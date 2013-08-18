@@ -15,12 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 	protected final Log logger = LogFactory.getLog(getClass());
 
-    @RequestMapping(value="/hello.do")
+    @RequestMapping(value="/login")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         logger.info("Returning hello view");
 
-        return new ModelAndView("hello.jsp");
+        return new ModelAndView("login");
     }
 }
