@@ -1,6 +1,6 @@
 package com.shared.rides.domain;
 
-public class Pedestrian implements RoleType{
+public class Pedestrian extends User implements RoleType{
 
 	private float rating;
 	private int [][] schedule;

@@ -1,6 +1,6 @@
 package com.shared.rides.domain;
 
-public class DualUser implements DualUserComposite{
+public class DualUser extends User implements DualUserComposite{
 	private int oid;
 	
 	
