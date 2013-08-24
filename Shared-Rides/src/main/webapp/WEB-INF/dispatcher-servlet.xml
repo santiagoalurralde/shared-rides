@@ -44,21 +44,12 @@
  	p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
  	p:password="${jdbc.password}" />
 
- <bean id="sessionFactory"
- 	class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
- 	<property name="dataSource" ref="dataSource" />
- 	<property name="configLocation">
- 		<value>classpath:hibernate.cfg.xml</value>
- 	</property>
- 	<property name="configurationClass">
- 		<value>org.hibernate.cfg.AnnotationConfiguration</value>
- 	</property>
- 	<property name="hibernateProperties">
- 		<props>
- 			<prop key="hibernate.dialect">${jdbc.dialect}</prop>
- 			<prop key="hibernate.show_sql">true</prop>
- 		</props>
- 	</property>
+ <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" />  
+        <property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration"/>  
+        <property name="configLocation">  
+            <value>classpath:hibernate.cfg.xml</value>  
+        </property>  
  </bean>
 
 <tx:annotation-driven />

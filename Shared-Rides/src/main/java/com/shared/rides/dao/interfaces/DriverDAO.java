@@ -6,8 +6,9 @@ import com.shared.rides.domain.Driver;
 
 public interface DriverDAO {
 	
-		public void addDriver(Driver driver);
-	    public List<Driver> listDriver();
-	    public void removeDriver(Integer id);
+		public boolean save(Driver driver);
+		public Driver load(Driver driver);
+		public Driver delete(Driver driver);
+	    public List<Driver> listAll();
 	
 }

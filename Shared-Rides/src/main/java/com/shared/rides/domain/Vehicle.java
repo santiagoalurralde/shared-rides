@@ -13,7 +13,7 @@ public class Vehicle {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long oid;
+	private int vehicleID;
 	
 	@Column (name="model")
 	private String model;
@@ -23,6 +23,12 @@ public class Vehicle {
 	
 	@Column (name="seats")
 	private int seats;
+	
+	public Vehicle(){
+		
+	}
+	
+//-----------GETTERS & SETTERS 
 	
 	public String getModel() {
 		return model;
@@ -36,19 +42,22 @@ public class Vehicle {
 	public void setLicensePlate(String licensePlate) {
 		this.licensePlate = licensePlate;
 	}
-	public long getOid() {
-		return oid;
-	}
-	public void setOid(long oid) {
-		this.oid = oid;
-	}
+
 	public int getSeats() {
 		return seats;
 	}
 	public void setSeats(int seats) {
 		this.seats = seats;
 	}
+
+	public int getVehicleID() {
+		return vehicleID;
+	}
+
+	public void setVehicleID(int vehicleID) {
+		this.vehicleID = vehicleID;
+	}
 	
-	
+//----------------------	
 
 }

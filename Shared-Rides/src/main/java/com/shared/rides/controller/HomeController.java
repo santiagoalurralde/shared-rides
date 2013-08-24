@@ -1,6 +1,7 @@
 package com.shared.rides.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shared.rides.dao.persistence.VehicleDAOImplMySql;
+import com.shared.rides.domain.Vehicle;
+
 @Controller
 public class HomeController {
 	protected final Log logger = LogFactory.getLog(getClass());
@@ -20,7 +24,18 @@ public class HomeController {
             throws ServletException, IOException {
         logger.info("Returning hello view");
         
+        //ESTO ES DE PRUEBA
+        Vehicle v = new Vehicle();
+        v.setVehicleID(123);
         
+        System.out.println("EL OID DEL VEHICULO ES: " + v.getVehicleID());
+        
+        VehicleDAOImplMySql vehicleDAO = new VehicleDAOImplMySql();
+        
+        v = vehicleDAO.load(v);
+        System.out.println("EL OID ES EL MISMO: " + v.getVehicleID());
+        
+        //HASTA ACA
         
         return new ModelAndView("login");
     }
