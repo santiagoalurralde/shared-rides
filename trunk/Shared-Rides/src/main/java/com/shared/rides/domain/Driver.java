@@ -1,23 +1,39 @@
 package com.shared.rides.domain;
 
+/*
+ Clase que representa el tipo de usuario Driver (conductor) que posee un 
+ rating específico, un horario y un vehículo vinculado.
+ Implementa la interfaz RoleType y extiende de la clase User.
+ */
 
 public class Driver extends User implements RoleType{
 	
+	private long oid;
 	private float rating;
-	private int[][] schedule;
-	
+	private Schedule schedule;
+	private Vehicle vehicle;
+
+//-----------GETTERS & SETTERS 
+
 	public float getRating() {
-		return 0;
+		return rating;
 	}
-	
-	
-	
-	public int[][] getSchedule() {
-		return null;
+	public void setRating(float rating) {
+		this.rating = rating;
 	}
-
+	public Schedule getSchedule() {
+		return schedule;
+	}
+	public void setSchedule(Schedule schedule) {
+		this.schedule = schedule;
+	}
 	public Vehicle getVehicle() {
-		return null;
+		return vehicle;
 	}
-
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+	
+//-------------------
+	
 }

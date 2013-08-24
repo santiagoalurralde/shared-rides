@@ -35,6 +35,8 @@ public abstract class User implements Serializable{
 	
 	protected RoleType role;	
 	
+//-----------GETTERS & SETTERS 
+	
 	public String getPersonalId() {
 		return personalId;
 	}
@@ -77,7 +79,8 @@ public abstract class User implements Serializable{
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	
+
+//-------------------------------
 	
 
 }
