@@ -2,14 +2,24 @@ package com.shared.rides.dao.persistence;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.shared.rides.dao.interfaces.VehicleDAO;
+import com.shared.rides.dao.interfaces.IVehicleDAO;
 import com.shared.rides.domain.Vehicle;
 import com.shared.rides.util.HibernateUtil;
 
-public class VehicleDAOImplMySql implements VehicleDAO{
+@Repository
+@Transactional
+public class VehicleDAOImplMySql implements IVehicleDAO{
 
+	@Autowired
+	private SessionFactory sessionFactory;
+	
 	public boolean save(Vehicle vehicle) {
 		// TODO Auto-generated method stub
 		return false;
@@ -29,8 +39,11 @@ public class VehicleDAOImplMySql implements VehicleDAO{
 	}
 
 	public List<Vehicle> listAll() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Query query = sessionFactory.getCurrentSession().createQuery("from Vehicle");
+		List<Vehicle> vehicles = query.list();
+		
+		return vehicles;
 	}
 
 }

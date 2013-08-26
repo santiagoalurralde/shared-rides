@@ -8,34 +8,28 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shared.rides.dao.persistence.VehicleDAOImplMySql;
 import com.shared.rides.domain.Vehicle;
+import com.shared.rides.service.VehicleService;
 
 @Controller
 public class HomeController {
 	protected final Log logger = LogFactory.getLog(getClass());
 
+	@Autowired
+	private VehicleService vehicleService;
+	
     @RequestMapping(value="/login.do")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("Returning hello view");
         
-        //ESTO ES DE PRUEBA
-        Vehicle v = new Vehicle();
-        v.setVehicleID(123);
-        
-        System.out.println("EL OID DEL VEHICULO ES: " + v.getVehicleID());
-        
-        VehicleDAOImplMySql vehicleDAO = new VehicleDAOImplMySql();
-        
-        v = vehicleDAO.load(v);
-        System.out.println("EL OID ES EL MISMO: " + v.getVehicleID());
-        
-        //HASTA ACA
+        System.out.println(vehicleService.listAllVehicles()); 
         
         return new ModelAndView("login");
     }

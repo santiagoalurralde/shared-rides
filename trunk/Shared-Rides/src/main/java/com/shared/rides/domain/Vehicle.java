@@ -1,5 +1,7 @@
 package com.shared.rides.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,10 +11,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name="Vehicle")
-public class Vehicle {
+public class Vehicle implements Serializable{
 	
 	@Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "vehicleID")
 	private int vehicleID;
 	
 	@Column (name="model")
