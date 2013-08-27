@@ -3,7 +3,6 @@ package com.shared.rides.dao.persistence;
 import java.util.List;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shared.rides.dao.interfaces.IVehicleDAO;
 import com.shared.rides.domain.Vehicle;
-import com.shared.rides.util.HibernateUtil;
 
 @Repository
 @Transactional
@@ -26,11 +24,7 @@ public class VehicleDAOImplMySql implements IVehicleDAO{
 	}
 
 	public Vehicle load(Vehicle vehicle) {
-		
-		Session s = HibernateUtil.getSessionFactory().openSession();
-		Vehicle v = (Vehicle) s.get(Vehicle.class, 123);
-		
-		return v;
+		return vehicle;
 	}
 
 	public Vehicle delete(Vehicle vehicle) {
@@ -40,8 +34,7 @@ public class VehicleDAOImplMySql implements IVehicleDAO{
 
 	public List<Vehicle> listAll() {
 		
-		Query query = sessionFactory.getCurrentSession().createQuery("SELECT v FROM Vehicle v");
-		
+		Query query = sessionFactory.getCurrentSession().createQuery("FROM Vehicle");
         
 		List<Vehicle> vehicles = query.list();
 		
