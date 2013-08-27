@@ -29,7 +29,8 @@ public class HomeController {
             throws ServletException, IOException {
         logger.info("Returning hello view");
         
-        System.out.println(vehicleService.listAllVehicles()); 
+        //PRUEBA
+        System.out.println("ESTOS SON LOS AUTOS" + vehicleService.listAllVehicles()); 
         
         return new ModelAndView("login");
     }

@@ -40,7 +40,9 @@ public class VehicleDAOImplMySql implements IVehicleDAO{
 
 	public List<Vehicle> listAll() {
 		
-		Query query = sessionFactory.getCurrentSession().createQuery("from Vehicle");
+		Query query = sessionFactory.getCurrentSession().createQuery("SELECT v FROM Vehicle v");
+		
+        
 		List<Vehicle> vehicles = query.list();
 		
 		return vehicles;
