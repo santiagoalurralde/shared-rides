@@ -24,13 +24,24 @@ public class HomeController {
 	@Autowired
 	private VehicleService vehicleService;
 	
-    @RequestMapping(value="/login.do")
+    @RequestMapping(value="/login.htm")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("Returning hello view");
         
+        Vehicle v = new Vehicle();
+        v.setVehicleId(1);
+        
+        System.out.println("OID" + v.getVehicleId());
+        
+        System.out.println(vehicleService.loadVehicle(v));
+        
+        System.out.println(vehicleService.deleteVehicle(vehicleService.loadVehicle(v)));
+        
         //PRUEBA
-        System.out.println("ESTOS SON LOS AUTOS" + vehicleService.listAllVehicles()); 
+        //System.out.println("ESTOS SON LOS AUTOS" + vehicleService.listAllVehicles()); 
+        
+        
         
         return new ModelAndView("login");
     }

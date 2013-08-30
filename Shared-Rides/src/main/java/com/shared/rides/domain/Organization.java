@@ -1,19 +1,40 @@
 package com.shared.rides.domain;
 
-public class Organization {
+import java.io.Serializable;
 
-	private long oid;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.OneToOne;
+
+@Entity
+@Table(name="Organization")
+public class Organization implements Serializable{
+
+	@Id
+	@GeneratedValue
+	@Column(name="organizationID")
+	private long organizationId;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	private Address address;
+	
+	@Column(name="name")
 	private String name;
 	
+//-----------CONSTRUCTOR 
+
+	public Organization(){
+	}
+
 //-----------GETTERS & SETTERS 
 
-	public long getOid() {
-		return oid;
-	}
-	public void setOid(long oid) {
-		this.oid = oid;
-	}
+
 	public Address getAddress() {
 		return address;
 	}
@@ -25,6 +46,14 @@ public class Organization {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public long getOrganizationId() {
+		return organizationId;
+	}
+
+	public void setOrganizationId(long organizationId) {
+		this.organizationId = organizationId;
 	}
 	
 //------------------------

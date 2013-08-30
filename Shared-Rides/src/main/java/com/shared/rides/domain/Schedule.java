@@ -1,27 +1,41 @@
 package com.shared.rides.domain;
 
-public class Schedule {
+import java.io.Serializable;
 
-	private long oid;
-	private User user;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Shedule")
+public class Schedule implements Serializable{
+
+	@Id
+	@GeneratedValue
+	@Column(name="scheduleID", nullable = false)
+	private long scheduleId;
+	
+	@Column(name="day", nullable = false)
 	private int day;
+	
+	@Column(name="hour", nullable = false)
 	private int hour;
+	
+	@Column(name="inout", nullable = false)
 	private int inout;
+	
+//-----------CONSTRUCTOR 
+
+	public Schedule(){
+	}
 	
 //-----------GETTERS & SETTERS 
 	
-	public long getOid() {
-		return oid;
-	}
-	public void setOid(long oid) {
-		this.oid = oid;
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
+	
 	public int getDay() {
 		return day;
 	}
@@ -39,5 +53,13 @@ public class Schedule {
 	}
 	public void setInout(int inout) {
 		this.inout = inout;
+	}
+
+	public long getScheduleId() {
+		return scheduleId;
+	}
+
+	public void setScheduleId(long scheduleId) {
+		this.scheduleId = scheduleId;
 	}
 }

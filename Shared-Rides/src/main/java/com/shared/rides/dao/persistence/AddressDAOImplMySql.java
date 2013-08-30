@@ -2,29 +2,40 @@ package com.shared.rides.dao.persistence;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.shared.rides.dao.interfaces.IAddressDAO;
 import com.shared.rides.domain.Address;
 
+@Repository
+@Transactional
 public class AddressDAOImplMySql implements IAddressDAO {
 
+	@Autowired
+	private SessionFactory sessionFactory;
+	
 	public boolean save(Address address) {
-		// TODO Auto-generated method stub
-		return false;
+		sessionFactory.getCurrentSession().save(address);
+		return true;
 	}
 
 	public Address load(Address address) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Address) sessionFactory.getCurrentSession().get(Address.class, address.getAddressId());	
 	}
 
 	public Address delete(Address address) {
-		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().delete(address);
 		return null;
 	}
 
 	public List<Address> listAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = sessionFactory.getCurrentSession().createQuery("FROM Address");     
+		List<Address> addresses = query.list();
+		return addresses;
 	}
 
 }

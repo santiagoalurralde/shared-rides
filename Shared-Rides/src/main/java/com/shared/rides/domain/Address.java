@@ -1,21 +1,49 @@
 package com.shared.rides.domain;
 
-public class Address {
+import java.io.Serializable;
 
-	private long oid;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.OneToOne;
+
+@Entity
+@Table(name = "Address")
+public class Address implements Serializable{
+
+	@Id
+	@GeneratedValue
+	@Column(name="addressID")
+	private long addressId;
+	
+	@Column(name="street")
 	private String street;
+	
+	@Column(name="number")
 	private int number;
+	
+	@Column(name="neighborhood")
 	private String neighborhood;
+	
+	@Column(name="city")
 	private String city;
 	
-//-----------GETTERS & SETTERS 
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Marker marker;
 	
-	public long getOid() {
-		return oid;
+ 
+//-----------CONSTRUCTOR	
+
+	public Address(){
 	}
-	public void setOid(long oid) {
-		this.oid = oid;
-	}
+
+//-----------GETTERS & SETTERS
+
 	public String getStreet() {
 		return street;
 	}
@@ -39,6 +67,21 @@ public class Address {
 	}
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public Marker getMarker() {
+		return marker;
+	}
+	public void setMarker(Marker marker) {
+		this.marker = marker;
+	}
+
+	public long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(long addressId) {
+		this.addressId = addressId;
 	}
 	
 //-----------------------
