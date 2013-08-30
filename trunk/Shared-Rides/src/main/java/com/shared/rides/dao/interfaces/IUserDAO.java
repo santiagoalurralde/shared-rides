@@ -10,5 +10,6 @@ public interface IUserDAO {
 	public User load(User user);
 	public User delete(User user);
 	public List<User> listAll();
+	public User loadByEmail(User user);
 
 }

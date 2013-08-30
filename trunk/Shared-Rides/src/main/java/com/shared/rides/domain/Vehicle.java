@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,8 +13,9 @@ import javax.persistence.Table;
 public class Vehicle implements Serializable{
 	
 	@Id
+	@GeneratedValue
 	@Column(name = "vehicleID")
-	private int vehicleID;
+	private int vehicleId;
 	
 	@Column (name="model")
 	private String model;
@@ -25,6 +25,11 @@ public class Vehicle implements Serializable{
 	
 	@Column (name="seats")
 	private int seats;
+	
+	@Column(name="brand")
+	private String brand;
+	
+//-----------CONSTRUCTOR
 	
 	public Vehicle(){
 		
@@ -52,13 +57,23 @@ public class Vehicle implements Serializable{
 		this.seats = seats;
 	}
 
-	public int getVehicleID() {
-		return vehicleID;
+
+	public String getBrand() {
+		return brand;
 	}
 
-	public void setVehicleID(int vehicleID) {
-		this.vehicleID = vehicleID;
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
+
+	public int getVehicleId() {
+		return vehicleId;
+	}
+
+	public void setVehicleId(int vehicleId) {
+		this.vehicleId = vehicleId;
+	}
+
 	
 //----------------------	
 

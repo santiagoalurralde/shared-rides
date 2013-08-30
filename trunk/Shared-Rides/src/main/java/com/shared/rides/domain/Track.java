@@ -1,5 +1,15 @@
 package com.shared.rides.domain;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.ManyToMany;
+
 /*
  Clase que representa las diferentes rutas o caminos que realizan los 
  conductores dependiendo el dia y si es horario de salida o entrada.
@@ -7,28 +17,33 @@ package com.shared.rides.domain;
  que utiliza la API OpenStreetMaps.
  */
 
-public class Track {
+@Entity
+@Table(name="Track")
+public class Track implements Serializable{
 	
-	private long oid;
-	private Driver driver;
+	@Id
+	@GeneratedValue
+	@Column(name="trackID")
+	private long trackId;
+	
+	@Column(name="day")
 	private int day;
+	
+	@Column(name="inout")
 	private int inout;
+	
+	@Column(name="pathFile")
 	private String pathFile;
+
+
+//-----------CONSTRUCTOR
+
+	public Track(){
+	}
 	
 //-----------GETTERS & SETTERS 
 
-	public long getOid() {
-		return oid;
-	}
-	public void setOid(long oid) {
-		this.oid = oid;
-	}
-	public Driver getDriver() {
-		return driver;
-	}
-	public void setDriver(Driver driver) {
-		this.driver = driver;
-	}
+	
 	public int getDay() {
 		return day;
 	}
@@ -47,7 +62,13 @@ public class Track {
 	public void setPathFile(String pathFile) {
 		this.pathFile = pathFile;
 	}
-	
-//-------------------------
+
+	public long getTrackId() {
+		return trackId;
+	}
+
+	public void setTrackId(long trackId) {
+		this.trackId = trackId;
+	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shared.rides.dao.interfaces.IVehicleDAO;
+import com.shared.rides.domain.Association;
 import com.shared.rides.domain.Vehicle;
 
 @Repository
@@ -19,25 +20,22 @@ public class VehicleDAOImplMySql implements IVehicleDAO{
 	private SessionFactory sessionFactory;
 	
 	public boolean save(Vehicle vehicle) {
-		// TODO Auto-generated method stub
-		return false;
+		sessionFactory.getCurrentSession().save(vehicle);
+		return true;
 	}
 
 	public Vehicle load(Vehicle vehicle) {
-		return vehicle;
+		return (Vehicle) sessionFactory.getCurrentSession().get(Vehicle.class, vehicle.getVehicleId());	
 	}
 
 	public Vehicle delete(Vehicle vehicle) {
-		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().delete(vehicle);
 		return null;
 	}
 
 	public List<Vehicle> listAll() {
-		
 		Query query = sessionFactory.getCurrentSession().createQuery("FROM Vehicle");
-        
-		List<Vehicle> vehicles = query.list();
-		
+		List<Vehicle> vehicles = query.list();		
 		return vehicles;
 	}
 
