@@ -38,4 +38,9 @@ public class MarkerDAOImplMySql implements IMarkerDAO{
 		return markers;
 	}
 
+	public Marker update(Marker marker) {
+		sessionFactory.getCurrentSession().update(marker);
+		return null;
+	}
+
 }

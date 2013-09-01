@@ -8,6 +8,7 @@ public interface IDriverDAO {
 	
 		public boolean save(Driver driver);
 		public Driver load(Driver driver);
+		public Driver update(Driver driver);
 		public Driver delete(Driver driver);
 	    public List<Driver> listAll();
 	

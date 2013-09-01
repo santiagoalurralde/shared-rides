@@ -8,6 +8,7 @@ public interface IAssociationDAO {
 	
 	public boolean save(Association assoc);
 	public Association load(Association assoc);
+	public Association update(Association assoc);
 	public Association delete(Association assoc);
 	public List<Association> listAll();
 

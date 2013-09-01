@@ -24,7 +24,7 @@ public class DriverDAOImplMySql implements IDriverDAO {
 	}
 
 	public Driver load(Driver driver) {
-		return (Driver) sessionFactory.getCurrentSession().get(Driver.class, driver.getUserId());	
+		return (Driver) sessionFactory.getCurrentSession().get(Driver.class, driver.getDriverId());	
 	}
 
 	public Driver delete(Driver driver) {
@@ -36,6 +36,11 @@ public class DriverDAOImplMySql implements IDriverDAO {
 		Query query = sessionFactory.getCurrentSession().createQuery("FROM Driver");     
 		List<Driver> drivers = query.list();
 		return drivers;
+	}
+
+	public Driver update(Driver driver) {
+		sessionFactory.getCurrentSession().update(driver);
+		return null;
 	}
 
 }

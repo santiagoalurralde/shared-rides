@@ -22,7 +22,7 @@
             </div> 
         </div> 
     </div> 
-    <div id=clearfooter"></div> 
+    <div id="clearfooter"></div> 
 </div> 
 
 <div id="footer" align="center"> 

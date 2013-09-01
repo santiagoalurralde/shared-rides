@@ -47,5 +47,10 @@ public class UserDAOImplMySql implements IUserDAO {
 		return (User) query.list().get(0);	
 	}
 
+	public User update(User user) {
+		sessionFactory.getCurrentSession().update(user);
+		return null;
+	}
+
 
 }

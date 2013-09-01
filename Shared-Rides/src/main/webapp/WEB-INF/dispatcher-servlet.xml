@@ -74,6 +74,12 @@
         <property name="annotatedClasses">
 			<list>
 				<value>com.shared.rides.domain.Vehicle</value>
+				<value>com.shared.rides.domain.User</value>
+				<value>com.shared.rides.domain.Organization</value>			
+				<value>com.shared.rides.domain.Address</value>
+				<value>com.shared.rides.domain.Association</value>
+				<value>com.shared.rides.domain.Marker</value>
+				<value>com.shared.rides.domain.State</value>
 			</list>
 		</property> 
  </bean>

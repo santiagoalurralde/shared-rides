@@ -39,4 +39,9 @@ public class VehicleDAOImplMySql implements IVehicleDAO{
 		return vehicles;
 	}
 
+	public Vehicle update(Vehicle vehicle) {
+		sessionFactory.getCurrentSession().update(vehicle);
+		return null;
+	}
+
 }

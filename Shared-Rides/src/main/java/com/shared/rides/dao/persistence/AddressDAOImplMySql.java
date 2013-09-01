@@ -38,4 +38,9 @@ public class AddressDAOImplMySql implements IAddressDAO {
 		return addresses;
 	}
 
+	public Address update(Address address) {
+		sessionFactory.getCurrentSession().update(address);
+		return null;
+	}
+
 }

@@ -34,46 +34,57 @@ public class User implements Serializable{
 	
 	@Id
 	@GeneratedValue
-	@Column(name="userID")
-	protected long userId;
+	@Column(name="id")
+	private long userId;
 	
 	@Column(name="personalID")
-	protected String personalId;
+	private String personalId;
 	
 	@Column(name="password")
-	protected String pw;
+	private String pw;
 	
 	@Column(name="name")
-	protected String name;
+	private String name;
 	
 	@Column(name="surname")
-	protected String surname;
+	private String surname;
 	
 	@OneToOne(cascade=CascadeType.ALL)
     @PrimaryKeyJoinColumn
-	protected Address address;
+	private Address address;
 	
 	@OneToOne
     @PrimaryKeyJoinColumn
-	protected Organization organization;
+	private Organization organization;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="User-Assoc", joinColumns = @JoinColumn(name="userID"),
 	inverseJoinColumns = @JoinColumn(name="associationID"))
-	protected List<Association> associations;
+	private List<Association> associations;
 	
 	@Column(name="phoneNumber")
-	protected int phoneNumber;
+	private int phoneNumber;
 	
 	@Column(name="email")
-	protected String email;
+	private String email;
 	
 	@Column(name="shift")
-	protected String shift;
+	private String shift;
 	
 	@Column(name="picture")
-	protected String picture;
+	private String picture;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name="Profile", joinColumns = @JoinColumn(name="userID"),
+	inverseJoinColumns = @JoinColumn(name="driverID"))
+	private Driver driver;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="Profile", joinColumns = @JoinColumn(name="userID"),
+	inverseJoinColumns = @JoinColumn(name="pedestrianID"))
+	private Pedestrian pedestrian;
+	
+	
 //-----------CONSTRUCTOR 
 	
 	public User(){

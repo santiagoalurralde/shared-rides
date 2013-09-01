@@ -8,6 +8,7 @@ public interface IVehicleDAO {
 
 	public boolean save(Vehicle vehicle);
 	public Vehicle load(Vehicle vehicle);
+	public Vehicle update(Vehicle vehicle);
 	public Vehicle delete(Vehicle vehicle);
 	public List<Vehicle> listAll();
 }
