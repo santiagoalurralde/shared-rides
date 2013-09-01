@@ -39,4 +39,9 @@ public class AssociationDAOImplMySql implements IAssociationDAO {
 		return associations;
 	}
 
+	public Association update(Association assoc) {
+		sessionFactory.getCurrentSession().update(assoc);
+		return null;
+	}
+
 }

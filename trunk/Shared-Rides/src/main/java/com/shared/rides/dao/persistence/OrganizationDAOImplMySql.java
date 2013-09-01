@@ -38,4 +38,9 @@ public class OrganizationDAOImplMySql implements IOrganizationDAO {
 		return organizations;
 	}
 
+	public Organization update(Organization org) {
+		sessionFactory.getCurrentSession().update(org);
+		return null;
+	}
+
 }

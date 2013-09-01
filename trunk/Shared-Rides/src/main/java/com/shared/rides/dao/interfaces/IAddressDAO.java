@@ -8,6 +8,7 @@ public interface IAddressDAO {
 
 	public boolean save(Address address);
 	public Address load(Address address);
+	public Address update(Address address);
 	public Address delete(Address address);
 	public List<Address> listAll();
 	

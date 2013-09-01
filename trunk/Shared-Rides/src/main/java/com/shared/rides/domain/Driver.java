@@ -3,6 +3,8 @@ package com.shared.rides.domain;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.CascadeType;
@@ -21,16 +23,23 @@ import javax.persistence.ManyToMany;
 
 @Entity
 @Table(name="Driver")
-@PrimaryKeyJoinColumn(name="driverID")
-public class Driver extends User implements RoleType{
+public class Driver implements Profile{
+	
+	@Id
+	@GeneratedValue
+	@Column(name="id", nullable = false)
+	private long driverId;
 	
 	@Column(name="rating")
 	private float rating;
 	
-	@OneToOne(mappedBy="scheduleID", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name="Driver-Schedule", joinColumns = @JoinColumn(name="driverID"),
+	inverseJoinColumns = @JoinColumn(name="scheduleID"))
 	private Schedule schedule;
 	
-	@OneToOne(mappedBy="vehicleID", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	private Vehicle vehicle;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -69,6 +78,14 @@ public class Driver extends User implements RoleType{
 	}
 	public void setTracks(List<Track> tracks) {
 		this.tracks = tracks;
+	}
+
+	public long getDriverId() {
+		return driverId;
+	}
+
+	public void setDriverId(long driverId) {
+		this.driverId = driverId;
 	}
 	
 //-------------------

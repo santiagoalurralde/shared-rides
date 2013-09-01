@@ -8,6 +8,7 @@ public interface IPedestrianDAO {
 
 	public boolean save(Pedestrian ped);
 	public Pedestrian load(Pedestrian ped);
+	public Pedestrian update(Pedestrian ped);
 	public Pedestrian delete(Pedestrian ped);
 	public List<Pedestrian> listAll();
 }

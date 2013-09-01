@@ -17,7 +17,7 @@ public class Organization implements Serializable{
 
 	@Id
 	@GeneratedValue
-	@Column(name="organizationID")
+	@Column(name="id")
 	private long organizationId;
 	
 	@OneToOne(cascade = CascadeType.ALL)

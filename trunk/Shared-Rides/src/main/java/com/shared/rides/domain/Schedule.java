@@ -16,7 +16,7 @@ public class Schedule implements Serializable{
 
 	@Id
 	@GeneratedValue
-	@Column(name="scheduleID", nullable = false)
+	@Column(name="id", nullable = false)
 	private long scheduleId;
 	
 	@Column(name="day", nullable = false)

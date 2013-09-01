@@ -24,7 +24,7 @@ public class PedestrianDAOImplMySql implements IPedestrianDAO {
 	}
 
 	public Pedestrian load(Pedestrian ped) {
-		return (Pedestrian) sessionFactory.getCurrentSession().get(Pedestrian.class, ped.getUserId());	
+		return (Pedestrian) sessionFactory.getCurrentSession().get(Pedestrian.class, ped.getPedestrianId());	
 	}
 
 	public Pedestrian delete(Pedestrian ped) {
@@ -36,6 +36,11 @@ public class PedestrianDAOImplMySql implements IPedestrianDAO {
 		Query query = sessionFactory.getCurrentSession().createQuery("FROM Pedestrian");     
 		List<Pedestrian> pedestrians = query.list();
 		return pedestrians;
+	}
+
+	public Pedestrian update(Pedestrian ped) {
+		sessionFactory.getCurrentSession().update(ped);
+		return null;
 	}
 
 }

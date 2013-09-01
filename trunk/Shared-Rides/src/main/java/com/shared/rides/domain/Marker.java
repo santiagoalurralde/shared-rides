@@ -19,7 +19,7 @@ public class Marker implements Serializable{
 
 	@Id
 	@GeneratedValue
-	@Column(name="markerID", nullable = false)
+	@Column(name="id", nullable = false)
 	private long markerId;
 	
 	@Column(name="lat", nullable = false)

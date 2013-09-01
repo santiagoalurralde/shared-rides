@@ -2,6 +2,10 @@ package com.shared.rides.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -15,13 +19,19 @@ import javax.persistence.Column;
 
 @Entity
 @Table(name="Pedestrian")
-@PrimaryKeyJoinColumn(name="pedestrianID")
-public class Pedestrian extends User implements RoleType{
+public class Pedestrian implements Profile{
 
+	@Id
+	@GeneratedValue
+	@Column(name="id")
+	private long pedestrianID;
+	
 	@Column(name="rating", nullable = false)
 	private float rating;
 	
-	@OneToOne(mappedBy="scheduleID", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name="Pedestrian-Schedule", joinColumns = @JoinColumn(name="pedestrianID"),
+	inverseJoinColumns = @JoinColumn(name="scheduleID"))
 	private Schedule schedule;
 
 //-----------CONSTRUCTOR 
@@ -42,6 +52,14 @@ public class Pedestrian extends User implements RoleType{
 	}
 	public void setSchedule(Schedule schedule) {
 		this.schedule = schedule;
+	}
+
+	public long getPedestrianId() {
+		return pedestrianID;
+	}
+
+	public void setPedestrianId(long pedestrianID) {
+		this.pedestrianID = pedestrianID;
 	}
 	
 //---------------------------

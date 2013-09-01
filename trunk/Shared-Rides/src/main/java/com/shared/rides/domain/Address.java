@@ -17,13 +17,13 @@ public class Address implements Serializable{
 
 	@Id
 	@GeneratedValue
-	@Column(name="addressID")
+	@Column(name="id", nullable = false)
 	private long addressId;
 	
-	@Column(name="street")
+	@Column(name="street", nullable = false)
 	private String street;
 	
-	@Column(name="number")
+	@Column(name="number", nullable = false)
 	private int number;
 	
 	@Column(name="neighborhood")

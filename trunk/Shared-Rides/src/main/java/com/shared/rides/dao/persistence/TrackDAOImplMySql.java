@@ -40,4 +40,9 @@ public class TrackDAOImplMySql implements ITrackDAO {
 		return tracks;
 	}
 
+	public Track update(Track track) {
+		sessionFactory.getCurrentSession().update(track);
+		return null;
+	}
+
 }

@@ -23,7 +23,7 @@ public class Track implements Serializable{
 	
 	@Id
 	@GeneratedValue
-	@Column(name="trackID")
+	@Column(name="id")
 	private long trackId;
 	
 	@Column(name="day")

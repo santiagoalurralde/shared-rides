@@ -38,4 +38,9 @@ public class ScheduleDAOImplMySql implements IScheduleDAO {
 		return schedules;
 	}
 
+	public Schedule update(Schedule sch) {
+		sessionFactory.getCurrentSession().update(sch);
+		return null;
+	}
+
 }

@@ -24,10 +24,10 @@ public class Association implements Serializable{
 	
 	@Id
 	@GeneratedValue
-	@Column(name="associationID", nullable = false)
+	@Column(name="id", nullable = false)
 	private long associationId;
 
-	@Column(name="applicantID_assoc", nullable = false)
+	@Column(name="applicantID", nullable = false)
 	private User applier;
 	
 	@Column(name="day", nullable = false)
