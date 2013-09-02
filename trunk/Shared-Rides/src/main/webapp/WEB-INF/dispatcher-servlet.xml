@@ -22,6 +22,12 @@
 
  <mvc:view-controller path="/" view-name="index.jsp"/>
  
+ <!--  Santiago: Handles Static Resources  -->
+ <mvc:resources mapping="/resources/**" location="/resources/" />
+ 
+ <bean	class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" 	/>
+ <bean	class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"	/>
+ 
 <!-- Tiles Config -->
  
 <bean id="viewResolver"  
@@ -29,9 +35,9 @@
         <property name="viewClass">  
             <value>  
                 org.springframework.web.servlet.view.tiles2.TilesView  
-        </value>  
+        	</value>  
         </property>  
-    </bean>  
+</bean>  
 	
 <bean id="tilesConfigurer"
     class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
