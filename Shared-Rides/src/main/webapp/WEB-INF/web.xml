@@ -5,6 +5,7 @@
 <web-app>
   <display-name>Shared Rides</display-name>
   
+
  <!-- Servlets -->   	
    	
    	<servlet>   	
