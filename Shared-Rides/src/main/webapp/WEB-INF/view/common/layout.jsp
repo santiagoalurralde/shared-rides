@@ -4,9 +4,9 @@
 <html> 
 
 <head> 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-<title><tiles:getAsString name="title"/></title> 
-<link rel="stylesheet" href="css/master.css" type="text/css" /> 
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+	<title><tiles:getAsString name="title"/></title> 
+	<link rel="stylesheet" href="resources/styles/style.css" type="text/css" /> 
 </head> 
 
 <body> 
@@ -28,5 +28,8 @@
 <div id="footer" align="center"> 
     <tiles:insertAttribute name="footer"/> 
 </div> 
+
+
+
 </body> 
 </html>
