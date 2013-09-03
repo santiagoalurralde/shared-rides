@@ -86,6 +86,10 @@
 				<value>com.shared.rides.domain.Association</value>
 				<value>com.shared.rides.domain.Marker</value>
 				<value>com.shared.rides.domain.State</value>
+				<value>com.shared.rides.domain.Pedestrian</value>
+				<value>com.shared.rides.domain.Driver</value>
+				<value>com.shared.rides.domain.Schedule</value>
+				<value>com.shared.rides.domain.Track</value>
 			</list>
 		</property> 
  </bean>

@@ -76,13 +76,15 @@ public class User implements Serializable{
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinTable(name="Profile", joinColumns = @JoinColumn(name="userID"),
+	inverseJoinColumns = @JoinColumn(name="pedestrianID"))
+	private Pedestrian pedestrian;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name="Profile", joinColumns = @JoinColumn(name="userID"),
 	inverseJoinColumns = @JoinColumn(name="driverID"))
 	private Driver driver;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="Profile", joinColumns = @JoinColumn(name="userID"),
-	inverseJoinColumns = @JoinColumn(name="pedestrianID"))
-	private Pedestrian pedestrian;
+	
 	
 	
 //-----------CONSTRUCTOR 
