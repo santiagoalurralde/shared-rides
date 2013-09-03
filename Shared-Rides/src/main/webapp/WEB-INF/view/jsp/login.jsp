@@ -7,7 +7,7 @@
 			<hr style="margin-top:30px; margin-bottom:20px; border-color:Black; height: 0px" />
 			<h3 style="text-align:center"> Iniciar Sesion </h3>
 	
-			<form>
+			<form method="POST" action="validate.htm">
 				Username: <br> <input class="ipt" type="text"       name="username" value="Nombre de Usuario"><br>
 				Password: <br> <input class="ipt" type="password"   name="pwd"		value="Password"><br>
 				
