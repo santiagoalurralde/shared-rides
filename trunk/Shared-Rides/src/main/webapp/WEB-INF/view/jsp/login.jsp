@@ -8,8 +8,8 @@
 			<h3 style="text-align:center"> Iniciar Sesion </h3>
 	
 			<form method="POST" action="validate.htm">
-				Username: <br> <input class="ipt" type="text"       name="username" value="Nombre de Usuario"><br>
-				Password: <br> <input class="ipt" type="password"   name="pwd"		value="Password"><br>
+				E-mail: <br> <input class="ipt" type="text"      name="email" value="" placeholder="mike@email.com"><br>
+				Password: <br> <input class="ipt" type="password"   name="pwd"		value="" placeholder="Password"><br>
 				
 				<input class="font" id="but" type="submit" value="Ingresar!">
 			</form>
