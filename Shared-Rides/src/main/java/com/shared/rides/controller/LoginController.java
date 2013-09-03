@@ -5,15 +5,18 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shared.rides.domain.User;
 import com.shared.rides.service.LoginService;
 
 
@@ -25,20 +28,23 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
+	@RequestMapping(value = "login.htm")
+	public ModelAndView loadLogin(HttpSession request)
+            throws ServletException, IOException {
+		
+		return new ModelAndView("login");
+	}
 	
-	@RequestMapping(value = "login.do")
-	public ModelAndView userValidation()
+	
+	@RequestMapping(value = "validate.htm", method = RequestMethod.POST)
+	public ModelAndView userValidation(@RequestParam("email") String email , @RequestParam("pwd") String pwd, HttpServletRequest request)
             throws ServletException, IOException {
         logger.info("Returning hello view");
-        
-        String email = "leandro.bagur@hotmail.com";
-        String pw = "leandro";
-        
-        if(loginService.validate(email, pw)){
-        	System.out.println("ENTRO - USUARIO VALIDO");
-        	return new ModelAndView("login");
+        	
+        if(loginService.validate(email, pwd, request)){
+        	
+        	return new ModelAndView("login"); 
         }
-        System.out.println("USUARIO NO VALIDO");
      return new ModelAndView("login");
         
     }
