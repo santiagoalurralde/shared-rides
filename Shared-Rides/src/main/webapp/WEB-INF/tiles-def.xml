@@ -17,7 +17,21 @@
     	<put-attribute name="title" value="Login"/>
     	<put-attribute name="body" value="/WEB-INF/view/jsp/login.jsp"/>
     </definition>
+
+	<definition name="main" extends="baseDefinition">
+    	<put-attribute name="title" value="Main"/>
+    	<put-attribute name="body" value="/WEB-INF/view/jsp/main.jsp"/>
+    </definition>    
     
+    <definition name="people" extends="baseDefinition">
+    	<put-attribute name="title" value="People"/>
+    	<put-attribute name="body" value="/WEB-INF/view/jsp/people.jsp"/>
+    </definition>
+    
+    <definition name="profile" extends="baseDefinition">
+    	<put-attribute name="title" value="Profile"/>
+    	<put-attribute name="body" value="/WEB-INF/view/jsp/profile.jsp"/>
+    </definition>
     
  
 </tiles-definitions>
