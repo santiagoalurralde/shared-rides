@@ -4,19 +4,22 @@
  
 
 <body>
+	<span id="intl">
+    		<a href="?lang=es">
+    			<img src="resources/images/ar.png"/>
+    		</a> 
+    		 
+    		<a href="?lang=en">
+    			<img src="resources/images/us.png"/>
+    		</a>
+	</span>
+    
     <div class="littleTupper">
     
         <!----------------  CONTENT     -------------->
 		<div class="content">
-			<h3>
-				<spring:message code="label.welcome"/>
-			</h3>
- 
-			<span style="float: right">
-    			<a href="?lang=es">es</a> 
-    			| 
-    			<a href="?lang=en">en</a>
-			</span>
+		
+
 			
 			
 			<img 	width=275px src="resources/images/logo1.png"/>
@@ -28,18 +31,20 @@
 	
 	
 			<form method="POST" action="validate.htm">
-				E-mail:		<br> <input class="ipt" type="text"		name="email"	value="" placeholder="mike@email.com">	<br>
-				Password:	<br> <input class="ipt" type="password"	name="pwd"		value="" placeholder="Password">		<br>
+				<spring:message code="label.email"/>	<br> 
+				<input class="ipt" type="text"		name="email"	placeholder="mike@email.com">	<br>
 				
-				<input class="font" id="but" type="submit" value="Ingresar!">
+				<spring:message code="label.password"/>	<br> 
+				<input class="ipt" type="password"	name="pwd"		placeholder="Password">			<br>
+				
+				
+				<input class="font" id="but" type="submit" value="<spring:message code="label.enter"/>">
 			</form>
 		</div>
 		
 		
 		<!----------------  PICTURE     -------------->
 		<div>
-		
-
 			<img id="introPic" width=325px src="resources/images/intropic.png"/>		
 		</div>
 	</div>
