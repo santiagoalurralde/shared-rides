@@ -43,10 +43,16 @@ public class LoginController {
         	
         if(loginService.validate(email, pwd, request)){
         	
-        	return new ModelAndView("login"); 
+        	return new ModelAndView("redirect:/main.htm"); 
         }
      return new ModelAndView("login");
         
     }
+	
+	@RequestMapping(value="main.htm")
+	public ModelAndView loadMain(){
+		
+		return new ModelAndView("main");
+	}
 
 }
