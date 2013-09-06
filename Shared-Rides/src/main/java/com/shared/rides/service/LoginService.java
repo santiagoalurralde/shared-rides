@@ -15,7 +15,8 @@ public class LoginService {
 
 	@Autowired
 	private IUserDAO userDAO;
-	String password;
+	
+	private String password;
 	
 	public boolean validate(String email, String pw, HttpServletRequest r){
 		//Busco en la base de datos si se encuentra el usuario con ese email
