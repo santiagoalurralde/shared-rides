@@ -5,9 +5,12 @@
 
 <body>
     <div class="littleTupper">
+    
         <!----------------  CONTENT     -------------->
 		<div class="content">
-			<h3><spring:message code="label.welcome"/></h3>
+			<h3>
+				<spring:message code="label.welcome"/>
+			</h3>
  
 			<span style="float: right">
     			<a href="?lang=es">es</a> 
@@ -18,7 +21,10 @@
 			
 			<img 	width=275px src="resources/images/logo1.png"/>
 			<hr		class="hrs"/>
-			<h3 	style="text-align:center"> Iniciar Sesi&oacuten </h3>
+			
+			<h3 	style="text-align:center"> 
+				<spring:message code="label.login"/>
+			</h3>
 	
 	
 			<form method="POST" action="validate.htm">
@@ -29,15 +35,19 @@
 			</form>
 		</div>
 		
+		
 		<!----------------  PICTURE     -------------->
 		<div>
 		
-			<!--
-						http://i43.tinypic.com/15840oi.png  #LOGO
-			  			http://i43.tinypic.com/28hmrf8.png	#FOTO		
-			 -->
+
 			<img id="introPic" width=325px src="resources/images/intropic.png"/>		
 		</div>
 	</div>
 </body>
+
+
+<!--
+	http://i43.tinypic.com/15840oi.png  #LOGO
+	http://i43.tinypic.com/28hmrf8.png	#FOTO		
+-->
  
