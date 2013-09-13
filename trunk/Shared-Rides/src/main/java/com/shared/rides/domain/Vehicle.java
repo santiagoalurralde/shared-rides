@@ -14,7 +14,7 @@ public class Vehicle implements Serializable{
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "vehicleID")
+	@Column(name = "id")
 	private int vehicleId;
 	
 	@Column (name="model")

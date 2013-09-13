@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
-
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
  
 
@@ -31,9 +30,9 @@
 	
 	
 			<form method="POST" action="validate.htm">
+
 				<spring:message code="label.email"/>	<br> 
-				<input class="ipt" type="text"		name="email"	placeholder="mike@email.com">	<br>
-				
+				<input class="ipt" type="text"		name="email"	placeholder="mike@email.com">	<br>			
 				<spring:message code="label.password"/>	<br> 
 				<input class="ipt" type="password"	name="pwd"		placeholder="Password">			<br>
 				
