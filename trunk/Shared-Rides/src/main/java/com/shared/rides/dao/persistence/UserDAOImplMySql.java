@@ -51,6 +51,7 @@ public class UserDAOImplMySql implements IUserDAO {
 		sessionFactory.getCurrentSession().update(user);
 		return null;
 	}
-
+	
+	
 
 }
