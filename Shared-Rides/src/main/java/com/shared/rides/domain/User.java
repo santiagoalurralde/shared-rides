@@ -69,7 +69,7 @@ public class User implements Serializable{
 	private String email;
 	
 	@Column(name="shift")
-	private String shift;
+	private int shift;
 	
 	@Column(name="picture")
 	private String picture;
@@ -83,8 +83,6 @@ public class User implements Serializable{
 	@JoinTable(name="Profile", joinColumns = @JoinColumn(name="userID"),
 	inverseJoinColumns = @JoinColumn(name="driverID"))
 	private Driver driver;
-	
-	
 	
 	
 //-----------CONSTRUCTOR 
@@ -154,11 +152,11 @@ public class User implements Serializable{
 		this.email = email;
 	}
 
-	public String getShift() {
+	public int getShift() {
 		return shift;
 	}
 
-	public void setShift(String shift) {
+	public void setShift(int shift) {
 		this.shift = shift;
 	}
 
@@ -188,5 +186,13 @@ public class User implements Serializable{
 
 //-------------------------------
 	
+	public boolean isPedestrian(){
+		if (pedestrian == null) return false;
+		return true;
+	}
 
+	public boolean isDriver(){
+		if (driver == null) return false;
+		return true;
+	}
 }
