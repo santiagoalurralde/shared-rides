@@ -60,16 +60,18 @@ a
 	position:				relative;
 }
 
+/*NAVEGADOR PRINCIPAL*/
 #nav
 {
-	z-index:				1000;
-	/*ojo*/
+	background:				-moz-linear-gradient(top, #90AA44, #50A410);
+	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
+	margin-bottom:			100px;
+	padding-left:			15px;
+	overflow:				auto;
 	position:				fixed;
 	top:					0;
 	width:					100%;
-	
-	overflow:				auto;	
-	padding-left:			35px;	
+	z-index:				1000;
 	
 	/*
 	background-color:		#50A410;
@@ -90,7 +92,7 @@ a
 	{
 		line-height:		40px;
 		color:				Black;
-		padding:			0px 40px;
+		padding:			0px 58px;
 		border-radius:		4px;
 		text-align:			center;
 		display:			block;
@@ -116,6 +118,40 @@ a
 	{ 
 		background-color:	#000000; 
 	}
+	
+
+/*NAVEGADOR PASOS*/
+#navSteps
+{
+	z-index:				1000;
+	/*ojo*/
+	top:					0;
+	width:					100%;
+	overflow:				auto;
+	margin:					20px 0;	
+	background:				-moz-linear-gradient(top, #90AA44, #50A410);
+	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
+	text-align:				center;
+	/*
+	background-color:		#50A410;
+	width:					auto;
+	display:				inline-block;
+	background-image:		url('pattern3.jpg');
+	*/
+}
+	#navSteps li
+	{
+		width:				33%;
+		list-style-type:	none;
+		height:				40px;
+		display:			inline-block;
+	}
+	#navSteps li a:active
+	{ 
+		background-color:	#000000; 
+	}
+	
+
 
 .content
 {
@@ -127,7 +163,7 @@ a
 	text-align:				left;
 	
 	/*
-	background:			#F0F0F0;
+	background:				#F0F0F0;
 	box-shadow:				0px 1px 1px #000000;
 	border:					solid 1px; 
 	border-radius: 			7px;
@@ -136,7 +172,8 @@ a
 
 #contentMain
 {
-	margin:					5px auto auto auto;
+	padding:				20px 0px;
+	margin:					50px auto auto auto;
 	box-shadow:				0px 1px 1px #000000;
 	border:					solid 1px; 
 }
@@ -160,7 +197,6 @@ a
 	
 	/*
 	background-image:		url('backNew.jpg');
-	background:				-moz-linear-gradient(top, #90AA44, #50A410);
 	*/
 }
 		
@@ -246,4 +282,12 @@ a
 	box-shadow:				0px 1px 1px #000000;
 	position:				absolute;
 	left:					978px;
+}
+
+#steps{
+	display:				inline;
+}
+
+#updatePanel{
+	padding:					20px 10px;	
 }

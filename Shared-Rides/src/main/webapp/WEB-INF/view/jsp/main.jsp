@@ -1,17 +1,9 @@
 <body>   
-        <!----------------  HEADER      -------------->
-	    <!-- <div id="pix">
-	        <a href="file://M:\Web\main.html">
-	            <img id="pix2" src="file://M:\Web\logoNew.bmp"/> 
-		    </a>	
-	    </div>
-		-->  
-		
 	    <!----------------  MENU      -------------->
         <div id="nav" class="aBox">
             <div class="tupper">
 	        <ul>       
-		        <li><a href="#">		<img width=125px src="resources/images/logo3.png"/></a></li>
+		        <li><a href="#">		<img width=120px src="resources/images/logo3.png"/></a></li>
 		        <li><a href="#">     	Mi Perfil   </a></li>
 		        <li><a href="#">        Personas    </a></li>
 		        <li><a href="#">     	Contacto    </a></li>
@@ -22,23 +14,25 @@
 	
 
         <!----------------  CONTENT      -------------->
-	    <div id="contentMain" class="content">
+	    <div id="contentMain">
 	        <div class="tupper"> 
-	       		<p>
-			    	Encuentre con quién quiere asociarse.
-	        	</p>
-			
-	        
+	       		<h4>
+	       			Encuentre con quién asociarse!
+	        	</h4>
+	        	
+	        	<div id="navSteps" class="aBox"> 
+	        		<ul>
+	        			<li><h1>1</h1></li>
+	        			<li><h1>2</h1></li>
+	        			<li><h1>3</h1></li>
+	        		</ul>
+	        	</div>
+	        	
+	        	<div id="updatePanel" class="aBox">
+	        		<h4>
+	        			Seleccione el tipo de Usuario al que está buscando
+	        		</h4>
+	        	</div>
             </div>
 		</div>
-		
-		<!----------------  FOOTER      -------------->
-        <div id="footer" class="aBox">
-            <div class="tupper">
-            <p>
-                © 2013  Sluggin'    <br />
-                Todos los derechos reservados.
-            </p>
-            </div>
-        </div>
 </body>
