@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/dispatcher-servlet.xml" })
+@ContextConfiguration(locations = { "WEB-INF/dispatcher-servlet.xml" })
 public class LoginServiceTest{
 
 	@Autowired
