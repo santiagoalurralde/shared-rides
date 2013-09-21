@@ -32,7 +32,7 @@ a
 
 .hrs
 {
-	
+
 	margin-top:				25px; 
 	margin-bottom:			30px; 
 	border: 				0; 
@@ -172,8 +172,8 @@ a
 
 #contentMain
 {
-	padding:				20px 0px;
-	margin:					50px auto auto auto;
+	padding:				50px 0px;
+	margin:					40px auto auto auto;
 	box-shadow:				0px 1px 1px #000000;
 	border:					solid 1px; 
 }
@@ -224,7 +224,7 @@ a
 	border:					solid 1px Grey; 	
 }		
 
-#but{
+.but{
 	margin:					10px 0px 10px 0px;
 	font-size:				100%;
 	color:					white;
@@ -239,7 +239,7 @@ a
 	box-shadow: 			0 1px 2px rgba(0,0,0,.2);
 }
 
-#but:hover{
+.but:hover{
 	background: 			-webkit-linear-gradient(top, #99BB66, #9ED474);
 	background: 			-moz-linear-gradient(top, #99BB66, #9ED474);
 }
@@ -288,6 +288,16 @@ a
 	display:				inline;
 }
 
-#updatePanel{
-	padding:					20px 10px;	
+#updateForm{
+	padding:				20px 10px;	
+	height:					275px;	
+}
+
+#updateButtons{
+	text-align:				center;
+	margin-top:				30px;
+}
+
+#nextBtn{
+	margin-left:			500px;
 }
