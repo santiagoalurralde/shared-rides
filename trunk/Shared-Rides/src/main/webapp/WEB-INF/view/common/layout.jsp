@@ -9,7 +9,9 @@
 	<meta name="viewport" content="width=device-width" />
 	 
 	<title><tiles:getAsString name="title"/></title> 
-	<link rel="stylesheet" href="resources/styles/style.css" type="text/css" /> 
+	<link 	rel=	"stylesheet" 		href=	"resources/styles/style.css" type="text/css" /> 
+	<script type=	"text/javascript" 	src=	"resources/scripts/jsFunctions.js"></script>
+
 	</head> 
 
 <body> 

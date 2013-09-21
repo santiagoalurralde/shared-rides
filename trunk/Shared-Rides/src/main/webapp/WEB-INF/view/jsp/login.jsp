@@ -37,7 +37,7 @@
 				<input class="ipt" type="password"	name="pwd"		placeholder="Password">			<br>
 				
 				
-				<input class="font" id="but" type="submit" value="<spring:message code="label.enter"/>">
+				<input class="font, but" id="loginBtn" type="submit" value="<spring:message code="label.enter"/>">
 			</form>
 		</div>
 		

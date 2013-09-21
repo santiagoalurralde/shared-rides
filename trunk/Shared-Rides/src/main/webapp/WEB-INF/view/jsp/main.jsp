@@ -1,4 +1,6 @@
 <body>   
+
+	
 	    <!----------------  MENU      -------------->
         <div id="nav" class="aBox">
             <div class="tupper">
@@ -22,17 +24,25 @@
 	        	
 	        	<div id="navSteps" class="aBox"> 
 	        		<ul>
-	        			<li><h1>1</h1></li>
-	        			<li><h1>2</h1></li>
-	        			<li><h1>3</h1></li>
+	        			<li><h4>1. Que tipo de usuario busca?					</h4></li>
+	        			<li><h4>2. Seleccione un turno							</h4></li>
+	        			<li><h4>3. Seleccione su ubicacion						</h4></li>
 	        		</ul>
 	        	</div>
 	        	
-	        	<div id="updatePanel" class="aBox">
-	        		<h4>
-	        			Seleccione el tipo de Usuario al que está buscando
-	        		</h4>
-	        	</div>
+	        	<form name="updateSearchForm" id="updateForm" class="aBox">
+  		
+	        		
+	        		<div id="steps1">
+	        		
+	        			
+	        		</div>
+	        		
+	        		<div id="updateButtons">
+	        			<input type="button" class="but" id="backBtn" value="Volver" onClick="stepsUpdate(-1);" />	
+	        			<input type="button" class="but" id="nextBtn" value="Siguiente" onClick="stepsUpdate(1);" />	
+	        		</div>
+	        	</form>
             </div>
 		</div>
 </body>
