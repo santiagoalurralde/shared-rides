@@ -7,13 +7,13 @@
 {
 	padding:				0px;
 	margin:					0px;
+	font-family: 			'Raleway', sans-serif;	
 }
 
 body
 {
 	
 	background-color:		#FFFFFF;
-	font-family:			"A", Serif; 
 	font-weight:			normal;
 	text-shadow: 			0 1px 1px rgba(0,0,0,.2);
 	
@@ -27,7 +27,7 @@ body
 a
 {
 	text-decoration:		none;
-	font-family:			"Antic", Serif;
+	font-family: 			'Raleway', sans-serif;
 }
 
 .hrs
@@ -66,27 +66,18 @@ a
 	background:				-moz-linear-gradient(top, #90AA44, #50A410);
 	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
 	margin-bottom:			100px;
-	padding-left:			15px;
 	overflow:				auto;
 	position:				fixed;
 	top:					0;
 	width:					100%;
 	z-index:				1000;
-	
-	/*
-	background-color:		#50A410;
-	width:					auto;
-	display:				inline-block;
-	background-image:		url('pattern3.jpg');
-	#55AC3A
-	#90AA44
-	*/
 }
 	#nav li
 	{
 		list-style-type:	none;
 		height:				40px;
 		float:				left;
+		width:				20%;
 	}
 	#nav li a
 	{
@@ -127,23 +118,17 @@ a
 	/*ojo*/
 	top:					0;
 	width:					100%;
-	overflow:				auto;
-	margin:					20px 0;	
+	padding-top:			10px;
+	margin:					20px 0 0 0;	
 	background:				-moz-linear-gradient(top, #90AA44, #50A410);
 	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
 	text-align:				center;
-	/*
-	background-color:		#50A410;
-	width:					auto;
-	display:				inline-block;
-	background-image:		url('pattern3.jpg');
-	*/
 }
 	#navSteps li
 	{
 		width:				33%;
 		list-style-type:	none;
-		height:				40px;
+		height:				30px;
 		display:			inline-block;
 	}
 	#navSteps li a:active
@@ -172,10 +157,12 @@ a
 
 #contentMain
 {
-	padding:				50px 0px;
+	width:					100%;
+	padding:				50px 1px 50px 0px;
 	margin:					40px auto auto auto;
 	box-shadow:				0px 1px 1px #000000;
-	border:					solid 1px; 
+	border:					solid 1px;
+	background-image:		url(../images/txture4.jpg); 
 }
 
 #myfooter
@@ -289,8 +276,10 @@ a
 }
 
 #updateForm{
-	padding:				20px 10px;	
-	height:					275px;	
+	padding:				20px 0px;
+	/*padding:				20px 10px;*/
+	width:					100%;	
+	background-color:		white;
 }
 
 #updateButtons{
