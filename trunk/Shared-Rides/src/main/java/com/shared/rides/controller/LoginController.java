@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shared.rides.service.LoginService;
+import com.shared.rides.util.ReadGPXFile;
 
 
 @Controller
@@ -29,7 +30,7 @@ public class LoginController {
 	@RequestMapping(value = "login.htm")
 	public ModelAndView loadLogin(HttpSession request)
             throws ServletException, IOException {
-		
+
 		return new ModelAndView("login");
 	}
 	
