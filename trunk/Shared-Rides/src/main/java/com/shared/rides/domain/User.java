@@ -184,6 +184,23 @@ public class User implements Serializable{
 		this.userId = userId;
 	}
 
+	public Pedestrian getPedestrian() {
+		return pedestrian;
+	}
+
+	public void setPedestrian(Pedestrian pedestrian) {
+		this.pedestrian = pedestrian;
+	}
+
+	public Driver getDriver() {
+		return driver;
+	}
+
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
+
+	
 //-------------------------------
 	
 	public boolean isPedestrian(){
