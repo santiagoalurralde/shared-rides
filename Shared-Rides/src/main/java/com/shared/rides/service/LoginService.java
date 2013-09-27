@@ -23,14 +23,15 @@ public class LoginService {
 		User u = new User();
 		u.setEmail(email);
 		u = userDAO.loadByEmail(u);
-		
 		//Si el usuario no es null, quiere decir que existe
 		if (u != null){
 			password = u.getPw().toString();
 			if (password.equals(pw)){
 				//Seteamos a la session el atributo user
+				
 				HttpSession session = r.getSession(false);
 				session.setAttribute("user", u);
+				
 				return true;
 			}
 			else return false;

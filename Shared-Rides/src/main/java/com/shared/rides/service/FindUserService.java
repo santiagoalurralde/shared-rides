@@ -84,7 +84,7 @@ public class FindUserService {
 		//Peaton y turno mañana
 		if (profile == 0 && shift == 0){
 			for(int i = 0; i < userList.size(); i++){
-				if(userList.get(i).isPedestrian()==false || userList.get(i).getShift() == 0){
+				if(userList.get(i).isPedestrian()==false || userList.get(i).getShift().equals("Mañana")){
 					userList.remove(i);
 				}			
 			}
@@ -93,7 +93,7 @@ public class FindUserService {
 		//Peaton y turno tarde
 		if (profile == 0 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
-				if(userList.get(i).isPedestrian()==false || userList.get(i).getShift() == 1){
+				if(userList.get(i).isPedestrian()==false || userList.get(i).getShift().equals("Tarde")){
 					userList.remove(i);
 				}			
 			}
@@ -102,7 +102,7 @@ public class FindUserService {
 		//Conductor y turno mañana
 		if (profile == 1 && shift == 0){
 			for(int i = 0; i < userList.size(); i++){
-				if(userList.get(i).isDriver()==false || userList.get(i).getShift() == 0){
+				if(userList.get(i).isDriver()==false || userList.get(i).getShift().equals("Mañana")){
 					userList.remove(i);
 				}			
 			}
@@ -111,7 +111,7 @@ public class FindUserService {
 		//Conductor y turno tarde
 		if (profile == 1 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
-				if(userList.get(i).isDriver()==false || userList.get(i).getShift() == 1){
+				if(userList.get(i).isDriver()==false || userList.get(i).getShift().equals("Tarde")){
 					userList.remove(i);
 				}			
 			}
