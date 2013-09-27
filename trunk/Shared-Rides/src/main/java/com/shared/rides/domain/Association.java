@@ -10,6 +10,8 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -36,11 +38,10 @@ public class Association implements Serializable{
 	@Column(name="inout", nullable = false)
 	private int inout;
 	
-	/*
-	@OneToOne
-	@PrimaryKeyJoinColumn
+	@Enumerated(EnumType.STRING)
+	@Column(name="state")
 	private State state;
-	*/
+	
 //-----------CONSTRUCTOR
 
 	public Association(){	
@@ -69,14 +70,14 @@ public class Association implements Serializable{
 	public void setInout(int inout) {
 		this.inout = inout;
 	}
-	/*
+	
 	public State getState() {
 		return state;
 	}
 	public void setState(State state) {
 		this.state = state;
 	}
-	 */
+	
 	public long getAssociationId() {
 		return associationId;
 	}

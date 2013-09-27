@@ -31,6 +31,11 @@ public class MainController {
 								@RequestParam("lat") double latitude)
             throws ServletException, IOException {
 
+		//System.out.println("profile = " + profile);
+		//System.out.println("turno = " + shift);
+		//System.out.println("longitud = " + longitude);
+		//System.out.println("latitud = " + latitude);
+		
 		//Obtengo la lista de usuarios que se encuentran a 10 cuadras alrededor
 		listUsers = findUserService.findUsers(profile, shift, longitude, latitude);
 		

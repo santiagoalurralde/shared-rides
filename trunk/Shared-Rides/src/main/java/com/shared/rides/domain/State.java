@@ -1,5 +1,18 @@
 package com.shared.rides.domain;
 
 public enum State {
-	PENDING, ACCEPTED, CANCELLED
+	PENDING("Pendiente"), ACCEPTED("Aceptado"), CANCELLED("Cancelado");
+	
+	
+	private String stateName;
+	
+	
+	State(String name){
+		this.stateName = name;
+	}
+	
+	public String getStateName(){
+		return this.stateName;
+	}
+	
 }
