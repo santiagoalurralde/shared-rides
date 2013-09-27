@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       
+       <bean class = "com.shared.rides.service.LoginService"/>
+       <bean class = "com.shared.rides.dao.persistence.UserDAOImplMySql"/>
+ 		
+		
+		 <!-- Database config -->
+
+ <bean id="dataSource"
+ 	class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+ 	p:driverClassName="com.mysql.jdbc.Driver"
+ 	p:url="jdbc:mysql://localhost:3306/Shared-Rides" p:username="root"
+ 	p:password="root" />
+
+<!-- Hibernate config -->
+
+ <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" />   
+        <property name="hibernateProperties">
+        	<props>
+            	<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property> 
+        
+        <property name="annotatedClasses">
+			<list>
+				<value>com.shared.rides.domain.Vehicle</value>
+				<value>com.shared.rides.domain.User</value>
+				<value>com.shared.rides.domain.Organization</value>			
+				<value>com.shared.rides.domain.Address</value>
+				<value>com.shared.rides.domain.Association</value>
+				<value>com.shared.rides.domain.Marker</value>
+				<value>com.shared.rides.domain.State</value>
+				<value>com.shared.rides.domain.Pedestrian</value>
+				<value>com.shared.rides.domain.Driver</value>
+				<value>com.shared.rides.domain.Schedule</value>
+				<value>com.shared.rides.domain.Track</value>
+			</list>
+		</property> 
+ </bean>
+
+<tx:annotation-driven />
+ <bean id="transactionManager"
+ 	class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+ 	<property name="sessionFactory" ref="sessionFactory" />
+ </bean>
+	
+</beans>
