@@ -17,7 +17,7 @@
        
        <bean class = "com.shared.rides.service.LoginService"/>
        <bean class = "com.shared.rides.dao.persistence.UserDAOImplMySql"/>
- 		
+       <bean class = "com.shared.rides.service.FindUserService"/>
 		
 		 <!-- Database config -->
 
