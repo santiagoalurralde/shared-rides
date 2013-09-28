@@ -26,11 +26,12 @@ public class Pedestrian implements Profile{
 	@Column(name="id")
 	private long pedestrianID;
 	
-	@Column(name="rating", nullable = false)
+	@Column(name="rating_ped", nullable = false)
 	private float rating;
 	
+
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name="Pedestrian-Schedule", joinColumns = @JoinColumn(name="pedestrianID"),
+	@JoinTable(name="Pedestrian_Schedule", joinColumns = @JoinColumn(name="pedestrianID"),
 	inverseJoinColumns = @JoinColumn(name="scheduleID"))
 	private Schedule schedule;
 

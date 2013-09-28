@@ -2,6 +2,9 @@ package com.shared.rides.service;
 
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,12 +36,11 @@ public class FindUserService {
 	private double longitudeUser;
 	private int dist;
 	
-	public List<User> findUsers(int profile, int shift, double longitudeSelected, double latitudeSelected){
+	public List findUsers(int profile, int shift, double longitudeSelected, double latitudeSelected){
 		
 		userList = userDAO.listAll();
 		//Filtro la lista de acuerdo al perfil y el turno
 		cleanList(profile, shift);
-		
 		//Con la lista filtrada, vemos que usuarios tienen una distancia mejor a 10 cuadras = 1000 mts.
 		if (profile == 0){
 			for(int i = 0; i < userList.size() ; i++){
@@ -46,7 +48,6 @@ public class FindUserService {
 				latitudeUser = addressUser.getMarker().getLatitude();
 				longitudeUser = addressUser.getMarker().getLongitude();
 				dist = DistanceHaversine.calculateDistance(latitudeSelected, longitudeSelected, latitudeUser, longitudeUser);		
-				
 				//Si la distancia es mayor a 1000 mts, lo saco de la lista
 				if (dist > 1000) userList.remove(i);
 			}
@@ -76,6 +77,7 @@ public class FindUserService {
 			}
 		}
 		
+		//if (userList.isEmpty()) return null;
 		return userList;
 	}
 	
@@ -84,39 +86,52 @@ public class FindUserService {
 		//Peaton y turno mañana
 		if (profile == 0 && shift == 0){
 			for(int i = 0; i < userList.size(); i++){
-				if(userList.get(i).isPedestrian()==false || userList.get(i).getShift().equals("Mañana")){
+				User u = userList.get(i);
+				if(u.isPedestrian()==false || !(u.getShift().getShiftName().equals("Mañana"))){
 					userList.remove(i);
 				}			
 			}
-		}
-				
+		}		
 		//Peaton y turno tarde
 		if (profile == 0 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
-				if(userList.get(i).isPedestrian()==false || userList.get(i).getShift().equals("Tarde")){
+				User u = userList.get(i);
+				if(u.isPedestrian()==false || !(u.getShift().getShiftName().equals("Tarde"))){
 					userList.remove(i);
 				}			
 			}
-		}
-				
+		}		
 		//Conductor y turno mañana
 		if (profile == 1 && shift == 0){
 			for(int i = 0; i < userList.size(); i++){
-				if(userList.get(i).isDriver()==false || userList.get(i).getShift().equals("Mañana")){
+				User u = userList.get(i);
+				if(u.isDriver()==false || !(u.getShift().getShiftName().equals("Mañana"))){
 					userList.remove(i);
 				}			
 			}
 		}
-				
 		//Conductor y turno tarde
 		if (profile == 1 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
-				if(userList.get(i).isDriver()==false || userList.get(i).getShift().equals("Tarde")){
+				User u = userList.get(i);
+				if(u.isDriver()==false || !(u.getShift().getShiftName().equals("Tarde"))){
 					userList.remove(i);
 				}			
 			}
 		}
 	}
+	
+	
+	//Funcion que me convierte la lista de usuarios en un JSONArray
+	private JSONArray createJSON(List list){
+		JSONArray listJSONArray = new JSONArray();
+		
+		for (int i = 0; i < list.size(); i++){
+			JSONObject user = new JSONObject(list.get(i));
+			listJSONArray.put(user);
+		}
+		return listJSONArray;
+	}	
 	
 }
 

@@ -16,6 +16,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -58,8 +59,8 @@ public class User implements Serializable{
     @PrimaryKeyJoinColumn
 	private Organization organization;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="User-Assoc", joinColumns = @JoinColumn(name="userID"),
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name="User_Assoc", joinColumns = @JoinColumn(name="userID"),
 	inverseJoinColumns = @JoinColumn(name="associationID"))
 	private List<Association> associations;
 	
@@ -77,12 +78,12 @@ public class User implements Serializable{
 	private String picture;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name="Profile", joinColumns = @JoinColumn(name="userID"),
+	@JoinTable(name="User_Pedestrian", joinColumns = @JoinColumn(name="userID"),
 	inverseJoinColumns = @JoinColumn(name="pedestrianID"))
 	private Pedestrian pedestrian;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name="Profile", joinColumns = @JoinColumn(name="userID"),
+	@JoinTable(name="User_Driver", joinColumns = @JoinColumn(name="userID"),
 	inverseJoinColumns = @JoinColumn(name="driverID"))
 	private Driver driver;
 	

@@ -6,10 +6,13 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shared.rides.domain.User;
@@ -31,16 +34,14 @@ public class MainController {
 								@RequestParam("lat") double latitude)
             throws ServletException, IOException {
 
-		//System.out.println("profile = " + profile);
-		//System.out.println("turno = " + shift);
-		//System.out.println("longitud = " + longitude);
-		//System.out.println("latitud = " + latitude);
-		
 		//Obtengo la lista de usuarios que se encuentran a 10 cuadras alrededor
 		listUsers = findUserService.findUsers(profile, shift, longitude, latitude);
 		
+		ModelAndView modelAndView = new ModelAndView("userList");
+		modelAndView.addObject(listUsers);
+		modelAndView.setViewName("main");
 		
-		return new ModelAndView("login");
+		return modelAndView;
 	}
 
 }

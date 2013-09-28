@@ -30,11 +30,11 @@ public class Driver implements Profile{
 	@Column(name="id", nullable = false)
 	private long driverId;
 	
-	@Column(name="rating")
+	@Column(name="rating_driver")
 	private float rating;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name="Driver-Schedule", joinColumns = @JoinColumn(name="driverID"),
+	@JoinTable(name="Driver_Schedule", joinColumns = @JoinColumn(name="driverID"),
 	inverseJoinColumns = @JoinColumn(name="scheduleID"))
 	private Schedule schedule;
 	
@@ -43,7 +43,7 @@ public class Driver implements Profile{
 	private Vehicle vehicle;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="Driver-Track", joinColumns = @JoinColumn(name="driverID"),
+	@JoinTable(name="Driver_Track", joinColumns = @JoinColumn(name="driverID"),
 	inverseJoinColumns = @JoinColumn(name="trackID"))
 	private List<Track> tracks;
 

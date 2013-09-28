@@ -11,7 +11,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Shedule")
+@Table(name="Schedule")
 public class Schedule implements Serializable{
 
 	@Id
@@ -22,11 +22,11 @@ public class Schedule implements Serializable{
 	@Column(name="day", nullable = false)
 	private int day;
 	
-	@Column(name="hour", nullable = false)
-	private int hour;
+	@Column(name="hourIn", nullable = false)
+	private int hourIn;
 	
-	@Column(name="inout", nullable = false)
-	private int inout;
+	@Column(name="hourOut", nullable = false)
+	private int hourOut;
 	
 //-----------CONSTRUCTOR 
 
@@ -42,17 +42,17 @@ public class Schedule implements Serializable{
 	public void setDay(int day) {
 		this.day = day;
 	}
-	public int getHour() {
-		return hour;
+	public int getHourIn() {
+		return hourIn;
 	}
-	public void setHour(int hour) {
-		this.hour = hour;
+	public void setHourIn(int hourIn) {
+		this.hourIn = hourIn;
 	}
-	public int getInout() {
-		return inout;
+	public int getHourOut() {
+		return hourOut;
 	}
-	public void setInout(int inout) {
-		this.inout = inout;
+	public void setHourOut(int hourOut) {
+		this.hourOut = hourOut;
 	}
 
 	public long getScheduleId() {
