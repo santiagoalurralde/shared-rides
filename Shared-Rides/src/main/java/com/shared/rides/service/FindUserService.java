@@ -2,9 +2,6 @@ package com.shared.rides.service;
 
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -121,7 +118,7 @@ public class FindUserService {
 		}
 	}
 	
-	
+	/*
 	//Funcion que me convierte la lista de usuarios en un JSONArray
 	private JSONArray createJSON(List list){
 		JSONArray listJSONArray = new JSONArray();
@@ -132,7 +129,7 @@ public class FindUserService {
 		}
 		return listJSONArray;
 	}	
-	
+	*/
 }
 
 	
