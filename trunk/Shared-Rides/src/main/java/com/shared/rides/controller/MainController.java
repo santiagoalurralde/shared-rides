@@ -1,16 +1,15 @@
 package com.shared.rides.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,21 +26,30 @@ public class MainController {
 	
 	private List<User> listUsers;
 	
-	@RequestMapping(value = "find.htm")
-	public ModelAndView search(@RequestParam("prof") int profile, 
+	@RequestMapping(value = "/find.htm", headers = "Accept=*/*")
+	public @ResponseBody List<User> search(@RequestParam("prof") int profile, 
 								@RequestParam("shift") int shift, 
 								@RequestParam("long") double longitude,
 								@RequestParam("lat") double latitude)
             throws ServletException, IOException {
 
+		listUsers = new ArrayList<User>();
 		//Obtengo la lista de usuarios que se encuentran a 10 cuadras alrededor
 		listUsers = findUserService.findUsers(profile, shift, longitude, latitude);
+		return listUsers;
+	}
+	
+	@RequestMapping(value = "/prueba.htm")
+	public @ResponseBody List<User> prueba()
+            throws ServletException, IOException {
+
+		listUsers = new ArrayList<User>();
 		
-		ModelAndView modelAndView = new ModelAndView("userList");
-		modelAndView.addObject(listUsers);
-		modelAndView.setViewName("main");
+		User u = new User();
+		u.setName("Leandro");
+		listUsers.add(u);
 		
-		return modelAndView;
+		return listUsers;
 	}
 
 }
