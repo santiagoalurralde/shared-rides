@@ -30,27 +30,15 @@
 	        	</div>
 	        	
 	        	<form name="updateSearchForm" id="updateForm" class="aBox">
-  		
-	        		
-	        		<div id="steps1">
-	        			<div id="step1" style="margin: 10px 0px 0px 250px">
-			        		<img id="imgBoot" 		src="resources/images/boot.png" 	width="175" style="margin-right: 100px">
-							<img id="imgSteering"	src="resources/images/steering.png" width="175">
-						</div>
+	        		<div id="steps" style="margin: 10px 0px 0px 250px">
+			        		<img id="imgLeft" 		src="resources/images/boot.png" 	width="175" style="margin-right: 100px">
+							<img id="imgRight"		src="resources/images/steering.png" width="175">
 	        		</div>
 	        		
 	        		<div id="updateButtons">
-	        			<input type="button" class="but" id="backBtn" value="Volver" onClick="stepsUpdate(-1);" style="visibility:hidden" />	
+	        			<input type="button" class="but" id="backBtn" value="Volver" onClick="stepsUpdate(-1);"/>	
 	        			<input type="button" class="but" id="nextBtn" value="Siguiente" onClick="stepsUpdate(1);" />
-	        		</div>
-	        			
-	        		<script>
-
-	    				$( "#nextBtn" ).click(function() {
-	    					$( "#imgBoot" ).attr('src','resources/images/sun.png'); 
-	   					});
-
-					</script>	        		
+	        		</div>	        		
 	        	</form>
             </div>
 		</div>

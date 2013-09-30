@@ -7,14 +7,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name		='viewport'		content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
 	<meta name		="viewport" 	content="width=device-width" />
-	 
 	<title><tiles:getAsString name="title"/></title> 
 	<link 	rel=	"stylesheet" 		href=	"resources/styles/style.css" type="text/css" />
 	<link 	rel=	'stylesheet'		href='http://fonts.googleapis.com/css?family=Raleway:500'  type='text/css'> 
-	<script type=	"text/javascript" 	src=	"resources/scripts/jsFunctions.js">		</script>
-	<script src=	"resources/scripts/jquery-1.10.2.js">	</script>
-	<!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
-	
+	<script src=	"resources/scripts/jquery-1.10.2.js">								</script>
+	<script src=	"resources/scripts/jsFunctions.js" type=	"text/javascript">		</script>
 </head> 
 
 
