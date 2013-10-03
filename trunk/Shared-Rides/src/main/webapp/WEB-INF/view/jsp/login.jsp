@@ -29,7 +29,7 @@
 			</h3>
 	
 	
-			<form method="POST" action="validate.htm">
+			<form method="POST" action="validate.do">
 
 				<spring:message code="label.email"/>	<br> 
 				<input class="ipt" type="text"		name="email"	placeholder="mike@email.com">	<br>			
