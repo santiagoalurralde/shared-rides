@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shared.rides.dao.interfaces.IUserDAO;
+import com.shared.rides.domain.Association;
 import com.shared.rides.domain.Marker;
 import com.shared.rides.domain.User;
 
@@ -51,7 +52,5 @@ public class UserDAOImplMySql implements IUserDAO {
 		sessionFactory.getCurrentSession().update(user);
 		return null;
 	}
-	
-	
 
 }

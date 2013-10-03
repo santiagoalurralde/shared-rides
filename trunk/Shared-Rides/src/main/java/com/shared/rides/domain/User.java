@@ -205,14 +205,5 @@ public class User implements Serializable{
 
 	
 //-------------------------------
-	
-	public boolean isPedestrian(){
-		if (pedestrian == null) return false;
-		return true;
-	}
 
-	public boolean isDriver(){
-		if (driver == null) return false;
-		return true;
-	}
 }

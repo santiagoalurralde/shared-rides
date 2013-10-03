@@ -1,5 +1,7 @@
 package com.shared.rides.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +21,7 @@ import javax.persistence.Column;
 
 @Entity
 @Table(name="Pedestrian")
-public class Pedestrian implements Profile{
+public class Pedestrian implements Profile, Serializable{
 
 	@Id
 	@GeneratedValue
@@ -55,13 +57,14 @@ public class Pedestrian implements Profile{
 		this.schedule = schedule;
 	}
 
-	public long getPedestrianId() {
+	public long getPedestrianID() {
 		return pedestrianID;
 	}
 
-	public void setPedestrianId(long pedestrianID) {
+	public void setPedestrianID(long pedestrianID) {
 		this.pedestrianID = pedestrianID;
 	}
+
 	
 //---------------------------
 
