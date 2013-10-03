@@ -9,10 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.shared.rides.dao.interfaces.IUserDAO;
-import com.shared.rides.dao.persistence.UserDAOImplMySql;
-import com.shared.rides.domain.User;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/test-servlet.xml" })
 public class FindUserServiceTest {
