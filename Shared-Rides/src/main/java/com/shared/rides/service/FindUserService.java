@@ -84,7 +84,7 @@ public class FindUserService {
 		if (profile == 0 && shift == 0){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
-				if(u.isPedestrian()==false || !(u.getShift().getShiftName().equals("Mañana"))){
+				if(u.getPedestrian().equals(null) || !(u.getShift().getShiftName().equals("Mañana"))){
 					userList.remove(i);
 				}			
 			}
@@ -93,7 +93,7 @@ public class FindUserService {
 		if (profile == 0 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
-				if(u.isPedestrian()==false || !(u.getShift().getShiftName().equals("Tarde"))){
+				if(u.getPedestrian().equals(null) || !(u.getShift().getShiftName().equals("Tarde"))){
 					userList.remove(i);
 				}			
 			}
@@ -102,7 +102,7 @@ public class FindUserService {
 		if (profile == 1 && shift == 0){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
-				if(u.isDriver()==false || !(u.getShift().getShiftName().equals("Mañana"))){
+				if(u.getDriver().equals(null) || !(u.getShift().getShiftName().equals("Mañana"))){
 					userList.remove(i);
 				}			
 			}
@@ -111,7 +111,7 @@ public class FindUserService {
 		if (profile == 1 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
-				if(u.isDriver()==false || !(u.getShift().getShiftName().equals("Tarde"))){
+				if(u.getDriver().equals(null) || !(u.getShift().getShiftName().equals("Tarde"))){
 					userList.remove(i);
 				}			
 			}

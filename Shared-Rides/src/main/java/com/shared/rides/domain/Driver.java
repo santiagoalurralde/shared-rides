@@ -1,5 +1,6 @@
 package com.shared.rides.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ import javax.persistence.ManyToMany;
 
 @Entity
 @Table(name="Driver")
-public class Driver implements Profile{
+public class Driver implements Profile, Serializable{
 	
 	@Id
 	@GeneratedValue

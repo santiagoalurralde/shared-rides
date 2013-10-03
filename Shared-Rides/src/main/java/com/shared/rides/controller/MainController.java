@@ -26,7 +26,7 @@ public class MainController {
 	
 	private List<User> listUsers;
 	
-	@RequestMapping(value = "/find.htm", headers = "Accept=*/*")
+	@RequestMapping(value = "/find.do")
 	public @ResponseBody List<User> search(@RequestParam("prof") int profile, 
 								@RequestParam("shift") int shift, 
 								@RequestParam("long") double longitude,
@@ -38,18 +38,6 @@ public class MainController {
 		listUsers = findUserService.findUsers(profile, shift, longitude, latitude);
 		return listUsers;
 	}
-	
-	@RequestMapping(value = "/prueba.htm")
-	public @ResponseBody List<User> prueba()
-            throws ServletException, IOException {
 
-		listUsers = new ArrayList<User>();
-		
-		User u = new User();
-		u.setName("Leandro");
-		listUsers.add(u);
-		
-		return listUsers;
-	}
 
 }

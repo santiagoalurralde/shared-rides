@@ -27,7 +27,7 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
-	@RequestMapping(value = "login.htm")
+	@RequestMapping(value = "login.do")
 	public ModelAndView loadLogin(HttpSession request)
             throws ServletException, IOException {
 
@@ -35,20 +35,20 @@ public class LoginController {
 	}
 	
 	
-	@RequestMapping(value = "validate.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "validate.do", method = RequestMethod.POST)
 	public ModelAndView userValidation(@RequestParam("email") String email , @RequestParam("pwd") String pwd, HttpServletRequest request)
             throws ServletException, IOException {
         logger.info("Returning hello view");
         	
         if(loginService.validate(email, pwd, request)){
         	
-        	return new ModelAndView("redirect:/main.htm"); 
+        	return new ModelAndView("redirect:/main.do"); 
         }
      return new ModelAndView("login");
         
     }
 	
-	@RequestMapping(value="main.htm")
+	@RequestMapping(value="main.do")
 	public ModelAndView loadMain(){
 		
 		return new ModelAndView("main");
