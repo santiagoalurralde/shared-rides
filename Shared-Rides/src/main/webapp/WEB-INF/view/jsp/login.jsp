@@ -3,7 +3,8 @@
  
 
 <body>
-	<span id="intl">
+	<div class="tupper mini">
+		<span id="i18n">
     		<a href="?lang=es">
     			<img src="resources/images/ar.png"/>
     		</a> 
@@ -11,16 +12,12 @@
     		<a href="?lang=en">
     			<img src="resources/images/us.png"/>
     		</a>
-	</span>
-    
-    <div class="littleTupper">
-    
-        <!----------------  CONTENT     -------------->
-		<div class="content">
-		
+		</span>
+	</div>
 
-			
-			
+    <div class="tupper mini">
+        <!----------------  CONTENT     -------------->
+		<div id="theLogin">
 			<img 	width=275px src="resources/images/logo1.png"/>
 			<hr		class="hrs"/>
 			
@@ -31,21 +28,18 @@
 	
 			<form method="POST" action="validate.do">
 
-				<spring:message code="label.email"/>	<br> 
-				<input class="ipt" type="text"		name="email"	placeholder="mike@email.com">	<br>			
-				<spring:message code="label.password"/>	<br> 
-				<input class="ipt" type="password"	name="pwd"		placeholder="Password">			<br>
+				<!-- <spring:message code="label.email"/>	<br> --> 
+				<input class="theInputs" type="text"		name="email"	placeholder="mike@email.com">	<br>			
+				<!--<spring:message code="label.password"/>	<br> -->
+				<input class="theInputs" type="password"	name="pwd"		placeholder="Password">			<br>
 				
-				
-				<input class="font, but" id="loginBtn" type="submit" value="<spring:message code="label.enter"/>">
+				<input class="but" id="butLogin" type="submit" value="<spring:message code="label.enter"/>">
 			</form>
 		</div>
 		
 		
 		<!----------------  PICTURE     -------------->
-		<div>
-			<img id="introPic" width=325px src="resources/images/intropic.png"/>		
-		</div>
+		<img id="introPic" width="50px" src="resources/images/intropic.png"/>		
 	</div>
 </body>
 
