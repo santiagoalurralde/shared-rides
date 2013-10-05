@@ -1,229 +1,216 @@
-/*@font-face {
-  font-family: 'Alegreya SC';
-  src: url('http://fonts.googleapis.com/css?family=Alegreya+SC');
-}*/
+/*------------------------------------------------------------------
+[Master Stylesheet]
+
+Project:		Shared Rides
+Last change:	04/10/2013
+Assigned to:	Santiago Alurralde (sa)
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+[Layout]
+-------------------------------------------------------------------*/
 
 *
 {
-	padding:				0px;
+	font-family: 			'Raleway', sans-serif;
 	margin:					0px;
-	font-family: 			'Raleway', sans-serif;	
+	padding:				0px;	
 }
 
-body
-{
-	
-	background-color:		#FFFFFF;
-	font-weight:			normal;
-	text-shadow: 			0 1px 1px rgba(0,0,0,.2);
-	
-	/*
-	background-image:		url('backNew.jpg');
-	background-repeat:		repeat-x;
-	background-position:	top;
-	*/
+html{
+	height:					100%;
 }
 
 a
 {
 	text-decoration:		none;
-	font-family: 			'Raleway', sans-serif;
+}
+
+body
+{
+	font-weight:			normal;
+	text-shadow: 			0 1px 1px rgba(0,0,0,.2);
+	height:				100%;
 }
 
 .hrs
 {
-
-	margin-top:				25px; 
-	margin-bottom:			30px; 
+	background:				black;
 	border: 				0; 
 	height: 				1px; 
+	margin-top:				25px; 
+	margin-bottom:			30px; 
 	text-align: 			center; 
-	background:				black;
-	
-	/*
-	background:	 			-webkit-linear-gradient(left, #fff, #000, #fff);
-	background:	 			-moz-linear-gradient(left, #fff, #000, #fff);
-	*/
 }
 
 .tupper
 {
+	position:				relative;
+	margin:					0 auto;
 	width:					960px;
-	margin:					auto;
-	position:				relative;
 }
 
-.littleTupper
+.mini
 {
-	width: 					750px;
-	margin:					auto;
-	position:				relative;
+	width:					750px;
 }
 
-/*NAVEGADOR PRINCIPAL*/
+.theBox
+{
+	box-shadow:				1px 1px 1px #000000;
+	color:					Black;
+	border:					solid 1px; 	
+}
+
+/*------------------------------------------------------------------
+[Content / #content]
+------------------------------------------------------------------*/
+
+#theContent
+{
+	background-image:		url(../images/txture4.jpg); 
+	clear:					both;
+	height:					auto;
+	margin:					0 auto;
+	margin-top:				40px;
+	min-height:				100%;
+	padding:				50px 0px;
+	padding-bottom: 		2em;
+	width:					100%; 
+}
+
+
+/*------------------------------------------------------------------
+[Footer / #theFooter]
+-------------------------------------------------------------------*/
+#theFooter
+{
+	background-image:		url(../images/txture.png);
+	clear:					both;
+	color:					white;
+	font-size:				80%;
+	height:					4em;	
+	margin-top: 			-2em;
+	padding:				3em 0em; 
+	position: 				relative;
+	text-align:				center;
+	width:					100%;
+ 	z-index: 				10;
+}
+
+/*------------------------------------------------------------------
+[Navigation / #nav]
+------------------------------------------------------------------*/
+
 #nav
 {
 	background:				-moz-linear-gradient(top, #90AA44, #50A410);
 	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
-	margin-bottom:			100px;
 	overflow:				auto;
 	position:				fixed;
-	top:					0;
+		top:					0;
 	width:					100%;
-	z-index:				1000;
+	z-index:				2000;
 }
 	#nav li
 	{
-		list-style-type:	none;
-		height:				40px;
 		float:				left;
+		height:				40px;
+		list-style-type:	none;
 		width:				20%;
 	}
 	#nav li a
 	{
-		line-height:		40px;
-		color:				Black;
-		padding:			0px 58px;
 		border-radius:		4px;
-		text-align:			center;
+		color:				black;
 		display:			block;
+		line-height:		40px;
+		padding:			0px 58px;
+		text-align:			center;
 		
 		/* Color Transition */
+		transition:			.4s;
 		-moz-transition:	.4s;
 		-webkit-transition:	.4s;
-		transition:			.4s;
 	}	
 	#nav li a:hover
 	{
 		background:			-moz-linear-gradient(top, #90AA44, #9ED474);
 		background:			-webkit-linear-gradient(top, #90AA44, #9ED474);
 		box-shadow:			0px 1px 1px #000000;			
-		
-		/*
-		background-color:	#309000;
-		rgb(149, 172, 42);
-		#90AA55
-		*/ 
 	}
-	#nav li a:active
+	#nav .current
 	{ 
-		background-color:	#000000; 
+		background:			-moz-linear-gradient(top, #90AA44, #A5E580);
+		background:			-webkit-linear-gradient(top, #90AA44, #A5E580);
+		box-shadow:			0px 1px 1px #000000;			
 	}
 	
 
-/*NAVEGADOR PASOS*/
+
+/*------------------------------------------------------------------
+[Multistepform /]
+------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+[Navigation Steps / #navSteps]
+------------------------------------------------------------------*/
+
 #navSteps
 {
-	z-index:				1000;
-	/*ojo*/
-	top:					0;
-	width:					100%;
-	padding-top:			10px;
-	margin:					20px 0 0 0;	
 	background:				-moz-linear-gradient(top, #90AA44, #50A410);
 	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
+	margin:					20px 0 0 0;	
+	padding-top:			10px;
 	text-align:				center;
+	top:					0;
+	width:					100%;
+	z-index:				1000;
+	
 }
 	#navSteps li
 	{
-		width:				33%;
-		list-style-type:	none;
-		height:				30px;
 		display:			inline-block;
+		height:				30px;
+		list-style-type:	none;
+		width:				33%;
+		
 	}
 	#navSteps li a:active
 	{ 
-		background-color:	#000000; 
+		background-color:	black; 
 	}
 	
-
-
-.content
-{
-	float:					right;
-	font-size:				90%;
-	margin-top:				60px;
-	padding:				20px;
-	height:					480px;
-	text-align:				left;
-	
-	/*
-	background:				#F0F0F0;
-	box-shadow:				0px 1px 1px #000000;
-	border:					solid 1px; 
-	border-radius: 			7px;
-	*/
+#steps{
+	display:				inline;
 }
 
-#contentMain
-{
-	width:					100%;
-	padding:				50px 1px 50px 0px;
-	margin:					40px auto auto auto;
-	box-shadow:				0px 1px 1px #000000;
-	border:					solid 1px;
-	background-image:		url(../images/txture4.jpg); 
+#updateForm{
+	background-color:		white;
+	padding:				20px 0px;
+	width:					100%;	
 }
 
-#myfooter
+#imgSun, #imgMoon, #imgSteering, #imgBoot
 {
-	font-size:				80%;
-	margin:					5px auto auto auto;
-	padding:				20px;
-	text-align:				center;
-	color:					#FFFFFF;
-	background-image:		url(../images/txture.png);
-	clear:					both;
+	width:					20%;
 }
 
-.aBox
-{
-	box-shadow:				0px 1px 1px #000000;
-	color:					Black;
-	border:					solid 1px; 	
-	
-	/*
-	background-image:		url('backNew.jpg');
-	*/
-}
-		
-#pix
-{
-	width:					300px;
-	margin:					auto auto 8px auto;
-}
-
-#pix2
-{
-	width:					300px;
-	
-	/*
-	border:3px groove #555555;
-	border:3px solid black;
-	margin-left: 200px; 
-	*/
-}
-
-.ipt{
-	margin:					10px 0px 10px 0px;
-	width:					300px;
-	height:					22px;
-	border:					solid 1px Grey; 	
-}		
-
+/*------------------------------------------------------------------
+[Buttons / ]
+------------------------------------------------------------------*/
 .but{
-	margin:					10px 0px 10px 0px;
-	font-size:				100%;
-	color:					white;
-	font-weight:			bold;
-	text-shadow: 			0 1px 1px rgba(0,0,0,.3);
-	height:					30px;
-	width:					130px;
-	border: 				solid 1px #90AA44;
 	border-radius: 			2px;	
 	background: 			-webkit-linear-gradient(top, #90AA44, #9ED474);
 	background: 			-moz-linear-gradient(top, #90AA44, #9ED474);
 	box-shadow: 			0 1px 2px rgba(0,0,0,.2);
+	border: 				solid 1px #90AA44;
+	color:					white;
+	font-size:				100%;
+	font-weight:			bold;
+	height:					30px;
+	margin:					10px 0px 10px 0px;
+	text-shadow: 			0 1px 1px rgba(0,0,0,.3);
+	width:					130px;
 }
 
 .but:hover{
@@ -231,10 +218,33 @@ a
 	background: 			-moz-linear-gradient(top, #99BB66, #9ED474);
 }
 
-#map
-{
+#buttonsSteps{
+	clear:					both;
+	margin-top:				30px;
+	position:				relative;
 	text-align:				center;
+	width:					100%;
 }
+
+#imgSun, #imgSteering, #imgMoon, #imgBoot{
+	
+}
+
+#imgSun:active, #imgSteering:active, #imgMoon:active, #imgBoot:active{
+	/*Escalar*/
+	-webkit-transform:			scale(1.2, 1.2);
+	-o-transform:				scale(1.2, 1.2);
+	-moz-transform:				scale(1.2, 1.2);
+	transform:					scale(1.2, 1.2);
+
+	
+	/*Transicion*/
+	-webkit-transition: 		all 0.04s ease-out;  	/* Chrome 1-25, Safari 3.2+ */
+    -moz-transition: 			all 0.04s ease-out;  	/* Firefox 4-15 */
+   	-o-transition: 				all 0.04s ease-out;  	/* Opera 10.50–12.00 */
+    transition: 				all 0.04s ease-out;  	/* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+}
+
 
 #blockLeft
 {
@@ -246,54 +256,85 @@ a
 	float: 					right;
 }
 
-#logo
-{
-	position:				relative;
-	left:					175px;	
-}
+/*------------------------------------------------------------------
+[Login / ]
+------------------------------------------------------------------*/
 
 #introPic
 {
-	float: 					left;
-	margin-top:				85px;
-	margin-right:			40px;
 	border-radius:			6px;
 	box-shadow:				0px 3px 3px #000000;
+	float: 					left;
+	width:					45%;
+	margin-top:				60px;
 }
 
-#intl{
+#i18n{
+	box-shadow:				0px 1px 1px #000000;
 	float: 					right;
 	padding:				0px 2px;
-	width:					50px;
 	text-align:				center;
-	box-shadow:				0px 1px 1px #000000;
-	position:				absolute;
-	left:					978px;
 }
 
-#steps{
-	display:				inline;
+#theLogin
+{
+	float:					right;
+	font-size:				90%;
+	height:					440px;
+	margin-top:				60px;
+	padding-bottom:			20px;	
+	text-align:				left;	
+	width:					45%;
+	clear:					both;
 }
 
-#updateForm{
-	padding:				20px 0px;
-	/*padding:				20px 10px;*/
-	width:					100%;	
-	background-color:		white;
-}
-
-#updateButtons{
-	position:				relative;
-	text-align:				center;
-	margin-top:				30px;
+.theInputs{
+	border:					solid 1px Grey; 	
+	height:					25px;
+	margin-top:				20px;
 	width:					100%;
+}	
+
+#butLogin{
+	margin-top:				40px;	
+}	
+
+/*------------------------------------------------------------------
+[Comments]
+
+//FONT FACE
+@font-face {
+  font-family: 'Alegreya SC';
+  src: url('http://fonts.googleapis.com/css?family=Alegreya+SC');
 }
 
-#updateButtons but{
-	float:					left;
-	margin-left:			30px;
-	margin-right:			30px;
-}
+//BACKGROUND NAVIGATOR
+background-image:		url('backNew.jpg');
+background-repeat:		repeat-x;
+background-position:	top;
+
+//BACKGROUND NAVIGATOR HOVER
+background-color:		#309000;
+Rgb(149, 172, 42);
+#90AA55
+
+//GRADIENT FOR LINES
+background:	 			-webkit-linear-gradient(left, #fff, #000, #fff);
+background:	 			-moz-linear-gradient(left, #fff, #000, #fff);
+
+//STYLE FOR CONTENT
+background:				#F0F0F0;
+box-shadow:				0px 1px 1px #000000;
+border:					solid 1px; 
+border-radius: 			7px;
+
+//STYLE FOR FOOTER
+height:					150px;
+position:				absolute;
+bottom:					0%;
+
+ 
+-------------------------------------------------------------------*/
 
 
 
