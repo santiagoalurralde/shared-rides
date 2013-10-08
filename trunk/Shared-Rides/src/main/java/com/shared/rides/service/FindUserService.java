@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.shared.rides.dao.interfaces.IUserDAO;
 import com.shared.rides.domain.Address;
 import com.shared.rides.domain.Track;
@@ -33,7 +35,7 @@ public class FindUserService {
 	private double longitudeUser;
 	private int dist;
 	
-	public List findUsers(int profile, int shift, double longitudeSelected, double latitudeSelected){
+	public String findUsers(int profile, int shift, double longitudeSelected, double latitudeSelected){
 		
 		userList = userDAO.listAll();
 		//Filtro la lista de acuerdo al perfil y el turno
@@ -74,8 +76,10 @@ public class FindUserService {
 			}
 		}
 		
+		//auxUserList = createList(userList);
+		
 		//if (userList.isEmpty()) return null;
-		return userList;
+		return createJson(userList).toString();
 	}
 	
 	//Funcion que filtra la lista de usuarios dependiendo el perfil y el turno
@@ -118,18 +122,25 @@ public class FindUserService {
 		}
 	}
 	
-	/*
 	//Funcion que me convierte la lista de usuarios en un JSONArray
-	private JSONArray createJSON(List list){
-		JSONArray listJSONArray = new JSONArray();
+	private JsonArray createJson(List<User> list){
+		
+		JsonArray jsonList = new JsonArray();
 		
 		for (int i = 0; i < list.size(); i++){
-			JSONObject user = new JSONObject(list.get(i));
-			listJSONArray.put(user);
+			JsonObject jsonUser = new JsonObject();
+			
+			jsonUser.addProperty("id", list.get(i).getUserId());;
+			jsonUser.addProperty("name", list.get(i).getName());;
+			jsonUser.addProperty("surname", list.get(i).getSurname());
+			jsonUser.addProperty("picture", list.get(i).getPicture());;
+			
+			jsonList.add(jsonUser);
 		}
-		return listJSONArray;
+		
+		return jsonList;
 	}	
-	*/
+	
 }
 
 	
