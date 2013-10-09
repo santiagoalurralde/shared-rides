@@ -3,6 +3,7 @@ package com.shared.rides.dao.interfaces;
 import java.util.List;
 
 import com.shared.rides.domain.Driver;
+import com.shared.rides.domain.Schedule;
 
 public interface IDriverDAO {
 	
@@ -11,5 +12,4 @@ public interface IDriverDAO {
 		public Driver update(Driver driver);
 		public Driver delete(Driver driver);
 	    public List<Driver> listAll();
-	
 }

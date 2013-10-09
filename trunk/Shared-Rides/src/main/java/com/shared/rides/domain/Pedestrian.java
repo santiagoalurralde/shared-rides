@@ -1,6 +1,7 @@
 package com.shared.rides.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -32,10 +34,10 @@ public class Pedestrian implements Profile, Serializable{
 	private float rating;
 	
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="Pedestrian_Schedule", joinColumns = @JoinColumn(name="pedestrianID"),
 	inverseJoinColumns = @JoinColumn(name="scheduleID"))
-	private Schedule schedule;
+	private List<Schedule> schedule;
 
 //-----------CONSTRUCTOR 
 
@@ -50,12 +52,7 @@ public class Pedestrian implements Profile, Serializable{
 	public void setRating(float rating) {
 		this.rating = rating;
 	}
-	public Schedule getSchedule() {
-		return schedule;
-	}
-	public void setSchedule(Schedule schedule) {
-		this.schedule = schedule;
-	}
+
 
 	public long getPedestrianID() {
 		return pedestrianID;
@@ -65,7 +62,14 @@ public class Pedestrian implements Profile, Serializable{
 		this.pedestrianID = pedestrianID;
 	}
 
-	
+	public List<Schedule> getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(List<Schedule> schedule) {
+		this.schedule = schedule;
+	}
+
 //---------------------------
 
 }

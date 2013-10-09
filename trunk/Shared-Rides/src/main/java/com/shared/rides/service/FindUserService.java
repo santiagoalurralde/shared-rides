@@ -23,7 +23,6 @@ import com.shared.rides.util.ReadGPXFile;
  shift 1 --> turno tarde
  */
 
-
 @Service
 public class FindUserService {
 
@@ -76,9 +75,6 @@ public class FindUserService {
 			}
 		}
 		
-		//auxUserList = createList(userList);
-		
-		//if (userList.isEmpty()) return null;
 		return createJson(userList).toString();
 	}
 	
@@ -124,7 +120,6 @@ public class FindUserService {
 	
 	//Funcion que me convierte la lista de usuarios en un JSONArray
 	private JsonArray createJson(List<User> list){
-		
 		JsonArray jsonList = new JsonArray();
 		
 		for (int i = 0; i < list.size(); i++){
@@ -136,8 +131,7 @@ public class FindUserService {
 			jsonUser.addProperty("picture", list.get(i).getPicture());;
 			
 			jsonList.add(jsonUser);
-		}
-		
+		}		
 		return jsonList;
 	}	
 	

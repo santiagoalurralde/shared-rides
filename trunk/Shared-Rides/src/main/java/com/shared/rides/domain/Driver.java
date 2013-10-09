@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.CascadeType;
@@ -34,16 +35,16 @@ public class Driver implements Profile, Serializable{
 	@Column(name="rating_driver")
 	private float rating;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="Driver_Schedule", joinColumns = @JoinColumn(name="driverID"),
 	inverseJoinColumns = @JoinColumn(name="scheduleID"))
-	private Schedule schedule;
+	private List<Schedule> schedule;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private Vehicle vehicle;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="Driver_Track", joinColumns = @JoinColumn(name="driverID"),
 	inverseJoinColumns = @JoinColumn(name="trackID"))
 	private List<Track> tracks;
@@ -61,12 +62,7 @@ public class Driver implements Profile, Serializable{
 	public void setRating(float rating) {
 		this.rating = rating;
 	}
-	public Schedule getSchedule() {
-		return schedule;
-	}
-	public void setSchedule(Schedule schedule) {
-		this.schedule = schedule;
-	}
+
 	public Vehicle getVehicle() {
 		return vehicle;
 	}
@@ -87,6 +83,14 @@ public class Driver implements Profile, Serializable{
 
 	public void setDriverId(long driverId) {
 		this.driverId = driverId;
+	}
+
+	public List<Schedule> getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(List<Schedule> schedule) {
+		this.schedule = schedule;
 	}
 	
 //-------------------

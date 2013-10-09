@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shared.rides.dao.interfaces.IDriverDAO;
 import com.shared.rides.domain.Driver;
+import com.shared.rides.domain.Schedule;
+import com.shared.rides.domain.User;
 
 @Repository
 @Transactional
@@ -42,5 +44,6 @@ public class DriverDAOImplMySql implements IDriverDAO {
 		sessionFactory.getCurrentSession().update(driver);
 		return null;
 	}
+
 
 }
