@@ -14,8 +14,9 @@
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
- 
+ <!--  
  <context:annotation-config />
+ -->
  <context:component-scan base-package="com.shared.rides" />
  
  <mvc:annotation-driven/>
@@ -25,11 +26,12 @@
  <!--  Santiago: Handles Static Resources  -->
  <mvc:resources mapping="/resources/**" location="/resources/" />
  
+ <!--  
  <bean	class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" 	/>
  <bean	class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"	/>
- 
+ -->
 <!-- Tiles Config -->
- 
+  
 <bean id="viewResolver"  
         class="org.springframework.web.servlet.view.UrlBasedViewResolver">  
         <property name="viewClass">  
@@ -38,7 +40,7 @@
         	</value>  
         </property>  
 </bean>  
-	
+	 
 <bean id="tilesConfigurer"
     class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
     <property name="definitions">
@@ -53,19 +55,17 @@
 	<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="lang"/>
 </mvc:interceptors>
 
-
  <bean id="messageSource"
  	class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
  	<property name="basename" value="resources/messages" />
  	<property name="defaultEncoding" value="UTF-8" />
  </bean>
-
+ 
  <bean id="localeChangeInterceptor"
     class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
     <property name="paramName" value="lang" />
  </bean>
  
-
  <bean id="localeResolver"
     class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
     <property name="defaultLocale" value="es"/>
