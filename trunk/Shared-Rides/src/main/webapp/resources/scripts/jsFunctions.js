@@ -1,13 +1,16 @@
 
 var i 		= -1; 	//Contador de Pasos
-var user	= 0;	//Tipo de Usuario
-var shift	= 0;	//Turno
+var userJs	= 0;	//Tipo de Usuario
+var shiftJs	= 0;	//Turno
 
 function stepsUpdate(value) {
-	if(i===0 && user===0)
-		alert("Seleccione un tipo de Usuario!");
-	else if(i===1 && shift===0)
-		alert("Seleccione un turno!");
+	if(value === 1)
+		if(i===0 && userJs===0)
+			alert("Seleccione un tipo de Usuario!");
+		else if(i===1 && shiftJs===0)
+			alert("Seleccione un turno!");
+		else
+			i = i + value;
 	else
 		i = i + value;
 }
@@ -15,16 +18,42 @@ function stepsUpdate(value) {
 
 	
 function printResults(){
-	console.log("shift: ", shift);
-	console.log("user: ", user);
+	console.log("shiftJs: ", shiftJs);
+	console.log("userJs: ", userJs);
 }
 
 $( document ).ready(function() {
 	initMap();
-	
+});
+
+$( document ).ready(function() {
 	//Esconder el boton Anterior y el Mapa
 	$( "#butBack" ).hide( 0 );
 	$( "#mapWrap" ).hide( 0 );
+	$( "#listFound" ).hide( 0 );
+
+	
+	//Acciones al presionar las imagenes
+	$( "#imgSun" ).click(function(){
+		shiftJs	= 1;
+		$( this ).css('opacity', '1');
+		$( "#imgMoon" ).css('opacity', '0.05');
+	});
+	$( "#imgMoon" ).click(function(){
+		shiftJs 	= 2;
+		$( this ).css('opacity', '1');
+		$( "#imgSun" ).css('opacity', '0.05');
+	});
+	$( "#imgBoot" ).click(function(){
+		userJs 	= 1;
+		$( this ).css('opacity', '1');
+		$( "#imgSteering" ).css('opacity', '0.05');
+	});
+	$( "#imgSteering" ).click(function(){
+		userJs 	= 2;
+		$( this ).css('opacity', '1');
+		$( "#imgBoot" ).css('opacity', '0.05');
+	});
 
 	//Acciones al presionar Siguiente
 	$( "#butNext" ).click(function(){
@@ -32,62 +61,77 @@ $( document ).ready(function() {
 		{
 		case 1:		//De TipoUsuario a Turno
 			$( this ).css('marginLeft', '60px');
-			$( "#imgBoot" ).hide( 'fast' );
-			$( "#imgSteering" ).hide( 'fast' );
+			$( "#imgBoot" ).hide( 0 );
+			$( "#imgSteering" ).hide( 0 );
 			$( "#imgSun" ).show( 'fast' );
 			$( "#imgMoon" ).show( 'fast' );
-			$( "#butBack" ).show( 'slow' );	
+			
+			$( "#butBack" ).show( 'fast' );	
 			break;
 		case 2:		//De Turno a Mapa
-			$( "#imgSun" ).hide( 'fast' );
-			$( "#imgMoon" ).hide( 'fast' );
+			$( "#imgSun" ).hide( 0 );
+			$( "#imgMoon" ).hide( 0 );
 			$( "#mapWrap" ).show( 'slow' );
-			$( this ).hide('fast');
+			
+			$( this ).hide( 0 );
 			$( "#butOK" ).css('marginLeft', '60px');
-			$( "#butOK" ).show(' fast ');
+			$( "#butOK" ).show( 'slow' );
 			break;	
 		}
 	});
-	
 	//Acciones al presionar Anterior
 	$( "#butBack" ).click(function(){
 		switch(i)
 		{
-		case 1:		//De Mapa a Turno
-			$( "#mapWrap" ).hide( 0 );
-			$( "#imgSun" ).show( "slow" );
-			$( "#imgMoon" ).show( "slow" );
-			$( "#butOK" ).hide( 'slow' );
-			$( "#butNext" ).show( "slow" );
-			break;
 		case 0:		//De Turno a TipoUsuario
 			$( "#imgSun" ).hide( 0 );
 			$( "#imgMoon" ).hide( 0 );
 			$( "#imgBoot" ).show( 'fast' );
 			$( "#imgSteering" ).show( 'fast' );
 
-			$( this ).hide( 'slow' );
+			$( this ).hide( 'fast' );
 			$( "#butNext" ).css('marginLeft', '0px');
+			break;
+		case 1:		//De Mapa a Turno
+			$( "#mapWrap" ).hide( 0 );
+			$( "#imgSun" ).show( 'fast' );
+			$( "#imgMoon" ).show( 'fast' );
+			
+			$( "#butOK" ).hide( 'fast' );
+			$( "#butNext" ).show( 'slow' );
 			break;
 		}
 	});
 	
+	$( "#updateForm" ).submit(function(){
+		var $form = $( this ),
+			url = $form.attr( "action" );
+		
+		$.post( url, { user: userJs, shift: shiftJs, lon: lonJs, lat: latJs} );
+	});
+	
+	/*
+	$( "#butOK" ).click(function(){
+		$( "#mapWrap" ).hide( 0 );
+		
+		$.getJSON( "/Shared-Rides/find.do", function( data ) {
+			var items = [];
+			
+			$.each( data, function( key, val ) {
+				items.push( "<tr id='" + key + "'>" + val + "</tr>" ); 
+			});
+			  		  
+			$( "<ul/>", {
+				"class": "my-new-list",
+				html: items.join( "" )
+			}).appendTo( "body" );
+		});
+		
+		$( "#listFound" ).show( 'fast' );
 
-	$( "#imgSun" ).click(function(){
-		shift	= 1;
 	});
-	$( "#imgMoon" ).click(function(){
-		shift 	= 2;
-	});
-	$( "#imgBoot" ).click(function(){
-		user 	= 1;
-	});
-	$( "#imgSteering" ).click(function(){
-		user 	= 2;
-	});
+	*/
 });
-
-
 
 
 /*

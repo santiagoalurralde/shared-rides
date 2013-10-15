@@ -32,7 +32,7 @@
 
 				<!-- <spring:message code="label.email"/>	<br> --> 
 				<input class="theInputs" type="text"		name="email"	placeholder="mike@email.com">	<br>			
-				<!--<spring:message code="label.password"/>	<br> -->
+				<!-- <spring:message code="label.password"/>	<br> -->
 				<input class="theInputs" type="password"	name="pwd"		placeholder="Password">			<br>
 				
 				<input class="but" id="butLogin" type="submit" value="<spring:message code="label.enter"/>">
