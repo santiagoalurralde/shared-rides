@@ -1,4 +1,6 @@
 var map;
+var lonJs;
+var latJs;
 
 function initMap(){
 	var map         = new OpenLayers.Map('map');
@@ -35,27 +37,38 @@ function initMap(){
 		
 		var lonlat          = map.getLonLatFromPixel(position);
 		var lonlatTransf    = lonlat.transform(map.getProjectionObject(), proj4326);
+		lonJs				= lonlatTransf.lon;
+		latJs				= lonlatTransf.lat;
 		var lonlat          = lonlatTransf.transform(proj4326, map.getProjectionObject());
-			
+
+		
+		
+		
 		if(count>0)
 			layerMarkers.clearMarkers();
 			
 		layerMarkers.addMarker(new OpenLayers.Marker(lonlat,icon));	
 		count = count + 1;
 	});
+	
+
 	map.addLayer(layerMarkers);
 	map.addControl(new OpenLayers.Control.LayerSwitcher());
 }
 
+/*
+ * 
+ * 	map.events.register("mousemove", map, function(e) { 
+	    var position = this.events.getMousePosition(e);
+	    OpenLayers.Util.getElement("coords").innerHTML = 'MOUSE POSITION '+position;
+	    var lonlat = map.getLonLatFromPixel( this.events.getMousePosition(e) );
+	    OpenLayers.Util.getElement("lonlatTG").innerHTML = 'lonlat => '+lonlat;
+	    var lonlatTransf = lonlat.transform(map.getProjectionObject(), proj4326);
+	    OpenLayers.Util.getElement("lonlatTrans").innerHTML = 'lonlatTransf => '+lonlatTransf;
+	    OpenLayers.Util.getElement("lonlatDouble").innerHTML = 'lonlat => '+lonlat;
+	});
+	
+ */
 
-/*####MOUSEMOVE####
-map.events.register("mousemove", map, function(e) { 
-    var position = this.events.getMousePosition(e);
-    OpenLayers.Util.getElement("coords").innerHTML = 'MOUSE POSITION '+position;
-    var lonlat = map.getLonLatFromPixel( this.events.getMousePosition(e) );
-    OpenLayers.Util.getElement("lonlatTG").innerHTML = 'lonlat => '+lonlat;
-    var lonlatTransf = lonlat.transform(map.getProjectionObject(), proj4326);
-    OpenLayers.Util.getElement("lonlatTrans").innerHTML = 'lonlatTransf => '+lonlatTransf;
-    OpenLayers.Util.getElement("lonlatDouble").innerHTML = 'lonlat => '+lonlat;
-});
-*/
+
+
