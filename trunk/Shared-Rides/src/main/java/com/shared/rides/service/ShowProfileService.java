@@ -1,5 +1,6 @@
 package com.shared.rides.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,9 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.shared.rides.dao.interfaces.IDriverDAO;
 import com.shared.rides.dao.interfaces.IPedestrianDAO;
 import com.shared.rides.dao.interfaces.IUserDAO;
@@ -40,18 +40,17 @@ public class ShowProfileService {
 	@Autowired
 	private IUserDAO userDAO;
 	@Autowired
-	private IDriverDAO driverDAO;
-	@Autowired
 	private IPedestrianDAO pedDAO;
 	private boolean isAssociation = false;
 	private int freeSeats;
 	private boolean myProfile;
+	private ModelAndView model;
 	
-	public String getProfile(int userId, HttpServletRequest req, boolean myProf){
+	public ModelAndView getProfile(int userId, HttpServletRequest req, boolean myProf){
 		HttpSession s = req.getSession(false);
 		User u = (User)s.getAttribute("user");
 		myProfile = myProf;
-
+		
 		//Si no es mi profile, entonces veo si tengo asociacion con esa persona
 		if(myProfile = false){
 		for (Association assoc : u.getAssociations()){
@@ -63,113 +62,109 @@ public class ShowProfileService {
 		User userAssoc = new User();
 		userAssoc.setUserId(userId);
 		userAssoc = userDAO.load(userAssoc);
-		return createJsonUser(userAssoc).toString();
+		createModel(userAssoc);		
+		return model;
 		}
 		
-		return createJsonUser(u).toString();	
+		createModel(u);
+		
+		return model;
 	}
 	
-	private JsonObject createJsonUser(User u){
+	private void createModel(User u){
 		//json object para el usuario general
-		JsonObject jsonUser = new JsonObject();
-
-		jsonUser.addProperty("id", u.getUserId());
-		jsonUser.addProperty("name", u.getName());
-		jsonUser.addProperty("surname", u.getSurname());
-		jsonUser.addProperty("shift", u.getShift().getShiftName());
+		model = new ModelAndView();
+		
+		model.addObject("id", u.getUserId());
+		model.addObject("name", u.getName());
+		model.addObject("surname", u.getSurname());
+		model.addObject("shift", u.getShift().getShiftName());
 		
 		String street = u.getAddress().getStreet();
 		int numberStreet = u.getAddress().getNumber();
-		jsonUser.addProperty("address", street + numberStreet);
-		jsonUser.addProperty("neighborhood", u.getAddress().getNeighborhood());
+		model.addObject("address", street + " " + numberStreet);
+		model.addObject("neighborhood", u.getAddress().getNeighborhood());
 		
 		//Agrego los datos del driver si el usuario es uno.
-		if(!u.getDriver().equals(null)){
-			jsonUser.add("driver", createJsonDriver(u));
-		}
-		//Agrego los datos del pedestrian si el usuario es uno.
-		if(!u.getPedestrian().equals(null)){
-			jsonUser.add("pedestrian", createJsonPedestrian(u));
+		if(u.getDriver() != null){
+			addModelDriver(u);
 		}
 		
+		//Agrego los datos del pedestrian si el usuario es uno.
+		if(u.getPedestrian() != null){
+			addModelPedestrian(u);
+		}
 		//Agrego los datos privados del usuario en caso de que existe la asociacion
 		if(isAssociation || myProfile){
-			jsonUser.addProperty("telephone", u.getPhoneNumber());
-			jsonUser.addProperty("email", u.getEmail());
-			jsonUser.addProperty("picture", u.getPicture());
+			model.addObject("telephone", u.getPhoneNumber());
+			model.addObject("email", u.getEmail());
+			model.addObject("picture", u.getPicture());
 		}
-		return jsonUser;
 	}
 	
-	private JsonObject createJsonDriver(User u){
+	private void addModelDriver(User u){
 		Driver d = u.getDriver();
-		JsonObject jsonDriver = new JsonObject();
-		jsonDriver.addProperty("idDriver", d.getDriverId());
-		jsonDriver.addProperty("ratingDriver", d.getRating());
+		model.addObject("idDriver", d.getDriverId());
+		model.addObject("ratingDriver", d.getRating());
 
 		//Agrego el horario al objecto jsonDriver
-		JsonArray jsonArraySch = new JsonArray();
+		ArrayList arraySch = new ArrayList();
 		for(int i = 0; i < d.getSchedule().size(); i++){
-			JsonObject jsonSched = new JsonObject();
+			ArrayList<Object> arrayDay = new ArrayList<Object>();
 			int freeSeatsIn = calculateFreeSeats(u, 0);
 			int freeSeatsOut = calculateFreeSeats(u, 1);
 			Schedule sch = d.getSchedule().get(i);
 			
-			jsonSched.addProperty("idSched", sch.getScheduleId());
-			jsonSched.addProperty("day", sch.getDay());
-			jsonSched.addProperty("hourIn", sch.getHourIn());
-			jsonSched.addProperty("freeIn", freeSeatsIn);
-			jsonSched.addProperty("hourOut", sch.getHourOut());
-			jsonSched.addProperty("freeOut", freeSeatsOut);
+			arrayDay.add(0, sch.getScheduleId());
+			arrayDay.add(1, sch.getDay());
+			arrayDay.add(2, sch.getHourIn());
+			arrayDay.add(3, freeSeatsIn);
+			//ACA DEBERIA IR EL TRACK DE IDA
 			
-			//ACA AGREGARIA EL TRACK TAMBIEN, EN LA BASE DE DATOS TENGO QUE AGREGAR
-			//A LA TABLA DRIVER_SCHEDULE LOS FREESEATS Y EL TRACK DE ESE HORARIO
-			//QUEDARIA LA TABLA CON "driverID, scheduleID
-			//pathFileTrackIn, pathFileTrackOut"
+			arrayDay.add(4, sch.getHourOut());
+			arrayDay.add(5, freeSeatsOut);
+			//ACA VA EL TRACK DE VUELTA DE ESE DIA
+			arrayDay.add(6, sch.getDay());
 			
-			jsonArraySch.add(jsonSched);
+			
+			arraySch.add(i, arrayDay);
 		}
 		//Agrego el horario
-		jsonDriver.add("schedule", jsonArraySch);
+		model.addObject("schDriver", arraySch);
 		
 		//Agrego los datos privados del driver en caso de que exista la asociacion
 		if(isAssociation || myProfile){
-			jsonDriver.addProperty("vehicle", d.getVehicle().getModel());
-			jsonDriver.addProperty("licensePlate", d.getVehicle().getLicensePlate());
+			model.addObject("vehicle", d.getVehicle().getModel());
+			model.addObject("licensePlate", d.getVehicle().getLicensePlate());
 		}
-		return jsonDriver;
 	}
 	
-	private JsonObject createJsonPedestrian(User u){
+	private void addModelPedestrian(User u){
 		Pedestrian p = u.getPedestrian();
-		JsonObject jsonPedestrian = new JsonObject();
-	
-		jsonPedestrian.addProperty("idPedestrian", p.getPedestrianID());
-		jsonPedestrian.addProperty("ratingPedestrian", p.getRating());
 		
-		JsonArray jsonArraySch = new JsonArray();
+		model.addObject("idPedestrian", p.getPedestrianID());
+		model.addObject("ratingPedestrian", p.getRating());
+		
+		ArrayList arraySch = new ArrayList();
 		for(int i = 0; i < p.getSchedule().size(); i++){
-			JsonObject jsonSch = new JsonObject();
 			Schedule sch = p.getSchedule().get(i);
+			ArrayList<Object> arrayDay = new ArrayList<Object>();
 			
-			jsonSch.addProperty("idSchedule", sch.getScheduleId());
-			jsonSch.addProperty("day", sch.getDay());
-			jsonSch.addProperty("hourIn", sch.getHourIn());
-			jsonSch.addProperty("haveDriverIn", haveDriver(u, sch, 0));
-			jsonSch.addProperty("hourOut", sch.getHourOut());
-			jsonSch.addProperty("haveDriverOut", haveDriver(u, sch, 1));
+			arrayDay.add(0, sch.getDay());
+			arrayDay.add(1, sch.getHourIn());
+			arrayDay.add(2, haveDriver(u, sch, 0));
+			arrayDay.add(3, sch.getHourOut());
+			arrayDay.add(4, haveDriver(u, sch, 1));
 			
-			jsonArraySch.add(jsonSch);
+			arraySch.add(i, arrayDay);
 		}
 		
-		jsonPedestrian.add("schedule", jsonArraySch);
+		model.addObject("schPed", arraySch);
 		
 		float latitude = u.getAddress().getMarker().getLatitude();
 		float longitude = u.getAddress().getMarker().getLongitude();
-		jsonPedestrian.addProperty("lat", latitude);
-		jsonPedestrian.addProperty("long", longitude);
-		
-		return jsonPedestrian;
+		model.addObject("lat", latitude);
+		model.addObject("long", longitude);	
 	}
 	
 	//Funcion que va a calcular los asientos libres	
