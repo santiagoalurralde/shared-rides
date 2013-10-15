@@ -1,6 +1,10 @@
 package com.shared.rides.controller;
 
+import java.awt.List;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shared.rides.domain.User;
 import com.shared.rides.service.LoginService;
 
 
@@ -52,5 +57,4 @@ public class LoginController {
 		
 		return new ModelAndView("main");
 	}
-
 }

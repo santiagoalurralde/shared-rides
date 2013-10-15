@@ -16,6 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 
 /*
  Clase que representa el tipo de usuario Driver (conductor) que posee un 
@@ -36,6 +39,7 @@ public class Driver implements Profile, Serializable{
 	private float rating;
 	
 	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="Driver_Schedule", joinColumns = @JoinColumn(name="driverID"),
 	inverseJoinColumns = @JoinColumn(name="scheduleID"))
 	private List<Schedule> schedule;
@@ -45,6 +49,7 @@ public class Driver implements Profile, Serializable{
 	private Vehicle vehicle;
 	
 	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="Driver_Track", joinColumns = @JoinColumn(name="driverID"),
 	inverseJoinColumns = @JoinColumn(name="trackID"))
 	private List<Track> tracks;

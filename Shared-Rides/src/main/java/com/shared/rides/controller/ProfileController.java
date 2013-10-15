@@ -27,14 +27,22 @@ public class ProfileController {
 		private ShowProfileService showProfileService;
 	
 		@RequestMapping(value = "/{userId}.do")
-		public @ResponseBody String showProfile(@PathVariable("userId") int id, 
+		public ModelAndView showProfile(@PathVariable("userId") int id, 
 										HttpServletRequest request){
 			HttpSession s = request.getSession();
 			User u = (User)s.getAttribute("user");
+			ModelAndView model = new ModelAndView();
 			
-			if (id == u.getUserId()) return showProfileService.getProfile(id, request, true);
+			if (id == u.getUserId()){
+				model = showProfileService.getProfile(id, request, true);
+				model.setViewName("profile");
+				return model;
+			}
 			
-			return showProfileService.getProfile(id, request, false);
+			model = showProfileService.getProfile(id, request, false);
+			model.setViewName("profile");
+			
+			return model;
 		}
 
 }

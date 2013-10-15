@@ -30,6 +30,8 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "User")
@@ -61,7 +63,8 @@ public class User implements Serializable{
     @PrimaryKeyJoinColumn
 	private Organization organization;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="User_Assoc", joinColumns = @JoinColumn(name="userID"),
 	inverseJoinColumns = @JoinColumn(name="associationID"))
 	private List<Association> associations;
@@ -96,6 +99,10 @@ public class User implements Serializable{
 	}
 	
 //-----------GETTERS & SETTERS 
+	
+	public String getMessage(){
+		return "Hola";
+	}
 	
 	public int getPhoneNumber() {
 		return phoneNumber;
