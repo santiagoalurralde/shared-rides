@@ -1,12 +1,10 @@
 <%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page import="com.shared.rides.domain.User" %>  
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page isELIgnored="false" %>
+
 
 <body>
 	<div class="tupper mini">
+		<!----	Internationalization	---->
 		<span id="i18n">
     		<a href="?lang=es">
     			<img src="resources/images/ar.png"/>
@@ -19,7 +17,7 @@
 	</div>
 
     <div class="tupper mini">
-        <!----------------  CONTENT     -------------->
+        <!----	Login	---->
 		<div id="theLogin">
 			<img 	width=275px src="resources/images/logo1.png"/>
 			<hr		class="hrs"/>
@@ -39,8 +37,7 @@
 			</form>
 		</div>
 		
-		
-		<!----------------  PICTURE     -------------->
+		<!----	Picture	---->
 		<img id="introPic" width="50px" src="resources/images/intropic.png"/>		
 	</div>
 </body>
@@ -49,5 +46,12 @@
 <!--
 	http://i43.tinypic.com/15840oi.png  #LOGO
 	http://i43.tinypic.com/28hmrf8.png	#FOTO		
+-->
+
+
+<!--  
+	taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 -->
 		
