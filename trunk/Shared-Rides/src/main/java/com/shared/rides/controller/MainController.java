@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonObject;
 import com.shared.rides.service.FindUserService;
 
 
@@ -32,7 +33,7 @@ public class MainController {
 		String listUsers = findUserService.findUsers(profile, shift, longitude, latitude);
 		return listUsers;
 	}
-	*/
+	
 	
 	@RequestMapping(value = "/find.do")
 	public @ResponseBody String search(@RequestBody String searchParameters){
@@ -43,4 +44,15 @@ public class MainController {
 		//return listUsers;		
 		return null;
 	}
+	*/
+	@RequestMapping(value = "/prueba.do")
+	public @ResponseBody String prueba(){
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("id", 1);
+		json.addProperty("name", "SEEER");
+		
+		return json.toString();
+	}
+	
 }
