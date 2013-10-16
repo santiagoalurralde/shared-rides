@@ -92,9 +92,7 @@
  		<artifactId>slf4j-log4j12</artifactId>
  		<version>1.4.2</version>
  	</dependency>
- 
 
- 
  <!-- Base de datos -->
  
  	<dependency>
@@ -177,7 +175,7 @@
  	<dependency>
  		<groupId>javax.servlet</groupId>
  		<artifactId>jstl</artifactId>
- 		<version>1.1.2</version>
+ 		<version>1.2</version>
  	</dependency>
   
   <!-- XML dependencies -->
