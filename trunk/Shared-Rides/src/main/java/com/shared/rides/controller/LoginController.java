@@ -44,8 +44,7 @@ public class LoginController {
             throws ServletException, IOException {
         logger.info("Returning hello view");
         	
-        if(loginService.validate(email, pwd, request)){
-        	
+        if(loginService.validate(email, pwd, request)){   	
         	return new ModelAndView("redirect:/main.do"); 
         }
      return new ModelAndView("login");

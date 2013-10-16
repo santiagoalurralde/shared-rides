@@ -6,7 +6,7 @@
 <html> 
 
 	<head> 
-		<!-- Specific -->
+		<!----	Specific	---->
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<meta name		='viewport'		content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
 		<meta name		="viewport" 	content="width=device-width" />
@@ -15,13 +15,13 @@
 	
 		<title><tiles:getAsString name="title"/></title>
 		 
-		<!-- Styles -->
+		<!----	Styles		---->
 		<link 	rel=	"stylesheet" 		href="resources/styles/style.css" 							type="text/css"/>
 		<link 	rel=	"stylesheet"		href="http://fonts.googleapis.com/css?family=Raleway:500"  	type="text/css"/> 
 		<link 	rel=	"stylesheet" 		href="resources/styles/olStyle.css" 						type="text/css"/>
 		<link	rel=	"stylesheet"		href="resources/styles/olStyle1.css"						type="text/css"/>
 	
-		<!-- Scripts -->
+		<!----	Scripts		---->
 		<script src=	"resources/scripts/jquery-1.10.2.js" 		type=	"text/javascript">		</script>
 		<script src=	"http://code.jquery.com/ui/1.10.3/jquery-ui.js">							</script>
 		<script src=	"resources/OpenLayers-2.13/OpenLayers.js"	type=	"text/javascript">		</script>
@@ -39,10 +39,3 @@
     	<tiles:insertAttribute name="footer"/> 
 	</body> 
 </html>
-
-
-<!--        <div id="leftcol-wrapper"> 
-            <div id="leftcol"><tiles:insertAttribute name="menu"/></div> 
-            <div id="content"> -->
-<!--    </div> 
-        </div>  --> 

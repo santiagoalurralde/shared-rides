@@ -14,14 +14,7 @@ function stepsUpdate(value) {
 	else
 		i = i + value;
 }
-
-
 	
-function printResults(){
-	console.log("shiftJs: ", shiftJs);
-	console.log("userJs: ", userJs);
-}
-
 $( document ).ready(function() {
 	initMap();
 });
@@ -79,6 +72,7 @@ $( document ).ready(function() {
 			break;	
 		}
 	});
+	
 	//Acciones al presionar Anterior
 	$( "#butBack" ).click(function(){
 		switch(i)
@@ -103,38 +97,30 @@ $( document ).ready(function() {
 		}
 	});
 	
+	/*
 	$( "#updateForm" ).submit(function(){
 		var $form = $( this ),
 			url = $form.attr( "action" );
 		
 		$.post( url, { user: userJs, shift: shiftJs, lon: lonJs, lat: latJs} );
 	});
+	*/
 	
-	/*
 	$( "#butOK" ).click(function(){
 		$( "#mapWrap" ).hide( 0 );
 		
-		$.getJSON( "/Shared-Rides/find.do", function( data ) {
-			var items = [];
-			
-			$.each( data, function( key, val ) {
-				items.push( "<tr id='" + key + "'>" + val + "</tr>" ); 
+		$.getJSON( "/Shared-Rides/prueba.do", function( json ) {
+			$.each(json, function(i, data){
+				$( "#tableFound" ).append("<tr><td>" + data.name + "</td><td>" + data.surname + "</td><td><a href='/profile/"+ data.id +"'><img src='" + data.pic + "'/></a></td></tr>");
 			});
-			  		  
-			$( "<ul/>", {
-				"class": "my-new-list",
-				html: items.join( "" )
-			}).appendTo( "body" );
 		});
 		
 		$( "#listFound" ).show( 'fast' );
-
+		$( "#butOK"	).hide( 'fast' );
 	});
-	*/
+	
 });
 
 
-/*
- */
 
 
