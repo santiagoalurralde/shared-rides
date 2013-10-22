@@ -52,7 +52,7 @@ public class ShowProfileService {
 		myProfile = myProf;
 		
 		//Si no es mi profile, entonces veo si tengo asociacion con esa persona
-		if(myProfile = false){
+		if(!myProfile){
 		for (Association assoc : u.getAssociations()){
 			if (assoc.getApplier().getUserId() == userId && assoc.getState().getStateName().equals("Aceptado")){
 				isAssociation = true;
@@ -95,6 +95,7 @@ public class ShowProfileService {
 			addModelPedestrian(u);
 		}
 		//Agrego los datos privados del usuario en caso de que existe la asociacion
+		
 		if(isAssociation || myProfile){
 			model.addObject("telephone", u.getPhoneNumber());
 			model.addObject("email", u.getEmail());
