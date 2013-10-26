@@ -43,6 +43,18 @@ body
 	text-align: 			center; 
 }
 
+.vrs
+{
+	border-left: 			thin solid #CFCFCF;
+}
+
+#line{
+	height: 				540px;
+	position:				absolute;
+	left:					480px; 
+	top:					0px;		
+}
+
 .tupper
 {
 	position:				relative;
@@ -58,12 +70,70 @@ body
 .theBox
 {
 	box-shadow:				1px 1px 1px #000000;
-	color:					Black;
 	border:					solid 1px; 	
 }
 
+.theLightBox
+{
+	/*box-shadow:         	0px 0px 14px rgba(207, 207, 207, 0.35);*/
+	border:					solid #CFCFCF 1px; 	
+}
+
 /*------------------------------------------------------------------
-[Content / #content]
+[Profile / ]
+------------------------------------------------------------------*/
+#userData{
+	padding-left: 				20px;
+	padding-right: 				20px;
+	min-height:					175px;
+}
+
+#publicData{
+	float:					left;	
+	width: 					30%;
+}
+
+#privateData{
+	float:					right;
+	width: 					50%;
+}
+
+#pictureData{
+	float:					left;
+	width:					20%;
+}
+
+#thePic{
+	box-shadow:				0.5px 1px 2px #000000;
+	color:					Black;
+	border:					solid White 4px; 	
+	
+	z-index:				500;
+}
+
+#profileData{
+	padding-left: 				20px;
+	padding-right: 				20px;
+	overflow:					auto;
+	min-height:					500px;
+}
+
+#driverData{
+	float:						left;	
+	width: 						50%;
+}
+
+#pedestrianData{
+	float:						right;
+	width: 						50%;
+	text-align: 				right;
+}
+
+
+
+
+/*------------------------------------------------------------------
+[Content / ]
 ------------------------------------------------------------------*/
 
 #theContent
@@ -77,6 +147,13 @@ body
 	padding:				50px 0px;
 	padding-bottom: 		2em;
 	width:					100%; 
+}
+
+.theBoard
+{
+	background-color:		white;
+	padding:				20px 0px;
+	width:					100%;	
 }
 
 
@@ -341,6 +418,98 @@ bottom:					0%;
 -------------------------------------------------------------------*/
 
 
+#theSchedule{
+	font-family:					Arial, Helvetica, sans-serif;
+	font-size:						75%;
+	border:							#ccc 1px solid;
+	border-spacing: 				0;
+
+	border-radius:					5px;
+	-moz-border-radius:				5px;
+	-webkit-border-radius:			5px;
+
+	-moz-box-shadow:				0 1px 2px #d1d1d1;
+	-webkit-box-shadow: 			0 1px 2px #d1d1d1;
+	box-shadow: 					0 1px 2px #d1d1d1;
+	
+	text-shadow: 					0.05em 0.05em 0em #eee;
+
+	background:						-webkit-linear-gradient(top, #fdfdfd, #fbfbfb);
+	background:						-moz-linear-gradient(top,  #fdfdfd,  #fbfbfb);
+	
+	margin:							0 auto;
+	margin-top:						5%;
+	clear:							both;
+}
+
+#theSchedule th{
+	background:						-moz-linear-gradient(top, #90AA44, #50A410);
+	background:						-webkit-linear-gradient(top, #90AA44, #50A410);
+	padding:						10px 15px 15px 15px;
+	border-bottom:					1px solid #e0e0e0;
+}
+
+#theSchedule tr:first-child th:first-child {
+	-moz-border-top-left-radius:	5px;
+	-webkit-border-top-left-radius:	5px;
+	border-top-left-radius:			5px;
+}
+
+#theSchedule tr:first-child th:last-child {
+	-moz-border-top-right-radius:	5px;
+	-webkit-border-top-right-radius:5px;
+	border-top-right-radius:		5px;
+}
+
+#theSchedule tr{
+	text-align: center;
+}
+
+#theSchedule td:first-child {
+	padding-left:20px;
+	border-left: 0;
+}
+
+#theSchedule td{
+	padding:		10px;
+	border-top: 	1px solid #ffffff;
+	border-bottom:	1px solid #e0e0e0;
+	border-left: 	1px solid #e0e0e0;
+}
+
+#theSchedule tr:nth-child(even){	
+	background:		-webkit-linear-gradient(top, #fafafa, #f7f7f7);
+	background:		-moz-linear-gradient(top,  #fafafa,  #f7f7f7)
+}
+
+#theSchedule tr:last-child td {
+	border-bottom:0;
+}
+
+#theSchedule tr:last-child td:first-child {
+	-moz-border-bottom-left-radius:		5px;
+	-webkit-border-bottom-left-radius:	5px;
+	border-bottom-left-radius:			5px;
+}
+
+#theSchedule tr:last-child td:last-child {
+	-moz-border-bottom-right-radius:	5px;
+	-webkit-border-bottom-right-radius:	5px;
+	border-bottom-right-radius:			5px;
+}
+
+#theSchedule tr:hover td {
+	background:		-webkit-linear-gradient(top, #f4f4f4, #f1f1f1);
+	background:		-moz-linear-gradient(top,  #f4f4f4,  #f1f1f1);	
+}
+
+#theSchedule img{
+	width: 			100px;
+	height:			110px;
+}
+
+
+/*
 table{
 	font-family:					Arial, Helvetica, sans-serif;
 	border:							#ccc 1px solid;
@@ -426,4 +595,6 @@ table img{
 	height:			110px;
 }
 
+
+*/
 

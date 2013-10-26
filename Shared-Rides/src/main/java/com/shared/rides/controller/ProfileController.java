@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,14 +21,14 @@ import com.shared.rides.service.ShowProfileService;
  */
 
 @Controller
-@RequestMapping(value = "profile")
+//@RequestMapping(value = "profile")
 public class ProfileController {
 	
 		@Autowired
 		private ShowProfileService showProfileService;
 	
-		@RequestMapping(value = "/{userId}.do")
-		public ModelAndView showProfile(@PathVariable("userId") int id, 
+		@RequestMapping(value = "/profile.do")
+		public ModelAndView showProfile(@RequestParam("user") int id, 
 										HttpServletRequest request){
 			HttpSession s = request.getSession();
 			User u = (User)s.getAttribute("user");
