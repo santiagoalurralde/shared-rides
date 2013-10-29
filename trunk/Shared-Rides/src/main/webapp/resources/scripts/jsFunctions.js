@@ -14,22 +14,25 @@ function stepsUpdate(value) {
 	else
 		i = i + value;
 }
-	
+
 $( document ).ready(function() {
 	initMap();
-});
 
-$( document ).ready(function() {
-	//Esconder el boton Anterior y el Mapa
+	//Esconder el boton Anterior, el Mapa y la Lista
 	$( "#butBack" ).hide( 0 );
-	$( "#mapWrap" ).hide( 0 );
+	$( "#mapDriver" ).css('display', 'none');
+	$( "#mapPedestrian" ).css('display', 'none');
 	$( "#listFound" ).hide( 0 );
 
+	//Iniciar Mapa
+
+	//Resaltar Primer Paso
+	highlightStep(i);
 	
 	//Acciones al presionar las imagenes
 	$( "#imgSun" ).click(function(){
-		shiftJs	= 1;
-		$( this ).css('opacity', '1');
+		shiftJs		= 1;
+		$( "#imgSun" ).css('opacity', '1');
 		$( "#imgMoon" ).css('opacity', '0.05');
 	});
 	$( "#imgMoon" ).click(function(){
@@ -38,12 +41,12 @@ $( document ).ready(function() {
 		$( "#imgSun" ).css('opacity', '0.05');
 	});
 	$( "#imgBoot" ).click(function(){
-		userJs 	= 1;
+		userJs		= 1;
 		$( this ).css('opacity', '1');
 		$( "#imgSteering" ).css('opacity', '0.05');
 	});
 	$( "#imgSteering" ).click(function(){
-		userJs 	= 2;
+		userJs		= 2;
 		$( this ).css('opacity', '1');
 		$( "#imgBoot" ).css('opacity', '0.05');
 	});
@@ -52,20 +55,27 @@ $( document ).ready(function() {
 	$( "#butNext" ).click(function(){
 		switch(i)
 		{
-		case 1:		//De TipoUsuario a Turno
+		case 1:
+			//	De TipoUsuario a Turno
+			
 			$( this ).css('marginLeft', '60px');
-			$( "#imgBoot" ).hide( 0 );
-			$( "#imgSteering" ).hide( 0 );
-			$( "#imgSun" ).show( 'fast' );
-			$( "#imgMoon" ).show( 'fast' );
+			
+			highlightStep(i);
+			nextStep(i);
 			
 			$( "#butBack" ).show( 'fast' );	
 			break;
-		case 2:		//De Turno a Mapa
-			$( "#imgSun" ).hide( 0 );
-			$( "#imgMoon" ).hide( 0 );
-			$( "#mapWrap" ).show( 'slow' );
+		case 2:		
+			//	De Turno a Mapa
 			
+			highlightStep(i);
+			nextStep(i);
+			
+			if(userJs === 2)
+				$( "#mapDriver" ).show( 'slow' );
+			else
+				$( "#mapPedestrian" ).show( 'slow' );
+		
 			$( this ).hide( 0 );
 			$( "#butOK" ).css('marginLeft', '60px');
 			$( "#butOK" ).show( 'slow' );
@@ -77,19 +87,20 @@ $( document ).ready(function() {
 	$( "#butBack" ).click(function(){
 		switch(i)
 		{
-		case 0:		//De Turno a TipoUsuario
-			$( "#imgSun" ).hide( 0 );
-			$( "#imgMoon" ).hide( 0 );
-			$( "#imgBoot" ).show( 'fast' );
-			$( "#imgSteering" ).show( 'fast' );
+		case 0:		
+			//	De Turno a TipoUsuario
+			
+			highlightStep(i);
+			backStep(i);
 
 			$( this ).hide( 'fast' );
 			$( "#butNext" ).css('marginLeft', '0px');
 			break;
-		case 1:		//De Mapa a Turno
-			$( "#mapWrap" ).hide( 0 );
-			$( "#imgSun" ).show( 'fast' );
-			$( "#imgMoon" ).show( 'fast' );
+		case 1:		
+			//	De Mapa a Turno
+			
+			highlightStep(i);
+			backStep(i);
 			
 			$( "#butOK" ).hide( 'fast' );
 			$( "#butNext" ).show( 'slow' );
@@ -97,17 +108,99 @@ $( document ).ready(function() {
 		}
 	});
 	
+	function nextStep(step){
+		//	Inserta elementos del paso actual 
+		//	del formulario al avanzar
+		//	step: numero de paso actual.
+		
+		switch(step)
+		{
+		case 1:
+			$( "#imgBoot" ).hide( 0 );
+			$( "#imgSteering" ).hide( 0 );
+			$( "#imgSun" ).show( 'fast' );
+			$( "#imgMoon" ).show( 'fast' );
+			break;
+		case 2:
+			$( "#imgSun" ).hide( 0 );
+			$( "#imgMoon" ).hide( 0 );
+			break;
+		}
+	}
+	
+	function backStep(step){
+		//	Inserta elementos del paso actual 
+		//	del formulario al retroceder
+		//	step: numero de paso actual.
+		
+		switch(step)
+		{
+		case 0:
+			$( "#imgSun" ).hide( 0 );
+			$( "#imgMoon" ).hide( 0 );
+			$( "#imgBoot" ).show( 'fast' );
+			$( "#imgSteering" ).show( 'fast' );
+			break;
+		case 1:
+			$( "#mapDriver" ).hide( 0 );
+			$( "#mapPedestrian" ).hide( 0 );
+			$( "#imgSun" ).show( 'fast' );
+			$( "#imgMoon" ).show( 'fast' );
+			break;
+		}
+	}
+
+	function highlightStep(step){
+		//	Resalta el paso actual del formulario
+		//	step: numero de paso actual.
+			
+		switch(step)
+		{
+		case -1:
+		case 0:
+			$( "#step1" ).css('opacity', '1');
+			$( "#step2" ).css('opacity', '0.2');
+			$( "#step3" ).css('opacity', '0.2');
+			break;
+		case 1:
+			$( "#step1" ).css('opacity', '0.2');
+			$( "#step2" ).css('opacity', '1');
+			$( "#step3" ).css('opacity', '0.2');
+			break;
+		case 2:
+			$( "#step1" ).css('opacity', '0.2');
+			$( "#step2" ).css('opacity', '0.2');
+			$( "#step3" ).css('opacity', '1');
+			break;
+		}
+	}
+	
+	
 	/*
-	$( "#updateForm" ).submit(function(){
+	$( "#updateForm" ).submit(function(e){
+		e.preventDefault();
 		var $form = $( this ),
 			url = $form.attr( "action" );
+		
+			
 		
 		$.post( url, { user: userJs, shift: shiftJs, lon: lonJs, lat: latJs} );
 	});
 	*/
 	
+	/*
+	function fillData(){
+		alert("filled");
+		document.getElementById("dataSent").innerHTML = 
+			"<input type='hidden' id='userData' 	value='"	+ userJs 	+ 		"'/> " +
+			"<input type='hidden' id='shiftData'	value='"	+ shiftJs 	+ 		"'/> " ;	
+	}
+	*/
+	
+	
+	/*
 	$( "#butOK" ).click(function(){
-		$( "#mapWrap" ).hide( 0 );
+		$( "#mapDriver" ).hide( 0 );
 		
 		$.getJSON( "/Shared-Rides/prueba.do", function( json ) {
 			$.each(json, function(i, data){
@@ -118,6 +211,7 @@ $( document ).ready(function() {
 		$( "#listFound" ).show( 'fast' );
 		$( "#butOK"	).hide( 'fast' );
 	});
+	*/
 	
 });
 
