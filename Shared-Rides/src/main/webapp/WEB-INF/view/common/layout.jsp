@@ -18,13 +18,13 @@
 		<!----	Styles		---->
 		<link 	rel=	"stylesheet" 		href="resources/styles/style.css" 							type="text/css"/>
 		<link 	rel=	"stylesheet"		href="http://fonts.googleapis.com/css?family=Raleway:500"  	type="text/css"/> 
-		<link 	rel=	"stylesheet" 		href="resources/styles/olStyle.css" 						type="text/css"/>
-		<link	rel=	"stylesheet"		href="resources/styles/olStyle1.css"						type="text/css"/>
-	
+		<link	rel=	"stylesheet"		href="resources/styles/olStyle.css"							type="text/css"/>
+		
 		<!----	Scripts		---->
 		<script src=	"resources/scripts/jquery-1.10.2.js" 		type=	"text/javascript">		</script>
 		<script src=	"http://code.jquery.com/ui/1.10.3/jquery-ui.js">							</script>
-		<script src=	"resources/OpenLayers-2.13/OpenLayers.js"	type=	"text/javascript">		</script>
+		<script src=	"resources/maps/OpenLayers.js"				type=	"text/javascript">		</script>
+		<script src=	"resources/maps/OpenStreetMap.js"			type=	"text/javascript">		</script>
 		<script src=	"resources/scripts/olFunctions.js"			type=	"text/javascript">		</script>	
 		<script src=	"resources/scripts/jsFunctions.js" 			type=	"text/javascript">		</script>
 		

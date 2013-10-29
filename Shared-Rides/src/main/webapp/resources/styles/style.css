@@ -286,12 +286,21 @@ body
    	
 }
 
-#map{
-	height: 	600px;
+#mapDriver{
 	width: 		900px;
-	margin:		0 auto;
+	margin:		0 0 0 30px;
+	border:		1px solid #ccc;
 }
 
+#mapPedestrian{
+	margin:		0 0 0 30px;
+}
+
+#map2{
+	width: 		900px;
+	height: 	450px;	
+	border:		1px solid #ccc;
+}
 
 /*------------------------------------------------------------------
 [Buttons / ]
