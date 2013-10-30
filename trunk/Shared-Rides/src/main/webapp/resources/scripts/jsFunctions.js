@@ -189,7 +189,7 @@ $( document ).ready(function() {
 		var coordsJs;				//Datos de coordenadas
 		
 		if(userJs === 2)
-			coordsJs = "{lon=" + lonJs.toString() + " , lat=" + latJs.toString() + "}";
+			coordsJs = "[{lon=" + lonJs.toString() + " , lat=" + latJs.toString() + "}]";
 		else
 			coordsJs = gpxTrack.confirm();
 		
