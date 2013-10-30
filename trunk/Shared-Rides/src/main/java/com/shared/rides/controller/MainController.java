@@ -39,6 +39,7 @@ public class MainController {
 	}
 	*/
 	
+	/*
 	@RequestMapping(value = "/find.do", method = RequestMethod.POST)
 	public @ResponseBody String search(@RequestBody String json){
 		
@@ -55,7 +56,7 @@ public class MainController {
 		//return listUsers;		
 		return null;
 	}
-	
+	*/
 	
 	@RequestMapping(value = "/prueba.do")
 	public @ResponseBody String prueba(){
@@ -86,5 +87,11 @@ public class MainController {
 		
 		return jsonA.toString();
 	}
+	
+	@RequestMapping(value = "/find.do", method = RequestMethod.POST)
+	public @ResponseBody String search(@RequestParam("user") int u,										@RequestParam("shift") int s){
+		
+		return null;
+	} 
 	
 }

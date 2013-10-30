@@ -16,15 +16,12 @@ function stepsUpdate(value) {
 }
 
 $( document ).ready(function() {
+	
+	//Iniciar Mapa Simple
 	initMap();
 
-	//Esconder el boton Anterior, el Mapa y la Lista
-	$( "#butBack" ).hide( 0 );
-	$( "#mapDriver" ).css('display', 'none');
-	$( "#mapPedestrian" ).css('display', 'none');
-	$( "#listFound" ).hide( 0 );
-
-	//Iniciar Mapa
+	//Esconder elementos
+	start();
 
 	//Resaltar Primer Paso
 	highlightStep(i);
@@ -108,6 +105,16 @@ $( document ).ready(function() {
 		}
 	});
 	
+	function start(){
+		//	Establece las propiedades iniciales
+		
+		$( "#mapDriver" ).css('display', 'none');
+		$( "#mapPedestrian" ).css('display', 'none');
+		$( "#butBack" ).hide( 0 );							
+		$( "#listFound" ).hide( 0 );
+	} 
+	
+	
 	function nextStep(step){
 		//	Inserta elementos del paso actual 
 		//	del formulario al avanzar
@@ -127,6 +134,7 @@ $( document ).ready(function() {
 			break;
 		}
 	}
+	
 	
 	function backStep(step){
 		//	Inserta elementos del paso actual 
@@ -150,6 +158,7 @@ $( document ).ready(function() {
 		}
 	}
 
+	
 	function highlightStep(step){
 		//	Resalta el paso actual del formulario
 		//	step: numero de paso actual.
@@ -176,45 +185,57 @@ $( document ).ready(function() {
 	}
 	
 	
-	/*
-	$( "#updateForm" ).submit(function(e){
-		e.preventDefault();
-		var $form = $( this ),
-			url = $form.attr( "action" );
-		
-			
-		
-		$.post( url, { user: userJs, shift: shiftJs, lon: lonJs, lat: latJs} );
-	});
-	*/
-	
-	/*
-	function fillData(){
-		alert("filled");
-		document.getElementById("dataSent").innerHTML = 
-			"<input type='hidden' id='userData' 	value='"	+ userJs 	+ 		"'/> " +
-			"<input type='hidden' id='shiftData'	value='"	+ shiftJs 	+ 		"'/> " ;	
-	}
-	*/
-	
-	
-	/*
 	$( "#butOK" ).click(function(){
-		$( "#mapDriver" ).hide( 0 );
+		var mapDataJs;
 		
-		$.getJSON( "/Shared-Rides/prueba.do", function( json ) {
-			$.each(json, function(i, data){
-				$( "#tableFound" ).append("<tr><td>" + data.name + "</td><td>" + data.surname + "</td><td><a href='/profile/"+ data.id +"'><img src='" + data.pic + "'/></a></td></tr>");
-			});
-		});
-		
-		$( "#listFound" ).show( 'fast' );
-		$( "#butOK"	).hide( 'fast' );
+		if(userJs === 2)
+			mapDataJs = gpxTrack.confirm();
+		else
+		{
+			
+		}
+		$.post( "find.do", { "user": userJs , "shift": shiftJs, "mapData": mapDataJs } );
 	});
-	*/
-	
+		
 });
 
 
 
+//CODIGO VIEJO
+
+/*
+$( "#updateForm" ).submit(function(e){
+	e.preventDefault();
+	var $form = $( this ),
+		url = $form.attr( "action" );
+	
+		
+	
+	$.post( url, { user: userJs, shift: shiftJs, lon: lonJs, lat: latJs} );
+});
+
+
+
+function fillData(){
+	alert("filled");
+	document.getElementById("dataSent").innerHTML = 
+		"<input type='hidden' id='userData' 	value='"	+ userJs 	+ 		"'/> " +
+		"<input type='hidden' id='shiftData'	value='"	+ shiftJs 	+ 		"'/> " ;	
+}
+
+
+
+$( "#butOK" ).click(function(){
+	$( "#mapDriver" ).hide( 0 );
+	
+	$.getJSON( "/Shared-Rides/prueba.do", function( json ) {
+		$.each(json, function(i, data){
+			$( "#tableFound" ).append("<tr><td>" + data.name + "</td><td>" + data.surname + "</td><td><a href='/profile/"+ data.id +"'><img src='" + data.pic + "'/></a></td></tr>");
+		});
+	});
+	
+	$( "#listFound" ).show( 'fast' );
+	$( "#butOK"	).hide( 'fast' );
+});
+*/
 
