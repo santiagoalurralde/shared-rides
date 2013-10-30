@@ -69,9 +69,9 @@ $( document ).ready(function() {
 			nextStep(i);
 			
 			if(userJs === 2)
-				$( "#mapDriver" ).show( 'slow' );
-			else
 				$( "#mapPedestrian" ).show( 'slow' );
+			else
+				$( "#mapDriver" ).show( 'slow' );
 		
 			$( this ).hide( 0 );
 			$( "#butOK" ).css('marginLeft', '60px');
@@ -189,9 +189,9 @@ $( document ).ready(function() {
 		var coordsJs;				//Datos de coordenadas
 		
 		if(userJs === 2)
-			coordsJs = gpxTrack.confirm();
+			coordsJs = "{lon=" + lonJs.toString() + " , lat=" + latJs.toString() + "}";
 		else
-			coordsJs = "{" + lonJs.toString() + " " + latJs.toString() + "}";
+			coordsJs = gpxTrack.confirm();
 		
 		$.post( "find.do", { "user": userJs , "shift": shiftJs, "mapData": coordsJs } );
 	});
