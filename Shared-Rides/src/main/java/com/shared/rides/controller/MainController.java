@@ -56,7 +56,15 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/find.do", method = RequestMethod.POST)
-	public @ResponseBody String search(@RequestParam("user") int u,										@RequestParam("shift") int s){
+	public @ResponseBody String search(@RequestParam("user") String user,
+								@RequestParam("shift") int shift,
+								@RequestParam("mapData") String map){
+		System.out.println(map);
+		
+		JsonParser parser = new JsonParser();
+		Object obj = parser.parse(map);		
+		JsonArray json = (JsonArray) obj;
+		System.out.println(json.toString());
 		
 		return null;
 	} 
