@@ -25,10 +25,10 @@
 	        	
 	        		<!----	Images			---->
 	        		<div id="steps" style="width: 300px; margin: 10px 0px 0px 250px">
-			        		<img id="imgBoot" 	 	class="imagesSteps"	src="resources/images/boot.png" 	style="margin-right: 100px">
-							<img id="imgSteering"	class="imagesSteps"	src="resources/images/steering.png" >
-							<img id="imgSun" 		class="imagesSteps"	src="resources/images/sun.png" 		style="margin-right: 100px; display: none">
-							<img id="imgMoon"		class="imagesSteps"	src="resources/images/moon.png" 	style="display: none">
+			        		<img id="imgBoot" 	 	class="imagesSteps"	src="resources/images/boot.png" 	style="margin-right: 100px"					/>
+							<img id="imgSteering"	class="imagesSteps"	src="resources/images/steering.png" 											/>
+							<img id="imgSun" 		class="imagesSteps"	src="resources/images/sun.png" 		style="display: none; margin-right: 100px" 	/>
+							<img id="imgMoon"		class="imagesSteps"	src="resources/images/moon.png" 	style="display: none"						/>
 	        		</div>
 	        		    
 	        		  			
@@ -69,11 +69,11 @@
 	        		<div id="buttonsSteps">
 	        			<input type="button" class="but" id="butBack" 	value="Anterior" 	onClick="stepsUpdate(-1);"	/>	
 	           	   		<input type="button" class="but" id="butNext" 	value="Siguiente"	onClick="stepsUpdate(1);"	/>		
+	        			<input type="button" class="but" id="butOK" 	value="Confirmar" 	style="display: none" 		/>  
+	        			
 	        			<!--
-	        			<input type="button" class="but" id="butOK" 	value="Confirmar" 	style="display: none" />  
-	        			-->
-	        	   		 
 	        	   		<input type="submit" class="but" id="butOK"	  	value="Confirmar"	style="display: none"/>    
+	        	   		-->
 	        	   		
 	        		</div> 	  
 	        		
