@@ -269,10 +269,9 @@ var m = {
 		for(var i=0; i<markers.length; i++) {
 			var m	= markers[i];
 			var ll	= this.toGrad(m.lonlat);
-			html	+= '{lat="'+ll.lat+'" lon="'+ll.lon+'"}';
+			html	+= '{lat="'+ll.lat+'" , lon="'+ll.lon+'"}';
 		}
 		
-		alert(html);
 		return html;
 	},
 	

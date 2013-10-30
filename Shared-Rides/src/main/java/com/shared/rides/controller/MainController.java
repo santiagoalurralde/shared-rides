@@ -25,39 +25,6 @@ public class MainController {
 	@Autowired
 	private FindUserService findUserService;
 	
-	/*
-	@RequestMapping(value = "/find.do")
-	public @ResponseBody String search(@RequestParam("user") int profile, 
-								@RequestParam("shift") int shift, 
-								@RequestParam("lon") double longitude,
-								@RequestParam("lat") double latitude)
-            throws ServletException, IOException {
-
-		//Obtengo la lista de usuarios que se encuentran a 10 cuadras alrededor
-		String listUsers = findUserService.findUsers(profile, shift, longitude, latitude);
-		return listUsers;
-	}
-	*/
-	
-	/*
-	@RequestMapping(value = "/find.do", method = RequestMethod.POST)
-	public @ResponseBody String search(@RequestBody String json){
-		
-		JsonParser parser = new JsonParser(); 
-		Object obj = parser.parse(json);
-		JsonObject jsonObj = (JsonObject) obj;
-		
-		System.out.println("hola");
-		System.out.println(jsonObj.get("user"));
-		
-		//System.out.println(searchParameters.toString());
-		//Obtengo la lista de usuarios que se encuentran a 10 cuadras alrededor
-		//String listUsers = findUserService.findUsers(profile, shift, longitude, latitude);
-		//return listUsers;		
-		return null;
-	}
-	*/
-	
 	@RequestMapping(value = "/prueba.do")
 	public @ResponseBody String prueba(){
 		
