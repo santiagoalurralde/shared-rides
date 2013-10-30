@@ -1,7 +1,7 @@
 
-var i 		= -1; 	//Contador de Pasos
-var userJs	= 0;	//Tipo de Usuario
-var shiftJs	= 0;	//Turno
+var i 		=  -1; 	//Contador de Pasos
+var userJs	= 	0;	//Tipo de Usuario
+var shiftJs	= 	0;	//Turno
 
 function stepsUpdate(value) {
 	if(value === 1)
@@ -186,14 +186,14 @@ $( document ).ready(function() {
 	
 	
 	$( "#butOK" ).click(function(){
-		var mapDataJs;
+		var coordsJs;				//Datos de coordenadas
 		
 		if(userJs === 2)
-			mapDataJs = gpxTrack.confirm();
+			coordsJs = gpxTrack.confirm();
 		else
-			mapDataJs = "{" + lonJs.toString() + " " + latJs.toString() + "}";
+			coordsJs = "{" + lonJs.toString() + " " + latJs.toString() + "}";
 		
-		$.post( "find.do", { "user": userJs , "shift": shiftJs, "mapData": mapDataJs } );
+		$.post( "find.do", { "user": userJs , "shift": shiftJs, "mapData": coordsJs } );
 	});
 		
 });
