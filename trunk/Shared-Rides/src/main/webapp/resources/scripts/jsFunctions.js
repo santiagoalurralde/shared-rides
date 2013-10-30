@@ -191,9 +191,8 @@ $( document ).ready(function() {
 		if(userJs === 2)
 			mapDataJs = gpxTrack.confirm();
 		else
-		{
-			
-		}
+			mapDataJs = "{" + lonJs.toString() + " " + latJs.toString() + "}";
+		
 		$.post( "find.do", { "user": userJs , "shift": shiftJs, "mapData": mapDataJs } );
 	});
 		
