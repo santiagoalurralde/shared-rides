@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.shared.rides.dao.interfaces.IUserDAO;
 import com.shared.rides.domain.Address;
 import com.shared.rides.domain.Track;
@@ -17,10 +18,10 @@ import com.shared.rides.util.ReadGPXFile;
 /*
  Servicio que se encarga de buscar todas los usuarios que pasan por el marker seleccionado
  por el usuario. 
- Si el profile es 0 --> El usuario busca un peaton
- Si el profile es 1 --> El usuario busca un conductor
- shift 0 --> turno mañana
- shift 1 --> turno tarde
+ Si el profile es 1 --> El usuario busca un peaton
+ Si el profile es 2 --> El usuario busca un conductor
+ shift 1 --> turno mañana
+ shift 2 --> turno tarde
  */
 
 @Service
@@ -32,56 +33,58 @@ public class FindUserService {
 	private Address addressUser;
 	private double latitudeUser;
 	private double longitudeUser;
+	private double [][] markers;
 	private int dist;
 	
-	public String findUsers(int profile, int shift, double longitudeSelected, double latitudeSelected){
-		
+	public String findUsers(int profile, int shift, String m){
+		parseMarkers(m);
 		userList = userDAO.listAll();
 		//Filtro la lista de acuerdo al perfil y el turno
-		cleanList(profile, shift);
-		//Con la lista filtrada, vemos que usuarios tienen una distancia mejor a 10 cuadras = 1000 mts.
-		if (profile == 0){
+		filterList(profile, shift);
+		//Con la lista filtrada, vemos que usuarios tienen una distancia menor a 10 cuadras = 1000 mts.
+		boolean needRemove = true;
+		if (profile == 1){
+			//Si estoy buscando un peatón; quiere decir que soy un conductor y que en la vista marque un
+			//track; por ende tengo varios markers y los tengo que comparar con la direccion de cada peaton
 			for(int i = 0; i < userList.size() ; i++){
 				addressUser = userList.get(i).getAddress();
 				latitudeUser = addressUser.getMarker().getLatitude();
 				longitudeUser = addressUser.getMarker().getLongitude();
-				dist = DistanceHaversine.calculateDistance(latitudeSelected, longitudeSelected, latitudeUser, longitudeUser);		
-				//Si la distancia es mayor a 1000 mts, lo saco de la lista
-				if (dist > 1000) userList.remove(i);
+				
+				for(int j = 0; j < markers.length; j++){
+					dist = DistanceHaversine.calculateDistance(markers[j][1], markers[j][0], latitudeUser, longitudeUser);
+					if (dist < 1000) needRemove = false;
+				}	
+				if (needRemove) userList.remove(i);
 			}
 		}
 		else{
-			boolean needRemove = true;
-			
-			//Recorro todos los tracks de cada persona
-			//Recordemos que un driver puede tener varios track de acuerdo al dia
+			//Sino estamos buscando un conductor; por ende tenemos que comparar todos tracks de los conductores
+			//con el único marker que se encuentra en la matriz "markers" 
 			for(int i = 0; i < userList.size(); i++){
 				List<Track> trackList = userList.get(i).getDriver().getTracks();
-				
 				//Por cada track asociado, tengo que buscar todos los puntos de ese track
 				for(int j = 0; j < trackList.size(); j++){
-					double [][] pointsList = ReadGPXFile.readFile(trackList.get(j).getPathFile());
+					double [][] trackPoints = ReadGPXFile.readFile(trackList.get(j).getPathFile());
 					
-					for (int k = 0; k < pointsList.length; k++){
-						dist = DistanceHaversine.calculateDistance(latitudeSelected, longitudeSelected, pointsList[k][0], pointsList[k][1]);
-						if (dist < 1000) needRemove = false;
+					for (int k = 0; k < trackPoints.length; k++){
+						dist = DistanceHaversine.calculateDistance(markers[0][1], markers[0][0], trackPoints[k][0], trackPoints[k][1]);
+						if (dist < 1000) needRemove = false;	
 					}
-					//Si no ningun punto del track esta a una distancia menor de 1000 mts
-					//entonces elimino ese track
 					if (needRemove) trackList.remove(j);
 				}
 				//Si no hay ningun track que pase cerca elimino el usuario de la lista
 				if(trackList.isEmpty()) userList.remove(i);
 			}
 		}
-		
+	
 		return createJson(userList).toString();
 	}
 	
 	//Funcion que filtra la lista de usuarios dependiendo el perfil y el turno
-	private void cleanList(int profile, int shift){
+	private void filterList(int profile, int shift){
 		//Peaton y turno mañana
-		if (profile == 0 && shift == 0){
+		if (profile == 1 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
 				if(u.getPedestrian() == null || !(u.getShift().getShiftName().equals("Mañana"))){
@@ -90,7 +93,7 @@ public class FindUserService {
 			}
 		}		
 		//Peaton y turno tarde
-		if (profile == 0 && shift == 1){
+		if (profile == 1 && shift == 2){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
 				if(u.getPedestrian() == null || !(u.getShift().getShiftName().equals("Tarde"))){
@@ -99,7 +102,7 @@ public class FindUserService {
 			}
 		}		
 		//Conductor y turno mañana
-		if (profile == 1 && shift == 0){
+		if (profile == 2 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
 				if(u.getDriver() == null || !(u.getShift().getShiftName().equals("Mañana"))){
@@ -108,7 +111,7 @@ public class FindUserService {
 			}
 		}
 		//Conductor y turno tarde
-		if (profile == 1 && shift == 1){
+		if (profile == 2 && shift == 2){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
 				if(u.getDriver() == null || !(u.getShift().getShiftName().equals("Tarde"))){
@@ -135,6 +138,20 @@ public class FindUserService {
 		return jsonList;
 	}	
 	
+	//Función que se encarga de convertir el String de los markers recibido en la vista a una matriz
+	private void parseMarkers(String m){
+		JsonParser parser = new JsonParser();
+		Object obj = parser.parse(m);		
+		JsonArray arrayMarkers = (JsonArray) obj;
+		markers = new double [arrayMarkers.size()][2];
+		
+		for (int i = 0; i < arrayMarkers.size(); i++){
+			JsonObject jsonMarker = (JsonObject) arrayMarkers.get(i);
+			markers[i][0] = jsonMarker.get("lon").getAsFloat();
+			markers[i][1] = jsonMarker.get("lat").getAsFloat();
+		}
+	}
+		
 }
 
 	
