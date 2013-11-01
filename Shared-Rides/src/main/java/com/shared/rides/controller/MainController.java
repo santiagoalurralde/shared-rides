@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
 import com.shared.rides.service.FindUserService;
 
 
@@ -59,14 +60,9 @@ public class MainController {
 	public @ResponseBody String search(@RequestParam("user") String user,
 								@RequestParam("shift") int shift,
 								@RequestParam("mapData") String map){
-		System.out.println(map);
 		
-		JsonParser parser = new JsonParser();
-		Object obj = parser.parse(map);		
-		JsonArray json = (JsonArray) obj;
-		System.out.println(json.toString());
-		
-		return null;
+		int prof = Integer.parseInt(user);
+		return findUserService.findUsers(prof, shift, map);
 	} 
 	
 }

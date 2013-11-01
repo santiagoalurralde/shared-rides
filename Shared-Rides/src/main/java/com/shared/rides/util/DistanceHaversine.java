@@ -15,7 +15,7 @@ public class DistanceHaversine {
 			long1 = Math.toRadians(long1);
 			lat2 = Math.toRadians(lat2);
 			long2 = Math.toRadians(long2);
-
+			
 			double dlon = (long2 - long1);
 			double dlat = (lat2 - lat1);
 
@@ -24,7 +24,7 @@ public class DistanceHaversine {
 
 			double a = (sinlat * sinlat) + Math.cos(lat1)*Math.cos(lat2)*(sinlon*sinlon);
 			double c = 2 * Math.asin (Math.min(1.0, Math.sqrt(a)));
-
+			
 			double distanceInMeters = earthRadius * c * 1000;
 
 			return (int)distanceInMeters;
