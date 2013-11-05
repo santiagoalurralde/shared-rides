@@ -70,7 +70,7 @@ public class User implements Serializable{
 	private List<Association> associations;
 	
 	@Column(name="phoneNumber")
-	private int phoneNumber;
+	private long phoneNumber;
 	
 	@Column(name="email")
 	private String email;
@@ -100,14 +100,10 @@ public class User implements Serializable{
 	
 //-----------GETTERS & SETTERS 
 	
-	public String getMessage(){
-		return "Hola";
-	}
-	
-	public int getPhoneNumber() {
+	public long getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
