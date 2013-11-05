@@ -193,48 +193,25 @@ $( document ).ready(function() {
 		else
 			coordsJs = gpxTrack.confirm();
 		
-		$.post( "find.do", { "user": userJs , "shift": shiftJs, "mapData": coordsJs } );
+		$.post( "find.do", { "user": userJs , "shift": shiftJs, "mapData": coordsJs }, 
+				function(json)
+				{
+					var jsonNew = $.parseJSON(json);
+					$.each(jsonNew, function(i, data){
+						$( "#tableFound" ).append("<tr><td>" + data.name + "</td><td>" + data.surname + "</td><td><a href='/Shared-Rides/profile.do?user="+ data.id +"'><img src='resources/profilePic/" + data.picture + "'/></a></td></tr>");
+					});
+				}); 
+		
+		//Traer la lista
+		
+		$( "#mapDriver" ).css('display', 'none');
+		$( "#mapPedestrian" ).css('display', 'none');
+		
+		$( "#listFound" ).show( 'fast' );
+		$( "#butOK"	).hide( 'fast' );
+		
 	});
 		
 });
 
-
-
-//CODIGO VIEJO
-
-/*
-$( "#updateForm" ).submit(function(e){
-	e.preventDefault();
-	var $form = $( this ),
-		url = $form.attr( "action" );
-	
-		
-	
-	$.post( url, { user: userJs, shift: shiftJs, lon: lonJs, lat: latJs} );
-});
-
-
-
-function fillData(){
-	alert("filled");
-	document.getElementById("dataSent").innerHTML = 
-		"<input type='hidden' id='userData' 	value='"	+ userJs 	+ 		"'/> " +
-		"<input type='hidden' id='shiftData'	value='"	+ shiftJs 	+ 		"'/> " ;	
-}
-
-
-
-$( "#butOK" ).click(function(){
-	$( "#mapDriver" ).hide( 0 );
-	
-	$.getJSON( "/Shared-Rides/prueba.do", function( json ) {
-		$.each(json, function(i, data){
-			$( "#tableFound" ).append("<tr><td>" + data.name + "</td><td>" + data.surname + "</td><td><a href='/profile/"+ data.id +"'><img src='" + data.pic + "'/></a></td></tr>");
-		});
-	});
-	
-	$( "#listFound" ).show( 'fast' );
-	$( "#butOK"	).hide( 'fast' );
-});
-*/
 
