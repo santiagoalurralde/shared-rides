@@ -162,8 +162,8 @@ public class ShowProfileService {
 		
 		model.addObject("schPed", arraySch);
 		
-		float latitude = u.getAddress().getMarker().getLatitude();
-		float longitude = u.getAddress().getMarker().getLongitude();
+		double latitude = u.getAddress().getMarker().getLatitude();
+		double longitude = u.getAddress().getMarker().getLongitude();
 		model.addObject("lat", latitude);
 		model.addObject("long", longitude);	
 	}
