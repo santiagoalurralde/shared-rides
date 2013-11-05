@@ -35,7 +35,7 @@ public class Driver implements Profile, Serializable{
 	@Column(name="id", nullable = false)
 	private long driverId;
 	
-	@Column(name="rating_driver")
+	@Column(name="ratingDriver")
 	private float rating;
 	
 	@OneToMany(cascade = CascadeType.ALL)
