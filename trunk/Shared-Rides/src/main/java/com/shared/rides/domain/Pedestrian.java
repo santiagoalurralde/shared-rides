@@ -29,9 +29,9 @@ public class Pedestrian implements Profile, Serializable{
 	@Id
 	@GeneratedValue
 	@Column(name="id")
-	private long pedestrianID;
+	private long pedestrianId;
 	
-	@Column(name="rating_ped", nullable = false)
+	@Column(name="ratingPed", nullable = false)
 	private float rating;
 	
 
@@ -57,11 +57,11 @@ public class Pedestrian implements Profile, Serializable{
 
 
 	public long getPedestrianID() {
-		return pedestrianID;
+		return pedestrianId;
 	}
 
-	public void setPedestrianID(long pedestrianID) {
-		this.pedestrianID = pedestrianID;
+	public void setPedestrianID(long pedestrianId) {
+		this.pedestrianId = pedestrianId;
 	}
 
 	public List<Schedule> getSchedule() {
