@@ -1,4 +1,3 @@
-
 var map;
 var lonJs;
 var latJs;
@@ -42,9 +41,6 @@ function initMap(){
     latJs       		= lonlatTransf.lat;
     var lonlat          = lonlatTransf.transform(proj4326, map.getProjectionObject());
 
-    
-    
-    
     if(count>0)
       layerMarkers.clearMarkers();
       

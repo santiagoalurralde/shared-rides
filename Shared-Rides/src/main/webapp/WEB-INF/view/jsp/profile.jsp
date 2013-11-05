@@ -1,8 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<body>
+
+<body onload="initStaticMap()">
 	<div id="theContent" class="theBox">	
-	
+		
 		<section title="User Data" class="tupper">
 				<h2>${name}	${surname}</h2>
 		
@@ -58,7 +59,9 @@
 								</table>					
 							</div>	
 
-							<div> 	<!--Mapa				-->		</div>
+							<div> 	<!--Mapa				-->		
+								
+							</div>
 								 
 						</div>
 						
@@ -93,15 +96,21 @@
 								</table>					
 							</div>	
 							
-							<div> 	<!--Mapa				-->		</div>	 
+							<div> 	<!--Mapa				-->		
+	        					<div id="map3">
+	        					</div>
+							</div>	 
 						</div>
 					</div>	
 			</div>
 		</section>
 
+	
 
 	</div>
 </body>
+
+
 
 
 
