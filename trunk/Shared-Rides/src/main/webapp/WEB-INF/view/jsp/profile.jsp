@@ -9,7 +9,7 @@
 				<div class="theBoard theLightBox" style="margin-top: 10px"> 		
 					<div id="userData">				<!-- Datos 				-->
 						<div id="pictureData">		<!-- Foto 	-->
-							<img id="thePic" src="resources/profilePic/${picture}"  width="150px"/>  
+							<img id="thePic" src="resources/profilePic/${picture}"  width="150px" height="160px"/>  
 						</div>
 						<div id="publicData"> 		<!-- Datos Publicos 	--> 
 							<p>${address}		</p>	
