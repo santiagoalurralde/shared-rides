@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<body onload="initStaticMap()">
+<body>
 	<div id="theContent" class="theBox">	
 		
 		<section title="User Data" class="tupper">
@@ -59,8 +58,8 @@
 								</table>					
 							</div>	
 
-							<div> 	<!--Mapa				-->		
-								
+							<div>	<!--Mapa				-->		
+								<div id="map2" class="mapStatic"></div>
 							</div>
 								 
 						</div>
@@ -97,8 +96,6 @@
 							</div>	
 							
 							<div> 	<!--Mapa				-->		
-	        					<div id="map3">
-	        					</div>
 							</div>	 
 						</div>
 					</div>	
@@ -108,6 +105,11 @@
 	
 
 	</div>
+	
+	<script src="resources/maps/OpenLayers.js"		type="text/javascript"></script>    
+	<script src="resources/maps/OpenStreetMap.js"  	type="text/javascript"></script>
+	<script src="resources/maps/osmapStatic.js"		type="text/javascript"></script>	
+	<script src="resources/scripts/jsProfile.js"	type="text/javascript"></script>
 </body>
 
 
