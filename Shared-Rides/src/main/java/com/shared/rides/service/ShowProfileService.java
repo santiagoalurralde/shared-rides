@@ -1,7 +1,9 @@
 package com.shared.rides.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -111,24 +113,18 @@ public class ShowProfileService {
 		//Agrego el horario al objecto jsonDriver
 		ArrayList arraySch = new ArrayList();
 		for(int i = 0; i < d.getSchedule().size(); i++){
-			ArrayList<Object> arrayDay = new ArrayList<Object>();
 			int freeSeatsIn = calculateFreeSeats(u, 0);
 			int freeSeatsOut = calculateFreeSeats(u, 1);
 			Schedule sch = d.getSchedule().get(i);
+			Map<String, Object> day = new HashMap();
+
+			day.put("day", sch.getDay());
+			day.put("hourIn", sch.getHourIn());
+			day.put("freeSeatsIn", freeSeatsIn);
+			day.put("hourOut", sch.getHourOut());
+			day.put("freeSeatsOut", freeSeatsOut);
 			
-			arrayDay.add(0, sch.getScheduleId());
-			arrayDay.add(1, sch.getDay());
-			arrayDay.add(2, sch.getHourIn());
-			arrayDay.add(3, freeSeatsIn);
-			//ACA DEBERIA IR EL TRACK DE IDA
-			
-			arrayDay.add(4, sch.getHourOut());
-			arrayDay.add(5, freeSeatsOut);
-			//ACA VA EL TRACK DE VUELTA DE ESE DIA
-			arrayDay.add(6, sch.getDay());
-			
-			
-			arraySch.add(i, arrayDay);
+			arraySch.add(i, day);
 		}
 		//Agrego el horario
 		model.addObject("schDriver", arraySch);
@@ -149,21 +145,21 @@ public class ShowProfileService {
 		ArrayList arraySch = new ArrayList();
 		for(int i = 0; i < p.getSchedule().size(); i++){
 			Schedule sch = p.getSchedule().get(i);
-			ArrayList<Object> arrayDay = new ArrayList<Object>();
+			Map<String, Object> day = new HashMap();
 			
-			arrayDay.add(0, sch.getDay());
-			arrayDay.add(1, sch.getHourIn());
-			arrayDay.add(2, haveDriver(u, sch, 0));
-			arrayDay.add(3, sch.getHourOut());
-			arrayDay.add(4, haveDriver(u, sch, 1));
+			day.put("day", sch.getDay());
+			day.put("hourIn", sch.getHourIn());
+			day.put("hasDriverIn", hasDriver(u, sch, 0));
+			day.put("hourOut", sch.getHourOut());
+			day.put("hasDriverOut", hasDriver(u, sch, 1));
 			
-			arraySch.add(i, arrayDay);
+			arraySch.add(day);
 		}
-		
 		model.addObject("schPed", arraySch);
 		
-		double latitude = u.getAddress().getMarker().getLatitude();
-		double longitude = u.getAddress().getMarker().getLongitude();
+		
+		float latitude = (float) u.getAddress().getMarker().getLatitude();
+		float longitude = (float) u.getAddress().getMarker().getLongitude();
 		model.addObject("lat", latitude);
 		model.addObject("long", longitude);	
 	}
@@ -186,16 +182,16 @@ public class ShowProfileService {
 	}
 	
 	//Funcion para ver si ese peaton ya tiene conductor en ese dia
-	private boolean haveDriver(User u, Schedule sch, int inout){
-		boolean haveDriver = false;
+	private boolean hasDriver(User u, Schedule sch, int inout){
+		boolean hasDriver = false;
 		List<Association> assoc = u.getAssociations();
 		
 			for (int j = 0; j <assoc.size(); j++){
 				if (sch.getDay() == assoc.get(j).getDay() 
 						&& assoc.get(j).getInout() == inout 
 						&& assoc.get(j).getState().getStateName().equals("Aceptado")) 
-					haveDriver = true;
+					hasDriver = true;
 			}
-		return haveDriver;
+		return hasDriver;
 	}
 }
