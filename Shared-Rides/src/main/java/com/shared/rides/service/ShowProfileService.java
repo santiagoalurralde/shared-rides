@@ -44,7 +44,6 @@ public class ShowProfileService {
 	@Autowired
 	private IPedestrianDAO pedDAO;
 	private boolean isAssociation = false;
-	private int freeSeats;
 	private boolean myProfile;
 	private ModelAndView model;
 	
@@ -89,15 +88,22 @@ public class ShowProfileService {
 		
 		//Agrego los datos del driver si el usuario es uno.
 		if(u.getDriver() != null){
+			model.addObject("driver", "true");
 			addModelDriver(u);
+		}
+		else{
+			model.addObject("driver", "false");
 		}
 		
 		//Agrego los datos del pedestrian si el usuario es uno.
 		if(u.getPedestrian() != null){
+			model.addObject("pedestrian", "true");
 			addModelPedestrian(u);
 		}
+		else{
+			model.addObject("pedestrian", "false");
+		}
 		//Agrego los datos privados del usuario en caso de que existe la asociacion
-		
 		if(isAssociation || myProfile){
 			model.addObject("telephone", u.getPhoneNumber());
 			model.addObject("email", u.getEmail());
@@ -113,15 +119,16 @@ public class ShowProfileService {
 		//Agrego el horario al objecto jsonDriver
 		ArrayList arraySch = new ArrayList();
 		for(int i = 0; i < d.getSchedule().size(); i++){
-			int freeSeatsIn = calculateFreeSeats(u, 0);
-			int freeSeatsOut = calculateFreeSeats(u, 1);
+			int totalSeats = d.getVehicle().getSeats();
+			int freeSeatsIn = calculateFreeSeats(u, d.getSchedule().get(i), totalSeats, 0);
+			int freeSeatsOut = calculateFreeSeats(u, d.getSchedule().get(i), totalSeats, 1);
 			Schedule sch = d.getSchedule().get(i);
 			Map<String, Object> day = new HashMap();
-
-			day.put("day", sch.getDay());
-			day.put("hourIn", sch.getHourIn());
+			
+			day.put("dayDriver", sch.getDay());
+			day.put("hourInDriver", sch.getHourIn());
 			day.put("freeSeatsIn", freeSeatsIn);
-			day.put("hourOut", sch.getHourOut());
+			day.put("hourOutDriver", sch.getHourOut());
 			day.put("freeSeatsOut", freeSeatsOut);
 			
 			arraySch.add(i, day);
@@ -147,10 +154,10 @@ public class ShowProfileService {
 			Schedule sch = p.getSchedule().get(i);
 			Map<String, Object> day = new HashMap();
 			
-			day.put("day", sch.getDay());
-			day.put("hourIn", sch.getHourIn());
+			day.put("dayPed", sch.getDay());
+			day.put("hourInPed", sch.getHourIn());
 			day.put("hasDriverIn", hasDriver(u, sch, 0));
-			day.put("hourOut", sch.getHourOut());
+			day.put("hourOutPed", sch.getHourOut());
 			day.put("hasDriverOut", hasDriver(u, sch, 1));
 			
 			arraySch.add(day);
@@ -160,25 +167,21 @@ public class ShowProfileService {
 		
 		float latitude = (float) u.getAddress().getMarker().getLatitude();
 		float longitude = (float) u.getAddress().getMarker().getLongitude();
-		model.addObject("lat", latitude);
-		model.addObject("long", longitude);	
+		model.addObject("latPed", latitude);
+		model.addObject("lonPed", longitude);	
 	}
 	
 	//Funcion que va a calcular los asientos libres	
-	private int calculateFreeSeats(User u, int inout){
-		freeSeats = u.getDriver().getVehicle().getSeats();
-		List<Schedule> sch = u.getDriver().getSchedule();
+	private int calculateFreeSeats(User u, Schedule sch, int seats, int inout){
 		List<Association> assoc = u.getAssociations();
 		
-		for (int i = 0; i < sch.size(); i++){
-			for (int j = 0; j <assoc.size(); j++){
-				if (sch.get(i).getDay() == assoc.get(j).getDay() 
-						&& assoc.get(j).getInout() == inout 
-						&& assoc.get(j).getState().getStateName().equals("Aceptado")) 
-					freeSeats--;
-			}
-		}
-		return freeSeats;
+		for (int j = 0; j <assoc.size(); j++){
+			if (sch.getDay() == assoc.get(j).getDay() 
+					&& assoc.get(j).getInout() == inout 
+					&& assoc.get(j).getState().getStateName().equals("Aceptado")) 
+				seats--;
+		}	
+		return seats;
 	}
 	
 	//Funcion para ver si ese peaton ya tiene conductor en ese dia
