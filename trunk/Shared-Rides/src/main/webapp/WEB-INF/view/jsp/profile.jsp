@@ -35,7 +35,7 @@
 							<p> 	<!--Resto de datos		-->		</p>	
 							 		
 							<div> 	<!--Horario				--> 	
-								<table id="theSchedule">
+								<table id="tablePed" class="theSchedule">
 
 								</table>					
 							</div>	
@@ -54,33 +54,11 @@
 							
 								<img src="resources/images/star.png" width="50px" style="float:left; margin-left:2%"/>
 							</div>	 	
-												
-							<c:forEach var="sch" items="${lista}">
-								<c:forEach var="day" items="${hola}">
-									<c:out value="${day.name}" />
-								</c:forEach>
-							</c:forEach>
 							
 							<p> 	<!--Resto de datos		-->		</p>	
 							 		
 							<div> 	<!--Horario				--> 	
-								<table id="theSchedule">
-									<tr>
-										<th>				</th>
-										<th> 	Martes		</th>
-										<th> 	Jueves		</th>
-									</tr>
-									<tr>
-										<td>  	Entrada	</td>
-										<td>	8:00	</td>
-										<td>	8:00	</td>
-									</tr>
-
-									<tr>
-										<td>	Salida	</td>
-										<td>	20:00	</td>
-										<td>	20:00	</td>
-									</tr>
+								<table id="tableDriver" class="theSchedule">
 								</table>					
 							</div>	
 							
@@ -99,7 +77,85 @@
 	<script src="resources/maps/osmapStatic.js"		type="text/javascript"></script>	
 	<script src="resources/scripts/jsProfile.js"	type="text/javascript"></script>
 
+	<script type="text/javascript">
+	
+		var schPed = [];							
+		var schDriver = [];
+		
+		<c:forEach var="day" items="${schPed}">
+			schPed.push(["${day.day}","${day.hourIn}","${day.hourOut}","${day.haveDriverOut}"]);
+		</c:forEach>
+		
+		<c:forEach var="day" items="${schDriver}">
+			schDriver.push(["${day.day}","${day.hourIn}","${day.hourOut}","${day.freeSeatsIn}", "${day.freeSeatsIn}"]);
+		</c:forEach>
+		
 
+		function fillTablePed(){
+			var tPed = document.getElementById("tablePed");
+			
+			
+			var rDay 	= tPed.insertRow(-1);
+			var rIn 	= tPed.insertRow(-1);
+			var rOut	= tPed.insertRow(-1);
+			
+			var hDay 		= document.createElement('th'); 
+			hDay.innerHTML 	= "";
+			rDay.appendChild(hDay);
+			var cIn 		= rIn.insertCell(-1);
+			cIn.innerHTML 	= "Entrada";
+			var cOut 		= rOut.insertCell(-1);
+			cOut.innerHTML 	= "Salida";
+			
+			for(var i=0; i<schPed.length; i++)
+			{
+				var hDay 		= document.createElement('th'); 
+				hDay.innerHTML	= schPed[i][0];
+				rDay.appendChild(hDay);
+				
+				var cIn 		= rIn.insertCell(-1);
+				cIn.innerHTML 	= schPed[i][1];
+
+				var cOut 		= rOut.insertCell(-1);
+				cOut.innerHTML 	= schPed[i][2];
+			}
+		}
+		
+		function fillTableDriver(){
+			var tDriver = document.getElementById("tableDriver");
+			
+			
+			var rDay 	= tDriver.insertRow(-1);
+			var rIn 	= tDriver.insertRow(-1);
+			var rOut	= tDriver.insertRow(-1);
+			
+			var hDay 		= document.createElement('th'); 
+			hDay.innerHTML 	= "";
+			rDay.appendChild(hDay);
+			var cIn 		= rIn.insertCell(-1);
+			cIn.innerHTML 	= "Entrada";
+			var cOut 		= rOut.insertCell(-1);
+			cOut.innerHTML 	= "Salida";
+			
+			for(var i=0; i<schDriver.length; i++)
+			{
+				var hDay 		= document.createElement('th'); 
+				hDay.innerHTML	= schDriver[i][0];
+				rDay.appendChild(hDay);
+				
+				var cIn 		= rIn.insertCell(-1);
+				cIn.innerHTML 	= schDriver[i][1];
+
+				var cOut 		= rOut.insertCell(-1);
+				cOut.innerHTML 	= schDriver[i][2];
+			}
+		}
+		
+		fillTablePed();
+		fillTableDriver();
+	
+	
+	</script>
 
 
 </body>

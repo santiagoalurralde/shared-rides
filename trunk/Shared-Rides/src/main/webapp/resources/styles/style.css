@@ -443,7 +443,7 @@ bottom:					0%;
 -------------------------------------------------------------------*/
 
 
-#theSchedule{
+.theSchedule{
 	font-family:					Arial, Helvetica, sans-serif;
 	font-size:						75%;
 	border:							#ccc 1px solid;
@@ -467,63 +467,63 @@ bottom:					0%;
 	clear:							both;
 }
 
-#theSchedule th{
+.theSchedule th{
 	background:						-moz-linear-gradient(top, #90AA44, #50A410);
 	background:						-webkit-linear-gradient(top, #90AA44, #50A410);
 	padding:						10px 15px 15px 15px;
 	border-bottom:					1px solid #e0e0e0;
 }
 
-#theSchedule tr:first-child th:first-child {
+.theSchedule tr:first-child th:first-child {
 	-moz-border-top-left-radius:	5px;
 	-webkit-border-top-left-radius:	5px;
 	border-top-left-radius:			5px;
 }
 
-#theSchedule tr:first-child th:last-child {
+.theSchedule tr:first-child th:last-child {
 	-moz-border-top-right-radius:	5px;
 	-webkit-border-top-right-radius:5px;
 	border-top-right-radius:		5px;
 }
 
-#theSchedule tr{
+.theSchedule tr{
 	text-align: center;
 }
 
-#theSchedule td:first-child {
+.theSchedule td:first-child {
 	padding-left:20px;
 	border-left: 0;
 }
 
-#theSchedule td{
+.theSchedule td{
 	padding:		10px;
 	border-top: 	1px solid #ffffff;
 	border-bottom:	1px solid #e0e0e0;
 	border-left: 	1px solid #e0e0e0;
 }
 
-#theSchedule tr:nth-child(even){	
+.theSchedule tr:nth-child(even){	
 	background:		-webkit-linear-gradient(top, #fafafa, #f7f7f7);
 	background:		-moz-linear-gradient(top,  #fafafa,  #f7f7f7)
 }
 
-#theSchedule tr:last-child td {
+.theSchedule tr:last-child td {
 	border-bottom:0;
 }
 
-#theSchedule tr:last-child td:first-child {
+.theSchedule tr:last-child td:first-child {
 	-moz-border-bottom-left-radius:		5px;
 	-webkit-border-bottom-left-radius:	5px;
 	border-bottom-left-radius:			5px;
 }
 
-#theSchedule tr:last-child td:last-child {
+.theSchedule tr:last-child td:last-child {
 	-moz-border-bottom-right-radius:	5px;
 	-webkit-border-bottom-right-radius:	5px;
 	border-bottom-right-radius:			5px;
 }
 
-#theSchedule tr:hover td {
+.theSchedule tr:hover td {
 	background:		-webkit-linear-gradient(top, #f4f4f4, #f1f1f1);
 	background:		-moz-linear-gradient(top,  #f4f4f4,  #f1f1f1);	
 }
