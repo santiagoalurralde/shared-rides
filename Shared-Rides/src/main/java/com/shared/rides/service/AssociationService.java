@@ -20,18 +20,16 @@ public class AssociationService {
 	/*
 	 * Funcion que se usa para verificar si el usuario posee asociaciones nuevas
 	 */
-	public String hasAssociation(User u){
+	public boolean hasAssociation(User u){
 		List<Association> assocList = u.getAssociations();
 		JsonObject json = new JsonObject();
 		
 		for(int i = 0; i < assocList.size(); i++){
 			if (assocList.get(i).getState().getStateName().equals("Pendiente")){
-				json.addProperty("hasAssoc", true);
-				return json.toString();
+				return true;
 			}
 		}
-		json.addProperty("hasAssoc", false);
-		return json.toString();
+		return false;
 	}
 	
 	/*

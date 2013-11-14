@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shared.rides.domain.User;
+import com.shared.rides.service.AssociationService;
 import com.shared.rides.service.LoginService;
 
 
@@ -30,6 +31,8 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
+	@Autowired
+	private AssociationService assocService;
 	
 	@RequestMapping(value = "login.do")
 	public ModelAndView loadLogin(){
@@ -50,9 +53,10 @@ public class LoginController {
     }
 	
 	@RequestMapping(value="main.do")
-	public ModelAndView loadMain(){
+	public ModelAndView loadMain(HttpServletRequest request){
 	   	ModelAndView model = new ModelAndView();
-    	model.addObject("hasAssoc", true);
+	   	User u = (User) request.getAttribute("user");
+    	model.addObject("hasAssoc", assocService.hasAssociation(u));
     	model.setViewName("main");
 		return model;
 	}
