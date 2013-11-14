@@ -14,4 +14,7 @@
         <li>					<a href="#">        				<spring:message code="label.about"																/>  	</a></li>
     </ul>
     </div>
+    <div id="btnLogout">
+    	<a href="logout.do"><button>Salir</button></a>
+    </div>
 </div>
