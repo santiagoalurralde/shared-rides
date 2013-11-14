@@ -56,7 +56,7 @@
 							<h2> 	Peaton		</h2>	
 							<div> 	<!--Puntuacion			-->		
 								<img src="resources/images/star.png" width="50px" style="float:left; margin-left:2%"/>
-								<div style="position:absolute; right: 10px;"> ${ratingPedestrian} </div>
+								${ratingPedestrian}
 							</div>	 	
 							
 							<p> 	<!--Resto de datos		-->		</p>	
@@ -155,16 +155,19 @@
 				var hDay 		= document.createElement('th');
 				hDay.innerHTML 	= getDay(schPed[i][0]);
 				
-				var btnRequest	= '<a href="#" style="margin-left: 3px"><img src="resources/images/seat.png" width="25px"/></a>'; 
+				var btnRequest	= '<button class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/seat.png" width="25px"/></button>'; 
+				var hdnDay		= '<input id="hdnDay" 	type="hidden" value="'+ schPed[i][0] +'"/>'; 
+				var hdnIn		= '<input id="hdn" 	type="hidden" value="'+ 1 +'"/>'; 
+				var hdnOut		= '<input id="hdn" 	type="hidden" value="'+ 2 +'"/>';
 				
 				rDay.appendChild(hDay);
 				var cIn 		= rIn.insertCell(-1);
 				cIn.id			= "day" + schPed[i][0] + "-1";	//In
-				cIn.innerHTML 	= schPed[i][1] + btnRequest;				
+				cIn.innerHTML 	= schPed[i][1] + btnRequest + hdnDay + hdnIn;				
 				
 				var cOut 		= rOut.insertCell(-1);
 				cOut.id			= "day" + schPed[i][0] + "-2"; 	//Out
-				cOut.innerHTML 	= schPed[i][2] + btnRequest;
+				cOut.innerHTML 	= schPed[i][2] + btnRequest + hdnDay + hdnOut;
 				
 				
 			}
@@ -213,7 +216,15 @@
 			$( '#pedestrianData' ).css("width", "100%");
 		}
 		
-
+		$( '.btnRequestAssoc' ).click(function(){
+			var dayJs 	= $( this ).parent().find("#hdnDay").val();;
+			var inOutJs = $( this ).parent().find("#hdn").val();
+						
+			/*var idUserJs 	=  request("user") %>*/
+			
+			$.post( "requestAssoc.do", { "day":  dayJs, "inout": inOutJs }); 
+			
+		});
 		
 	</script>
 

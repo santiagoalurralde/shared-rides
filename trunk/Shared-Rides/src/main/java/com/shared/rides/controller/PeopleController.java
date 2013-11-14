@@ -25,8 +25,10 @@ public class PeopleController {
 								@RequestParam("idUser") long idUser,
 								HttpServletRequest request){
 		
-		
+		System.out.println(day);
 		return null;
 	}
+	
+	
 	
 }
