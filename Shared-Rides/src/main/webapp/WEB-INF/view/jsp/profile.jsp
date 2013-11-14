@@ -217,37 +217,18 @@
 		}
 		
 		$( '.btnRequestAssoc' ).click(function(){
-			var dayJs 	= $( this ).parent().find("#hdnDay").val();;
-			var inOutJs = $( this ).parent().find("#hdn").val();
-						
-			/*var idUserJs 	=  request("user") %>*/
+			var dayJs 	= $( this ).parent().find("#hdnDay").val();
+			var inOutJs = $( this ).parent().find("#hdn").val();			
 			
-			$.post( "requestAssoc.do", { "day":  dayJs, "inout": inOutJs }); 
+			var idUserJs 	=  <% request.getParameter("user") %>
+			
+			$.post( 'requestAssoc.do', { "day":  dayJs, "inout": inOutJs , "idUser": idUserJs }); 
 			
 		});
 		
 	</script>
 
-
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!--	Datos	-->

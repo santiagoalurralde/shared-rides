@@ -53,11 +53,7 @@ public class LoginController {
 	
 	@RequestMapping(value="main.do")
 	public ModelAndView loadMain(HttpServletRequest request){
-	   	ModelAndView model = new ModelAndView();
-	   	User u = (User) request.getSession().getAttribute("user");
-    	model.addObject("hasAssoc", assocService.hasAssociation(u));
-    	model.setViewName("main");
-		return model;
+		return new ModelAndView("main");
 	}
 	
 	@RequestMapping(value="logout.do")

@@ -82,11 +82,6 @@
         					initMapCoords(lonlat, zoom, map);
       					}
      					
-     					if("${hasAssoc}" === 'true')
-     					{
-     						$( '#alertIcon' ).show( 0 );
-     					}
-     					
     				</script>
 	            	
 	        	</form>	        	
