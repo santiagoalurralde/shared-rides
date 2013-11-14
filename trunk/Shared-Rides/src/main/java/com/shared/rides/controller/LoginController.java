@@ -42,16 +42,19 @@ public class LoginController {
             throws ServletException, IOException {
         logger.info("Returning hello view");
         	
-        if(loginService.validate(email, pwd, request)){   	
+        if(loginService.validate(email, pwd, request)){
+     
         	return new ModelAndView("redirect:/main.do"); 
         }
      return new ModelAndView("login");
-        
     }
 	
 	@RequestMapping(value="main.do")
 	public ModelAndView loadMain(){
-		return new ModelAndView("main");
+	   	ModelAndView model = new ModelAndView();
+    	model.addObject("hasAssoc", true);
+    	model.setViewName("main");
+		return model;
 	}
 	
 	@RequestMapping(value="logout.do")
