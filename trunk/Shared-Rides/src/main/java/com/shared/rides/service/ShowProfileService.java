@@ -48,7 +48,7 @@ public class ShowProfileService {
 	private boolean myProfile;
 	private ModelAndView model;
 	
-	public ModelAndView getProfile(int userId, HttpServletRequest req, boolean myProf){
+	public ModelAndView getProfile(long userId, HttpServletRequest req, boolean myProf){
 		HttpSession s = req.getSession(false);
 		User u = (User)s.getAttribute("user");
 		myProfile = myProf;
@@ -143,7 +143,7 @@ public class ShowProfileService {
 		//Agrego el horario
 		model.addObject("schDriver", arraySch);
 		
-		//Agrego los datos privados del driver en caso de que exista la asociacion
+		//Agrego los datos privados del driver egetNameTrack(d, sch, 0));n caso de que exista la asociacion
 		if(isAssociation || myProfile){
 			model.addObject("vehicle", d.getVehicle().getModel());
 			model.addObject("licensePlate", d.getVehicle().getLicensePlate());
