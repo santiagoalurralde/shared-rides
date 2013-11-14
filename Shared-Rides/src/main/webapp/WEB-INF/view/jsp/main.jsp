@@ -82,6 +82,11 @@
         					initMapCoords(lonlat, zoom, map);
       					}
      					
+     					if("${hasAssoc}" === 'true')
+     					{
+     						alert("mostrar campanita");	
+     					}
+     					alert("${hasAssoc}");
     				</script>
 	            	
 	        	</form>	        	
