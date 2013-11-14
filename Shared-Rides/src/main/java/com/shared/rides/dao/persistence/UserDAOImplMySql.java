@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shared.rides.dao.interfaces.IUserDAO;
 import com.shared.rides.domain.Association;
-import com.shared.rides.domain.Marker;
 import com.shared.rides.domain.User;
 
 
@@ -52,5 +51,14 @@ public class UserDAOImplMySql implements IUserDAO {
 		sessionFactory.getCurrentSession().update(user);
 		return null;
 	}
-
+	
+	public void newAssoc(User u, Association assoc){
+		long idAssoc = assoc.getAssociationId();
+		long idUser = u.getUserId();
+		String hql = "INSERT INTO User_Assoc VALUES ( ? , ? )";
+		Query query  = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter(0, idAssoc);
+		query.setParameter(1, idUser);
+	}
+	
 }
