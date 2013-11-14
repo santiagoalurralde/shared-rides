@@ -23,11 +23,7 @@ function initMap(lonPed, latPed){
 
 	if (!map.getCenter()) map.zoomToMaxExtent();
 
-	/*	Add Marker			*/
-	
-	alert(lonPed);
-	alert(latPed);
-	
+	/*	Add Marker			*/	
     var size 	= new OpenLayers.Size(35,35);
     var offset 	= new OpenLayers.Pixel(-(size.w/2), -size.h);
     var icon 	= new OpenLayers.Icon('resources/images/marker.png',size,offset);

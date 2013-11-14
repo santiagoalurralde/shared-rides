@@ -105,11 +105,13 @@ public class ShowProfileService {
 		}
 		//Agrego los datos privados del usuario en caso de que existe la asociacion
 		if(isAssociation || myProfile){
+			model.addObject("visible", true);	
 			model.addObject("telephone", u.getPhoneNumber());
 			model.addObject("email", u.getEmail());
 			model.addObject("picture", u.getPicture());
 		}
 		else{
+			model.addObject("visible", false);			
 			model.addObject("picture", "user.png");
 		}
 	}
