@@ -56,7 +56,7 @@
 							<h2> 	Peaton		</h2>	
 							<div> 	<!--Puntuacion			-->		
 								<img src="resources/images/star.png" width="50px" style="float:left; margin-left:2%"/>
-								<div style="position:absolute; left:0"> ${ratingPedestrian} </div>
+								<div style="position:absolute; right: 10px;"> ${ratingPedestrian} </div>
 							</div>	 	
 							
 							<p> 	<!--Resto de datos		-->		</p>	
