@@ -1,6 +1,5 @@
 <%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ page import="com.shared.rides.domain.User" %>  
-
+  
 
 <body>
 	<div class="tupper mini">

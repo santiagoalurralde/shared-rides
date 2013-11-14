@@ -41,7 +41,7 @@
 							</div>	
 							
 							<div style="margin-top: 45px">	<!--Mapa				-->		
-								<div id="map2" class="mapStatic"></div>
+								<div id="map3" class="mapStatic"></div>
 							</div>
 								 
 						</div>
@@ -63,7 +63,7 @@
 							</div>	
 							
 							<div  style="margin-top: 45px"> 	<!--Mapa				-->		
-								<div id="map3" class="mapStatic"></div>
+								<div id="map2" class="mapStatic"></div>
 							</div>
 								 
 						</div>
@@ -82,12 +82,17 @@
 		var schPed = [];							
 		var schDriver = [];
 		
+		initMap("${lonPed}", "${latPed}");
+		//initMap( ,);
+		initMap1("santiago.gpx");
+		
+		
 		<c:forEach var="day" items="${schPed}">
-			schPed.push(["${day.day}","${day.hourIn}","${day.hourOut}","${day.haveDriverOut}"]);
+			schPed.push(["${day.dayPed}","${day.hourInPed}","${day.hourOutPed}","${day.haveDriverOut}"]);
 		</c:forEach>
 		
 		<c:forEach var="day" items="${schDriver}">
-			schDriver.push(["${day.day}","${day.hourIn}","${day.hourOut}","${day.freeSeatsIn}", "${day.freeSeatsIn}"]);
+			schDriver.push(["${day.dayDriver}","${day.hourInDriver}","${day.hourOutDriver}","${day.freeSeatsIn}", "${day.freeSeatsOut}"]);
 		</c:forEach>
 		
 
@@ -123,8 +128,7 @@
 		
 		function fillTableDriver(){
 			var tDriver = document.getElementById("tableDriver");
-			
-			
+					
 			var rDay 	= tDriver.insertRow(-1);
 			var rIn 	= tDriver.insertRow(-1);
 			var rOut	= tDriver.insertRow(-1);
@@ -153,7 +157,8 @@
 		
 		fillTablePed();
 		fillTableDriver();
-	
+		
+		
 	
 	</script>
 
