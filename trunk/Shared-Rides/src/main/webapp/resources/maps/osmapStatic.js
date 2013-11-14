@@ -51,7 +51,7 @@ function initMap1(urlGpxDriver){
   
 	/*  Layers    */
 	var layerOSM    = new OpenLayers.Layer.OSM("Street Map");
-	var layerTrack = new OpenLayers.Layer.OSM.CycleMap("TrackLayer");
+	var layerTrack 	= new OpenLayers.Layer.OSM.CycleMap("TrackLayer");
 	map.addLayers([layerOSM]);
 	map.addLayer(layerTrack);
 	
@@ -72,18 +72,17 @@ function initMap1(urlGpxDriver){
 	// Here we use a predefined layer that will be kept up to date with URL changes
 
 
-	var lgpx = new OpenLayers.Layer.Vector("Lakeside cycle ride", {
+	var gpx = new OpenLayers.Layer.Vector("driver track", {
 		strategies: [new OpenLayers.Strategy.Fixed()],
 		protocol: new OpenLayers.Protocol.HTTP({
-		url: 'resources/gpxFiles/'+ url,
+		url: 'resources/gpxFiles/'+ urlGpxDriver,
 		format: new OpenLayers.Format.GPX()
 	}),
 	style: {strokeColor: "green", strokeWidth: 5, strokeOpacity: 0.5},
 	projection: new OpenLayers.Projection("EPSG:4326")
 	});
-	map.addLayer(lgpx);
-
-	map.setCenter(lonLat, zoom);	
+	
+	map.addLayer(gpx);	
 }
 
 

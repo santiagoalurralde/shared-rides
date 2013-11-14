@@ -1,18 +1,20 @@
+<%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <body onLoad="stepsUpdate(1);">		
 		  
 		<!----	Content	---->
 	    <div id="theContent" class="theBox">
 	        <div class="tupper"> 
 	       		<h4>
-	       			Encuentre con quién asociarse!
+	       			<spring:message code="label.messageFind"/>
 	        	</h4>
 	        
 	        	<!----	Steps	---->
 	        	<div id="navSteps" class="theBox"> 
 	        		<ul>
-	        			<li id="step1"><h4>1. Que tipo de usuario busca?</h4></li>
-	        			<li id="step2"><h4>2. Seleccione un turno</h4></li>
-	        			<li id="step3"><h4>3. Seleccione su ubicacion</h4></li>
+	        			<li id="step1"><h4><spring:message code="label.step1"/></h4></li>
+	        			<li id="step2"><h4><spring:message code="label.step2"/></h4></li>
+	        			<li id="step3"><h4><spring:message code="label.step3"/></h4></li>
 	        		</ul>
 	        	</div>
 	        	
@@ -49,7 +51,7 @@
 	        		<div id="listFound" style="width: 400px; margin-left: 325px">
 	        			<table id="tableFound">
 								<tr>
-								<th colspan="4"> Usuarios Encontrados </th>
+								<th colspan="4"> <spring:message code="label.foundUsers"/> </th>
 							</tr>
 						</table>
 	        		</div>
