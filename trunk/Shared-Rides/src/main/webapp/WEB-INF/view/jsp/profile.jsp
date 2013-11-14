@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <body>
 	<div id="theContent" class="theBox">	
@@ -37,7 +38,7 @@
 							<p> 	<!--Resto de datos		-->		</p>	
 							 		
 							<div> 	<!--Horario				--> 	
-								<table id="tablePed" class="theSchedule">
+								<table id="tableDriver" class="theSchedule">
 
 								</table>					
 							</div>	
@@ -60,7 +61,7 @@
 							<p> 	<!--Resto de datos		-->		</p>	
 							 		
 							<div> 	<!--Horario				--> 	
-								<table id="tableDriver" class="theSchedule">
+								<table id="tablePed" class="theSchedule">
 								</table>					
 							</div>	
 							
@@ -116,10 +117,39 @@
 			
 			for(var i=0; i<schPed.length; i++)
 			{
-				var hDay 		= document.createElement('th'); 
-				hDay.innerHTML	= schPed[i][0];
-				rDay.appendChild(hDay);
+				var hDay 		= document.createElement('th');
+				aux				= schPed[i][0];
 				
+				switch(aux)
+				{
+					case '1':
+						{
+							hDay.innerHTML	= '<spring:message code="label.monday"/>';
+							break;
+						}
+					case '2':
+						{
+							hDay.innerHTML	= '<spring:message code="label.tuesday"/>';
+							break;
+						}
+					case '3':
+						{
+							hDay.innerHTML	= '<spring:message code="label.wednesday"/>';
+							break;
+						}
+					case '4':
+						{
+							hDay.innerHTML	= '<spring:message code="label.thursday"/>';
+							break;
+						}
+					case '5':
+						{
+							hDay.innerHTML	= '<spring:message code="label.friday"/>';
+							break;
+						}
+				}
+				
+				rDay.appendChild(hDay);
 				var cIn 		= rIn.insertCell(-1);
 				cIn.innerHTML 	= schPed[i][1];
 
@@ -146,7 +176,8 @@
 			for(var i=0; i<schDriver.length; i++)
 			{
 				var hDay 		= document.createElement('th'); 
-				hDay.innerHTML	= schDriver[i][0];
+				hDay.innerHtml	= schDriver[i][0];
+				
 				rDay.appendChild(hDay);
 				
 				var cIn 		= rIn.insertCell(-1);
@@ -159,6 +190,18 @@
 		
 		fillTablePed();
 		fillTableDriver();
+		
+		if("${driver}" === 'false')
+		{	
+			$( '#driverData' ).css("display", "none");
+			$( '#driverData' ).css("width", "100%");
+		}
+		
+		if("${pedestrian}" === 'false')
+		{
+			$( '#pedestrianData' ).css("display", "none");
+			$( '#pedestrianData' ).css("width", "100%");
+		}
 	</script>
 
 
