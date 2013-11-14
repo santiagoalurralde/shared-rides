@@ -11,13 +11,15 @@
 						<div id="pictureData">		<!-- Foto 	-->
 							<img id="thePic" src="resources/profilePic/${picture}"  width="150px" height="160px"/>  
 						</div>
+						
 						<div id="publicData"> 		<!-- Datos Publicos 	--> 
-							<p>${address}		</p>	
+							<p><img class="helpIcon" src="resources/images/location.png" />${address}		</p>	
 							<p>${neighborhood}	</p>		
-						</div>  		
+						</div> 
+						 		
 						<div id="privateData"> 		<!-- Datos Privados 	-->
-							<p>${telephone}				</p>
-							<p>${email} 				</p>
+							<p><img class="helpIcon" src="resources/images/phone.png" />${telephone}				</p>
+							<p><img class="helpIcon" src="resources/images/email.png" />${email} 				</p>
 						</div>		
 					</div>	
 				</div>
