@@ -109,6 +109,9 @@ public class ShowProfileService {
 			model.addObject("email", u.getEmail());
 			model.addObject("picture", u.getPicture());
 		}
+		else{
+			model.addObject("picture", "user.png");
+		}
 	}
 	
 	private void addModelDriver(User u){

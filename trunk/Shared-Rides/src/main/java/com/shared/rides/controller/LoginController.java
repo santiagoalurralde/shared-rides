@@ -32,9 +32,7 @@ public class LoginController {
 	private LoginService loginService;
 	
 	@RequestMapping(value = "login.do")
-	public ModelAndView loadLogin(HttpSession request)
-            throws ServletException, IOException {
-
+	public ModelAndView loadLogin(){
 		return new ModelAndView("login");
 	}
 	
@@ -53,7 +51,12 @@ public class LoginController {
 	
 	@RequestMapping(value="main.do")
 	public ModelAndView loadMain(){
-		
 		return new ModelAndView("main");
+	}
+	
+	@RequestMapping(value="logout.do")
+	public ModelAndView logOut(HttpServletRequest request){
+		request.getSession().invalidate();
+		return new ModelAndView("login");
 	}
 }
