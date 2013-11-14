@@ -109,7 +109,7 @@ var m = {
 		OpenLayers.Control.prototype.initialize.apply(this, [options]);
 		map.addControl(this);
 		
-		this.icon	=	new OpenLayers.Icon("resources/images/pin.png", 		//Icono Track
+		this.icon	=	new OpenLayers.Icon("resources/images/track.png", 		//Icono Track
 						new OpenLayers.Size(17, 17),
 						new OpenLayers.Pixel(-8,-8));
 		this.icon.setOpacity(0.8);    

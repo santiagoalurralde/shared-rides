@@ -28,9 +28,9 @@ function initMap(lonPed, latPed){
 	alert(lonPed);
 	alert(latPed);
 	
-    var size 	= new OpenLayers.Size(25,25);
+    var size 	= new OpenLayers.Size(35,35);
     var offset 	= new OpenLayers.Pixel(-(size.w/2), -size.h);
-    var icon 	= new OpenLayers.Icon('resources/images/pin.png',size,offset);
+    var icon 	= new OpenLayers.Icon('resources/images/marker.png',size,offset);
 
     markerPed = new OpenLayers.Marker(new OpenLayers.LonLat(lonPed, latPed).transform(
   				proj4326,
