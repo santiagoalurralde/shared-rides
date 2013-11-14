@@ -1,7 +1,4 @@
-var lonJs;
-var latJs;
-
-function initMap(){
+function initMap(lonPed, latPed){
 	var map         = new OpenLayers.Map('map2');
   
 	/*  Projections */
@@ -10,27 +7,42 @@ function initMap(){
   
 	/*  Layers    */
 	var layerOSM    = new OpenLayers.Layer.OSM("Street Map");
-	var layerMarkers= new OpenLayers.Layer.Markers( "Markers" );
+	var layerMarker = new OpenLayers.Layer.Markers( "Markers" );
 
-  map.addLayers([layerOSM]);
-  
-  /*  Set Start Position  */
-  var lonlatStart= new OpenLayers.LonLat( -64.183 ,-31.416 )
-      .transform(
-          proj4326,
-          map.getProjectionObject()
-    );
-  var zoomStart=16;
-  map.setCenter (lonlatStart, zoomStart);
+	map.addLayers([layerOSM]);
+	map.addLayer(layerMarker);
 
-  if (!map.getCenter()) map.zoomToMaxExtent();
+	/*  Set Start Position  */
+	var lonlatStart= new OpenLayers.LonLat( -64.183 ,-31.416 )
+  		.transform(
+  				proj4326,
+  				map.getProjectionObject()
+  		);
+	var zoomStart=16;
+	map.setCenter (lonlatStart, zoomStart);
 
-  map.addLayer(layerMarkers);
-  map.addControl(new OpenLayers.Control.LayerSwitcher());
+	if (!map.getCenter()) map.zoomToMaxExtent();
+
+	/*	Add Marker			*/
+	
+	alert(lonPed);
+	alert(latPed);
+	
+    var size 	= new OpenLayers.Size(25,25);
+    var offset 	= new OpenLayers.Pixel(-(size.w/2), -size.h);
+    var icon 	= new OpenLayers.Icon('resources/images/pin.png',size,offset);
+
+    markerPed = new OpenLayers.Marker(new OpenLayers.LonLat(lonPed, latPed).transform(
+  				proj4326,
+  				map.getProjectionObject()
+  		),icon.clone());
+    layerMarker.addMarker(markerPed); 
+	
+	map.addControl(new OpenLayers.Control.LayerSwitcher());
 }
 
 
-function initMap1(){
+function initMap1(urlGpxDriver){
 	var map         = new OpenLayers.Map('map3');
   
 	/*  Projections */
@@ -39,23 +51,39 @@ function initMap1(){
   
 	/*  Layers    */
 	var layerOSM    = new OpenLayers.Layer.OSM("Street Map");
-	var layerMarkers= new OpenLayers.Layer.Markers( "Markers" );
-
-  map.addLayers([layerOSM]);
-  
-  /*  Set Start Position  */
-  var lonlatStart= new OpenLayers.LonLat( -64.183 ,-31.416 )
-      .transform(
-          proj4326,
-          map.getProjectionObject()
+	var layerTrack = new OpenLayers.Layer.OSM.CycleMap("TrackLayer");
+	map.addLayers([layerOSM]);
+	map.addLayer(layerTrack);
+	
+	/*  Set Start Position  */
+	var lonlatStart= new OpenLayers.LonLat( -64.183 ,-31.416 )
+		.transform(
+				proj4326,
+				map.getProjectionObject()
     );
-  var zoomStart=16;
-  map.setCenter (lonlatStart, zoomStart);
+	var zoomStart=16;
+	map.setCenter (lonlatStart, zoomStart);
 
-  if (!map.getCenter()) map.zoomToMaxExtent();
+	if (!map.getCenter()) map.zoomToMaxExtent();
 
-  map.addLayer(layerMarkers);
-  map.addControl(new OpenLayers.Control.LayerSwitcher());
+	map.addControl(new OpenLayers.Control.LayerSwitcher());
+
+	// Define the map layer
+	// Here we use a predefined layer that will be kept up to date with URL changes
+
+
+	var lgpx = new OpenLayers.Layer.Vector("Lakeside cycle ride", {
+		strategies: [new OpenLayers.Strategy.Fixed()],
+		protocol: new OpenLayers.Protocol.HTTP({
+		url: 'resources/gpxFiles/'+ url,
+		format: new OpenLayers.Format.GPX()
+	}),
+	style: {strokeColor: "green", strokeWidth: 5, strokeOpacity: 0.5},
+	projection: new OpenLayers.Projection("EPSG:4326")
+	});
+	map.addLayer(lgpx);
+
+	map.setCenter(lonLat, zoom);	
 }
 
 
