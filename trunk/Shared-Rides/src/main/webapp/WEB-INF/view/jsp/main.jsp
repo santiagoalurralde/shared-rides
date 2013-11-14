@@ -50,8 +50,8 @@
 	        		<!---- Results List		---->     
 	        		<div id="listFound" style="width: 400px; margin-left: 325px">
 	        			<table id="tableFound">
-								<tr>
-								<th colspan="4"> <spring:message code="label.foundUsers"/> </th>
+							<tr>
+								<th colspan=4"> <spring:message code="label.foundUsers"/> </th>
 							</tr>
 						</table>
 	        		</div>
@@ -81,8 +81,9 @@
       					{		
         					initMapCoords(lonlat, zoom, map);
       					}
+     					
     				</script>
-	            		
+	            	
 	        	</form>	        	
 	        	
             </div>

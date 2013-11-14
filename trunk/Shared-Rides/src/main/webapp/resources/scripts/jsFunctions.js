@@ -4,14 +4,14 @@ var userJs	= 	0;	//Tipo de Usuario
 var shiftJs	= 	0;	//Turno
 
 function stepsUpdate(value) {
-	if(value === 1)
+	if(value === 1)							//Si estoy sumando
 		if(i===0 && userJs===0)
 			alert("Seleccione un tipo de Usuario!");
 		else if(i===1 && shiftJs===0)
 			alert("Seleccione un turno!");
 		else
 			i = i + value;
-	else
+	else									//Si estoy restando
 		i = i + value;
 }
 
@@ -19,10 +19,10 @@ $( document ).ready(function() {
 	
 	//Iniciar Mapa Simple
 	initMap();
-
+	
 	//Esconder elementos
 	start();
-
+	
 	//Resaltar Primer Paso
 	highlightStep(i);
 	
@@ -102,15 +102,17 @@ $( document ).ready(function() {
 			$( "#butOK" ).hide( 'fast' );
 			$( "#butNext" ).show( 'slow' );
 			$( "#listFound" ).hide( 'fast' );
+			$( "#tableFound td" ).remove();
 			break;
 		}
 	});
 	
+
 	function start(){
 		//	Establece las propiedades iniciales
-		
-		$( "#mapDriver" ).css('display', 'none');
-		$( "#mapPedestrian" ).css('display', 'none');
+				
+		$( "#mapDriver" ).css( 'display', 'none' );
+		$( "#mapPedestrian" ).css( 'display', 'none' );
 		$( "#butBack" ).hide( 0 );							
 		$( "#listFound" ).hide( 0 );
 	} 
@@ -204,13 +206,11 @@ $( document ).ready(function() {
 				}); 
 		
 		//Traer la lista
-		
 		$( "#mapDriver" ).css('display', 'none');
 		$( "#mapPedestrian" ).css('display', 'none');
 		
 		$( "#listFound" ).show( 'fast' );
 		$( "#butOK"	).hide( 'fast' );
-		
 	});
 		
 });

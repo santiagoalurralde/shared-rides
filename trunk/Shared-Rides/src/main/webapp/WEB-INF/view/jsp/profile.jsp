@@ -32,8 +32,9 @@
 					<div id="profileData">				<!-- Resto del Perfil	--> 
 						<div id="driverData">			<!-- Perfil conductor 	-->		 		
 							<h2> 	Conductor	</h2>	 	
-							<div> 	<!--Puntuacion			-->		
-								<img src="resources/images/star.png" width="50px" style="float:right; margin-right: 2%"/>	
+							<div style="float:left; margin-left:2%"> 	<!--Puntuacion			-->		
+								<img src="resources/images/star.png" width="50px" style="float:right; margin-right: 2%"/>
+								${ratingDriver}	
 							</div>	 	
 							<p> 	<!--Resto de datos		-->		</p>	
 							 		
@@ -53,9 +54,9 @@
 						
 						<div id="pedestrianData">		<!-- Perfil peaton 	-->		 		
 							<h2> 	Peaton		</h2>	
-							<div> 	<!--Puntuacion			-->		
-							
-								<img src="resources/images/star.png" width="50px" style="float:left; margin-left:2%"/>
+							<div style="float:left; margin-left:2%"> 	<!--Puntuacion			-->		
+								<img src="resources/images/star.png" width="50px"/>
+								${ratingPedestrian}
 							</div>	 	
 							
 							<p> 	<!--Resto de datos		-->		</p>	
@@ -99,6 +100,40 @@
 			schDriver.push(["${day.dayDriver}","${day.hourInDriver}","${day.hourOutDriver}","${day.freeSeatsIn}", "${day.freeSeatsOut}"]);
 		</c:forEach>
 		
+		function getDay(aux)
+		{
+			var day;
+			
+			switch(aux)
+			{
+				case '1':
+					{
+						day	= '<spring:message code="label.monday"/>';
+						break;
+					}
+				case '2':
+					{
+						day	= '<spring:message code="label.tuesday"/>';
+						break;
+					}
+				case '3':
+					{
+						day	= '<spring:message code="label.wednesday"/>';
+						break;
+					}
+				case '4':
+					{
+						day	= '<spring:message code="label.thursday"/>';
+						break;
+					}
+				case '5':
+					{
+						day	= '<spring:message code="label.friday"/>';
+						break;
+					}			
+			}
+			return day;
+		}
 
 		function fillTablePed(){
 			var tPed = document.getElementById("tablePed");
@@ -118,43 +153,20 @@
 			for(var i=0; i<schPed.length; i++)
 			{
 				var hDay 		= document.createElement('th');
-				aux				= schPed[i][0];
+				hDay.innerHTML 	= getDay(schPed[i][0]);
 				
-				switch(aux)
-				{
-					case '1':
-						{
-							hDay.innerHTML	= '<spring:message code="label.monday"/>';
-							break;
-						}
-					case '2':
-						{
-							hDay.innerHTML	= '<spring:message code="label.tuesday"/>';
-							break;
-						}
-					case '3':
-						{
-							hDay.innerHTML	= '<spring:message code="label.wednesday"/>';
-							break;
-						}
-					case '4':
-						{
-							hDay.innerHTML	= '<spring:message code="label.thursday"/>';
-							break;
-						}
-					case '5':
-						{
-							hDay.innerHTML	= '<spring:message code="label.friday"/>';
-							break;
-						}
-				}
+				var btnRequest	= '<a href="#" style="margin-left: 3px"><img src="resources/images/seat.png" width="25px"/></a>'; 
 				
 				rDay.appendChild(hDay);
 				var cIn 		= rIn.insertCell(-1);
-				cIn.innerHTML 	= schPed[i][1];
-
+				cIn.id			= "day" + schPed[i][0] + "-1";	//In
+				cIn.innerHTML 	= schPed[i][1] + btnRequest;				
+				
 				var cOut 		= rOut.insertCell(-1);
-				cOut.innerHTML 	= schPed[i][2];
+				cOut.id			= "day" + schPed[i][0] + "-2"; 	//Out
+				cOut.innerHTML 	= schPed[i][2] + btnRequest;
+				
+				
 			}
 		}
 		
@@ -176,9 +188,7 @@
 			for(var i=0; i<schDriver.length; i++)
 			{
 				var hDay 		= document.createElement('th'); 
-				hDay.innerHtml	= schDriver[i][0];
-				
-				rDay.appendChild(hDay);
+				hDay.innerHTML 	= getDay(schDriver[i][0]);			
 				
 				var cIn 		= rIn.insertCell(-1);
 				cIn.innerHTML 	= schDriver[i][1];
@@ -202,6 +212,9 @@
 			$( '#pedestrianData' ).css("display", "none");
 			$( '#pedestrianData' ).css("width", "100%");
 		}
+		
+
+		
 	</script>
 
 
@@ -242,7 +255,5 @@
 	<h1>${shift}</h1>
 	<h1>${idPedestrian}</h1>
 	<h1>${ratingPedestrian}</h1>		
-				
-
 	<h1>${lat}</h1>
 -->	

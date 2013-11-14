@@ -312,7 +312,7 @@ body
 
 .helpIcon{
 	width:		25px;
-	margin:		2px 1px 0 0;
+	margin:		1px 1px 0 0;
 	
 }
 
@@ -339,24 +339,6 @@ body
 	background: 			-webkit-linear-gradient(top, #99BB66, #9ED474);
 	background: 			-moz-linear-gradient(top, #99BB66, #9ED474);
 }
-
-
-/*
-#imgSun:active, #imgSteering:active, #imgMoon:active, #imgBoot:active{
-	Escalar
-	-webkit-transform:			scale(1.2, 1.2);
-	-o-transform:				scale(1.2, 1.2);
-	-moz-transform:				scale(1.2, 1.2);
-	transform:					scale(1.2, 1.2);
-
-	
-	Transicion
-	-webkit-transition: 		all 0.04s ease-out;  	
-    -moz-transition: 			all 0.04s ease-out;  
-    -o-transition: 				all 0.04s ease-out;  	
-    transition: 				all 0.04s ease-out;  	
-}
-*/
 
 #blockLeft
 {
