@@ -101,6 +101,7 @@ $( document ).ready(function() {
 			
 			$( "#butOK" ).hide( 'fast' );
 			$( "#butNext" ).show( 'slow' );
+			$( "#listFound" ).hide( 'fast' );
 			break;
 		}
 	});
