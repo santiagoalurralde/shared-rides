@@ -19,6 +19,7 @@ import com.shared.rides.domain.Association;
 import com.shared.rides.domain.Driver;
 import com.shared.rides.domain.Pedestrian;
 import com.shared.rides.domain.Schedule;
+import com.shared.rides.domain.Track;
 import com.shared.rides.domain.User;
 
 /*
@@ -67,8 +68,7 @@ public class ShowProfileService {
 		return model;
 		}
 		
-		createModel(u);
-		
+		createModel(u);	
 		return model;
 	}
 	
@@ -115,11 +115,11 @@ public class ShowProfileService {
 		Driver d = u.getDriver();
 		model.addObject("idDriver", d.getDriverId());
 		model.addObject("ratingDriver", d.getRating());
-
+		
+		int totalSeats = d.getVehicle().getSeats();
 		//Agrego el horario al objecto jsonDriver
 		ArrayList arraySch = new ArrayList();
-		for(int i = 0; i < d.getSchedule().size(); i++){
-			int totalSeats = d.getVehicle().getSeats();
+		for(int i = 0; i < d.getSchedule().size(); i++){	
 			int freeSeatsIn = calculateFreeSeats(u, d.getSchedule().get(i), totalSeats, 0);
 			int freeSeatsOut = calculateFreeSeats(u, d.getSchedule().get(i), totalSeats, 1);
 			Schedule sch = d.getSchedule().get(i);
@@ -128,8 +128,10 @@ public class ShowProfileService {
 			day.put("dayDriver", sch.getDay());
 			day.put("hourInDriver", sch.getHourIn());
 			day.put("freeSeatsIn", freeSeatsIn);
+			day.put("trackIn", getNameTrack(d, sch, 0));
 			day.put("hourOutDriver", sch.getHourOut());
 			day.put("freeSeatsOut", freeSeatsOut);
+			day.put("trackOut", getNameTrack(d, sch, 1));
 			
 			arraySch.add(i, day);
 		}
@@ -163,15 +165,16 @@ public class ShowProfileService {
 			arraySch.add(day);
 		}
 		model.addObject("schPed", arraySch);
-		
-		
+			
 		float latitude = (float) u.getAddress().getMarker().getLatitude();
 		float longitude = (float) u.getAddress().getMarker().getLongitude();
 		model.addObject("latPed", latitude);
 		model.addObject("lonPed", longitude);	
 	}
 	
-	//Funcion que va a calcular los asientos libres	
+	/*
+	 * Funcion que va a calcular los asientos libres	
+	 */
 	private int calculateFreeSeats(User u, Schedule sch, int seats, int inout){
 		List<Association> assoc = u.getAssociations();
 		
@@ -184,17 +187,38 @@ public class ShowProfileService {
 		return seats;
 	}
 	
-	//Funcion para ver si ese peaton ya tiene conductor en ese dia
+	/*
+	 * Funcion para ver si ese peaton ya tiene conductor en ese dia
+	 */
 	private boolean hasDriver(User u, Schedule sch, int inout){
 		boolean hasDriver = false;
 		List<Association> assoc = u.getAssociations();
-		
-			for (int j = 0; j <assoc.size(); j++){
-				if (sch.getDay() == assoc.get(j).getDay() 
-						&& assoc.get(j).getInout() == inout 
-						&& assoc.get(j).getState().getStateName().equals("Aceptado")) 
-					hasDriver = true;
-			}
+		for (int j = 0; j <assoc.size(); j++){
+			if (sch.getDay() == assoc.get(j).getDay() 
+					&& assoc.get(j).getInout() == inout 
+					&& assoc.get(j).getState().getStateName().equals("Aceptado")) 
+				hasDriver = true;
+		}
 		return hasDriver;
 	}
+	
+	/*
+	 * Funcion que va a devolver el nombre del track correspondiente a ese horario
+	 * in -> 0
+	 * out -> 1
+	 */
+	private String getNameTrack(Driver d, Schedule sch, int inout){
+		String nameTrack = null;
+		
+		for (int i = 0; i < d.getTracks().size(); i++){
+			Track track = d.getTracks().get(i);
+			if (track.getDay() == sch.getDay()
+				&& track.getInout() == inout){
+				nameTrack = track.getPathFile();
+				break;
+			}
+		}
+		return nameTrack;
+	}
+	
 }
