@@ -14,13 +14,13 @@
 						</div>
 						
 						<div id="publicData"> 		<!-- Datos Publicos 	--> 
-							<p><img class="helpIcon" src="resources/images/location.png" />${address}		</p>	
-							<p>${neighborhood}</p>		
+							<p><img class="helpIcon" src="resources/images/location.png" 	/>${address}		</p>	
+							<p><img class="helpIcon" src="resources/images/house.png" 		/>${neighborhood}	</p>		
 						</div> 
 						 		
 						<div id="privateData"> 		<!-- Datos Privados 	-->
-							<p><img class="helpIcon" src="resources/images/phone.png" />${telephone}				</p>
-							<p><img class="helpIcon" src="resources/images/email.png" />${email} 				</p>
+							<p><img class="helpIcon" src="resources/images/phone.png" 		/>${telephone}		</p>
+							<p><img class="helpIcon" src="resources/images/email.png" 		/>${email} 			</p>
 						</div>		
 					</div>	
 				</div>
@@ -32,7 +32,7 @@
 					<div id="profileData">				<!-- Resto del Perfil	--> 
 						<div id="driverData">			<!-- Perfil conductor 	-->		 		
 							<h2> 	Conductor	</h2>	 	
-							<div style="float:left; margin-left:2%"> 	<!--Puntuacion			-->		
+							<div  style="float:left; margin-left:2%"> 	<!--Puntuacion			-->		
 								<img src="resources/images/star.png" width="50px" style="float:right; margin-right: 2%"/>
 								${ratingDriver}	
 							</div>	 	
@@ -54,9 +54,9 @@
 						
 						<div id="pedestrianData">		<!-- Perfil peaton 	-->		 		
 							<h2> 	Peaton		</h2>	
-							<div style="float:left; margin-left:2%"> 	<!--Puntuacion			-->		
-								<img src="resources/images/star.png" width="50px"/>
-								${ratingPedestrian}
+							<div> 	<!--Puntuacion			-->		
+								<img src="resources/images/star.png" width="50px" style="float:left; margin-left:2%"/>
+								<div style="position:absolute; left:0"> ${ratingPedestrian} </div>
 							</div>	 	
 							
 							<p> 	<!--Resto de datos		-->		</p>	

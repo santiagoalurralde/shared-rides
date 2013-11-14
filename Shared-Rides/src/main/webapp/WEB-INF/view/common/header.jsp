@@ -9,12 +9,12 @@
     <ul>       
         <li class="current">	<a href="#">						<img width=120px src="resources/images/logoFin1.png" style="position: relative; left: -20px;"	/></a></li>
         <li>					<a href="myProfile.do">  			<spring:message code="label.profile"															/>   	</a></li>
-        <li>					<a href="#">       					<spring:message code="label.people"																/>     	</a></li>
+        <li>					<a href="#">       					<spring:message code="label.people"																/><img id="alertIcon" src="resources/images/bell.png" width="20px" style="display:none"/></a></li>
         <li>					<a href="#">     					<spring:message code="label.contact"															/>   	</a></li>
         <li>					<a href="#">        				<spring:message code="label.about"																/>  	</a></li>
     </ul>
     </div>
     <div id="btnLogout">
-    	<a href="logout.do"><button>Salir</button></a>
+    	<a href="logout.do"><img src="resources/images/logout.png" width="25px"></a>
     </div>
 </div>

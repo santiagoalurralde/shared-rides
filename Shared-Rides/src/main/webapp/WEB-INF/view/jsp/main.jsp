@@ -84,9 +84,9 @@
      					
      					if("${hasAssoc}" === 'true')
      					{
-     						alert("mostrar campanita");	
+     						$( '#alertIcon' ).show( 0 );
      					}
-     					alert("${hasAssoc}");
+     					
     				</script>
 	            	
 	        	</form>	        	
