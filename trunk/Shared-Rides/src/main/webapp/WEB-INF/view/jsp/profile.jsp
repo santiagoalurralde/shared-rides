@@ -14,7 +14,7 @@
 						
 						<div id="publicData"> 		<!-- Datos Publicos 	--> 
 							<p><img class="helpIcon" src="resources/images/location.png" />${address}		</p>	
-							<p>${neighborhood}	</p>		
+							<p>${neighborhood}</p>		
 						</div> 
 						 		
 						<div id="privateData"> 		<!-- Datos Privados 	-->
@@ -84,10 +84,11 @@
 		var schPed = [];							
 		var schDriver = [];
 		
-		initMap("${lonPed}", "${latPed}");
-		//initMap( ,);
-		initMap1("santiago.gpx");
+		if("${visible}" === 'false')
+			$( '#privateData' ).hide( 0 );
 		
+		initMap("${lonPed}", "${latPed}");
+		initMap1("santiago.gpx");
 		
 		<c:forEach var="day" items="${schPed}">
 			schPed.push(["${day.dayPed}","${day.hourInPed}","${day.hourOutPed}","${day.haveDriverOut}"]);
@@ -100,7 +101,6 @@
 
 		function fillTablePed(){
 			var tPed = document.getElementById("tablePed");
-			
 			
 			var rDay 	= tPed.insertRow(-1);
 			var rIn 	= tPed.insertRow(-1);
@@ -159,9 +159,6 @@
 		
 		fillTablePed();
 		fillTableDriver();
-		
-		
-	
 	</script>
 
 
