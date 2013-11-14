@@ -21,14 +21,13 @@ import com.shared.rides.service.ShowProfileService;
  */
 
 @Controller
-//@RequestMapping(value = "profile")
 public class ProfileController {
 	
 		@Autowired
 		private ShowProfileService showProfileService;
 	
 		@RequestMapping(value = "/profile.do")
-		public ModelAndView showProfile(@RequestParam("user") int id, 
+		public ModelAndView showProfile(@RequestParam("user") long id, 
 										HttpServletRequest request){
 			HttpSession s = request.getSession();
 			User u = (User)s.getAttribute("user");
@@ -45,5 +44,17 @@ public class ProfileController {
 			
 			return model;
 		}
-
+		
+		@RequestMapping(value = "/myProfile.do")
+		public ModelAndView showMyProfile(HttpServletRequest request){
+			HttpSession s = request.getSession();
+			User u = (User)s.getAttribute("user");
+			ModelAndView model = new ModelAndView();
+			long id = u.getUserId();
+			
+			model = showProfileService.getProfile(id, request, true);
+			model.setViewName("profile");
+			return model;
+		}
+		
 }
