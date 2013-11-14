@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
 import com.shared.rides.dao.interfaces.IAssociationDAO;
 import com.shared.rides.dao.interfaces.IUserDAO;
 import com.shared.rides.domain.Association;
+import com.shared.rides.domain.State;
 import com.shared.rides.domain.User;
 
 @Service
@@ -36,5 +37,20 @@ public class AssociationService {
 	 * Funcion que se usa cuando el usuario envia una peticion de asociacion a otro usuario
 	 */
 	public void sendAssocRequest(int day, int inout, long idUser, long idApplicant){
+		//Persona que hace la peticion
+		User applicant = new User();
+		applicant.setUserId(idApplicant);
+		//Persona que tiene que responder
+		User u = new User();
+		u.setUserId(idUser);
+		Association assoc = new Association();
+		assoc.setDay(day);
+		assoc.setInout(inout);
+		assoc.setApplier(applicant);
+		assoc.setState(State.PENDING);
+		
+		assocDAO.save(assoc);
+		userDAO.newAssoc(u, assoc);
+		
 	}
 }
