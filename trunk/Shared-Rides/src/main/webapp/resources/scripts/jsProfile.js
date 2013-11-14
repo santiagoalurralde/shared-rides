@@ -1,5 +1,6 @@
 $( document ).ready(function() {
 	//Iniciar Mapa Estático
-	initMap();
-	initMap1();
+	
+	//initMap();
+	//initMap1();
 });
