@@ -19,3 +19,16 @@
     </div>
     <img id="alertIcon" src="resources/images/bell.png" width="20px" style="position: fixed; left: 745px; top: 15px "/>
 </div>
+
+
+<script>
+	$.post( 'hasAssociation.do', 
+			function(json)
+			{
+				var jsonNew = $.parseJSON(json);
+				if (jsonNew.hasAssoc === false)
+				{
+					$( '#alertIcon' ).hide( 0 );
+				}
+	});
+</script>
