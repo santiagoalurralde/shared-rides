@@ -45,7 +45,7 @@ public class Driver implements Profile, Serializable{
 	private List<Schedule> schedule;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name = "vehicleID")
 	private Vehicle vehicle;
 	
 	@OneToMany(cascade = CascadeType.ALL)

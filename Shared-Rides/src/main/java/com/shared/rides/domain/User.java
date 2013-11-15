@@ -56,11 +56,11 @@ public class User implements Serializable{
 	private String surname;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+	@JoinColumn(name = "addressID")
 	private Address address;
 	
 	@OneToOne
-    @PrimaryKeyJoinColumn
+	@JoinColumn(name = "organizationID")
 	private Organization organization;
 	
 	@OneToMany(cascade = CascadeType.ALL)

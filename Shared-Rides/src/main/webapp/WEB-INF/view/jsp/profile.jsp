@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-
+<% 
+	String id = request.getParameter("user");
+%>
 <body>
 	<div id="theContent" class="theBox">	
 		
@@ -209,15 +211,19 @@
 		$( '.btnRequestAssoc' ).click(function(){
 			var dayJs 	= $( this ).parent().find("#hdnDay").val();
 			var inOutJs = $( this ).parent().find("#hdn").val();			
-			
-			var idUserJs 	=  <% request.getParameter("user") %>
-			
-			$.post( 'requestAssoc.do', { "day":  dayJs, "inout": inOutJs , "idUser": idUserJs }); 
-			
+			var idUserJs = ${id};
+			$.post( 'requestAssoc.do', { "day":  dayJs, "inout": inOutJs , "idUser": idUserJs },
+					function(msg)
+					{
+						if (msg != '')
+						{
+							window.alert(msg);
+						}
+			}); 			
 		});
 		
 	</script>
-
+	
 </body>
 
 

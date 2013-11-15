@@ -25,7 +25,7 @@ public class Marker implements Serializable{
 	@Column(name="lat", nullable = false)
 	private double latitude;
 	
-	@Column(name="long", nullable = false)
+	@Column(name="lon", nullable = false)
 	private double longitude;
 	
 //-----------CONSTRUCTOR 

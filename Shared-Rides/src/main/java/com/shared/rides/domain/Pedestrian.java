@@ -72,6 +72,7 @@ public class Pedestrian implements Profile, Serializable{
 		this.schedule = schedule;
 	}
 
+
 //---------------------------
 
 }
