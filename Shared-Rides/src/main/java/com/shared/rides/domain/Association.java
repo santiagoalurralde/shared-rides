@@ -15,6 +15,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -29,7 +30,8 @@ public class Association implements Serializable{
 	@Column(name="id", nullable = false)
 	private long associationId;
 
-	@Column(name="applicantID", nullable = false)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "applicantID")
 	private User applier;
 	
 	@Column(name="day", nullable = false)
@@ -40,7 +42,7 @@ public class Association implements Serializable{
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="state")
-	private State state;
+	private String state;
 	
 //-----------CONSTRUCTOR
 
@@ -71,10 +73,10 @@ public class Association implements Serializable{
 		this.inout = inout;
 	}
 	
-	public State getState() {
+	public String getState() {
 		return state;
 	}
-	public void setState(State state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 	

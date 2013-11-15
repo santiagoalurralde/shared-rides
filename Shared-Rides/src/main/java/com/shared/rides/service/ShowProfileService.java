@@ -19,6 +19,7 @@ import com.shared.rides.domain.Association;
 import com.shared.rides.domain.Driver;
 import com.shared.rides.domain.Pedestrian;
 import com.shared.rides.domain.Schedule;
+import com.shared.rides.domain.State;
 import com.shared.rides.domain.Track;
 import com.shared.rides.domain.User;
 
@@ -56,7 +57,7 @@ public class ShowProfileService {
 		//Si no es mi profile, entonces veo si tengo asociacion con esa persona
 		if(!myProfile){
 		for (Association assoc : u.getAssociations()){
-			if (assoc.getApplier().getUserId() == userId && assoc.getState().getStateName().equals("Aceptado")){
+			if (assoc.getApplier().getUserId() == userId && assoc.getState().equals(State.ACCEPTED.getStateName())){
 				isAssociation = true;
 			}
 		}
@@ -186,7 +187,7 @@ public class ShowProfileService {
 		for (int j = 0; j <assoc.size(); j++){
 			if (sch.getDay() == assoc.get(j).getDay() 
 					&& assoc.get(j).getInout() == inout 
-					&& assoc.get(j).getState().getStateName().equals("Aceptado")) 
+					&& assoc.get(j).getState().equals(State.ACCEPTED.getStateName())) 
 				seats--;
 		}	
 		return seats;
@@ -201,7 +202,7 @@ public class ShowProfileService {
 		for (int j = 0; j <assoc.size(); j++){
 			if (sch.getDay() == assoc.get(j).getDay() 
 					&& assoc.get(j).getInout() == inout 
-					&& assoc.get(j).getState().getStateName().equals("Aceptado")) 
+					&& assoc.get(j).getState().equals(State.ACCEPTED.getStateName())) 
 				hasDriver = true;
 		}
 		return hasDriver;
