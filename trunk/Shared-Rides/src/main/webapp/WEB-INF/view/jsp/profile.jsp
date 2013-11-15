@@ -188,7 +188,7 @@
 				var hDay 		= document.createElement('th'); 
 				hDay.innerHTML 	= getDay(schDriver[i][0]);			
 				
-				var btnRequest	= '<button class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/steering.png" width="25px"/></button>'; 
+				var btnRequest	= '<button class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/seat.png" width="25px"/></button>'; 
 				var hdnDay		= '<input id="hdnDay" 	type="hidden" value="'+ schDriver[i][0] +'"/>'; 
 				var hdnIn		= '<input id="hdn" 		type="hidden" value="'+ 1 +'"/>'; 
 				var hdnOut		= '<input id="hdn" 		type="hidden" value="'+ 2 +'"/>';
