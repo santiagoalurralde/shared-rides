@@ -29,7 +29,7 @@
 		</section>
 		
 	
-		<section title="Profile Data" class="tupper" style="margin-top: 20px">
+		<section title="Profile Data" class="tupper" style="margin-top: 50px">
 			<div class="theBoard theLightBox"> 		
 					<div id="profileData">				<!-- Resto del Perfil	--> 
 						<div id="driverData">			<!-- Perfil conductor 	-->		 		
@@ -41,10 +41,7 @@
 								${ratingDriver}	
 							</div>	 	
 							<p> 	<!--Resto de datos		-->	
-								<img class="helpIcon" src="resources/images/car.png" 	/>	
-								${vehicle}
-								<img class="helpIcon" src="resources/images/location.png" 	/>
-								${licensePlate}
+
 							</p>	
 							 		
 							<div> 	<!--Horario				--> 	
@@ -77,7 +74,7 @@
 								</table>					
 							</div>	
 							
-							<div  style="margin-top: 45px"> 	<!--Mapa				-->		
+							<div  style="margin-top: 45px; margin-left: 40px"> 	<!--Mapa				-->		
 								<div id="map2" class="mapStatic"></div>
 							</div>
 								 
@@ -215,13 +212,15 @@
 		if("${driver}" === 'false')
 		{	
 			$( '#driverData' ).css("display", "none");
-			$( '#driverData' ).css("width", "100%");
+			$( '#driverData' ).css("width", "=+50%");
+			$( '#driverData' ).css("float", "none");
 		}
 		
 		if("${pedestrian}" === 'false')
 		{
 			$( '#pedestrianData' ).css("display", "none");
-			$( '#pedestrianData' ).css("width", "100%");
+			$( '#pedestrianData' ).css("width", "=+50%");
+			$( '#pedestrianData' ).css("float", "none");
 		}
 		
 		$( '.btnRequestAssoc' ).click(function(){
@@ -260,5 +259,4 @@
 	<h1>${idPedestrian}</h1>
 	<h1>${ratingPedestrian}</h1>		
 	<h1>${lat}</h1>
-	${}
 -->	
