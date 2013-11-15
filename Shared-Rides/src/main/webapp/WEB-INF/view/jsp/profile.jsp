@@ -107,30 +107,20 @@
 			switch(aux)
 			{
 				case '1':
-					{
 						day	= '<spring:message code="label.monday"/>';
 						break;
-					}
 				case '2':
-					{
 						day	= '<spring:message code="label.tuesday"/>';
 						break;
-					}
 				case '3':
-					{
 						day	= '<spring:message code="label.wednesday"/>';
 						break;
-					}
 				case '4':
-					{
 						day	= '<spring:message code="label.thursday"/>';
 						break;
-					}
 				case '5':
-					{
 						day	= '<spring:message code="label.friday"/>';
-						break;
-					}			
+						break;		
 			}
 			return day;
 		}
