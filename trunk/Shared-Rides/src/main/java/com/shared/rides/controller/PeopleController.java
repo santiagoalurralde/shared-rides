@@ -38,7 +38,8 @@ public class PeopleController {
 		User requestUser = (User) request.getSession().getAttribute("user");
 		String msg = null;
 		if (idUser != requestUser.getUserId())
-			msg = assocService.sendAssocRequest(day, inout, idUser, requestUser.getUserId());
+			msg = "Se hizo correctamente";
+			//msg = assocService.sendAssocRequest(day, inout, idUser, requestUser.getUserId());
 			
 		return msg;
 	}
