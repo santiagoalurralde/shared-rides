@@ -40,7 +40,12 @@
 								<img src="resources/images/star.png" width="50px" style="float:right; margin-right: 2%"/>
 								${ratingDriver}	
 							</div>	 	
-							<p> 	<!--Resto de datos		-->		</p>	
+							<p> 	<!--Resto de datos		-->	
+								<img class="helpIcon" src="resources/images/car.png" 	/>	
+								${vehicle}
+								<img class="helpIcon" src="resources/images/location.png" 	/>
+								${licensePlate}
+							</p>	
 							 		
 							<div> 	<!--Horario				--> 	
 								<table id="tableDriver" class="theSchedule">
@@ -255,4 +260,5 @@
 	<h1>${idPedestrian}</h1>
 	<h1>${ratingPedestrian}</h1>		
 	<h1>${lat}</h1>
+	${}
 -->	
