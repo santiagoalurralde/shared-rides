@@ -49,7 +49,7 @@
 	        	
 	        		<!---- Results List		---->     
 	        		<div id="listFound" style="width: 400px; margin-left: 325px">
-	        			<table id="tableFound">
+	        			<table id="tableFound" class="tableUsers">
 							<tr>
 								<th colspan=4"> <spring:message code="label.foundUsers"/> </th>
 							</tr>
