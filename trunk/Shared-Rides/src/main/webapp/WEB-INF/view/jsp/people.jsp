@@ -11,19 +11,16 @@
 								<tr>
 									<td> Steve	 		</td>
 									<td> Jobs			</td>
-									<td> Visitar Perfil	</td>
 									<td> <img src="http://www.igdigital.com/wp-content/uploads/2013/03/steve_jobs_apple1-1.jpeg"/> </td>
 								</tr>
 								<tr>
 									<td> Clint			</td>
 									<td> Eastwood		</td>
-									<td> Visitar Perfil	</td>
 									<td><img src="http://2.bp.blogspot.com/-Pleua1JUrJg/UajruKT0gaI/AAAAAAAABy4/TDbntFwudPM/s640/Clint-Eastwood-.jpg"/>	</td>		
 								</tr>
 								<tr>
 									<td> Pablo 			</td>
 									<td> Picasso		</td>
-									<td> Visitar Perfil	</td>
 									<td><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/192px-Pablo_picasso_1.jpg"/>				</td>						
 								</tr>
 							</table>
@@ -35,19 +32,16 @@
 								<tr>
 									<td> Steve	 		</td>
 									<td> Jobs			</td>
-									<td> Visitar Perfil	</td>
 									<td> <img src="http://www.igdigital.com/wp-content/uploads/2013/03/steve_jobs_apple1-1.jpeg"/> </td>
 								</tr>
 								<tr>
 									<td> Clint			</td>
 									<td> Eastwood		</td>
-									<td> Visitar Perfil	</td>
 									<td><img src="http://2.bp.blogspot.com/-Pleua1JUrJg/UajruKT0gaI/AAAAAAAABy4/TDbntFwudPM/s640/Clint-Eastwood-.jpg"/>	</td>		
 								</tr>
 								<tr>
 									<td> Pablo 			</td>
 									<td> Picasso		</td>
-									<td> Visitar Perfil	</td>
 									<td><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/192px-Pablo_picasso_1.jpg"/>				</td>						
 								</tr>
 							</table>
