@@ -33,7 +33,7 @@ public class AssociationService {
 		List<Association> assocList = u.getAssociations();
 		JsonObject json = new JsonObject();
 		for(int i = 0; i < assocList.size(); i++){
-			if (assocList.get(i).getState().getStateName().equals("Pendiente")){
+			if (assocList.get(i).getState().equals(State.PENDING.getStateName())){
 				json.addProperty("hasAssoc", true);
 				return json.toString();
 			}
@@ -50,21 +50,22 @@ public class AssociationService {
 		//Persona que hace la peticion
 		applicantUser = new User();
 		applicantUser.setUserId(idApplicant);
+		applicantUser = userDAO.load(applicantUser);
 		//Persona que tiene que responder
 		supplierUser = new User();
 		supplierUser.setUserId(idUser);
-		
-		System.out.println("Nombre del supplier: " + supplierUser.getName());
-		System.out.println("Nombre del applicant: " + applicantUser.getName());
+		supplierUser = userDAO.load(supplierUser);
 		
 		if (validateData(day)){
+			/*
 			Association assoc = new Association();
 			assoc.setDay(day);
 			assoc.setInout(inout);
 			assoc.setApplier(applicantUser);
-			assoc.setState(State.PENDING);
+			assoc.setState(State.PENDING.getStateName().toString());
 			assocDAO.save(assoc);
 			userDAO.newAssoc(supplierUser, assoc);
+			*/
 			message = "Se ha realizado la asociacion correctamente.";
 		}
 		

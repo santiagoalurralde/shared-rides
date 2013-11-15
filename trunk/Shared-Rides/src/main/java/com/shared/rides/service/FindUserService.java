@@ -39,7 +39,7 @@ public class FindUserService {
 	public String findUsers(int profile, int shift, String m){
 
 		parseMarkers(m);
-		userList = userDAO.listAll();
+		userList = userDAO.listAll();		
 		//Filtro la lista de acuerdo al perfil y el turno
 		filterList(profile, shift);
 		//Con la lista filtrada, vemos que usuarios tienen una distancia menor a 10 cuadras = 1000 mts.
@@ -88,58 +88,57 @@ public class FindUserService {
 		//Peaton y turno mañana
 		if (profile == 1 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
-				if(isDelete){ 
-					i--;
-					isDelete = false;
-				}
 				User u = userList.get(i);
 				if(u.getPedestrian() == null || !(u.getShift().getShiftName().equals("Mañana"))){
 					userList.remove(i);
 					isDelete = true;
-				}			
-			}
-		}		
-
-		//Peaton y turno tarde
-		if (profile == 1 && shift == 2){
-			for(int i = 0; i < userList.size(); i++){
+				}
 				if(isDelete){ 
 					i--;
 					isDelete = false;
 				}
+			}
+		}		
+		//Peaton y turno tarde
+		if (profile == 1 && shift == 2){
+			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
 				if(u.getPedestrian() == null || !(u.getShift().getShiftName().equals("Tarde"))){
 					userList.remove(i);
 					isDelete = true;
-				}			
+				}
+				if(isDelete){ 
+					i--;
+					isDelete = false;
+				}
 			}
 		}		
 		//Conductor y turno mañana
 		if (profile == 2 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
+				User u = userList.get(i);
+				if(u.getDriver() == null || !(u.getShift().getShiftName().equals("Mañana"))){
+					userList.remove(i);
+					isDelete = true;				
+				}			
 				if(isDelete){ 
 					i--;
 					isDelete = false;
 				}
-				User u = userList.get(i);
-				if(u.getDriver() == null || !(u.getShift().getShiftName().equals("Mañana"))){
-					userList.remove(i);
-					isDelete = true;
-				}			
 			}
 		}
 		//Conductor y turno tarde
 		if (profile == 2 && shift == 2){
 			for(int i = 0; i < userList.size(); i++){
-				if(isDelete){ 
-					i--;
-					isDelete = false;
-				}
 				User u = userList.get(i);
 				if(u.getDriver() == null || !(u.getShift().getShiftName().equals("Tarde"))){
 					userList.remove(i);
 					isDelete = true;
-				}	
+				}
+				if(isDelete){ 
+					i--;
+					isDelete = false;
+				}
 			}
 		}
 	}
