@@ -33,7 +33,9 @@
 			<div class="theBoard theLightBox"> 		
 					<div id="profileData">				<!-- Resto del Perfil	--> 
 						<div id="driverData">			<!-- Perfil conductor 	-->		 		
-							<h2> 	Conductor	</h2>	 	
+							<h2>
+								<spring:message code="label.driver"/>
+							</h2>	 	
 							<div  style="float:left; margin-left:2%"> 	<!--Puntuacion			-->		
 								<img src="resources/images/star.png" width="50px" style="float:right; margin-right: 2%"/>
 								${ratingDriver}	
@@ -55,13 +57,15 @@
 						<div id="line" class="vrs"></div>
 						
 						<div id="pedestrianData">		<!-- Perfil peaton 	-->		 		
-							<h2> 	Peaton		</h2>	
+							<h2> 	<spring:message code="label.pedestrian"/>		</h2>	
 							<div> 	<!--Puntuacion			-->		
 								<img src="resources/images/star.png" width="50px" style="float:left; margin-left:2%"/>
 								${ratingPedestrian}
 							</div>	 	
 							
-							<p> 	<!--Resto de datos		-->		</p>	
+							<p> 	
+								<!--Resto de datos		-->		
+							</p>	
 							 		
 							<div> 	<!--Horario				--> 	
 								<table id="tablePed" class="theSchedule">
@@ -138,19 +142,19 @@
 			hDay.innerHTML 	= "";
 			rDay.appendChild(hDay);
 			var cIn 		= rIn.insertCell(-1);
-			cIn.innerHTML 	= "Entrada";
+			cIn.innerHTML 	= "<spring:message code="label.arrival"/>";
 			var cOut 		= rOut.insertCell(-1);
-			cOut.innerHTML 	= "Salida";
+			cOut.innerHTML 	= "<spring:message code="label.departure"/>";
 			
 			for(var i=0; i<schPed.length; i++)
 			{
 				var hDay 		= document.createElement('th');
 				hDay.innerHTML 	= getDay(schPed[i][0]);
 				
-				var btnRequest	= '<button class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/seat.png" width="25px"/></button>'; 
-				var hdnDay		= '<input id="hdnDay" 	type="hidden" value="'+ schPed[i][0] +'"/>'; 
-				var hdnIn		= '<input id="hdn" 	type="hidden" value="'+ 1 +'"/>'; 
-				var hdnOut		= '<input id="hdn" 	type="hidden" value="'+ 2 +'"/>';
+				var btnRequest	= '<button class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/steering.png" width="25px"/></button>'; 
+				var hdnDay		= '<input id="hdnDay"	type="hidden" value="'+ schPed[i][0] +'"/>'; 
+				var hdnIn		= '<input id="hdn" 		type="hidden" value="'+ 1 +'"/>'; 
+				var hdnOut		= '<input id="hdn"		type="hidden" value="'+ 2 +'"/>';
 				
 				rDay.appendChild(hDay);
 				var cIn 		= rIn.insertCell(-1);
@@ -159,12 +163,11 @@
 				
 				var cOut 		= rOut.insertCell(-1);
 				cOut.id			= "day" + schPed[i][0] + "-2"; 	//Out
-				cOut.innerHTML 	= schPed[i][2] + btnRequest + hdnDay + hdnOut;
-				
-				
+				cOut.innerHTML 	= schPed[i][2] + btnRequest + hdnDay + hdnOut;	
 			}
 		}
 		
+		/*	Llenamos la tabla del Conductor		*/
 		function fillTableDriver(){
 			var tDriver = document.getElementById("tableDriver");
 					
@@ -176,20 +179,28 @@
 			hDay.innerHTML 	= "";
 			rDay.appendChild(hDay);
 			var cIn 		= rIn.insertCell(-1);
-			cIn.innerHTML 	= "Entrada";
+			cIn.innerHTML 	= "<spring:message code="label.arrival"/>";
 			var cOut 		= rOut.insertCell(-1);
-			cOut.innerHTML 	= "Salida";
+			cOut.innerHTML 	= "<spring:message code="label.departure"/>";
 			
 			for(var i=0; i<schDriver.length; i++)
-			{
+			{		
 				var hDay 		= document.createElement('th'); 
 				hDay.innerHTML 	= getDay(schDriver[i][0]);			
 				
+				var btnRequest	= '<button class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/steering.png" width="25px"/></button>'; 
+				var hdnDay		= '<input id="hdnDay" 	type="hidden" value="'+ schDriver[i][0] +'"/>'; 
+				var hdnIn		= '<input id="hdn" 		type="hidden" value="'+ 1 +'"/>'; 
+				var hdnOut		= '<input id="hdn" 		type="hidden" value="'+ 2 +'"/>';
+				
+				rDay.appendChild(hDay);
 				var cIn 		= rIn.insertCell(-1);
-				cIn.innerHTML 	= schDriver[i][1];
+				cIn.id			= "day" + schDriver[i][0] + "-1";	//In
+				cIn.innerHTML 	= schDriver[i][1] + btnRequest + hdnDay + hdnIn;
 
 				var cOut 		= rOut.insertCell(-1);
-				cOut.innerHTML 	= schDriver[i][2];
+				cOut.id			= "day" + schDriver[i][0] + "-2"; 	//Out
+				cOut.innerHTML 	= schDriver[i][2] + btnRequest + hdnDay + hdnOut;
 			}
 		}
 		
@@ -212,14 +223,14 @@
 			var dayJs 	= $( this ).parent().find("#hdnDay").val();
 			var inOutJs = $( this ).parent().find("#hdn").val();			
 			var idUserJs = ${id};
-			$.post( 'requestAssoc.do', { "day":  dayJs, "inout": inOutJs , "idUser": idUserJs },
+			$.post( 'requestAssoc.do', { "day":  dayJs, "inout": inOutJs, "idUser": idUserJs },
 					function(msg)
 					{
 						if (msg != '')
 						{
 							window.alert(msg);
 						}
-			}); 			
+					}); 			
 		});
 		
 	</script>

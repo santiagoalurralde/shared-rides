@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <body>
 	<div id="theContent" class="theBox">	
 		
@@ -6,7 +9,7 @@
 					<div id="listData">				<!-- Listas				-->	
 										
 						<div id="applicants" class="blockRight"> 		<!-- Lista Solicitudes 	--> 
-							<h2>	Solicitantes	</h2>
+							<h2>	Appliers	</h2>
 							<table class="tableUsers">
 								<tr>
 									<td> Steve	 		</td>
@@ -67,8 +70,22 @@
 								<h2> 	Ofreció		</h2>	
 							
 								<div> 						<!-- Horario	-->
-									<table id="" class="">
-										
+									<table id="" class="theSchedule">
+										<tr>
+											<th></th>
+											<th><spring:message code="label.tuesday"/></th>
+											<th><spring:message code="label.thursday"/></th>
+										</tr>
+										<tr>
+											<td><spring:message code="label.arrival"/></td>
+											<td>15</td>
+											<td>13</td>
+										</tr>
+										<tr>
+											<td><spring:message code="label.departure"/></td>
+											<td>20</td>
+											<td>18</td>
+										</tr>										
 									</table>					
 								</div>	
 							</div>
@@ -77,7 +94,25 @@
 								<h2> 	Solicitó	</h2>	
 							
 								<div> 						<!-- Horario	-->
-									<table id="" class="">
+									<table id="" class="theSchedule">
+										<tr>
+											<th></th>
+											<th><spring:message code="label.monday"/></th>
+											<th><spring:message code="label.wednesday"/></th>
+											<th><spring:message code="label.friday"/></th>
+										</tr>
+										<tr>
+											<td><spring:message code="label.arrival"/></td>
+											<td>13</td>
+											<td>14</td>
+											<td>14</td>
+										</tr>
+										<tr>
+											<td><spring:message code="label.departure"/></td>
+											<td>19</td>
+											<td>20</td>
+											<td>20</td>
+										</tr>
 									</table>					
 								</div>
 							</div>	
