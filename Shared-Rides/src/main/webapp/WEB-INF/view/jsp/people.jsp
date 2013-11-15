@@ -8,14 +8,9 @@
 				<div class="theBoard theLightBox" style="margin-top: 10px"> 		
 					<div id="listData">				<!-- Listas				-->	
 										
-						<div id="applicants" class="blockRight"> 		<!-- Lista Solicitudes 	--> 
-							<h2>	Appliers	</h2>
+						<div id="pending" class="blockRight"> 		<!-- Lista Solicitudes 	--> 
+							<h2>	Pendientes	</h2>	
 							<table class="tableUsers">
-								<tr>
-									<td> Steve	 		</td>
-									<td> Jobs			</td>
-									<td> <img src="http://www.igdigital.com/wp-content/uploads/2013/03/steve_jobs_apple1-1.jpeg"/> </td>
-								</tr>
 								<tr>
 									<td> Clint			</td>
 									<td> Eastwood		</td>
