@@ -15,14 +15,15 @@ public class ReadGPXFile {
 	
 	public static double[][] readFile(String pathFile){
 		try {
-			 
-			File fXmlFile = new File(pathFile);
+			
+			File fGPXFile = new File("Shared Rides/src/main/webapp/resources/gpxFiles/" + pathFile);
+			System.out.println(fGPXFile.getAbsolutePath());
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
+			Document doc = dBuilder.parse(fGPXFile);
 		 
 			doc.getDocumentElement().normalize();
-		 
+			
 			//Busco el nodo trkpt
 			NodeList nList = doc.getElementsByTagName("trkpt");
 		 
