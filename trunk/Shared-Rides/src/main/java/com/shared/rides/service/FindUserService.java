@@ -37,6 +37,7 @@ public class FindUserService {
 	private int dist;
 	
 	public String findUsers(int profile, int shift, String m){
+
 		parseMarkers(m);
 		userList = userDAO.listAll();
 		//Filtro la lista de acuerdo al perfil y el turno
@@ -83,40 +84,62 @@ public class FindUserService {
 	
 	//Funcion que filtra la lista de usuarios dependiendo el perfil y el turno
 	private void filterList(int profile, int shift){
+		boolean isDelete = false;
 		//Peaton y turno mañana
 		if (profile == 1 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
+				if(isDelete){ 
+					i--;
+					isDelete = false;
+				}
 				User u = userList.get(i);
 				if(u.getPedestrian() == null || !(u.getShift().getShiftName().equals("Mañana"))){
 					userList.remove(i);
+					isDelete = true;
 				}			
 			}
 		}		
+
 		//Peaton y turno tarde
 		if (profile == 1 && shift == 2){
 			for(int i = 0; i < userList.size(); i++){
+				if(isDelete){ 
+					i--;
+					isDelete = false;
+				}
 				User u = userList.get(i);
 				if(u.getPedestrian() == null || !(u.getShift().getShiftName().equals("Tarde"))){
 					userList.remove(i);
+					isDelete = true;
 				}			
 			}
 		}		
 		//Conductor y turno mañana
 		if (profile == 2 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
+				if(isDelete){ 
+					i--;
+					isDelete = false;
+				}
 				User u = userList.get(i);
 				if(u.getDriver() == null || !(u.getShift().getShiftName().equals("Mañana"))){
 					userList.remove(i);
+					isDelete = true;
 				}			
 			}
 		}
 		//Conductor y turno tarde
 		if (profile == 2 && shift == 2){
 			for(int i = 0; i < userList.size(); i++){
+				if(isDelete){ 
+					i--;
+					isDelete = false;
+				}
 				User u = userList.get(i);
 				if(u.getDriver() == null || !(u.getShift().getShiftName().equals("Tarde"))){
 					userList.remove(i);
-				}			
+					isDelete = true;
+				}	
 			}
 		}
 	}

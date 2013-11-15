@@ -48,12 +48,12 @@ public class LoginController {
         if(loginService.validate(email, pwd, request)){
         	return new ModelAndView("redirect:/main.do"); 
         }
-     return new ModelAndView("login");
+     return new ModelAndView("redirect:/");
     }
 	
 	@RequestMapping(value="logout.do")
 	public ModelAndView logOut(HttpServletRequest request){
 		request.getSession().invalidate();
-		return new ModelAndView("login");
+		return new ModelAndView("redirect:/");
 	}
 }
