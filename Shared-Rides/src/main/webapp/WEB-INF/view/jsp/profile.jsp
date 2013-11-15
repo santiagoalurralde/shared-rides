@@ -12,16 +12,18 @@
 				<div class="theBoard theLightBox" style="margin-top: 10px"> 		
 					<div id="userData">				<!-- Datos 				-->
 						<div id="pictureData">		<!-- Foto 	-->
-							<img id="thePic" src="resources/profilePic/${picture}"  width="150px" height="160px"/>  
+							<img id="thePic" src="resources/profilePic/${picture}"  width="140px" height="150px"/>  
 						</div>
 						
 						<div id="publicData"> 		<!-- Datos Publicos 	--> 
 							<p><img class="helpIcon" src="resources/images/location.png" 	/>${address}		</p>	
+							<br><br>
 							<p><img class="helpIcon" src="resources/images/house.png" 		/>${neighborhood}	</p>		
 						</div> 
 						 		
 						<div id="privateData"> 		<!-- Datos Privados 	-->
 							<p><img class="helpIcon" src="resources/images/phone.png" 		/>${telephone}		</p>
+							<br><br>
 							<p><img class="helpIcon" src="resources/images/email.png" 		/>${email} 			</p>
 						</div>		
 					</div>	
@@ -60,9 +62,9 @@
 						
 						<div id="pedestrianData">		<!-- Perfil peaton 	-->		 		
 							<h2> 	<spring:message code="label.pedestrian"/>		</h2>	
-							<div> 	<!--Puntuacion			-->		
+							<div style="margin: 10px 0 50px 0;"> 	<!--Puntuacion			-->		
 								<img src="resources/images/star.png" width="50px" style="float:left; margin-left:2%"/>
-								${ratingPedestrian}
+								<span style="display: inline-block;">${ratingPedestrian}</span>
 							</div>	 	
 							
 							<p> 	

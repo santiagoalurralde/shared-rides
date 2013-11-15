@@ -9,7 +9,7 @@
 										
 						<div id="pending" class="blockRight"> 		<!-- Lista Solicitudes 	--> 
 							<h2>	Pendientes	</h2>	
-							<table class="tableUsers">
+							<table style="margin-top: 10px" class="tableUsers">
 								<tr>
 									<td> Clint			</td>
 									<td> Eastwood		</td>
@@ -25,7 +25,7 @@
 						 		
 						<div id="associated" class="blockLeft"> 		<!-- Lista Asociados 	-->
 							<h2>	Asociados		</h2>
-							<table class="tableUsers">
+							<table style="margin-top: 10px" class="tableUsers">
 								<tr>
 									<td> Steve	 		</td>
 									<td> Jobs			</td>
@@ -61,7 +61,7 @@
 										
 						<div id="applicantsSchedule">		 
 							<div class="blockRight blockHalf">		
-								<h2> 	Ofreció		</h2>	
+								<h2> 	Actuales		</h2>	
 							
 								<div> 						<!-- Horario	-->
 									<table id="" class="theSchedule">
@@ -72,13 +72,13 @@
 										</tr>
 										<tr>
 											<td><spring:message code="label.arrival"/></td>
-											<td>15</td>
-											<td>13</td>
+											<td>15 <img src="resources/images/cancel.png" width="15px"/></td>
+											<td>13 <img src="resources/images/cancel.png" width="15px"/></td>
 										</tr>
 										<tr>
 											<td><spring:message code="label.departure"/></td>
-											<td>20</td>
-											<td>18</td>
+											<td>20 <img src="resources/images/cancel.png" width="15px"/></td>
+											<td>18 <img src="resources/images/cancel.png" width="15px"/></td>
 										</tr>										
 									</table>					
 								</div>	
@@ -97,15 +97,15 @@
 										</tr>
 										<tr>
 											<td><spring:message code="label.arrival"/></td>
-											<td>13</td>
-											<td>14</td>
-											<td>14</td>
+											<td>13 <img src="resources/images/accept.png" width="15px"/> <img src="resources/images/cancel.png" width="15px"/></td>
+											<td>14 <img src="resources/images/accept.png" width="15px"/> <img src="resources/images/cancel.png" width="15px"/></td>
+											<td>14 <img src="resources/images/accept.png" width="15px"/> <img src="resources/images/cancel.png" width="15px"/></td>
 										</tr>
 										<tr>
 											<td><spring:message code="label.departure"/></td>
-											<td>19</td>
-											<td>20</td>
-											<td>20</td>
+											<td>19 <img src="resources/images/accept.png" width="15px"/> <img src="resources/images/cancel.png" width="15px"/></td>
+											<td>20 <img src="resources/images/accept.png" width="15px"/> <img src="resources/images/cancel.png" width="15px"/></td>
+											<td>20 <img src="resources/images/accept.png" width="15px"/> <img src="resources/images/cancel.png" width="15px"/></td>
 										</tr>
 									</table>					
 								</div>
