@@ -9,6 +9,9 @@ import com.google.gson.JsonObject;
 import com.shared.rides.dao.interfaces.IAssociationDAO;
 import com.shared.rides.dao.interfaces.IUserDAO;
 import com.shared.rides.domain.Association;
+import com.shared.rides.domain.Driver;
+import com.shared.rides.domain.Pedestrian;
+import com.shared.rides.domain.Schedule;
 import com.shared.rides.domain.State;
 import com.shared.rides.domain.User;
 
@@ -16,9 +19,12 @@ import com.shared.rides.domain.User;
 public class AssociationService {
 	
 	@Autowired
-	IAssociationDAO assocDAO;
+	private IAssociationDAO assocDAO;
 	@Autowired
-	IUserDAO userDAO;
+	private IUserDAO userDAO;
+	private User applicantUser;
+	private User supplierUser;
+	private String message;
 	
 	/*
 	 * Funcion que se usa para verificar si el usuario posee asociaciones nuevas
@@ -39,21 +45,84 @@ public class AssociationService {
 	/*
 	 * Funcion que se usa cuando el usuario envia una peticion de asociacion a otro usuario
 	 */
-	public void sendAssocRequest(int day, int inout, long idUser, long idApplicant){
+	public String sendAssocRequest(int day, int inout, long idUser, long idApplicant){
+		message = "No se pudo efectuar la asociacion correctamente.";
 		//Persona que hace la peticion
-		User applicant = new User();
-		applicant.setUserId(idApplicant);
+		applicantUser = new User();
+		applicantUser.setUserId(idApplicant);
 		//Persona que tiene que responder
-		User u = new User();
-		u.setUserId(idUser);
-		Association assoc = new Association();
-		assoc.setDay(day);
-		assoc.setInout(inout);
-		assoc.setApplier(applicant);
-		assoc.setState(State.PENDING);
+		supplierUser = new User();
+		supplierUser.setUserId(idUser);
 		
-		assocDAO.save(assoc);
-		userDAO.newAssoc(u, assoc);
+		System.out.println("Nombre del supplier: " + supplierUser.getName());
+		System.out.println("Nombre del applicant: " + applicantUser.getName());
 		
+		if (validateData(day)){
+			Association assoc = new Association();
+			assoc.setDay(day);
+			assoc.setInout(inout);
+			assoc.setApplier(applicantUser);
+			assoc.setState(State.PENDING);
+			assocDAO.save(assoc);
+			userDAO.newAssoc(supplierUser, assoc);
+			message = "Se ha realizado la asociacion correctamente.";
+		}
+		
+		return message;
 	}
+	
+	private boolean validateData(int day){
+		if (applicantUser.getPedestrian() != null){
+			if (supplierUser.getDriver() != null){
+				Pedestrian pedApplicant = applicantUser.getPedestrian();
+				Driver driverSupplier = supplierUser.getDriver();
+				/*
+			 	* Si esto pasa, significa que para el dia en el que se solicito la invitacion, uno es un
+			 	* pedestrian y otro es un driver, lo cual esta bien 
+			 	*/
+				if ( hasSchedule(pedApplicant, day, 0) && hasSchedule(driverSupplier, day, 1) ){
+					return true;
+				}
+			}
+		}
+		if (applicantUser.getDriver() != null){
+			if (supplierUser.getPedestrian() != null){
+				Driver driverApplicant = applicantUser.getDriver();
+				Pedestrian pedSupplier = supplierUser.getPedestrian();
+				/*
+			 	* Si esto pasa, significa que para el dia en el que se solicito la invitacion, uno es un
+			 	* pedestrian y otro es un driver, lo cual esta bien 
+			 	*/
+				if ( hasSchedule(driverApplicant, day, 1) && hasSchedule(pedSupplier, day, 0) ){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	/*
+	 * Funcion que le paso un objecto (que puede ser un driver o un pedestrian), el dia por el cual quiero buscar
+	 * y el profile que me sirve para luego dentro de la funcion saber de que tipo es el parametro objeto
+	 * Si retorna -1 quiere decir que ese usuario no tiene un schedule para ese dia
+	 */
+	private boolean hasSchedule(Object o, int day, int profile){
+		List<Schedule> schList;
+		if (profile == 0){
+			Pedestrian p = (Pedestrian) o;
+			schList = p.getSchedule();
+		}
+		else{
+			Driver d = (Driver) o;
+			schList = d.getSchedule();
+		}
+		
+		for (int i = 0; i < schList.size(); i++){
+			if (schList.get(i).getDay() == day){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

@@ -51,11 +51,6 @@ public class LoginController {
      return new ModelAndView("login");
     }
 	
-	@RequestMapping(value="main.do")
-	public ModelAndView loadMain(HttpServletRequest request){
-		return new ModelAndView("main");
-	}
-	
 	@RequestMapping(value="logout.do")
 	public ModelAndView logOut(HttpServletRequest request){
 		request.getSession().invalidate();

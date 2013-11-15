@@ -19,24 +19,28 @@ public class PeopleController {
 	@Autowired
 	AssociationService assocService;
 	
+	@RequestMapping(value = "/people.do")
+	public ModelAndView showPeople(){
+		return new ModelAndView ("people");
+	}
+	
 	@RequestMapping(value = "/hasAssociation.do", method = RequestMethod.POST)
 	public @ResponseBody String hasAssoc(HttpServletRequest request){
 	   	User u = (User) request.getSession().getAttribute("user");
     	return assocService.hasAssociation(u);
 	}
 	
-	
 	@RequestMapping(value = "/requestAssoc.do", method = RequestMethod.POST)
-	public ModelAndView sendAssociationRequest(@RequestParam("day") int day,
+	public @ResponseBody String sendAssociationRequest(@RequestParam("day") int day,
 								@RequestParam("inout") int inout,
 								@RequestParam("idUser") long idUser,
 								HttpServletRequest request){
-		System.out.println(day);
-		System.out.println(idUser);
-		//User u = (User) request.getSession().getAttribute("user");
-		//assocService.sendAssocRequest(day, inout, idUser, u.getUserId());
-		
-		return null;
+		User requestUser = (User) request.getSession().getAttribute("user");
+		String msg = null;
+		if (idUser != requestUser.getUserId())
+			msg = assocService.sendAssocRequest(day, inout, idUser, requestUser.getUserId());
+			
+		return msg;
 	}
 	
 }
