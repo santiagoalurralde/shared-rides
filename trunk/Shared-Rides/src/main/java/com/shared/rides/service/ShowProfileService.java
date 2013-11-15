@@ -113,7 +113,7 @@ public class ShowProfileService {
 		}
 		else{
 			model.addObject("visible", false);			
-			model.addObject("picture", "user.png");
+			model.addObject("picture", "user.jpg");
 		}
 	}
 	
