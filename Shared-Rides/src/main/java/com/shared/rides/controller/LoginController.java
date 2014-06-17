@@ -46,7 +46,7 @@ public class LoginController {
         logger.info("Returning hello view");
         	
         if(loginService.validate(email, pwd, request)){
-        	return new ModelAndView("redirect:/main.do"); 
+        	return new ModelAndView("redirect:/main.do");
         }
      return new ModelAndView("redirect:/");
     }

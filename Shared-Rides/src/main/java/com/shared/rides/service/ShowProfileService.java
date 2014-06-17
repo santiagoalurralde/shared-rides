@@ -57,13 +57,12 @@ public class ShowProfileService {
 		//Si no es mi profile, entonces veo si tengo asociacion con esa persona
 		if(!myProfile){
 		for (Association assoc : u.getAssociations()){
-			if (assoc.getApplier().getUserId() == userId && assoc.getState().equals(State.ACCEPTED.getStateName())){
+			if (assoc.getApplier().getUserId() == userId && assoc.getState().equals(State.ACCEPTED)){
 				isAssociation = true;
 			}
 		}
 		
-		User userAssoc = new User();
-		userAssoc.setUserId(userId);
+		User userAssoc = new User(userId);
 		userAssoc = userDAO.load(userAssoc);
 		createModel(userAssoc);		
 		return model;

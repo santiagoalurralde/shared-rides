@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shared.rides.dao.interfaces.IUserDAO;
+import com.shared.rides.domain.Shift;
 import com.shared.rides.domain.User;
 
 
@@ -31,7 +32,6 @@ public class LoginService {
 				
 				HttpSession session = r.getSession(false);
 				session.setAttribute("user", u);
-				
 				return true;
 			}
 			else return false;

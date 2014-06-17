@@ -29,7 +29,7 @@ public class Track implements Serializable{
 	@Column(name="day")
 	private int day;
 	
-	@Column(name="inout")
+	@Column(name="hourInOut")
 	private int inout;
 	
 	@Column(name="pathFile")

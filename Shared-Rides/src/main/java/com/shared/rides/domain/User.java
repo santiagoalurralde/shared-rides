@@ -98,6 +98,10 @@ public class User implements Serializable{
 	public User(){
 	}
 	
+	public User(long id){
+		this.userId = id;
+	}
+	
 //-----------GETTERS & SETTERS 
 	
 	public long getPhoneNumber() {

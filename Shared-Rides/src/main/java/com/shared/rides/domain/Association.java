@@ -37,12 +37,12 @@ public class Association implements Serializable{
 	@Column(name="day", nullable = false)
 	private int day;
 	
-	@Column(name="inout", nullable = false)
+	@Column(name="hourInOut", nullable = false)
 	private int inout;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="state")
-	private String state;
+	private State state;
 	
 //-----------CONSTRUCTOR
 
@@ -73,10 +73,10 @@ public class Association implements Serializable{
 		this.inout = inout;
 	}
 	
-	public String getState() {
+	public State getState() {
 		return state;
 	}
-	public void setState(String state) {
+	public void setState(State state) {
 		this.state = state;
 	}
 	
