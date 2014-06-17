@@ -214,14 +214,16 @@
 		if("${driver}" === 'false')
 		{	
 			$( '#driverData' ).css("display", "none");
-			$( '#driverData' ).css("width", "=+50%");
+			$( '#line' ).css("display", "none");			
+			$( '#pedestrianData' ).css("width", "100%");
 			$( '#driverData' ).css("float", "none");
 		}
 		
 		if("${pedestrian}" === 'false')
 		{
 			$( '#pedestrianData' ).css("display", "none");
-			$( '#pedestrianData' ).css("width", "=+50%");
+			$( '#line' ).css("display", "none");			
+			$( '#driverData' ).css("width", "100%");
 			$( '#pedestrianData' ).css("float", "none");
 		}
 		

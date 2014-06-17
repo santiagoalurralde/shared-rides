@@ -131,5 +131,14 @@
 		Ese id de la asociacion no hace falta mostrarlo, pero sirve para dps buscar la info de esa asoc para mostrar
 		abajo
 		*/
+
+		var jsonNew = $.parseJSON(json);
+		$.each(jsonNew.pending, function(i, data){
+			$( "#pending" ).append("<tr><td>" + data. + "</td><td>" + data. + "</td><td><a href='/Shared-Rides/profile.do?user="+ data. +"'><img src='resources/profilePic/" + data.picture + "'/></a></td></tr>");
+		});		
+		
+		$.each(jsonNew.associated, function(i, data){
+			$( "#associated" ).append("<tr><td>" + data. + "</td><td>" + data. + "</td><td><a href='/Shared-Rides/profile.do?user="+ data. +"'><img src='resources/profilePic/" + data.picture + "'/></a></td></tr>");
+		});				
 	});
 </script>
