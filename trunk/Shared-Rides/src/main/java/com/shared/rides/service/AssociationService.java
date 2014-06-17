@@ -33,7 +33,7 @@ public class AssociationService {
 		List<Association> assocList = u.getAssociations();
 		JsonObject json = new JsonObject();
 		for(int i = 0; i < assocList.size(); i++){
-			if (assocList.get(i).getState().equals(State.PENDING.getStateName())){
+			if (assocList.get(i).getState().equals(State.PENDING)){
 				json.addProperty("hasAssoc", true);
 				return json.toString();
 			}
@@ -46,29 +46,27 @@ public class AssociationService {
 	 * Funcion que se usa cuando el usuario envia una peticion de asociacion a otro usuario
 	 */
 	public String sendAssocRequest(int day, int inout, long idUser, long idApplicant){
-		message = "No se pudo efectuar la asociacion correctamente.";
+		message = "No se pudo enviar la solicitud correctamente.";
 		//Persona que hace la peticion
 		applicantUser = new User();
 		applicantUser.setUserId(idApplicant);
 		applicantUser = userDAO.load(applicantUser);
+		
 		//Persona que tiene que responder
 		supplierUser = new User();
 		supplierUser.setUserId(idUser);
 		supplierUser = userDAO.load(supplierUser);
 		
 		if (validateData(day)){
-			/*
 			Association assoc = new Association();
 			assoc.setDay(day);
 			assoc.setInout(inout);
 			assoc.setApplier(applicantUser);
-			assoc.setState(State.PENDING.getStateName().toString());
+			assoc.setState(State.PENDING);
 			assocDAO.save(assoc);
 			userDAO.newAssoc(supplierUser, assoc);
-			*/
-			message = "Se ha realizado la asociacion correctamente.";
+			message = "Se ha enviado la solicitud correctamente.";
 		}
-		
 		return message;
 	}
 	

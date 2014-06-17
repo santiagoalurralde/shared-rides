@@ -116,3 +116,20 @@
 		</section>
 	</div>
 </body>
+
+
+<script>
+	$.post( 'loadAssociations.do', 
+		function(json)
+		{
+		/*
+		Aca va a traer la informacion de las personas, como un json
+		el json esta formado de la siguiente manera
+		Es un JsonArray que tiene adentro dos JsonArray: uno con las asociaciones pendientes y otro con las
+		asociaciones aceptadas (o sea mis amigos)
+		Dentro de cada uno de estos; tengo el id de la asociacion y el nombre completo de la persona
+		Ese id de la asociacion no hace falta mostrarlo, pero sirve para dps buscar la info de esa asoc para mostrar
+		abajo
+		*/
+	});
+</script>

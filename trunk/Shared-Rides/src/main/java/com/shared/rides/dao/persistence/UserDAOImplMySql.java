@@ -55,10 +55,9 @@ public class UserDAOImplMySql implements IUserDAO {
 	public void newAssoc(User u, Association assoc){
 		long idAssoc = assoc.getAssociationId();
 		long idUser = u.getUserId();
-		String hql = "INSERT INTO User_Assoc VALUES ( ? , ? )";
-		Query query  = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, idAssoc);
-		query.setParameter(1, idUser);
+		String hql = "INSERT INTO User_Assoc (userID, associationID) VALUES ( "+ idUser +" , "+ idAssoc +"  )";
+		Query query  = sessionFactory.getCurrentSession().createSQLQuery(hql);
+		query.executeUpdate();
 	}
 	
 }

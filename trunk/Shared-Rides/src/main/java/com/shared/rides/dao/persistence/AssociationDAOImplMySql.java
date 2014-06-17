@@ -20,7 +20,7 @@ public class AssociationDAOImplMySql implements IAssociationDAO {
 	private SessionFactory sessionFactory;
 	
 	public boolean save(Association assoc) {
-		sessionFactory.getCurrentSession().saveOrUpdate(assoc);
+		sessionFactory.getCurrentSession().save(assoc);
 		return true;
 	}
 

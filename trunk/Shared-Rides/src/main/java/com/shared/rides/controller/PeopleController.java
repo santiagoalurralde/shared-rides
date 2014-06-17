@@ -12,12 +12,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shared.rides.domain.User;
 import com.shared.rides.service.AssociationService;
+import com.shared.rides.service.PeopleService;
 
 @Controller
 public class PeopleController {
 	
 	@Autowired
-	AssociationService assocService;
+	private AssociationService assocService;
+	@Autowired 
+	private PeopleService peopleService;
 	
 	@RequestMapping(value = "/people.do")
 	public ModelAndView showPeople(){
@@ -41,6 +44,13 @@ public class PeopleController {
 			msg = assocService.sendAssocRequest(day, inout, idUser, requestUser.getUserId());
 			
 		return msg;
+	}
+	
+	@RequestMapping(value = "/loadAssociations", method = RequestMethod.POST)
+	public @ResponseBody String loadAssoc(HttpServletRequest r){
+		User u = (User) r.getAttribute("user");
+		//return peopleService.getPeople(u.getUserId());
+		return "anda bien";
 	}
 	
 }

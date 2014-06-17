@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.shared.rides.dao.interfaces.IUserDAO;
 import com.shared.rides.domain.Address;
+import com.shared.rides.domain.Shift;
 import com.shared.rides.domain.Track;
 import com.shared.rides.domain.User;
 import com.shared.rides.util.DistanceHaversine;
@@ -89,7 +90,7 @@ public class FindUserService {
 		if (profile == 1 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
-				if(u.getPedestrian() == null || !(u.getShift().getShiftName().equals("Mañana"))){
+				if(u.getPedestrian() == null || !(u.getShift().equals(Shift.MOORNING))){
 					userList.remove(i);
 					isDelete = true;
 				}
@@ -103,7 +104,7 @@ public class FindUserService {
 		if (profile == 1 && shift == 2){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
-				if(u.getPedestrian() == null || !(u.getShift().getShiftName().equals("Tarde"))){
+				if(u.getPedestrian() == null || !(u.getShift().equals(Shift.AFTERNOON))){
 					userList.remove(i);
 					isDelete = true;
 				}
@@ -117,7 +118,7 @@ public class FindUserService {
 		if (profile == 2 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
-				if(u.getDriver() == null || !(u.getShift().getShiftName().equals("Mañana"))){
+				if(u.getDriver() == null || !(u.getShift().equals(Shift.MOORNING))){
 					userList.remove(i);
 					isDelete = true;				
 				}			
@@ -131,7 +132,7 @@ public class FindUserService {
 		if (profile == 2 && shift == 2){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
-				if(u.getDriver() == null || !(u.getShift().getShiftName().equals("Tarde"))){
+				if(u.getDriver() == null || !(u.getShift().equals(Shift.AFTERNOON))){
 					userList.remove(i);
 					isDelete = true;
 				}
