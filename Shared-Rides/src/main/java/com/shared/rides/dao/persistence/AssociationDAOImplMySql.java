@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shared.rides.dao.interfaces.IAssociationDAO;
 import com.shared.rides.domain.Association;
+import com.shared.rides.domain.User;
 
 
 @Repository
@@ -42,6 +43,13 @@ public class AssociationDAOImplMySql implements IAssociationDAO {
 	public Association update(Association assoc) {
 		sessionFactory.getCurrentSession().update(assoc);
 		return null;
+	}
+
+	public long getSupplierId(Association assoc) {
+		String hql = "SELECT User.id FROM User, User_Assoc, Association WHERE User_Assoc.associationID = Association.id AND Association.id = ? ";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter(0, assoc.getAssociationId());
+		return (Long) query.list().get(0);
 	}
 
 }
