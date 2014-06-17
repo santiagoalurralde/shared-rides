@@ -81,7 +81,6 @@
       					{		
         					initMapCoords(lonlat, zoom, map);
       					}
-     					
     				</script>
 	            	
 	        	</form>	        	
