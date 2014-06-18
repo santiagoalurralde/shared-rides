@@ -61,10 +61,9 @@ public class UserDAOImplMySql implements IUserDAO {
 	}
 
 	public List<Association> getMyRequests(User u) {
-		String hql = "SELECT * FROM Association WHERE Association.applicantID = ? ";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, u.getUserId());
-		return (List<Association>) query.list();
+		Query query = sessionFactory.getCurrentSession().createQuery("FROM Association assoc WHERE assoc.applicantID = " + u.getUserId() + " ");	
+		List<Association> assocs = query.list();
+		return assocs;
 	}
 	
 }
