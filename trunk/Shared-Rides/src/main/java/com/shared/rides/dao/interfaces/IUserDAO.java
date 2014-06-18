@@ -14,5 +14,5 @@ public interface IUserDAO {
 	public List<User> listAll();
 	public User loadByEmail(User user);
 	public void newAssoc(User user, Association assoc);
-	public List<Association> getMyRequests (User user);
+	public List<Association> getMyRequests(User u);
 }

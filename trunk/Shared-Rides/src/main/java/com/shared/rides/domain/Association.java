@@ -32,7 +32,7 @@ public class Association implements Serializable{
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "applicantID")
-	private User applier;
+	private User applicantID;
 	
 	@Column(name="day", nullable = false)
 	private int day;
@@ -53,10 +53,10 @@ public class Association implements Serializable{
 
 	
 	public User getApplier() {
-		return applier;
+		return applicantID;
 	}
 	public void setApplier(User applier) {
-		this.applier = applier;
+		this.applicantID = applier;
 	}
 	
 	public int getDay() {

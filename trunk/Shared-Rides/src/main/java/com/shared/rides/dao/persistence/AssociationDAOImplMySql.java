@@ -1,9 +1,11 @@
 package com.shared.rides.dao.persistence;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.type.LongType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,10 +48,12 @@ public class AssociationDAOImplMySql implements IAssociationDAO {
 	}
 
 	public long getSupplierId(Association assoc) {
-		String hql = "SELECT User.id FROM User, User_Assoc, Association WHERE User_Assoc.associationID = Association.id AND Association.id = ? ";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		String sql = "SELECT u.id as id FROM User u , User_Assoc uAssoc, Association assoc WHERE uAssoc.associationID = assoc.id AND uAssoc.userID = u.id AND assoc.id = ? ";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(sql);
 		query.setParameter(0, assoc.getAssociationId());
-		return (Long) query.list().get(0);
+		
+		BigInteger supplierId = (BigInteger) query.list().get(0);
+		return supplierId.longValue();
 	}
 
 }

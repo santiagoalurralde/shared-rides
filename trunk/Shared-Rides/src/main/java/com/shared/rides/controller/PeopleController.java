@@ -47,8 +47,8 @@ public class PeopleController {
 	}
 	
 	@RequestMapping(value = "/loadAssociations", method = RequestMethod.POST)
-	public @ResponseBody String loadAssoc(HttpServletRequest r){
-		User u = (User) r.getAttribute("user");
+	public @ResponseBody String loadAssoc(HttpServletRequest request){
+		User u = (User) request.getSession().getAttribute("user");
 		return peopleService.getPeople(u.getUserId());
 	}
 	
