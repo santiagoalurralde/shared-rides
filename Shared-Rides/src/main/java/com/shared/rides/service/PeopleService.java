@@ -32,20 +32,21 @@ public class PeopleService {
 	private IUserDAO userDAO;
 	@Autowired
 	private IAssociationDAO assocDAO;
-	
+		
 	public String getPeople(long userId){
 		User u = new User(userId);
 		u = userDAO.load(u);
 		
-		List <Association> supplierAssoc = userDAO.getMyRequests(u);
-		List <Association> applicantList = u.getAssociations();
+		List <Association> supplierAssocList = userDAO.getMyRequests(u);
+		List <Association> applicantAssocList = u.getAssociations();
+	
 		JsonArray jsonList = new JsonArray();
 		JsonArray pendingList = new JsonArray();
 		JsonArray acceptedList = new JsonArray();
 		
 		//Aca estoy buscando aquellas asociaciones que yo he enviado a otras personas
-		for (int j = 0; j < supplierAssoc.size(); j++){
-			Association assoc = supplierAssoc.get(j);
+		for (int j = 0; j < supplierAssocList.size(); j++){
+			Association assoc = supplierAssocList.get(j);
 			long idSupplier = assocDAO.getSupplierId(assoc);
 			
 			User supplier = new User(idSupplier);
@@ -56,8 +57,10 @@ public class PeopleService {
 				
 				JsonObject jsonUser = new JsonObject();
 				jsonUser.addProperty("assocId", assoc.getAssociationId());
+				jsonUser.addProperty("userId", supplier.getUserId());
 				jsonUser.addProperty("name", fullNameSupplier);
 				jsonUser.addProperty("side", "applicant");
+				jsonUser.addProperty("pic", "user.jpg");
 				
 				pendingList.add(jsonUser);
 			}
@@ -67,34 +70,38 @@ public class PeopleService {
 				
 				JsonObject jsonUser = new JsonObject();
 				jsonUser.addProperty("assocId", assoc.getAssociationId());
+				jsonUser.addProperty("userId", supplier.getUserId());
 				jsonUser.addProperty("name", fullNameSupplier);
 				jsonUser.addProperty("pic", pictureSupplier);
 				
 				acceptedList.add(jsonUser);
 			}
-			
 		}
 
 		//Aca estoy viendo directamente las asociaciones que yo recibi que pude o no haber aceptado
-		for(int i = 0; i < applicantList.size(); i++){
-			Association assoc = applicantList.get(i);
+		for(int i = 0; i < applicantAssocList.size(); i++){
+			Association assoc = applicantAssocList.get(i);
+			User applier = assoc.getApplier();
+			
 			if (assoc.getState().equals(State.PENDING)){
-				String fullNameApplier = assoc.getApplier().getName() + " " + assoc.getApplier().getSurname();
+				String fullNameApplier = applier.getName() + " " + applier.getSurname();
 				
 				JsonObject jsonUser = new JsonObject();
 				jsonUser.addProperty("assocId", assoc.getAssociationId());
-				jsonUser.addProperty("applicantName", fullNameApplier);
+				jsonUser.addProperty("userId", applier.getUserId());
+				jsonUser.addProperty("name", fullNameApplier);
 				jsonUser.addProperty("side", "supplier");
+				jsonUser.addProperty("pic", "user.jpg");
 				
 				pendingList.add(jsonUser);
 			}
 			if (assoc.getState().equals(State.ACCEPTED)){
-				String fullNameApplier = assoc.getApplier().getName() + " " + assoc.getApplier().getSurname();
-				String pictureApplier = assoc.getApplier().getPicture();
+				String fullNameApplier = applier.getName() + " " + applier.getSurname();
 				JsonObject jsonUser = new JsonObject();
 				jsonUser.addProperty("assocId", assoc.getAssociationId());
+				jsonUser.addProperty("userId", applier.getUserId());
 				jsonUser.addProperty("name", fullNameApplier);
-				jsonUser.addProperty("pic", pictureApplier);
+				jsonUser.addProperty("pic", applier.getPicture());
 				
 				acceptedList.add(jsonUser);
 			}
