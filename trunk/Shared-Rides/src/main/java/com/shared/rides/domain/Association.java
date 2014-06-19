@@ -49,6 +49,10 @@ public class Association implements Serializable{
 	public Association(){	
 	}
 	
+	public Association(long id){
+		this.associationId = id;
+	}
+	
 //-----------GETTERS & SETTERS 
 
 	

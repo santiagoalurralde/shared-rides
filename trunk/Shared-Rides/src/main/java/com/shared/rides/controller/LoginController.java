@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shared.rides.domain.User;
-import com.shared.rides.service.AssociationService;
+import com.shared.rides.service.RequestAssociationService;
 import com.shared.rides.service.LoginService;
 
 
@@ -32,7 +32,7 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	@Autowired
-	private AssociationService assocService;
+	private RequestAssociationService assocService;
 	
 	@RequestMapping(value = "login.do")
 	public ModelAndView loadLogin(){

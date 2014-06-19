@@ -11,28 +11,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shared.rides.domain.User;
-import com.shared.rides.service.AssociationService;
-import com.shared.rides.service.PeopleService;
+import com.shared.rides.service.RequestAssociationService;
+import com.shared.rides.service.ResponseAssociationService;
+import com.shared.rides.service.ShowPeopleService;
 
 @Controller
 public class PeopleController {
 	
 	@Autowired
-	private AssociationService assocService;
+	private ResponseAssociationService responseAssocService;	
+	@Autowired
+	private RequestAssociationService requestAssocService;
 	@Autowired 
-	private PeopleService peopleService;
+	private ShowPeopleService peopleService;
 	
 	@RequestMapping(value = "/people.do")
 	public ModelAndView showPeople(){
 		return new ModelAndView ("people");
 	}
 	
-	@RequestMapping(value = "/hasAssociation.do", method = RequestMethod.POST)
-	public @ResponseBody String hasAssoc(HttpServletRequest request){
-	   	User u = (User) request.getSession().getAttribute("user");
-    	return assocService.hasAssociation(u);
-	}
-	
+	//Metodo que se llama cuando se envia una nueva asociacion a un usuario
 	@RequestMapping(value = "/requestAssoc.do", method = RequestMethod.POST)
 	public @ResponseBody String sendAssociationRequest(@RequestParam("day") int day,
 								@RequestParam("inout") int inout,
@@ -41,15 +39,25 @@ public class PeopleController {
 		User requestUser = (User) request.getSession().getAttribute("user");
 		String msg = null;
 		if (idUser != requestUser.getUserId())
-			msg = assocService.sendAssocRequest(day, inout, idUser, requestUser.getUserId());
+			msg = requestAssocService.sendAssocRequest(day, inout, idUser, requestUser.getUserId());
 			
 		return msg;
 	}
 	
+	//Metodo que se llama cuando se accede a la seccion de "Personas" 
 	@RequestMapping(value = "/loadAssociations", method = RequestMethod.POST)
 	public @ResponseBody String loadAssoc(HttpServletRequest request){
 		User u = (User) request.getSession().getAttribute("user");
 		return peopleService.getPeople(u.getUserId());
+	}
+	
+	//Metodo que se llama cuando el usuario responde a una solicitud pendiente
+	@RequestMapping(value = "/responseAssoc.do", method = RequestMethod.POST)
+	public @ResponseBody String sendAssociationResponse(@RequestParam("assocId") long assocId,
+								@RequestParam("response") boolean resp,
+								HttpServletRequest request){
+		
+		return responseAssocService.sendResponseAssoc(assocId, resp);
 	}
 	
 }
