@@ -19,7 +19,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
+import com.shared.rides.domain.User;
 import com.shared.rides.service.FindUserService;
+import com.shared.rides.service.RequestAssociationService;
 
 
 @Controller
@@ -27,12 +29,23 @@ public class MainController {
 
 	@Autowired
 	private FindUserService findUserService;
+	@Autowired
+	private RequestAssociationService requestAssocService;
+	
 	
 	@RequestMapping(value="main.do")
 	public ModelAndView loadMain(HttpServletRequest request){
 		return new ModelAndView("main");
 	}
 	
+	//Metodo que se llama para ver si el usuario tiene nuevas asociaciones
+	@RequestMapping(value = "/hasAssociation.do", method = RequestMethod.POST)
+	public @ResponseBody String hasAssoc(HttpServletRequest request){
+	   	User u = (User) request.getSession().getAttribute("user");
+	   	return requestAssocService.hasAssociation(u);
+	}
+	
+	//Metodo que se encarga de realizar la busqueda de los usuarios de acuerdo a los parametros recibidos
 	@RequestMapping(value = "/find.do", method = RequestMethod.POST)
 	public @ResponseBody String search(@RequestParam("user") String user,
 								@RequestParam("shift") int shift,
