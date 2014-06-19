@@ -186,7 +186,7 @@ public class ShowProfileService {
 		for (int j = 0; j <assoc.size(); j++){
 			if (sch.getDay() == assoc.get(j).getDay() 
 					&& assoc.get(j).getInout() == inout 
-					&& assoc.get(j).getState().equals(State.ACCEPTED.getStateName())) 
+					&& assoc.get(j).getState().equals(State.ACCEPTED)) 
 				seats--;
 		}	
 		return seats;
@@ -201,7 +201,7 @@ public class ShowProfileService {
 		for (int j = 0; j <assoc.size(); j++){
 			if (sch.getDay() == assoc.get(j).getDay() 
 					&& assoc.get(j).getInout() == inout 
-					&& assoc.get(j).getState().equals(State.ACCEPTED.getStateName())) 
+					&& assoc.get(j).getState().equals(State.ACCEPTED)) 
 				hasDriver = true;
 		}
 		return hasDriver;
