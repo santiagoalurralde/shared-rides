@@ -10,20 +10,24 @@
 				<h2>${name}	${surname}</h2>
 		
 				<div class="theBoard theLightBox" style="margin-top: 10px"> 		
-					<div id="userData">				<!-- Datos 				-->
+					<div id="userData">				<!-- Datos 	-->
 						<div id="pictureData">		<!-- Foto 	-->
 							<img id="thePic" src="resources/profilePic/${picture}"  width="140px" height="150px"/>  
 						</div>
 						
-						<div id="publicData"> 		<!-- Datos Publicos 	--> 
+						<div id="publicData"> 		<!-- Datos Publicos	--> 
+							<p><b>Información Básica</b></p>
+							<br>
 							<p><img class="helpIcon" src="resources/images/location.png" 	/>${address}		</p>	
-							<br><br>
+							<br>
 							<p><img class="helpIcon" src="resources/images/house.png" 		/>${neighborhood}	</p>		
 						</div> 
 						 		
-						<div id="privateData"> 		<!-- Datos Privados 	-->
+						<div id="privateData"> 		<!-- Datos Privados	-->
+							<p><b>Información de Contacto</b></p>
+							<br>
 							<p><img class="helpIcon" src="resources/images/phone.png" 		/>${telephone}		</p>
-							<br><br>
+							<br>
 							<p><img class="helpIcon" src="resources/images/email.png" 		/>${email} 			</p>
 						</div>		
 					</div>	
@@ -195,7 +199,7 @@
 				var btnRequest	= '<button class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/seat.png" width="25px"/></button>'; 
 				var hdnDay		= '<input id="hdnDay" 	type="hidden" value="'+ schDriver[i][0] +'"/>'; 
 				var hdnIn		= '<input id="hdn" 		type="hidden" value="'+ 1 +'"/>'; 
-				var hdnOut		= '<input id="hdn" 		type="hidden" value="'+ 2 +'"/>';
+				var hdnOut		= '<input id="hdn"		type="hidden" value="'+ 2 +'"/>';
 				
 				rDay.appendChild(hDay);
 				var cIn 		= rIn.insertCell(-1);

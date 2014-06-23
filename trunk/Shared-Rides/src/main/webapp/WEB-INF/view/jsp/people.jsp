@@ -7,42 +7,37 @@
 				<div class="theBoard theLightBox" style="margin-top: 10px"> 		
 					<div id="listData">				<!-- Listas				-->	
 										
-						<div id="pending" class="blockRight"> 		<!-- Lista Solicitudes 	--> 
+						<div id="pending" class="blockHalf blockRight"> 		<!-- Lista Solicitudes 	--> 
 							<h2>	Pendientes	</h2>	
-							<table style="margin-top: 10px" class="tableUsers">
-								<tr>
-									<td> Clint			</td>
-									<td> Eastwood		</td>
-									<td><img src="http://2.bp.blogspot.com/-Pleua1JUrJg/UajruKT0gaI/AAAAAAAABy4/TDbntFwudPM/s640/Clint-Eastwood-.jpg"/>	</td>		
-								</tr>
-								<tr>
-									<td> Pablo 			</td>
-									<td> Picasso		</td>
-									<td><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/192px-Pablo_picasso_1.jpg"/>				</td>						
-								</tr>
+							<table id="tablePending"	class="tableUsers" style="margin-top: 10px">
+
 							</table>
 						</div> 
 						 		
-						<div id="associated" class="blockLeft"> 		<!-- Lista Asociados 	-->
+						<div id="associated" class="blockHalf blockLeft">		<!-- Lista Asociados 	-->
 							<h2>	Asociados		</h2>
-							<table style="margin-top: 10px" class="tableUsers">
-								<tr>
-									<td> Steve	 		</td>
-									<td> Jobs			</td>
-									<td> <img src="http://www.igdigital.com/wp-content/uploads/2013/03/steve_jobs_apple1-1.jpeg"/> </td>
-								</tr>
-								<tr>
-									<td> Clint			</td>
-									<td> Eastwood		</td>
-									<td><img src="http://2.bp.blogspot.com/-Pleua1JUrJg/UajruKT0gaI/AAAAAAAABy4/TDbntFwudPM/s640/Clint-Eastwood-.jpg"/>	</td>		
-								</tr>
-								<tr>
-									<td> Pablo 			</td>
-									<td> Picasso		</td>
-									<td><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/192px-Pablo_picasso_1.jpg"/>				</td>						
-								</tr>
+							<table id="tableAssociated"	class="tableUsers" style="margin-top: 10px">
+
 							</table>
 						</div>		
+						
+						<!-- 
+						<tr>
+							<td> Steve	 		</td>
+							<td> Jobs			</td>
+							<td> <img src="http://www.igdigital.com/wp-content/uploads/2013/03/steve_jobs_apple1-1.jpeg"/> </td>
+						</tr>
+						<tr>
+							<td> Clint			</td>
+							<td> Eastwood		</td>
+							<td><img src="http://2.bp.blogspot.com/-Pleua1JUrJg/UajruKT0gaI/AAAAAAAABy4/TDbntFwudPM/s640/Clint-Eastwood-.jpg"/>	</td>		
+						</tr>
+						<tr>
+							<td> Pablo 			</td>
+							<td> Picasso		</td>
+							<td><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/192px-Pablo_picasso_1.jpg"/>				</td>						
+						</tr>
+						-->
 					</div>	
 				</div>
 		</section>
@@ -60,7 +55,7 @@
 						</div>
 										
 						<div id="applicantsSchedule">		 
-							<div class="blockRight blockHalf">		
+							<div class="blockLeft blockHalf">		
 								<h2> 	Actuales		</h2>	
 							
 								<div> 						<!-- Horario	-->
@@ -84,7 +79,7 @@
 								</div>	
 							</div>
 							
-							<div class="blockLeft blockHalf">
+							<div class="blockRight blockHalf">
 								<h2> 	Solicitó	</h2>	
 							
 								<div> 						<!-- Horario	-->
@@ -119,12 +114,18 @@
 
 
 <script>
+	function createTables(){
+		$( "#tablePending" ).append("<tr><th> Usuario  </th><th> Petición </th></tr>");
+		$( "#tableAssociated" ).append("<tr><th> Usuario  </th></tr>");		
+	}
+	
+	createTables();
+	
 	$.post( 'loadAssociations.do', 
 		function(json)
 		{
 		/*
-		Aca va a traer la informacion de las personas, como un json
-		el json esta formado de la siguiente manera
+		Aca va a traer la informacion de las personas, como un json.
 		Es un JsonArray que tiene adentro dos JsonArray: uno con las asociaciones pendientes y otro con las
 		asociaciones aceptadas (o sea mis amigos)
 		Dentro de cada uno de estos; tengo el id de la asociacion y el nombre completo de la persona
@@ -133,12 +134,37 @@
 		*/
 
 		var jsonNew = $.parseJSON(json);
-		$.each(jsonNew.pending, function(i, data){
-			$( "#pending" ).append("<tr><td>" + data. + "</td><td>" + data. + "</td><td><a href='/Shared-Rides/profile.do?user="+ data. +"'><img src='resources/profilePic/" + data.picture + "'/></a></td></tr>");
+		var side;
+		
+		$.each(jsonNew[0], function(i, data){
+			if(data.side=="supplier")
+				side = "Ajena";
+			else
+				side = "Propia";
+		
+			var applicant = "<div>" +
+								"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId+"'>"+
+									"<img src='resources/profilePic/"+ data.pic +"'>"+
+								"</a>"+
+								"<span style='margin-right: 10px'>"+ data.name + "</span>"+
+								"<input type='button' value='Ver Peticion'>"+
+							"</div>";
+				
+			$( "#tablePending" ).append("<tr><td>"+ applicant +"</td><td>"+ side +"</td></tr>");
+			
+			//<input type='hidden' id="+ data. 
 		});		
 		
-		$.each(jsonNew.associated, function(i, data){
-			$( "#associated" ).append("<tr><td>" + data. + "</td><td>" + data. + "</td><td><a href='/Shared-Rides/profile.do?user="+ data. +"'><img src='resources/profilePic/" + data.picture + "'/></a></td></tr>");
+		$.each(jsonNew[1], function(i, data){
+			var applicant = "<div>" +
+								"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
+									"<img src='resources/profilePic/"+ data.pic +"'>"+
+								"</a>"+
+								"<span style='margin-right: 10px'>"+ data.name +"</span>"+
+								"<input type='button' value='Ver Asociacion'>"+
+							"</div>";
+			
+			$( "#tableAssociated" ).append("<tr><td>"+ applicant +"</td></tr>");
 		});				
 	});
 </script>

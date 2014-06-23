@@ -1,0 +1,57 @@
+/*------------------------------------------------------------------
+[Profile Stylesheet]
+
+Project:		Shared Rides
+Last change:	19/06/2014
+Assigned to:	Santiago Alurralde (sa)
+-------------------------------------------------------------------*/
+
+
+/*-----------------------------------------------------------------*/
+
+#userData{
+	padding-left: 				3%;
+	padding-right: 				3%;
+	height:						110px;
+}
+
+#publicData{
+	float:					left;	
+	width: 					36%;
+}
+
+#privateData{
+	float:					right;
+	width: 					42%;
+}
+
+#pictureData{
+	float:					left;
+	width:					22%;
+}
+
+#thePic{
+	box-shadow:				0.5px 1px 2px #000000;
+	color:					Black;
+	border:					solid White 4px; 	
+	z-index:				500;
+}
+
+#profileData{
+	padding-left: 				20px;
+	padding-right: 				20px;
+	overflow:					auto;
+	min-height:					500px;
+}
+
+#driverData{
+	float:						left;	
+	width: 						50%;
+}
+
+#pedestrianData{
+	float:						right;
+	width: 						50%;
+	text-align: 				right;
+}
+
