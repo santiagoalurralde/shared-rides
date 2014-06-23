@@ -31,39 +31,55 @@ public class ResponseAssociationService {
 		User assocUser = new User(assocUserId);
 		assocUser = userDAO.load(assocUser);
 		
+		int driver;
+		
+		if (requestUser.getDriver() != null && assocUser.getDriver() == null){
+			driver = 0;
+		}
+		if (requestUser.getDriver() == null && assocUser.getDriver() != null){
+			driver = 1;
+		}
+		if (requestUser.getDriver() != null && assocUser.getDriver() != null){
+			driver = 2;
+		}
+		
 		List<Long> assocIdList = assocDAO.findAssoc(requestUser, assocUser);
 		JsonArray json = new JsonArray();
 		
 		if (assocType == 0){
 			for (int i = 0; i < assocIdList.size(); i++){
-				Association assoc = new Association(assocIdList.get(i));
-				assoc = assocDAO.load(assoc);
+					Association assoc = new Association(assocIdList.get(i));
+					assoc = assocDAO.load(assoc);
 				
-				if(assoc.getState().equals(State.PENDING)){
-					JsonObject jsonSchedule = new JsonObject();
-					jsonSchedule.addProperty("day", assoc.getDay());
-					jsonSchedule.addProperty("inout", assoc.getInout());
-					jsonSchedule.addProperty("applicant", assoc.getApplier().getUserId());
+					if(assoc.getState().equals(State.PENDING)){
+						JsonObject jsonSchedule = new JsonObject();
+						jsonSchedule.addProperty("day", assoc.getDay());
+						jsonSchedule.addProperty("inout", assoc.getInout());
+						jsonSchedule.addProperty("applicant", assoc.getApplier().getUserId());
 				
-					json.add(jsonSchedule);
-				}	
-			}	
-		}
-		else{
-			for (int i = 0; i < assocIdList.size(); i++){
-				Association assoc = new Association(assocIdList.get(i));
-				assoc = assocDAO.load(assoc);
-				
-				if(assoc.getState().equals(State.ACCEPTED)){
-					JsonObject jsonSchedule = new JsonObject();
-					jsonSchedule.addProperty("day", assoc.getDay());
-					jsonSchedule.addProperty("inout", assoc.getInout());
-					
-					json.add(jsonSchedule);
+						//if (driver == 0){
+						
+						//	jsonSchedule.addProperty("hour", request.);
+						//}
+						
+						json.add(jsonSchedule);
+					}	
 				}	
 			}
-		}
-
+			else{
+				for (int i = 0; i < assocIdList.size(); i++){
+					Association assoc = new Association(assocIdList.get(i));
+					assoc = assocDAO.load(assoc);
+				
+					if(assoc.getState().equals(State.ACCEPTED)){
+						JsonObject jsonSchedule = new JsonObject();
+						jsonSchedule.addProperty("day", assoc.getDay());
+						jsonSchedule.addProperty("inout", assoc.getInout());
+						
+						json.add(jsonSchedule);
+					}	
+				}
+			}
 		return json.toString();
 	}
 	
