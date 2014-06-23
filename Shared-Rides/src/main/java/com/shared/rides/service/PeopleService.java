@@ -54,18 +54,22 @@ public class PeopleService {
 			Association assoc = applicantAssocList.get(i);
 			User applier = assoc.getApplier();
 			if (assoc.getState().equals(State.PENDING) && pendingIdList.contains(applier.getUserId())==false){
-				String fullNameApplier = applier.getName() + " " + applier.getSurname();
+				completeList(applier, pendingIdList, pendingList);
+				/*String fullNameApplier = applier.getName() + " " + applier.getSurname();
 						
 				JsonObject jsonUser = new JsonObject();
 				jsonUser.addProperty("userId", applier.getUserId());
 				jsonUser.addProperty("name", fullNameApplier);
-				jsonUser.addProperty("side", "supplier");
+				//jsonUser.addProperty("side", "supplier");
 				jsonUser.addProperty("pic", "user.jpg");
 				
 				pendingIdList.add(applier.getUserId());
 				pendingList.add(jsonUser);
+				*/
 			}
 			if (assoc.getState().equals(State.ACCEPTED) && acceptedIdList.contains(applier.getUserId())==false){
+				completeList(applier, acceptedIdList, acceptedList);
+				/*
 				String fullNameApplier = applier.getName() + " " + applier.getSurname();
 				JsonObject jsonUser = new JsonObject();
 				jsonUser.addProperty("userId", applier.getUserId());
@@ -74,6 +78,7 @@ public class PeopleService {
 						
 				acceptedIdList.add(applier.getUserId());
 				acceptedList.add(jsonUser);
+				*/
 			}
 		}
 
@@ -85,7 +90,7 @@ public class PeopleService {
 			User supplier = new User(idSupplier);
 			supplier = userDAO.load(supplier);
 		
-			if (assoc.getState().equals(State.PENDING) && pendingIdList.contains(supplier.getUserId())==false){
+			/*if (assoc.getState().equals(State.PENDING) && pendingIdList.contains(supplier.getUserId())==false){
 				String fullNameSupplier = supplier.getName() + " " +  supplier.getSurname();				
 				
 				JsonObject jsonUser = new JsonObject();
@@ -96,9 +101,10 @@ public class PeopleService {
 				
 				pendingIdList.add(supplier.getUserId());
 				pendingList.add(jsonUser);
-			}
+			}*/
 			if (assoc.getState().equals(State.ACCEPTED) && acceptedIdList.contains(supplier.getUserId())==false){
-				String fullNameSupplier = supplier.getName() + " " + supplier.getSurname();
+				completeList(supplier, acceptedIdList, acceptedList);
+				/*String fullNameSupplier = supplier.getName() + " " + supplier.getSurname();
 				String pictureSupplier = supplier.getPicture();
 				
 				JsonObject jsonUser = new JsonObject();
@@ -108,6 +114,7 @@ public class PeopleService {
 				
 				acceptedIdList.add(supplier.getUserId());
 				acceptedList.add(jsonUser);
+				*/
 			}
 		}
 		
@@ -116,5 +123,18 @@ public class PeopleService {
 		jsonList.add(acceptedList);		
 		return jsonList.toString();
 		
+	}
+	
+	private void completeList(User u, List<Long> idList, JsonArray list){
+		String fullNameSupplier = u.getName() + " " + u.getSurname();
+		String pictureSupplier = u.getPicture();
+		
+		JsonObject jsonUser = new JsonObject();
+		jsonUser.addProperty("userId", u.getUserId());
+		jsonUser.addProperty("name", fullNameSupplier);
+		jsonUser.addProperty("pic", pictureSupplier);
+		
+		idList.add(u.getUserId());
+		list.add(jsonUser);
 	}
 }
