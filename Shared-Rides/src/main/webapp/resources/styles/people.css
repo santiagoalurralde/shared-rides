@@ -1,0 +1,37 @@
+/*------------------------------------------------------------------
+[People Stylesheet]
+
+Project:		Shared Rides
+Last change:	19/06/2014
+Assigned to:	Santiago Alurralde (sa)
+-------------------------------------------------------------------*/
+
+
+/*-----------------------------------------------------------------*/
+
+#listData{
+	padding-left: 				20px;
+	padding-right: 				20px;
+	overflow:					auto;
+	min-height:					250px;
+}
+
+#scheduleData{
+	padding-left: 				20px;
+	padding-right: 				20px;
+	overflow:					auto;
+	min-height:					200px;
+}
+
+
+.tableUsers th{
+	background:							-moz-linear-gradient(top, #90AA44, #50A410);
+	background:							-webkit-linear-gradient(top, #90AA44, #50A410);
+	padding:							10px 10px 10px 10px;
+	border-bottom:						1px solid #e0e0e0;
+}
+
+.tableUsers img{					
+	width: 								50px;
+	height:								50px;
+}

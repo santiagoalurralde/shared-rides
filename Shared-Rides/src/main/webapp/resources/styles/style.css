@@ -2,9 +2,14 @@
 [Master Stylesheet]
 
 Project:		Shared Rides
-Last change:	15/11/2013
+Last change:	19/06/2014
 Assigned to:	Santiago Alurralde (sa)
 -------------------------------------------------------------------*/
+
+@font-face {
+  font-family: 'LibelSuit';
+  src: 			url('libelsuit.ttf');
+}
 
 /*------------------------------------------------------------------
 [Layout]
@@ -80,55 +85,6 @@ body
 }
 
 
-/*------------------------------------------------------------------
-[Profile / ]
-------------------------------------------------------------------*/
-#userData{
-	padding-left: 				20px;
-	padding-right: 				20px;
-	min-height:					100px;
-}
-
-#publicData{
-	float:					left;	
-	width: 					30%;
-}
-
-#privateData{
-	float:					right;
-	width: 					50%;
-}
-
-#pictureData{
-	float:					left;
-	width:					20%;
-}
-
-#thePic{
-	box-shadow:				0.5px 1px 2px #000000;
-	color:					Black;
-	border:					solid White 4px; 	
-	z-index:				500;
-}
-
-#profileData{
-	padding-left: 				20px;
-	padding-right: 				20px;
-	overflow:					auto;
-	min-height:					500px;
-}
-
-#driverData{
-	float:						left;	
-	width: 						50%;
-}
-
-#pedestrianData{
-	float:						right;
-	width: 						50%;
-	text-align: 				right;
-}
-
 
 /*------------------------------------------------------------------
 [Content / ]
@@ -177,6 +133,14 @@ body
 [Navigation / #nav]
 ------------------------------------------------------------------*/
 
+.logo
+{
+	font-family:			'LibelSuit', 'Georgia', serif;
+	font-size:				1.95vw;
+	line-height:        	130%;	
+	vertical-align:			middle;
+}
+
 #nav
 {
 	background:				-moz-linear-gradient(top, #90AA44, #50A410);
@@ -192,16 +156,10 @@ body
 	#nav li
 	{
 		display:			inline;
-		list-style-type:        none;		
-		/*padding:      		10px 70px;
-		float:				left;
-		height:				40px;
-		width:				20%;
-		*/
+		list-style-type:    none;		
 	}
 	#nav li a
 	{
-		border-radius:		4px;
 		color:				black;
 		display:			inline-block;
         font-size:          1.2vw;		
@@ -213,11 +171,11 @@ body
 		-moz-transition:	.4s;
 		-webkit-transition:	.4s;
 	}	
-	#nav li a:hover
+	#nav li a.highlight:hover
 	{
 		background:			-moz-linear-gradient(top, #90AA44, #9ED474);
 		background:			-webkit-linear-gradient(top, #90AA44, #9ED474);
-		box-shadow:			0px 1px 1px #000000;			
+		box-shadow:			0px 2px 2px #000000;			
 	}
 	#nav .current
 	{ 
@@ -228,66 +186,6 @@ body
 	
 
 
-/*------------------------------------------------------------------
-[Multistepform /]
-------------------------------------------------------------------*/
-/*------------------------------------------------------------------
-[Navigation Steps / #navSteps]
-------------------------------------------------------------------*/
-
-#navSteps
-{
-	background:				-moz-linear-gradient(top, #90AA44, #50A410);
-	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
-	margin:					20px 0 0 0;	
-	padding-top:			10px;
-	text-align:				center;
-	top:					0;
-	width:					100%;
-	z-index:				1000;
-	
-}
-	#navSteps li
-	{
-		display:			inline-block;
-		height:				30px;
-		list-style-type:	none;
-		width:				33%;
-		
-	}
-	#navSteps li a:active
-	{ 
-		background-color:	black; 
-	}
-	
-#steps{
-	display:				inline;
-}
-
-#updateForm{
-	background-color:		white;
-	padding:				20px 0px;
-	width:					100%;	
-}
-
-#buttonsSteps{
-	clear:					both;
-	margin-top:				30px;
-	position:				relative;
-	text-align:				center;
-	width:					100%;
-}
-
-.imagesSteps{
-	width: 					175px;
-	opacity:				1;
-	
-	-webkit-transition: 	opacity 0.5s ease-out;  	
-    -moz-transition: 		opacity 0.2s ease-out;  
-    -o-transition: 			opacity 0.5s ease-out;  	
-    transition: 			opacity 0.5s ease-out;
-   	
-}
 
 /*------------------------------------------------------------------
 [Maps / ]
@@ -341,8 +239,9 @@ body
 }
 
 #btnLogout{
-	float:	right;
-	margin: 6.5px 5px 0 0;
+	position: 				fixed; 
+	right: 					0.5%;	
+	top: 					3%; 
 }
 
 .blockHalf
@@ -364,73 +263,6 @@ body
 	width:		18px;
 	margin:		1px 10px 0 0;
 }
-
-#listData{
-	padding-left: 				20px;
-	padding-right: 				20px;
-	overflow:					auto;
-	min-height:					250px;
-}
-
-#scheduleData{
-	padding-left: 				20px;
-	padding-right: 				20px;
-	overflow:					auto;
-	min-height:					200px;
-}
-
-#applicants{
-	width:					50%;
-}
-
-#associated{
-	width:					50%;
-}
-
-
-/*------------------------------------------------------------------
-[Login / ]
-------------------------------------------------------------------*/
-
-#introPic
-{
-	border-radius:			6px;
-	box-shadow:				0px 3px 3px #000000;
-	float: 					left;
-	width:					45%;
-	margin-top:				60px;
-}
-
-#i18n{
-	box-shadow:				0px 1px 1px #000000;
-	float: 					right;
-	padding:				0px 2px;
-	text-align:				center;
-}
-
-#theLogin
-{
-	float:					right;
-	font-size:				90%;
-	height:					440px;
-	margin-top:				60px;
-	padding-bottom:			20px;	
-	text-align:				left;	
-	width:					45%;
-	clear:					both;
-}
-
-.theInputs{
-	border:					solid 1px Grey; 	
-	height:					25px;
-	margin-top:				20px;
-	width:					100%;
-}	
-
-#butLogin{
-	margin-top:				40px;	
-}	
-
 
 /*------------------------------------------------------------------
 [Tables / ]
@@ -521,6 +353,85 @@ body
 	background:							-moz-linear-gradient(top,  #f4f4f4,  #f1f1f1);	
 }
 
+/*	TABLA MOSTRAR LISTA USUARIOS	*/
+
+.tableUsers{
+	font-family:						Arial, Helvetica, sans-serif;
+	border:								#ccc 1px solid;
+	border-spacing: 					0;
+
+	border-radius:						5px;
+	-moz-border-radius:					5px;
+	-webkit-border-radius:				5px;
+
+	-moz-box-shadow:					0 1px 2px #d1d1d1;
+	-webkit-box-shadow: 				0 1px 2px #d1d1d1;
+	box-shadow: 						0 1px 2px #d1d1d1;
+	
+	text-shadow: 						0.05em 0.05em 0em #eee;
+
+	background:							-webkit-linear-gradient(top, #fdfdfd, #fbfbfb);
+	background:							-moz-linear-gradient(top,  #fdfdfd,  #fbfbfb);
+}
+
+.tableUsers tr:first-child th:first-child {
+	-moz-border-top-left-radius:		5px;
+	-webkit-border-top-left-radius:		5px;
+	border-top-left-radius:				5px;
+}
+
+.tableUsers tr:first-child th:last-child {
+	-moz-border-top-right-radius:		5px;
+	-webkit-border-top-right-radius:	5px;
+	border-top-right-radius:			5px;
+}
+
+.tableUsers tr{
+	text-align: 						center;
+}
+
+.tableUsers td:first-child {
+	padding-left:						20px;
+	border-left: 						0;
+}
+
+.tableUsers td{
+	padding:							10px;
+	border-top: 						1px solid #ffffff;
+	border-bottom:						1px solid #e0e0e0;
+	border-left: 						1px solid #e0e0e0;
+}
+
+.tableUsers tr:nth-child(even){	
+	background:							-webkit-linear-gradient(top, #fafafa, #f7f7f7);
+	background:							-moz-linear-gradient(top,  #fafafa,  #f7f7f7)
+}
+
+.tableUsers tr:last-child td {
+	border-bottom:						0;
+}
+
+.tableUsers tr:last-child td:first-child {
+	-moz-border-bottom-left-radius:		5px;
+	-webkit-border-bottom-left-radius:	5px;
+	border-bottom-left-radius:			5px;
+}
+
+.tableUsers tr:last-child td:last-child {
+	-moz-border-bottom-right-radius:	5px;
+	-webkit-border-bottom-right-radius:	5px;
+	border-bottom-right-radius:			5px;
+}
+
+.tableUsers tr:hover td {
+	background:							-webkit-linear-gradient(top, #f4f4f4, #f1f1f1);
+	background:							-moz-linear-gradient(top,  #f4f4f4,  #f1f1f1);	
+}
+
+
+/*------------------------------------------------------------------
+[Comments]
+
 /*
 #tableFound{
 	font-family:						Arial, Helvetica, sans-serif;
@@ -606,99 +517,6 @@ body
 	width: 								100px;
 	height:								110px;
 }
-*/
-
-/*	TABLA MOSTRAR LISTA USUARIOS	*/
-
-.tableUsers{
-	font-family:						Arial, Helvetica, sans-serif;
-	border:								#ccc 1px solid;
-	border-spacing: 					0;
-
-	border-radius:						5px;
-	-moz-border-radius:					5px;
-	-webkit-border-radius:				5px;
-
-	-moz-box-shadow:					0 1px 2px #d1d1d1;
-	-webkit-box-shadow: 				0 1px 2px #d1d1d1;
-	box-shadow: 						0 1px 2px #d1d1d1;
-	
-	text-shadow: 						0.05em 0.05em 0em #eee;
-
-	background:							-webkit-linear-gradient(top, #fdfdfd, #fbfbfb);
-	background:							-moz-linear-gradient(top,  #fdfdfd,  #fbfbfb);
-}
-
-.tableUsers th{
-	background:							-moz-linear-gradient(top, #90AA44, #50A410);
-	background:							-webkit-linear-gradient(top, #90AA44, #50A410);
-	padding:							20px 25px 25px 25px;
-	border-bottom:						1px solid #e0e0e0;
-}
-
-.tableUsers tr:first-child th:first-child {
-	-moz-border-top-left-radius:		5px;
-	-webkit-border-top-left-radius:		5px;
-	border-top-left-radius:				5px;
-}
-
-.tableUsers tr:first-child th:last-child {
-	-moz-border-top-right-radius:		5px;
-	-webkit-border-top-right-radius:	5px;
-	border-top-right-radius:			5px;
-}
-
-.tableUsers tr{
-	text-align: 						center;
-}
-
-.tableUsers td:first-child {
-	padding-left:						20px;
-	border-left: 						0;
-}
-
-.tableUsers td{
-	padding:							10px;
-	border-top: 						1px solid #ffffff;
-	border-bottom:						1px solid #e0e0e0;
-	border-left: 						1px solid #e0e0e0;
-}
-
-.tableUsers tr:nth-child(even){	
-	background:							-webkit-linear-gradient(top, #fafafa, #f7f7f7);
-	background:							-moz-linear-gradient(top,  #fafafa,  #f7f7f7)
-}
-
-.tableUsers tr:last-child td {
-	border-bottom:						0;
-}
-
-.tableUsers tr:last-child td:first-child {
-	-moz-border-bottom-left-radius:		5px;
-	-webkit-border-bottom-left-radius:	5px;
-	border-bottom-left-radius:			5px;
-}
-
-.tableUsers tr:last-child td:last-child {
-	-moz-border-bottom-right-radius:	5px;
-	-webkit-border-bottom-right-radius:	5px;
-	border-bottom-right-radius:			5px;
-}
-
-.tableUsers tr:hover td {
-	background:							-webkit-linear-gradient(top, #f4f4f4, #f1f1f1);
-	background:							-moz-linear-gradient(top,  #f4f4f4,  #f1f1f1);	
-}
-
-.tableUsers img{					
-	width: 								100px;
-	height:								110px;
-}
-
-
-
-/*------------------------------------------------------------------
-[Comments]
 
 //FONT FACE
 @font-face {
