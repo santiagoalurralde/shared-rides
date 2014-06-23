@@ -12,8 +12,10 @@
         <li>					<a class="highlight"	href="#">     			<spring:message code="label.contact"	/></a></li>
         <li>					<a class="highlight"	href="#">        		<spring:message code="label.about"		/></a></li>
     </ul>
-
-	<img id="btnLogout" src="resources/images/logout.png" width="1.75%">
+	
+	<a href="logout.do">
+		<img id="btnLogout" src="resources/images/logout.png" width="1.75%">
+	</a>
 </div>
 
 
@@ -26,5 +28,6 @@
 				{
 					$( '#alertIcon' ).hide( 0 );
 				}
-			});
+			}
+	);
 </script>
