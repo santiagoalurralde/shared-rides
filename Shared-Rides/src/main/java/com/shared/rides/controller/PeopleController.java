@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shared.rides.dao.interfaces.IUserDAO;
 import com.shared.rides.domain.User;
 import com.shared.rides.service.RequestAssociationService;
 import com.shared.rides.service.ResponseAssociationService;
@@ -49,6 +50,15 @@ public class PeopleController {
 	public @ResponseBody String loadAssoc(HttpServletRequest request){
 		User u = (User) request.getSession().getAttribute("user");
 		return peopleService.getPeople(u.getUserId());
+	}
+	
+	@RequestMapping(value = "/viewSchedule", method = RequestMethod.POST)
+	public @ResponseBody String viewSchedule(HttpServletRequest request,
+											@RequestParam("userId") long userId,
+											@RequestParam("typeAssoc") int type){
+	
+		User u = (User) request.getSession().getAttribute("user");
+		return responseAssocService.showAssociationSchedule(u, userId, type); 
 	}
 	
 	//Metodo que se llama cuando el usuario responde a una solicitud pendiente

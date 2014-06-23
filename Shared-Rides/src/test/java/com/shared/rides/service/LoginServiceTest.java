@@ -39,5 +39,5 @@ public class LoginServiceTest{
 		r.getSession();
 		assertTrue(loginService.validate(email, password, r));
 	}
-
+	
 }
