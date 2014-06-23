@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.shared.rides.dao.interfaces.IAssociationDAO;
+import com.shared.rides.dao.interfaces.IUserDAO;
 import com.shared.rides.domain.Association;
 import com.shared.rides.domain.State;
 import com.shared.rides.domain.User;
@@ -18,12 +19,17 @@ public class ResponseAssociationService {
 	@Autowired
 	private IAssociationDAO assocDAO;
 	
+	@Autowired
+	private IUserDAO userDAO;
+	
 	/*
 	 * Metodo que se encarga de devolver la lista de horarios entre dos usuarios para mostrarlo en la vista
 	 * Si el tipo de asociacion es 0 --> Pendiente
 	 * Si es 1 --> Asociado
 	 */
-	public String showAssociationSchedule(User requestUser, User assocUser, int assocType){
+	public String showAssociationSchedule(User requestUser, long assocUserId, int assocType){
+		User assocUser = new User(assocUserId);
+		assocUser = userDAO.load(assocUser);
 		
 		List<Long> assocIdList = assocDAO.findAssoc(requestUser, assocUser);
 		JsonArray json = new JsonArray();
