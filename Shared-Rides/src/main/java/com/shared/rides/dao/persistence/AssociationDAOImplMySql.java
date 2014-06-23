@@ -56,4 +56,14 @@ public class AssociationDAOImplMySql implements IAssociationDAO {
 		return supplierId.longValue();
 	}
 
+	public List<Long> findAssoc (User requestUser, User assocUser){
+		String sql = "SELECT uAssoc.id as id FROM User u, User_Assoc uAssoc, Association assoc WHERE u.id = uAssoc.userID AND uAssoc.associationID = assoc.id AND (assoc.applicantID = ? AND uAssoc.userID = ? OR assoc.applicantID = ? AND uAssoc.userID = ?)";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		query.setParameter(0, requestUser.getUserId());
+		query.setParameter(1, assocUser.getUserId());
+		query.setParameter(2, assocUser.getUserId());
+		query.setParameter(3, requestUser.getUserId());
+		
+		return query.list();
+	}
 }
