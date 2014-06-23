@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.shared.rides.domain.User;
 import com.shared.rides.service.RequestAssociationService;
 import com.shared.rides.service.ResponseAssociationService;
-import com.shared.rides.service.ShowPeopleService;
+import com.shared.rides.service.PeopleService;
 
 @Controller
 public class PeopleController {
@@ -23,7 +23,7 @@ public class PeopleController {
 	@Autowired
 	private RequestAssociationService requestAssocService;
 	@Autowired 
-	private ShowPeopleService peopleService;
+	private PeopleService peopleService;
 	
 	@RequestMapping(value = "/people.do")
 	public ModelAndView showPeople(){

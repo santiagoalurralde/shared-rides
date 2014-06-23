@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shared.rides.domain.User;
-import com.shared.rides.service.ShowProfileService;
+import com.shared.rides.service.ProfileService;
 
 /*
  * Controlador que se encarga de recibir el id del perfil a buscar y luego llama
@@ -24,7 +24,7 @@ import com.shared.rides.service.ShowProfileService;
 public class ProfileController {
 	
 		@Autowired
-		private ShowProfileService showProfileService;
+		private ProfileService showProfileService;
 	
 		@RequestMapping(value = "/profile.do")
 		public ModelAndView showProfile(@RequestParam("user") long id, 
