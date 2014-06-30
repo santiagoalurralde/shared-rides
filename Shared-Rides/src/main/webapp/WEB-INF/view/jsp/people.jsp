@@ -144,8 +144,8 @@
 	function viewPendingSchedule(target)
 	{
 		var $userId = $(target).parent().find("input").attr("id");
-
-		$.post( "viewSchedule.do", { "user": $userId , "type": 0}, 
+		
+		$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 0}, 
 			function(json){
 				var jsonNew = $.parseJSON(json);
 				$.each(jsonNew, function(i, data){
@@ -158,7 +158,7 @@
 	{
 		var $userId = $(target).parent().find("input").attr("id");
 
-		$.post( "viewSchedule.do", { "user": $userId , "type": 1}, 
+		$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 1}, 
 			function(json){
 				var jsonNew = $.parseJSON(json);
 				$.each(jsonNew, function(i, data){
