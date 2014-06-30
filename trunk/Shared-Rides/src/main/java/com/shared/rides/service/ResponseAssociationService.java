@@ -2,12 +2,17 @@ package com.shared.rides.service;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.print.attribute.HashAttributeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.shared.rides.dao.interfaces.IAssociationDAO;
 import com.shared.rides.dao.interfaces.IScheduleDAO;
@@ -33,6 +38,7 @@ public class ResponseAssociationService {
 	private JsonArray requestedJson;
 	private JsonArray offeredJson;
 	private List<Long> schIdList;
+	
 	/*
 	 * Metodo que se encarga de devolver la lista de horarios entre dos usuarios para mostrarlo en la vista
 	 * Si el tipo de asociacion es 0 --> Pendiente
@@ -52,13 +58,13 @@ public class ResponseAssociationService {
 				return new Integer(assoc1.getDay()).compareTo(new Integer(assoc2.getDay()));
 			}
 		});
-		
+
 		//Si es 0 es porque es pendiente
 		if (assocType == 0){
 			for (int i = 0; i < assocList.size(); i++){
 				User assocUser = assocList.get(i).getApplier();
 				if (assocUser.getUserId() == assocUserId && assocList.get(i).getState().equals(State.PENDING)){
-					completeJson(assocList.get(i));					
+					completeJson(assocList.get(i));
 				}
 			}
 		}
@@ -91,6 +97,7 @@ public class ResponseAssociationService {
 		int requestedOfferedFlag = 0;
 		JsonObject jsonSchedule = new JsonObject();
 		
+		jsonSchedule.addProperty("assocId", assoc.getAssociationId());
 		jsonSchedule.addProperty("day", assoc.getDay());
 		jsonSchedule.addProperty("inout", assoc.getInout());
 		
