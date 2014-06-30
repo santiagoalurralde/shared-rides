@@ -1,5 +1,7 @@
 package com.shared.rides.dao.persistence;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -68,15 +70,20 @@ public class UserDAOImplMySql implements IUserDAO {
 	}
 
 	public List<Long> getAllSchedule(User u) {
-		String sql = "(Select s.id as id From User u, User_Pedestrian uP, Pedestrian p, Pedestrian_Schedule pS, Schedule s"
-				+ "Where u.id = ? And u.id = uP.userID And uP.pedestrianID = p.id And p.id = pS.pedestrianID And pS.scheduleID = s.id)"
+		String sql = "(SELECT s.id as id FROM User u, User_Pedestrian uP, Pedestrian p, Pedestrian_Schedule pS, Schedule s WHERE u.id = ? AND u.id = uP.userID AND uP.pedestrianID = p.id AND p.id = pS.pedestrianID AND pS.scheduleID = s.id)"
 				+ "UNION"
-				+ "(Select s.id as id From User u, User_Driver uD, Driver d, Driver_Schedule dS, Schedule s"
-				+ " Where u.id = ? And u.id = uD.userID And uD.driverID = d.id And d.id = dS.driverID And dS.scheduleID = s.id)";
+				+ "(SELECT s.id as id From User u, User_Driver uD, Driver d, Driver_Schedule dS, Schedule s WHERE u.id = ? AND u.id = uD.userID AND uD.driverID = d.id AND d.id = dS.driverID AND dS.scheduleID = s.id)";
 		Query query = sessionFactory.getCurrentSession().createSQLQuery(sql);
 		query.setParameter(0, u.getUserId());
+		query.setParameter(1, u.getUserId());
 		
-		return query.list();
+		List<Long> result = new ArrayList<Long>();
+		for(int i = 0; i < query.list().size(); i++) {
+		    BigInteger schId = (BigInteger) query.list().get(i);
+			result.add(schId.longValue());
+		}
+		
+		return result;
 	}
 	
 }
