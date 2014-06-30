@@ -1,6 +1,7 @@
 <%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<body>
+<body> 
+<!-- style="background: url(resources/images/introPic.jpg); background-size: 1500px" -->
 	<div class="tupper mini">
 		<!----	Internationalization	---->
 		<span id="i18n">
@@ -31,12 +32,12 @@
 				<!-- <spring:message code="label.password"/>	<br> -->
 				<input class="theInputs" type="password"	name="pwd"		placeholder="Password">			<br>
 				
-				<input class="but" id="butLogin" type="submit" value="<spring:message code="label.enter"/>">
+				<input class="btn" id="btnLogin" type="submit" value="<spring:message code="label.enter"/>">
 			</form>
 		</div>
 		
 		<!----	Picture	---->
-		<img id="introPic" width="50px" src="resources/images/intropic.png"/>		
+		<img id="picIntro"src="resources/images/intropic.png"/>		
 	</div>
 </body>
 
@@ -45,8 +46,6 @@
 	http://i43.tinypic.com/15840oi.png  #LOGO
 	http://i43.tinypic.com/28hmrf8.png	#FOTO		
 -->
-
-
 <!--  
 	taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>

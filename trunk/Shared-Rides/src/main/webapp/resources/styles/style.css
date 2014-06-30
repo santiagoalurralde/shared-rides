@@ -15,8 +15,7 @@ Assigned to:	Santiago Alurralde (sa)
 [Layout]
 -------------------------------------------------------------------*/
 
-*
-{
+*{
 	font-family: 			'Raleway', sans-serif;
 	margin:					0px;
 	padding:				0px;	
@@ -26,20 +25,19 @@ html{
 	height:					100%;
 }
 
-a
-{
+a{
 	text-decoration:		none;
 }
 
-body
-{
+body{
 	font-weight:			normal;
 	text-shadow: 			0 1px 1px rgba(0,0,0,.2);
 	height:					100%;
 }
 
-.hrs
-{
+.hrs{
+	/*	Horizontal and dark lines */
+	
 	background:				black;
 	border: 				0; 
 	height: 				1px; 
@@ -48,8 +46,9 @@ body
 	text-align: 			center; 
 }
 
-.vrs
-{
+.vrs{
+	/*	Vertical and light lines */
+	
 	border-left: 			thin solid #CFCFCF;
 }
 
@@ -60,28 +59,38 @@ body
 	top:					0px;		
 }
 
-.tupper
-{
+.clearer{
+	/*	Class made for divs that clear floating divs */
+	
+	clear:					both;
+}
+
+.tupper{
+	/*	Invisible wrapper */
+	
 	position:				relative;
 	margin:					0 auto;
 	width:					960px;
 }
 
-.mini
-{
+.mini{
+	/*	Invisible wrapper */
+	
 	width:					750px;
 }
 
-.theBox
-{
+.theBox{
+	/*	Container with dark border and shadow */
+	
 	box-shadow:				1px 1px 1px #000000;
 	border:					solid 1px; 	
 }
 
-.theLightBox
-{
-	/*box-shadow:         	0px 0px 14px rgba(207, 207, 207, 0.35);*/
-	border:					solid #CFCFCF 1px; 	
+.theLightBox{
+	/*	Container with light border and shadowless */
+	
+	border:					solid #CFCFCF 1px;
+	/*box-shadow:         	0px 0px 14px rgba(207, 207, 207, 0.35);*/ 	
 }
 
 
@@ -90,8 +99,9 @@ body
 [Content / ]
 ------------------------------------------------------------------*/
 
-#theContent
-{
+#theContent{
+	/*	Container with background, between header and footer */
+	
 	background-image:		url(../images/txture4.jpg); 
 	clear:					both;
 	height:					auto;
@@ -103,8 +113,9 @@ body
 	width:					100%; 
 }
 
-.theBoard
-{
+.theBoard{	
+	/*	Container with white background */
+	
 	background-color:		white;
 	padding:				20px 0px;
 	width:					100%;	
@@ -114,8 +125,7 @@ body
 /*------------------------------------------------------------------
 [Footer / #theFooter]
 -------------------------------------------------------------------*/
-#theFooter
-{
+#theFooter{
 	background-image:		url(../images/txture.png);
 	clear:					both;
 	color:					white;
@@ -133,16 +143,14 @@ body
 [Navigation / #nav]
 ------------------------------------------------------------------*/
 
-.logo
-{
+.logo{
 	font-family:			'LibelSuit', 'Georgia', serif;
 	font-size:				1.95vw;
 	line-height:        	130%;	
 	vertical-align:			middle;
 }
 
-#nav
-{
+#nav{
 	background:				-moz-linear-gradient(top, #90AA44, #50A410);
 	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
 	box-shadow:				1px 1px 6px #000000;
@@ -153,13 +161,11 @@ body
 	width:					100%;
 	z-index:				2000;
 }
-	#nav li
-	{
+	#nav li{
 		display:			inline;
 		list-style-type:    none;		
 	}
-	#nav li a
-	{
+	#nav li a{
 		color:				black;
 		display:			inline-block;
         font-size:          1.2vw;		
@@ -171,21 +177,16 @@ body
 		-moz-transition:	.4s;
 		-webkit-transition:	.4s;
 	}	
-	#nav li a.highlight:hover
-	{
+	#nav li a.highlight:hover{
 		background:			-moz-linear-gradient(top, #90AA44, #9ED474);
 		background:			-webkit-linear-gradient(top, #90AA44, #9ED474);
 		box-shadow:			0px 2px 2px #000000;			
 	}
-	#nav .current
-	{ 
+	#nav .current{ 
 		background:			-moz-linear-gradient(top, #90AA44, #A5E580);
 		background:			-webkit-linear-gradient(top, #90AA44, #A5E580);
 		box-shadow:			0px 1px 1px #000000;			
 	}
-	
-
-
 
 /*------------------------------------------------------------------
 [Maps / ]
@@ -200,8 +201,6 @@ body
 #mapPedestrian{
 	margin:		0 0 0 30px;
 }
-
-
 
 .mapSimple{
 	width: 		900px;
@@ -218,50 +217,36 @@ body
 /*------------------------------------------------------------------
 [Buttons / ]
 ------------------------------------------------------------------*/
-.but{
-	border-radius: 			2px;	
-	background: 			-webkit-linear-gradient(top, #90AA44, #9ED474);
-	background: 			-moz-linear-gradient(top, #90AA44, #9ED474);
-	box-shadow: 			0 1px 2px rgba(0,0,0,.2);
-	border: 				solid 1px #90AA44;
-	color:					white;
-	font-size:				100%;
-	font-weight:			bold;
-	height:					30px;
-	margin:					10px 0px 10px 0px;
-	text-shadow: 			0 1px 1px rgba(0,0,0,.3);
-	width:					130px;
+
+.btn{
+	border-radius:	2px;	
+	background: 	-webkit-linear-gradient(top, #90AA44, #9ED474);
+	background: 	-moz-linear-gradient(top, #90AA44, #9ED474);
+	box-shadow: 	0 1px 2px rgba(0,0,0,.2);
+	border: 		solid 1px #90AA44;
+	color:			white;
+	font-size:		100%;
+	font-weight:	bold;
+	height:			30px;
+	margin:			10px 0px 10px 0px;
+	text-shadow: 	0 1px 1px rgba(0,0,0,.3);
+	width:			130px;
 }
 
-.but:hover{
-	background: 			-webkit-linear-gradient(top, #99BB66, #9ED474);
-	background: 			-moz-linear-gradient(top, #99BB66, #9ED474);
+.btn:hover{
+	background: 	-webkit-linear-gradient(top, #99BB66, #9ED474);
+	background: 	-moz-linear-gradient(top, #99BB66, #9ED474);
 }
 
 #btnLogout{
-	position: 				fixed; 
-	right: 					0.5%;	
-	top: 					3%; 
-}
-
-.blockHalf
-{
-	width:					50%;
-}
-
-.blockLeft
-{
-	float: 					left;
-}
-
-.blockRight
-{
-	float: 					right;
+	position: 		fixed; 
+	right: 			0.5%;	
+	top:			2%; 
 }
 
 .helpIcon{
-	width:		18px;
-	margin:		1px 10px 0 0;
+	width:			18px;
+	margin:			1px 10px 0 0;
 }
 
 /*------------------------------------------------------------------

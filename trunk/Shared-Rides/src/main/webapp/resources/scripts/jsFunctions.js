@@ -49,7 +49,7 @@ $( document ).ready(function() {
 	});
 
 	//Acciones al presionar Siguiente
-	$( "#butNext" ).click(function(){
+	$( "#btnNext" ).click(function(){
 		switch(i)
 		{
 		case 1:
@@ -60,7 +60,7 @@ $( document ).ready(function() {
 			highlightStep(i);
 			nextStep(i);
 			
-			$( "#butBack" ).show( 'fast' );	
+			$( "#btnBack" ).show( 'fast' );	
 			break;
 		case 2:		
 			//	De Turno a Mapa
@@ -74,14 +74,14 @@ $( document ).ready(function() {
 				$( "#mapDriver" ).show( 'slow' );
 		
 			$( this ).hide( 0 );
-			$( "#butOK" ).css('marginLeft', '60px');
-			$( "#butOK" ).show( 'slow' );
+			$( "#btnOK" ).css('marginLeft', '60px');
+			$( "#btnOK" ).show( 'slow' );
 			break;	
 		}
 	});
 	
 	//Acciones al presionar Anterior
-	$( "#butBack" ).click(function(){
+	$( "#btnBack" ).click(function(){
 		switch(i)
 		{
 		case 0:		
@@ -91,7 +91,7 @@ $( document ).ready(function() {
 			backStep(i);
 
 			$( this ).hide( 'fast' );
-			$( "#butNext" ).css('marginLeft', '0px');
+			$( "#btnNext" ).css('marginLeft', '0px');
 			break;
 		case 1:		
 			//	De Mapa a Turno
@@ -99,8 +99,8 @@ $( document ).ready(function() {
 			highlightStep(i);
 			backStep(i);
 			
-			$( "#butOK" ).hide( 'fast' );
-			$( "#butNext" ).show( 'slow' );
+			$( "#btnOK" ).hide( 'fast' );
+			$( "#btnNext" ).show( 'slow' );
 			$( "#listFound" ).hide( 'fast' );
 			$( "#tableFound td" ).remove();
 			break;
@@ -113,7 +113,7 @@ $( document ).ready(function() {
 				
 		$( "#mapDriver" ).css( 'display', 'none' );
 		$( "#mapPedestrian" ).css( 'display', 'none' );
-		$( "#butBack" ).hide( 0 );							
+		$( "#btnBack" ).hide( 0 );							
 		$( "#listFound" ).hide( 0 );
 	} 
 	
@@ -188,7 +188,7 @@ $( document ).ready(function() {
 	}
 	
 	
-	$( "#butOK" ).click(function(){
+	$( "#btnOK" ).click(function(){
 		var coordsJs;				//Datos de coordenadas
 		
 		if(userJs === 2)
@@ -210,7 +210,7 @@ $( document ).ready(function() {
 		$( "#mapPedestrian" ).css('display', 'none');
 		
 		$( "#listFound" ).show( 'fast' );
-		$( "#butOK"	).hide( 'fast' );
+		$( "#btnOK"	).hide( 'fast' );
 	});
 	
 });

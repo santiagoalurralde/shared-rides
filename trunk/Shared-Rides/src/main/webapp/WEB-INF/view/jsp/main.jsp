@@ -51,16 +51,16 @@
 	        		<div id="listFound" style="width: 400px; margin-left: 325px">
 	        			<table id="tableFound" class="tableUsers">
 							<tr>
-								<th colspan=4"> <spring:message code="label.foundUsers"/> </th>
+								<th colspan="4"> <spring:message code="label.foundUsers"/> </th>
 							</tr>
 						</table>
 	        		</div>
 	        		
 	        		<!----	Buttons	---->
 	        		<div id="buttonsSteps">
-	        			<input type="button" class="but" id="butBack" 	value="Anterior" 	onClick="stepsUpdate(-1);"	/>	
-	           	   		<input type="button" class="but" id="butNext" 	value="Siguiente"	onClick="stepsUpdate(1);"	/>		
-	        			<input type="button" class="but" id="butOK" 	value="Confirmar" 	style="display: none" 		/>  
+	        			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepsUpdate(-1);"	/>	
+	           	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepsUpdate(1);"	/>		
+	        			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 		/>  
 	        		</div> 	  
 	        		
 	        		
