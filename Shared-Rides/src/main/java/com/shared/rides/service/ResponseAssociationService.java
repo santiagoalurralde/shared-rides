@@ -27,7 +27,9 @@ public class ResponseAssociationService {
 	@Autowired 
 	private IScheduleDAO scheduleDAO;
 	
-	private JsonArray json = new JsonArray();
+	private JsonObject json = new JsonObject();
+	private JsonArray requestedJson = new JsonArray();
+	private JsonArray offeredJson = new JsonArray();
 	private List<Long> schIdList;
 	/*
 	 * Metodo que se encarga de devolver la lista de horarios entre dos usuarios para mostrarlo en la vista
@@ -66,10 +68,14 @@ public class ResponseAssociationService {
 				}
 			}
 		}
+		json.add("requested", requestedJson);
+		json.add("offered", offeredJson);
+		
 		return json.toString();
 	}
 	
 	private void completeJson(Association assoc){
+		int requestedOfferedFlag = 0;
 		JsonObject jsonSchedule = new JsonObject();
 		
 		jsonSchedule.addProperty("day", assoc.getDay());
@@ -92,17 +98,18 @@ public class ResponseAssociationService {
 				List<Schedule> auxSch = assoc.getApplier().getDriver().getSchedule();
 				for (int i = 0; i < auxSch.size(); i++){
 					if(auxSch.get(i).getDay() == assoc.getDay()){
-						jsonSchedule.addProperty("askedOffered", 2);
+						requestedOfferedFlag = 2;
 						flag = true;
 						break;
 					}
 				}
 				//Si el aplicante es conductor, pero en ese dia no lo es, quiere decir que le solicito un asiento
-				if (!flag) jsonSchedule.addProperty("askedOffered", 1); 
+				if (!flag) requestedOfferedFlag = 1; 
 			}
-			else	jsonSchedule.addProperty("askedOffered", 1);
+			else	requestedOfferedFlag = 1;
 		}
-		json.add(jsonSchedule);
+		if (requestedOfferedFlag == 1) requestedJson.add(jsonSchedule);
+		if (requestedOfferedFlag == 2) offeredJson.add(jsonSchedule);
 	}
 	
 	/*
