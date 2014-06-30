@@ -1,5 +1,7 @@
 package com.shared.rides.service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +29,9 @@ public class ResponseAssociationService {
 	@Autowired 
 	private IScheduleDAO scheduleDAO;
 	
-	private JsonObject json = new JsonObject();
-	private JsonArray requestedJson = new JsonArray();
-	private JsonArray offeredJson = new JsonArray();
+	private JsonObject json;
+	private JsonArray requestedJson;
+	private JsonArray offeredJson;
 	private List<Long> schIdList;
 	/*
 	 * Metodo que se encarga de devolver la lista de horarios entre dos usuarios para mostrarlo en la vista
@@ -37,8 +39,19 @@ public class ResponseAssociationService {
 	 * Si es 1 --> Asociado
 	 */
 	public String showAssociationSchedule(User requestUser, long assocUserId, int assocType){			
+		json = new JsonObject();
+		requestedJson = new JsonArray();
+		offeredJson = new JsonArray();
 		List<Association> assocList = requestUser.getAssociations();
 		schIdList =  userDAO.getAllSchedule(requestUser);
+		
+		Collections.sort(assocList, new Comparator() {
+			public int compare(Object a1, Object a2) {
+				Association assoc1 = (Association) a1;
+				Association assoc2 = (Association) a2;
+				return new Integer(assoc1.getDay()).compareTo(new Integer(assoc2.getDay()));
+			}
+		});
 		
 		//Si es 0 es porque es pendiente
 		if (assocType == 0){
@@ -51,7 +64,7 @@ public class ResponseAssociationService {
 		}
 		else{
 			//Lista de todas las peticiones que yo realice
-			List<Association> myRequestsList = userDAO.getMyRequests(requestUser);
+			/*List<Association> myRequestsList = userDAO.getMyRequests(requestUser);
 			
 			for (int i = 0; i < assocList.size(); i++){
 				User assocUser = assocList.get(i).getApplier();
@@ -66,7 +79,7 @@ public class ResponseAssociationService {
 				if (userId == assocUserId && myRequestsList.get(j).getState().equals(State.ACCEPTED)){
 					completeJson(assocList.get(j));
 				}
-			}
+			}*/
 		}
 		json.add("requested", requestedJson);
 		json.add("offered", offeredJson);
@@ -89,25 +102,26 @@ public class ResponseAssociationService {
 				else jsonSchedule.addProperty("hour", sch.getHourOut());
 				break;
 			}
-			/*
-			 * Si es 1; solicito un asiento, es decir yo soy conductor
-			 * Si es 2; ofrece asiento, soy peaton
-			 */
-			if (assoc.getApplier().getDriver() != null){
-				boolean flag = false;
-				List<Schedule> auxSch = assoc.getApplier().getDriver().getSchedule();
-				for (int i = 0; i < auxSch.size(); i++){
-					if(auxSch.get(i).getDay() == assoc.getDay()){
-						requestedOfferedFlag = 2;
-						flag = true;
-						break;
-					}
-				}
-				//Si el aplicante es conductor, pero en ese dia no lo es, quiere decir que le solicito un asiento
-				if (!flag) requestedOfferedFlag = 1; 
-			}
-			else	requestedOfferedFlag = 1;
 		}
+		/*
+		 * Si es 1; solicito un asiento, es decir yo soy conductor
+		 * Si es 2; ofrece asiento, soy peaton
+		 */
+		if (assoc.getApplier().getDriver() != null){
+			boolean flag = false;
+			List<Schedule> auxSch = assoc.getApplier().getDriver().getSchedule();
+			for (int i = 0; i < auxSch.size(); i++){
+				if(auxSch.get(i).getDay() == assoc.getDay()){
+					requestedOfferedFlag = 2;
+					flag = true;
+					break;
+				}
+			}
+			//Si el aplicante es conductor, pero en ese dia no lo es, quiere decir que le solicito un asiento
+			if (!flag) requestedOfferedFlag = 1; 
+		}
+		else requestedOfferedFlag = 1;
+		
 		if (requestedOfferedFlag == 1) requestedJson.add(jsonSchedule);
 		if (requestedOfferedFlag == 2) offeredJson.add(jsonSchedule);
 	}
