@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shared.rides.dao.interfaces.IUserDAO;
 import com.shared.rides.domain.Association;
+import com.shared.rides.domain.Schedule;
 import com.shared.rides.domain.User;
 
 
@@ -64,6 +65,18 @@ public class UserDAOImplMySql implements IUserDAO {
 		Query query = sessionFactory.getCurrentSession().createQuery("FROM Association assoc WHERE assoc.applicantID = " + u.getUserId() + " ");	
 		List<Association> assocs = query.list();
 		return assocs;
+	}
+
+	public List<Long> getAllSchedule(User u) {
+		String sql = "(Select s.id as id From User u, User_Pedestrian uP, Pedestrian p, Pedestrian_Schedule pS, Schedule s"
+				+ "Where u.id = ? And u.id = uP.userID And uP.pedestrianID = p.id And p.id = pS.pedestrianID And pS.scheduleID = s.id)"
+				+ "UNION"
+				+ "(Select s.id as id From User u, User_Driver uD, Driver d, Driver_Schedule dS, Schedule s"
+				+ " Where u.id = ? And u.id = uD.userID And uD.driverID = d.id And d.id = dS.driverID And dS.scheduleID = s.id)";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		query.setParameter(0, u.getUserId());
+		
+		return query.list();
 	}
 	
 }

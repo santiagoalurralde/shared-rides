@@ -16,7 +16,7 @@ public class FindUserServiceTest {
 		@Autowired
 		private FindUserService findUserService;
 		/*
-		 * Test para comprobar el funcionamiento del metodo findUsersTest del servicio
+		 * Test para comprobar el funcionamiento del metodo findUsers del servicio
 		 * FindUserService. Como parametros de busqueda tenemos:
 		 * shift --> 2 (Turno tarde)
 		 * profile --> 1 (Perfil Peaton)
@@ -31,7 +31,5 @@ public class FindUserServiceTest {
 			int shift = 2;
 			int profile = 1;
 			String marker = "{lan: -34.231312 , lon: -61.123342}";
-			
-			assertNotNull(findUserService.findUsers(profile, shift, marker));
 		}
 }

@@ -31,7 +31,11 @@ public class PeopleController {
 		return new ModelAndView ("people");
 	}
 	
-	//Metodo que se llama cuando se envia una nueva asociacion a un usuario
+	/*
+	 * Metodo que se llama cuando se envia una nueva asociacion a un usuario
+	 * IN --> 1
+	 * OUT --> 2
+	 */
 	@RequestMapping(value = "/requestAssoc.do", method = RequestMethod.POST)
 	public @ResponseBody String sendAssociationRequest(@RequestParam("day") int day,
 								@RequestParam("inout") int inout,

@@ -33,6 +33,10 @@ public class Schedule implements Serializable{
 	public Schedule(){
 	}
 	
+	public Schedule(long id){
+		this.scheduleId = id;
+	}
+	
 //-----------GETTERS & SETTERS 
 	
 	
