@@ -8,36 +8,22 @@
 					<div id="listData">				<!-- Listas				-->	
 										
 						<div id="pending" class="blockHalf blockRight"> 		<!-- Lista Solicitudes 	--> 
-							<h2>	Pendientes	</h2>	
+							<h2> <spring:message code="label.pending"/> </h2>
 							<table id="tablePending"	class="tableUsers" style="margin-top: 10px">
 
 							</table>
 						</div> 
-						 		
+						
+						<!-- <div class="vrs"></div> -->
+							
 						<div id="associated" class="blockHalf blockLeft">		<!-- Lista Asociados 	-->
-							<h2>	Asociados		</h2>
+							<h2> <spring:message code="label.associated"/> </h2>
 							<table id="tableAssociated"	class="tableUsers" style="margin-top: 10px">
 
 							</table>
 						</div>		
-						
-						<!-- 
-						<tr>
-							<td> Steve	 		</td>
-							<td> Jobs			</td>
-							<td> <img src="http://www.igdigital.com/wp-content/uploads/2013/03/steve_jobs_apple1-1.jpeg"/> </td>
-						</tr>
-						<tr>
-							<td> Clint			</td>
-							<td> Eastwood		</td>
-							<td><img src="http://2.bp.blogspot.com/-Pleua1JUrJg/UajruKT0gaI/AAAAAAAABy4/TDbntFwudPM/s640/Clint-Eastwood-.jpg"/>	</td>		
-						</tr>
-						<tr>
-							<td> Pablo 			</td>
-							<td> Picasso		</td>
-							<td><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/192px-Pablo_picasso_1.jpg"/>				</td>						
-						</tr>
-						-->
+					
+						<div class="clearer"></div>
 					</div>	
 				</div>
 		</section>
@@ -54,9 +40,9 @@
 							</div>		 
 						</div>
 										
-						<div id="applicantsSchedule">		 
+						<div id="pendingSchedule">		 
 							<div class="blockLeft blockHalf">		
-								<h2> 	Actuales		</h2>	
+								<h2> <spring:message code="label.requested"/> </h2>
 							
 								<div> 						<!-- Horario	-->
 									<table id="" class="theSchedule">
@@ -80,7 +66,7 @@
 							</div>
 							
 							<div class="blockRight blockHalf">
-								<h2> 	Solicitó	</h2>	
+								<h2> <spring:message code="label.offered"/> </h2>	
 							
 								<div> 						<!-- Horario	-->
 									<table id="" class="theSchedule">
@@ -89,18 +75,6 @@
 											<th><spring:message code="label.monday"/></th>
 											<th><spring:message code="label.wednesday"/></th>
 											<th><spring:message code="label.friday"/></th>
-										</tr>
-										<tr>
-											<td><spring:message code="label.arrival"/></td>
-											<td>13 <img src="resources/images/accept.png" width="15px"/> <img src="resources/images/cancel.png" width="15px"/></td>
-											<td>14 <img src="resources/images/accept.png" width="15px"/> <img src="resources/images/cancel.png" width="15px"/></td>
-											<td>14 <img src="resources/images/accept.png" width="15px"/> <img src="resources/images/cancel.png" width="15px"/></td>
-										</tr>
-										<tr>
-											<td><spring:message code="label.departure"/></td>
-											<td>19 <img src="resources/images/accept.png" width="15px"/> <img src="resources/images/cancel.png" width="15px"/></td>
-											<td>20 <img src="resources/images/accept.png" width="15px"/> <img src="resources/images/cancel.png" width="15px"/></td>
-											<td>20 <img src="resources/images/accept.png" width="15px"/> <img src="resources/images/cancel.png" width="15px"/></td>
 										</tr>
 									</table>					
 								</div>
@@ -115,15 +89,14 @@
 
 <script>
 	function createTables(){
-		$( "#tablePending" ).append("<tr><th> Usuario  </th><th> Petición </th></tr>");
+		$( "#tablePending" ).append("<tr><th> Usuario  </th></tr>");
 		$( "#tableAssociated" ).append("<tr><th> Usuario  </th></tr>");		
 	}
 	
 	createTables();
-	
+
 	$.post( 'loadAssociations.do', 
-		function(json)
-		{
+		function(json){
 		/*
 		Aca va a traer la informacion de las personas, como un json.
 		Es un JsonArray que tiene adentro dos JsonArray: uno con las asociaciones pendientes y otro con las
@@ -146,25 +119,72 @@
 								"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId+"'>"+
 									"<img src='resources/profilePic/"+ data.pic +"'>"+
 								"</a>"+
-								"<span style='margin-right: 10px'>"+ data.name + "</span>"+
-								"<input type='button' value='Ver Peticion'>"+
+								"<span style='vertical-align: top; margin-right: 10px'>"+ data.name + "</span>"+
+								"<input type='hidden' id="+ data.userId +">"+ 																
+								"<button onclick='viewPendingSchedule(this)' style='vertical-align: top'><spring:message code='label.request'/></button>"+
 							"</div>";
 				
-			$( "#tablePending" ).append("<tr><td>"+ applicant +"</td><td>"+ side +"</td></tr>");
-			
-			//<input type='hidden' id="+ data. 
+			$( "#tablePending" ).append("<tr><td>"+ applicant +"</td></tr>");
 		});		
 		
 		$.each(jsonNew[1], function(i, data){
-			var applicant = "<div>" +
+			var applicant = "<div id='pic'>" +
 								"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
 									"<img src='resources/profilePic/"+ data.pic +"'>"+
 								"</a>"+
-								"<span style='margin-right: 10px'>"+ data.name +"</span>"+
-								"<input type='button' value='Ver Asociacion'>"+
+								"<span style='vertical-align: top; margin-right: 10px'>"+ data.name +"</span>"+
+								"<input type='hidden' id="+ data.userId +">"+ 								
+								"<button onclick='viewAssociatedSchedule(this)' style='vertical-align: top'><spring:message code='label.association'/></button>"+
 							"</div>";
 			
 			$( "#tableAssociated" ).append("<tr><td>"+ applicant +"</td></tr>");
 		});				
 	});
+	
+	function viewPendingSchedule(target)
+	{
+		var $userId = $(target).parent().find("input").attr("id");
+
+		$.post( "viewSchedule.do", { "user": $userId , "type": 0}, 
+			function(json){
+				var jsonNew = $.parseJSON(json);
+				$.each(jsonNew, function(i, data){
+					$( "#" ).append("<tr><td>" + data.name + "</td><td>" + data.surname + "</td><td><a href='/Shared-Rides/profile.do?user="+ data.id +"'><img src='resources/profilePic/" + data.picture + "'/></a></td></tr>");
+				});
+		}); 
+	}
+	
+	function viewAssociatedSchedule(target)
+	{
+		var $userId = $(target).parent().find("input").attr("id");
+
+		$.post( "viewSchedule.do", { "user": $userId , "type": 1}, 
+			function(json){
+				var jsonNew = $.parseJSON(json);
+				$.each(jsonNew, function(i, data){
+					$( "#" ).append("<tr><td>" + data.name + "</td><td>" + data.surname + "</td><td><a href='/Shared-Rides/profile.do?user="+ data.id +"'><img src='resources/profilePic/" + data.picture + "'/></a></td></tr>");
+				});
+		}); 
+		
+	}	
+	
 </script>
+
+
+<!-- 
+<tr>
+	<td> Steve	 		</td>
+	<td> Jobs			</td>
+	<td> <img src="http://www.igdigital.com/wp-content/uploads/2013/03/steve_jobs_apple1-1.jpeg"/> </td>
+</tr>
+<tr>
+	<td> Clint			</td>
+	<td> Eastwood		</td>
+	<td><img src="http://2.bp.blogspot.com/-Pleua1JUrJg/UajruKT0gaI/AAAAAAAABy4/TDbntFwudPM/s640/Clint-Eastwood-.jpg"/>	</td>		
+</tr>
+<tr>
+	<td> Pablo 			</td>
+	<td> Picasso		</td>
+	<td><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/192px-Pablo_picasso_1.jpg"/>				</td>						
+</tr>
+-->
