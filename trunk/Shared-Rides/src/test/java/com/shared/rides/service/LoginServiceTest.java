@@ -32,7 +32,7 @@ public class LoginServiceTest{
 	 */
 	@Test
 	public void testValidate() {
-		String email = "leandro.bagur@hotmail.com";
+		String email = "leandro.bagur@gmail.com";
 		String password = "leandro";
 		HttpServletRequest r = new MockHttpServletRequest();
 		//Hago esto asi crea una sesion automaticamente

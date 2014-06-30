@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.shared.rides.dao.interfaces.IAssociationDAO;
+import com.shared.rides.dao.interfaces.IScheduleDAO;
 import com.shared.rides.dao.interfaces.IUserDAO;
 import com.shared.rides.domain.Association;
+import com.shared.rides.domain.Schedule;
 import com.shared.rides.domain.State;
 import com.shared.rides.domain.User;
 
@@ -22,65 +24,67 @@ public class ResponseAssociationService {
 	@Autowired
 	private IUserDAO userDAO;
 	
+	@Autowired 
+	private IScheduleDAO scheduleDAO;
+	
+	private JsonArray json = new JsonArray();
+	private List<Long> schIdList;
 	/*
 	 * Metodo que se encarga de devolver la lista de horarios entre dos usuarios para mostrarlo en la vista
 	 * Si el tipo de asociacion es 0 --> Pendiente
 	 * Si es 1 --> Asociado
 	 */
-	public String showAssociationSchedule(User requestUser, long assocUserId, int assocType){
-		User assocUser = new User(assocUserId);
-		assocUser = userDAO.load(assocUser);
+	public String showAssociationSchedule(User requestUser, long assocUserId, int assocType){			
+		List<Association> assocList = requestUser.getAssociations();
+		schIdList =  userDAO.getAllSchedule(requestUser);
 		
-		int driver;
-		
-		if (requestUser.getDriver() != null && assocUser.getDriver() == null){
-			driver = 0;
-		}
-		if (requestUser.getDriver() == null && assocUser.getDriver() != null){
-			driver = 1;
-		}
-		if (requestUser.getDriver() != null && assocUser.getDriver() != null){
-			driver = 2;
-		}
-		
-		List<Long> assocIdList = assocDAO.findAssoc(requestUser, assocUser);
-		JsonArray json = new JsonArray();
-		
+		//Si es 0 es porque es pendiente
 		if (assocType == 0){
-			for (int i = 0; i < assocIdList.size(); i++){
-					Association assoc = new Association(assocIdList.get(i));
-					assoc = assocDAO.load(assoc);
-				
-					if(assoc.getState().equals(State.PENDING)){
-						JsonObject jsonSchedule = new JsonObject();
-						jsonSchedule.addProperty("day", assoc.getDay());
-						jsonSchedule.addProperty("inout", assoc.getInout());
-						jsonSchedule.addProperty("applicant", assoc.getApplier().getUserId());
-				
-						//if (driver == 0){
-						
-						//	jsonSchedule.addProperty("hour", request.);
-						//}
-						
-						json.add(jsonSchedule);
-					}	
-				}	
-			}
-			else{
-				for (int i = 0; i < assocIdList.size(); i++){
-					Association assoc = new Association(assocIdList.get(i));
-					assoc = assocDAO.load(assoc);
-				
-					if(assoc.getState().equals(State.ACCEPTED)){
-						JsonObject jsonSchedule = new JsonObject();
-						jsonSchedule.addProperty("day", assoc.getDay());
-						jsonSchedule.addProperty("inout", assoc.getInout());
-						
-						json.add(jsonSchedule);
-					}	
+			for (int i = 0; i < assocList.size(); i++){
+				User assocUser = assocList.get(i).getApplier();
+				if (assocUser.getUserId() == assocUserId && assocList.get(i).getState().equals(State.PENDING)){
+					completeJson(assocList.get(i));
 				}
 			}
+		}
+		else{
+			//Lista de todas las peticiones que yo realice
+			List<Association> myRequestsList = userDAO.getMyRequests(requestUser);
+			
+			for (int i = 0; i < assocList.size(); i++){
+				User assocUser = assocList.get(i).getApplier();
+				if (assocUser.getUserId() == assocUserId && assocList.get(i).getState().equals(State.ACCEPTED)){
+					completeJson(assocList.get(i));
+				}
+			}
+			for (int j = 0; j < myRequestsList.size(); j++){
+				//Obtengo el id del usuario al cual le envie la peticion
+				long userId = assocDAO.getSupplierId(myRequestsList.get(j));
+				
+				if (userId == assocUserId && myRequestsList.get(j).getState().equals(State.ACCEPTED)){
+					completeJson(assocList.get(j));
+				}
+			}
+		}
 		return json.toString();
+	}
+	
+	private void completeJson(Association assoc){
+		JsonObject jsonSchedule = new JsonObject();
+		
+		jsonSchedule.addProperty("day", assoc.getDay());
+		jsonSchedule.addProperty("inout", assoc.getInout());
+		
+		for (int j = 0; j < schIdList.size(); j++){
+			Schedule sch = new Schedule(schIdList.get(j));
+			sch = scheduleDAO.load(sch);
+			if (assoc.getDay() == sch.getDay()){
+				if (assoc.getInout() == 1) jsonSchedule.addProperty("hour", sch.getHourIn());
+				else jsonSchedule.addProperty("hour", sch.getHourOut());
+				break;
+			}
+		}
+		json.add(jsonSchedule);
 	}
 	
 	/*
