@@ -43,7 +43,7 @@ public class ResponseAssociationService {
 			for (int i = 0; i < assocList.size(); i++){
 				User assocUser = assocList.get(i).getApplier();
 				if (assocUser.getUserId() == assocUserId && assocList.get(i).getState().equals(State.PENDING)){
-					completeJson(assocList.get(i));
+					completeJson(assocList.get(i));					
 				}
 			}
 		}
@@ -83,6 +83,24 @@ public class ResponseAssociationService {
 				else jsonSchedule.addProperty("hour", sch.getHourOut());
 				break;
 			}
+			/*
+			 * Si es 1; solicito un asiento, es decir yo soy conductor
+			 * Si es 2; ofrece asiento, soy peaton
+			 */
+			if (assoc.getApplier().getDriver() != null){
+				boolean flag = false;
+				List<Schedule> auxSch = assoc.getApplier().getDriver().getSchedule();
+				for (int i = 0; i < auxSch.size(); i++){
+					if(auxSch.get(i).getDay() == assoc.getDay()){
+						jsonSchedule.addProperty("askedOffered", 2);
+						flag = true;
+						break;
+					}
+				}
+				//Si el aplicante es conductor, pero en ese dia no lo es, quiere decir que le solicito un asiento
+				if (!flag) jsonSchedule.addProperty("askedOffered", 1); 
+			}
+			else	jsonSchedule.addProperty("askedOffered", 1);
 		}
 		json.add(jsonSchedule);
 	}
