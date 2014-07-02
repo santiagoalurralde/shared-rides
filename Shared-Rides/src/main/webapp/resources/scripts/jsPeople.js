@@ -116,28 +116,55 @@ function printSchedule(days, $table)
 		{
 			$table.find( "tr:first" ).append("<th id='"+ i +"'>"+ dayLabel(i) +"</th>");
 			
+			if(!$table.find("#in").length) 		//Fila de In no existe la creamos
+				$table.append("<tr id='in'><td>"+ $('#lblArrival').val() +"</td></tr>");
+			
+			if(!$table.find("#out").length)		//Fila de Out no existe la creamos
+				$table.append("<tr id='out'><td>"+ $('#lblDeparture').val() +"</td></tr>");
+
+			
 			if(days[i].inHour != "")
-			{
-				if(!$table.find("#in").length)
-					$table.append("<tr id='in'><td>"+ $('#lblArrival').val() +"</td></tr>");
-				$table.find( "#in" ).append("<td>"+ 
-												days[i].inHour +
-												"<button style='margin-left: 4px'><img src='resources/images/accept.png' width='15px'></button>"+
-												"<button style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>"+
-												"<input type='hidden' value='"+ days[i].assocIdIn +"' name='assocIdIn'>" +
-					 						"</td>");			
+			{		
+				var content = 	"<td>"+ 
+									days[i].inHour +
+									"<button style='margin-left: 4px'><img src='resources/images/accept.png' width='15px'></button>"+
+									"<button style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>"+
+									"<input type='hidden' value='"+ days[i].assocIdIn +"' name='assocIdIn'>" +
+								"</td>";
+				
+				if($table.find("#in #emptyCell"+i).length)			//Si ya existe celda in vacía donde queremos insertar.
+				{
+					$table.find( "#in #emptyCell"+i ).append(content);
+					$table.find( "#in #emptyCell"+i ).removeAttr('id');
+					$table.find( "#in #emptyCell"+i ).removeClass('emptyCells');
+				}
+				else
+					$table.find( "#in" ).append(content);
+				
+				if(!$table.find("#out #emptyCell"+i).length)		//Si no existe celda out vacía en la misma columna
+					$table.find( "#out" ).append("<td id='emptyCell"+ i +" class='emptyCells'></td>"); 
 			}
 			
 			if(days[i].outHour != "")
-			{
-				if(!$table.find("#out").length)
-					$table.append("<tr id='out'><td>"+ $('#lblDeparture').val() +"</td></tr>");
-				$table.find( "#out" ).append("<td>"+ 
-												days[i].outHour +
-												"<button style='margin-left: 4px'><img src='resources/images/accept.png' width='15px'></button>"+
-												"<button style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>"+
-												"<input type='hidden' value='"+ days[i].assocIdOut +"' name='assocIdOut'>" +
-											 "</td>");
+			{	
+				var content =	"<td>"+ 
+									days[i].outHour +
+									"<button style='margin-left: 4px'><img src='resources/images/accept.png' width='15px'></button>"+
+									"<button style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>"+
+									"<input type='hidden' value='"+ days[i].assocIdOut +"' name='assocIdOut'>" +
+								"</td>";
+				
+				if(!$table.find("#in #emptyCell"+i).length)			//Si no existe celda in vacía en la misma columna
+					$table.find( "#in" ).append("<td id='emptyCell"+ i +" class='emptyCells'></td>"); 
+				
+				if(!$table.find("#out #emptyCell"+i).length)		//Si ya existe celda in vacía donde queremos insertar.
+				{
+					$table.find( "#out #emptyCell"+i ).append(content);
+					$table.find( "#out #emptyCell"+i ).removeAttr('id');
+					$table.find( "#out #emptyCell"+i ).removeClass('emptyCells');
+				}
+				else
+					$table.find( "#out" ).append(content);
 			}
 		}
 	}	
