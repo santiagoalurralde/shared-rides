@@ -110,6 +110,11 @@ function fetchDays(days, data)
 
 function printSchedule(days, $table)
 {
+	$table.html("<tr>"		+
+					"<th>"	+
+					"</th>"	+
+				"</tr>");
+	
 	for(var i=1;i<days.length;i++)
 	{
 		if(days[i]!=null)
@@ -157,7 +162,7 @@ function printSchedule(days, $table)
 				if(!$table.find("#in #emptyCell"+i).length)			//Si no existe celda in vacía en la misma columna
 					$table.find( "#in" ).append("<td id='emptyCell"+ i +" class='emptyCells'></td>"); 
 				
-				if($table.find("#out #emptyCell"+i).length)		//Si ya existe celda in vacía donde queremos insertar.
+				if($table.find("#out #emptyCell"+i).length)			//Si ya existe celda in vacía donde queremos insertar.
 				{
 					$table.find( "#out #emptyCell"+i ).append(content);
 					$table.find( "#out #emptyCell"+i ).removeAttr('id');
