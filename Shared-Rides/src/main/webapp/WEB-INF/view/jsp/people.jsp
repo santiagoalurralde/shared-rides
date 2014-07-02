@@ -6,63 +6,58 @@
 	<div id="theContent" class="theBox">	
 		
 		<section title="List Data" class="tupper">
-				<div class="theBoard theLightBox" style="margin-top: 10px"> 		
-					<div id="listData">				<!-- Listas				-->	
-										
-						<div id="pending" class="blockHalf blockRight"> 		<!-- Lista Solicitudes 	--> 
-							<h2> <spring:message code="label.pending"/> </h2>
-							<table id="tablePending"	class="tableUsers" style="margin-top: 10px">
+				<div id="listData" class="theBoard theLightBox" style="margin-top: 10px"> 							
+					<div id="pending" class="blockHalf blockRight"> 		<!-- Lista Solicitudes 	--> 
+						<h2> <spring:message code="label.pending"/> </h2>
+						<table id="tablePending"	class="tableUsers" style="margin-top: 10px">
 
-							</table>
-						</div> 
-						
-						<!-- <div class="vrs"></div> -->
-							
-						<div id="associated" class="blockHalf blockLeft">		<!-- Lista Asociados 	-->
-							<h2> <spring:message code="label.associated"/> </h2>
-							<table id="tableAssociated"	class="tableUsers" style="margin-top: 10px">
-
-							</table>
-						</div>		
+						</table>
+					</div> 
 					
-						<div class="clearer"></div>
-					</div>	
+					<!-- <div class="vrs"></div> -->
+						
+					<div id="associated" class="blockHalf blockLeft">		<!-- Lista Asociados 	-->
+						<h2> <spring:message code="label.associated"/> </h2>
+						<table id="tableAssociated"	class="tableUsers" style="margin-top: 10px">
+
+						</table>
+					</div>		
+				
+					<div class="clearer"></div>
 				</div>
 		</section>
 		
 	
 		<section title="Schedule Data" class="tupper" style="margin-top: 20px">
-			<div class="theBoard theLightBox"> 		
-				<div id="scheduleData">					 
-					<div class="blockLeft blockHalf">		
-						<h2> <spring:message code="label.requested"/> </h2>
-					
-						<div> 						<!-- Horario	-->
-							<table id="tableRequested" class="theSchedule">
-								<tr>
-									<th>
-										
-									</th>
-								</tr>							
-							</table>					
-						</div>	
-					</div>
-					
-					<div class="blockRight blockHalf">
-						<h2> <spring:message code="label.offered"/> </h2>	
-					
-						<div> 						<!-- Horario	-->
-							<table id="tableOffered" class="theSchedule">
-								<tr>
-									<th>
-										
-									</th>
-								</tr>		
-							</table>					
-						</div>
+			<div id="scheduleData" class="theBoard theLightBox" style="display: none"> 		
+				<div class="blockLeft blockHalf">		
+					<h2> <spring:message code="label.requested"/> </h2>
+				
+					<div> 						<!-- Horario	-->
+						<table id="tableRequested" class="theSchedule">
+							<tr>
+								<th>
+								
+								</th>
+							</tr>							
+						</table>					
 					</div>	
+				</div>
+				
+				<div class="blockRight blockHalf">
+					<h2> <spring:message code="label.offered"/> </h2>	
+				
+					<div> 						<!-- Horario	-->
+						<table id="tableOffered" class="theSchedule">
+							<tr>
+								<th>
+									
+								</th>
+							</tr>		
+						</table>					
+					</div>
 				</div>	
-			</div>
+			</div>	
 		</section>
 	</div>
 	

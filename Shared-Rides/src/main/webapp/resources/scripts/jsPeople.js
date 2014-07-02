@@ -1,7 +1,9 @@
 function createTables(){
 	$( "#tablePending" ).append("<tr><th> Usuario  </th></tr>");
-	$( "#tableAssociated" ).append("<tr><th> Usuario  </th></tr>");		
+	$( "#tableAssociated" ).append("<tr><th> Usuario  </th></tr>");
 }
+
+
 
 createTables();
 
@@ -46,7 +48,7 @@ $.post( 'loadAssociations.do',
 });
 
 function viewPendingSchedule(target)
-{
+{	
 	var $userId = $(target).parent().find("input").attr("id");
 	
 	$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 0}, 
@@ -58,7 +60,7 @@ function viewPendingSchedule(target)
 }
 
 function viewAssociatedSchedule(target)
-{
+{	
 	var $userId = $(target).parent().find("input").attr("id");
 	
 	$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 1}, 
@@ -109,7 +111,10 @@ function fetchDays(days, data)
 }
 
 function printSchedule(days, $table)
-{
+{	
+	if(!$( "#scheduleData" ).is(":visible"))			//Display schedules' section
+		$( "#scheduleData" ).show( "bounce", 400 );
+	
 	$table.html("<tr>"		+
 					"<th>"	+
 					"</th>"	+
@@ -171,6 +176,8 @@ function printSchedule(days, $table)
 				else
 					$table.find( "#out" ).append(content);
 			}
+			
+			$table.find( ".emptyCells" ).css( "background-color", "#FAFAFA");
 		}
 	}	
 }
