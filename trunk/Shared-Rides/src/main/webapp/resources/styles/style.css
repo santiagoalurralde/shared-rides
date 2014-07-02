@@ -121,6 +121,20 @@ body{
 	width:					100%;	
 }
 
+.blockHalf
+{
+	width:					50%;
+}
+
+.blockLeft
+{
+	float:					left;
+}
+
+.blockRight
+{
+	float:					right;
+}
 
 /*------------------------------------------------------------------
 [Footer / #theFooter]
