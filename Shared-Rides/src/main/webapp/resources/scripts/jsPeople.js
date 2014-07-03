@@ -191,8 +191,8 @@ function printSchedule(days, $table, typeAssoc)
 
 function actionAssociation(target, action)
 {	
-	var $assocId = $(target).parent().find("input").attr("assocId");
-	
+	var $assocId = $(target).parent().find("#assocId").val();
+		
 	$.post( "responseAssoc.do", { "assocId": $assocId , "response": action}, 
 			function()
 			{
