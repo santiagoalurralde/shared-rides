@@ -204,7 +204,7 @@ function actionAssociation(target, action)
 				alert("respondido");
 				load();
 
-				viewAssociatedSchedule(_listenerScheduleTarget);
+				listenerSchedule(_listenerScheduleTarget);
 			}
 	);
 }
