@@ -1,8 +1,15 @@
-function createTables(){
-	$( "#tablePending" ).html("");
-	$( "#tableAssociated" ).html("");
-	$( "#tablePending" ).append("<tr><th> Usuario  </th></tr>");
-	$( "#tableAssociated" ).append("<tr><th> Usuario  </th></tr>");
+var _viewScheduleTarget;
+var _typeTarget;
+
+load();
+
+function createTables()
+{
+	//Clean Tables at the beginning and after updating.
+	var content = "<tr><th> Usuario  </th></tr>";
+	
+	$( "#tablePending" ).html(content);
+	$( "#tableAssociated" ).html(content);
 }
 
 function load()
@@ -29,7 +36,7 @@ function load()
 									"</a>"+
 									"<span style='vertical-align: top; margin-right: 10px'>"+ data.name + "</span>"+
 									"<input type='hidden' id="+ data.userId +">"+ 																
-									"<button onclick='viewPendingSchedule(this)' style='vertical-align: top'>"+ $('#lblRequest').val() +"</button>"+
+									"<button class='pending' onclick='viewPendingSchedule(this)' style='vertical-align: top'>"+ $('#lblRequest').val() +"</button>"+
 								"</div>";
 					
 				$( "#tablePending" ).append("<tr><td>"+ applicant +"</td></tr>");
@@ -42,7 +49,7 @@ function load()
 									"</a>"+
 									"<span style='vertical-align: top; margin-right: 10px'>"+ data.name +"</span>"+
 									"<input type='hidden' id="+ data.userId +">"+ 								
-									"<button onclick='viewAssociatedSchedule(this)' style='vertical-align: top'>"+ $('#lblAssociation').val() +"</button>"+
+									"<button class='associated' onclick='viewAssociatedSchedule(this)' style='vertical-align: top'>"+ $('#lblAssociation').val() +"</button>"+
 								"</div>";
 				
 				$( "#tableAssociated" ).append("<tr><td>"+ applicant +"</td></tr>");
@@ -50,11 +57,12 @@ function load()
 		});
 }
 
-load();
-
 function viewPendingSchedule(target)
-{	
-	var $userId = $(target).parent().find("input").attr("id");
+{
+	_viewScheduleTarget = target;
+	_typeTarget = 0;
+	
+	$userId = $(target).parent().find("input").attr("id");
 	
 	$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 0}, 
 		function(json)
@@ -66,7 +74,11 @@ function viewPendingSchedule(target)
 
 function viewAssociatedSchedule(target)
 {	
-	var $userId = $(target).parent().find("input").attr("id");
+	_viewScheduleTarget = target;
+	_typeTarget = 1;
+	
+	$userId = $(target).parent().find("input").attr("id");
+
 	
 	$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 1}, 
 		function(json)
@@ -89,8 +101,8 @@ function viewSchedule(json, typeAssoc)
 	});
 	printSchedule(days, $("#tableRequested"), typeAssoc);
 	
-	days	= new Array();
-	days[7] = null;	
+	days		= new Array();
+	days[7] 	= null;	
 	
 	$.each(jsonNew.offered, function(i, data){	
 		fetchDays(days, data);
@@ -198,6 +210,8 @@ function printSchedule(days, $table, typeAssoc)
 
 function actionAssociation(target, action)
 {	
+	// Cancels or Accepts the request.
+	
 	var $assocId = $(target).parent().find("#assocId").val();
 		
 	$.post( "responseAssoc.do", { "assocId": $assocId , "response": action}, 
@@ -205,10 +219,14 @@ function actionAssociation(target, action)
 			{
 				alert("respondido");
 				load();
+				
+				if(_typeTarget == 1)
+					viewAssociatedSchedule(_viewScheduleTarget);
+				else
+					viewPendingSchedule(_viewScheduleTarget);
 			}
 	);
 }
-
 
 function Day()
 { 
@@ -222,6 +240,8 @@ function Day()
 
 function dayLabel(index)
 {
+	//	Return the day's Label according to the index.
+	
 	var label;
 
 	switch (index)
