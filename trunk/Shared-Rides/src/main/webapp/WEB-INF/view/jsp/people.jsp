@@ -1,7 +1,6 @@
 <%@	taglib uri="http://www.springframework.org/tags" 	prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c" %>
 
-
 <body>
 	<div id="theContent" class="theBox">	
 		
@@ -35,11 +34,7 @@
 				
 					<div> 						<!-- Horario	-->
 						<table id="tableRequested" class="theSchedule">
-							<tr>
-								<th>
-								
-								</th>
-							</tr>							
+					
 						</table>					
 					</div>	
 				</div>
@@ -49,14 +44,12 @@
 				
 					<div> 						<!-- Horario	-->
 						<table id="tableOffered" class="theSchedule">
-							<tr>
-								<th>
-									
-								</th>
-							</tr>		
+	
 						</table>					
 					</div>
 				</div>	
+				
+				<div class="clearer"></div>
 			</div>	
 		</section>
 	</div>

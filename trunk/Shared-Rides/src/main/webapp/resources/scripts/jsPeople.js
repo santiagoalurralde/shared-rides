@@ -3,8 +3,6 @@ function createTables(){
 	$( "#tableAssociated" ).append("<tr><th> Usuario  </th></tr>");
 }
 
-
-
 createTables();
 
 $.post( 'loadAssociations.do', 
@@ -54,7 +52,7 @@ function viewPendingSchedule(target)
 	$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 0}, 
 		function(json)
 		{
-			viewSchedule(json);
+			viewSchedule(json, 0);
 		}
 	);
 }
@@ -66,30 +64,31 @@ function viewAssociatedSchedule(target)
 	$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 1}, 
 		function(json)
 		{
-			viewSchedule(json);
+			viewSchedule(json, 1);
 		}
 	);
 }
 
-function viewSchedule(json)
+function viewSchedule(json, typeAssoc)
 {
 	var jsonNew = $.parseJSON(json);
 	//{"requested":[{"day":2,"inout":2,"hour":20},{"day":5,"inout":2,"hour":20}],"offered":[]}
 
-	var daysRequested	= new Array();
-	daysRequested[7] 	= null;	
-	var daysOffered		= new Array();
-	daysOffered[7] 		= null;	
+	var days	= new Array();
+	days[7] 	= null;	
 	
 	$.each(jsonNew.requested, function(i, data){	
-		fetchDays(daysRequested, data);
+		fetchDays(days, data);
 	});
-	printSchedule(daysRequested, $("#tableRequested"));
+	printSchedule(days, $("#tableRequested"), typeAssoc);
+	
+	days	= new Array();
+	days[7] = null;	
 	
 	$.each(jsonNew.offered, function(i, data){	
-		fetchDays(daysOffered, data);
+		fetchDays(days, data);
 	});
-	printSchedule(daysOffered, $("#tableOffered"));
+	printSchedule(days, $("#tableOffered"), typeAssoc);
 }
 
 function fetchDays(days, data)
@@ -110,7 +109,7 @@ function fetchDays(days, data)
 	}	
 }
 
-function printSchedule(days, $table)
+function printSchedule(days, $table, typeAssoc)
 {	
 	if(!$( "#scheduleData" ).is(":visible"))			//Display schedules' section
 		$( "#scheduleData" ).show( "bounce", 400 );
@@ -124,6 +123,8 @@ function printSchedule(days, $table)
 	{
 		if(days[i]!=null)
 		{
+			var buttons;
+			
 			$table.find( "tr:first" ).append("<th id='"+ i +"'>"+ dayLabel(i) +"</th>");
 			
 			if(!$table.find("#in").length) 		//Fila de In no existe la creamos
@@ -132,14 +133,22 @@ function printSchedule(days, $table)
 			if(!$table.find("#out").length)		//Fila de Out no existe la creamos
 				$table.append("<tr id='out'><td>"+ $('#lblDeparture').val() +"</td></tr>");
 
+			if(typeAssoc == 0)
+			{
+				buttons = 	"<button onclick='actionAssociation(this, true)' style='margin-left: 4px'><img src='resources/images/accept.png' width='15px'></button>"+
+							"<button onclick='actionAssociation(this, false)' style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>";
+			}
+			else
+			{
+				buttons = 	"<button onclick='actionAssociation(this, false)' style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>";
+			}
 			
 			if(days[i].inHour != "")
-			{		
+			{	
+				
 				var content = 	"<td>"+ 
-									days[i].inHour +
-									"<button style='margin-left: 4px'><img src='resources/images/accept.png' width='15px'></button>"+
-									"<button style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>"+
-									"<input type='hidden' value='"+ days[i].assocIdIn +"' name='assocIdIn'>" +
+									days[i].inHour + buttons +
+									"<input type='hidden' value='"+ days[i].assocIdIn +"' id='assocId'>" +
 								"</td>";
 				
 				if($table.find("#in #emptyCell"+i).length)			//Si ya existe celda in vacía donde queremos insertar.
@@ -158,10 +167,8 @@ function printSchedule(days, $table)
 			if(days[i].outHour != "")
 			{	
 				var content =	"<td>"+ 
-									days[i].outHour +
-									"<button style='margin-left: 4px'><img src='resources/images/accept.png' width='15px'></button>"+
-									"<button style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>"+
-									"<input type='hidden' value='"+ days[i].assocIdOut +"' name='assocIdOut'>" +
+									days[i].outHour + buttons +
+									"<input type='hidden' value='"+ days[i].assocIdOut +"' id='assocId'>" +
 								"</td>";
 				
 				if(!$table.find("#in #emptyCell"+i).length)			//Si no existe celda in vacía en la misma columna
@@ -181,6 +188,19 @@ function printSchedule(days, $table)
 		}
 	}	
 }
+
+function actionAssociation(target, action)
+{	
+	var $assocId = $(target).parent().find("input").attr("assocId");
+	
+	$.post( "viewSchedule.do", { "assocId": $assocId , "response": true}, 
+			function()
+			{
+				alert("respondido");
+			}
+	);
+}
+
 
 function Day()
 { 
