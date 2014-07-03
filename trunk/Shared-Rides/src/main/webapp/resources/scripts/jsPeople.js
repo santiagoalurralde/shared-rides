@@ -193,7 +193,7 @@ function actionAssociation(target, action)
 {	
 	var $assocId = $(target).parent().find("input").attr("assocId");
 	
-	$.post( "viewSchedule.do", { "assocId": $assocId , "response": true}, 
+	$.post( "responseAssoc.do", { "assocId": $assocId , "response": action}, 
 			function()
 			{
 				alert("respondido");
