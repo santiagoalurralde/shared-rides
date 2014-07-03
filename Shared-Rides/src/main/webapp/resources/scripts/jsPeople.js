@@ -1,5 +1,4 @@
-var _viewScheduleTarget;
-var _typeTarget;
+var _listenerScheduleTarget;
 
 load();
 
@@ -28,70 +27,66 @@ function load()
 			*/
 
 			var jsonNew = $.parseJSON(json);
+
+
 			
 			$.each(jsonNew[0], function(i, data){
-				var applicant = "<div>" +
-									"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId+"'>"+
-										"<img src='resources/profilePic/"+ data.pic +"'>"+
-									"</a>"+
-									"<span style='vertical-align: top; margin-right: 10px'>"+ data.name + "</span>"+
-									"<input type='hidden' id="+ data.userId +">"+ 																
-									"<button class='pending' onclick='viewPendingSchedule(this)' style='vertical-align: top'>"+ $('#lblRequest').val() +"</button>"+
-								"</div>";
-					
-				$( "#tablePending" ).append("<tr><td>"+ applicant +"</td></tr>");
-			});		
-			
-			$.each(jsonNew[1], function(i, data){
-				var applicant = "<div id='pic'>" +
+				var applicant =	"<div>"+
 									"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
 										"<img src='resources/profilePic/"+ data.pic +"'>"+
 									"</a>"+
 									"<span style='vertical-align: top; margin-right: 10px'>"+ data.name +"</span>"+
-									"<input type='hidden' id="+ data.userId +">"+ 								
-									"<button class='associated' onclick='viewAssociatedSchedule(this)' style='vertical-align: top'>"+ $('#lblAssociation').val() +"</button>"+
+									"<input type='hidden' id="+ data.userId +">"+ 			
+									"<button class='pending' onclick='listenerSchedule(this)' style='vertical-align: top'>"+ $('#lblRequest').val() +"</button>"+
 								"</div>";
-				
+
+				$( "#tablePending" ).append("<tr><td>"+ applicant +"</td></tr>");
+			});		
+			
+			$.each(jsonNew[1], function(i, data){
+				var applicant =	"<div>"+
+									"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
+										"<img src='resources/profilePic/"+ data.pic +"'>"+
+									"</a>"+
+									"<span style='vertical-align: top; margin-right: 10px'>"+ data.name +"</span>"+
+									"<input type='hidden' id="+ data.userId +">"+ 	
+									"<button class='associated' onclick='listenerSchedule(this)' style='vertical-align: top'>"+ $('#lblAssociation').val() +"</button>"+
+								"</div>";
+
 				$( "#tableAssociated" ).append("<tr><td>"+ applicant +"</td></tr>");
 			});				
 		});
 }
 
-function viewPendingSchedule(target)
+function listenerSchedule(target)
 {
-	_viewScheduleTarget = target;
-	_typeTarget = 0;
+	_listenerScheduleTarget = target;
 	
 	$userId = $(target).parent().find("input").attr("id");
 	
-	$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 0}, 
-		function(json)
-		{
-			viewSchedule(json, 0);
-		}
-	);
-}
-
-function viewAssociatedSchedule(target)
-{	
-	_viewScheduleTarget = target;
-	_typeTarget = 1;
-	
-	$userId = $(target).parent().find("input").attr("id");
-
-	
-	$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 1}, 
-		function(json)
-		{
-			viewSchedule(json, 1);
-		}
-	);
+	if($(target).hasClass("pending"))
+	{
+		$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 0}, 
+			function(json)
+			{
+				viewSchedule(json, 0);
+			}
+		);
+	}
+	else
+	{
+		$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 1}, 
+			function(json)
+			{
+				viewSchedule(json, 1);
+			}
+		);
+	}		
 }
 
 function viewSchedule(json, typeAssoc)
 {
 	var jsonNew = $.parseJSON(json);
-	//{"requested":[{"day":2,"inout":2,"hour":20},{"day":5,"inout":2,"hour":20}],"offered":[]}
 
 	var days	= new Array();
 	days[7] 	= null;	
@@ -113,9 +108,8 @@ function viewSchedule(json, typeAssoc)
 function fetchDays(days, data)
 {
 	if(days[data.day] == null)
-	{
 		days[data.day] = new Day();
-	}
+
 	if(data.inout == 1)	//in
 	{
 		days[data.day].inHour 		= data.hour;
@@ -133,10 +127,7 @@ function printSchedule(days, $table, typeAssoc)
 	if(!$( "#scheduleData" ).is(":visible"))			//Display schedules' section
 		$( "#scheduleData" ).show( "bounce", 400 );
 	
-	$table.html("<tr>"		+
-					"<th>"	+
-					"</th>"	+
-				"</tr>");
+	$table.html("<tr><th></th></tr>");
 	
 	for(var i=1;i<days.length;i++)
 	{
@@ -152,19 +143,16 @@ function printSchedule(days, $table, typeAssoc)
 			if(!$table.find("#out").length)		//Fila de Out no existe la creamos
 				$table.append("<tr id='out'><td>"+ $('#lblDeparture').val() +"</td></tr>");
 
+			var buttonCancel = "<button onclick='actionAssociation(this, false)' style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>";
+			
 			if(typeAssoc == 0)
-			{
 				buttons = 	"<button onclick='actionAssociation(this, true)' style='margin-left: 4px'><img src='resources/images/accept.png' width='15px'></button>"+
-							"<button onclick='actionAssociation(this, false)' style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>";
-			}
+							buttonCancel;
 			else
-			{
-				buttons = 	"<button onclick='actionAssociation(this, false)' style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>";
-			}
+				buttons = 	buttonCancel;
 			
 			if(days[i].inHour != "")
 			{	
-				
 				var content = 	"<td>"+ 
 									days[i].inHour + buttons +
 									"<input type='hidden' value='"+ days[i].assocIdIn +"' id='assocId'>" +
@@ -173,8 +161,7 @@ function printSchedule(days, $table, typeAssoc)
 				if($table.find("#in #emptyCell"+i).length)			//Si ya existe celda in vacía donde queremos insertar.
 				{
 					$table.find( "#in #emptyCell"+i ).append(content);
-					$table.find( "#in #emptyCell"+i ).removeAttr('id');
-					$table.find( "#in #emptyCell"+i ).removeClass('emptyCells');
+					$table.find( "#in #emptyCell"+i ).removeAttr('id').removeClass('emptyCells');
 				}
 				else
 					$table.find( "#in" ).append(content);
@@ -196,14 +183,11 @@ function printSchedule(days, $table, typeAssoc)
 				if($table.find("#out #emptyCell"+i).length)			//Si ya existe celda in vacía donde queremos insertar.
 				{
 					$table.find( "#out #emptyCell"+i ).append(content);
-					$table.find( "#out #emptyCell"+i ).removeAttr('id');
-					$table.find( "#out #emptyCell"+i ).removeClass('emptyCells');
+					$table.find( "#out #emptyCell"+i ).removeAttr('id').removeClass('emptyCells');
 				}
 				else
 					$table.find( "#out" ).append(content);
 			}
-			
-			$table.find( ".emptyCells" ).css( "background-color", "#FAFAFA");
 		}
 	}	
 }
@@ -219,11 +203,8 @@ function actionAssociation(target, action)
 			{
 				alert("respondido");
 				load();
-				
-				if(_typeTarget == 1)
-					viewAssociatedSchedule(_viewScheduleTarget);
-				else
-					viewPendingSchedule(_viewScheduleTarget);
+
+				viewAssociatedSchedule(_listenerScheduleTarget);
 			}
 	);
 }
