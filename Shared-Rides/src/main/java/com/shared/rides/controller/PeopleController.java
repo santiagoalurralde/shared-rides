@@ -62,7 +62,7 @@ public class PeopleController {
 											@RequestParam("typeAssoc") int type){
 	
 		User u = (User) request.getSession().getAttribute("user");
-		return responseAssocService.showAssociationSchedule(u, userId, type); 
+		return responseAssocService.showAssociationSchedule(u.getUserId(), userId, type); 
 	}
 	
 	//Metodo que se llama cuando el usuario responde a una solicitud pendiente

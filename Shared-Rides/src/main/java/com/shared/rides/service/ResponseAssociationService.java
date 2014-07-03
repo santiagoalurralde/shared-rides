@@ -1,5 +1,6 @@
 package com.shared.rides.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -44,7 +45,10 @@ public class ResponseAssociationService {
 	 * Si el tipo de asociacion es 0 --> Pendiente
 	 * Si es 1 --> Asociado
 	 */
-	public String showAssociationSchedule(User requestUser, long assocUserId, int assocType){			
+	public String showAssociationSchedule(long requestUserId, long assocUserId, int assocType){
+		User requestUser = new User(requestUserId);
+		requestUser = userDAO.load(requestUser);
+		
 		json = new JsonObject();
 		requestedJson = new JsonArray();
 		offeredJson = new JsonArray();
@@ -68,9 +72,9 @@ public class ResponseAssociationService {
 				}
 			}
 		}
-		else{
+		/*else{
 			//Lista de todas las peticiones que yo realice
-			/*List<Association> myRequestsList = userDAO.getMyRequests(requestUser);
+			List<Association> myRequestsList = userDAO.getMyRequests(requestUser);
 			
 			for (int i = 0; i < assocList.size(); i++){
 				User assocUser = assocList.get(i).getApplier();
@@ -85,8 +89,8 @@ public class ResponseAssociationService {
 				if (userId == assocUserId && myRequestsList.get(j).getState().equals(State.ACCEPTED)){
 					completeJson(assocList.get(j));
 				}
-			}*/
-		}
+			}
+		}*/
 		json.add("requested", requestedJson);
 		json.add("offered", offeredJson);
 		
