@@ -29,7 +29,10 @@ public class RequestAssociationService {
 	/*
 	 * Funcion que se usa para verificar si el usuario posee asociaciones nuevas
 	 */
-	public String hasAssociation(User u){
+	public String hasAssociation(long userId){
+		User u = new User(userId);
+		u = userDAO.load(u);
+		
 		List<Association> assocList = u.getAssociations();
 		JsonObject json = new JsonObject();
 		for(int i = 0; i < assocList.size(); i++){

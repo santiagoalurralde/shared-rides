@@ -155,7 +155,7 @@ public class ResponseAssociationService {
 			msg = "El usuario ha rechazado la solicitud";
 		}
 		assocDAO.update(assoc);
-		
+			
 		return msg;
 	}
 }
