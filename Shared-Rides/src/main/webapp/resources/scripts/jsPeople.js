@@ -1,49 +1,56 @@
 function createTables(){
+	$( "#tablePending" ).html("");
+	$( "#tableAssociated" ).html("");
 	$( "#tablePending" ).append("<tr><th> Usuario  </th></tr>");
 	$( "#tableAssociated" ).append("<tr><th> Usuario  </th></tr>");
 }
 
-createTables();
-
-$.post( 'loadAssociations.do', 
-	function(json){
-	/*
-	Aca va a traer la informacion de las personas, como un json.
-	Es un JsonArray que tiene adentro dos JsonArray: uno con las asociaciones pendientes y otro con las
-	asociaciones aceptadas (o sea mis amigos)
-	Dentro de cada uno de estos; tengo el id de la asociacion y el nombre completo de la persona
-	Ese id de la asociacion no hace falta mostrarlo, pero sirve para dps buscar la info de esa asoc para mostrar
-	abajo
-	*/
-
-	var jsonNew = $.parseJSON(json);
+function load()
+{
+	createTables();
 	
-	$.each(jsonNew[0], function(i, data){
-		var applicant = "<div>" +
-							"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId+"'>"+
-								"<img src='resources/profilePic/"+ data.pic +"'>"+
-							"</a>"+
-							"<span style='vertical-align: top; margin-right: 10px'>"+ data.name + "</span>"+
-							"<input type='hidden' id="+ data.userId +">"+ 																
-							"<button onclick='viewPendingSchedule(this)' style='vertical-align: top'>"+ $('#lblRequest').val() +"</button>"+
-						"</div>";
+	$.post( 'loadAssociations.do', 
+			function(json){
+			/*
+			Aca va a traer la informacion de las personas, como un json.
+			Es un JsonArray que tiene adentro dos JsonArray: uno con las asociaciones pendientes y otro con las
+			asociaciones aceptadas (o sea mis amigos)
+			Dentro de cada uno de estos; tengo el id de la asociacion y el nombre completo de la persona
+			Ese id de la asociacion no hace falta mostrarlo, pero sirve para dps buscar la info de esa asoc para mostrar
+			abajo
+			*/
+
+			var jsonNew = $.parseJSON(json);
 			
-		$( "#tablePending" ).append("<tr><td>"+ applicant +"</td></tr>");
-	});		
-	
-	$.each(jsonNew[1], function(i, data){
-		var applicant = "<div id='pic'>" +
-							"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
-								"<img src='resources/profilePic/"+ data.pic +"'>"+
-							"</a>"+
-							"<span style='vertical-align: top; margin-right: 10px'>"+ data.name +"</span>"+
-							"<input type='hidden' id="+ data.userId +">"+ 								
-							"<button onclick='viewAssociatedSchedule(this)' style='vertical-align: top'>"+ $('#lblAssociation').val() +"</button>"+
-						"</div>";
-		
-		$( "#tableAssociated" ).append("<tr><td>"+ applicant +"</td></tr>");
-	});				
-});
+			$.each(jsonNew[0], function(i, data){
+				var applicant = "<div>" +
+									"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId+"'>"+
+										"<img src='resources/profilePic/"+ data.pic +"'>"+
+									"</a>"+
+									"<span style='vertical-align: top; margin-right: 10px'>"+ data.name + "</span>"+
+									"<input type='hidden' id="+ data.userId +">"+ 																
+									"<button onclick='viewPendingSchedule(this)' style='vertical-align: top'>"+ $('#lblRequest').val() +"</button>"+
+								"</div>";
+					
+				$( "#tablePending" ).append("<tr><td>"+ applicant +"</td></tr>");
+			});		
+			
+			$.each(jsonNew[1], function(i, data){
+				var applicant = "<div id='pic'>" +
+									"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
+										"<img src='resources/profilePic/"+ data.pic +"'>"+
+									"</a>"+
+									"<span style='vertical-align: top; margin-right: 10px'>"+ data.name +"</span>"+
+									"<input type='hidden' id="+ data.userId +">"+ 								
+									"<button onclick='viewAssociatedSchedule(this)' style='vertical-align: top'>"+ $('#lblAssociation').val() +"</button>"+
+								"</div>";
+				
+				$( "#tableAssociated" ).append("<tr><td>"+ applicant +"</td></tr>");
+			});				
+		});
+}
+
+load();
 
 function viewPendingSchedule(target)
 {	
@@ -197,6 +204,7 @@ function actionAssociation(target, action)
 			function()
 			{
 				alert("respondido");
+				load();
 			}
 	);
 }
