@@ -42,7 +42,7 @@ public class MainController {
 	@RequestMapping(value = "/hasAssociation.do", method = RequestMethod.POST)
 	public @ResponseBody String hasAssoc(HttpServletRequest request){
 	   	User u = (User) request.getSession().getAttribute("user");
-	   	return requestAssocService.hasAssociation(u);
+	   	return requestAssocService.hasAssociation(u.getUserId());
 	}
 	
 	//Metodo que se encarga de realizar la busqueda de los usuarios de acuerdo a los parametros recibidos
