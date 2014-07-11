@@ -9,17 +9,9 @@ Assigned to:	Santiago Alurralde (sa)
 
 /*-----------------------------------------------------------------*/
 
-#picIntro
-{
-	border-radius:			6px;
-	box-shadow:				0px 3px 3px #000000;
-	float: 					left;
-	width:					45%;
-	margin-top:				60px;
-}
-
 #i18n{
 	box-shadow:				0px 1px 1px #000000;
+	background-color: 		rgba(0, 0, 0, 0.7);	
 	float: 					right;
 	padding:				0px 2px;
 	text-align:				center;
@@ -27,14 +19,12 @@ Assigned to:	Santiago Alurralde (sa)
 
 #theLogin
 {
-	float:					right;
-	font-size:				90%;
-	height:					440px;
-	margin-top:				60px;
-	padding-bottom:			20px;	
-	text-align:				left;	
-	width:					40%;
-	clear:					both;
+	background-color: 	rgba(0, 0, 0, 0.7);	
+	color:				#EEEEEE;
+	margin:				0 auto;
+	width: 				30%;
+	padding:			2% 10%;
+	font-family: 		'Open Sans', sans-serif;
 }
 
 .theInputs{
