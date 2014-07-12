@@ -15,23 +15,6 @@ div.olLayerDiv {
    -khtml-user-select:	none;
 }
 
-/*
-.olLayerGoogleCopyright {
-    left: 2px;
-    bottom: 2px;
-}
-.olLayerGoogleV3.olLayerGoogleCopyright {
-    right: auto !important;
-}
-.olLayerGooglePoweredBy {
-    left: 2px;
-    bottom: 15px;
-}
-.olLayerGoogleV3.olLayerGooglePoweredBy {
-    bottom: 15px !important;
-}
-*/
-/* GMaps should not set styles on its container */
 .olForeignContainer {
     opacity:			1 !important;
 }
@@ -548,3 +531,21 @@ img.olTileImage {
     max-width: none;
 }
 
+
+/*
+.olLayerGoogleCopyright {
+    left: 2px;
+    bottom: 2px;
+}
+.olLayerGoogleV3.olLayerGoogleCopyright {
+    right: auto !important;
+}
+.olLayerGooglePoweredBy {
+    left: 2px;
+    bottom: 15px;
+}
+.olLayerGoogleV3.olLayerGooglePoweredBy {
+    bottom: 15px !important;
+}
+*/
+/* GMaps should not set styles on its container */
