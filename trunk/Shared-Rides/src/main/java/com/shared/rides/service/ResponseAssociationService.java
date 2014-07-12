@@ -3,6 +3,7 @@ package com.shared.rides.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -143,11 +144,12 @@ public class ResponseAssociationService {
 	public String sendResponseAssoc(long assocId, boolean response){
 		Association assoc = new Association(assocId);
 		assoc = assocDAO.load(assoc);
-		
+		Date date = new Date();
 		String msg = null;
 		
 		if (response == true){
 			assoc.setState(State.ACCEPTED);
+			assoc.setDate(date);
 			msg = "El usuario ha aceptado la solicitud";
 		}
 		else{

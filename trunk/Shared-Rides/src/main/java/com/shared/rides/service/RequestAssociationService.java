@@ -1,5 +1,7 @@
 package com.shared.rides.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +52,7 @@ public class RequestAssociationService {
 	 * A la hora de setear el inout; se setea un 1 si es in o un 2 si es out
 	 */
 	public String sendAssocRequest(int day, int inout, long idUser, long idApplicant){
+		Date date = new Date();
 		message = "No se pudo enviar la solicitud correctamente.";
 		//Persona que hace la peticion
 		applicantUser = new User();
@@ -67,6 +70,7 @@ public class RequestAssociationService {
 			assoc.setInout(inout);
 			assoc.setApplier(applicantUser);
 			assoc.setState(State.PENDING);
+			assoc.setDate(date);
 			assocDAO.save(assoc);
 			userDAO.newAssoc(supplierUser, assoc);
 			message = "Se ha enviado la solicitud correctamente.";

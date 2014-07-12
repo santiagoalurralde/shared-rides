@@ -7,6 +7,7 @@ package com.shared.rides.domain;
 */
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -43,6 +44,9 @@ public class Association implements Serializable{
 	@Enumerated(EnumType.STRING)
 	@Column(name="state")
 	private State state;
+	
+	@Column(name="date")
+	private Date date;
 	
 //-----------CONSTRUCTOR
 
@@ -90,6 +94,22 @@ public class Association implements Serializable{
 
 	public void setAssociationId(long associationId) {
 		this.associationId = associationId;
+	}
+
+	public User getApplicantID() {
+		return applicantID;
+	}
+
+	public void setApplicantID(User applicantID) {
+		this.applicantID = applicantID;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	
