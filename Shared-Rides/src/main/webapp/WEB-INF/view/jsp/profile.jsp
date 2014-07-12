@@ -104,7 +104,7 @@
 		if("${visible}" === 'false')
 			$( '#privateData' ).hide( 0 );
 		
-		initMap("${lonPed}", "${latPed}");
+		initMap("${lonPed}", "${latPed}");	
 		initMap1("santiago.gpx");
 		
 		<c:forEach var="day" items="${schPed}">
@@ -141,75 +141,48 @@
 		}
 
 		function fillTablePed(){
-			var tPed = document.getElementById("tablePed");
+			var tPed = $("#tablePed");
 			
-			var rDay 	= tPed.insertRow(-1);
-			var rIn 	= tPed.insertRow(-1);
-			var rOut	= tPed.insertRow(-1);
-			
-			var hDay 		= document.createElement('th'); 
-			hDay.innerHTML 	= "";
-			rDay.appendChild(hDay);
-			var cIn 		= rIn.insertCell(-1);
-			cIn.innerHTML 	= "<spring:message code="label.arrival"/>";
-			var cOut 		= rOut.insertCell(-1);
-			cOut.innerHTML 	= "<spring:message code="label.departure"/>";
+			tPed.append("<tr id='rDay'></tr><tr id='rIn'></tr><tr id='rOut'></tr>");
+
+			$( "#tablePed #rDay" ).append("<th></th>"); //vacio
+			$( "#tablePed #rIn" ).append('<td><spring:message code="label.arrival"/></td>');
+			$( "#tablePed #rOut" ).append('<td><spring:message code="label.departure"/></td>');
 			
 			for(var i=0; i<schPed.length; i++)
 			{
-				var hDay 		= document.createElement('th');
-				hDay.innerHTML 	= getDay(schPed[i][0]);
-				
 				var btnRequest	= '<button class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/steering.png" width="25px"/></button>'; 
 				var hdnDay		= '<input id="hdnDay"	type="hidden" value="'+ schPed[i][0] +'"/>'; 
 				var hdnIn		= '<input id="hdn" 		type="hidden" value="'+ 1 +'"/>'; 
 				var hdnOut		= '<input id="hdn"		type="hidden" value="'+ 2 +'"/>';
 				
-				rDay.appendChild(hDay);
-				var cIn 		= rIn.insertCell(-1);
-				cIn.id			= "day" + schPed[i][0] + "-1";	//In
-				cIn.innerHTML 	= schPed[i][1] + btnRequest + hdnDay + hdnIn;				
-				
-				var cOut 		= rOut.insertCell(-1);
-				cOut.id			= "day" + schPed[i][0] + "-2"; 	//Out
-				cOut.innerHTML 	= schPed[i][2] + btnRequest + hdnDay + hdnOut;	
+				$( "#tablePed #rDay" ).append("<th>"+ getDay(schPed[i][0]) +"</th>");
+				$( "#tablePed #rIn" ).append("<td id='day'"+ schPed[i][0] +"-1'>"+ schPed[i][1] + btnRequest + hdnDay + hdnIn +"</td>");
+				$( "#tablePed #rOut" ).append("<td id='day'"+ schPed[i][0] +"-2'>"+ schPed[i][2] + btnRequest + hdnDay + hdnOut +"</td>");
 			}
 		}
 		
 		/*	Llenamos la tabla del Conductor		*/
 		function fillTableDriver(){
-			var tDriver = document.getElementById("tableDriver");
-					
-			var rDay 	= tDriver.insertRow(-1);
-			var rIn 	= tDriver.insertRow(-1);
-			var rOut	= tDriver.insertRow(-1);
 			
-			var hDay 		= document.createElement('th'); 
-			hDay.innerHTML 	= "";
-			rDay.appendChild(hDay);
-			var cIn 		= rIn.insertCell(-1);
-			cIn.innerHTML 	= "<spring:message code="label.arrival"/>";
-			var cOut 		= rOut.insertCell(-1);
-			cOut.innerHTML 	= "<spring:message code="label.departure"/>";
+			var tDriver = $("#tableDriver");
+			
+			tDriver.append("<tr id='rDay'></tr><tr id='rIn'></tr><tr id='rOut'></tr>");
+			$( "#tableDriver #rDay" ).append("<th></th>"); //vacio
+			$( "#tableDriver #rIn" ).append('<td><spring:message code="label.arrival"/></td>');
+			$( "#tableDriver #rOut" ).append('<td><spring:message code="label.departure"/></td>');
+			
 			
 			for(var i=0; i<schDriver.length; i++)
 			{		
-				var hDay 		= document.createElement('th'); 
-				hDay.innerHTML 	= getDay(schDriver[i][0]);			
-				
 				var btnRequest	= '<button class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/seat.png" width="25px"/></button>'; 
-				var hdnDay		= '<input id="hdnDay" 	type="hidden" value="'+ schDriver[i][0] +'"/>'; 
+				var hdnDay		= '<input id="hdnDay"	type="hidden" value="'+ schDriver[i][0] +'"/>'; 
 				var hdnIn		= '<input id="hdn" 		type="hidden" value="'+ 1 +'"/>'; 
 				var hdnOut		= '<input id="hdn"		type="hidden" value="'+ 2 +'"/>';
 				
-				rDay.appendChild(hDay);
-				var cIn 		= rIn.insertCell(-1);
-				cIn.id			= "day" + schDriver[i][0] + "-1";	//In
-				cIn.innerHTML 	= schDriver[i][1] + btnRequest + hdnDay + hdnIn;
-
-				var cOut 		= rOut.insertCell(-1);
-				cOut.id			= "day" + schDriver[i][0] + "-2"; 	//Out
-				cOut.innerHTML 	= schDriver[i][2] + btnRequest + hdnDay + hdnOut;
+				$( "#tableDriver #rDay" ).append("<th>"+ getDay(schDriver[i][0]) +"</th>");
+				$( "#tableDriver #rIn" ).append("<td id='day'"+ schDriver[i][0] +"-1'>"+ schDriver[i][1] + btnRequest + hdnDay + hdnIn +"</td>");
+				$( "#tableDriver #rOut" ).append("<td id='day'"+ schDriver[i][0] +"-2'>"+ schDriver[i][2] + btnRequest + hdnDay + hdnOut +"</td>");
 			}
 		}
 		
@@ -219,31 +192,32 @@
 		if("${driver}" === 'false')
 		{	
 			$( '#driverData' ).css("display", "none");
+			$( '#pedestrianData' ).css("float", "none").css("width", "100%");
 			$( '#line' ).css("display", "none");			
-			$( '#pedestrianData' ).css("width", "100%");
-			$( '#driverData' ).css("float", "none");
+			$( '.mapStatic' ).css("height", "400px").css("width", "750px");
+			$( '.mapStatic' ).parent().css("margin-left", "85px");			
 		}
 		
 		if("${pedestrian}" === 'false')
 		{
 			$( '#pedestrianData' ).css("display", "none");
+			$( '#driverData' ).css("float", "none").css("width", "100%");
 			$( '#line' ).css("display", "none");			
-			$( '#driverData' ).css("width", "100%");
-			$( '#pedestrianData' ).css("float", "none");
+			$( '.mapStatic' ).css("height", "400px").css("width", "830px");
 		}
 		
 		$( '.btnRequestAssoc' ).click(function(){
-			var dayJs 	= $( this ).parent().find("#hdnDay").val();
-			var inOutJs = $( this ).parent().find("#hdn").val();			
-			var idUserJs = ${id};
+			var dayJs 		= $( this ).parent().find("#hdnDay").val();
+			var inOutJs 	= $( this ).parent().find("#hdn").val();			
+			var idUserJs 	= ${id};
 			$.post( 'requestAssoc.do', { "day":  dayJs, "inout": inOutJs, "idUser": idUserJs },
-					function(msg)
+				function(msg)
+				{
+					if (msg != '')
 					{
-						if (msg != '')
-						{
-							window.alert(msg);
-						}
-					}); 			
+						window.alert(msg);
+					}
+				}); 			
 		});
 		
 	</script>
