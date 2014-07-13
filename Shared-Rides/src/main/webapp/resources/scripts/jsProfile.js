@@ -1,43 +1,63 @@
-function fillTablePed(schPed){
-	var tPed = $("#tablePed");
+function fillTable(schedule, type){
 	
-	tPed.append("<tr id='rDay'></tr><tr id='rIn'></tr><tr id='rOut'></tr>");
-
-	$( "#tablePed #rDay" ).append("<th></th>"); 
-	$( "#tablePed #rIn" ).append('<td>'+ $('#lblArrival').val() +'</td>');
-	$( "#tablePed #rOut" ).append('<td>'+ $('#lblDeparture').val() +'</td>');
+	var $table, image;
 	
-	for(var i=0; i<schPed.length; i++)
+	if(type == "Driver")
 	{
-		var btnRequest	= '<button class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/steering.png" width="25px"/></button>'; 
-		var hdnDay		= '<input id="hdnDay"	type="hidden" value="'+ schPed[i][0] +'"/>'; 
-		var hdnIn		= '<input class="hdnInOut" 	type="hidden" value="1"/>'; 
-		var hdnOut		= '<input class="hdnInOut"	type="hidden" value="2"/>';
+		$table = $("#tableDriver");
+		image = "seat.png";
+	}
+	else
+	{
+		$table = $("#tablePed");
+		image = "steering.png";
+	}
+	
+	$table.append("<tr id='rDay'></tr><tr id='rIn'></tr><tr id='rOut'></tr>");
+	$table.find("#rDay").append("<th></th>"); 
+	$table.find("#rIn" ).append('<td>'+ $('#lblArrival').val() +'</td>');
+	$table.find("#rOut" ).append('<td>'+ $('#lblDeparture').val() +'</td>');
+	
+	for(var i=0; i<schedule.length; i++)
+	{
+		var btnRequest	= '<button 	class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/'+ image +'" width="25px"/></button>'; 
+		var hdnDay		= '<input 	class="hdnDay"		type="hidden" value="'+ schedule[i][0] +'"/>'; 
+		var hdnIn		= '<input 	class="hdnInOut" 	type="hidden" value="1"/>'; 
+		var hdnOut		= '<input 	class="hdnInOut"	type="hidden" value="2"/>';
 		
-		$( "#tablePed #rDay" ).append("<th>"+ getDayLabel(schPed[i][0]) +"</th>");
-		$( "#tablePed #rIn" ).append("<td id='day'"+ schPed[i][0] +"-1'>"+ schPed[i][1] + btnRequest + hdnDay + hdnIn +"</td>");
-		$( "#tablePed #rOut" ).append("<td id='day'"+ schPed[i][0] +"-2'>"+ schPed[i][2] + btnRequest + hdnDay + hdnOut +"</td>");
+		$table.find("#rDay" ).append("<th>"+ getDayLabel(schedule[i][0]) +"</th>");
+		$table.find("#rIn" ).append("<td>"+ schedule[i][1] + btnRequest + hdnDay + hdnIn +"</td>");
+		$table.find("#rOut" ).append("<td>"+ schedule[i][2] + btnRequest + hdnDay + hdnOut +"</td>");
 	}
 }
 
-function fillTableDriver(schDriver){
-	
-	var tDriver = $("#tableDriver");
-	
-	tDriver.append("<tr id='rDay'></tr><tr id='rIn'></tr><tr id='rOut'></tr>");
-	$( "#tableDriver #rDay" ).append("<th></th>");
-	$( "#tablePed #rIn" ).append('<td>'+ $('#lblArrival').val() +'</td>');
-	$( "#tablePed #rOut" ).append('<td>'+ $('#lblDeparture').val() +'</td>');
-	
-	for(var i=0; i<schDriver.length; i++)
-	{		
-		var btnRequest	= '<button class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/seat.png" width="25px"/></button>'; 
-		var hdnDay		= '<input id="hdnDay"		type="hidden" value="'+ schDriver[i][0] +'"/>'; 
-		var hdnIn		= '<input class="hdnInOut" 	type="hidden" value="1"/>'; 
-		var hdnOut		= '<input class="hdnInOut"	type="hidden" value="2"/>';
-		
-		$( "#tableDriver #rDay" ).append("<th>"+ getDayLabel(schDriver[i][0]) +"</th>");
-		$( "#tableDriver #rIn" ).append("<td id='day'"+ schDriver[i][0] +"-1'>"+ schDriver[i][1] + btnRequest + hdnDay + hdnIn +"</td>");
-		$( "#tableDriver #rOut" ).append("<td id='day'"+ schDriver[i][0] +"-2'>"+ schDriver[i][2] + btnRequest + hdnDay + hdnOut +"</td>");
-	}
+if( $( "#valDriver" ).val() === 'false' )	//It's not a driver
+{	
+	$( '#driverData' ).css("display", "none");
+	$( '#pedestrianData' ).css("float", "none").css("width", "100%");
+	$( '#line' ).css("display", "none");			
+	$( '.mapStatic' ).css("height", "400px").css("width", "750px");
+	$( '.mapStatic' ).parent().css("margin-left", "85px");			
 }
+
+if( $( "#valPedestrian" ).val() === 'false' )		//It's not a pedestrian
+{
+	$( '#pedestrianData' ).css("display", "none");
+	$( '#driverData' ).css("float", "none").css("width", "100%");
+	$( '#line' ).css("display", "none");			
+	$( '.mapStatic' ).css("height", "400px").css("width", "830px");
+}
+
+$( '.btnRequestAssoc' ).click(function(){
+	var $day	= $( this ).parent().find(".hdnDay").val();
+	var $inOut	= $( this ).parent().find(".hdnInOut").val();			
+	var $idUser	= $( "#valId" ).val();
+	
+	$.post( 'requestAssoc.do', { "day":  $day, "inout": $inOut, "idUser": $idUser },
+		function(msg)
+		{
+			if (msg != '')
+				window.alert(msg);
+		}); 			
+});
+

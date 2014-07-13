@@ -3,6 +3,7 @@
 <% 
 	String id = request.getParameter("user");
 %>
+
 <body>
 	<div id="theContent" class="theBox">	
 		
@@ -91,9 +92,37 @@
 		</section>
 	</div>
 	
+	<!-- LABELS -->
+	
+	<c:set var="labelArrival"><spring:message code="label.arrival"/></c:set>	
+	<input id="lblArrival" type="hidden" value="${labelArrival}"/>
+	<c:set var="labelDeparture"><spring:message code="label.departure"/></c:set>	
+	<input id="lblDeparture" type="hidden" value="${labelDeparture}"/>
+	<c:set var="labelMonday"><spring:message code="label.monday"/></c:set>	
+	<input id="lblMonday" type="hidden" value="${labelMonday}"/>
+	<c:set var="labelTuesday"><spring:message code="label.tuesday"/></c:set>	
+	<input id="lblTuesday" type="hidden" value="${labelTuesday}"/>
+	<c:set var="labelWednesday"><spring:message code="label.wednesday"/></c:set>	
+	<input id="lblWednesday" type="hidden" value="${labelWednesday}"/>
+	<c:set var="labelThursday"><spring:message code="label.thursday"/></c:set>	
+	<input id="lblThursday" type="hidden" value="${labelThursday}"/>
+	<c:set var="labelFriday"><spring:message code="label.friday"/></c:set>	
+	<input id="lblFriday" type="hidden" value="${labelFriday}"/>
+	
+	<input id="valDriver" 		type="hidden" value="${driver}"/>
+	<input id="valPedestrian" 	type="hidden" value="${pedestrian}"/>
+	<input id="valId" 			type="hidden" value="${id}"/>
+
+	
+	
+</body>
+
+<!-- SCRIPTS -->
+	
 	<script src="resources/maps/OpenLayers.js"		type="text/javascript"></script>    
 	<script src="resources/maps/OpenStreetMap.js"  	type="text/javascript"></script>
 	<script src="resources/maps/osmapStatic.js"		type="text/javascript"></script>	
+	<script src="resources/scripts/utils.js"		type="text/javascript"></script>
 	<script src="resources/scripts/jsProfile.js"	type="text/javascript"></script>
 
 	<script type="text/javascript">
@@ -108,121 +137,17 @@
 		initMap1("santiago.gpx");
 		
 		<c:forEach var="day" items="${schPed}">
-			schPed.push(["${day.dayPed}","${day.hourInPed}","${day.hourOutPed}","${day.haveDriverOut}"]);
+			schPed.push(["${day.dayPed}","${day.hourInPed}","${day.hourOutPed}","${day.haveDriverIn}", "${day.haveDriverOut}"]);
 		</c:forEach>
 		
 		<c:forEach var="day" items="${schDriver}">
 			schDriver.push(["${day.dayDriver}","${day.hourInDriver}","${day.hourOutDriver}","${day.freeSeatsIn}", "${day.freeSeatsOut}"]);
 		</c:forEach>
-		
-		function getDay(aux)
-		{
-			var day;
-			
-			switch(aux)
-			{
-				case '1':
-						day	= '<spring:message code="label.monday"/>';
-						break;
-				case '2':
-						day	= '<spring:message code="label.tuesday"/>';
-						break;
-				case '3':
-						day	= '<spring:message code="label.wednesday"/>';
-						break;
-				case '4':
-						day	= '<spring:message code="label.thursday"/>';
-						break;
-				case '5':
-						day	= '<spring:message code="label.friday"/>';
-						break;		
-			}
-			return day;
-		}
 
-		function fillTablePed(){
-			var tPed = $("#tablePed");
-			
-			tPed.append("<tr id='rDay'></tr><tr id='rIn'></tr><tr id='rOut'></tr>");
-
-			$( "#tablePed #rDay" ).append("<th></th>"); //vacio
-			$( "#tablePed #rIn" ).append('<td><spring:message code="label.arrival"/></td>');
-			$( "#tablePed #rOut" ).append('<td><spring:message code="label.departure"/></td>');
-			
-			for(var i=0; i<schPed.length; i++)
-			{
-				var btnRequest	= '<button class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/steering.png" width="25px"/></button>'; 
-				var hdnDay		= '<input id="hdnDay"	type="hidden" value="'+ schPed[i][0] +'"/>'; 
-				var hdnIn		= '<input id="hdn" 		type="hidden" value="'+ 1 +'"/>'; 
-				var hdnOut		= '<input id="hdn"		type="hidden" value="'+ 2 +'"/>';
-				
-				$( "#tablePed #rDay" ).append("<th>"+ getDay(schPed[i][0]) +"</th>");
-				$( "#tablePed #rIn" ).append("<td id='day'"+ schPed[i][0] +"-1'>"+ schPed[i][1] + btnRequest + hdnDay + hdnIn +"</td>");
-				$( "#tablePed #rOut" ).append("<td id='day'"+ schPed[i][0] +"-2'>"+ schPed[i][2] + btnRequest + hdnDay + hdnOut +"</td>");
-			}
-		}
-		
-		/*	Llenamos la tabla del Conductor		*/
-		function fillTableDriver(){
-			
-			var tDriver = $("#tableDriver");
-			
-			tDriver.append("<tr id='rDay'></tr><tr id='rIn'></tr><tr id='rOut'></tr>");
-			$( "#tableDriver #rDay" ).append("<th></th>"); //vacio
-			$( "#tableDriver #rIn" ).append('<td><spring:message code="label.arrival"/></td>');
-			$( "#tableDriver #rOut" ).append('<td><spring:message code="label.departure"/></td>');
-			
-			
-			for(var i=0; i<schDriver.length; i++)
-			{		
-				var btnRequest	= '<button class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/seat.png" width="25px"/></button>'; 
-				var hdnDay		= '<input id="hdnDay"	type="hidden" value="'+ schDriver[i][0] +'"/>'; 
-				var hdnIn		= '<input id="hdn" 		type="hidden" value="'+ 1 +'"/>'; 
-				var hdnOut		= '<input id="hdn"		type="hidden" value="'+ 2 +'"/>';
-				
-				$( "#tableDriver #rDay" ).append("<th>"+ getDay(schDriver[i][0]) +"</th>");
-				$( "#tableDriver #rIn" ).append("<td id='day'"+ schDriver[i][0] +"-1'>"+ schDriver[i][1] + btnRequest + hdnDay + hdnIn +"</td>");
-				$( "#tableDriver #rOut" ).append("<td id='day'"+ schDriver[i][0] +"-2'>"+ schDriver[i][2] + btnRequest + hdnDay + hdnOut +"</td>");
-			}
-		}
-		
-		fillTablePed();
-		fillTableDriver();
-		
-		if("${driver}" === 'false')
-		{	
-			$( '#driverData' ).css("display", "none");
-			$( '#pedestrianData' ).css("float", "none").css("width", "100%");
-			$( '#line' ).css("display", "none");			
-			$( '.mapStatic' ).css("height", "400px").css("width", "750px");
-			$( '.mapStatic' ).parent().css("margin-left", "85px");			
-		}
-		
-		if("${pedestrian}" === 'false')
-		{
-			$( '#pedestrianData' ).css("display", "none");
-			$( '#driverData' ).css("float", "none").css("width", "100%");
-			$( '#line' ).css("display", "none");			
-			$( '.mapStatic' ).css("height", "400px").css("width", "830px");
-		}
-		
-		$( '.btnRequestAssoc' ).click(function(){
-			var dayJs 		= $( this ).parent().find("#hdnDay").val();
-			var inOutJs 	= $( this ).parent().find("#hdn").val();			
-			var idUserJs 	= ${id};
-			$.post( 'requestAssoc.do', { "day":  dayJs, "inout": inOutJs, "idUser": idUserJs },
-				function(msg)
-				{
-					if (msg != '')
-					{
-						window.alert(msg);
-					}
-				}); 			
-		});
-		
-	</script>
+		fillTable(schPed, "Pedestrian");
+		fillTable(schDriver, "Driver");
 	
-</body>
+	</script>
 
 
 <!--	Datos	-->

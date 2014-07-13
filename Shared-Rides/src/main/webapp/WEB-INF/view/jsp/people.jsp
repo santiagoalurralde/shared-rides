@@ -75,9 +75,12 @@
 	<c:set var="labelFriday"><spring:message code="label.friday"/></c:set>	
 	<input id="lblFriday" type="hidden" value="${labelFriday}"/>
 
+	<script type="text/javascript" src="resources/scripts/utils.js">	</script>
+	<script type="text/javascript" src="resources/scripts/jsPeople.js">	</script>
+
 </body>
 
-<script type="text/javascript" src="resources/scripts/jsPeople.js"></script>
+
 
 
 
