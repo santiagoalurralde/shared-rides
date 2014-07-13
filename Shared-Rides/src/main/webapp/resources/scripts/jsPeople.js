@@ -135,7 +135,7 @@ function printSchedule(days, $table, typeAssoc)
 		{
 			var buttons;
 			
-			$table.find( "tr:first" ).append("<th id='"+ i +"'>"+ dayLabel(i) +"</th>");
+			$table.find( "tr:first" ).append("<th id='"+ i +"'>"+ getDayLabel(i) +"</th>");
 			
 			if(!$table.find("#in").length) 		//Fila de In no existe la creamos
 				$table.append("<tr id='in'><td>"+ $('#lblArrival').val() +"</td></tr>");
@@ -219,30 +219,4 @@ function Day()
   	this.outHour 	= "";
 }
 
-function dayLabel(index)
-{
-	//	Return the day's Label according to the index.
-	
-	var label;
-
-	switch (index)
-	{	
-		case 1:
-			label = $('#lblMonday').val();
-			break;
-		case 2:
-			label = $('#lblTuesday').val();
-			break;
-		case 3:
-			label = $('#lblWednesday').val();
-			break;
-		case 4:
-			label = $('#lblThursday').val();		
-			break;					
-		case 5:
-			label = $('#lblFriday').val();		
-			break;
-	}	
-	return label;
-}
 
