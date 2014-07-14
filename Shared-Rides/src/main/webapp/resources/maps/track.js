@@ -2,8 +2,7 @@
 	Define class TrackMarker.
 ------------------------------------------------------------------------------*/
 var m = {
-	
-		
+			
 	//Constructor
 	initialize	: function(track, lonlat, options) {
 		this.name 			= "";										// set only explicitly for waypoints
@@ -39,7 +38,6 @@ var m = {
 		}
 	},
   
-	
 	//Mouse Over
 	mouseOver	: function(evt) {
 		this.setOpacity(0.6);
@@ -56,7 +54,6 @@ var m = {
 		this.lock = false;
 	},
 	
-	
 	//Mover hacia
 	moveTo		: function(xy){ 
 		var xyl	 	 = this.map.getLayerPxFromViewPortPx(xy);
@@ -66,7 +63,6 @@ var m = {
 		this.lock	 = true;
 	},
 	
-  
 	//Clickear
 	click		: function(evt){
 		
@@ -83,7 +79,6 @@ var m = {
 		}
 	},
 
-	
 	//Mover Punto
 	movePoint	: function(which, lonlat){
 		var p 	= this.myLine.geometry.components[which];
@@ -202,7 +197,7 @@ var m = {
 	// supports upload of marks. The server sends an array of elements
 	// with lon, lat and name to run over
 	marksFromList: function(marks){
-		for(i=0; i<marks.length; i++)
+		for(var i=0; i<marks.length; i++)
 		{
 			var minfo		= marks[i];             					// again a list: lon, lat, name
 			var lonlat		= this.fromGrad(minfo[0], minfo[1]);
@@ -308,6 +303,6 @@ var vectors = new OpenLayers.Layer.Vector("Lines", options);
 	
 map.addLayer(vectors);
 map.addLayer(markers);
-gpxTrack	= new GpxTrack(map, {"markers":markers, "vectors": vectors});
+gpxTrack	= new GpxTrack(map, {"markers": markers, "vectors": vectors});
 
 
