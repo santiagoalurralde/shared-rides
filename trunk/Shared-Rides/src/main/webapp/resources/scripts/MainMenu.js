@@ -16,9 +16,9 @@ function stepsUpdate(value) {
 }
 
 $( document ).ready(function() {
-	
+
 	//Iniciar Mapa Simple
-	initMap();
+	initMap(); 
 	
 	//Esconder elementos
 	start();
