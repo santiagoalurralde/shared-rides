@@ -12,9 +12,9 @@
 	        	<!----	Steps	---->
 	        	<div id="navSteps" class="theBox"> 
 	        		<ul>
-	        			<li id="step1"><h4><spring:message code="label.step1"/></h4></li>
-	        			<li id="step2"><h4><spring:message code="label.step2"/></h4></li>
-	        			<li id="step3"><h4><spring:message code="label.step3"/></h4></li>
+	        			<li id="step1"><b>1. </b><spring:message code="label.step1"/></li>
+	        			<li id="step2"><b>2. </b><spring:message code="label.step2"/></li>
+	        			<li id="step3"><b>3. </b><spring:message code="label.step3"/></li>
 	        		</ul>
 	        	</div>
 	        	
@@ -28,8 +28,7 @@
 						<img id="imgSun" 		title="dia"			class="imagesSteps"	src="resources/images/sun.png" 		style="display: none; margin-right: 100px" 	/>
 						<img id="imgMoon"		title="tarde/noche"	class="imagesSteps"	src="resources/images/moon.png" 	style="display: none"						/>
 	        		</div>
-	        		    
-	        		  			
+
 	        		<!----	Map Driver		---->		
 					<div id="mapDriver">
 						<div id="map"></div>
@@ -62,29 +61,21 @@
 	           	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepsUpdate(1);"	/>		
 	        			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 		/>  
 	        		</div> 	  
-	        		
-	        		
-	        		<script src="resources/scripts/jsFunctions.js" 	type="text/javascript"></script>
-	        		<script src="resources/maps/OpenLayers.js"		type="text/javascript"></script>    
-					<script src="resources/maps/OpenStreetMap.js"  	type="text/javascript"></script>
-					<script src="resources/maps/proj4js.js"			type="text/javascript"></script>
-	        		<script src="resources/maps/osmap.js" 			type="text/javascript"></script>
-    				<script src="resources/maps/track.js" 			type="text/javascript"></script>
-    				<script src="resources/maps/osmapSimple.js" 	type="text/javascript"></script>
-		
-    				<script >
-     					if(typeof(a)!="undefined")
-      					{
-        					a = null;
-      					}
-      					else 
-      					{		
-        					initMapCoords(lonlat, zoom, map);
-      					}
-    				</script>
 	            	
 	        	</form>	        	
 	        	
             </div>
 		</div>
 </body>
+
+<script src="resources/scripts/MainMenu.js" 	type="text/javascript"></script>
+<script src="resources/maps/OpenLayers.js"		type="text/javascript"></script>    
+<script src="resources/maps/OpenStreetMap.js"  	type="text/javascript"></script>
+<script src="resources/maps/proj4js.js"			type="text/javascript"></script>
+<script src="resources/maps/osmap.js" 			type="text/javascript"></script>
+<script src="resources/maps/track.js" 			type="text/javascript"></script>
+<script src="resources/maps/osmapSimple.js" 	type="text/javascript"></script>
+
+<script >
+	initMapCoords(lonlat, zoom, map);
+</script>

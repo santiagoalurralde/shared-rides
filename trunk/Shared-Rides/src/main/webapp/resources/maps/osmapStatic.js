@@ -13,7 +13,7 @@ function initMap(lonPed, latPed){
 	map.addLayer(layerMarker);
 
 	/*  Set Start Position  */
-	var lonlatStart= new OpenLayers.LonLat( -64.183 ,-31.416 )
+	var lonlatStart= new OpenLayers.LonLat( lonPed , latPed ) 
   		.transform(
   				proj4326,
   				map.getProjectionObject()

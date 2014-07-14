@@ -31,21 +31,21 @@ function fillTable(schedule, type){
 	}
 }
 
-if( $( "#valDriver" ).val() === 'false' )	//It's not a driver
-{	
-	$( '#driverData' ).css("display", "none");
-	$( '#pedestrianData' ).css("float", "none").css("width", "100%");
-	$( '#line' ).css("display", "none");			
-	$( '.mapStatic' ).css("height", "400px").css("width", "750px");
-	$( '.mapStatic' ).parent().css("margin-left", "85px");			
-}
+if( $( "#valDriver" ).val() === 'false' )		//It's not a driver
+	fixView($( '#pedestrianData' ), $( '#driverData' ));
 
-if( $( "#valPedestrian" ).val() === 'false' )		//It's not a pedestrian
-{
-	$( '#pedestrianData' ).css("display", "none");
-	$( '#driverData' ).css("float", "none").css("width", "100%");
+if( $( "#valPedestrian" ).val() === 'false' )	//It's not a pedestrian
+	fixView($( '#driverData' ), $( '#pedestrianData' ));
+
+function fixView($targetThis, $targetOther){
+	$targetOther.css("display", "none");
+	$targetThis.css("float", "none").css("width", "100%").css("text-align","left");
+	$( '.star' ).css("float", "left").css("margin-right", "1%").css("margin-left", "0%");
+	$( '.theRating' ).css("margin", "2% 0% 0% 0%");	
+	$( '#profileData' ).css("padding-right", "70px").css("padding-left", "70px");		
 	$( '#line' ).css("display", "none");			
-	$( '.mapStatic' ).css("height", "400px").css("width", "830px");
+	$( '.mapStatic' ).css("height", "400px").css("width", "815px");
+	$( '.mapContainer' ).css("margin-left", "0px");
 }
 
 $( '.btnRequestAssoc' ).click(function(){

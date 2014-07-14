@@ -52,13 +52,6 @@ body{
 	border-left: 			thin solid #CFCFCF;
 }
 
-#line{
-	height: 				725px;
-	position:				absolute;
-	left:					480px; 
-	top:					0px;		
-}
-
 .clearer{
 	/*	Class made for divs that clear floating divs */
 	
@@ -287,8 +280,6 @@ body{
 	-webkit-box-shadow: 			0 1px 2px #d1d1d1;
 	box-shadow: 					0 1px 2px #d1d1d1;
 	
-	text-shadow: 					0.05em 0.05em 0em #eee;
-
 	background:						-webkit-linear-gradient(top, #fdfdfd, #fbfbfb);
 	background:						-moz-linear-gradient(top,  #fdfdfd,  #fbfbfb);
 	
