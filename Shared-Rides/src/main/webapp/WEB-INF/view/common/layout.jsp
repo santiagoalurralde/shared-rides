@@ -18,8 +18,10 @@
 		<!----	Styles		---->
 		<link 	rel		="stylesheet" 		href="resources/styles/style.css" 							type="text/css"/>
 		<link 	rel		="stylesheet"		href="resources/styles/<tiles:getAsString name="style"/>"	type="text/css"/>
-		<link 	rel		="stylesheet"		href="http://fonts.googleapis.com/css?family=Raleway:500"  	type="text/css"/> 
-		<link	rel		="stylesheet"		href="resources/styles/olStyle.css"							type="text/css"/>
+		<link 	rel		="stylesheet"		href="http://fonts.googleapis.com/css?family=Raleway:500"  	type="text/css"/>
+		<!--  
+		<link	rel		="stylesheet"		href="resources/styles/olStyle.css"							type="text/css"/>  
+		-->
 		
 		<!----	Scripts		---->
 		<script src		="resources/scripts/jquery-1.10.2.js" 		type=	"text/javascript">		</script>

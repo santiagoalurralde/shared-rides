@@ -9,10 +9,23 @@ Assigned to:	Santiago Alurralde (sa)
 
 /*-----------------------------------------------------------------*/
 
+*{
+	font-family: 			'Raleway', sans-serif;
+}
+
+
 #userData{
 	padding-left: 				3%;
 	padding-right: 				3%;
 	height:						110px;
+}
+
+.theBoard{	
+	/*	Container with white background */
+	
+	background-color:		white;
+	padding:				20px 0 35px 0;
+	width:					100%;	
 }
 
 #publicData{
@@ -44,13 +57,35 @@ Assigned to:	Santiago Alurralde (sa)
 	min-height:					500px;
 }
 
+#line{
+	height: 				778px;
+	position:				absolute;
+	left:					480px; 
+	top:					0px;		
+}
+
 #driverData{
-	float:						left;	
-	width: 						50%;
 }
 
 #pedestrianData{
 	text-align: 				right;
+}
+
+/*------------------------------------------------------------------
+[Rating / ]
+------------------------------------------------------------------*/
+
+.theRating{
+	margin: 					5% 0 8% 0;
+}
+
+#wrapperRate{
+	height: 100%;
+	padding:0;
+	margin:0;
+	box-sizing: border-box;
+	text-align: center;  
+	vertical-align: middle;
 }
 
 .star-rating{
@@ -129,3 +164,6 @@ Assigned to:	Santiago Alurralde (sa)
 .star-rating i ~ i ~ i ~ i ~ i ~ i ~ i ~ i ~ i ~ i{
   width: 100%;
 }
+
+
+
