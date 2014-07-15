@@ -53,10 +53,7 @@
 								${ratingDriver}
 							</span>	
 						</div>	 	
-														 	
-						<p> 	<!-- Resto de datos	-->	
-						</p>	
-						 		
+														 							 		
 						<div> 	<!-- Horario --> 	
 							<table id="tableDriver" class="theSchedule">
 							</table>					
@@ -86,10 +83,6 @@
 								<img class="star" src="resources/images/star.png" width="50px" style="float:right; margin-left:2%"/>
 							</a>
 						</div>	 	
-						
-						<p> 	
-							<!-- Resto de datos -->		
-						</p>	
 						 		
 						<div> 	<!-- Horario --> 	
 							<table id="tablePed" class="theSchedule">

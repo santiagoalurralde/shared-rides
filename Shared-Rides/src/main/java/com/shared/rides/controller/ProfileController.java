@@ -27,6 +27,11 @@ public class ProfileController {
 		@Autowired
 		private ProfileService showProfileService;
 	
+		@RequestMapping(value = "/rate.do")
+		public ModelAndView showRating(){
+			return new ModelAndView ("rate");
+		}
+		
 		@RequestMapping(value = "/profile.do")
 		public ModelAndView showProfile(@RequestParam("user") long id, 
 										HttpServletRequest request){
@@ -66,7 +71,7 @@ public class ProfileController {
 												HttpServletRequest request){
 			
 			User u = (User) request.getAttribute("user");
-			if (responseAssocService.calculateRating(u.getUserId(), userId, profile, rating))
+			if (showProfileService.calculateRating(u.getUserId(), userId, profile, rating))
 				return "Se hizo la puntuacion";
 			return "NO SE PUDO HACER LA PUNTUACION";
 		}
