@@ -77,7 +77,7 @@ public class PeopleController {
 	@RequestMapping(value = "/updateRating.do", method = RequestMethod.POST)
 	public @ResponseBody String updateRating(@RequestParam("userId") long userId,
 											@RequestParam("prof") int profile,
-											@RequestParam("rating") float rating,
+											@RequestParam("rating") int rating,
 											HttpServletRequest request){
 		
 		User u = (User) request.getAttribute("user");
