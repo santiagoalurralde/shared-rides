@@ -166,7 +166,7 @@ public class ResponseAssociationService {
 	 * lo puntee
 	 * Si me pasa un 0 es un Peaton, sino es un Driver
 	 */
-	public boolean calculateRating(long requestUserID, long userID, int profile, float rating){
+	public boolean calculateRating(long requestUserID, long userID, int profile, int rating){
 		User u = new User(userID);
 		u = userDAO.load(u);
 		User requestUser = new User(requestUserID);
