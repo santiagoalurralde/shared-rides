@@ -1,7 +1,5 @@
 var _listenerScheduleTarget;
 
-load();
-
 function createTables()
 {
 	//Clean Tables at the beginning and after updating.
@@ -11,55 +9,55 @@ function createTables()
 	$( "#tableAssociated" ).html(content);
 }
 
+load();
+
 function load()
 {
 	createTables();
 	
 	$.post( 'loadAssociations.do', 
-			function(json){
-			/*
-			Aca va a traer la informacion de las personas, como un json.
-			Es un JsonArray que tiene adentro dos JsonArray: uno con las asociaciones pendientes y otro con las
-			asociaciones aceptadas (o sea mis amigos)
-			Dentro de cada uno de estos; tengo el id de la asociacion y el nombre completo de la persona
-			Ese id de la asociacion no hace falta mostrarlo, pero sirve para dps buscar la info de esa asoc para mostrar
-			abajo
-			*/
+		function(json){
+		/*
+			Trae la informacion de las personas.
+			JsonArray que contiene 2 JsonArray: uno con las asociaciones pendientes y otro con las
+			asociaciones aceptadas.
+			Dentro de cada uno de estos; tengo el id de la asociacion y el nombre completo de la persona.
+		*/
 
-			var jsonNew = $.parseJSON(json);
+		var jsonNew = $.parseJSON(json);
 
+		$.each(jsonNew[0], function(i, data){
+			var applicant =	"<div>"+
+								"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
+									"<img src='resources/profilePic/"+ data.pic +"'>"+
+								"</a>"+
+								"<span style='vertical-align: top; margin-right: 10px'>"+ data.name +"</span>"+
+								"<input type='hidden' id="+ data.userId +">"+ 			
+								"<button class='pending' onclick='listenerSchedule(this)' style='vertical-align: top'>"+ $('#lblRequest').val() +"</button>"+
+							"</div>";
 
-			
-			$.each(jsonNew[0], function(i, data){
-				var applicant =	"<div>"+
-									"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
-										"<img src='resources/profilePic/"+ data.pic +"'>"+
-									"</a>"+
-									"<span style='vertical-align: top; margin-right: 10px'>"+ data.name +"</span>"+
-									"<input type='hidden' id="+ data.userId +">"+ 			
-									"<button class='pending' onclick='listenerSchedule(this)' style='vertical-align: top'>"+ $('#lblRequest').val() +"</button>"+
-								"</div>";
+			$( "#tablePending" ).append("<tr><td>"+ applicant +"</td></tr>");
+		});		
+		
+		$.each(jsonNew[1], function(i, data){
+			var applicant =	"<div>"+
+								"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
+									"<img src='resources/profilePic/"+ data.pic +"'>"+
+								"</a>"+
+								"<span style='vertical-align: top; margin-right: 10px'>"+ data.name +"</span>"+
+								"<input type='hidden' id="+ data.userId +">"+ 	
+								"<button class='associated' onclick='listenerSchedule(this)' style='vertical-align: top'>"+ $('#lblAssociation').val() +"</button>"+
+							"</div>";
 
-				$( "#tablePending" ).append("<tr><td>"+ applicant +"</td></tr>");
-			});		
-			
-			$.each(jsonNew[1], function(i, data){
-				var applicant =	"<div>"+
-									"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
-										"<img src='resources/profilePic/"+ data.pic +"'>"+
-									"</a>"+
-									"<span style='vertical-align: top; margin-right: 10px'>"+ data.name +"</span>"+
-									"<input type='hidden' id="+ data.userId +">"+ 	
-									"<button class='associated' onclick='listenerSchedule(this)' style='vertical-align: top'>"+ $('#lblAssociation').val() +"</button>"+
-								"</div>";
-
-				$( "#tableAssociated" ).append("<tr><td>"+ applicant +"</td></tr>");
-			});				
-		});
+			$( "#tableAssociated" ).append("<tr><td>"+ applicant +"</td></tr>");
+		});				
+	});
 }
 
 function listenerSchedule(target)
 {
+	// Receives button object that shares cell with input that contains id.
+	
 	_listenerScheduleTarget = target;
 	
 	$userId = $(target).parent().find("input").attr("id");
@@ -67,8 +65,7 @@ function listenerSchedule(target)
 	if($(target).hasClass("pending"))
 	{
 		$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 0}, 
-			function(json)
-			{
+			function(json){
 				viewSchedule(json, 0);
 			}
 		);
@@ -76,8 +73,7 @@ function listenerSchedule(target)
 	else
 	{
 		$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 1}, 
-			function(json)
-			{
+			function(json){
 				viewSchedule(json, 1);
 			}
 		);
@@ -124,6 +120,8 @@ function fetchDays(days, data)
 
 function printSchedule(days, $table, typeAssoc)
 {	
+	// Prints both schedules
+	
 	if(!$( "#scheduleData" ).is(":visible"))			//Display schedules' section
 		$( "#scheduleData" ).show( "bounce", 400 );
 	
@@ -199,9 +197,8 @@ function actionAssociation(target, action)
 	var $assocId = $(target).parent().find("#assocId").val();
 		
 	$.post( "responseAssoc.do", { "assocId": $assocId , "response": action}, 
-			function()
-			{
-				alert("respondido");
+			function(){
+				alert("Acción Completada");
 				load();
 
 				listenerSchedule(_listenerScheduleTarget);
