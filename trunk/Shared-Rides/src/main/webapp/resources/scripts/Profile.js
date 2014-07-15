@@ -48,16 +48,21 @@ function fixView($targetThis, $targetOther){
 	$( '.mapContainer' ).css("margin-left", "0px");
 }
 
-$( '.btnRequestAssoc' ).click(function(){
-	var $day	= $( this ).parent().find(".hdnDay").val();
-	var $inOut	= $( this ).parent().find(".hdnInOut").val();			
-	var $idUser	= $( "#valId" ).val();
-	
-	$.post( 'requestAssoc.do', { "day":  $day, "inout": $inOut, "idUser": $idUser },
-		function(msg)
-		{
-			if (msg != '')
-				window.alert(msg);
-		}); 			
+$(document).ready(function(){
+	$( '.btnRequestAssoc' ).click(function(){
+		
+		var $day	= $( this ).parent().find(".hdnDay").val();
+		var $inOut	= $( this ).parent().find(".hdnInOut").val();			
+		var $idUser	= $( "#valId" ).val();
+		
+		$.post( 'requestAssoc.do', { "day":  $day, "inout": $inOut, "idUser": $idUser },
+			function(msg)
+			{
+				if (msg != '')
+					window.alert(msg);
+			}); 			
+	});
 });
+
+
 

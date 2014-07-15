@@ -160,8 +160,7 @@
 	</c:forEach>
 
 	fillTable(schPed, "Pedestrian");
-	fillTable(schDriver, "Driver");
-
+	fillTable(schDriver, "Driver");	
 </script>
 
 <!-- FANCY BOX -->
@@ -179,7 +178,6 @@
 	            'type'                  :       'iframe'
 	    });
 	});
-	
 </script>
 
 
