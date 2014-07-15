@@ -26,19 +26,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name="Pedestrian")
 public class Pedestrian implements Profile, Serializable{
 
-	@Id
-	@GeneratedValue
-	@Column(name="id")
 	private long pedestrianId;
-	
-	@Column(name="ratingPed", nullable = false)
 	private float rating;
-	
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name="Pedestrian_Schedule", joinColumns = @JoinColumn(name="pedestrianID"),
-	inverseJoinColumns = @JoinColumn(name="scheduleID"))
 	private List<Schedule> schedule;
 
 //-----------CONSTRUCTOR 
@@ -48,26 +37,34 @@ public class Pedestrian implements Profile, Serializable{
 	
 //-----------GETTERS & SETTERS
 	
-	public float getRating() {
-		return rating;
-	}
-	public void setRating(float rating) {
-		this.rating = rating;
-	}
-
-
+	@Id
+	@GeneratedValue
+	@Column(name="id")
 	public long getPedestrianID() {
 		return pedestrianId;
 	}
-
+	
 	public void setPedestrianID(long pedestrianId) {
 		this.pedestrianId = pedestrianId;
 	}
 
+	@Column(name="ratingPed", nullable = false)
+	public float getRating() {
+		return rating;
+	}
+	
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name="Pedestrian_Schedule", joinColumns = @JoinColumn(name="pedestrianID"),
+	inverseJoinColumns = @JoinColumn(name="scheduleID"))
 	public List<Schedule> getSchedule() {
 		return schedule;
 	}
-
+	
 	public void setSchedule(List<Schedule> schedule) {
 		this.schedule = schedule;
 	}

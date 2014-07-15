@@ -12,21 +12,10 @@ import javax.persistence.Table;
 @Table (name="Vehicle")
 public class Vehicle implements Serializable{
 	
-	@Id
-	@GeneratedValue
-	@Column(name = "id")
 	private int vehicleId;
-	
-	@Column (name="model")
 	private String model;
-	
-	@Column (name="licensePlate")
 	private String licensePlate;
-	
-	@Column (name="seats")
 	private int seats;
-	
-	@Column(name="brand")
 	private String brand;
 	
 //-----------CONSTRUCTOR
@@ -37,12 +26,15 @@ public class Vehicle implements Serializable{
 	
 //-----------GETTERS & SETTERS 
 	
+	@Column (name="model")
 	public String getModel() {
 		return model;
 	}
 	public void setModel(String model) {
 		this.model = model;
 	}
+	
+	@Column (name="licensePlate")
 	public String getLicensePlate() {
 		return licensePlate;
 	}
@@ -50,6 +42,7 @@ public class Vehicle implements Serializable{
 		this.licensePlate = licensePlate;
 	}
 
+	@Column (name="seats")
 	public int getSeats() {
 		return seats;
 	}
@@ -57,7 +50,7 @@ public class Vehicle implements Serializable{
 		this.seats = seats;
 	}
 
-
+	@Column(name="brand")
 	public String getBrand() {
 		return brand;
 	}
@@ -66,6 +59,9 @@ public class Vehicle implements Serializable{
 		this.brand = brand;
 	}
 
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
 	public int getVehicleId() {
 		return vehicleId;
 	}

@@ -16,16 +16,8 @@ import javax.persistence.OneToOne;
 @Table(name="Organization")
 public class Organization implements Serializable{
 
-	@Id
-	@GeneratedValue
-	@Column(name="id")
 	private long organizationId;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "addressID")
 	private Address address;
-	
-	@Column(name="name")
 	private String name;
 	
 //-----------CONSTRUCTOR 
@@ -34,14 +26,27 @@ public class Organization implements Serializable{
 	}
 
 //-----------GETTERS & SETTERS 
-
-
+	
+	@Id
+	@GeneratedValue
+	@Column(name="id")
+	public long getOrganizationId() {
+		return organizationId;
+	}
+	public void setOrganizationId(long organizationId) {
+		this.organizationId = organizationId;
+	}
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "addressID")
 	public Address getAddress() {
 		return address;
 	}
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+	
+	@Column(name="name")
 	public String getName() {
 		return name;
 	}
@@ -49,14 +54,6 @@ public class Organization implements Serializable{
 		this.name = name;
 	}
 
-	public long getOrganizationId() {
-		return organizationId;
-	}
-
-	public void setOrganizationId(long organizationId) {
-		this.organizationId = organizationId;
-	}
-	
 //------------------------
 	
 }

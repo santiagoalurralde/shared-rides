@@ -7,14 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -30,28 +28,10 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name="Driver")
 public class Driver implements Profile, Serializable{
 	
-	@Id
-	@GeneratedValue
-	@Column(name="id", nullable = false)
-	private long driverId;
-	
-	@Column(name="ratingDriver")
+	private long driverId;	
 	private float rating;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name="Driver_Schedule", joinColumns = @JoinColumn(name="driverID"),
-	inverseJoinColumns = @JoinColumn(name="scheduleID"))
 	private List<Schedule> schedule;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "vehicleID")
 	private Vehicle vehicle;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name="Driver_Track", joinColumns = @JoinColumn(name="driverID"),
-	inverseJoinColumns = @JoinColumn(name="trackID"))
 	private List<Track> tracks;
 
 //-----------CONSTRUCTOR	
@@ -61,27 +41,9 @@ public class Driver implements Profile, Serializable{
 
 //-----------GETTERS & SETTERS
 
-	public float getRating() {
-		return rating;
-	}
-	public void setRating(float rating) {
-		this.rating = rating;
-	}
-
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-
-	public List<Track> getTracks() {
-		return tracks;
-	}
-	public void setTracks(List<Track> tracks) {
-		this.tracks = tracks;
-	}
-
+	@Id
+	@GeneratedValue
+	@Column(name="id", nullable = false)
 	public long getDriverId() {
 		return driverId;
 	}
@@ -89,7 +51,19 @@ public class Driver implements Profile, Serializable{
 	public void setDriverId(long driverId) {
 		this.driverId = driverId;
 	}
+	
+	@Column(name="ratingDriver")
+	public float getRating() {
+		return rating;
+	}
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
 
+	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name="Driver_Schedule", joinColumns = @JoinColumn(name="driverID"),
+	inverseJoinColumns = @JoinColumn(name="scheduleID"))
 	public List<Schedule> getSchedule() {
 		return schedule;
 	}
@@ -97,6 +71,27 @@ public class Driver implements Profile, Serializable{
 	public void setSchedule(List<Schedule> schedule) {
 		this.schedule = schedule;
 	}
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "vehicleID")
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name="Driver_Track", joinColumns = @JoinColumn(name="driverID"),
+	inverseJoinColumns = @JoinColumn(name="trackID"))
+	public List<Track> getTracks() {
+		return tracks;
+	}
+	public void setTracks(List<Track> tracks) {
+		this.tracks = tracks;
+	}
+
 	
 //-------------------
 	

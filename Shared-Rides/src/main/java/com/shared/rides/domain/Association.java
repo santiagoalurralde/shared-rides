@@ -13,39 +13,22 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Column;
 
 @Entity
 @Table(name="Association")
 public class Association implements Serializable{
-	
-	@Id
-	@GeneratedValue
-	@Column(name="id", nullable = false)
-	private long associationId;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "applicantID")
+	private long associationId;
 	private User applicantID;
-	
-	@Column(name="day", nullable = false)
 	private int day;
-	
-	@Column(name="hourInOut", nullable = false)
 	private int inout;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name="state")
 	private State state;
-	
-	@Column(name="date")
 	private Date date;
 	
 //-----------CONSTRUCTOR
@@ -59,35 +42,9 @@ public class Association implements Serializable{
 	
 //-----------GETTERS & SETTERS 
 
-	
-	public User getApplier() {
-		return applicantID;
-	}
-	public void setApplier(User applier) {
-		this.applicantID = applier;
-	}
-	
-	public int getDay() {
-		return day;
-	}
-	public void setDay(int day) {
-		this.day = day;
-	}
-	
-	public int getInout() {
-		return inout;
-	}
-	public void setInout(int inout) {
-		this.inout = inout;
-	}
-	
-	public State getState() {
-		return state;
-	}
-	public void setState(State state) {
-		this.state = state;
-	}
-	
+	@Id
+	@GeneratedValue
+	@Column(name="id", nullable = false)
 	public long getAssociationId() {
 		return associationId;
 	}
@@ -96,6 +53,8 @@ public class Association implements Serializable{
 		this.associationId = associationId;
 	}
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "applicantID")
 	public User getApplicantID() {
 		return applicantID;
 	}
@@ -104,6 +63,32 @@ public class Association implements Serializable{
 		this.applicantID = applicantID;
 	}
 
+	@Column(name="day", nullable = false)
+	public int getDay() {
+		return day;
+	}
+	public void setDay(int day) {
+		this.day = day;
+	}
+	
+	@Column(name="hourInOut", nullable = false)
+	public int getInout() {
+		return inout;
+	}
+	public void setInout(int inout) {
+		this.inout = inout;
+	}
+		
+	@Enumerated(EnumType.STRING)
+	@Column(name="state")
+	public State getState() {
+		return state;
+	}
+	public void setState(State state) {
+		this.state = state;
+	}
+
+	@Column(name="date")
 	public Date getDate() {
 		return date;
 	}

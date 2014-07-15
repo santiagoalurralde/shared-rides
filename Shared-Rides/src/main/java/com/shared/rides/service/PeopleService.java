@@ -52,7 +52,7 @@ public class PeopleService {
 		//Aca estoy viendo directamente las asociaciones que yo recibi que pude o no haber aceptado
 		for(int i = 0; i < applicantAssocList.size(); i++){
 			Association assoc = applicantAssocList.get(i);
-			User applier = assoc.getApplier();
+			User applier = assoc.getApplicantID();
 			if (assoc.getState().equals(State.PENDING) && pendingIdList.contains(applier.getUserId())==false){
 				completeList(applier, pendingIdList, pendingList);
 				/*String fullNameApplier = applier.getName() + " " + applier.getSurname();
@@ -137,4 +137,5 @@ public class PeopleService {
 		idList.add(u.getUserId());
 		list.add(jsonUser);
 	}
+	
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shared.rides.dao.interfaces.IAssociationDAO;
 import com.shared.rides.dao.interfaces.IDriverDAO;
 import com.shared.rides.dao.interfaces.IPedestrianDAO;
 import com.shared.rides.dao.interfaces.IUserDAO;
@@ -45,6 +46,9 @@ public class ProfileService {
 	private IUserDAO userDAO;
 	@Autowired
 	private IPedestrianDAO pedDAO;
+	@Autowired
+	private IAssociationDAO assocDAO;
+	
 	private boolean isAssociation = false;
 	private boolean myProfile;
 	private ModelAndView model;
@@ -56,12 +60,25 @@ public class ProfileService {
 		
 		//Si no es mi profile, entonces veo si tengo asociacion con esa persona
 		if(!myProfile){
-		for (Association assoc : u.getAssociations()){
-			if (assoc.getApplier().getUserId() == userId && assoc.getState().equals(State.ACCEPTED)){
-				isAssociation = true;
-			}
+			for (Association assoc : u.getAssociations()){
+				if (assoc.getApplicantID().getUserId() == userId && assoc.getState().equals(State.ACCEPTED)){
+					isAssociation = true;
+					break;
+				}
+				if (!isAssociation){
+					List<Association> myRequestsList = userDAO.getMyRequests(u);
+					for (int j = 0; j < myRequestsList.size(); j++){
+						//Obtengo el id del usuario al cual le envie la peticion
+						long supplierId = assocDAO.getSupplierId(myRequestsList.get(j));
+				
+						if (userId == supplierId && myRequestsList.get(j).getState().equals(State.ACCEPTED)){
+							isAssociation = true;
+							break;
+						}
+					}
+				}
 		}
-		
+			
 		User userAssoc = new User(userId);
 		userAssoc = userDAO.load(userAssoc);
 		createModel(userAssoc);		

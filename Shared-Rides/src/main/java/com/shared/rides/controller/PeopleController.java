@@ -73,4 +73,17 @@ public class PeopleController {
 		return responseAssocService.sendResponseAssoc(assocId, resp);
 	}
 	
+	//Metodo que se encarga de actualizar el rating de un usuario cuando ha sido puntuado por otro
+	@RequestMapping(value = "/updateRating.do", method = RequestMethod.POST)
+	public @ResponseBody String updateRating(@RequestParam("userId") long userId,
+											@RequestParam("prof") int profile,
+											@RequestParam("rating") float rating,
+											HttpServletRequest request){
+		
+		User u = (User) request.getAttribute("user");
+		if (responseAssocService.calculateRating(u.getUserId(), userId, profile, rating))
+			return "Se hizo la puntuacion";
+		return "NO SE PUDO HACER LA PUNTUACION";
+	}
+	
 }
