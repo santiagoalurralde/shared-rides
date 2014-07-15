@@ -21,18 +21,9 @@ import javax.persistence.ManyToMany;
 @Table(name="Track")
 public class Track implements Serializable{
 	
-	@Id
-	@GeneratedValue
-	@Column(name="id")
 	private long trackId;
-	
-	@Column(name="day")
 	private int day;
-	
-	@Column(name="hourInOut")
 	private int inout;
-	
-	@Column(name="pathFile")
 	private String pathFile;
 
 
@@ -43,32 +34,39 @@ public class Track implements Serializable{
 	
 //-----------GETTERS & SETTERS 
 
-	
-	public int getDay() {
-		return day;
-	}
-	public void setDay(int day) {
-		this.day = day;
-	}
-	public int getInout() {
-		return inout;
-	}
-	public void setInout(int inout) {
-		this.inout = inout;
-	}
-	public String getPathFile() {
-		return pathFile;
-	}
-	public void setPathFile(String pathFile) {
-		this.pathFile = pathFile;
-	}
-
+	@Id
+	@GeneratedValue
+	@Column(name="id")
 	public long getTrackId() {
 		return trackId;
 	}
 
 	public void setTrackId(long trackId) {
 		this.trackId = trackId;
+	}
+	
+	@Column(name="day")
+	public int getDay() {
+		return day;
+	}
+	public void setDay(int day) {
+		this.day = day;
+	}
+	
+	@Column(name="hourInOut")
+	public int getInout() {
+		return inout;
+	}
+	public void setInout(int inout) {
+		this.inout = inout;
+	}
+	
+	@Column(name="pathFile")
+	public String getPathFile() {
+		return pathFile;
+	}
+	public void setPathFile(String pathFile) {
+		this.pathFile = pathFile;
 	}
 	
 }

@@ -68,7 +68,7 @@ public class RequestAssociationService {
 			Association assoc = new Association();
 			assoc.setDay(day);
 			assoc.setInout(inout);
-			assoc.setApplier(applicantUser);
+			assoc.setApplicantID(applicantUser);
 			assoc.setState(State.PENDING);
 			assoc.setDate(date);
 			assocDAO.save(assoc);

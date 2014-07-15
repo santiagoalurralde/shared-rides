@@ -14,18 +14,9 @@ import javax.persistence.Table;
 @Table(name="Schedule")
 public class Schedule implements Serializable{
 
-	@Id
-	@GeneratedValue
-	@Column(name="id", nullable = false)
 	private long scheduleId;
-	
-	@Column(name="day", nullable = false)
-	private int day;
-	
-	@Column(name="hourIn", nullable = false)
+	private int day;	
 	private int hourIn;
-	
-	@Column(name="hourOut", nullable = false)
 	private int hourOut;
 	
 //-----------CONSTRUCTOR 
@@ -39,31 +30,38 @@ public class Schedule implements Serializable{
 	
 //-----------GETTERS & SETTERS 
 	
-	
-	public int getDay() {
-		return day;
-	}
-	public void setDay(int day) {
-		this.day = day;
-	}
-	public int getHourIn() {
-		return hourIn;
-	}
-	public void setHourIn(int hourIn) {
-		this.hourIn = hourIn;
-	}
-	public int getHourOut() {
-		return hourOut;
-	}
-	public void setHourOut(int hourOut) {
-		this.hourOut = hourOut;
-	}
-
+	@Id
+	@GeneratedValue
+	@Column(name="id", nullable = false)
 	public long getScheduleId() {
 		return scheduleId;
 	}
 
 	public void setScheduleId(long scheduleId) {
 		this.scheduleId = scheduleId;
+	}
+	
+	@Column(name="day", nullable = false)
+	public int getDay() {
+		return day;
+	}
+	public void setDay(int day) {
+		this.day = day;
+	}
+	
+	@Column(name="hourIn", nullable = false)
+	public int getHourIn() {
+		return hourIn;
+	}
+	public void setHourIn(int hourIn) {
+		this.hourIn = hourIn;
+	}
+
+	@Column(name="hourOut", nullable = false)
+	public int getHourOut() {
+		return hourOut;
+	}
+	public void setHourOut(int hourOut) {
+		this.hourOut = hourOut;
 	}
 }

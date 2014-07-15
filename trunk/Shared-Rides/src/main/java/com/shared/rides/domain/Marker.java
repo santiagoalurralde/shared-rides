@@ -17,15 +17,8 @@ import javax.persistence.Column;
 @Table(name="Marker")
 public class Marker implements Serializable{
 
-	@Id
-	@GeneratedValue
-	@Column(name="id", nullable = false)
-	private long markerId;
-	
-	@Column(name="lat", nullable = false)
+	private long markerId;	
 	private double latitude;
-	
-	@Column(name="lon", nullable = false)
 	private double longitude;
 	
 //-----------CONSTRUCTOR 
@@ -35,7 +28,17 @@ public class Marker implements Serializable{
 
 //-----------GETTERS & SETTERS 
 
+	@Id
+	@GeneratedValue
+	@Column(name="id", nullable = false)
+	public long getMarkerId() {
+		return markerId;
+	}
+	public void setMarkerId(long markerId) {
+		this.markerId = markerId;
+	}
 	
+	@Column(name="lat", nullable = false)
 	public double getLatitude() {
 		return latitude;
 	}
@@ -43,6 +46,7 @@ public class Marker implements Serializable{
 		this.latitude = latitude;
 	}
 	
+	@Column(name="lon", nullable = false)
 	public double getLongitude() {
 		return longitude;
 	}
@@ -50,13 +54,6 @@ public class Marker implements Serializable{
 		this.longitude = longitude;
 	}
 
-	public long getMarkerId() {
-		return markerId;
-	}
-
-	public void setMarkerId(long markerId) {
-		this.markerId = markerId;
-	}
 
 //-----------------------
 	
