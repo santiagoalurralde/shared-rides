@@ -50,9 +50,27 @@ function load()
 							"</div>";
 
 			$( "#tableAssociated" ).append("<tr><td>"+ applicant +"</td></tr>");
-		});				
+		});	
+
 	});
 }
+
+if( $( "#tablePending" ).length < 2 )
+{
+	$( "#pending" ).append("<img src='resources/images/message.png' style='position: relative; left: 50%; margin-top: 5%' width='85px' height='75px'>");
+	$( "#pending" ).append("<p><br> No cuenta con peticiones pendientes");
+}
+else
+	$( "#tablePending" ).show( 0 );
+
+if( $( "#tableAssociated" ).length < 2 )
+{
+	$( "#associated" ).append("<img src='resources/images/message.png' style='position: relative; left: 50%; margin-top: 5%' width='85px' height='75px'>");	
+	$( "#associated" ).append("<p><br> Actualmente no posee asociaciones");
+}
+else
+	$( "#tableAssociated" ).show( 0 );
+
 
 function listenerSchedule(target)
 {

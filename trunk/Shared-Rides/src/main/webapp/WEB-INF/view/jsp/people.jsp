@@ -5,36 +5,39 @@
 	<div id="theContent" class="theBox">	
 		
 		<section title="List Data" class="tupper">
-				<div id="listData" class="theBoard theLightBox" style="margin-top: 10px"> 							
+				<div id="listData" class="theBoard theLightBox" style="margin-top: 10px"> 	
+										
 					<div id="pending" class="blockHalf blockRight"> 		<!-- Lista Solicitudes 	--> 
+					
 						<h2> <spring:message code="label.pending"/> </h2>
 						<table id="tablePending"	class="tableUsers" style="margin-top: 10px">
-
 						</table>
+						
 					</div> 
 					
 					<!-- <div class="vrs"></div> -->
 						
 					<div id="associated" class="blockHalf blockLeft">		<!-- Lista Asociados 	-->
+					
 						<h2> <spring:message code="label.associated"/> </h2>
 						<table id="tableAssociated"	class="tableUsers" style="margin-top: 10px">
-
 						</table>
+						
 					</div>		
 				
 					<div class="clearer"></div>
+					
 				</div>
 		</section>
 		
 	
 		<section title="Schedule Data" class="tupper" style="margin-top: 20px">
-			<div id="scheduleData" class="theBoard theLightBox" style="display: none"> 		
+			<div id="scheduleData" class="theBoard theLightBox"> 		
 				<div class="blockLeft blockHalf">		
 					<h2> <spring:message code="label.requested"/> </h2>
 				
 					<div> 						<!-- Horario	-->
 						<table id="tableRequested" class="theSchedule">
-					
 						</table>					
 					</div>	
 				</div>
@@ -44,7 +47,6 @@
 				
 					<div> 						<!-- Horario	-->
 						<table id="tableOffered" class="theSchedule">
-	
 						</table>					
 					</div>
 				</div>	

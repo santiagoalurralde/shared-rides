@@ -38,6 +38,16 @@ public class MainController {
 		return new ModelAndView("main");
 	}
 	
+	@RequestMapping(value="contact.do")
+	public ModelAndView showContact(HttpServletRequest request){
+		return new ModelAndView("contact");
+	}
+	
+	@RequestMapping(value="about.do")
+	public ModelAndView showAbout(HttpServletRequest request){
+		return new ModelAndView("about");
+	}
+	
 	//Metodo que se llama para ver si el usuario tiene nuevas asociaciones
 	@RequestMapping(value = "/hasAssociation.do", method = RequestMethod.POST)
 	public @ResponseBody String hasAssoc(HttpServletRequest request){
