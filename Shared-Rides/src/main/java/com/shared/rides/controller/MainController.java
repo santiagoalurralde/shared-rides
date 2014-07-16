@@ -57,12 +57,13 @@ public class MainController {
 	
 	//Metodo que se encarga de realizar la busqueda de los usuarios de acuerdo a los parametros recibidos
 	@RequestMapping(value = "/find.do", method = RequestMethod.POST)
-	public @ResponseBody String search(@RequestParam("user") String user,
+	public @ResponseBody String search(@RequestParam("user") int prof,
 								@RequestParam("shift") int shift,
-								@RequestParam("mapData") String map){
+								@RequestParam("mapData") String map,
+								HttpServletRequest request){
 		
-		int prof = Integer.parseInt(user);
-		return findUserService.findUsers(prof, shift, map);
+		User u = (User) request.getSession().getAttribute("user");
+		return findUserService.findUsers(u.getUserId(), prof, shift, map);
 	} 
 	
 }
