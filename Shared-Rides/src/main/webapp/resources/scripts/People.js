@@ -17,60 +17,48 @@ function load()
 	
 	$.post( 'loadAssociations.do', 
 		function(json){
-		/*
-			Trae la informacion de las personas.
-			JsonArray que contiene 2 JsonArray: uno con las asociaciones pendientes y otro con las
-			asociaciones aceptadas.
-			Dentro de cada uno de estos; tengo el id de la asociacion y el nombre completo de la persona.
-		*/
-
+		
+		/* Brings people info. JsonArray with 2 JsonArray: One with pending and another one 
+		 * with accepted associations. Each one contains association id and full name.
+		 */
+		 
 		var jsonNew = $.parseJSON(json);
 
 		$.each(jsonNew[0], function(i, data){
 			var applicant =	"<div>"+
-								"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
+								"<a style='float: left; margin-right: 25px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
 									"<img src='resources/profilePic/"+ data.pic +"'>"+
 								"</a>"+
-								"<span style='vertical-align: top; margin-right: 10px'>"+ data.name +"</span>"+
+								"<span style='float: left; vertical-align: top;'>"+ data.name +"</span>"+
 								"<input type='hidden' id="+ data.userId +">"+ 			
-								"<button class='pending' onclick='listenerSchedule(this)' style='vertical-align: top'>"+ $('#lblRequest').val() +"</button>"+
+								"<button class='btn pending' onclick='listenerSchedule(this)' style='float: right; vertical-align: top'>"+ $('#lblRequest').val() +"</button>"+
 							"</div>";
 
-			$( "#tablePending" ).append("<tr><td>"+ applicant +"</td></tr>");
+			$( "#tablePending" ).append("<tr><td>"+ applicant +"</td></tr>").show();
+			$( "#alertPending" ).hide();
 		});		
 		
 		$.each(jsonNew[1], function(i, data){
 			var applicant =	"<div>"+
-								"<a style='margin-right: 10px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
+								"<a style='float: left; margin-right: 25px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
 									"<img src='resources/profilePic/"+ data.pic +"'>"+
 								"</a>"+
-								"<span style='vertical-align: top; margin-right: 10px'>"+ data.name +"</span>"+
+								"<span style='float: left; vertical-align: top;'>"+ data.name +"</span>"+
 								"<input type='hidden' id="+ data.userId +">"+ 	
-								"<button class='associated' onclick='listenerSchedule(this)' style='vertical-align: top'>"+ $('#lblAssociation').val() +"</button>"+
+								"<button class='btn associated' onclick='listenerSchedule(this)' style='float: right; vertical-align: top'>"+ $('#lblAssociation').val() +"</button>"+
 							"</div>";
 
-			$( "#tableAssociated" ).append("<tr><td>"+ applicant +"</td></tr>");
+			$( "#tableAssociated" ).append("<tr><td>"+ applicant +"</td></tr>").show();
+			$( "#alertAssociated" ).hide();
 		});	
+		
+		if(jsonNew[0] == "")
+			$( "#pending" ).append("<div class='alerts' id='alertPending'><img src='resources/images/message.png'> <p><br> No cuenta con peticiones pendientes </div>");
+		if(jsonNew[1] == "")
+			$( "#associated" ).append("<div class='alerts' id='alertAssociated'><img src='resources/images/message.png'> <p><br> Actualmente no posee asociaciones </div>");
 
 	});
 }
-
-if( $( "#tablePending" ).length < 2 )
-{
-	$( "#pending" ).append("<img src='resources/images/message.png' style='position: relative; left: 50%; margin-top: 5%' width='85px' height='75px'>");
-	$( "#pending" ).append("<p><br> No cuenta con peticiones pendientes");
-}
-else
-	$( "#tablePending" ).show( 0 );
-
-if( $( "#tableAssociated" ).length < 2 )
-{
-	$( "#associated" ).append("<img src='resources/images/message.png' style='position: relative; left: 50%; margin-top: 5%' width='85px' height='75px'>");	
-	$( "#associated" ).append("<p><br> Actualmente no posee asociaciones");
-}
-else
-	$( "#tableAssociated" ).show( 0 );
-
 
 function listenerSchedule(target)
 {
@@ -81,25 +69,23 @@ function listenerSchedule(target)
 	$userId = $(target).parent().find("input").attr("id");
 	
 	if($(target).hasClass("pending"))
-	{
 		$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 0}, 
 			function(json){
 				viewSchedule(json, 0);
 			}
 		);
-	}
 	else
-	{
 		$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 1}, 
 			function(json){
 				viewSchedule(json, 1);
 			}
-		);
-	}		
+		);	
 }
 
 function viewSchedule(json, typeAssoc)
 {
+	// Performs all the work by calling other functions
+	
 	var jsonNew = $.parseJSON(json);
 
 	var days	= new Array();
@@ -107,7 +93,7 @@ function viewSchedule(json, typeAssoc)
 	
 	$.each(jsonNew.requested, function(i, data){	
 		fetchDays(days, data);
-	});
+	});	
 	printSchedule(days, $("#tableRequested"), typeAssoc);
 	
 	days		= new Array();
@@ -117,10 +103,23 @@ function viewSchedule(json, typeAssoc)
 		fetchDays(days, data);
 	});
 	printSchedule(days, $("#tableOffered"), typeAssoc);
+	
+	if(jsonNew.requested == "")
+	{
+		$( "#requested" ).hide();
+		$( "#offered" ).css("float", "none").css("width", "100%");
+	}
+	if(jsonNew.offered == "")
+	{
+		$( "#offered" ).hide();
+		$( "#requested" ).css("float", "none").css("width", "100%");
+	}
 }
 
 function fetchDays(days, data)
 {
+	// Fills up array "days" with objects
+	
 	if(days[data.day] == null)
 		days[data.day] = new Day();
 
@@ -145,64 +144,62 @@ function printSchedule(days, $table, typeAssoc)
 	
 	$table.html("<tr><th></th></tr>");
 	
+	var rIn 		= "<tr id='in'><td>"+ $('#lblArrival').val() +"</td></tr>";
+	var rOut		= "<tr id='out'><td>"+ $('#lblDeparture').val() +"</td></tr>";
+	var btnCancel 	= "<button onclick='actionAssociation(this, false)' style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>";
+	var btnAccept  	= "<button onclick='actionAssociation(this, true)' style='margin-left: 4px'><img src='resources/images/accept.png' width='15px'></button>";
+	
 	for(var i=1;i<days.length;i++)
 	{
 		if(days[i]!=null)
 		{
 			var buttons;
 			
-			$table.find( "tr:first" ).append("<th id='"+ i +"'>"+ getDayLabel(i) +"</th>");
+			$table.find( "tr:first" ).append("<th id='"+ i +"'>"+ getDayLabel(i) +"</th>"); 		//Create label for current day
 			
-			if(!$table.find("#in").length) 		//Fila de In no existe la creamos
-				$table.append("<tr id='in'><td>"+ $('#lblArrival').val() +"</td></tr>");
+			if(!$table.find("#in").length) 		//If IN Row doesn't exist, create it
+				$table.append(rIn);
 			
-			if(!$table.find("#out").length)		//Fila de Out no existe la creamos
-				$table.append("<tr id='out'><td>"+ $('#lblDeparture').val() +"</td></tr>");
+			if(!$table.find("#out").length)		//If OUT Row doesn't exist, create it
+				$table.append(rOut);
 
-			var buttonCancel = "<button onclick='actionAssociation(this, false)' style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>";
-			
 			if(typeAssoc == 0)
-				buttons = 	"<button onclick='actionAssociation(this, true)' style='margin-left: 4px'><img src='resources/images/accept.png' width='15px'></button>"+
-							buttonCancel;
+				buttons = 	btnAccept + btnCancel;
 			else
-				buttons = 	buttonCancel;
+				buttons = 	btnCancel;
 			
-			if(days[i].inHour != "")
-			{	
-				var content = 	"<td>"+ 
-									days[i].inHour + buttons +
-									"<input type='hidden' value='"+ days[i].assocIdIn +"' id='assocId'>" +
-								"</td>";
+			var content;
+			
+			if(days[i].inHour != "" && days[i].outHour == "")
+			{	     
+				//Just IN 
+				content = 	days[i].inHour + buttons +
+							"<input type='hidden' value='"+ days[i].assocIdIn +"' id='assocId'>";
 				
-				if($table.find("#in #emptyCell"+i).length)			//Si ya existe celda in vacía donde queremos insertar.
-				{
-					$table.find( "#in #emptyCell"+i ).append(content);
-					$table.find( "#in #emptyCell"+i ).removeAttr('id').removeClass('emptyCells');
-				}
-				else
-					$table.find( "#in" ).append(content);
-				
-				if(!$table.find("#out #emptyCell"+i).length)		//Si no existe celda out vacía en la misma columna
-					$table.find( "#out" ).append("<td id='emptyCell"+ i +" class='emptyCells'></td>"); 
+				$table.find( "#in" ).append("<td>"+ content +"</td>");
+				$table.find( "#out" ).append("<td class='emptyCells'></td>"); 			
 			}
-			
-			if(days[i].outHour != "")
+			else if(days[i].inHour != "" && days[i].outHour != "")
+			{
+				//IN & OUT
+				content = 	days[i].inHour + buttons +
+							"<input type='hidden' value='"+ days[i].assocIdIn +"' id='assocId'>";
+				
+				var content2 =	days[i].outHour + buttons +
+								"<input type='hidden' value='"+ days[i].assocIdOut +"' id='assocId'>";
+				
+				$table.find( "#in" ).append("<td>"+ content +"</td>");				
+				$table.find( "#out" ).append("<td>"+ content2 +"</td>");
+
+			}
+			else	
 			{	
-				var content =	"<td>"+ 
-									days[i].outHour + buttons +
-									"<input type='hidden' value='"+ days[i].assocIdOut +"' id='assocId'>" +
-								"</td>";
+				//Just OUT
+				content =	days[i].outHour + buttons +
+							"<input type='hidden' value='"+ days[i].assocIdOut +"' id='assocId'>";
 				
-				if(!$table.find("#in #emptyCell"+i).length)			//Si no existe celda in vacía en la misma columna
-					$table.find( "#in" ).append("<td id='emptyCell"+ i +" class='emptyCells'></td>"); 
-				
-				if($table.find("#out #emptyCell"+i).length)			//Si ya existe celda in vacía donde queremos insertar.
-				{
-					$table.find( "#out #emptyCell"+i ).append(content);
-					$table.find( "#out #emptyCell"+i ).removeAttr('id').removeClass('emptyCells');
-				}
-				else
-					$table.find( "#out" ).append(content);
+				$table.find( "#in" ).append("<td class='emptyCells'></td>");
+				$table.find( "#out" ).append("<td>"+ content +"</td>");
 			}
 		}
 	}	
