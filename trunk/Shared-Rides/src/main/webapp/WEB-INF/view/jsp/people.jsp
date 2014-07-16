@@ -10,7 +10,7 @@
 					<div id="pending" class="blockHalf blockRight"> 		<!-- Lista Solicitudes 	--> 
 					
 						<h2> <spring:message code="label.pending"/> </h2>
-						<table id="tablePending"	class="tableUsers" style="margin-top: 10px">
+						<table id="tablePending"	class="tableUsers">
 						</table>
 						
 					</div> 
@@ -20,7 +20,7 @@
 					<div id="associated" class="blockHalf blockLeft">		<!-- Lista Asociados 	-->
 					
 						<h2> <spring:message code="label.associated"/> </h2>
-						<table id="tableAssociated"	class="tableUsers" style="margin-top: 10px">
+						<table id="tableAssociated"	class="tableUsers">
 						</table>
 						
 					</div>		
@@ -33,19 +33,19 @@
 	
 		<section title="Schedule Data" class="tupper" style="margin-top: 20px">
 			<div id="scheduleData" class="theBoard theLightBox"> 		
-				<div class="blockLeft blockHalf">		
+				<div id="requested" class="blockLeft blockHalf">		
 					<h2> <spring:message code="label.requested"/> </h2>
 				
-					<div> 						<!-- Horario	-->
+					<div> 			<!-- Horario	-->
 						<table id="tableRequested" class="theSchedule">
 						</table>					
 					</div>	
 				</div>
 				
-				<div class="blockRight blockHalf">
+				<div id="offered" class="blockRight blockHalf">
 					<h2> <spring:message code="label.offered"/> </h2>	
 				
-					<div> 						<!-- Horario	-->
+					<div> 			<!-- Horario	-->
 						<table id="tableOffered" class="theSchedule">
 						</table>					
 					</div>

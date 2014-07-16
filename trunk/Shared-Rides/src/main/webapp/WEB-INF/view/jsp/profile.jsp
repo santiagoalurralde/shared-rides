@@ -4,7 +4,6 @@
 	String id = request.getParameter("user");
 %>
 
-
 <body>
 	<div id="theContent" class="theBox">	
 		
@@ -142,7 +141,7 @@
 		$( '#privateData' ).hide( 0 );
 	
 	initMap("${lonPed}", "${latPed}");	
-	initMap1("santiago.gpx");
+	initMap1("caro1in.gpx");
 	
 	<c:forEach var="day" items="${schPed}">
 		schPed.push(["${day.dayPed}","${day.hourInPed}","${day.hourOutPed}","${day.haveDriverIn}", "${day.haveDriverOut}"]);
