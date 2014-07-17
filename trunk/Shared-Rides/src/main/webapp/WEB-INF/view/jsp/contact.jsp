@@ -17,182 +17,190 @@
 			<form name="" method="POST" class="theBoard lightBorder">
        		    	        		    	
        		    <div id="firstStep" class="steps">
-          				
-          				<span>
+         			<span>
            				<span class="blockLeft">
-			              <strong>Identificación Personal</strong>:          
-			              <span class="red">*</span>
+			               	Organizacion :          
 			            </span> 
-           				
-           				<input type="text" id="personalId" class="blockRight theInputs" required/>
-          				</span> 
-          				
-          				<div class="split"></div>
-          				
-          				<span>
+         				<select id="organization" onChange="" class="blockRight theInputs">
+           					<option value="ucc" selected>Universidad Católica de Córdoba</option>	            					            					
+           				</select>       
+         			</span>	
+         			
+         			<div class="split"></div>
+         				
+         			<span>
            				<span class="blockLeft">
-			              <strong>Nombre</strong>:          
-			              <span class="red">*</span>
+			               	Identificación Personal :          
 			            </span> 
            				
-           				<input type="text" id="name" class="blockRight theInputs" required/>
-          				</span> 
-          				
-          				<div class="split"></div>
-          				
-          				<span>
+           				<input type="text" id="personalId" class="blockRight theInputs" onChange="checkIndividual(this)"/>
+         			</span> 
+         				
+         			<div class="split"></div>
+         				
+         			<span>
            				<span class="blockLeft">
-			              <strong>Apellido</strong>:          
-			              <span class="red">*</span>
+			              	Nombre :          
+			        	</span> 
+           				
+           				<input type="text" id="name" class="blockRight theInputs" onChange="checkIndividual(this)"/>
+         			</span> 
+         				
+         			<div class="split"></div>
+         				
+         			<span>
+           				<span class="blockLeft">
+			               	Apellido :          
 			            </span> 
            				
-           				<input type="text" id="surname" class="blockRight theInputs" required/>
-          				</span> 
-          				
-          				<div class="split"></div>
-          				
-          				<span>
-  				            <span class="blockLeft">
-			              <strong>Contraseña</strong>:          
-			              <span class="red">*</span>
+           				<input type="text" id="surname" class="blockRight theInputs" onChange="checkIndividual(this)"/>
+          			</span> 
+         				
+         			<div class="split"></div>
+         				
+         			<span>
+           				<span class="blockLeft">
+			               	E-mail :          
 			            </span> 
            				
-           				<input type="password" id="password-first" class="blockRight theInputs" required/>
-          				</span>
+           				<input type="text" id="email" class="blockRight theInputs" onChange="checkIndividual(this)"/>
+          			</span> 
+         				
+         			<div class="split"></div>
+         				          				
+       				<span>
+			            <span class="blockLeft">
+               				Contraseña :          
+            			</span> 
+        				
+        				<input type="password" id="password-first" class="blockRight theInputs" onChange="checkIndividual(this)"/>
+       				</span>
 
-          				<div class="split"></div>
-          				
-          				<span>
+         			<div class="split"></div>
+         				
+         			<span>
            				<span class="blockLeft">
-			              <strong>Repita su contraseña</strong>:          
-			              <span class="red">*</span>
+			               Repita su contraseña :          
 			            </span> 
            				
-           				<input type="password" id="password-check" class="blockRight theInputs" required/>
-          				</span> 
-          				
-          				<div class="split"></div>
+           				<input type="password" id="password-check" class="blockRight theInputs" onChange="checkIndividual(this); checkPassword();"/>
+         			</span> 
+         				
+         			<div class="split"></div>
 
-          				<span>
+         			<span>
            				<span class="blockLeft">
-			              <strong>Teléfono Celular</strong>:          
-			              <span class="red">*</span>
-			            </span> 
+			               Teléfono Celular :          
+			        	</span> 
            				
-           				<input type="text" id="cellphone" class="blockRight theInputs" required/>
-          				</span> 
+           				<input type="text" id="cellphone" class="blockRight theInputs" onChange="checkIndividual(this);" onKeyUp="checkNumeric(this);"/>
+         			</span> 
+												
        		    </div>
+       		    <!-------------------------------------------------- END of FIRST STEP -------------------------------------------------->
        		    
        		    <div id="secondStep" class="steps" style="display: none">
           				
-          				<span>
-           				<span class="blockLeft">
-			              <strong>Dirección</strong>:          
-			              <span class="red">*</span>
-			            </span> 
-           				
-           				<input type="text" id="number" class="blockRight theInputs" style="width: 4em" required/>
-           				<input type="text" id="street" class="blockRight theInputs" style="width: 8.8em" required/>
-           				
-          				</span> 
+          			<span>
+	           			<span class="blockLeft">
+				         	Dirección :          				              	 
+				        </span> 
+	           		
+	           			<input type="text" id="number" class="blockRight theInputs" style="width: 4em" onKeyUp="checkNumeric(this); checkBounds(99999);"/>
+	           			<input type="text" id="street" class="blockRight theInputs" style="width: 8.8em" />
+          			</span> 
           				
-          				<div class="split"></div>
+          			<div class="split"></div>
           				
-          				<span>
-           				<span class="blockLeft">
-			              <strong>Barrio</strong>:          
-			              <span class="red">*</span>
-			            </span> 
-           				
-           				<select id="neighborhood" class="blockRight theInputs" required>
-           					<option>Arguello</option>
-           				</select>
-          				</span> 
+          			<span>
+	           			<span class="blockLeft">
+				        	Barrio :          				              	 
+				        </span> 
+	           				
+	           			<select id="neighborhood" class="blockRight theInputs">
+	           				<option>Arguello</option>
+	           			</select>
+          			</span> 
 
-          				<div class="split"></div>
+          			<div class="split"></div>
           				
-          				<span>
+          			<span>
            				<span class="blockLeft">
-			              <strong>Turno</strong>:          
-			              <span class="red">*</span>
+			               	Turno :          				              	 
 			            </span> 
            				
            				<select id="shift" class="blockRight theInputs">
-           					<option value="">Mañana</option>	            				
-           					<option value="">Tarde</option>
+           					<option value="0" selected></option>	            					           				
+           					<option value="morning">Mañana</option>	            				
+           					<option value="afternoon">Tarde</option>
            				</select>            				
            			</span> 
           				
-          				<div class="split"></div>
+          			<div class="split"></div>
           				
-          				<span>
-  				            <span class="blockLeft">
-			              <strong>Tipo de Usuario</strong>:          
-			              <span class="red">*</span>
-			            </span> 
-           				
+         			<span>
+ 				        <span class="blockLeft">
+		            		Tipo de Usuario :          			              	 
+		           	 	</span> 
+          				
            				<select id="userType" name="userType" onChange="userTypeChanged(this);" class="blockRight theInputs">
-           				    <option value="0" selected=""> </option>
+           				    <option value="0" selected> </option>
            					<option value="pedestrian">Peatón</option>	            				
            					<option value="driver">Conductor</option>
            					<option value="driver-pedestrian">Peatón / Conductor</option>	            					
            				</select>               				
            			</span>
 
-          				<div class="split"></div>
+          			<div class="split"></div>
           				          				
-          				<div id="drives" style="display:none">
-          					<hr class="hrs">
-          					
-          					<h3>Información de Vehículo</h3>
-          					
-          					<div class="split"></div>
-          					
-	           				<span>
-	            				<span class="blockLeft">
-					              <strong>Marca del Vehículo</strong>:          
-					              <span class="red">*</span>
-					            </span> 
-	            				
-	            				<select id="brand" class="blockRight theInputs" required>
-	            					<option>Renault</option>	            				
-	            					<option>Fiat</option>
-	            					<option>Ford</option>	            					
-	            				</select>         	            				
-	            			</span> 
+          			<div id="drives" style="display:none">
+       					<hr class="hrs">
+       					
+       					<h3>Información de Vehículo</h3>
+       					
+       					<div class="split"></div>
+         					
+           				<span>
+            				<span class="blockLeft">
+				               Marca del Vehículo :          					               
+				            </span> 
+            				
+            				<select id="brand" class="blockRight theInputs">
+            					<option>Renault</option>	            				
+            					<option>Fiat</option>
+            					<option>Ford</option>	            					
+            				</select>         	            				
+            			</span> 
 	            			
-	            			<div class="split"></div>
+            			<div class="split"></div>
 	            			
-	           				<span>
-	            				<span class="blockLeft">
-					              <strong>Modelo del Vehículo</strong>:          
-					              <span class="red">*</span>
-					            </span> 
-	            				
-	            				<input type="text" id="model" class="blockRight theInputs" required>
-	      						</span> 
+           				<span>
+            				<span class="blockLeft">
+				               Modelo del Vehículo :          					               
+				            </span> 
+            				
+            				<input type="text" id="model" class="blockRight theInputs" >
+   						</span> 
 	      						
 	            			<div class="split"></div>
 	            			
 	           				<span>
 	            				<span class="blockLeft">
-					              <strong>Patente del Vehículo</strong>:          
-					              <span class="red">*</span>
+					               Patente del Vehículo :          					             
 					            </span> 
 	            				
-	            				<input type="text" id="plateNumbers" class="blockRight " required>	            				
-	            				<input type="text" id="plateLetters" class="blockRight " required>
+	            				<input type="text" id="plateNumbers" class="blockRight theInputs" style="width: 4em" onKeyUp="checkNumeric(); checkBounds(999);" />	            				
+	            				<input type="text" id="plateLetters" class="blockRight theInputs" style="width: 4em" />
 	      					</span>         	
 	      						
 	            			<div class="split"></div>
 	      						
 	           				<span>
 	            				<span class="blockLeft">
-					              <strong>Cantidad de Asientos Libres</strong>:          
-					              <span class="red">*</span>
+					               Cantidad de Asientos Libres :          					           
 					            </span> 
 	            				
-	            				<select id="brand" class="blockRight theInputs" required>
+	            				<select id="brand" class="blockRight theInputs">
 	            					<option>1</option>	            				
 	            					<option>2</option>
 	            					<option>3</option>	 
@@ -205,6 +213,8 @@
           				</div>
           				
        		    </div>
+       		    <!-------------------------------------------------- END of SECOND STEP -------------------------------------------------->
+
 
        		    <div id="thirdStep" class="steps" style="display: none">
 					<table id="tableSignUp" class="theSchedule">
@@ -256,6 +266,8 @@
 					</table>
 				</div>
 
+				<div id="alert" class="alerts"></div>          				
+				
         		<!----	Buttons	---->
         		<div id="buttonsSteps">
         			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepsUpdate(-1);"	/>	
