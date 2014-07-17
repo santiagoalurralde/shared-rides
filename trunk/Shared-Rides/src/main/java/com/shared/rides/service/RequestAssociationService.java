@@ -39,8 +39,11 @@ public class RequestAssociationService {
 		JsonObject json = new JsonObject();
 		for(int i = 0; i < assocList.size(); i++){
 			if (assocList.get(i).getState().equals(State.PENDING)){
-				json.addProperty("hasAssoc", true);
-				return json.toString();
+				if (assocList.get(i).getDate().compareTo(new Date()) != 10){
+					json.addProperty("hasAssoc", true);
+					return json.toString();
+				}
+				else assocList.get(i).setState(State.CANCELLED);
 			}
 		}
 		json.addProperty("hasAssoc", false);

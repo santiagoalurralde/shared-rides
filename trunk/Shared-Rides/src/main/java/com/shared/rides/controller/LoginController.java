@@ -3,6 +3,7 @@ package com.shared.rides.controller;
 import java.awt.List;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,6 +54,8 @@ public class LoginController {
 	
 	@RequestMapping(value="logout.do")
 	public ModelAndView logOut(HttpServletRequest request){
+		User u = (User) request.getSession().getAttribute("user");
+		loginService.saveLastLoginDate(u.getUserId());
 		request.getSession().invalidate();
 		return new ModelAndView("redirect:/");
 	}

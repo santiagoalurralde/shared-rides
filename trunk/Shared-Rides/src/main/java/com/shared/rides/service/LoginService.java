@@ -1,5 +1,7 @@
 package com.shared.rides.service;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shared.rides.dao.interfaces.IUserDAO;
-import com.shared.rides.domain.Shift;
 import com.shared.rides.domain.User;
 
 
@@ -37,6 +38,13 @@ public class LoginService {
 			else return false;
 		}
 		return false;
+	}
+	
+	public void saveLastLoginDate(long userId){
+		User u = new User(userId);
+		u = userDAO.load(u);
+		u.setLastLoginDate(new Date());
+		userDAO.update(u);		
 	}
 	
 }
