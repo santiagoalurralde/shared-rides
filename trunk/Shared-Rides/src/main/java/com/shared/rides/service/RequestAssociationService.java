@@ -1,6 +1,5 @@
 package com.shared.rides.service;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +23,7 @@ public class RequestAssociationService {
 	private IAssociationDAO assocDAO;
 	@Autowired
 	private IUserDAO userDAO;
+	
 	private User applicantUser;
 	private User supplierUser;
 	private String message;
@@ -65,15 +65,18 @@ public class RequestAssociationService {
 		supplierUser = userDAO.load(supplierUser);
 		
 		if (validateData(day)){
-			Association assoc = new Association();
-			assoc.setDay(day);
-			assoc.setInout(inout);
-			assoc.setApplicantID(applicantUser);
-			assoc.setState(State.PENDING);
-			assoc.setDate(date);
-			assocDAO.save(assoc);
-			userDAO.newAssoc(supplierUser, assoc);
-			message = "Se ha enviado la solicitud correctamente.";
+			if(validateAssoc(day, inout)){
+				Association assoc = new Association();
+				assoc.setDay(day);
+				assoc.setInout(inout);
+				assoc.setApplicantID(applicantUser);
+				assoc.setState(State.PENDING);
+				assoc.setDate(date);
+				assocDAO.save(assoc);
+				userDAO.newAssoc(supplierUser, assoc);
+				message = "Se ha enviado la solicitud correctamente.";	
+			}
+			else message = "Esta peticion ya se ha realizado anteriormente";
 		}
 		return message;
 	}
@@ -130,6 +133,19 @@ public class RequestAssociationService {
 			}
 		}
 		return false;
+	}
+	
+	private boolean validateAssoc(int day, int inout){
+		boolean isValidate = true;
+		
+		List<Association> myRequestList = userDAO.getMyRequests(applicantUser);
+		
+		for(Association assoc : myRequestList){
+			long supplierId = assocDAO.getSupplierId(assoc);
+			if((assoc.getDay() == day) && (assoc.getInout() == inout) && (supplierUser.getUserId() == supplierId)) isValidate = false;
+		}	
+		
+		return isValidate;
 	}
 	
 }
