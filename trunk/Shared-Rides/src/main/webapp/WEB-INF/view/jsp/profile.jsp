@@ -5,12 +5,12 @@
 %>
 
 <body>
-	<div id="theContent" class="theBox">	
+	<div id="theContent">	
 		
 		<section title="User Data" class="tupper">
 			<h2>${name}	${surname}</h2>
 	
-			<div class="theBoard theLightBox" style="margin-top: 10px"> 		
+			<div class="theBoard lightBorder" style="margin-top: 10px"> 		
 				<div id="userData">				<!-- Datos 	-->
 					<div id="pictureData">		<!-- Foto 	-->
 						<img id="thePic" src="resources/profilePic/${picture}"  width="140px" height="150px"/>  
@@ -36,7 +36,7 @@
 		</section>
 		
 		<section title="Profile Data" class="tupper" style="margin-top: 50px">
-			<div class="theBoard theLightBox"> 		
+			<div class="theBoard lightBorder"> 		
 				<div id="profileData">											<!-- Resto del Perfil --> 
 					<div id="driverData" class="blockLeft blockHalf">			<!-- Perfil conductor -->		 		
 						<h2>

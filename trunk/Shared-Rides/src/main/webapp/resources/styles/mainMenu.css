@@ -23,7 +23,6 @@ Assigned to:	Santiago Alurralde (sa)
 	top:					0;
 	width:					100%;
 	z-index:				1000;
-	
 }
 	#navSteps li
 	{
@@ -40,12 +39,6 @@ Assigned to:	Santiago Alurralde (sa)
 	
 #steps{
 	display:				inline;
-}
-
-#updateForm{
-	background-color:		white;
-	padding:				20px 0px;
-	width:					100%;	
 }
 
 #buttonsSteps{

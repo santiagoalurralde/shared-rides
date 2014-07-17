@@ -4,7 +4,7 @@
 <!--------------------------------------------------------------------
 [Menu]
 --------------------------------------------------------------------->
-<div id="nav" class="theBox">
+<div id="nav"> <!-- class="border" -->
     <ul>       
         <li>					<a class="" 			href="main.do"> 		<span class="logo"> Shared Rides  </span> 	</a></li>
         <li>					<a class="highlight"	href="myProfile.do">  	<spring:message code="label.profile"	/></a></li>

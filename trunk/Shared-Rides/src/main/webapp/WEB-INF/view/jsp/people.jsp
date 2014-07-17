@@ -2,10 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c" %>
 
 <body>
-	<div id="theContent" class="theBox">	
+	<div id="theContent">	
 		
 		<section title="List Data" class="tupper">
-				<div id="listData" class="theBoard theLightBox" style="margin-top: 10px"> 	
+				<div id="listData" class="theBoard lightBorder" style="margin-top: 10px"> 	
 										
 					<div id="pending" class="blockHalf blockRight"> 		<!-- Lista Solicitudes 	--> 
 					
@@ -32,7 +32,7 @@
 		
 	
 		<section title="Schedule Data" class="tupper" style="margin-top: 20px">
-			<div id="scheduleData" class="theBoard theLightBox"> 		
+			<div id="scheduleData" class="theBoard lightBorder"> 		
 				<div id="requested" class="blockLeft blockHalf">		
 					<h2> <spring:message code="label.requested"/> </h2>
 				
