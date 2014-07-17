@@ -63,7 +63,7 @@ body{
 	
 	position:				relative;
 	margin:					0 auto;
-	width:					960px;
+	width:					900px;
 }
 
 .mini{
@@ -72,16 +72,16 @@ body{
 	width:					750px;
 }
 
-.theBox{
-	/*	Container with dark border and shadow */
+.border{
+	/*	Dark border and shadow */
 	
 	box-shadow:				1px 1px 1px #000000;
 	border:					solid 1px; 	
 }
 
-.theLightBox{
-	/*	Container with light border and shadowless */
-	
+.lightBorder{
+	/*	Light border and shadowless */
+	box-shadow:				0 1px 1px rgba(0,0,0,0.15);
 	border:					solid #CFCFCF 1px;
 	/*box-shadow:         	0px 0px 14px rgba(207, 207, 207, 0.35);*/ 	
 }
@@ -95,6 +95,7 @@ body{
 #theContent{
 	/*	Container with background, between header and footer */
 	
+	/*	background-color:		#EEE;	*/	
 	background-image:		url(../images/txture4.jpg); 
 	clear:					both;
 	height:					auto;
@@ -129,13 +130,14 @@ body{
 /*------------------------------------------------------------------
 [Footer / #theFooter]
 -------------------------------------------------------------------*/
+
 #theFooter{
 	background-image:		url(../images/txture.png);
 	clear:					both;
 	color:					white;
 	font-size:				80%;
 	height:					4em;	
-	margin-top: 			-2em;
+	margin-top: 			-0.5em;
 	padding:				3em 0em; 
 	position: 				relative;
 	bottom:					0;
@@ -156,6 +158,7 @@ body{
 }
 
 #nav{
+	/*background-color:		#50A410*/
 	background:				-moz-linear-gradient(top, #90AA44, #50A410);
 	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
 	box-shadow:				1px 1px 6px #000000;

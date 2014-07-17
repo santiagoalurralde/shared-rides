@@ -44,7 +44,7 @@ function fixView($targetThis, $targetOther){
 	$( '.theRating' ).css("margin", "2% 0% 0% 0%");	
 	$( '#profileData' ).css("padding-right", "70px").css("padding-left", "70px");		
 	$( '#line' ).css("display", "none");			
-	$( '.mapStatic' ).css("height", "400px").css("width", "815px");
+	$( '.mapStatic' ).css("height", "400px").css("width", "760px");
 	$( '.mapContainer' ).css("margin-left", "0px");
 }
 

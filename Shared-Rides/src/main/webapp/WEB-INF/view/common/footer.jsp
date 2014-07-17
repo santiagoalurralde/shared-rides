@@ -1,9 +1,7 @@
 <!----------------  FOOTER      -------------->
-<div id="theFooter" class="theBox">
+<div id="theFooter" class="border">
     <p>
-    	© 2013  Sluggin'    <br />
+    	© 2013  Sluggin'    <br>
         Todos los derechos reservados.
-    </p>
-    
    	
 </div>

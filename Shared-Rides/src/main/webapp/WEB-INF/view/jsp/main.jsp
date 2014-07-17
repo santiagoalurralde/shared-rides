@@ -2,70 +2,69 @@
 
 <body onLoad="stepsUpdate(1);">		
 		  
-		<!----	Content	---->
-	    <div id="theContent" class="theBox">
-	        <div class="tupper"> 
-	       		<h4>
-	       			<spring:message code="label.messageFind"/>
-	        	</h4>
-	        
-	        	<!----	Steps	---->
-	        	<div id="navSteps" class="theBox"> 
-	        		<ul>
-	        			<li id="step1"><b>1. </b><spring:message code="label.step1"/></li>
-	        			<li id="step2"><b>2. </b><spring:message code="label.step2"/></li>
-	        			<li id="step3"><b>3. </b><spring:message code="label.step3"/></li>
-	        		</ul>
-	        	</div>
-	        	
-	        	<!----	Form	---->
-	        	<form name="updateSearchForm" id="updateForm" class="theBox" method="POST" action="">
-	        	
-	        		<!----	Images			---->
-	        		<div id="steps" style="width: 300px; margin: 10px 0px 0px 250px">
-			        	<img id="imgBoot" 	 	title="peaton"		class="imagesSteps"	src="resources/images/boot.png" 	style="margin-right: 100px"					/>
-						<img id="imgSteering"	title="conductor"	class="imagesSteps"	src="resources/images/steering.png" 											/>
-						<img id="imgSun" 		title="dia"			class="imagesSteps"	src="resources/images/sun.png" 		style="display: none; margin-right: 100px" 	/>
-						<img id="imgMoon"		title="tarde/noche"	class="imagesSteps"	src="resources/images/moon.png" 	style="display: none"						/>
-	        		</div>
+	<!----	Content	---->
+    <div id="theContent">
+        <section title="Main Menu" class="tupper"> 
+       		<h4>
+       			<spring:message code="label.messageFind"/>
+        	</h4>
+        
+        	<!----	Steps	---->
+        	<div id="navSteps" class="lightBorder"> 
+        		<ul>
+        			<li id="step1"><b>1. </b><spring:message code="label.step1"/></li>
+        			<li id="step2"><b>2. </b><spring:message code="label.step2"/></li>
+        			<li id="step3"><b>3. </b><spring:message code="label.step3"/></li>
+        		</ul>
+        	</div>
+        	
+        	<!----	Form	---->
+        	<form name="updateSearchForm" class="theBoard lightBorder" method="POST" action="">
+        	
+        		<!----	Images			---->
+        		<div id="steps" style="width: 300px; margin: 10px 0px 0px 250px">
+		        	<img id="imgBoot" 	 	title="peaton"		class="imagesSteps"	src="resources/images/boot.png" 	style="margin-right: 100px"					/>
+					<img id="imgSteering"	title="conductor"	class="imagesSteps"	src="resources/images/steering.png" 											/>
+					<img id="imgSun" 		title="dia"			class="imagesSteps"	src="resources/images/sun.png" 		style="display: none; margin-right: 100px" 	/>
+					<img id="imgMoon"		title="tarde/noche"	class="imagesSteps"	src="resources/images/moon.png" 	style="display: none"						/>
+        		</div>
 
-	        		<!----	Map Driver		---->		
-					<div id="mapDriver">
-						<div id="map"></div>
-						<span class="t1" style = "visibility:hidden">
-							<a id="permalink" href=""></a>
-						</span>
+        		<!----	Map Driver		---->		
+				<div id="mapDriver">
+					<div id="map"></div>
+					<span class="t1" style = "visibility:hidden">
+						<a id="permalink" href=""></a>
+					</span>
 
-						<span id='mapinfo'>
-							<span id='currentscale' style="display:none"></span>
-						</span>						
-					</div>
-					
-					<!----	Map Pedestrian	---->	
-	        		<div id="mapPedestrian">
-	        			<div id="map2" class="mapSimple"></div>
-	        		</div>
-	        	
-	        		<!---- Results List		---->     
-	        		<div id="listFound" style="width: 400px; margin-left: 325px">
-	        			<table id="tableFound" class="tableUsers">
-							<tr>
-								<th colspan="4"> <spring:message code="label.foundUsers"/> </th>
-							</tr>
-						</table>
-	        		</div>
-	        		
-	        		<!----	Buttons	---->
-	        		<div id="buttonsSteps">
-	        			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepsUpdate(-1);"	/>	
-	           	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepsUpdate(1);"	/>		
-	        			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 		/>  
-	        		</div> 	  
-	            	
-	        	</form>	        	
-	        	
-            </div>
-		</div>
+					<span id='mapinfo'>
+						<span id='currentscale' style="display:none"></span>
+					</span>						
+				</div>
+				
+				<!----	Map Pedestrian	---->	
+        		<div id="mapPedestrian">
+        			<div id="map2" class="mapSimple"></div>
+        		</div>
+        	
+        		<!---- Results List		---->     
+        		<div id="listFound" style="width: 400px; margin-left: 325px">
+        			<table id="tableFound" class="tableUsers">
+						<tr>
+							<th colspan="4"> <spring:message code="label.foundUsers"/> </th>
+						</tr>
+					</table>
+        		</div>
+        		
+        		<!----	Buttons	---->
+        		<div id="buttonsSteps">
+        			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepsUpdate(-1);"	/>	
+           	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepsUpdate(1);"	/>		
+        			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 		/>  
+        		</div> 	  
+            	
+       		</form>	        	
+        </section>        
+	</div>
 </body>
 
 <script src="resources/scripts/MainMenu.js" 	type="text/javascript"></script>
