@@ -250,7 +250,7 @@ function checkNumeric(target)
 $( document ).ready(function() {
 
 	//Iniciar Mapa Simple
-	//initMap(); 
+	initMap(); 
 	
 	//Esconder elementos
 	start();
@@ -271,6 +271,9 @@ $( document ).ready(function() {
  */
 function start()
 {
+	$( "#mapDriver" ).css( 'display', 'none' );
+	$( "#mapPedestrian" ).css( 'display', 'none' );
+	
 	highlightStep(0);
 	
 	$( "#btnBack" ).hide( 0 );		
@@ -285,18 +288,18 @@ function start()
  * @param {String} type - in
  */
 function fillRowsInOut(type){
-	var button = "<button>Definir</button>";
+	var button 	= "<button id='btn"+ type +"' onClick='changeMapType(this)'>Definir</button>";
 	
 	for(var i=1;i<6;i++)
 	{
 		var select 	= "<select id='"+ i + type + "'></select>"; 
-	
-		$( "#tableSignUp #"+ type +"Row" ).append("<td>"+ select + button + "</td>");
+
+		$( "#tableSignUp #"+ type ).append("<td>"+ select + button + "</td>");
 		
-		for(var j=5;j<24;j++)
+		for(var j=0;j<24;j++)
 		{
-			$( "#"+ i + type).append("<option value='"+j+":00'>"+j+":00 hs</option>");			
-			$( "#"+ i + type).append("<option value='"+j+":30'>"+j+":30 hs</option>");
+			$( "#"+ i + type ).append("<option value='"+j+":00'>"+j+":00 hs</option>");			
+			$( "#"+ i + type ).append("<option value='"+j+":30'>"+j+":30 hs</option>");
 		}
 	}
 }
@@ -324,6 +327,21 @@ function fillRowType()
 	}
 }
 
+
+
+function changeMapType(target)
+{
+	var type = $( target ).parent().parent().attr('id');
+	alert(type);
+	var day = $( target ).parent().index();
+	
+	if($( "#"+ day + type ).find("option:selected").val() == "pedestrian")
+		$( "#mapPedestrian" ).show( 'slow' );		
+	else
+		$( "#mapDriver" ).show( 'slow' );
+	
+}
+
 /**
  * Manages GUI according to current step of form.
  * 
@@ -341,7 +359,9 @@ function update(step){
 			$( "#btnNext" ).show( 'slow' );
 			break;
 		case 1:
-			highlightStep(step);			
+			highlightStep(step);	
+			$( "#mapDriver" ).hide();
+			$( "#mapPedestrian" ).hide();
 			$( "#firstStep" ).hide();
 			$( "#secondStep" ).show();
 			$( "#thirdStep" ).hide();
@@ -354,6 +374,12 @@ function update(step){
 			fillRowType();
 			$( "#secondStep" ).hide();
 			$( "#thirdStep" ).show();
+			
+			if(_userType == "pedestrian")
+				$( "#mapPedestrian" ).show( 'slow' );
+			if(_userType == "driver")
+				$( "#mapDriver" ).show( 'slow' );
+			
 			$( "#btnNext" ).hide( 'fast' );
 			$( "#btnOK" ).show( 'slow' );
 			break;
@@ -369,24 +395,21 @@ function highlightStep(step){
 		
 	switch(step)
 	{
-	case -1:
-		$( "#stepSignUp1" ).css('opacity', '1');
-		break;
-	case 0:
-		$( "#stepSignUp1" ).css('opacity', '1');
-		$( "#stepSignUp2" ).css('opacity', '0.2');
-		$( "#stepSignUp3" ).css('opacity', '0.2');
-		break;
-	case 1:
-		$( "#stepSignUp1" ).css('opacity', '0.2');
-		$( "#stepSignUp2" ).css('opacity', '1');
-		$( "#stepSignUp3" ).css('opacity', '0.2');
-		break;
-	case 2:
-		$( "#stepSignUp1" ).css('opacity', '0.2');
-		$( "#stepSignUp2" ).css('opacity', '0.2');
-		$( "#stepSignUp3" ).css('opacity', '1');
-		break;
+		case 0:
+			$( "#stepSignUp1" ).css('opacity', '1');
+			$( "#stepSignUp2" ).css('opacity', '0.2');
+			$( "#stepSignUp3" ).css('opacity', '0.2');
+			break;
+		case 1:
+			$( "#stepSignUp1" ).css('opacity', '0.2');
+			$( "#stepSignUp2" ).css('opacity', '1');
+			$( "#stepSignUp3" ).css('opacity', '0.2');
+			break;
+		case 2:
+			$( "#stepSignUp1" ).css('opacity', '0.2');
+			$( "#stepSignUp2" ).css('opacity', '0.2');
+			$( "#stepSignUp3" ).css('opacity', '1');
+			break;
 	}
 }
 
@@ -398,7 +421,7 @@ function highlightStep(step){
 function userTypeChanged(target)
 {
 	var selectedType = $(target).find("option:selected").val();
-	
+		
 	if(selectedType == "pedestrian" || selectedType == "0")
 	{
 		$("#drives").hide( 'slow' );

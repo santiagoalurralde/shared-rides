@@ -96,13 +96,12 @@
            				<input type="text" id="cellphone" class="blockRight theInputs" onChange="checkIt(this);" onKeyUp="checkNumeric(this);"/>
          			</span> 
          			
-         			<div class="split"></div>        								
        		    </div>
        		    <!-------------------------------------------------- END of FIRST STEP -------------------------------------------------->
        		    
        		    <div id="secondStep" class="steps" style="display: none">
           				
-          			<span>
+       				<span>
 	           			<span class="blockLeft">
 				         	Dirección :          				              	 
 				        </span> 
@@ -152,13 +151,13 @@
            					<option value="driver-pedestrian">Peatón / Conductor</option>	            					
            				</select>               				
            			</span>
-
-          			<div class="split"></div>
-          				          				
+          				
           			<div id="drives" style="display:none">
+          				<div class="split"></div>
+          			
        					<hr class="hrs">
        					
-       					<h3>Información de Vehículo</h3>
+       					<h4>Información de Vehículo</h4>
        					
        					<div class="split"></div>
          					
@@ -185,38 +184,36 @@
             				<input type="text" id="model" class="blockRight theInputs" onChange="checkIt(this);">
    						</span> 
 	      						
-	            			<div class="split"></div>
+            			<div class="split"></div>
 	            			
-	           				<span>
-	            				<span class="blockLeft">
-					               Patente del Vehículo :          					             
-					            </span> 
-	            				
-	            				<input type="number"	id="plateNumbers" class="blockRight theInputs" style="width: 4em" onChange="checkIt(this);" min="000" max="999" />	            				
-	            				<input type="text" 		id="plateLetters" class="blockRight theInputs" style="width: 4em" onChange="checkIt(this);" onKeyPress="checkAlphabetic(event);" maxlength="3" />
-	      					</span>         	
+           				<span>
+            				<span class="blockLeft">
+				               Patente del Vehículo :          					             
+				            </span> 
+            				
+            				<input type="number"	id="plateNumbers" class="blockRight theInputs" style="width: 4em" onChange="checkIt(this);" min="000" max="999" />	            				
+            				<input type="text" 		id="plateLetters" class="blockRight theInputs" style="width: 4em" onChange="checkIt(this);" onKeyPress="checkAlphabetic(event);" maxlength="3" />
+      					</span>         	
 	      						
-	            			<div class="split"></div>
+            			<div class="split"></div>
 	      						
-	           				<span>
-	            				<span class="blockLeft">
-					               Cantidad de Asientos Libres :          					           
-					            </span> 
-	            				
-	            				<select id="numberSeats" class="blockRight theInputs" onChange="checkIt(this);">
-	            					<option value="0" selected></option>	            					            				
-	            					<option value="1">1</option>	            				
-	            					<option value="2">2</option>
-	            					<option value="3">3</option>	 
-	            					<option value="4">4</option>	            					
-	            					<option value="5">5</option>	            					
-	            					<option value="6">6</option>	            					
-	            					<option value="7">7</option>	            					  					
-	            				</select>          						
-	            			</span>  
-	            			
-	            			<div class="split"></div>        								         													            			
-          				</div>
+           				<span>
+            				<span class="blockLeft">
+				               Cantidad de Asientos Libres :          					           
+				            </span> 
+		            				
+   	        				<select id="numberSeats" class="blockRight theInputs" onChange="checkIt(this);">
+            					<option value="0" selected></option>	            					            				
+            					<option value="1">1</option>	            				
+            					<option value="2">2</option>
+            					<option value="3">3</option>	 
+            					<option value="4">4</option>	            					
+            					<option value="5">5</option>	            					
+            					<option value="6">6</option>	            					
+            					<option value="7">7</option>	            					  					
+            				</select>          						
+            			</span>  	
+   					</div>
        		    </div>
        		    <!-------------------------------------------------- END of SECOND STEP -------------------------------------------------->
 
@@ -246,19 +243,41 @@
 						<tr id="userTypeRow">
 			
 						</tr>
-						<tr id="inRow">
+						<tr id="in">
 							<td>
 								Entrada
 							</td>
 						</tr>
-						<tr id="outRow">
+						<tr id="out">
 							<td>
 								Salida
 							</td>									
 						</tr>
 					</table>
 				</div>
+				<!-------------------------------------------------- END of THIRD STEP -------------------------------------------------->
+				
+				
+				<!----	Map Driver		---->		
+				<div id="mapDriver">
+					<div id="map"></div>
+					<span class="t1" style = "visibility:hidden">
+						<a id="permalink" href=""></a>
+					</span>
 
+					<span id='mapinfo'>
+						<span id='currentscale' style="display:none"></span>
+					</span>						
+				</div>
+				
+				<!----	Map Pedestrian	---->	
+        		<div id="mapPedestrian">
+        			<div id="map2" class="mapSimple"></div>
+        		</div>
+
+				<div class="split"></div>        								         													            			
+	
+				<!----	Red Alerts 	----->
 				<div id="alert" class="alerts"></div>          				
 				
         		<!----	Buttons	---->
@@ -267,7 +286,7 @@
            	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepNext();"	/>		
         			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 	/>  
         		</div> 	  
-           	
+           		
        		</form>	  
 			<div class="clearer"></div>
 		</section>
@@ -276,4 +295,15 @@
 </body>
 
 <script src="resources/scripts/Register.js" 	type="text/javascript"></script>
+<script src="resources/maps/OpenLayers.js"		type="text/javascript"></script>    
+<script src="resources/maps/OpenStreetMap.js"  	type="text/javascript"></script>
+<script src="resources/maps/proj4js.js"			type="text/javascript"></script>
+<script src="resources/maps/osmap.js" 			type="text/javascript"></script>
+<script src="resources/maps/track.js" 			type="text/javascript"></script>
+<script src="resources/maps/osmapSimple.js" 	type="text/javascript"></script>
+
+<script >
+	initMapCoords(lonlat, zoom, map);
+</script>
+
 
