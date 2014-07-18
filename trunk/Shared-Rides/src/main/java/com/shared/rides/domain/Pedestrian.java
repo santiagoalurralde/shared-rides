@@ -29,6 +29,7 @@ public class Pedestrian implements Profile, Serializable{
 	private long pedestrianId;
 	private float rating;
 	private List<Schedule> schedule;
+	private List<Stop> stops;
 
 //-----------CONSTRUCTOR 
 
@@ -36,15 +37,15 @@ public class Pedestrian implements Profile, Serializable{
 	}
 	
 //-----------GETTERS & SETTERS
-	
+
 	@Id
 	@GeneratedValue
 	@Column(name="id")
-	public long getPedestrianID() {
+	public long getPedestrianId() {
 		return pedestrianId;
 	}
-	
-	public void setPedestrianID(long pedestrianId) {
+
+	public void setPedestrianId(long pedestrianId) {
 		this.pedestrianId = pedestrianId;
 	}
 
@@ -67,6 +68,15 @@ public class Pedestrian implements Profile, Serializable{
 	
 	public void setSchedule(List<Schedule> schedule) {
 		this.schedule = schedule;
+	}
+
+	@OneToMany(mappedBy = "pedestrian")
+	public List<Stop> getStops() {
+		return stops;
+	}
+
+	public void setStops(List<Stop> stops) {
+		this.stops = stops;
 	}
 
 

@@ -171,7 +171,7 @@ public class ProfileService {
 	private void addModelPedestrian(User u){
 		Pedestrian p = u.getPedestrian();
 		
-		model.addObject("idPedestrian", p.getPedestrianID());
+		model.addObject("idPedestrian", p.getPedestrianId());
 		model.addObject("ratingPedestrian", p.getRating());
 		
 		ArrayList arraySch = new ArrayList();
