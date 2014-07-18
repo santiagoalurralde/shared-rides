@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.shared.rides.service.SignupUserService;
+//import com.shared.rides.service.SignupUserService;
 
 @Controller
 public class SignupUserController {
-
+/*
 	@Autowired
 	private SignupUserService signupUserService;
 	
@@ -25,5 +25,5 @@ public class SignupUserController {
 	public boolean validateNewUser(@RequestParam("personalId") String personalId,
 								HttpServletRequest request){
 		return signupUserService.validateNewUser(personalId);
-	}
+	}*/
 }
