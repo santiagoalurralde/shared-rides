@@ -12,29 +12,26 @@ import javax.persistence.Table;
 @Table(name = "Stops")
 public class Stop {
 
-	private long id;
-	private Pedestrian pedestrian;
+	private long stopId;
 	private String pathFile;
 	
+	//-----------CONSTRUCTOR
+
+		public Stop(){	
+		}
+		
+	//-----------GETTERS & SETTERS 
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
-	public long getId() {
-		return id;
+	public long getStopId() {
+		return stopId;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setStopId(long stopId) {
+		this.stopId = stopId;
 	}
-	
-	@ManyToOne
-	@JoinColumn(name = "id")
-	public Pedestrian getPedestrian() {
-		return pedestrian;
-	}
-	public void setPedestrian(Pedestrian pedestrian) {
-		this.pedestrian = pedestrian;
-	}
-	
+		
 	@Column (name = "pathFile")
 	public String getPathFile() {
 		return pathFile;

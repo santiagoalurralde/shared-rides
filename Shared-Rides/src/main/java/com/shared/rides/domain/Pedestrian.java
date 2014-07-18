@@ -70,7 +70,10 @@ public class Pedestrian implements Profile, Serializable{
 		this.schedule = schedule;
 	}
 
-	@OneToMany(mappedBy = "pedestrian")
+	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name="Pedestrian_Stop", joinColumns = @JoinColumn(name="pedestrianID"),
+	inverseJoinColumns = @JoinColumn(name="stopID"))
 	public List<Stop> getStops() {
 		return stops;
 	}
