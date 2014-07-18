@@ -1,7 +1,7 @@
 <%@	taglib uri="http://www.springframework.org/tags" 	prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c" %>
 
-<body onLoad="stepsUpdate(1);">
+<body onLoad="stepNext();">
 
 	<!----	Content	---->
 	<div id="theContent">	
@@ -21,7 +21,7 @@
            				<span class="blockLeft">
 			               	Organizacion :          
 			            </span> 
-         				<select id="organization" onChange="" class="blockRight theInputs">
+         				<select id="organization" class="blockRight theInputs">
            					<option value="ucc" selected>Universidad Católica de Córdoba</option>	            					            					
            				</select>       
          			</span>	
@@ -33,7 +33,7 @@
 			               	Identificación Personal :          
 			            </span> 
            				
-           				<input type="text" id="personalId" class="blockRight theInputs" onChange="checkIndividual(this)"/>
+           				<input type="text" id="personalId" class="blockRight theInputs" onChange="checkIt(this)"/>
          			</span> 
          				
          			<div class="split"></div>
@@ -43,7 +43,7 @@
 			              	Nombre :          
 			        	</span> 
            				
-           				<input type="text" id="name" class="blockRight theInputs" onChange="checkIndividual(this)"/>
+           				<input type="text" id="name" class="blockRight theInputs" onChange="checkIt(this)" onKeyPress="checkAlphabetic(event);"/>
          			</span> 
          				
          			<div class="split"></div>
@@ -53,7 +53,7 @@
 			               	Apellido :          
 			            </span> 
            				
-           				<input type="text" id="surname" class="blockRight theInputs" onChange="checkIndividual(this)"/>
+           				<input type="text" id="surname" class="blockRight theInputs" onChange="checkIt(this)" onKeyPress="checkAlphabetic(event);"/>
           			</span> 
          				
          			<div class="split"></div>
@@ -63,7 +63,7 @@
 			               	E-mail :          
 			            </span> 
            				
-           				<input type="text" id="email" class="blockRight theInputs" onChange="checkIndividual(this)"/>
+           				<input type="text" id="email" class="blockRight theInputs" onChange="checkIt(this)"/>
           			</span> 
          				
          			<div class="split"></div>
@@ -73,7 +73,7 @@
                				Contraseña :          
             			</span> 
         				
-        				<input type="password" id="password-first" class="blockRight theInputs" onChange="checkIndividual(this)"/>
+        				<input type="password" id="password-first" class="blockRight theInputs" onChange="checkIt(this); checkPassword();"/>
        				</span>
 
          			<div class="split"></div>
@@ -83,7 +83,7 @@
 			               Repita su contraseña :          
 			            </span> 
            				
-           				<input type="password" id="password-check" class="blockRight theInputs" onChange="checkIndividual(this); checkPassword();"/>
+           				<input type="password" id="password-check" class="blockRight theInputs" onChange="checkIt(this); checkPassword();"/>
          			</span> 
          				
          			<div class="split"></div>
@@ -93,9 +93,10 @@
 			               Teléfono Celular :          
 			        	</span> 
            				
-           				<input type="text" id="cellphone" class="blockRight theInputs" onChange="checkIndividual(this);" onKeyUp="checkNumeric(this);"/>
+           				<input type="text" id="cellphone" class="blockRight theInputs" onChange="checkIt(this);" onKeyUp="checkNumeric(this);"/>
          			</span> 
-												
+         			
+         			<div class="split"></div>        								
        		    </div>
        		    <!-------------------------------------------------- END of FIRST STEP -------------------------------------------------->
        		    
@@ -106,8 +107,8 @@
 				         	Dirección :          				              	 
 				        </span> 
 	           		
-	           			<input type="text" id="number" class="blockRight theInputs" style="width: 4em" onKeyUp="checkNumeric(this); checkBounds(99999);"/>
-	           			<input type="text" id="street" class="blockRight theInputs" style="width: 8.8em" />
+	           			<input type="number" 	id="number" class="blockRight theInputs" style="width: 4em" 	onChange="checkIt(this);" onKeyUp="checkNumeric(this);" min="0" max="99999"/>
+	           			<input type="text" 		id="street" class="blockRight theInputs" style="width: 8.8em" 	onChange="checkIt(this);" />
           			</span> 
           				
           			<div class="split"></div>
@@ -117,7 +118,8 @@
 				        	Barrio :          				              	 
 				        </span> 
 	           				
-	           			<select id="neighborhood" class="blockRight theInputs">
+	           			<select id="neighborhood" class="blockRight theInputs" onChange="checkIt(this);">
+	           				<option value="0"></option>	           			
 	           				<option>Arguello</option>
 	           			</select>
           			</span> 
@@ -129,7 +131,7 @@
 			               	Turno :          				              	 
 			            </span> 
            				
-           				<select id="shift" class="blockRight theInputs">
+           				<select id="shift" class="blockRight theInputs" onChange="checkIt(this);">
            					<option value="0" selected></option>	            					           				
            					<option value="morning">Mañana</option>	            				
            					<option value="afternoon">Tarde</option>
@@ -143,7 +145,7 @@
 		            		Tipo de Usuario :          			              	 
 		           	 	</span> 
           				
-           				<select id="userType" name="userType" onChange="userTypeChanged(this);" class="blockRight theInputs">
+           				<select id="userType" name="userType" onChange="checkIt(this); userTypeChanged(this);" class="blockRight theInputs">
            				    <option value="0" selected> </option>
            					<option value="pedestrian">Peatón</option>	            				
            					<option value="driver">Conductor</option>
@@ -165,7 +167,8 @@
 				               Marca del Vehículo :          					               
 				            </span> 
             				
-            				<select id="brand" class="blockRight theInputs">
+            				<select id="brand" class="blockRight theInputs" onChange="checkIt(this);">
+	            				<option value="0" selected></option>	            					            				            				
             					<option>Renault</option>	            				
             					<option>Fiat</option>
             					<option>Ford</option>	            					
@@ -179,7 +182,7 @@
 				               Modelo del Vehículo :          					               
 				            </span> 
             				
-            				<input type="text" id="model" class="blockRight theInputs" >
+            				<input type="text" id="model" class="blockRight theInputs" onChange="checkIt(this);">
    						</span> 
 	      						
 	            			<div class="split"></div>
@@ -189,8 +192,8 @@
 					               Patente del Vehículo :          					             
 					            </span> 
 	            				
-	            				<input type="text" id="plateNumbers" class="blockRight theInputs" style="width: 4em" onKeyUp="checkNumeric(); checkBounds(999);" />	            				
-	            				<input type="text" id="plateLetters" class="blockRight theInputs" style="width: 4em" />
+	            				<input type="number"	id="plateNumbers" class="blockRight theInputs" style="width: 4em" onChange="checkIt(this);" min="000" max="999" />	            				
+	            				<input type="text" 		id="plateLetters" class="blockRight theInputs" style="width: 4em" onChange="checkIt(this);" onKeyPress="checkAlphabetic(event);" maxlength="3" />
 	      					</span>         	
 	      						
 	            			<div class="split"></div>
@@ -200,18 +203,20 @@
 					               Cantidad de Asientos Libres :          					           
 					            </span> 
 	            				
-	            				<select id="brand" class="blockRight theInputs">
-	            					<option>1</option>	            				
-	            					<option>2</option>
-	            					<option>3</option>	 
-	            					<option>4</option>	            					
-	            					<option>5</option>	            					
-	            					<option>6</option>	            					
-	            					<option>7</option>	            					  					
+	            				<select id="numberSeats" class="blockRight theInputs" onChange="checkIt(this);">
+	            					<option value="0" selected></option>	            					            				
+	            					<option value="1">1</option>	            				
+	            					<option value="2">2</option>
+	            					<option value="3">3</option>	 
+	            					<option value="4">4</option>	            					
+	            					<option value="5">5</option>	            					
+	            					<option value="6">6</option>	            					
+	            					<option value="7">7</option>	            					  					
 	            				</select>          						
-	            			</span>           													            			
+	            			</span>  
+	            			
+	            			<div class="split"></div>        								         													            			
           				</div>
-          				
        		    </div>
        		    <!-------------------------------------------------- END of SECOND STEP -------------------------------------------------->
 
@@ -238,20 +243,8 @@
 								Viernes
 							</th>				
 						</tr>
-						<tr>
-							<td>
-								Tipo de Usuario
-							</td>
-							<td>
-							</td>
-							<td>
-							</td>
-							<td>
-							</td>
-							<td>
-							</td>
-							<td>
-							</td>				
+						<tr id="userTypeRow">
+			
 						</tr>
 						<tr id="inRow">
 							<td>
@@ -270,9 +263,9 @@
 				
         		<!----	Buttons	---->
         		<div id="buttonsSteps">
-        			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepsUpdate(-1);"	/>	
-           	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepsUpdate(1);"	/>		
-        			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 		/>  
+        			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepBack();"	/>	
+           	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepNext();"	/>		
+        			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 	/>  
         		</div> 	  
            	
        		</form>	  
