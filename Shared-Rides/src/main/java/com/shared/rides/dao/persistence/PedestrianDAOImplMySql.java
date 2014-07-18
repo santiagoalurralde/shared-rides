@@ -24,7 +24,7 @@ public class PedestrianDAOImplMySql implements IPedestrianDAO {
 	}
 
 	public Pedestrian load(Pedestrian ped) {
-		return (Pedestrian) sessionFactory.getCurrentSession().get(Pedestrian.class, ped.getPedestrianID());	
+		return (Pedestrian) sessionFactory.getCurrentSession().get(Pedestrian.class, ped.getPedestrianId());	
 	}
 
 	public Pedestrian delete(Pedestrian ped) {

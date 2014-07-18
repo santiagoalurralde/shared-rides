@@ -43,4 +43,8 @@ public class OrganizationDAOImplMySql implements IOrganizationDAO {
 		return null;
 	}
 
+	public Organization loadByName(Organization org) {
+		return (Organization) sessionFactory.getCurrentSession().load(Organization.class, org.getName());
+	}
+
 }
