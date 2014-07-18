@@ -203,7 +203,7 @@ body{
 #mapDriver{
 	/*	Shown in Main Menu */
 	
-	width: 		900px;
+	width: 		838px;
 	margin:		0 0 0 30px;
 	border:		1px solid #ccc;
 }
@@ -217,7 +217,7 @@ body{
 .mapSimple{
 	/*	Class for mapPedestrian */
 	
-	width: 		900px;
+	width: 		838px;
 	height: 	450px;	
 	border:		1px solid #ccc;
 }

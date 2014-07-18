@@ -1,6 +1,6 @@
 <%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<body onLoad="stepsUpdate(1);">		
+<body onLoad="stepNext();">		
 		  
 	<!----	Content	---->
     <div id="theContent">
@@ -22,11 +22,11 @@
         	<form name="updateSearchForm" class="theBoard lightBorder" method="POST" action="">
         	
         		<!----	Images			---->
-        		<div id="steps" style="width: 300px; margin: 10px 0px 0px 250px">
-		        	<img id="imgBoot" 	 	title="peaton"		class="imagesSteps"	src="resources/images/boot.png" 	style="margin-right: 100px"					/>
-					<img id="imgSteering"	title="conductor"	class="imagesSteps"	src="resources/images/steering.png" 											/>
-					<img id="imgSun" 		title="dia"			class="imagesSteps"	src="resources/images/sun.png" 		style="display: none; margin-right: 100px" 	/>
-					<img id="imgMoon"		title="tarde/noche"	class="imagesSteps"	src="resources/images/moon.png" 	style="display: none"						/>
+        		<div id="steps">
+		        	<img id="imgBoot" 	 	title="peaton"		class="imagesSteps"	src="resources/images/boot.png" 	/>
+					<img id="imgSteering"	title="conductor"	class="imagesSteps"	src="resources/images/steering.png" />
+					<img id="imgSun" 		title="dia"			class="imagesSteps"	src="resources/images/sun.png" 		/>
+					<img id="imgMoon"		title="tarde/noche"	class="imagesSteps"	src="resources/images/moon.png" 	/>
         		</div>
 
         		<!----	Map Driver		---->		
@@ -47,19 +47,19 @@
         		</div>
         	
         		<!---- Results List		---->     
-        		<div id="listFound" style="width: 400px; margin-left: 325px">
+        		<div id="listFound">
         			<table id="tableFound" class="tableUsers">
 						<tr>
-							<th colspan="4"> <spring:message code="label.foundUsers"/> </th>
+							<th colspan="4"><spring:message code="label.foundUsers"/> </th>
 						</tr>
 					</table>
         		</div>
         		
         		<!----	Buttons	---->
         		<div id="buttonsSteps">
-        			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepsUpdate(-1);"	/>	
-           	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepsUpdate(1);"	/>		
-        			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 		/>  
+        			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepBack();"	/>	
+           	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepNext();"	/>		
+        			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 	/>  
         		</div> 	  
             	
        		</form>	        	
@@ -75,6 +75,6 @@
 <script src="resources/maps/track.js" 			type="text/javascript"></script>
 <script src="resources/maps/osmapSimple.js" 	type="text/javascript"></script>
 
-<script >
+<script>
 	initMapCoords(lonlat, zoom, map);
 </script>
