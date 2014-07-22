@@ -81,7 +81,7 @@ $( document ).ready(function() {
 			coordsJs = "[{lon=" + lonJs.toString() + " , lat=" + latJs.toString() + "}]";
 		else
 			coordsJs = gpxTrack.confirm();
-		
+				
 		$.post( "find.do", { "user": userJs , "shift": shiftJs, "mapData": coordsJs }, 
 				function(json)
 				{

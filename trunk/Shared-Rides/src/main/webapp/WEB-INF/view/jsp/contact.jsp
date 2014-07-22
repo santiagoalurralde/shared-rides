@@ -254,6 +254,25 @@
 							</td>									
 						</tr>
 					</table>
+					
+					<div class="split"></div>
+	      						
+          			<span style="text-align: center">
+           				<span>
+			               Aplicar para:        					           
+			            </span> 
+	            				
+  	        			<select id="applyto" class="theInputs" onChange="checkIt(this);">
+           					<option value="0" selected></option>	            					            				
+           					<option value="onlythis">Sólo la hora seleccionada</option>
+           				</select>       
+           				
+           				<input type="button" id="btnMap" class="btn" 	value="Listo" 		style="display: none" 	/>  
+           				<input type="hidden" id="hdnInOut" 			/>  
+             			<input type="hidden" id="hdnDay" 			/>
+              			<input type="hidden" id="hdnUserTypeDay" 	/>
+             			  	            						            						
+           			</span>  	
 				</div>
 				<!-------------------------------------------------- END of THIRD STEP -------------------------------------------------->
 				
@@ -283,7 +302,7 @@
         		<!----	Buttons	---->
         		<div id="buttonsSteps">
         			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepBack();"	/>	
-           	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepNext();"	/>		
+           	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepNext();"	/>	
         			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 	/>  
         		</div> 	  
            		
