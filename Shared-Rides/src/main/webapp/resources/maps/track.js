@@ -109,7 +109,7 @@ var m = {
 						new OpenLayers.Pixel(-8,-8));
 		this.icon.setOpacity(0.8);    
 
-		//Éstilo de las Líneas en los tracks
+		//Estilo de las Líneas en los tracks
 		this.style					= OpenLayers.Util.extend(OpenLayers.Feature.Vector.style['default'], {});
 		this.style.strokeColor 		= "gold";
 		this.style.strokeColor 		= "#50A410";
@@ -126,12 +126,10 @@ var m = {
 	draw		: function(){
 		this.map.events.register("click", this, this.setMarkEvent);
 	},
-	
 
 	newIcon		: function(){
 		return this.icon.clone();
 	},
-	
 	
 	createLine	: function(llfrom, llto){
 		var p1 		= new OpenLayers.Geometry.Point(llfrom.lon, llfrom.lat);
@@ -235,7 +233,8 @@ var m = {
 		
 		m.destroy();
 	},
-
+	
+	//Deletes all markers
 	clear		: function() {
 		var markers 	= this.markers.markers;
 		
@@ -251,7 +250,7 @@ var m = {
 		var markers		= this.markers.markers;
 		if( markers.length<2 ) {
 			/* Si no hay marcadores aparece el cartel de advertencia */
-			alert("Marca una ruta en el mapa!")
+			alert("Marca una ruta en el mapa!");
 			
 			return;
 		}
@@ -303,6 +302,4 @@ var vectors = new OpenLayers.Layer.Vector("Lines", options);
 	
 map.addLayer(vectors);
 map.addLayer(markers);
-gpxTrack	= new GpxTrack(map, {"markers": markers, "vectors": vectors});
-
-
+gpxTrack = new GpxTrack(map, {"markers": markers, "vectors": vectors});

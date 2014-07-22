@@ -45,11 +45,16 @@
 }
 
 
-.theInputs{
+input.theInputs{
 	border:					solid 1px Grey; 	
 	height:					25px;
 	width:					13em;
 }	
+
+select.theInputs{
+	height:					25px;
+	width:					13em;	
+}
 
 .thePassword{
 	border:					solid 1px Grey; 	

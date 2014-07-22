@@ -67,7 +67,6 @@ function initMap1(urlGpxDriver){
 	// Define the map layer
 	// Here we use a predefined layer that will be kept up to date with URL changes
 
-
 	var gpx = new OpenLayers.Layer.Vector("driver track", {
 		strategies: [new OpenLayers.Strategy.Fixed()],
 		protocol: new OpenLayers.Protocol.HTTP({

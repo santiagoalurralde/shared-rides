@@ -3,6 +3,14 @@ var previous       	= "";
 var previous2      	= "";
 var previousTarget 	= "";
 var _userType;
+var _tracks			= new Array();
+var _markers		= new Array();
+
+for (var loop=0; loop<5; loop++)
+{
+    _tracks.push(null);
+    _markers.push(null);
+}
 
 /***************************************************************************************
  ***************************************************************************************/
@@ -190,10 +198,6 @@ function paint($target, flag)
 		$target.removeClass('painted');
 }
 
-
-/***************************************************************************************
- ***************************************************************************************/
-
 /**
  * Checks if value in element is smaller than limit
  * 
@@ -247,6 +251,9 @@ function checkNumeric(target)
 	}
 }
 
+/***************************************************************************************
+ ***************************************************************************************/
+
 $( document ).ready(function() {
 
 	//Iniciar Mapa Simple
@@ -263,8 +270,98 @@ $( document ).ready(function() {
 	//Acciones al presionar Anterior
 	$( "#btnBack" ).click(function(){
 		update(i);
-	});    
+	});  
+	
+	$( "#btnMap" ).click(function(){
+		var d 			= $( "#hdnDay" ).val();
+		var io			= $( "#hdnInOut" ).val();
+		var userTypeDay	= $( "#hdnUserTypeDay" ).val();
+
+		alert(userTypeDay + " " + d + " " + io);
+		
+		if(_tracks[d] == null)
+			_tracks[d] = new Track();
+		if(_markers[d] == null)
+			_markers[d] = new Marker();
+		
+		if(io == "in")  
+		{
+			if(userTypeDay == "driver"){
+				_tracks[d].trackIn = gpxTrack.confirm();
+				gpxTrack.clear();
+				alert(_tracks[d].trackIn);
+			}	
+			/*
+			else{
+				_markers[d].markerIn;
+				alert(_markers[d].markerIn);
+			}*/	
+		}
+		else
+		{
+			if(userTypeDay == "driver"){
+				_tracks[d].trackOut = gpxTrack.confirm();
+				gpxTrack.clear();				
+				alert(_tracks[d].trackOut);
+			}
+			/*
+			else{
+				_markers[d].markerOut;
+				alert(_markers[d].markerOut);
+			}	*/
+		}
+			
+		$( "#mapDriver" ).hide();
+		$( "#mapPedestrian" ).hide();
+	});
 });
+
+/**
+ * Inserts available hours in selected row.
+ * 
+ * @param {String} type - in
+ */
+function defineMap(target)
+{	
+	var d				= $( target ).parent().index();
+	var io 				= $( target ).parent().parent().attr('id');
+	var userTypeDay 	= $( "#userType"+ d ).find("option:selected").val();
+	if(_userType != "driver-pedestrian")
+		userTypeDay = _userType;
+	
+	$( "#hdnDay" ).val(d);
+	$( "#hdnInOut" ).val(io);
+	$( "#hdnUserTypeDay" ).val(userTypeDay);
+	
+	if(userTypeDay == "pedestrian")
+	{
+		$( "#mapDriver" ).hide();		
+		$( "#mapPedestrian" ).show( 'slow' );
+	}
+	else
+	{
+		$( "#mapPedestrian" ).hide();
+		$( "#mapDriver" ).show( 'slow' );
+	}
+	
+	$( "#btnMap" ).show( 'fast' );	
+	
+	//if($( "#applyto" ).find("option:selected").val());
+	
+	
+	if(io == "in")  
+	{
+		if(userTypeDay == "driver" && _tracks[d] != null){
+			alert("track in" + _tracks[d].trackIn);
+		}	
+	}
+	else
+	{
+		if(userTypeDay == "driver" && _tracks[d] != null){
+			alert("track out" + _tracks[d].trackOut);
+		}
+	}
+}
 
 /**
  * Establishes the starting environment
@@ -288,10 +385,12 @@ function start()
  * @param {String} type - in
  */
 function fillRowsInOut(type){
-	var button 	= "<button id='btn"+ type +"' onClick='changeMapType(this)'>Definir</button>";
-	
+	var button = "<button id='btn"+ type +"' onClick='defineMap(this); return false;'>Definir</button>";;
+		
 	for(var i=1;i<6;i++)
 	{
+		//Select for hours
+		
 		var select 	= "<select id='"+ i + type + "'></select>"; 
 
 		$( "#tableSignUp #"+ type ).append("<td>"+ select + button + "</td>");
@@ -304,6 +403,10 @@ function fillRowsInOut(type){
 	}
 }
 
+/**
+ * Inserts type of user in first row
+ * 
+ */
 function fillRowType()
 {
 	$( "#tableSignUp #userTypeRow" ).html("<td>	Tipo de Usuario </td>");
@@ -313,34 +416,28 @@ function fillRowType()
 		var content = "";
 		if(_userType == "driver-pedestrian")
 		{
-			content = 	"<select id='userType"+ i +"'>" +
-							"<option value='pedestrian'>Peaton</option>" +
-							"<option value='driver'>Conductor</option>" +
+			//Select for user type each day
+			
+			content = 	"<select id='userType"+ i +"'" +
+							"<option value='0'>Seleccionar</option>" 		+
+							"<option value='pedestrian'>Peaton</option>" 	+	
+							"<option value='driver'>Conductor</option>" 	+
 						"</select>"; 
 		}
 		else if(_userType == "driver")
+		{
+			$( "#hdnUserTypeDay" ).val(_userType);
 			content = "Conductor";
+		}
 		else if(_userType == "pedestrian")
+		{
+			$( "#hdnUserTypeDay" ).val(_userType);			
 			content = "Peaton";
-		
+		}
 		$( "#tableSignUp #userTypeRow" ).append("<td>"+ content +"</td>");			 
 	}
 }
 
-
-
-function changeMapType(target)
-{
-	var type = $( target ).parent().parent().attr('id');
-	alert(type);
-	var day = $( target ).parent().index();
-	
-	if($( "#"+ day + type ).find("option:selected").val() == "pedestrian")
-		$( "#mapPedestrian" ).show( 'slow' );		
-	else
-		$( "#mapDriver" ).show( 'slow' );
-	
-}
 
 /**
  * Manages GUI according to current step of form.
@@ -376,10 +473,15 @@ function update(step){
 			$( "#thirdStep" ).show();
 			
 			if(_userType == "pedestrian")
+			{
 				$( "#mapPedestrian" ).show( 'slow' );
+				$( "#btnMap" ).show( 'fast' );
+			}
 			if(_userType == "driver")
-				$( "#mapDriver" ).show( 'slow' );
-			
+			{
+				$( "#mapDriver" ).show( 'slow' );				
+				$( "#btnMap" ).show( 'fast' );				
+			}
 			$( "#btnNext" ).hide( 'fast' );
 			$( "#btnOK" ).show( 'slow' );
 			break;
@@ -414,27 +516,32 @@ function highlightStep(step){
 }
 
 /**
- * Checks whether or not showing the drivers data.
+ * Checks whether or not showing the drivers data, and sets global variable.
  * 
  * @param {Element} target
  */
 function userTypeChanged(target)
 {
-	var selectedType = $(target).find("option:selected").val();
+	_userType = $(target).find("option:selected").val();
 		
-	if(selectedType == "pedestrian" || selectedType == "0")
-	{
+	if(_userType == "pedestrian" || _userType == "0")
 		$("#drives").hide( 'slow' );
-		_userType = "pedestrian";
-	}
-	else if(selectedType == "driver")
-	{
-		$("#drives").show( 'slow' );
-		_userType = "driver";
-	}
 	else
-	{
 		$("#drives").show( 'slow' );
-		_userType = "driver-pedestrian";		
-	}
+}
+
+function Track()
+{ 
+	// Constructor
+
+	this.trackIn	= "";
+	this.trackOut	= "";		
+}
+
+function Marker()
+{
+	// Constructor
+
+	this.markerIn	= "";
+	this.markerOut	= "";			
 }
