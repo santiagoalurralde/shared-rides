@@ -125,6 +125,7 @@
 				<value>com.shared.rides.domain.Driver</value>
 				<value>com.shared.rides.domain.Schedule</value>
 				<value>com.shared.rides.domain.Track</value>
+				<value>com.shared.rides.domain.Stop</value>
 			</list>
 		</property> 
  </bean>
