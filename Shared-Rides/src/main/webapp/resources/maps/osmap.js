@@ -138,8 +138,9 @@ map.events.register("moveend", map, updateLocation);
 
 
 //Inicializar Mapa
-function initMapCoords(lonlat, zoom, map){
+function initMapCoords(lonlat, zoom, map, marks){
 	map.setCenter(lonlat, zoom, false, false);
 	updateScale.apply(map, null);
+	if(marks != null)
+		gpxTrack.marksFromList(marks);
 }
-

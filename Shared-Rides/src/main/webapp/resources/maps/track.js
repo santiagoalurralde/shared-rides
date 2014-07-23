@@ -197,8 +197,8 @@ var m = {
 	marksFromList: function(marks){
 		for(var i=0; i<marks.length; i++)
 		{
-			var minfo		= marks[i];             					// again a list: lon, lat, name
-			var lonlat		= this.fromGrad(minfo[0], minfo[1]);
+			var minfo		= marks[i];             				
+			var lonlat		= this.fromGrad(minfo[1], minfo[0]);
 			var previous 	= i>0 ? this.markers.markers[i-1] : null;
 			this.setMark(lonlat, previous, null);
 		}
@@ -273,6 +273,24 @@ var m = {
 		html += ']';
 		
 		return html;
+	},
+	
+	matrixify	: function(hint){
+
+		var markers			= this.markers.markers;
+		var previousTrack 	= new Array();
+		
+		//Empiezo a partir del segundo marker
+		for(var i=0; i<markers.length; i++) {
+			var m	= markers[i];
+			var ll	= this.toGrad(m.lonlat);
+			var strLat = String(ll.lat);
+			var strLon = String(ll.lon);
+
+			previousTrack[i] = [strLat, strLon];
+		}
+
+		return previousTrack;
 	},
 	
 	fromGrad	: function(lon, lat) {

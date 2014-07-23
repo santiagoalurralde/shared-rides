@@ -5,11 +5,14 @@ var previousTarget 	= "";
 var _userType;
 var _tracks			= new Array();
 var _markers		= new Array();
+var _matrices		= new Array();
+
 
 for (var loop=0; loop<5; loop++)
 {
     _tracks.push(null);
     _markers.push(null);
+    _matrices.push(null);    
 }
 
 /***************************************************************************************
@@ -150,6 +153,10 @@ function checkValues2()
  * 
  */
 function checkPassword(){
+	$( "#password-first" ).on("change", function(event) { 
+	     checkPassword();
+	});
+
 	if($( "#password-first" ).val() != $( "#password-check" ).val())
 	{
 		paint($( "#password-first" ), true);	
@@ -276,39 +283,42 @@ $( document ).ready(function() {
 		var d 			= $( "#hdnDay" ).val();
 		var io			= $( "#hdnInOut" ).val();
 		var userTypeDay	= $( "#hdnUserTypeDay" ).val();
-
-		alert(userTypeDay + " " + d + " " + io);
+		var applyTo		= $( "#selectApply" ).find("option:selected").val();
 		
+		//alert(userTypeDay + " " + d + " " + io);
+		
+		//REVISAR
+		if(_matrices[d] == null)
+			_matrices[d] = new Matrix();
 		if(_tracks[d] == null)
 			_tracks[d] = new Track();
 		if(_markers[d] == null)
 			_markers[d] = new Marker();
 		
-		if(io == "in")  
+		
+		if(userTypeDay == "driver")  
 		{
-			if(userTypeDay == "driver"){
+			if(io == "in"){
+				_matrices[d].matrixIn = gpxTrack.matrixify();				
 				_tracks[d].trackIn = gpxTrack.confirm();
-				gpxTrack.clear();
-				alert(_tracks[d].trackIn);
 			}	
-			/*
 			else{
-				_markers[d].markerIn;
-				alert(_markers[d].markerIn);
-			}*/	
+				_matrices[d].matrixOut = gpxTrack.matrixify();
+				_tracks[d].trackOut = gpxTrack.confirm();
+			}
+			gpxTrack.clear();		
 		}
 		else
 		{
-			if(userTypeDay == "driver"){
-				_tracks[d].trackOut = gpxTrack.confirm();
-				gpxTrack.clear();				
-				alert(_tracks[d].trackOut);
-			}
 			/*
+			if(io == "in"){
+				_markers[d].markerIn;
+				alert(_markers[d].markerIn);
+			}
 			else{
 				_markers[d].markerOut;
 				alert(_markers[d].markerOut);
-			}	*/
+			}*/
 		}
 			
 		$( "#mapDriver" ).hide();
@@ -326,6 +336,9 @@ function defineMap(target)
 	var d				= $( target ).parent().index();
 	var io 				= $( target ).parent().parent().attr('id');
 	var userTypeDay 	= $( "#userType"+ d ).find("option:selected").val();
+	var selectCommon	= 	'<option value="0" selected></option>' +
+           				    '<option value="onlythis">Sólo la hora seleccionada</option>';
+	
 	if(_userType != "driver-pedestrian")
 		userTypeDay = _userType;
 	
@@ -337,29 +350,33 @@ function defineMap(target)
 	{
 		$( "#mapDriver" ).hide();		
 		$( "#mapPedestrian" ).show( 'slow' );
+		$( "#selectApply" ).html(	selectCommon +
+									'<option value="allOut">Todas las salidas como peaton</option>'+
+									'<option value="allIn">Todas las entradas como peaton</option>'+
+									'<option value="allSchedule">Todo el horario</option>');	
 	}
 	else
 	{
 		$( "#mapPedestrian" ).hide();
 		$( "#mapDriver" ).show( 'slow' );
+		$( "#selectApply" ).html(	selectCommon +
+									'<option value="allOut">Todas las salidas como peaton</option>'+
+									'<option value="allIn">Todas las entradas como peaton</option>');		
 	}
 	
-	$( "#btnMap" ).show( 'fast' );	
-	
-	//if($( "#applyto" ).find("option:selected").val());
-	
-	
-	if(io == "in")  
+	$( "#applyMapDefinition" ).show( 'fast' );	
+		
+	if(userTypeDay == "driver")  
 	{
-		if(userTypeDay == "driver" && _tracks[d] != null){
-			alert("track in" + _tracks[d].trackIn);
-		}	
+		gpxTrack.clear();
+		if(io == "in" && _tracks[d] != null)
+			initMapCoords(lonlat, zoom, map, _matrices[d].matrixIn);
+		if(io == "out" && _tracks[d] != null)
+			initMapCoords(lonlat, zoom, map, _matrices[d].matrixOut);
 	}
 	else
 	{
-		if(userTypeDay == "driver" && _tracks[d] != null){
-			alert("track out" + _tracks[d].trackOut);
-		}
+
 	}
 }
 
@@ -418,7 +435,7 @@ function fillRowType()
 		{
 			//Select for user type each day
 			
-			content = 	"<select id='userType"+ i +"'" +
+			content = 	"<select id='userType"+ i +"'>"						+
 							"<option value='0'>Seleccionar</option>" 		+
 							"<option value='pedestrian'>Peaton</option>" 	+	
 							"<option value='driver'>Conductor</option>" 	+
@@ -429,7 +446,7 @@ function fillRowType()
 			$( "#hdnUserTypeDay" ).val(_userType);
 			content = "Conductor";
 		}
-		else if(_userType == "pedestrian")
+		else //_userType == "pedestrian"
 		{
 			$( "#hdnUserTypeDay" ).val(_userType);			
 			content = "Peaton";
@@ -545,3 +562,12 @@ function Marker()
 	this.markerIn	= "";
 	this.markerOut	= "";			
 }
+
+function Matrix()
+{
+	// Constructor
+
+	this.matrixIn	= "";
+	this.matrixOut	= "";			
+}
+

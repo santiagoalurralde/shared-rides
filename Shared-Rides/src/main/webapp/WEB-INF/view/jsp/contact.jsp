@@ -73,7 +73,7 @@
                				Contraseña :          
             			</span> 
         				
-        				<input type="password" id="password-first" class="blockRight theInputs" onChange="checkIt(this); checkPassword();"/>
+        				<input type="password" id="password-first" class="blockRight theInputs" onChange="checkIt(this);"/>
        				</span>
 
          			<div class="split"></div>
@@ -257,17 +257,16 @@
 					
 					<div class="split"></div>
 	      						
-          			<span style="text-align: center">
-           				<span>
-			               Aplicar para:        					           
-			            </span> 
-	            				
-  	        			<select id="applyto" class="theInputs" onChange="checkIt(this);">
-           					<option value="0" selected></option>	            					            				
-           					<option value="onlythis">Sólo la hora seleccionada</option>
-           				</select>       
-           				
-           				<input type="button" id="btnMap" class="btn" 	value="Listo" 		style="display: none" 	/>  
+          			<span id="applyMapDefinition">
+          				<!--  
+	           				<span>
+				               Aplicar para:        					           
+				            </span> 
+		            				
+	  	        			<select id="selectApply" class="theInputs" onChange="checkIt(this);">
+	           				</select>       
+           				-->
+           				<input type="button" id="btnMap" class="btn" value="Listo" />  
            				<input type="hidden" id="hdnInOut" 			/>  
              			<input type="hidden" id="hdnDay" 			/>
               			<input type="hidden" id="hdnUserTypeDay" 	/>
@@ -305,7 +304,6 @@
            	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepNext();"	/>	
         			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 	/>  
         		</div> 	  
-           		
        		</form>	  
 			<div class="clearer"></div>
 		</section>
@@ -322,7 +320,7 @@
 <script src="resources/maps/osmapSimple.js" 	type="text/javascript"></script>
 
 <script >
-	initMapCoords(lonlat, zoom, map);
+	initMapCoords(lonlat, zoom, map, null);
 </script>
 
 
