@@ -383,6 +383,7 @@ function checkNumeric(target)
  */
 function signUp()
 {	
+	alert("la cara");
 	/*if(checkValues2())
 	{*/
 		var org 		= $( "#organization" ).find("option:selected").val();
@@ -424,7 +425,7 @@ function signUp()
 							"plateNumbers": plLett,
 							"numberSeats": 	nSeats,
 				 			}), 
-				    contentType: "application/json; charset=utf-8",
+				    contentType: "application/json",
 				    dataType: "json",
                     success: function() {
                         alert("enviado"); 
