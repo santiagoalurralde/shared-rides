@@ -14,7 +14,7 @@
         		</ul>
         	</div>
 
-			<form name="" method="POST" class="theBoard lightBorder">
+			<form action="signupUser.do" method="POST" class="theBoard lightBorder">
        		    	        		    	
        		    <div id="firstStep" class="steps">
          			<span>
@@ -302,7 +302,7 @@
         		<div id="buttonsSteps">
         			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepBack();"	/>	
            	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepNext();"	/>	
-        			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 	/>  
+        			<input type="submit" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 	/>  
         		</div> 	  
        		</form>	  
 			<div class="clearer"></div>

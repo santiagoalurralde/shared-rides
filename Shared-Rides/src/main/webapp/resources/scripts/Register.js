@@ -151,7 +151,7 @@ function highlightStep(step){
 function checkValues0()
 {		
 	var flag = true;
-	/*
+
 	var lastElement = $( "#firstStep input" ).index( $("#cellphone") );
 	
 	for(var loop=0; loop<lastElement+1; loop++)
@@ -166,7 +166,7 @@ function checkValues0()
 		$( "#alert" ).html("<p>Los campos señalados están incompletos, debe llenarlos para proceder.");
 		$( "#alert" ).show( 'fast' );		
 	}
-	*/
+	
 	return flag;
 }
 
@@ -387,8 +387,8 @@ function signUp()
 		var org 		= $( "#organization" ).find("option:selected").val();
 		var pId 		= $( "#personalId" ).val();
 		var pw 			= $( "#password-first" ).val();
-		var name		= $( "#organization" ).val();
-		var surname 	= $( "#organization" ).val();
+		var name		= $( "#name" ).val();
+		var surname 	= $( "#surname" ).val();
 		var email 		= $( "#email" ).val();
 		var phone		= $( "#cellphone" ).val();
 		var number		= $( "#number" ).val();
