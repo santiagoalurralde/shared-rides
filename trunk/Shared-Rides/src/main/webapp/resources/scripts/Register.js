@@ -32,7 +32,7 @@ $( document ).ready(function(){
 	});
 	
 	$( "#btnOK" ).click(function(){
-		signUp();
+		//signUp();
 	});
 });
 
@@ -160,6 +160,7 @@ function checkValues0()
 			flag = false;
 			paint($($( "#firstStep input" )[ loop ]), true);
 		}
+	
 	
 	if(!flag)
 	{
