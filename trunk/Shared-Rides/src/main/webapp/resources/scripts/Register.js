@@ -1,7 +1,7 @@
-var i 				= -1; 	//Contador de Pasos
-var previous       	= "";
-var previous2      	= "";
-var previousTarget 	= "";
+var _step			= -1; 	//Contador de Pasos
+var _previous     	= "";
+var _previous2  	= "";
+var _previousTarget	= "";
 var _userType;
 var _days			= new Array();
 var _matrices		= new Array();
@@ -24,7 +24,7 @@ $( document ).ready(function(){
 
 	//Pressing next or back
 	$( "#btnNext, #btnBack" ).click(function(){
-		update(i);
+		update(_step);
 	});
 	
 	$( "#btnMap" ).click(function(){
@@ -56,12 +56,12 @@ function start()
  * Checks if we can add 1 step
  */
 function stepNext() {
-	if((i == 0 && !checkValues0()) || (i == 0 && $( "#alert.passwordMatch" ).is(":visible")))
+	if((_step == 0 && !checkValues0()) || (_step == 0 && $( "#alert.passwordMatch" ).is(":visible")))
 		console.log("mal");
-	else if(i == 1 && !checkValues1())
+	else if(_step == 1 && !checkValues1())
 		console.log("mal");
 	else
-		i++;
+		_step++;
 }
 
 /**
@@ -70,7 +70,7 @@ function stepNext() {
 function stepBack() {
 	$( "#alert" ).hide();
 	$( "#alert" ).removeClass("passwordMatch");
-	i--;
+	_step--;
 }
 
 /**
@@ -151,14 +151,14 @@ function highlightStep(step){
 function checkValues0()
 {		
 	var flag = true;
-	
+	/*
 	var lastElement = $( "#firstStep input" ).index( $("#cellphone") );
 	
-	for(var i=0;i<lastElement+1;i++)
-		if($($( "#firstStep input" )[ i ]).val().length == 0)
+	for(var loop=0; loop<lastElement+1; loop++)
+		if($($( "#firstStep input" )[ loop ]).val().length == 0)
 		{
 			flag = false;
-			paint($($( "#firstStep input" )[ i ]), true);
+			paint($($( "#firstStep input" )[ loop ]), true);
 		}
 	
 	if(!flag)
@@ -166,7 +166,7 @@ function checkValues0()
 		$( "#alert" ).html("<p>Los campos señalados están incompletos, debe llenarlos para proceder.");
 		$( "#alert" ).show( 'fast' );		
 	}
-	
+	*/
 	return flag;
 }
 
@@ -209,11 +209,11 @@ function checkValues1()
 		}
 	}
 	
-	for(var i=0;i<max;i++)
-		if($($( "#secondStep select" )[ i ]).val() == "0")
+	for(var loop=0; loop<max; loop++)
+		if($($( "#secondStep select" )[ loop ]).val() == "0")
 		{
 			flag = false;
-			paint($($( "#secondStep select" )[ i ]), true);
+			paint($($( "#secondStep select" )[ loop ]), true);
 		}
 	
 	if($( "#street").val().length == 0)
@@ -227,11 +227,11 @@ function checkValues1()
 		paint($( "#number" ), true);		
 	}
 	
-	for(var i=0;i<3;i++)
-		if($($( "#secondStep select" )[ i ]).val() == "0")
+	for(var loop=0; loop<3; loop++)
+		if($($( "#secondStep select" )[ loop ]).val() == "0")
 		{
 			flag = false;
-			paint($($( "#secondStep select" )[ i ]), true);
+			paint($($( "#secondStep select" )[ loop ]), true);
 		}
 	
 	if(!flag)
@@ -249,34 +249,16 @@ function checkValues1()
  * @return {Boolean} TRUE values are OK
  */
 function checkValues2()
-{
-	var flag = true;
-	
-	for(var loop=1;loop<6;loop++)
+{	
+	for (var d=1; d<6; d++)
 	{
-		var hsIn	= $("#"+ loop + "in").find("option:selected").val();
-		var hsOut	= $("#"+ loop + "out").find("option:selected").val();
-		
-		if(hsIn == "none" || hsOut == "none")
-			flag = false;		
-		
-		/*
-		if(!(hsOut > hsIn))
+		if(_days[d] == null)
 		{
-			paint($("#"+ loop + "in"), true);
-			paint($("#"+ loop + "out"), true);		
-			flag = false;
+			alert("Quedan dias por completar");
+			return false;
 		}
-		*/
 	}
-	
-	if(!flag)
-	{
-		$( "#alert" ).html("<p>Seleccionar horas válidas");
-		$( "#alert" ).show( 'fast' );		
-	}
-	
-	return flag;
+	return true;
 }
 
 /**
@@ -395,18 +377,56 @@ function checkNumeric(target)
  * FUNCTIONS
  ***************************************************************************************/
 
+/**
+ * Sends everything to server.
+ */
 function signUp()
-{
-	for (var d=1; d<6; d++)
+{	
+	if(checkValues2())
 	{
-		if(_days[d] == null)
-		{
-			alert("Quedan dias por completar");
-			return false;
-		}
+		var org 		= $( "#organization" ).find("option:selected").val();
+		var pId 		= $( "#personalId" ).val();
+		var pw 			= $( "#password-first" ).val();
+		var name		= $( "#organization" ).val();
+		var surname 	= $( "#organization" ).val();
+		var email 		= $( "#email" ).val();
+		var phone		= $( "#cellphone" ).val();
+		var number		= $( "#number" ).val();
+		var street		= $( "#street" ).val();
+		var nbh			= $( "#neighborhood" ).val();
+		var shift		= $( "#shift" ).val();
+		var usType 		= $( "#userType" ).find("option:selected").val();
+		var brand 		= $( "#brand" ).find("option:selected").val();
+		var model		= $( "#model" ).val(); 
+		var plNumb		= $( "#plateNumbers" ).val();
+		var plLett		= $( "#plLett" ).val();
+		var nSeats		= $( "#numberSeats" ).val();
+
+		$.post( "signupUser.do" , { "organization": org, 
+									"personalId": 	pId, 
+									"pw": 			pw, 
+									"name": 		name, 
+									"surname": 		surname, 
+									"email": 		email, 									
+									"phone": 		phone, 
+									"street": 		street, 
+									"number": 		number,
+									"neighborhood": nbh,
+									"shift": 		shift,
+									"userType": 	usType,
+									"brand": 		brand,
+									"model": 		model,
+									"plateLetters": plNumb,
+									"plateNumbers": plLett,
+									"numberSeats": 	nSeats,
+									}, 
+			function()
+			{
+				alert("enviado");
+		});
+		
 	}
 }
-
 
 /**
  * Saves map previously defined.

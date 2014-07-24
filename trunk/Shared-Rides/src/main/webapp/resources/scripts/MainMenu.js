@@ -1,107 +1,153 @@
+var _step		=  -1; 	//Contador de Pasos
+var _user		= 	0;	//Tipo de Usuario
+var _shift	= 	0;	//Turno
 
-var i 		=  -1; 	//Contador de Pasos
-var userJs	= 	0;	//Tipo de Usuario
-var shiftJs	= 	0;	//Turno
+/***************************************************************************************
+ * STEPS
+ ***************************************************************************************/
+
+$( document ).ready(function(){
+	
+	initMap(); 
+	
+	start();
+	
+	//Acciones al presionar las imagenes
+	$( "#imgSun" ).click(function(){
+		changeShift(1);
+	});
+	
+	$( "#imgMoon" ).click(function(){
+		changeShift(2);
+	});
+	
+	$( "#imgBoot" ).click(function(){
+		changeUserType(1);
+	});
+	
+	$( "#imgSteering" ).click(function(){
+		changeUserType(2);
+	});
+
+	//Pressing next or back
+	$( "#btnNext, #btnBack" ).click(function(){
+		update(_step);
+	});
+	
+	$( "#btnOK" ).click(function(){
+		findUsers();
+	});
+});
 
 /**
  * Checks if we can add 1 step
  */
 function stepNext() {
-	if(i===0 && userJs===0)
+	if(_step==0 && _user==0)
 		alert("Seleccione un tipo de Usuario!");
-	else if(i===1 && shiftJs===0)
+	else if(_step==1 && _shift==0)
 		alert("Seleccione un turno!");
 	else
-		i++;
+		_step++;
 }
 
 /**
  * Moves back 1 step
  */
 function stepBack() {
-	i--;
+	_step--;
 }
 
-$( document ).ready(function() {
 
-	//Iniciar Mapa Simple
-	initMap(); 
+/***************************************************************************************
+ * FUNCTIONS
+ ***************************************************************************************/
+
+/**
+ * Selects type of shift and highlights related icon.
+ */
+function changeShift(s)
+{
+	_shift = s;
 	
-	//Esconder elementos
-	start();
-	
-	//Resaltar Primer Paso
-	highlightStep(i);
-	
-	//Acciones al presionar las imagenes
-	$( "#imgSun" ).click(function(){
-		shiftJs		= 1;
-		$( "#imgSun" ).css('opacity', '1');
+	if(user == 1)	//Morning
+	{
 		$( "#imgMoon" ).css('opacity', '0.05');
-	});
-	$( "#imgMoon" ).click(function(){
-		shiftJs 	= 2;
-		$( this ).css('opacity', '1');
+		$( "#imgSun" ).css('opacity', '1');
+	}
+	else			//Afternoon
+	{
+		$( "#imgMoon" ).css('opacity', '1');
 		$( "#imgSun" ).css('opacity', '0.05');
-	});
-	$( "#imgBoot" ).click(function(){
-		userJs		= 1;
-		$( this ).css('opacity', '1');
-		$( "#imgSteering" ).css('opacity', '0.05');
-	});
-	$( "#imgSteering" ).click(function(){
-		userJs		= 2;
-		$( this ).css('opacity', '1');
+	}	
+}
+
+/**
+ * Selects type of user and highlights related icon.
+ */
+function changeUserType(u)
+{
+	_user = u;
+	
+	if(user == 1)	//Pedestrian
+	{
+		$( "#imgBoot" ).css('opacity', '1');
+		$( "#imgSteering" ).css('opacity', '0.05');	
+	}
+	else			//Driver
+	{
+		$( "#imgSteering" ).css('opacity', '1');
 		$( "#imgBoot" ).css('opacity', '0.05');
-	});
+	}
+}
 
-	//Acciones al presionar Siguiente
-	$( "#btnNext" ).click(function(){
-		update(i);
-	});
+/**
+ * Sends all data collected through post, and shows results
+ */
+function findUsers(){
+	var coordsJs;				//Datos de coordenadas
 	
-	//Acciones al presionar Anterior
-	$( "#btnBack" ).click(function(){
-		update(i);
-	});
+	if(_user == 2)
+		coordsJs = "[{lon=" + _lon.toString() + " , lat=" + _lat.toString() + "}]";
+	else
+		coordsJs = gpxTrack.confirm();
+			
+	$.post( "find.do", { "user": _user , "shift": _shift, "mapData": coordsJs }, 
+		function(json)
+		{
+			var jsonNew = $.parseJSON(json);
+			$.each(jsonNew, function(i, data){
+				var distance = Math.ceil(data.distance);
+				$( "#tableFound" ).append("<tr><td>" + data.name + " " + data.surname + "</td><td><a href='/Shared-Rides/profile.do?user="+ data.id +"'><img src='resources/profilePic/" + data.picture + "'/></a></td><td>A "+ distance +" cuadras aproximadamente</td></tr>");
+			});
+		}); 
 	
-	function start(){
-		//	Establece las propiedades iniciales
-				
-		$( "#mapDriver" ).css( 'display', 'none' );
-		$( "#mapPedestrian" ).css( 'display', 'none' );
-		$( "#btnBack" ).hide( 0 );							
-		$( "#listFound" ).hide( 0 );
-	} 
-		
-	$( "#btnOK" ).click(function(){
-		var coordsJs;				//Datos de coordenadas
-		
-		if(userJs === 2)
-			coordsJs = "[{lon=" + _lon.toString() + " , lat=" + _lat.toString() + "}]";
-		else
-			coordsJs = gpxTrack.confirm();
-				
-		$.post( "find.do", { "user": userJs , "shift": shiftJs, "mapData": coordsJs }, 
-				function(json)
-				{
-					var jsonNew = $.parseJSON(json);
-					$.each(jsonNew, function(i, data){
-						var distance = Math.ceil(data.distance);
-						$( "#tableFound" ).append("<tr><td>" + data.name + " " + data.surname + "</td><td><a href='/Shared-Rides/profile.do?user="+ data.id +"'><img src='resources/profilePic/" + data.picture + "'/></a></td><td>A "+ distance +" cuadras aproximadamente</td></tr>");
-					});
-				}); 
-		
-		//Traer la lista
-		$( "#mapDriver" ).css('display', 'none');
-		$( "#mapPedestrian" ).css('display', 'none');
-		
-		$( "#listFound" ).show( 'fast' );
-		$( "#btnOK"	).hide( 'fast' );
-	});
+	//Traer la lista
+	$( "#mapDriver" ).css('display', 'none');
+	$( "#mapPedestrian" ).css('display', 'none');
 	
-});
+	$( "#listFound" ).show( 'fast' );
+	$( "#btnOK"	).hide( 'fast' );
+}
 
+/**
+ * Establishes the starting environment
+ */
+function start(){
+	//	Establece las propiedades iniciales
+	
+	highlightStep(_step);		
+	$( "#mapDriver" ).css( 'display', 'none' );
+	$( "#mapPedestrian" ).css( 'display', 'none' );
+	$( "#btnBack" ).hide();							
+	$( "#listFound" ).hide();
+}
+
+/**
+ * Manages GUI according to current step of form.
+ * 
+ * @param {Number} step - current step
+ */
 function update(step)
 {
 	switch(step)
@@ -147,10 +193,12 @@ function update(step)
 	}	
 }
 
+/**
+ * Highlights current step
+ * 
+ * @param {Number} step - current step
+ */
 function highlightStep(step){
-	//	Resalta el paso actual del formulario
-	//	step: numero de paso actual.
-		
 	switch(step)
 	{
 		case -1:
