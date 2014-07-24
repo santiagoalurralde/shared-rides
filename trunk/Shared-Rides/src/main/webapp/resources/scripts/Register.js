@@ -3,20 +3,54 @@ var previous       	= "";
 var previous2      	= "";
 var previousTarget 	= "";
 var _userType;
-var _tracks			= new Array();
-var _markers		= new Array();
+var _days			= new Array();
 var _matrices		= new Array();
 
-
-for (var loop=0; loop<5; loop++)
+for (var loop=1; loop<6; loop++)
 {
-    _tracks.push(null);
-    _markers.push(null);
+    _days.push(null);
     _matrices.push(null);    
 }
 
 /***************************************************************************************
+ * STEPS
  ***************************************************************************************/
+
+$( document ).ready(function(){
+	//Start pedestrians map.
+	initMap(); 
+	
+	start();
+
+	//Pressing next or back
+	$( "#btnNext, #btnBack" ).click(function(){
+		update(i);
+	});
+	
+	$( "#btnMap" ).click(function(){
+		saveMap();		
+	});
+	
+	$( "#btnOK" ).click(function(){
+		signUp();
+	});
+});
+
+/**
+ * Establishes the starting environment
+ */
+function start()
+{
+	$( "#mapDriver" ).css( 'display', 'none' );
+	$( "#mapPedestrian" ).css( 'display', 'none' );
+	
+	highlightStep(0);
+	
+	$( "#btnBack" ).hide( 0 );		
+	
+	fillRowsInOut("in");		
+	fillRowsInOut("out");		
+} 
 
 /**
  * Checks if we can add 1 step
@@ -40,6 +74,76 @@ function stepBack() {
 }
 
 /**
+ * Manages GUI according to current step of form.
+ * 
+ * @param {Number} step - current step
+ */
+function update(step){
+	
+	switch(step)
+	{
+		case 0:
+			highlightStep(step);
+			$( "#firstStep" ).show();
+			$( "#secondStep" ).hide();
+			$( "#btnBack" ).hide( 'fast' );
+			$( "#btnNext" ).show( 'slow' );
+			break;
+		case 1:
+			highlightStep(step);	
+			$( "#mapDriver" ).hide();
+			$( "#mapPedestrian" ).hide();
+			$( "#firstStep" ).hide();
+			$( "#secondStep" ).show();
+			$( "#thirdStep" ).hide();
+			$( "#btnBack" ).show( 'fast' );
+			$( "#btnNext" ).show( 'fast' );			
+			$( "#btnOK" ).hide( 'fast' );
+			break;
+		case 2:
+			highlightStep(step);	
+			fillRowType();
+			$( "#secondStep" ).hide();
+			$( "#thirdStep" ).show();
+			$( "#btnNext" ).hide( 'fast' );
+			$( "#btnOK" ).show( 'slow' );
+			break;
+	}
+}
+
+/**
+ * Highlights current step
+ * 
+ * @param {Number} step - current step
+ */
+function highlightStep(step){
+		
+	switch(step)
+	{
+		case 0:
+			$( "#stepSignUp1" ).css('opacity', '1');
+			$( "#stepSignUp2" ).css('opacity', '0.2');
+			$( "#stepSignUp3" ).css('opacity', '0.2');
+			break;
+		case 1:
+			$( "#stepSignUp1" ).css('opacity', '0.2');
+			$( "#stepSignUp2" ).css('opacity', '1');
+			$( "#stepSignUp3" ).css('opacity', '0.2');
+			break;
+		case 2:
+			$( "#stepSignUp1" ).css('opacity', '0.2');
+			$( "#stepSignUp2" ).css('opacity', '0.2');
+			$( "#stepSignUp3" ).css('opacity', '1');
+			break;
+	}
+}
+
+
+/***************************************************************************************
+ * CHECKERS
+ ***************************************************************************************/
+
+/**
  * Checks if values in step 1 are filled.
  * 
  * @return {Boolean} TRUE values are OK
@@ -47,7 +151,7 @@ function stepBack() {
 function checkValues0()
 {		
 	var flag = true;
-	
+	/*
 	var lastElement = $( "#firstStep input" ).index( $("#cellphone") );
 	
 	for(var i=0;i<lastElement+1;i++)
@@ -62,7 +166,7 @@ function checkValues0()
 		$( "#alert" ).html("<p>Los campos señalados están incompletos, debe llenarlos para proceder.");
 		$( "#alert" ).show( 'fast' );		
 	}
-
+	*/
 	return flag;
 }
 
@@ -146,6 +250,33 @@ function checkValues1()
  */
 function checkValues2()
 {
+	var flag = true;
+	
+	for(var loop=1;loop<6;loop++)
+	{
+		var hsIn	= $("#"+ loop + "in").find("option:selected").val();
+		var hsOut	= $("#"+ loop + "out").find("option:selected").val();
+		
+		if(hsIn == "none" || hsOut == "none")
+			flag = false;		
+		
+		/*
+		if(!(hsOut > hsIn))
+		{
+			paint($("#"+ loop + "in"), true);
+			paint($("#"+ loop + "out"), true);		
+			flag = false;
+		}
+		*/
+	}
+	
+	if(!flag)
+	{
+		$( "#alert" ).html("<p>Seleccionar horas válidas");
+		$( "#alert" ).show( 'fast' );		
+	}
+	
+	return flag;
 }
 
 /**
@@ -192,7 +323,7 @@ function checkIt(target){
 }
 
 /**
- * Paints element or not.
+ * Paints or Unpaints element.
  * 
  * @param {Element} 
  * @param {Bool} flag - TRUE for painting element
@@ -244,9 +375,8 @@ function checkAlphabetic(event)
  */
 function checkNumeric(target)
 {
-	if(target.value.length > 0 && isNaN(target.value))
-	{
-		//alert("Este campo no admite letras, sólo números");
+	if(target.value.length > 0 && isNaN(target.value))							//alert("Este campo no admite letras, sólo números");
+	{									
 		if(previousTarget != target)
 			previous = "";
 		target.value = previous;
@@ -258,90 +388,119 @@ function checkNumeric(target)
 	}
 }
 
+//function checkHours(target){}
+
+
 /***************************************************************************************
+ * FUNCTIONS
  ***************************************************************************************/
 
-$( document ).ready(function() {
+function signUp()
+{
+	for (var d=1; d<6; d++)
+	{
+		if(_days[d] == null)
+		{
+			alert("Quedan dias por completar");
+			return false;
+		}
+	}
+}
 
-	//Iniciar Mapa Simple
-	initMap(); 
-	
-	//Esconder elementos
-	start();
 
-	//Acciones al presionar Siguiente
-	$( "#btnNext" ).click(function(){
-		update(i);
-	});
+/**
+ * Saves map previously defined.
+ */
+function saveMap()
+{
+	var d 			= $( "#hdnDay" ).val();
+	var io			= $( "#hdnInOut" ).val();
+	var userTypeDay	= $( "#hdnUserTypeDay" ).val();
+	var h 			= $( "#"+ d + io ).find("option:selected").val();		
+	var nthChild 	= Number(d) + 1;
+	//var applyTo		= $( "#selectApply" ).find("option:selected").val();
+
+	if(h == "none")
+	{
+		alert("Seleccione la hora a definir");
+		return false;
+	}
 	
-	//Acciones al presionar Anterior
-	$( "#btnBack" ).click(function(){
-		update(i);
-	});  
-	
-	$( "#btnMap" ).click(function(){
-		var d 			= $( "#hdnDay" ).val();
-		var io			= $( "#hdnInOut" ).val();
-		var userTypeDay	= $( "#hdnUserTypeDay" ).val();
-		var applyTo		= $( "#selectApply" ).find("option:selected").val();
-		
-		//alert(userTypeDay + " " + d + " " + io);
-		
-		//REVISAR
+	if(userTypeDay == "driver")  
+	{
 		if(_matrices[d] == null)
 			_matrices[d] = new Matrix();
-		if(_tracks[d] == null)
-			_tracks[d] = new Track();
-		if(_markers[d] == null)
-			_markers[d] = new Marker();
+		if(_days[d] == null)
+			_days[d] = new Track();
 		
-		
-		if(userTypeDay == "driver")  
+		if(io == "in"){
+			_matrices[d].matrixIn = gpxTrack.matrixify();				
+			_days[d].trackIn = gpxTrack.confirm();
+			_days[d].hourIn = h;
+		}	
+		else{
+			_matrices[d].matrixOut = gpxTrack.matrixify();
+			_days[d].trackOut = gpxTrack.confirm();
+			_days[d].hourOut = h;			
+		}
+		gpxTrack.clear();	
+		$( "#"+ io + " td:nth-child("+ nthChild +")" ).find("#btn" + io).html("Modificar");
+	}
+	else
+	{
+		if(_lon != "" && _lat != "")
 		{
+			if(_days[d] == null)
+				_days[d] = new Stop();
+
 			if(io == "in"){
-				_matrices[d].matrixIn = gpxTrack.matrixify();				
-				_tracks[d].trackIn = gpxTrack.confirm();
-			}	
-			else{
-				_matrices[d].matrixOut = gpxTrack.matrixify();
-				_tracks[d].trackOut = gpxTrack.confirm();
+				var lonlatCurrent = new OpenLayers.LonLat( _lon , _lat ).transform(proj4326, map.getProjectionObject());				
+				_days[d].stopIn = lonlatCurrent;
+				_days[d].hourIn = h;	
 			}
-			gpxTrack.clear();		
+			else{
+				var lonlatCurrent = new OpenLayers.LonLat( _lon , _lat ).transform(proj4326, map.getProjectionObject());
+				_days[d].stopOut = lonlatCurrent;
+				_days[d].hourOut = h;					
+			}
+			$( "#"+ io + " td:nth-child("+ nthChild +")" ).find("#btn" + io).html("Modificar");
 		}
 		else
 		{
-			/*
-			if(io == "in"){
-				_markers[d].markerIn;
-				alert(_markers[d].markerIn);
-			}
-			else{
-				_markers[d].markerOut;
-				alert(_markers[d].markerOut);
-			}*/
+			alert("Seleccione un punto en el mapa");
+			return false;
 		}
-			
-		$( "#mapDriver" ).hide();
-		$( "#mapPedestrian" ).hide();
-	});
-});
+	}
+	
+	$( ".btnDefine" ).prop( "disabled", false );
+	$( "#"+ d + io ).prop( "disabled", true );	
+	$( "#mapDriver" ).hide();
+	$( "#mapPedestrian" ).hide();
+	$( "#applyMapDefinition" ).hide();	
+}
 
 /**
- * Inserts available hours in selected row.
- * 
- * @param {String} type - in
+ * Opens type of map according to user type in day; and shows previously saved maps.
  */
 function defineMap(target)
 {	
 	var d				= $( target ).parent().index();
 	var io 				= $( target ).parent().parent().attr('id');
-	var userTypeDay 	= $( "#userType"+ d ).find("option:selected").val();
-	var selectCommon	= 	'<option value="0" selected></option>' +
-           				    '<option value="onlythis">Sólo la hora seleccionada</option>';
+	var userTypeDay 	= $( "#userType"+ d ).find("option:selected").val();				/*var selectCommon	= 	'<option value="0" selected></option>' +'<option value="onlythis">Sólo la hora seleccionada</option>';*/
+
+	if(userTypeDay == "0")					//No se ha seleccionado ningun tipo de usuario
+	{
+		alert("Seleccione el tipo de usuario de este día");
+		return false;
+	}
+
+	$( ".btnDefine" ).prop( "disabled", true );
+	$( "#"+ d + io ).prop( "disabled", false );
 	
-	if(_userType != "driver-pedestrian")
+	if(_userType != "driver-pedestrian")	//Si no es mixto, todos los días es el mismo usertType
 		userTypeDay = _userType;
 	
+	/* Save in Hidden fields */
 	$( "#hdnDay" ).val(d);
 	$( "#hdnInOut" ).val(io);
 	$( "#hdnUserTypeDay" ).val(userTypeDay);
@@ -349,93 +508,77 @@ function defineMap(target)
 	if(userTypeDay == "pedestrian")
 	{
 		$( "#mapDriver" ).hide();		
-		$( "#mapPedestrian" ).show( 'slow' );
-		$( "#selectApply" ).html(	selectCommon +
-									'<option value="allOut">Todas las salidas como peaton</option>'+
-									'<option value="allIn">Todas las entradas como peaton</option>'+
-									'<option value="allSchedule">Todo el horario</option>');	
+		$( "#mapPedestrian" ).show( 'slow' );				/* $( "#selectApply" ).html(	selectCommon + '<option value="allOut">Todas las salidas como peaton</option>'+'<option value="allIn">Todas las entradas como peaton</option>'+'<option value="allSchedule">Todo el horario</option>');	*/
 	}
-	else
-	{
-		$( "#mapPedestrian" ).hide();
+	else							
+	{																	
+		$( "#mapPedestrian" ).hide();	
 		$( "#mapDriver" ).show( 'slow' );
-		$( "#selectApply" ).html(	selectCommon +
-									'<option value="allOut">Todas las salidas como peaton</option>'+
-									'<option value="allIn">Todas las entradas como peaton</option>');		
 	}
 	
-	$( "#applyMapDefinition" ).show( 'fast' );	
+	$( "#applyMapDefinition" ).show( 'fast' );				/* $( "#selectApply" ).html(	selectCommon + '<option value="allOut">Todas las salidas como peaton</option>'+ '<option value="allIn">Todas las entradas como peaton</option>'); */
 		
 	if(userTypeDay == "driver")  
 	{
 		gpxTrack.clear();
-		if(io == "in" && _tracks[d] != null)
+		if(io == "in" && _days[d] != null)
 			initMapCoords(lonlat, zoom, map, _matrices[d].matrixIn);
-		if(io == "out" && _tracks[d] != null)
+		if(io == "out" && _days[d] != null)
 			initMapCoords(lonlat, zoom, map, _matrices[d].matrixOut);
 	}
 	else
 	{
-
+		clearMarkers();
+		_lon = "";
+		_lat = "";
+		if(io == "in" && _days[d] != null)
+			if( _days[d].stopIn != "")
+				drawPreviousMarkers(_days[d].stopIn);
+		
+		if(io == "out" && _days[d] != null)
+			if( _days[d].stopOut != "")		
+				drawPreviousMarkers(_days[d].stopOut);
 	}
 }
 
 /**
- * Establishes the starting environment
- */
-function start()
-{
-	$( "#mapDriver" ).css( 'display', 'none' );
-	$( "#mapPedestrian" ).css( 'display', 'none' );
-	
-	highlightStep(0);
-	
-	$( "#btnBack" ).hide( 0 );		
-	
-	fillRowsInOut("in");		
-	fillRowsInOut("out");		
-} 
-
-/**
  * Inserts available hours in selected row.
  * 
- * @param {String} type - in
+ * @param {String} io - in/out
  */
-function fillRowsInOut(type){
-	var button = "<button id='btn"+ type +"' onClick='defineMap(this); return false;'>Definir</button>";;
+function fillRowsInOut(io){
+	var button = "<button id='btn"+ io +"' class='btnDefine' onClick='defineMap(this); return false;'>Definir</button>";
 		
-	for(var i=1;i<6;i++)
+	for(var d=1;d<6;d++)	//Days
 	{
-		//Select for hours
-		
-		var select 	= "<select id='"+ i + type + "'></select>"; 
+		var select 	= "<select id='"+ d + io + "'></select>"; 
 
-		$( "#tableSignUp #"+ type ).append("<td>"+ select + button + "</td>");
+		$( "#tableSignUp #"+ io ).append("<td>"+ select + button + "</td>");
+		$( "#"+ d + io ).append("<option value='none'>Seleccionar</option>");					
 		
-		for(var j=0;j<24;j++)
+		for(var j=0;j<24;j++)	//Hours
 		{
-			$( "#"+ i + type ).append("<option value='"+j+":00'>"+j+":00 hs</option>");			
-			$( "#"+ i + type ).append("<option value='"+j+":30'>"+j+":30 hs</option>");
+			$( "#"+ d + io ).append("<option value='"+j+":00'>"+j+":00 hs</option>");			
+			$( "#"+ d + io ).append("<option value='"+j+":30'>"+j+":30 hs</option>");
 		}
+		
+		$( "#"+ d + io ).prop( "disabled", true );		/* Disable hour selects -> Enabled when defining map */
 	}
 }
 
 /**
  * Inserts type of user in first row
- * 
  */
 function fillRowType()
 {
 	$( "#tableSignUp #userTypeRow" ).html("<td>	Tipo de Usuario </td>");
 	
-	for(var i=1; i<6; i++)
+	for(var d=1; d<6; d++)
 	{
 		var content = "";
-		if(_userType == "driver-pedestrian")
+		if(_userType == "driver-pedestrian")				//Select for user type each day
 		{
-			//Select for user type each day
-			
-			content = 	"<select id='userType"+ i +"'>"						+
+			content = 	"<select id='userType"+ d +"'>"						+
 							"<option value='0'>Seleccionar</option>" 		+
 							"<option value='pedestrian'>Peaton</option>" 	+	
 							"<option value='driver'>Conductor</option>" 	+
@@ -457,82 +600,6 @@ function fillRowType()
 
 
 /**
- * Manages GUI according to current step of form.
- * 
- * @param {Number} step - current step
- */
-function update(step){
-	
-	switch(step)
-	{
-		case 0:
-			highlightStep(step);
-			$( "#firstStep" ).show();
-			$( "#secondStep" ).hide();
-			$( "#btnBack" ).hide( 'fast' );
-			$( "#btnNext" ).show( 'slow' );
-			break;
-		case 1:
-			highlightStep(step);	
-			$( "#mapDriver" ).hide();
-			$( "#mapPedestrian" ).hide();
-			$( "#firstStep" ).hide();
-			$( "#secondStep" ).show();
-			$( "#thirdStep" ).hide();
-			$( "#btnBack" ).show( 'fast' );
-			$( "#btnNext" ).show( 'fast' );			
-			$( "#btnOK" ).hide( 'fast' );
-			break;
-		case 2:
-			highlightStep(step);	
-			fillRowType();
-			$( "#secondStep" ).hide();
-			$( "#thirdStep" ).show();
-			
-			if(_userType == "pedestrian")
-			{
-				$( "#mapPedestrian" ).show( 'slow' );
-				$( "#btnMap" ).show( 'fast' );
-			}
-			if(_userType == "driver")
-			{
-				$( "#mapDriver" ).show( 'slow' );				
-				$( "#btnMap" ).show( 'fast' );				
-			}
-			$( "#btnNext" ).hide( 'fast' );
-			$( "#btnOK" ).show( 'slow' );
-			break;
-	}
-}
-
-/**
- * Highlights current step
- * 
- * @param {Number} step - current step
- */
-function highlightStep(step){
-		
-	switch(step)
-	{
-		case 0:
-			$( "#stepSignUp1" ).css('opacity', '1');
-			$( "#stepSignUp2" ).css('opacity', '0.2');
-			$( "#stepSignUp3" ).css('opacity', '0.2');
-			break;
-		case 1:
-			$( "#stepSignUp1" ).css('opacity', '0.2');
-			$( "#stepSignUp2" ).css('opacity', '1');
-			$( "#stepSignUp3" ).css('opacity', '0.2');
-			break;
-		case 2:
-			$( "#stepSignUp1" ).css('opacity', '0.2');
-			$( "#stepSignUp2" ).css('opacity', '0.2');
-			$( "#stepSignUp3" ).css('opacity', '1');
-			break;
-	}
-}
-
-/**
  * Checks whether or not showing the drivers data, and sets global variable.
  * 
  * @param {Element} target
@@ -547,26 +614,39 @@ function userTypeChanged(target)
 		$("#drives").show( 'slow' );
 }
 
+
+/***************************************************************************************
+ * CONSTRUCTORS
+ ***************************************************************************************/
+
+/**
+ * Constructor
+ */
 function Track()
 { 
-	// Constructor
-
 	this.trackIn	= "";
-	this.trackOut	= "";		
+	this.trackOut	= "";	
+	this.hourIn		= "";
+	this.hourOut	= "";		
 }
 
-function Marker()
+/**
+ * Constructor
+ */
+function Stop()
 {
-	// Constructor
-
-	this.markerIn	= "";
-	this.markerOut	= "";			
+	this.stopIn		= "";
+	this.stopOut	= "";
+	this.hourIn		= "";
+	this.hourOut	= "";		
 }
 
+
+/**
+ * Constructor
+ */
 function Matrix()
 {
-	// Constructor
-
 	this.matrixIn	= "";
 	this.matrixOut	= "";			
 }

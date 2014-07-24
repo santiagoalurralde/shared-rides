@@ -46,7 +46,7 @@
     	<put-attribute name="body" value="/WEB-INF/view/jsp/profile.jsp"/>
     </definition>
     
-    <definition name="contact" extends="baseDefinition">
+    <definition name="signup" extends="baseDefinition">
     	<put-attribute name="title" value="Sign Up"/>
     	<put-attribute name="style" value='register.css'/>	    	
     	<put-attribute name="body" 	value="/WEB-INF/view/jsp/signup.jsp"/>
