@@ -151,7 +151,7 @@ function highlightStep(step){
 function checkValues0()
 {		
 	var flag = true;
-	/*
+	
 	var lastElement = $( "#firstStep input" ).index( $("#cellphone") );
 	
 	for(var i=0;i<lastElement+1;i++)
@@ -166,7 +166,7 @@ function checkValues0()
 		$( "#alert" ).html("<p>Los campos señalados están incompletos, debe llenarlos para proceder.");
 		$( "#alert" ).show( 'fast' );		
 	}
-	*/
+	
 	return flag;
 }
 
