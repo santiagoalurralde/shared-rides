@@ -403,7 +403,9 @@ function signUp()
 		var plLett		= $( "#plLett" ).val();
 		var nSeats		= $( "#numberSeats" ).val();
 
-		$.ajax({ 	url: "signupUser.do" , 
+		$.ajax({ 						
+					type: "POST",
+					url: "signupUser.do" , 
 				 	data: { "organization": org, 
 							"personalId": 	pId, 
 							"pw": 			pw, 
@@ -422,7 +424,8 @@ function signUp()
 							"plateNumbers": plLett,
 							"numberSeats": 	nSeats,
 				 			}, 
-					type: "POST",
+				    contentType: "application/json; charset=utf-8",
+				    dataType: "json",
                     success: function() {
                         alert("enviado"); 
                     }
