@@ -1,17 +1,19 @@
 var map;
-var lonJs;
-var latJs;
+var _lon;
+var _lat;
+var _layerMarkers;
+var _proj4326;
+var _countMarkers = 0;
 
 function initMap(){
-	map         = new OpenLayers.Map('map2');
+	map         	= new OpenLayers.Map('map2');
   
 	/*  Projections */
-	var proj4326    = new OpenLayers.Projection("EPSG:4326");
-	var projmerc    = new OpenLayers.Projection("EPSG:900913");
+	proj4326		= new OpenLayers.Projection("EPSG:4326");
   
 	/*  Layers    */
 	var layerOSM    = new OpenLayers.Layer.OSM("Street Map");
-	var layerMarkers= new OpenLayers.Layer.Markers( "Markers" );
+	_layerMarkers	= new OpenLayers.Layer.Markers( "Markers" );
 
 	map.addLayers([layerOSM]);
 	  
@@ -25,44 +27,46 @@ function initMap(){
 	map.setCenter (lonlatStart, zoomStart);
 	
 	if (!map.getCenter()) map.zoomToMaxExtent();
-	 
-	//####MOUSEMOVE####
-	  
+	 	  
 	/*  Add Marker  */
-	var count = 0;
+	_countMarkers = 0;
 	
 	map.events.register("click", map, function(e) {
-		var position        = this.events.getMousePosition(e);
-	    var icon            = new OpenLayers.Icon('resources/images/pin.png');   
+		var position       	= this.events.getMousePosition(e);
+	    var icon           	= new OpenLayers.Icon('resources/images/pin.png');   
 	    
-	    var lonlat          = map.getLonLatFromPixel(position);
-	    var lonlatTransf    = lonlat.transform(map.getProjectionObject(), proj4326);
-	    lonJs       		= lonlatTransf.lon;
-	    latJs       		= lonlatTransf.lat;
-	    var lonlat          = lonlatTransf.transform(proj4326, map.getProjectionObject());
+	    var lonlat         	= map.getLonLatFromPixel(position);
+	    var lonlatTrans	    = lonlat.transform(map.getProjectionObject(), proj4326);
+	    _lon    	   		= lonlatTrans.lon;
+	    _lat	       		= lonlatTrans.lat;
+	    var lonlat         	= lonlatTrans.transform(proj4326, map.getProjectionObject());
 	
-	    if(count>0)
-	    	layerMarkers.clearMarkers();
+	    if(_countMarkers>0)
+	    	_layerMarkers.clearMarkers();
 	      
-	    layerMarkers.addMarker(new OpenLayers.Marker(lonlat,icon)); 
-	    count = count + 1;
+	    _layerMarkers.addMarker(new OpenLayers.Marker(lonlat,icon)); 
+	    _countMarkers++;
 	});
-  
-	map.addLayer(layerMarkers);
+
+	map.addLayer(_layerMarkers);
 }
 
+function clearMarkers()
+{
+	_layerMarkers.clearMarkers();
+}
 
-/*
-  map.events.register("mousemove", map, function(e) { 
-      var position = this.events.getMousePosition(e);
-      OpenLayers.Util.getElement("coords").innerHTML = 'MOUSE POSITION '+position;
-      var lonlat = map.getLonLatFromPixel( this.events.getMousePosition(e) );
-      OpenLayers.Util.getElement("lonlatTG").innerHTML = 'lonlat => '+lonlat;
-      var lonlatTransf = lonlat.transform(map.getProjectionObject(), proj4326);
-      OpenLayers.Util.getElement("lonlatTrans").innerHTML = 'lonlatTransf => '+lonlatTransf;
-      OpenLayers.Util.getElement("lonlatDouble").innerHTML = 'lonlat => '+lonlat;
-  });
-*/
+function drawPreviousMarkers(lonlatPrevious)
+{
+	if(lonlatPrevious != null)
+	{
+		var icon		= new OpenLayers.Icon('resources/images/pin.png');   	
+		alert("adentro90");
+		_layerMarkers.addMarker(new OpenLayers.Marker(lonlatPrevious,icon)); 
+	    _countMarkers++;
+  	}
+
+}
 
 
 
