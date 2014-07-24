@@ -406,7 +406,7 @@ function signUp()
 		$.ajax({ 						
 					type: "POST",
 					url: "signupUser.do" , 
-				 	data: { "organization": org, 
+				 	data: JSON.stringify({ "organization": org, 
 							"personalId": 	pId, 
 							"pw": 			pw, 
 							"name": 		name, 
@@ -423,7 +423,7 @@ function signUp()
 							"plateLetters": plNumb,
 							"plateNumbers": plLett,
 							"numberSeats": 	nSeats,
-				 			}, 
+				 			}), 
 				    contentType: "application/json; charset=utf-8",
 				    dataType: "json",
                     success: function() {
