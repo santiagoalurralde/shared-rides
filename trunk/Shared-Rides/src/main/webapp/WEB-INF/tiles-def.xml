@@ -13,6 +13,16 @@
     	<put-attribute name="footer" 	value="/WEB-INF/view/common/footer.jsp"/>
     </definition>
     
+    <definition name="newDefinition"  
+    	template="/WEB-INF/view/common/layout.jsp">
+    	<put-attribute name="title" 	value=""/>      
+		<put-attribute name="header" 	value="/WEB-INF/view/common/headerNew.jsp"/>    
+    	<put-attribute name="body" 		value=""/>
+    	<put-attribute name="menu" 		value=""/>
+    	<put-attribute name="footer" 	value="/WEB-INF/view/common/footer.jsp"/>
+    </definition>
+    
+    
     <definition name="loginDefinition"  
     	template="/WEB-INF/view/common/layout.jsp">
     	<put-attribute name="title" 	value=""/>      
@@ -46,7 +56,7 @@
     	<put-attribute name="body" value="/WEB-INF/view/jsp/profile.jsp"/>
     </definition>
     
-    <definition name="signup" extends="baseDefinition">
+    <definition name="signup" extends="newDefinition">
     	<put-attribute name="title" value="Sign Up"/>
     	<put-attribute name="style" value='register.css'/>	    	
     	<put-attribute name="body" 	value="/WEB-INF/view/jsp/signup.jsp"/>
