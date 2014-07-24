@@ -25,14 +25,14 @@
 
 <script>
 	$.post( 'hasAssociation.do', 
-			function(json)
+		function(json)
+		{
+			var jsonNew = $.parseJSON(json);
+			if (jsonNew.hasAssoc === false)
 			{
-				var jsonNew = $.parseJSON(json);
-				if (jsonNew.hasAssoc === false)
-				{
-					$( '#btnAlert' ).hide( 0 );
-					$( '#btnAlert' ).parent().attr("href", "people.do");
-				}
+				$( '#btnAlert' ).hide();
+				$( '#btnAlert' ).parent().attr("href", "people.do");
 			}
+		}
 	);
 </script>
