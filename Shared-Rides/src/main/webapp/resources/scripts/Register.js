@@ -32,7 +32,7 @@ $( document ).ready(function(){
 	});
 	
 	$( "#btnOK" ).click(function(){
-		//signUp();
+		signUp();
 	});
 });
 
@@ -383,8 +383,8 @@ function checkNumeric(target)
  */
 function signUp()
 {	
-	/*if(checkValues2())
-	{*/
+	if(checkValues2())
+	{
 		var org 		= $( "#organization" ).find("option:selected").val();
 		var pId 		= $( "#personalId" ).val();
 		var pw 			= $( "#password-first" ).val();
@@ -403,30 +403,32 @@ function signUp()
 		var plLett		= $( "#plLett" ).val();
 		var nSeats		= $( "#numberSeats" ).val();
 
-		$.post( "signupUser.do" , { "organization": org, 
-									"personalId": 	pId, 
-									"pw": 			pw, 
-									"name": 		name, 
-									"surname": 		surname, 
-									"email": 		email, 									
-									"phone": 		phone, 
-									"street": 		street, 
-									"number": 		number,
-									"neighborhood": nbh,
-									"shift": 		shift,
-									"userType": 	usType,
-									"brand": 		brand,
-									"model": 		model,
-									"plateLetters": plNumb,
-									"plateNumbers": plLett,
-									"numberSeats": 	nSeats,
-									}, 
-			function()
-			{
-				alert("enviado");
-		});
+		$.ajax({ 	url: "signupUser.do" , 
+				 	data: { "organization": org, 
+							"personalId": 	pId, 
+							"pw": 			pw, 
+							"name": 		name, 
+							"surname": 		surname, 
+							"email": 		email, 									
+							"phone": 		phone, 
+							"street": 		street, 
+							"number": 		number,
+							"neighborhood": nbh,
+							"shift": 		shift,
+							"userType": 	usType,
+							"brand": 		brand,
+							"model": 		model,
+							"plateLetters": plNumb,
+							"plateNumbers": plLett,
+							"numberSeats": 	nSeats,
+				 			}, 
+					type: "POST",
+                    success: function() {
+                        alert("enviado"); 
+                    }
+	});
 		
-	//}
+	}
 }
 
 /**
