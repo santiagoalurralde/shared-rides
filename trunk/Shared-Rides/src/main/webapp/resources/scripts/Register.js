@@ -383,8 +383,8 @@ function checkNumeric(target)
  */
 function signUp()
 {	
-	if(checkValues2())
-	{
+	/*if(checkValues2())
+	{*/
 		var org 		= $( "#organization" ).find("option:selected").val();
 		var pId 		= $( "#personalId" ).val();
 		var pw 			= $( "#password-first" ).val();
@@ -428,7 +428,7 @@ function signUp()
                     }
 	});
 		
-	}
+	//}
 }
 
 /**
