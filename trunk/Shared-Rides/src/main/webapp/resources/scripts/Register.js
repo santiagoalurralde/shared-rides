@@ -383,7 +383,7 @@ function checkNumeric(target)
  */
 function signUp()
 {	
-	alert("la cara");
+
 	/*if(checkValues2())
 	{*/
 		var org 		= $( "#organization" ).find("option:selected").val();
@@ -399,41 +399,34 @@ function signUp()
 		var shift		= $( "#shift" ).val();
 		var usType 		= $( "#userType" ).find("option:selected").val();
 		var brand 		= $( "#brand" ).find("option:selected").val();
-		var model		= $( "#model" ).val(); 
+		var modelVehicle= $( "#model" ).val(); 
 		var plNumb		= $( "#plateNumbers" ).val();
-		var plLett		= $( "#plLett" ).val();
-		var nSeats		= $( "#numberSeats" ).val();
-
-		$.ajax({ 						
-					type: "POST",
-					url: "signupUser.do" , 
-				 	data: JSON.stringify({ "organization": org, 
-							"personalId": 	pId, 
-							"pw": 			pw, 
-							"name": 		name, 
-							"surname": 		surname, 
-							"email": 		email, 									
-							"phone": 		phone, 
-							"street": 		street, 
-							"number": 		number,
-							"neighborhood": nbh,
-							"shift": 		shift,
-							"userType": 	usType,
-							"brand": 		brand,
-							"model": 		model,
-							"plateLetters": plNumb,
-							"plateNumbers": plLett,
-							"numberSeats": 	nSeats,
-				 			}), 
-				    contentType: "application/json",
-				    dataType: "json",
-                    success: function() {
-                        alert("enviado"); 
-                    }
-	});
+		var plLett		= $( "#plateLetters" ).val();
+		var nSeats		= $( "#numberSeats" ).find("option:selected").val();
 		
-	//}
-}
+		$.post( "register.do", { "organization": org , 
+								"personalId": 	pId, 
+								"pw": 			pw, 
+								"name": 		name, 
+								"surname": 		surname, 
+								"email": 		email, 									
+								"phone": 		phone, 
+								"street": 		street, 
+								"number": 		number,
+								"neighborhood": nbh,
+								"shift": 		shift,
+								"userType": 	usType,
+								"brand": 		brand,
+								"modelVehicle":	modelVehicle,
+								"plateLetters": plNumb,
+								"plateNumbers": plLett,
+								"numberSeats": 	nSeats
+					 			},  
+				function(str)
+				{
+				alert("HOLA");
+				}); 
+			}
 
 /**
  * Saves map previously defined.
