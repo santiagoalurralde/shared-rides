@@ -6,10 +6,10 @@ var _userType;
 var _days			= new Array();
 var _matrices		= new Array();
 
-for (var loop=1; loop<6; loop++)
+for (var loop=0; loop<5; loop++)
 {
-    _days.push(null);
-    _matrices.push(null);    
+    _days[loop] = null;
+    _matrices[loop] = null;    
 }
 
 /***************************************************************************************
@@ -420,7 +420,8 @@ function signUp()
 								"modelVehicle":	modelVehicle,
 								"plateLetters": plNumb,
 								"plateNumbers": plLett,
-								"numberSeats": 	nSeats
+								"numberSeats": 	nSeats,
+								"days":			JSON.stringify(_days)
 					 			},  
 				function(str)
 				{
@@ -438,6 +439,7 @@ function saveMap()
 	var userTypeDay	= $( "#hdnUserTypeDay" ).val();
 	var h 			= $( "#"+ d + io ).find("option:selected").val();		
 	var nthChild 	= Number(d) + 1;
+	var index 		= Number(d) - 1;
 	//var applyTo		= $( "#selectApply" ).find("option:selected").val();
 
 	if(h == "none")
@@ -448,20 +450,20 @@ function saveMap()
 	
 	if(userTypeDay == "driver")  
 	{
-		if(_matrices[d] == null)
-			_matrices[d] = new Matrix();
-		if(_days[d] == null)
-			_days[d] = new Track();
+		if(_matrices[index] == null)
+			_matrices[index] = new Matrix();
+		if(_days[index] == null)
+			_days[index] = new Track();
 		
 		if(io == "in"){
-			_matrices[d].matrixIn = gpxTrack.matrixify();				
-			_days[d].trackIn = gpxTrack.confirm();
-			_days[d].hourIn = h;
+			_matrices[index].matrixIn = gpxTrack.matrixify();				
+			_days[index].trackIn = gpxTrack.confirm();
+			_days[index].hourIn = h;
 		}	
 		else{
-			_matrices[d].matrixOut = gpxTrack.matrixify();
-			_days[d].trackOut = gpxTrack.confirm();
-			_days[d].hourOut = h;			
+			_matrices[index].matrixOut = gpxTrack.matrixify();
+			_days[index].trackOut = gpxTrack.confirm();
+			_days[index].hourOut = h;			
 		}
 		gpxTrack.clear();	
 		$( "#"+ io + " td:nth-child("+ nthChild +")" ).find("#btn" + io).html("Modificar");
@@ -470,18 +472,18 @@ function saveMap()
 	{
 		if(_lon != "" && _lat != "")
 		{
-			if(_days[d] == null)
-				_days[d] = new Stop();
+			if(_days[index] == null)
+				_days[index] = new Stop();
 
 			if(io == "in"){
 				var lonlatCurrent = new OpenLayers.LonLat( _lon , _lat ).transform(proj4326, map.getProjectionObject());				
-				_days[d].stopIn = lonlatCurrent;
-				_days[d].hourIn = h;	
+				_days[index].stopIn = lonlatCurrent;
+				_days[index].hourIn = h;	
 			}
 			else{
 				var lonlatCurrent = new OpenLayers.LonLat( _lon , _lat ).transform(proj4326, map.getProjectionObject());
-				_days[d].stopOut = lonlatCurrent;
-				_days[d].hourOut = h;					
+				_days[index].stopOut = lonlatCurrent;
+				_days[index].hourOut = h;					
 			}
 			$( "#"+ io + " td:nth-child("+ nthChild +")" ).find("#btn" + io).html("Modificar");
 		}
@@ -507,6 +509,7 @@ function defineMap(target)
 	var d				= $( target ).parent().index();
 	var io 				= $( target ).parent().parent().attr('id');
 	var userTypeDay 	= $( "#userType"+ d ).find("option:selected").val();				/*var selectCommon	= 	'<option value="0" selected></option>' +'<option value="onlythis">Sólo la hora seleccionada</option>';*/
+	var index 			= Number(d) - 1;
 
 	if(userTypeDay == "0")					//No se ha seleccionado ningun tipo de usuario
 	{
@@ -541,23 +544,23 @@ function defineMap(target)
 	if(userTypeDay == "driver")  
 	{
 		gpxTrack.clear();
-		if(io == "in" && _days[d] != null)
-			initMapCoords(lonlat, zoom, map, _matrices[d].matrixIn);
-		if(io == "out" && _days[d] != null)
-			initMapCoords(lonlat, zoom, map, _matrices[d].matrixOut);
+		if(io == "in" && _days[index] != null)
+			initMapCoords(lonlat, zoom, map, _matrices[index].matrixIn);
+		if(io == "out" && _days[index] != null)
+			initMapCoords(lonlat, zoom, map, _matrices[index].matrixOut);
 	}
 	else
 	{
 		clearMarkers();
 		_lon = "";
 		_lat = "";
-		if(io == "in" && _days[d] != null)
-			if( _days[d].stopIn != "")
-				drawPreviousMarkers(_days[d].stopIn);
+		if(io == "in" && _days[index] != null)
+			if( _days[index].stopIn != "")
+				drawPreviousMarkers(_days[index].stopIn);
 		
-		if(io == "out" && _days[d] != null)
-			if( _days[d].stopOut != "")		
-				drawPreviousMarkers(_days[d].stopOut);
+		if(io == "out" && _days[index] != null)
+			if( _days[index].stopOut != "")		
+				drawPreviousMarkers(_days[index].stopOut);
 	}
 }
 
@@ -645,8 +648,8 @@ function userTypeChanged(target)
 function Track()
 { 
 	this.trackIn	= "";
+	this.hourIn		= "";	
 	this.trackOut	= "";	
-	this.hourIn		= "";
 	this.hourOut	= "";		
 }
 
@@ -656,8 +659,8 @@ function Track()
 function Stop()
 {
 	this.stopIn		= "";
+	this.hourIn		= "";	
 	this.stopOut	= "";
-	this.hourIn		= "";
 	this.hourOut	= "";		
 }
 

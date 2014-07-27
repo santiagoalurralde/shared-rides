@@ -102,7 +102,6 @@
 	</div>
 	
 	<!-- LABELS -->
-	
 	<c:set var="labelArrival"><spring:message code="label.arrival"/></c:set>	
 	<input id="lblArrival" type="hidden" value="${labelArrival}"/>
 	<c:set var="labelDeparture"><spring:message code="label.departure"/></c:set>	
@@ -121,7 +120,7 @@
 	<input id="valDriver" 		type="hidden" value="${driver}"/>
 	<input id="valPedestrian" 	type="hidden" value="${pedestrian}"/>
 	<input id="valId" 			type="hidden" value="${id}"/>
-	
+	<input id="valMine"			type="hidden" value="${mine}"/>
 </body>
 
 <!-- SCRIPTS -->

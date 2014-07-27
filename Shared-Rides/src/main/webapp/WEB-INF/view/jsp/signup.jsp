@@ -13,8 +13,8 @@
         			<li id="stepSignUp3"><b>3. </b>Horarios y Ubicaciones</li>
         		</ul>
         	</div>
-
-			<form class="theBoard lightBorder">
+        	
+			<div class="theBoard lightBorder">
        		    	        		    	
        		    <div id="firstStep" class="steps">
          			<span>
@@ -95,6 +95,13 @@
            				
            				<input type="text" id="cellphone" class="blockRight theInputs" onChange="checkIt(this);" onKeyUp="checkNumeric(this);"/>
          			</span> 
+         			
+         			<div class="split"></div>         			
+         			
+         			<form action="">
+						  <input type="file" name="pic" accept="image/x-png, image/jpeg">
+						  <input type="submit">
+					</form>
          			
        		    </div>
        		    <!-------------------------------------------------- END of FIRST STEP -------------------------------------------------->
@@ -304,7 +311,7 @@
            	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepNext();"	/>	
         			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 	/>  
         		</div> 	  
-       		</form>	  
+       		</div>	  
 			<div class="clearer"></div>
 		</section>
 	

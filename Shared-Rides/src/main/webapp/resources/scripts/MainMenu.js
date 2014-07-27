@@ -70,7 +70,7 @@ function changeShift(s)
 {
 	_shift = s;
 	
-	if(user == 1)	//Morning
+	if(_shift == 1)	//Morning
 	{
 		$( "#imgMoon" ).css('opacity', '0.05');
 		$( "#imgSun" ).css('opacity', '1');
@@ -89,7 +89,7 @@ function changeUserType(u)
 {
 	_user = u;
 	
-	if(user == 1)	//Pedestrian
+	if(_user == 1)	//Pedestrian
 	{
 		$( "#imgBoot" ).css('opacity', '1');
 		$( "#imgSteering" ).css('opacity', '0.05');	
@@ -181,7 +181,7 @@ function update(step)
 			$( "#imgSun" ).hide();
 			$( "#imgMoon" ).hide();
 			
-			if(userJs === 2)
+			if(_user == 2)
 				$( "#mapPedestrian" ).show( 'slow' );
 			else
 				$( "#mapDriver" ).show( 'slow' );
