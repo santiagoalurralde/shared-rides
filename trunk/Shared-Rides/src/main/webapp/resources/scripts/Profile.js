@@ -20,7 +20,12 @@ function fillTable(schedule, type){
 	
 	for(var i=0; i<schedule.length; i++)
 	{
-		var btnRequest	= '<button 	class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/'+ image +'" width="25px"/></button>'; 
+		var btnRequest;		
+		if($( "#valMine" ).val())
+			btnRequest	= '';
+		else
+			btnRequest	= '<button 	class="btnRequestAssoc" style="margin-left: 3px"><img src="resources/images/'+ image +'" width="25px"/></button>';
+		
 		var hdnDay		= '<input 	class="hdnDay"		type="hidden" value="'+ schedule[i][0] +'"/>'; 
 		var hdnIn		= '<input 	class="hdnInOut" 	type="hidden" value="1"/>'; 
 		var hdnOut		= '<input 	class="hdnInOut"	type="hidden" value="2"/>';

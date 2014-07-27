@@ -22,7 +22,11 @@
 	</a>
 </div>
 
-
+<!-- 
+<div id="frmNotif" class="notif">
+	<iframe src='notifications.do' ></iframe>
+</div>
+-->
 <script>
 	$.post( 'hasAssociation.do', 
 		function(json)
