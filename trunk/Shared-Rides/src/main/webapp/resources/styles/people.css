@@ -10,15 +10,24 @@ Assigned to:	Santiago Alurralde (sa)
 /*-----------------------------------------------------------------*/
 
 #listData{
-	padding-left: 				20px;
-	padding-right: 				20px;
+	margin-top: 				10px;
 	overflow:					auto;
+}
+
+.blockHalf{
+	width:						47%;
+}
+
+#pending, #offered{
+	padding-right:				3%;
+}
+
+#associated, #requested{
+	padding-left:				3%;
 }
 
 #scheduleData{
 	display:					none;
-	padding-left: 				20px;
-	padding-right: 				20px;
 	min-height:					175px;
 }
 
