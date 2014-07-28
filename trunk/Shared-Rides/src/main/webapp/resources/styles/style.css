@@ -96,7 +96,7 @@ body{
 	/*	Container with background, between header and footer */
 	
 	/*	background-color:		#EEE;	*/	
-	background-image:		url(../images/txture4.jpg); 
+	background-image:		url(../images/txture1.png); 
 	clear:					both;
 	height:					auto;
 	margin:					0 auto;
@@ -196,10 +196,11 @@ body{
 		box-shadow:			0px 1px 1px #000000;			
 	}
 
-#frmNotif{
+#notifications{
 	position: 			fixed;
 	z-index: 			5000;
 	background-color: 	#e5e5e5;
+	display:			none;
 	right: 				20px;
 	top: 				65px;
 	overflow:			visible;
@@ -208,7 +209,7 @@ body{
 	padding:			1.1em
 }
 
-#frmNotif iframe{
+#notifications iframe{
 	border:				none;
 }
 

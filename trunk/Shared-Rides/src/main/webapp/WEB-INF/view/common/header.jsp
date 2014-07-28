@@ -13,21 +13,27 @@
         <li>					<a class="highlight"	href="about.do">        <spring:message code="label.about"		/></a></li>
     </ul>
 	
-	<a href="">
-		<img id="btnAlert" src="resources/images/bell.png" width="1.75%"/>
-	</a>
+	<img id="btnAlert" src="resources/images/bell.png" width="1.75%"/>
 	
 	<a href="logout.do">
 		<img id="btnLogout" src="resources/images/logout.png" width="1.75%">
 	</a>
 </div>
 
-<!-- 
-<div id="frmNotif" class="notif">
-	<iframe src='notifications.do' ></iframe>
+ 
+<div id="notifications" class="notif">
+	<iframe id="theFrame" src='notifications.do' ></iframe>
 </div>
--->
+
 <script>
+	$( "#btnAlert" ).click(function(){
+		if ($("#notifications").is(":visible"))
+			$( "#notifications" ).hide();
+		else
+			$( "#notifications" ).show();	
+	});
+	
+
 	$.post( 'hasAssociation.do', 
 		function(json)
 		{
@@ -35,7 +41,7 @@
 			if (jsonNew.hasAssoc === false)
 			{
 				$( '#btnAlert' ).hide();
-				$( '#btnAlert' ).parent().attr("href", "people.do");
+				$('#theFrame').contents().find("#listNotifications").append("<li>Has recibido una peticion</li>");
 			}
 		}
 	);

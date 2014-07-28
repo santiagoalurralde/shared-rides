@@ -1,7 +1,8 @@
+<%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <!----------------  FOOTER      -------------->
-<div id="theFooter" class="border">
-    <p>
-    	© 2013  Sluggin'    <br>
-        Todos los derechos reservados.
-   	
+<div id="theFooter">
+	<p>
+   	© 2013  Shared Rides	<br><br>
+    <spring:message code="label.rights"/>
 </div>
