@@ -5,7 +5,7 @@
 	<div id="theContent">	
 		
 		<section title="List Data" class="tupper">
-				<div id="listData" class="theBoard lightBorder" style="margin-top: 10px"> 	
+				<div id="listData" class="theBoard lightBorder"> 	
 										
 					<div id="pending" class="blockHalf blockRight"> 		<!-- Lista Solicitudes 	--> 
 					
