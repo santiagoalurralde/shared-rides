@@ -11,4 +11,5 @@ public interface ITrackDAO {
 	public Track update(Track track);
 	public Track delete(Track track);
 	public List<Track> listAll();
+	public Track getLastTrack();
 }

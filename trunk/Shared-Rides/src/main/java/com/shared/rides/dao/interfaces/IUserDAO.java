@@ -16,4 +16,5 @@ public interface IUserDAO {
 	public void newAssoc(User user, Association assoc);
 	public List<Association> getMyRequests(User u);
 	public List<Long> getAllSchedule(User u);
+	public User getLastUser();
 }

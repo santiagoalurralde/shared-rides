@@ -1,15 +1,21 @@
 package com.shared.rides.dao.persistence;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.shared.rides.dao.interfaces.IStopDAO;
 import com.shared.rides.domain.Organization;
 import com.shared.rides.domain.Stop;
+import com.shared.rides.domain.User;
 
+@Repository
+@Transactional
 public class StopDAOImplMySql implements IStopDAO{
 
 	@Autowired
@@ -35,9 +41,17 @@ public class StopDAOImplMySql implements IStopDAO{
 	}
 
 	public List<Stop> listAll() {
-		Query query = sessionFactory.getCurrentSession().createQuery("FROM Stop");     
+		Query query = sessionFactory.getCurrentSession().createQuery("FROM Stops");     
 		List<Stop> stops = query.list();
 		return stops;
+	}
+
+	public Stop getLastStop() {
+		String sql = "SELECT MAX(id) FROM Stops";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		
+		BigInteger id = (BigInteger) query.list().get(0);
+		return (Stop) sessionFactory.getCurrentSession().get(Stop.class, id.longValue());
 	}
 
 }

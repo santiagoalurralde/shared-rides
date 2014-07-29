@@ -1,5 +1,6 @@
 package com.shared.rides.dao.persistence;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.shared.rides.dao.interfaces.IDriverDAO;
 import com.shared.rides.domain.Driver;
 import com.shared.rides.domain.Schedule;
+import com.shared.rides.domain.Track;
 import com.shared.rides.domain.User;
 
 @Repository
@@ -45,5 +47,28 @@ public class DriverDAOImplMySql implements IDriverDAO {
 		return null;
 	}
 
+	public Driver getLastDriver(){
+		String sql = "SELECT MAX(id) FROM Driver";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		
+		BigInteger id = (BigInteger) query.list().get(0);
+		return (Driver) sessionFactory.getCurrentSession().get(Driver.class, id.longValue());
+	}
+
+	public void newSch(Driver driver, Schedule sch) {
+		Long idSch = sch.getScheduleId();
+		Long idDriver = driver.getDriverId();
+		String sql = "INSERT INTO Driver_Schedule (driverID, scheduleID) VALUES ( "+ idDriver +" , "+ idSch +"  )";
+		Query query  = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		query.executeUpdate();		
+	}
+
+	public void newTrack(Driver driver, Track track) {
+		Long idTrack = track.getTrackId();
+		Long idDriver = driver.getDriverId();
+		String sql = "INSERT INTO Driver_Track (driverID, trackID) VALUES ( "+ idDriver +" , "+ idTrack +"  )";
+		Query query  = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		query.executeUpdate();				
+	}
 
 }

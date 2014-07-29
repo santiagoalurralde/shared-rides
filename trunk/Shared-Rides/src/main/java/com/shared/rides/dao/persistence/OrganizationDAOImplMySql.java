@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shared.rides.dao.interfaces.IOrganizationDAO;
 import com.shared.rides.domain.Organization;
+import com.shared.rides.domain.User;
 
 @Repository
 @Transactional
@@ -41,10 +42,6 @@ public class OrganizationDAOImplMySql implements IOrganizationDAO {
 	public Organization update(Organization org) {
 		sessionFactory.getCurrentSession().update(org);
 		return null;
-	}
-
-	public Organization loadByName(Organization org) {
-		return (Organization) sessionFactory.getCurrentSession().load(Organization.class, org.getName());
 	}
 
 }

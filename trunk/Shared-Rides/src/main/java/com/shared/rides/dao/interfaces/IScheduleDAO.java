@@ -11,4 +11,5 @@ public interface IScheduleDAO {
 	public Schedule update(Schedule sch);
 	public Schedule delete(Schedule sch);
 	public List<Schedule> listAll();
+	public Schedule getLastSchedule();
 }

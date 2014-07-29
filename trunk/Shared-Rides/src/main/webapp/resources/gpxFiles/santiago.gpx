@@ -5,10 +5,12 @@
 		<ele>2372</ele>
 		<name>LAGORETICO</name>
 	</wpt>
-	<trk><name>Example gpx</name><number>1</number><trkseg>
-		<trkpt lat="-31.427766305903" lon="-64.184332521431"><ele>2376</ele><time>2007-10-14T10:09:57Z</time></trkpt>
-		<trkpt lat="-31.424525416503" lon="-64.182980688087"><ele>2375</ele><time>2007-10-14T10:10:52Z</time></trkpt>
-		<trkpt lat="-31.421778812379" lon="-64.181714685432"><ele>2372</ele><time>2007-10-14T10:12:39Z</time></trkpt>
-		<trkpt lat="-31.419764584897" lon="-64.189932973852"><ele>2373</ele><time>2007-10-14T10:13:12Z</time></trkpt>
-	</trkseg></trk>
+	<trk><name>Example gpx</name><number>1</number>
+		<trkseg>
+			<trkpt lat="-31.427766305903" lon="-64.184332521431"><ele>2376</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+			<trkpt lat="-31.424525416503" lon="-64.182980688087"><ele>2375</ele><time>2007-10-14T10:10:52Z</time></trkpt>
+			<trkpt lat="-31.421778812379" lon="-64.181714685432"><ele>2372</ele><time>2007-10-14T10:12:39Z</time></trkpt>
+			<trkpt lat="-31.419764584897" lon="-64.189932973852"><ele>2373</ele><time>2007-10-14T10:13:12Z</time></trkpt>
+		</trkseg>
+	</trk>
 </gpx>

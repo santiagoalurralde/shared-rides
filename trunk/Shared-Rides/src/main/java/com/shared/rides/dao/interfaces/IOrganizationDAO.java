@@ -11,5 +11,4 @@ public interface IOrganizationDAO {
 	public Organization update(Organization org);
 	public Organization delete(Organization org);
 	public List<Organization> listAll();
-	public Organization loadByName(Organization org);
 }
