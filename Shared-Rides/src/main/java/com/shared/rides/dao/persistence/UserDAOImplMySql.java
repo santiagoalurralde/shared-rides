@@ -86,4 +86,12 @@ public class UserDAOImplMySql implements IUserDAO {
 		return result;
 	}
 	
+	public User getLastUser(){
+		String sql = "SELECT MAX(id) FROM User";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		
+		BigInteger id = (BigInteger) query.list().get(0);
+		return (User) sessionFactory.getCurrentSession().get(User.class, id.longValue());
+	}
+	
 }

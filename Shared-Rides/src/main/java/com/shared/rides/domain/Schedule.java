@@ -16,8 +16,8 @@ public class Schedule implements Serializable{
 
 	private long scheduleId;
 	private int day;	
-	private int hourIn;
-	private int hourOut;
+	private String hourIn;
+	private String hourOut;
 	
 //-----------CONSTRUCTOR 
 
@@ -50,18 +50,18 @@ public class Schedule implements Serializable{
 	}
 	
 	@Column(name="hourIn", nullable = false)
-	public int getHourIn() {
+	public String getHourIn() {
 		return hourIn;
 	}
-	public void setHourIn(int hourIn) {
+	public void setHourIn(String hourIn) {
 		this.hourIn = hourIn;
 	}
 
 	@Column(name="hourOut", nullable = false)
-	public int getHourOut() {
+	public String getHourOut() {
 		return hourOut;
 	}
-	public void setHourOut(int hourOut) {
+	public void setHourOut(String hourOut) {
 		this.hourOut = hourOut;
 	}
 }

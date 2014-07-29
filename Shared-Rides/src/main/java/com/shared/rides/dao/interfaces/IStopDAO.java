@@ -10,4 +10,5 @@ public interface IStopDAO {
 	public Stop update(Stop stop);
 	public Stop delete(Stop stop);
 	public List<Stop> listAll();
+	public Stop getLastStop();
 }

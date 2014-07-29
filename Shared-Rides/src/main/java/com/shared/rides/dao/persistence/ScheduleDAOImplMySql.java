@@ -1,5 +1,6 @@
 package com.shared.rides.dao.persistence;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shared.rides.dao.interfaces.IScheduleDAO;
 import com.shared.rides.domain.Schedule;
+import com.shared.rides.domain.User;
 
 @Repository
 @Transactional
@@ -43,4 +45,11 @@ public class ScheduleDAOImplMySql implements IScheduleDAO {
 		return null;
 	}
 
+	public Schedule getLastSchedule(){
+		String sql = "SELECT MAX(id) FROM Schedule";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		
+		BigInteger id = (BigInteger) query.list().get(0);
+		return (Schedule) sessionFactory.getCurrentSession().get(Schedule.class, id.longValue());
+	}
 }

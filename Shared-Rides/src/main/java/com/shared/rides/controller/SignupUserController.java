@@ -1,5 +1,10 @@
 package com.shared.rides.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shared.rides.dao.interfaces.IOrganizationDAO;
+import com.shared.rides.domain.Organization;
 import com.shared.rides.service.SignupUserService;
 
 //import com.shared.rides.service.SignupUserService;
@@ -20,9 +28,26 @@ public class SignupUserController {
 	@Autowired
 	private SignupUserService signupUserService;
 	
+	@Autowired
+	private IOrganizationDAO orgDAO;
+	
 	@RequestMapping("/signup.do")
 	public ModelAndView showContactView(){
-		return new ModelAndView("signup");
+		ModelAndView model = new ModelAndView();
+		List <Organization> orgList = orgDAO.listAll();
+		List orgNameList = new ArrayList();
+		for(Organization o : orgList){
+			Map<String, Object> org = new HashMap();
+			
+			org.put("orgId", o.getOrganizationId());
+			org.put("orgName", o.getName());
+		
+			orgNameList.add(org);
+//			model.addObject("organizations", o);
+		}
+		model.addObject("organizations", orgNameList);
+		model.setViewName("signup");
+		return model;
 	}
 	
 	@RequestMapping("/validateNewUser.do")
@@ -32,7 +57,7 @@ public class SignupUserController {
 	}
 
 	@RequestMapping(value = "/register.do", method = RequestMethod.POST)
-	public @ResponseBody String signupUser(@RequestParam("organization") String organization,
+	public @ResponseBody String signupUser(@RequestParam("organization") long organization,
 											@RequestParam("personalId") String personalId,
 											@RequestParam("pw") String pw,
 											@RequestParam("name") String name,
@@ -48,11 +73,17 @@ public class SignupUserController {
 											@RequestParam("modelVehicle") String modelVehicle,
 											@RequestParam("plateLetters") String plateLetters,
 											@RequestParam("plateNumbers") String plateNumbers,
-											@RequestParam("numberSeats") int numberSeats
+											@RequestParam("numberSeats") int numberSeats,
+											@RequestParam("days") String days
 											){	
-
-		return "Mensaje";
-//String licensePlate = plateLetters + " " + plateNumbers;
-//signupUserService.signupUser(organization, personalId, pw, name, surname, phoneNumber, email, street, numberStreet, neighborhood, shift, userType, brand, model, licensePlate, numberSeats);
+		String licensePlate = plateLetters + " " + plateNumbers;
+		signupUserService.signupUser(organization, personalId, pw, name, surname, phoneNumber, email, street, numberStreet, neighborhood, shift, userType, brand, modelVehicle, licensePlate, numberSeats, days);
+		return "msg";
 	}	
+	
+	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    public @ResponseBody String uploadFileHandler(@RequestParam("file") MultipartFile file) {
+		//TODO: devuelvo un msg? hay que ver a donde tengo que redireccionar.
+		return signupUserService.uploadFile(file);
+    }
 }

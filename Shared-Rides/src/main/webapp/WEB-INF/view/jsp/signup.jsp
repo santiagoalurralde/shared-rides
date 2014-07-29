@@ -22,7 +22,11 @@
 			               	Organizacion :          
 			            </span> 
          				<select id="organization" class="blockRight theInputs">
-           					<option value="ucc" selected>Universidad Católica de Córdoba</option>	            					            					
+         				
+         					<c:forEach var="org" items="${organizations}">
+           						<option value="${org.orgId}" selected>${org.orgName}</option>
+							</c:forEach>
+	            					            					
            				</select>       
          			</span>	
          			
@@ -97,9 +101,10 @@
          			</span> 
          			
          			<div class="split"></div>         			
-         			
-         			<form action="">
-						  <input type="file" name="pic" accept="image/x-png, image/jpeg">
+         		
+         	        			
+         			<form action="uploadFile.do" enctype="multipart/form-data" method="post">
+						  <input type="file" name="file" accept="image/x-png, image/jpeg">
 						  <input type="submit">
 					</form>
          			
@@ -139,8 +144,8 @@
            				
            				<select id="shift" class="blockRight theInputs" onChange="checkIt(this);">
            					<option value="0" selected>Turno</option>	            					           				
-           					<option value="morning">Mañana</option>	            				
-           					<option value="afternoon">Tarde</option>
+           					<option value="MOORNING">Mañana</option>	            				
+           					<option value="AFTERNOON">Tarde</option>
            				</select>            				
            			</span> 
           				
