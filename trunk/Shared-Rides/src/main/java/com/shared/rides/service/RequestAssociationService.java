@@ -77,7 +77,9 @@ public class RequestAssociationService {
 				assoc.setDate(date);
 				assocDAO.save(assoc);
 				userDAO.newAssoc(supplierUser, assoc);
-				message = "Se ha enviado la solicitud correctamente.";	
+				message = "Se ha enviado la solicitud correctamente.";
+				
+				//TODO: Aca se deberia mandar un mail a la persona correspondiente
 			}
 			else message = "Esta peticion ya se ha realizado anteriormente";
 		}
@@ -150,5 +152,4 @@ public class RequestAssociationService {
 		
 		return isValidate;
 	}
-	
 }

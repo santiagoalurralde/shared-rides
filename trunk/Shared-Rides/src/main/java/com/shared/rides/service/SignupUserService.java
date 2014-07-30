@@ -187,7 +187,7 @@ public class SignupUserService {
 				
 				Stop stop = new Stop();
 				//El nombre del archivo esta formado por el identificador personal del usuario, mas el dia de semana que es y si es in o out 
-				fileName = u.getPersonalId() + i + "in";
+				fileName = u.getPersonalId() + "_" + i + "_in";
 				
 				CreateGPXFile.createGPX(fileName, markers);
 				stop.setPathFile(fileName);
@@ -203,7 +203,7 @@ public class SignupUserService {
 				markers[0][0] = lat.getAsDouble();
 				markers[0][1] = lon.getAsDouble();
 
-				fileName = u.getPersonalId() + i + "out";
+				fileName = u.getPersonalId() + "_" + i + "_out";
 				
 				CreateGPXFile.createGPX(fileName, markers);
 				stop.setPathFile(fileName);
@@ -266,5 +266,5 @@ public class SignupUserService {
 				//TODO: aca falta hacer cuando es los dos tipos de usuarios
 			}
 		}
-	}	
+	}
 }
