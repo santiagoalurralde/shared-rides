@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.shared.rides.dao.interfaces.IOrganizationDAO;
 import com.shared.rides.domain.Organization;
 import com.shared.rides.service.SignupUserService;
+import com.shared.rides.util.UploadFile;
 
 //import com.shared.rides.service.SignupUserService;
 
@@ -84,6 +85,6 @@ public class SignupUserController {
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody String uploadFileHandler(@RequestParam("file") MultipartFile file) {
 		//TODO: devuelvo un msg? hay que ver a donde tengo que redireccionar.
-		return signupUserService.uploadFile(file);
+		return UploadFile.uploadFile(file);
     }
 }
