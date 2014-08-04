@@ -7,7 +7,7 @@
 	<!----	Content	---->
     <div id="theContent">
         <section class="tupper mini">
-        	<h2><spring:message code="label.whoarewe"/></h2>
+        	<h2><spring:message code="label.contactus"/></h2>
         
         	<div class="theBoard lightBorder"> <!--  style="background: url(resources/images/Contact.png); background-size: cover" -->
 				<div class="blockLeft blockHalf">
