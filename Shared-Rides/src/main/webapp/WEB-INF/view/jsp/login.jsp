@@ -16,7 +16,7 @@
 	</div>
 
 	<!----	Logo	---->
-	<div style="width: 20%; margin: 0 auto">
+	<div style="width: 14%; text-align: center; margin: 2% auto">
 		<img src="resources/images/Logo2.png" width="80%">
 	</div>
 

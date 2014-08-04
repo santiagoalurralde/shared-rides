@@ -9,7 +9,9 @@
 		
 		<section title="User Data" class="tupper">
 			<h2>${name}	${surname}</h2>
-	
+			
+			<!--  <p class="txtHelp">Ver mapa</p> -->				
+				
 			<div class="theBoard lightBorder" style="margin-top: 10px"> 		
 				<div id="userData">				<!-- Datos 	-->
 					<div id="pictureData">		<!-- Foto 	-->
@@ -35,7 +37,7 @@
 			</div>
 		</section>
 		
-		<section title="Profile Data" class="tupper" style="margin-top: 50px">
+		<section title="" class="tupper" style="margin-top: 50px">
 			<div class="theBoard lightBorder"> 		
 				<div id="profileData">											<!-- Resto del Perfil --> 
 					<div id="driverData" class="blockLeft blockHalf">			<!-- Perfil conductor -->		 		
@@ -44,7 +46,7 @@
 						</h2>	 	
 						
 						<div class="theRating"> 	<!-- Puntuacion -->	
-							<a class="ifancybox" href="resources/rate.html">
+							<a class="ifancybox" href="rate.do">
 								<img class="star" src="resources/images/star.png" width="50px" style="float:left; margin-right:2%"/>
 							</a>
 							
@@ -78,14 +80,14 @@
 							<span style="position: relative; top: 12px">
 								${ratingPedestrian}
 							</span>
-							<a class="ifancybox" href="resources/rate.html">
+							<a class="ifancybox" href="rate.do">
 								<img class="star" src="resources/images/star.png" width="50px" style="float:right; margin-left:2%"/>
 							</a>
 						</div>	 	
 						 		
 						<div> 	<!-- Horario --> 	
 							<table id="tablePed" class="theSchedule">
-							</table>					
+							</table>	
 						</div>	
 						
 						<div class="mapContainer" style="margin-top: 45px; margin-left: 40px"> 	<!-- Mapa -->		
@@ -117,6 +119,7 @@
 	<c:set var="labelFriday"><spring:message code="label.friday"/></c:set>	
 	<input id="lblFriday" type="hidden" value="${labelFriday}"/>
 	
+	<!-- VARIABLES -->
 	<input id="valDriver" 		type="hidden" value="${driver}"/>
 	<input id="valPedestrian" 	type="hidden" value="${pedestrian}"/>
 	<input id="valId" 			type="hidden" value="${id}"/>
@@ -139,8 +142,12 @@
 	if("${visible}" === 'false')
 		$( '#privateData' ).hide( 0 );
 	
-	initMap("${lonPed}", "${latPed}");	
-	initMap1("caro1in.gpx");
+	var _lonPed = "${lonPed}";
+	var _latPed = "${latPed}";
+	//Do the same for driver's gpx
+	
+	initMapPedestrian();	//"${lonPed}", "${latPed}"
+	initMapDriver(); 		//"caro1in.gpx"
 	
 	<c:forEach var="day" items="${schPed}">
 		schPed.push(["${day.dayPed}","${day.hourInPed}","${day.hourOutPed}","${day.haveDriverIn}", "${day.haveDriverOut}"]);

@@ -92,7 +92,7 @@ Assigned to:	Santiago Alurralde (sa)
   white-space: 					nowrap;
   display: 						inline-block;
   width: 						250px;
-  height: 						25px;
+  height: 						50px;
   overflow: 					hidden;
   position: 					relative;
   background:					url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
@@ -105,7 +105,7 @@ Assigned to:	Santiago Alurralde (sa)
   left: 						0;
   top: 							0;
   height: 						100%;
-  width: 						10%;
+  width: 						20%;
   z-index: 						1;
   background: 					url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjRkZERjg4IiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
   background-size: 				contain;
@@ -116,8 +116,8 @@ Assigned to:	Santiago Alurralde (sa)
   -webkit-appearance: 			none;
   opacity: 						0;
   display: 						inline-block;
-  width: 						10%;
-  height: 						200%;
+  width: 						20%;
+  height: 						100%;
   margin: 						0;
   padding: 						0;
   z-index: 						2;
@@ -129,40 +129,63 @@ Assigned to:	Santiago Alurralde (sa)
 }
 
 .star-rating i ~ i {
-  width: 20%;
-}
-
-.star-rating i ~ i ~ i {
-  width: 30%;
-}
-
-.star-rating i ~ i ~ i ~ i {
   width: 40%;
 }
 
-.star-rating i ~ i ~ i ~ i ~ i {
-  width: 50%;
-}
-
-.star-rating i ~ i ~ i ~ i ~ i ~ i{
+.star-rating i ~ i ~ i {
   width: 60%;
 }
 
-.star-rating i ~ i ~ i ~ i ~ i ~ i ~ i{
-  width: 70%;
-}
-
-.star-rating i ~ i ~ i ~ i ~ i ~ i ~ i ~ i{
+.star-rating i ~ i ~ i ~ i {
   width: 80%;
 }
 
-.star-rating i ~ i ~ i ~ i ~ i ~ i ~ i ~ i ~ i{
-  width: 90%;
-}
-
-.star-rating i ~ i ~ i ~ i ~ i ~ i ~ i ~ i ~ i ~ i{
+.star-rating i ~ i ~ i ~ i ~ i {
   width: 100%;
 }
 
 
+.btn{
+	border-radius:	2px;	
+	background: 	-webkit-linear-gradient(top, #90AA44, #9ED474);
+	background: 	-moz-linear-gradient(top, #90AA44, #9ED474);
+	box-shadow: 	0 1px 2px rgba(0,0,0,.2);
+	border: 		solid 1px #90AA44;
+	color:			white;
+	font-size:		100%;
+	font-weight:	bold;
+	height:			30px;
+	margin:			10px 0px 10px 0px;
+	text-shadow: 	0 1px 1px rgba(0,0,0,.3);
+	width:			130px;
+}
 
+.btn:hover{
+	background: 	-webkit-linear-gradient(top, #99BB66, #9ED474);
+	background: 	-moz-linear-gradient(top, #99BB66, #9ED474);
+}
+
+.cellCheckMap{
+	cursor:			pointer	
+}
+
+
+/*------------------------------------------------------------------
+[Tables / ]
+------------------------------------------------------------------*/
+
+.theSchedule tr .cellCheckMap:hover {
+	/* Change individual cell color */
+	
+	background:		-webkit-linear-gradient(top, #f4f4f4, #E0E0E0);
+	background:		-moz-linear-gradient(top,  #f4f4f4,  #E0E0E0);
+}
+
+/*
+.txtHelp{
+	position: 		absolute;
+	display:		none;
+	z-index:		10000
+	
+}
+*/

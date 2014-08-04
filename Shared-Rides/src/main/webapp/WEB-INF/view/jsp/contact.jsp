@@ -6,8 +6,8 @@
 		  
 	<!----	Content	---->
     <div id="theContent">
-        <section title="Contact us" class="tupper mini">
-        	<h2><spring:message code="label.contactus"/></h2>
+        <section class="tupper mini">
+        	<h2><spring:message code="label.whoarewe"/></h2>
         
         	<div class="theBoard lightBorder"> <!--  style="background: url(resources/images/Contact.png); background-size: cover" -->
 				<div class="blockLeft blockHalf">
@@ -38,12 +38,8 @@
 				<div class="blockRight blockHalf">
 					<input class="theInputs" type="text"		name="name"		placeholder="Martin Paganni">		<br>								
 					<input class="theInputs" type="text"		name="email"	placeholder="mike@email.com">		<br>			
-					<textarea rows="5" cols="30" class="theInputs" placeholder="Mensaje"></textarea>	<br>
-			
+					<textarea rows="5" cols="30" class="theInputs" placeholder="Mensaje"></textarea>				<br>
 					<input class="btn" type="submit" value="<spring:message code="label.send"/>">
-					
-					<span class="split"></span>
-
 				</div> 
 				
 				<div class="clearer"></div> 

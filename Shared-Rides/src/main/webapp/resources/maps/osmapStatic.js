@@ -1,69 +1,83 @@
-function initMap(lonPed, latPed){
-	var map         = new OpenLayers.Map('map2');
+var _mapPedestrian, _mapDriver, _proj4326, _layerMarker, _layerTrack; 
+
+/**
+ * Starts Pedestrian's map
+ */
+function initMapPedestrian(){
+	_mapPedestrian	= new OpenLayers.Map('map2');
   
 	/*  Projections */
-	var proj4326    = new OpenLayers.Projection("EPSG:4326");
-	var projmerc    = new OpenLayers.Projection("EPSG:900913");
+	_proj4326    = new OpenLayers.Projection("EPSG:4326");
   
 	/*  Layers    */
 	var layerOSM    = new OpenLayers.Layer.OSM("Street Map");
-	var layerMarker = new OpenLayers.Layer.Markers( "Markers" );
+	_layerMarker = new OpenLayers.Layer.Markers( "Markers" );
 
-	map.addLayers([layerOSM]);
-	map.addLayer(layerMarker);
+	_mapPedestrian.addLayers([layerOSM]);
+	_mapPedestrian.addLayer(_layerMarker);
 
 	/*  Set Start Position  */
-	var lonlatStart= new OpenLayers.LonLat( lonPed , latPed ) 
+	var lonlatStart= new OpenLayers.LonLat( -64.183 , -31.416 ) //COMPLETAR CON LON LAT DE CORDOBA
   		.transform(
-  				proj4326,
-  				map.getProjectionObject()
+  				_proj4326,
+  				_mapPedestrian.getProjectionObject()
   		);
 	var zoomStart=16;
-	map.setCenter (lonlatStart, zoomStart);
+	_mapPedestrian.setCenter (lonlatStart, zoomStart);
 
-	if (!map.getCenter()) map.zoomToMaxExtent();
+	if (!_mapPedestrian.getCenter()) 
+		_mapPedestrian.zoomToMaxExtent();
+}
 
+/**
+ * Starts Driver's map
+ */
+function initMapDriver(){
+	_mapDriver	= new OpenLayers.Map('map3');
+  
+	/*  Projections */
+	_proj4326    	= new OpenLayers.Projection("EPSG:4326");
+  
+	/*  Layers    */
+	var layerOSM    = new OpenLayers.Layer.OSM("Street Map");
+	_layerTrack 	= new OpenLayers.Layer.OSM.CycleMap("TrackLayer");
+	_mapDriver.addLayers([layerOSM]);
+	_mapDriver.addLayer(_layerTrack);
+	
+	/*  Set Start Position  */
+	var lonlatStart= new OpenLayers.LonLat( -64.183 ,-31.416 )
+		.transform(
+				_proj4326,
+				_mapDriver.getProjectionObject()
+    );
+	var zoomStart=16;
+	_mapDriver.setCenter (lonlatStart, zoomStart);
+
+	if (!_mapDriver.getCenter())
+		_mapDriver.zoomToMaxExtent();
+}
+
+/**
+ * Sets Pedestrian's Marker
+ */
+function setMapPedestrian(lonPed, latPed){
 	/*	Add Marker			*/	
     var size 	= new OpenLayers.Size(35,35);
     var offset 	= new OpenLayers.Pixel(-(size.w/2), -size.h);
     var icon 	= new OpenLayers.Icon('resources/images/markerred.png',size,offset);
 
     markerPed = new OpenLayers.Marker(new OpenLayers.LonLat(lonPed, latPed).transform(
-  				proj4326,
-  				map.getProjectionObject()
+    			_proj4326,
+  				_mapPedestrian.getProjectionObject()
   		),icon.clone());
-    layerMarker.addMarker(markerPed); 
-	
-	map.addControl(new OpenLayers.Control.LayerSwitcher());
+    _layerMarker.addMarker(markerPed); 	
+    alert(lonPed, latPed);
 }
 
-
-function initMap1(urlGpxDriver){
-	var map         = new OpenLayers.Map('map3');
-  
-	/*  Projections */
-	var proj4326    = new OpenLayers.Projection("EPSG:4326");
-	var projmerc    = new OpenLayers.Projection("EPSG:900913");
-  
-	/*  Layers    */
-	var layerOSM    = new OpenLayers.Layer.OSM("Street Map");
-	var layerTrack 	= new OpenLayers.Layer.OSM.CycleMap("TrackLayer");
-	map.addLayers([layerOSM]);
-	map.addLayer(layerTrack);
-	
-	/*  Set Start Position  */
-	var lonlatStart= new OpenLayers.LonLat( -64.183 ,-31.416 )
-		.transform(
-				proj4326,
-				map.getProjectionObject()
-    );
-	var zoomStart=16;
-	map.setCenter (lonlatStart, zoomStart);
-
-	if (!map.getCenter()) map.zoomToMaxExtent();
-
-	map.addControl(new OpenLayers.Control.LayerSwitcher());
-
+/**
+ * Sets Driver's Track
+ */
+function setMapDriver(urlGpxDriver){
 	// Define the map layer
 	// Here we use a predefined layer that will be kept up to date with URL changes
 
@@ -77,8 +91,9 @@ function initMap1(urlGpxDriver){
 	projection: new OpenLayers.Projection("EPSG:4326")
 	});
 	
-	map.addLayer(gpx);	
+	map.addLayer(gpx);		
 }
+
 
 
 
