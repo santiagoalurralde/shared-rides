@@ -41,26 +41,28 @@ public class ResponseAssociationService {
 	private JsonArray offeredJson;
 	private List<Long> schIdList;
 
-	public boolean hasResponse(long userId){
+	public String hasResponse(long userId){
 		User u = new User(userId);
 		u = userDAO.load(u);
-		boolean hasResponse = false;
 		
 		List<Association> myRequestList = userDAO.getMyRequests(u);
-		List<Association> assocList = u.getAssociations();
+		JsonArray json = new JsonArray();
 		
 		for(Association assoc : myRequestList){
 			if(assoc.getState().equals(State.ACCEPTED) || assoc.getState().equals(State.CANCELLED)){
-				if(assoc.getDate().after(u.getLastLoginDate())) hasResponse = true;
+				if(assoc.getDate().after(u.getLastLoginDate())){
+					long uAssocId = assocDAO.getSupplierId(assoc);
+					User uAssoc = new User(uAssocId);
+					uAssoc = userDAO.load(uAssoc);
+					String fullName = uAssoc.getName() + " " + uAssoc.getSurname();
+					JsonObject uJson = new JsonObject();
+					uJson.addProperty("name", fullName);
+					uJson.addProperty("date", assoc.getDate().toString());
+					json.add(uJson);
+				}
 			}
 		}
-		
-		for(Association assoc : assocList){
-			if(assoc.getState().equals(State.ACCEPTED) || assoc.getState().equals(State.CANCELLED)){
-				if(assoc.getDate().after(u.getLastLoginDate())) hasResponse = true;
-			}
-		}
-		return hasResponse;
+		return json.toString();
 	}
 	
 	/*
