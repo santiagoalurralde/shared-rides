@@ -13,7 +13,7 @@
         <li>					<a class="highlight"	href="about.do">        <spring:message code="label.about"		/></a></li>
     </ul>
 	
-	<img id="btnAlert" src="resources/images/bell.png" width="1.75%"/>
+	<img id="btnAlert" src="resources/images/bell.png" style="display:none" width="1.75%"/>
 	
 	<a href="logout.do">
 		<img id="btnLogout" src="resources/images/logout.png" width="1.75%">
@@ -21,27 +21,31 @@
 </div>
 
  
-<div id="notifications" class="notif">
-	<iframe id="theFrame" src='notifications.do' ></iframe>
+<div id="boxNotifications" class="notif">
+	<h5>Notificaciones</h5>
+	
+	<ul id="listNotifications">
+	</ul>
 </div>
 
 <script>
 	$( "#btnAlert" ).click(function(){
-		if ($("#notifications").is(":visible"))
-			$( "#notifications" ).hide();
+		if ($("#boxNotifications").is(":visible"))
+			$( "#boxNotifications" ).hide();
 		else
-			$( "#notifications" ).show();	
+			$( "#boxNotifications" ).show();	
 	});
 	
-
 	$.post( 'hasAssociation.do', 
 		function(json)
 		{
 			var jsonNew = $.parseJSON(json);
-			if (jsonNew.hasAssoc === false)
+			if (jsonNew.hasAssoc == true)
 			{
-				$( '#btnAlert' ).hide();
-				$('#theFrame').contents().find("#listNotifications").append("<li>Has recibido una peticion</li>");
+				$( '#btnAlert' ).show();
+				var divNotif = "<div class='divNotif'><li>Has recibido una peticion</li><div>";
+				$("#listNotifications").append(divNotif);
+				$("#listNotifications").append(divNotif);
 			}
 		}
 	);

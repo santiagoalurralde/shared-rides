@@ -121,6 +121,10 @@ public class ProfileService {
 		else{
 			model.addObject("pedestrian", "false");
 		}
+		
+		//Agrego boolean que indica si es mi perfil o no.
+		model.addObject("mine", myProfile);
+		
 		//Agrego los datos privados del usuario en caso de que existe la asociacion
 		if(isAssociation || myProfile){
 			model.addObject("visible", true);	
@@ -155,7 +159,6 @@ public class ProfileService {
 			day.put("hourOutDriver", sch.getHourOut());
 			day.put("freeSeatsOut", freeSeatsOut);
 			day.put("trackOut", getNameTrack(d, sch, 1));
-			
 			arraySch.add(i, day);
 		}
 		//Agrego el horario
@@ -184,7 +187,8 @@ public class ProfileService {
 			day.put("hasDriverIn", hasDriver(u, sch, 0));
 			day.put("hourOutPed", sch.getHourOut());
 			day.put("hasDriverOut", hasDriver(u, sch, 1));
-			
+			//latPed
+			//lonPed
 			arraySch.add(day);
 		}
 		model.addObject("schPed", arraySch);

@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.shared.rides.domain.User;
 import com.shared.rides.service.RequestAssociationService;
 import com.shared.rides.service.LoginService;
-import com.shared.rides.util.EmailSender;
 
 
 @Controller

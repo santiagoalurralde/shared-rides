@@ -621,7 +621,6 @@ function fillRowType()
 	}
 }
 
-
 /**
  * Checks whether or not showing the drivers data, and sets global variable.
  * 
@@ -647,10 +646,11 @@ function userTypeChanged(target)
  */
 function Track()
 { 
-	this.trackIn	= "";
-	this.hourIn		= "";	
-	this.trackOut	= "";	
-	this.hourOut	= "";		
+	this.isPedestrian 	= false;
+	this.trackIn		= "";
+	this.hourIn			= "";	
+	this.trackOut		= "";	
+	this.hourOut		= "";		
 }
 
 /**
@@ -658,10 +658,11 @@ function Track()
  */
 function Stop()
 {
-	this.stopIn		= "";
-	this.hourIn		= "";	
-	this.stopOut	= "";
-	this.hourOut	= "";		
+	this.isPedestrian 	= true;
+	this.stopIn			= "";
+	this.hourIn			= "";	
+	this.stopOut		= "";
+	this.hourOut		= "";		
 }
 
 
