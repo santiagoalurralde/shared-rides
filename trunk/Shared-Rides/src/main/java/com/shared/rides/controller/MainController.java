@@ -22,6 +22,7 @@ import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
 import com.shared.rides.domain.User;
 import com.shared.rides.service.FindUserService;
 import com.shared.rides.service.RequestAssociationService;
+import com.shared.rides.service.ResponseAssociationService;
 
 
 @Controller
@@ -31,6 +32,8 @@ public class MainController {
 	private FindUserService findUserService;
 	@Autowired
 	private RequestAssociationService requestAssocService;
+	@Autowired
+	private ResponseAssociationService responseAssocService;
 	
 	
 	@RequestMapping(value="main.do")
@@ -58,6 +61,12 @@ public class MainController {
 	public @ResponseBody String hasAssoc(HttpServletRequest request){
 	   	User u = (User) request.getSession().getAttribute("user");
 	   	return requestAssocService.hasAssociation(u.getUserId());
+	}
+	
+	@RequestMapping(value = "/hasResponse.do", method = RequestMethod.POST)
+	public @ResponseBody String hasResponse(HttpServletRequest request){
+		User u = (User) request.getSession().getAttribute("user");
+		return responseAssocService.hasResponse(u.getUserId());
 	}
 	
 	//Metodo que se encarga de realizar la busqueda de los usuarios de acuerdo a los parametros recibidos

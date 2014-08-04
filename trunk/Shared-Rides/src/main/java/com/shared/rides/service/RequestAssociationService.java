@@ -1,11 +1,13 @@
 package com.shared.rides.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.shared.rides.dao.interfaces.IAssociationDAO;
 import com.shared.rides.dao.interfaces.IUserDAO;
@@ -15,6 +17,7 @@ import com.shared.rides.domain.Pedestrian;
 import com.shared.rides.domain.Schedule;
 import com.shared.rides.domain.State;
 import com.shared.rides.domain.User;
+import com.shared.rides.util.EmailSender;
 
 @Service
 public class RequestAssociationService {
@@ -36,17 +39,21 @@ public class RequestAssociationService {
 		u = userDAO.load(u);
 		
 		List<Association> assocList = u.getAssociations();
-		JsonObject json = new JsonObject();
+		List<String> userAssoc = new ArrayList<String>();
+		JsonArray json = new JsonArray();
 		for(int i = 0; i < assocList.size(); i++){
 			if (assocList.get(i).getState().equals(State.PENDING)){
 				if (assocList.get(i).getDate().compareTo(new Date()) != 10){
-					json.addProperty("hasAssoc", true);
-					return json.toString();
+					JsonObject uJson = new JsonObject();
+					User uAssoc = assocList.get(i).getApplicantID();
+					String fullName = uAssoc.getName() + " " + u.getSurname();
+					uJson.addProperty("name", fullName);
+					uJson.addProperty("date", assocList.get(i).getDate().toString());
+					json.add(uJson);
 				}
 				else assocList.get(i).setState(State.CANCELLED);
 			}
 		}
-		json.addProperty("hasAssoc", false);
 		return json.toString();
 	}
 	
@@ -79,7 +86,15 @@ public class RequestAssociationService {
 				userDAO.newAssoc(supplierUser, assoc);
 				message = "Se ha enviado la solicitud correctamente.";
 				
-				//TODO: Aca se deberia mandar un mail a la persona correspondiente
+				try{
+					EmailSender emailSender = new EmailSender();
+					emailSender.sendEmail(supplierUser.getEmail(), applicantUser.getEmail(), applicantUser.getPw());					
+				}
+				catch(Exception e){
+					System.out.println(e);
+				}
+
+				
 			}
 			else message = "Esta peticion ya se ha realizado anteriormente";
 		}

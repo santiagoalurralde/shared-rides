@@ -267,4 +267,25 @@ public class SignupUserService {
 			}
 		}
 	}
+	
+	private void getMarkers(JsonObject jsonDay, int inout){
+		String tagName;
+		
+		//Me fijo si es in o out
+		if (inout == 0) tagName = "markerIn";
+		else tagName = "markerOut";
+		
+		JsonArray marker = jsonDay.getAsJsonArray(tagName);
+		Double[][] markers = new Double[marker.size()][2];
+		
+		for(int j = 0; j < marker.size(); j++){
+			JsonObject mkr = (JsonObject) marker.get(j);
+			JsonElement lat = mkr.get("lat");
+			JsonElement lon = mkr.get("lon");
+			markers[j][0] = lat.getAsDouble();
+			markers[j][1] = lon.getAsDouble();
+		}
+	}
+	
+	
 }
