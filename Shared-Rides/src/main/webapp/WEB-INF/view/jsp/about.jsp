@@ -25,18 +25,18 @@
 			
 			<div class="clearer"></div>
 		</section>
-        <div id="advantages">			
-			<div class="blockThird" style="float:left">
+        <div id="advantages">	
+			<div class="blockThird" >
 				<img class="advanPic" src="resources/images/green.png" >
 				<br>
 				<span>Cuidar el medioambiente</span>
 			</div>
-			<div class="blockThird" style="display:inline">
+			<div class="blockThird">
 				<img class="advanPic" src="resources/images/save.png" >
 				<br>
 				<span>Ahorrar</span>				
 			</div>
-			<div class="blockThird" style="float:right">
+			<div class="blockThird">
 				<img class="advanPic" src="resources/images/traffic.png" >
 				<br>
 				<span>Reducir el trafico</span>
