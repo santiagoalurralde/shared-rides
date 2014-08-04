@@ -5,7 +5,7 @@
 	<!----	Content	---->
     <div id="theContent">
         <section class="tupper mini">
-        	<h2><spring:message code="label.whoweare"/></h2>
+        	<h3><spring:message code="label.whoweare"/></h3>
         	
 			<div class="blockLeft blockHalf">
 				<img class="aboutPic" src="resources/profilePic/santi.jpg" >
@@ -26,22 +26,26 @@
 			<div class="clearer"></div>
 		</section>
         <div id="advantages">	
-			<div class="blockThird" >
-				<img class="advanPic" src="resources/images/green.png" >
-				<br>
-				<span>Cuidar el medioambiente</span>
+        	<h3>Por qu&eacute; Shared Rides?</h3>
+        	
+        	<div>
+				<div class="blockThird" >
+					<img class="advanPic" src="resources/images/green.png" >
+					<br>
+					<span>Cuidar el medioambiente</span>
+				</div>
+				<div class="blockThird">
+					<img class="advanPic" src="resources/images/save.png" >
+					<br>
+					<span>Ahorrar</span>				
+				</div>
+				<div class="blockThird">
+					<img class="advanPic" src="resources/images/traffic.png" >
+					<br>
+					<span>Reducir el trafico</span>
+				</div>
+				<div class="clearer"></div>			
 			</div>
-			<div class="blockThird">
-				<img class="advanPic" src="resources/images/save.png" >
-				<br>
-				<span>Ahorrar</span>				
-			</div>
-			<div class="blockThird">
-				<img class="advanPic" src="resources/images/traffic.png" >
-				<br>
-				<span>Reducir el trafico</span>
-			</div>
-			<div class="clearer"></div>			
         </div>        
 	</div>
 </body>
