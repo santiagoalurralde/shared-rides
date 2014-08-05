@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shared.rides.dao.interfaces.IAssociationDAO;
-import com.shared.rides.dao.interfaces.IDriverDAO;
 import com.shared.rides.dao.interfaces.IPedestrianDAO;
 import com.shared.rides.dao.interfaces.IUserDAO;
 import com.shared.rides.domain.Association;
@@ -22,6 +21,7 @@ import com.shared.rides.domain.Driver;
 import com.shared.rides.domain.Pedestrian;
 import com.shared.rides.domain.Schedule;
 import com.shared.rides.domain.State;
+import com.shared.rides.domain.Stop;
 import com.shared.rides.domain.Track;
 import com.shared.rides.domain.User;
 
@@ -183,12 +183,13 @@ public class ProfileService {
 			Map<String, Object> day = new HashMap();
 			
 			day.put("dayPed", sch.getDay());
+			day.put("stopIn", getNameStop(p, sch, 0));
 			day.put("hourInPed", sch.getHourIn());
 			day.put("hasDriverIn", hasDriver(u, sch, 0));
+			day.put("stopOut", getNameStop(p, sch, 1));
 			day.put("hourOutPed", sch.getHourOut());
 			day.put("hasDriverOut", hasDriver(u, sch, 1));
-			//latPed
-			//lonPed
+
 			arraySch.add(day);
 		}
 		model.addObject("schPed", arraySch);
@@ -246,6 +247,19 @@ public class ProfileService {
 			}
 		}
 		return nameTrack;
+	}
+	
+	private String getNameStop(Pedestrian p, Schedule sch, int inout){
+		String nameStop = null;
+		
+		for (int i = 0; i < p.getStops().size(); i++){
+			Stop stop = p.getStops().get(i);
+			if (stop.getDay() == sch.getDay() && stop.getInout() == inout){
+				nameStop = stop.getPathFile();
+				break;
+			}
+		}
+		return nameStop;
 	}
 	
 	/*
