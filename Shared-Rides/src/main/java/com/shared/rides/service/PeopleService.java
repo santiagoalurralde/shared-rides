@@ -87,6 +87,8 @@ public class PeopleService {
 		jsonUser.addProperty("userId", u.getUserId());
 		jsonUser.addProperty("name", fullNameSupplier);
 		
+		
+		
 		if (pending) jsonUser.addProperty("pic", "user.jpg");
 		else jsonUser.addProperty("pic", pictureSupplier);
 		
