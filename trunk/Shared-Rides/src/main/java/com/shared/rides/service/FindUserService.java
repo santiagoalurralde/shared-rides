@@ -15,6 +15,7 @@ import com.shared.rides.domain.Address;
 import com.shared.rides.domain.Association;
 import com.shared.rides.domain.Shift;
 import com.shared.rides.domain.State;
+import com.shared.rides.domain.Stop;
 import com.shared.rides.domain.Track;
 import com.shared.rides.domain.User;
 import com.shared.rides.util.DistanceHaversine;
@@ -67,24 +68,25 @@ public class FindUserService {
 			//track; por ende tengo varios markers y los tengo que comparar con la direccion de cada peaton
 			for(int i = 0; i < userList.size() ; i++){
 				minDistance = 1000;
-				needRemove = true;
-				addressUser = userList.get(i).getAddress();
-				latitudeUser = addressUser.getMarker().getLatitude();
-				longitudeUser = addressUser.getMarker().getLongitude();
 				
-				for(int j = 0; j < markers.length; j++){
-					dist = DistanceHaversine.calculateDistance(markers[j][1], markers[j][0], latitudeUser, longitudeUser);
-					if (dist < 1000){ 
-						needRemove = false;
-						if (dist < minDistance) minDistance = dist;
+				List<Stop> stopList = userList.get(i).getPedestrian().getStops();
+				
+				needRemove = true;
+				for (Stop s : stopList){
+					for(int j = 0; j < markers.length; j++){
+						dist = DistanceHaversine.calculateDistance(markers[j][1], markers[j][0], s.getLat(), s.getLon());
+						if (dist < 1000){ 
+							needRemove = false;
+							if (dist < minDistance) minDistance = dist;
+						}
+					}	
+					if (needRemove){ 
+						userList.remove(i);
+						i--;
 					}
-				}	
-				if (needRemove){ 
-					userList.remove(i);
-					i--;
-				}
-				else{
-					distanceList.add(minDistance);
+					else{
+						distanceList.add(minDistance);
+					}
 				}
 			}
 		}

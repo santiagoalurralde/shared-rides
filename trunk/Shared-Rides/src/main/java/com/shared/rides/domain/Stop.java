@@ -22,7 +22,8 @@ public class Stop {
 	private long stopId;
 	private int day;
 	private int inout;
-	private String pathFile;
+	private Double lat;
+	private Double lon;
 	
 	//-----------CONSTRUCTOR
 
@@ -59,12 +60,23 @@ public class Stop {
 		this.inout = inout;
 	}
 
-	@Column (name = "pathFile")
-	public String getPathFile() {
-		return pathFile;
+	@Column(name = "lat")
+	public Double getLat() {
+		return lat;
 	}
-	public void setPathFile(String pathFile) {
-		this.pathFile = pathFile;
+
+	public void setLat(Double lat) {
+		this.lat = lat;
 	}
+
+	@Column(name = "lon")
+	public Double getLon() {
+		return lon;
+	}
+
+	public void setLon(Double lon) {
+		this.lon = lon;
+	}
+
 	
 }

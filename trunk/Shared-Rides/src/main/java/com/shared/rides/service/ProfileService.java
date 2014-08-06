@@ -182,11 +182,16 @@ public class ProfileService {
 			Schedule sch = p.getSchedule().get(i);
 			Map<String, Object> day = new HashMap();
 			
+			Stop stopInAux = getStopPed(p, sch, 0);
+			Stop stopOutAux = getStopPed(p, sch, 1);
+			
 			day.put("dayPed", sch.getDay());
-			day.put("stopIn", getNameStop(p, sch, 0));
+			day.put("stopLatIn", stopInAux.getLat());
+			day.put("stopLonIn", stopInAux.getLon());
 			day.put("hourInPed", sch.getHourIn());
 			day.put("hasDriverIn", hasDriver(u, sch, 0));
-			day.put("stopOut", getNameStop(p, sch, 1));
+			day.put("stopLatOut", stopOutAux.getLat());
+			day.put("stopLonOut", stopOutAux.getLon());
 			day.put("hourOutPed", sch.getHourOut());
 			day.put("hasDriverOut", hasDriver(u, sch, 1));
 
@@ -249,17 +254,14 @@ public class ProfileService {
 		return nameTrack;
 	}
 	
-	private String getNameStop(Pedestrian p, Schedule sch, int inout){
-		String nameStop = null;
-		
+	private Stop getStopPed(Pedestrian p, Schedule sch, int inout){
 		for (int i = 0; i < p.getStops().size(); i++){
 			Stop stop = p.getStops().get(i);
 			if (stop.getDay() == sch.getDay() && stop.getInout() == inout){
-				nameStop = stop.getPathFile();
-				break;
+				return stop;
 			}
 		}
-		return nameStop;
+		return null;
 	}
 	
 	/*

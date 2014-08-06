@@ -199,25 +199,19 @@ public class SignupUserService {
 	}
 	
 	private void saveStop(JsonObject jsonDay, Pedestrian ped, int day, String personalId, String tagName, String inout){
-		Double[][] markers = new Double[1][2];
-		
-		//STOP
 		JsonObject stopIn = jsonDay.getAsJsonObject(tagName);
 		JsonElement lat = stopIn.get("lat");
 		JsonElement lon = stopIn.get("lon");
-		markers[0][0] = lat.getAsDouble();
-		markers[0][1] = lon.getAsDouble();
 		
 		Stop stop = new Stop();
-		//El nombre del archivo esta formado por el identificador personal del usuario, mas el dia de semana que es y si es in o out 
-		String fileName = personalId+ "_" + day + "_" + inout;
 		
-		CreateGPXFile.createGPX(fileName, markers);
-		
-		stop.setPathFile(fileName);
 		stop.setDay(day + 1);
+		
 		if (inout.equalsIgnoreCase("in")) stop.setInout(0);
 		else stop.setInout(1);
+		
+		stop.setLat(lat.getAsDouble());
+		stop.setLon(lon.getAsDouble());
 		
 		stopDAO.save(stop);
 		stop = stopDAO.getLastStop();
