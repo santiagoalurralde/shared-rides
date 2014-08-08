@@ -7,22 +7,25 @@
 
 	<head> 
 		<!----	Specific	---->
-		<meta http-equiv="Content-Type" 				content="text/html; charset=UTF-8"													/>
-		<meta name		='viewport'						content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'	/>
-    	<meta name		="apple-mobile-web-app-capable" content="yes"																		/>
+		<meta http-equiv="Content-Type" 			content="text/html; charset=UTF-8"													/>
+		<meta name='viewport'						content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'	/>
+    	<meta name="apple-mobile-web-app-capable" 	content="yes"																		/>
 	
 		<title>
 			<tiles:getAsString name="title"/>
 		</title>
-		 
+
 		<!----	Styles		---->
-		<link 	rel		="stylesheet" 		href="resources/styles/style.css" 							type="text/css"/>
-		<link 	rel		="stylesheet"		href="resources/styles/<tiles:getAsString name="style"/>"	type="text/css"/>
-		<link 	rel		="stylesheet"		href="http://fonts.googleapis.com/css?family=Raleway:500"  	type="text/css"/>
+		<link  	rel="stylesheet" 		type="text/css" 	href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"	/>
+		<link 	rel="stylesheet" 		type="text/css" 	href="resources/styles/style.css" 									/>
+		<link 	rel="stylesheet"		type="text/css" 	href="resources/styles/<tiles:getAsString name="style"/>"			/>
+		<link 	rel="stylesheet"		type="text/css" 	href="http://fonts.googleapis.com/css?family=Raleway:500"  			/>
+		<link 	rel="shortcut icon" 	type="image/x-icon"	href="resources/images/favLogo.ico" 								/>
 
 		<!----	Scripts		---->
-		<script src		="resources/scripts/jquery-1.10.2.js">	</script>
-		<script src		="resources/scripts/jquery-ui.js">		</script>
+		<script src="resources/scripts/jquery-1.10.2.js">	</script>
+		<script src="resources/scripts/jquery-ui.js">		</script>
+		
 	</head> 
 
 

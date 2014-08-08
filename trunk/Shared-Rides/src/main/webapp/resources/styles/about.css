@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+h3, .blockHalf{
+	text-align: center;
+}
+
+h3{
+	margin-bottom:	5%
+}
+
+.aboutPic{
+	border-radius:	100px;
+	width:			150px;
+	height:			150px;
+}
+
+.aboutName{
+	line-height: 	4em
+}
+
+span{
+}
+
+.advanPic{
+	width:			110px;
+	height:			110px;
+	margin-bottom:	2%;
+}
+
+#advantages{
+	width:				100%;
+	margin-top:			5%;
+	padding:			2% 0%;
+	background-color: 	#FAFAFA;
+}
+
+.blockThird{
+	text-align:		center;
+	width:			33.2%;
+	float:			left
+}

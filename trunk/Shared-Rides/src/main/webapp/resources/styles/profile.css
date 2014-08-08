@@ -14,8 +14,7 @@ Assigned to:	Santiago Alurralde (sa)
 }
 
 #userData{
-	padding-left: 				3%;
-	padding-right: 				3%;
+	margin-top: 				1.5%;	
 	height:						110px;
 }
 
@@ -29,23 +28,33 @@ Assigned to:	Santiago Alurralde (sa)
 
 #publicData{
 	float:					left;	
-	width: 					36%;
+	width: 					35%;
 }
 
 #privateData{
 	float:					right;
-	width: 					42%;
+	width: 					40%;
 }
 
 #pictureData{
 	float:					left;
-	width:					22%;
+	width:					19%;
+	margin-left:			3%;
+	margin-right:			2%;
+}
+
+.star{
+	width:					50px;
+	float:					left;
+	margin-right:			2%";
 }
 
 #thePic{
-	box-shadow:				0.5px 1px 2px #000000;
+	box-shadow:				.45px 1px 3.5px #444444;
 	color:					Black;
 	border:					solid White 4px; 	
+	width:					140px;
+	height:					150px;
 	z-index:				500;
 }
 
@@ -69,6 +78,15 @@ Assigned to:	Santiago Alurralde (sa)
 #pedestrianData{
 	text-align: 				right;
 }
+
+.btnRequestAssoc{
+	margin-left: 				3px;
+}
+
+.btnRequestAssoc img{
+	width:						25px;	
+}
+
 
 /*------------------------------------------------------------------
 [Rating / ]

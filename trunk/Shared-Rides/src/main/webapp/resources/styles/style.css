@@ -651,9 +651,49 @@ bottom:					0%;
  
 -------------------------------------------------------------------*/
 
-
-
-
+.ui-tooltip, .arrow:after {
+	background-color: 	#FAFAFA;
+ 	border: 			2px solid #fafafa;	
+}
+.ui-tooltip {
+	padding: 			10px 20px;
+	color: 				black;
+	font-size:			80%;
+	border-radius:		0px;
+	box-shadow: 		0 0 5px #555555;
+}	
+.arrow {
+	width: 				70px;
+	height: 			16px;
+	overflow: 			hidden;
+	position: 			absolute;
+	left: 				50%;
+	margin-left: 		-35px;
+	bottom: 			-16px;
+}
+.arrow.top {
+	top: 				-20px;
+	bottom: 			auto;
+}
+.arrow.left {
+	left: 				20%;
+}
+.arrow:after {
+	content: 			"";
+	position: 			absolute;
+	left: 				20px;
+	top: 				-20px;
+	width: 				25px;
+	height: 			23px;
+ 	box-shadow: 		6px 6px 6px -7px #444444;	
+	-webkit-transform: 	rotate(45deg);
+	-ms-transform: 		rotate(45deg);
+	transform: 			rotate(45deg);
+}
+.arrow.top:after {
+	bottom: 			-20px;
+	top: 				auto;
+}
 
 
 

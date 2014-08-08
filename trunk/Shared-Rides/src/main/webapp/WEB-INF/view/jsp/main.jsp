@@ -4,7 +4,7 @@
 		  
 	<!----	Content	---->
     <div id="theContent">
-        <section title="Main Menu" class="tupper"> 
+        <section title="" class="tupper"> 
        		<h4>
        			<spring:message code="label.messageFind"/>
         	</h4>
@@ -23,10 +23,10 @@
         	
         		<!----	Images			---->
         		<div id="steps">
-		        	<img id="imgBoot" 	 	title="peaton"		class="imagesSteps"	src="resources/images/boot.png" 	/>
-					<img id="imgSteering"	title="conductor"	class="imagesSteps"	src="resources/images/steering.png" />
-					<img id="imgSun" 		title="dia"			class="imagesSteps"	src="resources/images/sun.png" 		/>
-					<img id="imgMoon"		title="tarde/noche"	class="imagesSteps"	src="resources/images/moon.png" 	/>
+		        	<img id="imgBoot" 	 	title="Peaton"		class="imagesSteps"	src="resources/images/boot.png" 	/>
+					<img id="imgSteering"	title="Conductor"	class="imagesSteps"	src="resources/images/steering.png" />
+					<img id="imgSun" 		title="Dia"			class="imagesSteps"	src="resources/images/sun.png" 		/>
+					<img id="imgMoon"		title="Tarde/Noche"	class="imagesSteps"	src="resources/images/moon.png" 	/>
         		</div>
 
         		<!----	Map Driver		---->		
@@ -65,16 +65,32 @@
        		</form>	        	
         </section>        
 	</div>
+	<section>
+		<script src="resources/scripts/MainMenu.js" 	type="text/javascript"></script>
+		<script src="resources/maps/OpenLayers.js"		type="text/javascript"></script>    
+		<script src="resources/maps/OpenStreetMap.js"  	type="text/javascript"></script>
+		<script src="resources/maps/proj4js.js"			type="text/javascript"></script>
+		<script src="resources/maps/osmap.js" 			type="text/javascript"></script>
+		<script src="resources/maps/track.js" 			type="text/javascript"></script>
+		<script src="resources/maps/osmapSimple.js" 	type="text/javascript"></script>
+	</section>
 </body>
 
-<script src="resources/scripts/MainMenu.js" 	type="text/javascript"></script>
-<script src="resources/maps/OpenLayers.js"		type="text/javascript"></script>    
-<script src="resources/maps/OpenStreetMap.js"  	type="text/javascript"></script>
-<script src="resources/maps/proj4js.js"			type="text/javascript"></script>
-<script src="resources/maps/osmap.js" 			type="text/javascript"></script>
-<script src="resources/maps/track.js" 			type="text/javascript"></script>
-<script src="resources/maps/osmapSimple.js" 	type="text/javascript"></script>
+
 
 <script>
 	initMapCoords(lonlat, zoom, map);
+	
+	$(function() {
+		$( document ).tooltip({
+			track: true,
+			position: {
+				my: "center top+60",
+				using: function( position, feedback ) {
+					$( this ).css( position );
+				}
+			}
+		 });
+	 });
 </script>
+
