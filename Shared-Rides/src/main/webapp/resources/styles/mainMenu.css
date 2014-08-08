@@ -13,8 +13,7 @@ Assigned to:	Santiago Alurralde (sa)
 [Navigation Steps / #navSteps]
 ------------------------------------------------------------------*/
 
-#navSteps
-{
+#navSteps{
 	background:				-moz-linear-gradient(top, #90AA44, #50A410);
 	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
 	margin:					20px 0 0 0;	
@@ -24,16 +23,14 @@ Assigned to:	Santiago Alurralde (sa)
 	width:					100%;
 	z-index:				1000;
 }
-	#navSteps li
-	{
+	#navSteps li{
 		display:			inline-block;
 		height:				30px;
 		list-style-type:	none;
 		width:				33%;
 		
 	}
-	#navSteps li a:active
-	{ 
+	#navSteps li a:active{ 
 		background-color:	black; 
 	}
 	
@@ -41,7 +38,7 @@ Assigned to:	Santiago Alurralde (sa)
 	display:				inline;
 }
 
-#buttonsSteps{
+#buttonsSteps {
 	clear:					both;
 	margin-top:				30px;
 	position:				relative;
@@ -49,25 +46,26 @@ Assigned to:	Santiago Alurralde (sa)
 	width:					100%;
 }
 
-.imagesSteps{
+.imagesSteps {
 	width: 					175px;
 	opacity:				1;
+	cursor:					pointer;
 	
-	-webkit-transition: 	opacity 0.5s ease-out;  	
+	-webkit-transition: 	opacity 0.2s ease-out;  	
     -moz-transition: 		opacity 0.2s ease-out;  
-    -o-transition: 			opacity 0.5s ease-out;  	
-    transition: 			opacity 0.5s ease-out;
+    -o-transition: 			opacity 0.2s ease-out;  	
+    transition: 			opacity 0.2s ease-out;
 }
 
-#steps{
+#steps {
 	margin: 				10px 0px 0px 210px
 }
 
-#imgBoot, #imgSun{
+#imgBoot, #imgSun {
 	margin-right:			130px;
 }
 
-#imgSun, #imgMoon{
+#imgSun, #imgMoon {
 	display: 				none; 
 }
 
@@ -75,23 +73,37 @@ Assigned to:	Santiago Alurralde (sa)
 [Tables / ]
 ------------------------------------------------------------------*/
 
-#listFound{
+#listFound {
 	width:					100%;
     height:					100%;
 }
 
-#tableFound{
+#tableFound {
 	margin:					0 auto;
 }
 
-.tableUsers th{
+.tableUsers th {
 	background:				-moz-linear-gradient(top, #90AA44, #50A410);
 	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
 	padding:				20px 25px 25px 25px;
 	border-bottom:			1px solid #e0e0e0;
 }
 
-.tableUsers img{					
+.tableUsers img {					
 	width: 					100px;
 	height:					110px;
 }
+
+/*------------------------------------------------------------------
+[Tooltip / OVERRIDE ]
+------------------------------------------------------------------*/
+
+.ui-tooltip, .arrow:after {
+	background-color: 	#F0F0F0;
+ 	border: 			2px solid #fafafa;	
+}
+
+.ui-tooltip {
+	box-shadow: 		.2px .75px 4px #999;
+}	
+

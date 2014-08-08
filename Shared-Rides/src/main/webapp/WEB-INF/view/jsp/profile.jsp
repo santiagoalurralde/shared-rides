@@ -7,47 +7,37 @@
 <body>
 	<div id="theContent">	
 		
-		<section title="User Data" class="tupper">
+		<section title="" class="tupper">
 			<h2>${name}	${surname}</h2>
-			
-			<!--  <p class="txtHelp">Ver mapa</p> -->				
+							
+			<div id="userData" class="theBoard lightBorder">	<!-- Datos 	-->
+				<div id="pictureData">							<!-- Foto 	-->
+					<img id="thePic" src="resources/profilePic/${picture}" />  
+				</div>
 				
-			<div class="theBoard lightBorder" style="margin-top: 10px"> 		
-				<div id="userData">				<!-- Datos 	-->
-					<div id="pictureData">		<!-- Foto 	-->
-						<img id="thePic" src="resources/profilePic/${picture}"  width="140px" height="150px"/>  
-					</div>
-					
-					<div id="publicData"> 		<!-- Datos Publicos	--> 
-						<p><b>
-							<spring:message code="label.basicInfo"/>
-						</b></p><br>
-						<p><img class="helpIcon" src="resources/images/location.png" 	/>${address}		</p><br>
-						<p><img class="helpIcon" src="resources/images/house.png" 		/>${neighborhood}	</p>		
-					</div> 
-					 		
-					<div id="privateData"> 		<!-- Datos Privados	-->
-						<p><b>
-							<spring:message code="label.contactInfo"/>
-						</b></p><br>
-						<p><img class="helpIcon" src="resources/images/phone.png"		/>${telephone}		</p><br>
-						<p><img class="helpIcon" src="resources/images/email.png" 		/>${email} 			</p>
-					</div>		
-				</div>	
-			</div>
+				<div id="publicData"> 		<!-- Datos Publicos	--> 
+					<p><b><spring:message code="label.basicInfo"/></b></p><br>
+					<p><img class="helpIcon" src="resources/images/location.png" />${address}		</p><br>
+					<p><img class="helpIcon" src="resources/images/house.png" 	 />${neighborhood}	</p>		
+				</div> 
+				 		
+				<div id="privateData"> 		<!-- Datos Privados	-->
+					<p><b><spring:message code="label.contactInfo"/></b></p><br>
+					<p><img class="helpIcon" src="resources/images/phone.png"	/>${telephone}		</p><br>
+					<p><img class="helpIcon" src="resources/images/email.png" 	/>${email} 			</p>
+				</div>		
+			</div>	
 		</section>
 		
 		<section title="" class="tupper" style="margin-top: 50px">
 			<div class="theBoard lightBorder"> 		
 				<div id="profileData">											<!-- Resto del Perfil --> 
 					<div id="driverData" class="blockLeft blockHalf">			<!-- Perfil conductor -->		 		
-						<h2>
-							<spring:message code="label.driver"/>
-						</h2>	 	
+						<h2><spring:message code="label.driver"/></h2>	 	
 						
 						<div class="theRating"> 	<!-- Puntuacion -->	
 							<a class="ifancybox" href="rate.do">
-								<img class="star" src="resources/images/star.png" width="50px" style="float:left; margin-right:2%"/>
+								<img class="star" src="resources/images/star.png" />
 							</a>
 							
 							<span style="position: relative; top: 12px">
@@ -103,97 +93,93 @@
 		</section>
 	</div>
 	
-	<!-- LABELS -->
-	<c:set var="labelArrival"><spring:message code="label.arrival"/></c:set>	
-	<input id="lblArrival" type="hidden" value="${labelArrival}"/>
-	<c:set var="labelDeparture"><spring:message code="label.departure"/></c:set>	
-	<input id="lblDeparture" type="hidden" value="${labelDeparture}"/>
-	<c:set var="labelMonday"><spring:message code="label.monday"/></c:set>	
-	<input id="lblMonday" type="hidden" value="${labelMonday}"/>
-	<c:set var="labelTuesday"><spring:message code="label.tuesday"/></c:set>	
-	<input id="lblTuesday" type="hidden" value="${labelTuesday}"/>
-	<c:set var="labelWednesday"><spring:message code="label.wednesday"/></c:set>	
-	<input id="lblWednesday" type="hidden" value="${labelWednesday}"/>
-	<c:set var="labelThursday"><spring:message code="label.thursday"/></c:set>	
-	<input id="lblThursday" type="hidden" value="${labelThursday}"/>
-	<c:set var="labelFriday"><spring:message code="label.friday"/></c:set>	
-	<input id="lblFriday" type="hidden" value="${labelFriday}"/>
-	
-	<!-- VARIABLES -->
-	<input id="valDriver" 		type="hidden" value="${driver}"/>
-	<input id="valPedestrian" 	type="hidden" value="${pedestrian}"/>
-	<input id="valId" 			type="hidden" value="${id}"/>
-	<input id="valMine"			type="hidden" value="${mine}"/>
+	<!-- HIDDEN -->
+	<section>
+		<!-- LABELS -->
+		<c:set var="lblArrival"> 	<spring:message code="label.arrival" 	/></c:set>	
+		<c:set var="lblDeparture"> 	<spring:message code="label.departure" 	/></c:set>	
+		<c:set var="lblMonday"> 	<spring:message code="label.monday" 	/></c:set>	
+		<c:set var="lblTuesday"> 	<spring:message code="label.tuesday" 	/></c:set>	
+		<c:set var="lblWednesday"> 	<spring:message code="label.wednesday" 	/></c:set>	
+		<c:set var="lblThursday"> 	<spring:message code="label.thursday" 	/></c:set>	
+		<c:set var="lblFriday"> 	<spring:message code="label.friday"		/></c:set>	
+		
+		<input type="hidden" id="lblArrival" 	value="${lblArrival}" 	/>
+		<input type="hidden" id="lblDeparture" 	value="${lblDeparture}" />
+		<input type="hidden" id="lblMonday" 	value="${lblMonday}" 	/>
+		<input type="hidden" id="lblTuesday" 	value="${lblTuesday}" 	/>
+		<input type="hidden" id="lblWednesday" 	value="${lblWednesday}" />
+		<input type="hidden" id="lblThursday" 	value="${lblThursday}" 	/>
+		<input type="hidden" id="lblFriday" 	value="${lblFriday}"	/>
+		
+		<!-- VARIABLES -->
+		<input type="hidden" id="valDriver" 	value="${driver}"		/>
+		<input type="hidden" id="valPedestrian" value="${pedestrian}"	/>
+		<input type="hidden" id="valId" 		value="${id}"			/>
+		<input type="hidden" id="valMine"		value="${mine}"			/>
+	</section>
 </body>
+
+<!-- LINKS -->
+
+<link 	type="text/css" rel="stylesheet" href="resources/fancybox2/source/jquery.fancybox.css?v=2.1.5"		/>
 
 <!-- SCRIPTS -->
 
-<script src="resources/maps/OpenLayers.js"		type="text/javascript"></script>    
-<script src="resources/maps/OpenStreetMap.js"  	type="text/javascript"></script>
-<script src="resources/maps/osmapStatic.js"		type="text/javascript"></script>	
-<script src="resources/scripts/Utils.js"		type="text/javascript"></script>
-<script src="resources/scripts/Profile.js"		type="text/javascript"></script>
+<script type="text/javascript" src="resources/maps/OpenLayers.js"	></script>    
+<script type="text/javascript" src="resources/maps/OpenStreetMap.js"></script>
+<script type="text/javascript" src="resources/maps/osmapStatic.js"	></script>	
+<script type="text/javascript" src="resources/scripts/Utils.js"		></script>
+<script type="text/javascript" src="resources/scripts/Profile.js"	></script>
+<script type="text/javascript" src="resources/fancybox2/source/jquery.fancybox.pack.js?v=2.1.5" ></script>
 
 <script type="text/javascript">
-
-	var schPed = [];							
-	var schDriver = [];
 	
-	if("${visible}" === 'false')
-		$( '#privateData' ).hide( 0 );
+	if("${visible}" == 'false')
+		$( "#privateData" ).hide();
 	
-	var _lonPed = "${lonPed}";
-	var _latPed = "${latPed}";
-	//Do the same for driver's gpx
+	//##
 	
 	initMapPedestrian();	//"${lonPed}", "${latPed}"
 	initMapDriver(); 		//"caro1in.gpx"
-	
+		
 	<c:forEach var="day" items="${schPed}">
-		schPed.push(["${day.dayPed}","${day.hourInPed}","${day.hourOutPed}","${day.haveDriverIn}", "${day.haveDriverOut}"]);
+		var detSchPed 			= new DetailSchedulePedestrian();
+		detSchPed.day 			= "${day.dayPed}";
+		detSchPed.hourIn 		= "${day.hourInPed}";
+		detSchPed.hourOut 		= "${day.hourOutPed}";
+		detSchPed.hasDriverIn 	= "${day.hasDriverIn}";
+		detSchPed.hasDriverOut	= "${day.hasDriverOut}";
+		detSchPed.pathIn 		= "${day.stopIn}";
+		detSchPed.pathOut 		= "${day.stopOut}";
+		_schPed.push(detSchPed);
 	</c:forEach>
 	
 	<c:forEach var="day" items="${schDriver}">
-		schDriver.push(["${day.dayDriver}","${day.hourInDriver}","${day.hourOutDriver}","${day.freeSeatsIn}", "${day.freeSeatsOut}"]);
+		var detSchDriver 			= new DetailScheduleDriver();
+		detSchDriver.day 			= "${day.dayDriver}";
+		detSchDriver.hourIn 		= "${day.hourInDriver}";
+		detSchDriver.hourOut 		= "${day.hourOutDriver}";
+		detSchDriver.freeSeatsIn 	= "${day.freeSeatsIn}";
+		detSchDriver.freeSeatsOut 	= "${day.freeSeatsOut}";
+		detSchDriver.pathIn 		= "${day.trackIn}";
+		detSchDriver.pathOut 		= "${day.trackOut}";
+		_schDriver.push(detSchDriver);
 	</c:forEach>
-
-	fillTable(schPed, "Pedestrian");
-	fillTable(schDriver, "Driver");	
 </script>
 
-<!-- FANCY BOX -->
-
-<link 	type="text/css"			rel="stylesheet" href="resources/fancybox2/source/jquery.fancybox.css?v=2.1.5"/>
-<script type="text/javascript" 	src="resources/fancybox2/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-<script type="text/javascript">
-	$(document).ready(function(){
-	    $(".ifancybox").fancybox({
-	            'width'                 :       500,
-	            'height'                :       330,
-	            'autoSize'              :       false,
-	            'fitToView'             :       false,
-	            'type'                  :       'iframe'
-	    });
-	});
+<script>
+	
 </script>
 
+<style>
+
+</style>
 
 
-
-
-
-<!--	Datos
-
-	<h1>${id}</h1>
-	<h1>${name}</h1>
-	<h1>${surname}</h1>
-	<h1>${address}</h1>
-	<h1>${neighborhood}</h1>
-	<h1>${telephone}</h1>
-	<h1>${email}</h1>
-	<h1>${shift}</h1>
-	<h1>${idPedestrian}</h1>
-	<h1>${ratingPedestrian}</h1>		
-	<h1>${lat}</h1>
--->	
+<!-- ## 	
+	//WOULD NOT BE USEFUL ANYMORE
+	//var _lonPed = "${lonPed}";
+	//var _latPed = "${latPed}";
+	//Do the same for driver's gpx
+ -->

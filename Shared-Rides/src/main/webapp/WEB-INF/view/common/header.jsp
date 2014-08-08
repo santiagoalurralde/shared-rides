@@ -39,14 +39,26 @@
 	$.post( 'hasAssociation.do', 
 		function(json)
 		{
-			var jsonNew = $.parseJSON(json);
-			if (jsonNew.hasAssoc == true)
+			var notification = $.parseJSON(json);
+			if (notification != "")
 			{
 				$( '#btnAlert' ).show();
-				var divNotif = "<div class='divNotif'><li>Has recibido una peticion</li><div>";
-				$("#listNotifications").append(divNotif);
+				var divNotif = "<div class='divNotif'><li>Has recibido una peticion de <b>"+ notification.name +"</b></li><div>";
 				$("#listNotifications").append(divNotif);
 			}
 		}
 	);
+	
+	$.post( 'hasResponse.do', 
+			function(json)
+			{
+				var notification = $.parseJSON(json);
+				if (notification != "")
+				{
+					$( '#btnAlert' ).show();
+					var divNotif = "<div class='divNotif'><li><b>"+ notification.name +"</b> Ha respondido a tu peticion</li><div>";
+					$("#listNotifications").append(divNotif);
+				}
+			}
+		);
 </script>

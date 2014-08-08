@@ -34,7 +34,9 @@
 			<input class="theInputs" type="password"	name="pwd"		placeholder="Password">			<br>
 			
 			<input class="btn" id="btnLogin" type="submit" value="<spring:message code="label.enter"/>">
+			<button class="btn" id="btnRegister" onclick="return false;"><spring:message code="label.signup"/></button>
 		</form>
+		
 	</div>
 		
 </body>

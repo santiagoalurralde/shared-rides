@@ -37,3 +37,8 @@ Assigned to:	Santiago Alurralde (sa)
 #btnLogin{
 	margin-top:				40px;	
 }	
+
+#btnRegister{
+	margin-top: 			40px;	
+	float:					right;
+}	
