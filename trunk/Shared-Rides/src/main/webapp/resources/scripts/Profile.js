@@ -92,20 +92,15 @@ function fixView($targetThis, $targetOther){
  * @param {array} 	schedule - array that contains each day
  * @param {string} type - userType (side of schedule)
  */
-function fillTable(schedule, type){
+function fillTable(schedule, type) {
 	
-	alert("entra3");
-	alert(schedule.length);
-
 	var $table, image, btnReqIn = "", btnReqOut = "";
 	
-	if(type == "Driver")
-	{
+	if(type == "Driver") {
 		$table = $("#tableDriver");
 		image = "seat.png";
 	}
-	else
-	{
+	else {
 		$table = $("#tablePed");
 		image = "steering.png";
 	}
@@ -116,21 +111,20 @@ function fillTable(schedule, type){
 	$table.find("#rIn" ).append('<td>'+ $('#lblArrival').val() +'</td>');
 	$table.find("#rOut" ).append('<td>'+ $('#lblDeparture').val() +'</td>');
 	
-	for(var i=0; i<schedule.length; i++)
-	{
+	for(var i=0; i<schedule.length; i++) {
 		var hdnMapIn, hdnMapOut;
 		var hdnDay	= '<input class="hdnDay"	type="hidden" value="'+ schedule[i].day +'"/>'; 
 		var hdnIn	= '<input class="hdnInOut" 	type="hidden" value="1"/>'; 
 		var hdnOut	= '<input class="hdnInOut"	type="hidden" value="2"/>';
 		
-		if(!$( "#valMine" ).val()){
+		if(!$( "#valMine" ).val()) {
 			//If it's my profile can't invite myself
 
 			btnReqIn	= '<button 	class="btnRequestAssoc" ><img src="resources/images/'+ image +'"/></button>';
 			btnReqOut	= '<button 	class="btnRequestAssoc" ><img src="resources/images/'+ image +'"/></button>';
 		}
 				
-		if(type == "Pedestrian"){	
+		if(type == "Pedestrian") {	
 			//If Pedestrian has driver, can't invite him.
 			
 			if(schedule.hasDriverIn == true || schedule[i].allowIn)
