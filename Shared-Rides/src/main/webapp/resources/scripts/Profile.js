@@ -163,8 +163,13 @@ function fillTable(schedule, type) {
  * @param {javascript} target - clicked cell.
  */
 function showMap(target){
-	if($( target ).closest( "table" ).attr( "id" ) == "tablePed") 
-		setMapPedestrian($( target ).find(".hdnLat").val(), $( target ).find(".hdnLon").val());					
+	if($( target ).closest( "table" ).attr( "id" ) == "tablePed")
+		{
+		alert($( target ).find(".hdnLat").val());
+		alert($( target ).find(".hdnLon").val());
+		
+		setMapPedestrian($( target ).find(".hdnLat").val(), $( target ).find(".hdnLon").val());
+		}
 	else
 		setMapDriver($( target ).find(".hdnPath").val()); 	
 }

@@ -39,6 +39,8 @@ function initMap(){
 	    var lonlatTrans	    = lonlat.transform(map.getProjectionObject(), proj4326);
 	    _lon    	   		= lonlatTrans.lon;
 	    _lat	       		= lonlatTrans.lat;
+	    alert(_lon);
+	    alert(_lat);
 	    var lonlat         	= lonlatTrans.transform(proj4326, map.getProjectionObject());
 	
 	    if(_countMarkers>0)
@@ -61,11 +63,9 @@ function drawPreviousMarkers(lonlatPrevious)
 	if(lonlatPrevious != null)
 	{
 		var icon		= new OpenLayers.Icon('resources/images/pin.png');   	
-		alert("adentro90");
 		_layerMarkers.addMarker(new OpenLayers.Marker(lonlatPrevious,icon)); 
 	    _countMarkers++;
   	}
-
 }
 
 

@@ -115,8 +115,8 @@ function findUsers() {
 		function(json) {
 			var peopleFound = $.parseJSON(json);
 			if(peopleFound == null) {
-				$( "#tableFound" ).hide();
-				$( ".alerts" ).show();					
+				$( ".alerts" ).show();	
+				$( "#tableFound" ).hide();				
 			}
 			else {
 				$.each(peopleFound, function(i, data) {

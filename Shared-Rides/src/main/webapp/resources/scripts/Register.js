@@ -428,7 +428,7 @@ function signUp()
 					 			},  
 				function(str)
 				{
-					 alert("HOLA");
+					 alert("Alta de Usuario Completada");
 				}); 
 			}
 
@@ -479,12 +479,13 @@ function saveMap()
 				_days[index] = new Stop();
 
 			if(io == "in"){
-				var lonlatCurrent = new OpenLayers.LonLat( _lon , _lat ).transform(proj4326, map.getProjectionObject());				
+				var lonlatCurrent = new OpenLayers.LonLat( _lon , _lat );
+				alert(lonlatCurrent);
 				_days[index].stopIn = lonlatCurrent;
 				_days[index].hourIn = h;	
 			}
 			else{
-				var lonlatCurrent = new OpenLayers.LonLat( _lon , _lat ).transform(proj4326, map.getProjectionObject());
+				var lonlatCurrent = new OpenLayers.LonLat( _lon , _lat );
 				_days[index].stopOut = lonlatCurrent;
 				_days[index].hourOut = h;					
 			}
