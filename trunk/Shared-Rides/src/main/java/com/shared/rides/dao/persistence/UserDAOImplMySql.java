@@ -12,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.shared.rides.dao.interfaces.IUserDAO;
 import com.shared.rides.domain.Association;
-import com.shared.rides.domain.Schedule;
+import com.shared.rides.domain.Driver;
+import com.shared.rides.domain.Pedestrian;
 import com.shared.rides.domain.User;
 
 
@@ -82,7 +83,6 @@ public class UserDAOImplMySql implements IUserDAO {
 		    BigInteger schId = (BigInteger) query.list().get(i);
 			result.add(schId.longValue());
 		}
-		
 		return result;
 	}
 	
@@ -92,6 +92,22 @@ public class UserDAOImplMySql implements IUserDAO {
 		
 		BigInteger id = (BigInteger) query.list().get(0);
 		return (User) sessionFactory.getCurrentSession().get(User.class, id.longValue());
+	}
+	
+	public void newPed(User u, Pedestrian ped) {
+		Long idUser = u.getUserId();
+		Long idPed = ped.getPedestrianId();
+		String sql = "INSERT INTO User_Pedestrian (userID, pedestrianID) VALUES ( "+ idUser +" , "+ idPed +"  )";
+		Query query  = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		query.executeUpdate();
+	}
+	
+	public void newDriver(User u, Driver driver) {
+		Long idUser = u.getUserId();
+		Long idDriver = driver.getDriverId();
+		String sql = "INSERT INTO User_Driver (userID, driverID) VALUES ( "+ idUser +" , "+ idDriver +"  )";
+		Query query  = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		query.executeUpdate();
 	}
 	
 }

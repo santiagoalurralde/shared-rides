@@ -115,6 +115,9 @@ public class SignupUserService {
 		if(typeUser.equalsIgnoreCase("pedestrian")){
 			Pedestrian ped = new Pedestrian();
 			pedDAO.save(ped);
+			
+			ped = pedDAO.getLastPedestrian();
+			userDAO.newPed(u, ped);
 		}else if(typeUser.equalsIgnoreCase("driver")){
 			
 				Vehicle vehicle = new Vehicle();
@@ -129,6 +132,9 @@ public class SignupUserService {
 
 				driverDAO.save(driver);
 				vehicleDAO.save(vehicle);
+				
+				driver = driverDAO.getLastDriver();
+				userDAO.newDriver(u, driver);
 			}else{
 				
 				Pedestrian ped = new Pedestrian();
@@ -145,6 +151,11 @@ public class SignupUserService {
 				pedDAO.save(ped);
 				driverDAO.save(driver);
 				vehicleDAO.save(vehicle);
+				
+				ped = pedDAO.getLastPedestrian();
+				userDAO.newPed(u, ped);			
+				driver = driverDAO.getLastDriver();
+				userDAO.newDriver(u, driver);
 			}
 		
 		parseMarkers(days, typeUser);

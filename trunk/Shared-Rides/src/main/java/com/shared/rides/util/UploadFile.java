@@ -9,8 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadFile {
 
 	public static String uploadFile( MultipartFile file){
-		String name = file.getName();
-    
+		String name = file.getOriginalFilename();;
+		
 		if (!file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
