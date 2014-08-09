@@ -202,7 +202,7 @@
 	            			
            				<span>
             				<span class="blockLeft">
-				               <spring:message code="label.model"/>          					               
+				               <spring:message code="label.modelVehicle"/>          					               
 				            </span> 
             				
             				<input 	type="text" id="model" class="blockRight theInputs" 
