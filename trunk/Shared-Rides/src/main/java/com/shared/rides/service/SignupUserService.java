@@ -174,8 +174,12 @@ public class SignupUserService {
 			Schedule sch = new Schedule();
 		
 			sch.setDay(i+1);
-			sch.setHourIn(jsonDay.get("hourIn").toString());
-			sch.setHourOut(jsonDay.get("hourOut").toString());
+			String hourIn = jsonDay.get("hourIn").toString();
+			hourIn = hourIn.replace('"', ' ');
+			sch.setHourIn(hourIn);
+			String hourOut = jsonDay.get("hourOut").toString();
+			hourOut = hourOut.replace('"', ' ');
+			sch.setHourOut(hourOut);
 			
 			schDAO.save(sch);
 			
