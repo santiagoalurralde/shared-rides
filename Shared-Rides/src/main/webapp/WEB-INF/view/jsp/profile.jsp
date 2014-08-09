@@ -116,7 +116,8 @@
 		<input type="hidden" id="valDriver" 	value="${driver}"		/>
 		<input type="hidden" id="valPedestrian" value="${pedestrian}"	/>
 		<input type="hidden" id="valId" 		value="${id}"			/>
-		<input type="hidden" id="valMine"		value="${mine}"			/>
+		<input type="hidden" id="valMine" 		value="${mine}"			/>
+		
 	</section>
 </body>
 
@@ -146,6 +147,8 @@
 	<c:forEach var="day" items="${schPed}">
 		var detSchPed 			= new DetailSchedulePedestrian();
 		detSchPed.day 			= "${day.dayPed}";
+		detSchDriver.allowIn 	= "${day.allowIn}";
+		detSchDriver.allowOut 	= "${day.allowOut}";		
 		detSchPed.hourIn 		= "${day.hourInPed}";
 		detSchPed.hourOut 		= "${day.hourOutPed}";
 		detSchPed.hasDriverIn 	= "${day.hasDriverIn}";
@@ -160,12 +163,15 @@
 	<c:forEach var="day" items="${schDriver}">
 		var detSchDriver 			= new DetailScheduleDriver();
 		detSchDriver.day 			= "${day.dayDriver}";
+		detSchDriver.allowIn 		= "${day.allowIn}";
+		detSchDriver.allowOut 		= "${day.allowOut}";		
 		detSchDriver.hourIn 		= "${day.hourInDriver}";
 		detSchDriver.hourOut 		= "${day.hourOutDriver}";
 		detSchDriver.freeSeatsIn 	= "${day.freeSeatsIn}";
 		detSchDriver.freeSeatsOut 	= "${day.freeSeatsOut}";
 		detSchDriver.pathIn 		= "${day.trackIn}";
 		detSchDriver.pathOut 		= "${day.trackOut}";
+		
 		_schDriver.push(detSchDriver);
 	</c:forEach>
 </script>

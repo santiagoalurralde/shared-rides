@@ -123,7 +123,7 @@ function fillTable(schedule, type){
 		
 		if(!$( "#valMine" ).val()){
 			//If it's my profile can't invite myself
-			
+
 			btnReqIn	= '<button 	class="btnRequestAssoc" ><img src="resources/images/'+ image +'"/></button>';
 			btnReqOut	= '<button 	class="btnRequestAssoc" ><img src="resources/images/'+ image +'"/></button>';
 		}
@@ -131,16 +131,22 @@ function fillTable(schedule, type){
 		if(type == "Pedestrian"){	
 			//If Pedestrian has driver, can't invite him.
 			
-			if(schedule.hasDriverIn == true)
-				btnReqIn = "";
-			if(schedule.hasDriverOut == true)
-				btnReqOut = "";
+			if(schedule.hasDriverIn == true || schedule[i].allowIn)
+				btnReqIn	= "";	//DISABLE!!!!!!!!!!!
+			if(schedule.hasDriverOut == true || schedule[i].allowOut)
+				btnReqOut 	= "";
+			
 			hdnMapIn	=	'<input class="hdnLat"	type="hidden" value="'+ schedule[i].latIn +'"/>'+
 							'<input class="hdnLon"	type="hidden" value="'+ schedule[i].lonIn +'"/>';						
 			hdnMapOut	=	'<input class="hdnLat"	type="hidden" value="'+ schedule[i].latOut +'"/>'+
 							'<input class="hdnLon"	type="hidden" value="'+ schedule[i].lonOut +'"/>';	
 		}
 		else{
+			if(schedule.freeSeatsIn == 0 || schedule[i].allowIn)
+				btnReqIn	= "";	//DISABLE!!!!!!!!!!!
+			if(schedule.freeSeatsOut == 0 || schedule[i].allowOut)
+				btnReqOut 	= "";
+			
 			hdnsMapOut 	=	'<input class="hdnPath"		type="hidden" value="'+ schedule[i].pathIn +'"/>';
 			hdnsMapIn  	=	'<input class="hdnPath"		type="hidden" value="'+ schedule[i].pathOut +'"/>';						
 		}
@@ -191,6 +197,8 @@ function requestAssociation(target){
  */
 function DetailSchedulePedestrian(){
 	this.day 			= "";
+	this.allowIn 		= "";
+	this.allowOut 		= "";		
 	this.hourIn 		= "";
 	this.hourOut 		= "";		
 	this.hasDriverIn 	= false;
@@ -204,6 +212,8 @@ function DetailSchedulePedestrian(){
  */
 function DetailScheduleDriver(){
 	this.day 			= "";
+	this.allowIn 		= "";
+	this.allowOut 		= "";	
 	this.hourIn 		= "";
 	this.hourOut 		= "";		
 	this.freeSeatsIn 	= "";
