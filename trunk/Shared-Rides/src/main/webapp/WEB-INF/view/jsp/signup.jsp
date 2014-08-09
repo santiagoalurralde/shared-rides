@@ -8,9 +8,9 @@
 		<section title="Contact" class="tupper">
 			<div id="navSteps" class="lightBorder"> 
         		<ul>
-        			<li id="stepSignUp1"><b>1. </b>Datos Personales</li>
-        			<li id="stepSignUp2"><b>2. </b>Información de Perfil</li>
-        			<li id="stepSignUp3"><b>3. </b>Horarios y Ubicaciones</li>
+        			<li id="stepSignUp1"><b>1. </b><spring:message code="label.suStep1"/></li>
+        			<li id="stepSignUp2"><b>2. </b><spring:message code="label.suStep2"/></li>
+        			<li id="stepSignUp3"><b>3. </b><spring:message code="label.suStep3"/></li>
         		</ul>
         	</div>
         	
@@ -19,14 +19,12 @@
        		    <div id="firstStep" class="steps">
          			<span>
            				<span class="blockLeft">
-			               	Organizacion :          
+			               	<spring:message code="label.organization"/>	          
 			            </span> 
          				<select id="organization" class="blockRight theInputs">
-         				
          					<c:forEach var="org" items="${organizations}">
            						<option value="${org.orgId}" selected>${org.orgName}</option>
-							</c:forEach>
-	            					            					
+							</c:forEach>			            					
            				</select>       
          			</span>	
          			
@@ -34,81 +32,88 @@
          				
          			<span>
            				<span class="blockLeft">
-			               	Identificación Personal :          
+			               	<spring:message code="label.personalId"/>	          
 			            </span> 
            				
-           				<input type="text" id="personalId" class="blockRight theInputs" onChange="checkIt(this)"/>
+           				<input 	type="text" id="personalId" class="blockRight theInputs" 
+           						onChange="checkIt(this)"/>
          			</span> 
          				
          			<div class="split"></div>
          				
          			<span>
            				<span class="blockLeft">
-			              	Nombre :          
+			               <spring:message code="label.firstName"/>	         
 			        	</span> 
            				
-           				<input type="text" id="name" class="blockRight theInputs" onChange="checkIt(this)" onKeyPress="checkAlphabetic(event);"/>
+           				<input 	type="text" id="name" class="blockRight theInputs" 
+           						onChange="checkIt(this)" onKeyPress="checkAlphabetic(event);"/>
          			</span> 
          				
          			<div class="split"></div>
          				
          			<span>
            				<span class="blockLeft">
-			               	Apellido :          
+			               <spring:message code="label.lastName"/>	         
 			            </span> 
            				
-           				<input type="text" id="surname" class="blockRight theInputs" onChange="checkIt(this)" onKeyPress="checkAlphabetic(event);"/>
+           				<input 	type="text" id="surname" class="blockRight theInputs" 
+           						onChange="checkIt(this)" onKeyPress="checkAlphabetic(event);"/>
           			</span> 
          				
          			<div class="split"></div>
          				
          			<span>
            				<span class="blockLeft">
-			               	E-mail :          
+			               <spring:message code="label.email"/>	         
 			            </span> 
            				
-           				<input type="text" id="email" class="blockRight theInputs" onChange="checkIt(this)"/>
+           				<input 	type="text" id="email" class="blockRight theInputs" 
+           						onChange="checkIt(this)"/>
           			</span> 
          				
          			<div class="split"></div>
          				          				
        				<span>
 			            <span class="blockLeft">
-               				Contraseña :          
+			               <spring:message code="label.password"/>	
             			</span> 
         				
-        				<input type="password" id="password-first" class="blockRight theInputs" onChange="checkIt(this);"/>
+        				<input 	type="password" id="password-first" class="blockRight theInputs" 
+        						onChange="checkIt(this);"/>
        				</span>
 
          			<div class="split"></div>
          				
          			<span>
            				<span class="blockLeft">
-			               Repita su contraseña :          
+			               <spring:message code="label.passwordIdem"/>	
 			            </span> 
            				
-           				<input type="password" id="password-check" class="blockRight theInputs" onChange="checkIt(this); checkPassword();"/>
+           				<input 	type="password" id="password-check" class="blockRight theInputs" 
+           						onChange="checkIt(this); checkPassword();"/>
          			</span> 
          				
          			<div class="split"></div>
 
          			<span>
            				<span class="blockLeft">
-			               Teléfono Celular :          
-			        	</span> 
+			               <spring:message code="label.telephone"/>
+						</span> 
            				
-           				<input type="text" id="cellphone" class="blockRight theInputs" onChange="checkIt(this);" onKeyUp="checkNumeric(this);"/>
+           				<input 	type="text" id="cellphone" class="blockRight theInputs" 
+           						onChange="checkIt(this);" onKeyUp="checkNumeric(this);"/>
          			</span> 
          			
          			<div class="split"></div>         			
          			
-         			<form action="uploadFile.do" method="POST" enctype="multipart/form-data">
+            		<form action="uploadFile.do" method="POST" enctype="multipart/form-data">
 	          			<span class="blockLeft">
-			               Foto de Perfil:      
-			        	</span>      
-	         	  
-						<input type="file" id="picture" name="file" class="blockRight" accept="image/x-png, image/jpeg">
-	         			<input type="submit" value="Enviar">
+			               <spring:message code="label.picture"/>     
+			        	</span>     
+						<input 	type="file" id="picture" name="file" 
+								class="blockRight" accept="image/x-png, image/jpeg">
+	         			<input 	type="submit" value='<spring:message code="label.send"/>'>
          			</form>
        		    </div>
        		    <!-------------------------------------------------- END of FIRST STEP -------------------------------------------------->
@@ -117,22 +122,25 @@
           				
        				<span>
 	           			<span class="blockLeft">
-				         	Dirección :          				              	 
+				         	<spring:message code="label.address"/>          				              	 
 				        </span> 
 	           		
-	           			<input type="number" 	id="number" class="blockRight theInputs" style="width: 4em" 	onChange="checkIt(this);" onKeyUp="checkNumeric(this);" min="0" max="99999"/>
-	           			<input type="text" 		id="street" class="blockRight theInputs" style="width: 8.8em" 	onChange="checkIt(this);" />
+	           			<input 	type="number"	id="number" class="blockRight theInputs" 
+	           				   	onChange="checkIt(this);" onKeyUp="checkNumeric(this);" min="0" max="99999"/>
+	           			<input	type="text"		id="street" class="blockRight theInputs" 
+	           				   	onChange="checkIt(this);" />
           			</span> 
           				
           			<div class="split"></div>
           				
           			<span>
 	           			<span class="blockLeft">
-				        	Barrio :          				              	 
+				        	<spring:message code="label.neighborhood"/>          				              	 
 				        </span> 
 	           				
-	           			<select id="neighborhood" class="blockRight theInputs" onChange="checkIt(this);">
-	           				<option value="0" selected>Barrio</option>	           			
+	           			<select id="neighborhood" class="blockRight theInputs" 
+	           					onChange="checkIt(this);">
+	           				<option value="0" selected><spring:message code="label.neighborhood"/></option>	           			
 	           				<option>Arguello</option>
 	           			</select>
           			</span> 
@@ -141,13 +149,14 @@
           				
           			<span>
            				<span class="blockLeft">
-			               	Turno :          				              	 
+			               	<spring:message code="label.shift"/>          				              	 
 			            </span> 
            				
-           				<select id="shift" class="blockRight theInputs" onChange="checkIt(this);">
-           					<option value="0" selected>Turno</option>	            					           				
-           					<option value="morning">Mañana</option>	            				
-           					<option value="afternoon">Tarde</option>
+           				<select id="shift" class="blockRight theInputs" 
+           						onChange="checkIt(this);">
+           					<option value="0" selected>	<spring:message code="label.shift"/> 		</option>	            					           				
+           					<option value="morning">	<spring:message code="label.morning"/> 		</option>	            				
+           					<option value="afternoon">	<spring:message code="label.afternoon"/> 	</option>
            				</select>            				
            			</span> 
           				
@@ -155,14 +164,15 @@
           				
          			<span>
  				        <span class="blockLeft">
-		            		Tipo de Usuario :          			              	 
+		            		<spring:message code="label.userType"/>          			              	 
 		           	 	</span> 
           				
-           				<select id="userType" name="userType" onChange="checkIt(this); userTypeChanged(this);" class="blockRight theInputs">
+           				<select id="userType" class="blockRight theInputs"
+           						onChange="checkIt(this); userTypeChanged(this);">
            				    <option value="0" selected> </option>
-           					<option value="pedestrian">Peatón</option>	            				
-           					<option value="driver">Conductor</option>
-           					<option value="driver-pedestrian">Peatón / Conductor</option>	            					
+           					<option value="pedestrian">			<spring:message code="label.pedestrian"/>	</option>	            				
+           					<option value="driver">				<spring:message code="label.driver"/>		</option>
+           					<option value="driver-pedestrian">	<spring:message code="label.mixed"/>		</option>	            					
            				</select>               				
            			</span>
           				
@@ -171,20 +181,20 @@
           			
        					<hr class="hrs">
        					
-       					<h4>Información de Vehículo</h4>
+       					<h4><spring:message code="label.vehicleInfo"/></h4>
        					
        					<div class="split"></div>
          					
            				<span>
             				<span class="blockLeft">
-				               Marca del Vehículo :          					               
+				               <spring:message code="label.brand"/>          					               
 				            </span> 
             				
             				<select id="brand" class="blockRight theInputs" onChange="checkIt(this);">
 	            				<option value="0" selected></option>	            					            				            				
-            					<option>Renault</option>	            				
-            					<option>Fiat</option>
-            					<option>Ford</option>	            					
+            					<option>Renault	</option>	            				
+            					<option>Fiat	</option>
+            					<option>Ford	</option>	            					
             				</select>         	            				
             			</span> 
 	            			
@@ -192,28 +202,32 @@
 	            			
            				<span>
             				<span class="blockLeft">
-				               Modelo del Vehículo :          					               
+				               <spring:message code="label.model"/>          					               
 				            </span> 
             				
-            				<input type="text" id="model" class="blockRight theInputs" onChange="checkIt(this);">
+            				<input 	type="text" id="model" class="blockRight theInputs" 
+            						onChange="checkIt(this);">
    						</span> 
 	      						
             			<div class="split"></div>
 	            			
            				<span>
             				<span class="blockLeft">
-				               Patente del Vehículo :          					             
+				            	<spring:message code="label.licensePlate"/>         					             
 				            </span> 
             				
-            				<input type="number"	id="plateNumbers" class="blockRight theInputs" style="width: 4em" onChange="checkIt(this);" min="000" max="999" />	            				
-            				<input type="text" 		id="plateLetters" class="blockRight theInputs" style="width: 4em" onChange="checkIt(this);" onKeyPress="checkAlphabetic(event);" maxlength="3" />
+            				<input 	type="number" id="plateNumbers" class="blockRight theInputs" 
+            						onChange="checkIt(this);" min="000" max="999" />	            				
+            				<input 	type="text" id="plateLetters" class="blockRight theInputs" 
+            						onChange="checkIt(this);" onKeyPress="checkAlphabetic(event);" 
+            						maxlength="3"/>
       					</span>         	
 	      						
             			<div class="split"></div>
 	      						
            				<span>
             				<span class="blockLeft">
-				               Cantidad de Asientos Libres :          					           
+				               <spring:message code="label.numberSeats"/>          					           
 				            </span> 
 		            				
    	        				<select id="numberSeats" class="blockRight theInputs" onChange="checkIt(this);">
@@ -229,7 +243,7 @@
             			</span>  	
    					</div>
        		    </div>
-       		    <!-------------------------------------------------- END of SECOND STEP -------------------------------------------------->
+				<!---------------------------------------- END of SECOND STEP ---------------------------------------->
 
 
        		    <div id="thirdStep" class="steps" style="display: none">
@@ -239,19 +253,19 @@
 								<!-- Empty -->
 							</th>	
 							<th>
-								Lunes
+								<spring:message code="label.monday"/>
 							</th>
 							<th>
-								Martes
+								<spring:message code="label.tuesday"/>
 							</th>
 							<th>
-								Miércoles
+								<spring:message code="label.wednesday"/>
 							</th>
 							<th>
-								Jueves
+								<spring:message code="label.thursday"/>
 							</th>
 							<th>
-								Viernes
+								<spring:message code="label.friday"/>
 							</th>				
 						</tr>
 						<tr id="userTypeRow">
@@ -259,12 +273,12 @@
 						</tr>
 						<tr id="in">
 							<td>
-								Entrada
+								<spring:message code="label.arrival"/>
 							</td>
 						</tr>
 						<tr id="out">
 							<td>
-								Salida
+								<spring:message code="label.departure"/>
 							</td>									
 						</tr>
 					</table>
@@ -272,22 +286,18 @@
 					<div class="split"></div>
 	      						
           			<span id="applyMapDefinition">
-          				<!--  
-	           				<span>
-				               Aplicar para:        					           
-				            </span> 
-		            				
-	  	        			<select id="selectApply" class="theInputs" onChange="checkIt(this);">
-	           				</select>       
-           				-->
-           				<input type="button" id="btnMap" class="btn" value="Listo"/>  
-           				<input type="hidden" id="hdnInOut" 			/>  
-             			<input type="hidden" id="hdnDay" 			/>
-              			<input type="hidden" id="hdnUserTypeDay" 	/>
+          				<!-- <span> Aplicar para: </span><select id="selectApply" class="theInputs" onChange="checkIt(this);"></select>-->
+          				
+           				<input 	type="button" id="btnMap" class="btn" 
+           						value='<spring:message code="label.ready"/>'/>  
+           						
+           				<input type="hidden" id="hdnInOut" 		/>  
+             			<input type="hidden" id="hdnDay" 		/>
+              			<input type="hidden" id="hdnUserTypeDay"/>
              			  	            						            						
            			</span>  	
 				</div>
-				<!-------------------------------------------------- END of THIRD STEP -------------------------------------------------->
+				<!---------------------------------------- END of THIRD STEP ---------------------------------------->
 				
 				
 				<!----	Map Driver		---->		
@@ -314,9 +324,14 @@
 				
         		<!----	Buttons	---->
         		<div id="buttonsSteps">
-        			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepBack();"	/>	
-           	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepNext();"	/>	
-        			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 	/>  
+        			<input 	type="button" class="btn" id="btnBack" 
+        					value='<spring:message code="label.previous"/>'	
+        					onClick="stepBack();"/>	
+           	   		<input 	type="button" class="btn" id="btnNext" 	
+							value='<spring:message code="label.next"/>'		
+							onClick="stepNext();"/>	
+        			<input 	type="button" class="btn" id="btnOK" 	
+        					value='<spring:message code="label.confirm"/>'/>  
         		</div> 	  
        		</div>	  
 			<div class="clearer"></div>

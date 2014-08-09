@@ -62,9 +62,18 @@ select.theInputs{
 	width:					13em;	
 }
 
-#btnMap{
-
+#btnOK{
+	display: 				none;
 }
+
+#plateNumbers, #plateLetters, #number{
+	width: 					4em;
+}
+
+#street {
+	width: 					8.8em;		
+}
+
 
 #applyMapDefinition{
 	display: 				none;
