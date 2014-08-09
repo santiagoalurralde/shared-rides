@@ -102,11 +102,11 @@
          			
          			<div class="split"></div>         			
          		
-         	        			
-         			<form action="uploadFile.do" enctype="multipart/form-data" method="post">
-						  <input type="file" id="picture" name="file" accept="image/x-png, image/jpeg">
-						  <input type="submit">
-					</form>
+          			<span class="blockLeft">
+		               Foto de Perfil:      
+		        	</span>      
+         	  
+					<input type="file" id="picture" name="file" class="blockRight theInputs" accept="image/x-png, image/jpeg">
          			
        		    </div>
        		    <!-------------------------------------------------- END of FIRST STEP -------------------------------------------------->
