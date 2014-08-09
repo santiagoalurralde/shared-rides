@@ -53,8 +53,10 @@ public class ProfileService {
 	private boolean isAssociation = false;
 	private boolean myProfile;
 	private ModelAndView model;
+	private long userId;
 	
 	public ModelAndView getProfile(long userId, HttpServletRequest req, boolean myProf){
+		this.userId = userId;
 		HttpSession s = req.getSession(false);
 		User u = (User)s.getAttribute("user");
 		myProfile = myProf;
@@ -151,14 +153,18 @@ public class ProfileService {
 			int freeSeatsOut = calculateFreeSeats(u, d.getSchedule().get(i), totalSeats, 1);
 			Schedule sch = d.getSchedule().get(i);
 			Map<String, Object> day = new HashMap();
-			
+			//TRACK IN
 			day.put("dayDriver", sch.getDay());
 			day.put("hourInDriver", sch.getHourIn());
 			day.put("freeSeatsIn", freeSeatsIn);
 			day.put("trackIn", getNameTrack(d, sch, 0));
+			day.put("allowIn", allowRequest(u.getUserId(), sch.getDay(), 0));
+			//TRACK OUT
 			day.put("hourOutDriver", sch.getHourOut());
 			day.put("freeSeatsOut", freeSeatsOut);
 			day.put("trackOut", getNameTrack(d, sch, 1));
+			day.put("allowIn", allowRequest(u.getUserId(), sch.getDay(), 0));
+			
 			arraySch.add(i, day);
 		}
 		//Agrego el horario
@@ -184,16 +190,19 @@ public class ProfileService {
 			
 			Stop stopInAux = getStopPed(p, sch, 0);
 			Stop stopOutAux = getStopPed(p, sch, 1);
-			
+			//STOP IN
 			day.put("dayPed", sch.getDay());
 			day.put("stopLatIn", stopInAux.getLat());
 			day.put("stopLonIn", stopInAux.getLon());
 			day.put("hourInPed", sch.getHourIn());
 			day.put("hasDriverIn", hasDriver(u, sch, 0));
+			day.put("allowIn", allowRequest(u.getUserId(), sch.getDay(), 0));
+			//STOP OUT
 			day.put("stopLatOut", stopOutAux.getLat());
 			day.put("stopLonOut", stopOutAux.getLon());
 			day.put("hourOutPed", sch.getHourOut());
 			day.put("hasDriverOut", hasDriver(u, sch, 1));
+			day.put("allowOut", allowRequest(u.getUserId(), sch.getDay(), 1));
 
 			arraySch.add(day);
 		}
@@ -263,6 +272,43 @@ public class ProfileService {
 		}
 		return null;
 	}
+	
+	/*
+	 * Metodo que verifica si ya hay asociacion entre esas dos personas para ese dia y horario; para que no se pueda mandar
+	 * dos veces una misma asociacion
+	 */
+	private boolean allowRequest(long logInUserId, int day, int inout){
+		boolean allowFlag = true;
+		User logInUser = new User(logInUserId);
+		logInUser = userDAO.load(logInUser);
+		
+		User userAssoc = new User(this.userId);
+		userAssoc = userDAO.load(userAssoc);
+		
+		if(logInUserId == this.userId){
+			allowFlag = false;
+		}
+		else{
+			for(Association a : logInUser.getAssociations()){
+				if (a.getDay() == day && 
+					a.getInout() == inout && 
+					!(a.getState().equals(State.CANCELLED)) &&
+					a.getApplicantID().getUserId() == this.userId){
+						allowFlag = false; 
+				}
+			}
+			for(Association a : userAssoc.getAssociations()){
+				if (a.getDay() == day && 
+					a.getInout() == inout && 
+					!(a.getState().equals(State.CANCELLED)) &&
+					a.getApplicantID().getUserId() == logInUserId){
+						allowFlag = false;			
+				}
+			}	
+		}
+		return allowFlag;
+	}
+	
 	
 	/*
 	 * Metodo que se va a encargar de efectuar el calculo de la puntuacion de cada usuario cada vez que se

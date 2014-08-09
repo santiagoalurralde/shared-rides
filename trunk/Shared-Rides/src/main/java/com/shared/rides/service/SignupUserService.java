@@ -2,8 +2,12 @@ package com.shared.rides.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -29,6 +33,7 @@ import com.shared.rides.domain.Track;
 import com.shared.rides.domain.User;
 import com.shared.rides.domain.Vehicle;
 import com.shared.rides.util.CreateGPXFile;
+import com.shared.rides.util.UploadFile;
 
 @Service
 public class SignupUserService {
@@ -72,9 +77,9 @@ public class SignupUserService {
 	
 	public void signupUser(long organization, String personalId, String pw, String name, String surname,
 							long phoneNumber, String email, String street, int numberStreet, String neighborhood,
-							String shift, String typeUser, String brand, String model, String licensePlate, int numberSeats, String days){
+							String shift, String typeUser, String brand, String model, String licensePlate, int numberSeats, String days, String pic){
 		User u = new User();
-		
+		System.out.println(pic);
 		Organization org = new Organization();
 		org.setOrganizationId(organization);
 		
@@ -102,6 +107,9 @@ public class SignupUserService {
 			}else{
 				u.setShift(Shift.EVENING);	
 			}
+		
+		//Obtengo la foto de perfil desde la sesion
+		
 
 		userDAO.save(u);
 		
@@ -246,4 +254,9 @@ public class SignupUserService {
 		track = trackDAO.getLastTrack();
 		driverDAO.newTrack(driver, track);
 	}
+	
+	public String uploadPicFile(MultipartFile file){
+		return UploadFile.uploadFile(file);			
+	}
+	
 }
