@@ -60,6 +60,9 @@ public class ProfileController {
 			
 			model = showProfileService.getProfile(id, request, true);
 			model.setViewName("profile");
+			
+			System.out.println(model.getModel());
+			
 			return model;
 		}
 		

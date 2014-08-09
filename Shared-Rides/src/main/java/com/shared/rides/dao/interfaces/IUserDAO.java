@@ -3,6 +3,8 @@ package com.shared.rides.dao.interfaces;
 import java.util.List;
 
 import com.shared.rides.domain.Association;
+import com.shared.rides.domain.Driver;
+import com.shared.rides.domain.Pedestrian;
 import com.shared.rides.domain.User;
 
 public interface IUserDAO {
@@ -17,4 +19,6 @@ public interface IUserDAO {
 	public List<Association> getMyRequests(User u);
 	public List<Long> getAllSchedule(User u);
 	public User getLastUser();
+	public void newPed (User u, Pedestrian ped);
+	public void newDriver (User u, Driver driver);
 }
