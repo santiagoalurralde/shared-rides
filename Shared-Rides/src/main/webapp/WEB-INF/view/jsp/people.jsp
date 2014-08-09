@@ -30,7 +30,6 @@
 				</div>
 		</section>
 		
-	
 		<section title="Schedule Data" class="tupper" style="margin-top: 20px">
 			<div id="scheduleData" class="theBoard lightBorder"> 		
 				<div id="requested" class="blockLeft blockHalf">		

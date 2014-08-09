@@ -142,7 +142,7 @@
 	
 	initMapPedestrian();	//"${lonPed}", "${latPed}"
 	initMapDriver(); 		//"caro1in.gpx"
-		
+
 	<c:forEach var="day" items="${schPed}">
 		var detSchPed 			= new DetailSchedulePedestrian();
 		detSchPed.day 			= "${day.dayPed}";
@@ -150,8 +150,10 @@
 		detSchPed.hourOut 		= "${day.hourOutPed}";
 		detSchPed.hasDriverIn 	= "${day.hasDriverIn}";
 		detSchPed.hasDriverOut	= "${day.hasDriverOut}";
-		detSchPed.pathIn 		= "${day.stopIn}";
-		detSchPed.pathOut 		= "${day.stopOut}";
+		detSchPed.latIn 		= "${day.stopLatIn}";
+		detSchPed.latOut 		= "${day.stopLatOut}";
+		detSchPed.lonIn 		= "${day.stopLonIn}";
+		detSchPed.lonOut 		= "${day.stopLonOut}";		
 		_schPed.push(detSchPed);
 	</c:forEach>
 	
@@ -167,15 +169,6 @@
 		_schDriver.push(detSchDriver);
 	</c:forEach>
 </script>
-
-<script>
-	
-</script>
-
-<style>
-
-</style>
-
 
 <!-- ## 	
 	//WOULD NOT BE USEFUL ANYMORE

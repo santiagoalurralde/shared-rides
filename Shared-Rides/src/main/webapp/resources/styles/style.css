@@ -465,7 +465,7 @@ h5{
 	-webkit-box-shadow: 				0 1px 2px #d1d1d1;
 	box-shadow: 						0 1px 2px #d1d1d1;
 	
-	text-shadow: 						0.05em 0.05em 0em #eee;
+	/*text-shadow: 						0.05em 0.05em 0em #eee;*/
 
 	background:							-webkit-linear-gradient(top, #fdfdfd, #fbfbfb);
 	background:							-moz-linear-gradient(top,  #fdfdfd,  #fbfbfb);
@@ -499,6 +499,10 @@ h5{
 
 .tableUsers tr{
 	text-align: 						center;
+}
+
+.tableUsers th{
+	font-size:							95%;
 }
 
 .tableUsers td:first-child {

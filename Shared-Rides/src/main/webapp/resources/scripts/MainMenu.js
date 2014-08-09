@@ -1,40 +1,41 @@
 var _step		=  -1; 	//Contador de Pasos
 var _user		= 	0;	//Tipo de Usuario
-var _shift	= 	0;	//Turno
+var _shift		= 	0;	//Turno
+
 
 /***************************************************************************************
  * STEPS
  ***************************************************************************************/
 
-$( document ).ready(function(){
+$( document ).ready(function() {
 	
 	initMap(); 
 	
 	start();
 	
 	//Acciones al presionar las imagenes
-	$( "#imgSun" ).click(function(){
+	$( "#imgSun" ).click(function() {
 		changeShift(1);
 	});
 	
-	$( "#imgMoon" ).click(function(){
+	$( "#imgMoon" ).click(function() {
 		changeShift(2);
 	});
 	
-	$( "#imgBoot" ).click(function(){
+	$( "#imgBoot" ).click(function() {
 		changeUserType(1);
 	});
 	
-	$( "#imgSteering" ).click(function(){
+	$( "#imgSteering" ).click(function() {
 		changeUserType(2);
 	});
 
 	//Pressing next or back
-	$( "#btnNext, #btnBack" ).click(function(){
+	$( "#btnNext, #btnBack" ).click(function() {
 		update(_step);
 	});
 	
-	$( "#btnOK" ).click(function(){
+	$( "#btnOK" ).click(function() {
 		findUsers();
 	});
 });
@@ -66,17 +67,16 @@ function stepBack() {
 /**
  * Selects type of shift and highlights related icon.
  */
-function changeShift(s)
-{
+function changeShift(s) {
 	_shift = s;
 	
-	if(_shift == 1)	//Morning
-	{
+	if(_shift == 1)	{
+		//Morning
 		$( "#imgMoon" ).css('opacity', '0.05');
 		$( "#imgSun" ).css('opacity', '1');
 	}
-	else			//Afternoon
-	{
+	else {
+		//Afternoon
 		$( "#imgMoon" ).css('opacity', '1');
 		$( "#imgSun" ).css('opacity', '0.05');
 	}	
@@ -85,17 +85,16 @@ function changeShift(s)
 /**
  * Selects type of user and highlights related icon.
  */
-function changeUserType(u)
-{
+function changeUserType(u) {
 	_user = u;
 	
-	if(_user == 1)	//Pedestrian
-	{
+	if(_user == 1) {
+		//Pedestrian
 		$( "#imgBoot" ).css('opacity', '1');
 		$( "#imgSteering" ).css('opacity', '0.05');	
 	}
-	else			//Driver
-	{
+	else {
+		//Driver
 		$( "#imgSteering" ).css('opacity', '1');
 		$( "#imgBoot" ).css('opacity', '0.05');
 	}
@@ -104,7 +103,7 @@ function changeUserType(u)
 /**
  * Sends all data collected through post, and shows results
  */
-function findUsers(){
+function findUsers() {
 	var coordsJs;				//Datos de coordenadas
 	
 	if(_user == 2)
@@ -113,16 +112,29 @@ function findUsers(){
 		coordsJs = gpxTrack.confirm();
 			
 	$.post( "find.do", { "user": _user , "shift": _shift, "mapData": coordsJs }, 
-		function(json)
-		{
+		function(json) {
 			var jsonNew = $.parseJSON(json);
-			$.each(jsonNew, function(i, data){
-				var distance = Math.ceil(data.distance);
-				$( "#tableFound" ).append("<tr><td>" + data.name + " " + data.surname + "</td><td><a href='/Shared-Rides/profile.do?user="+ data.id +"'><img src='resources/profilePic/" + data.picture + "'/></a></td><td>A "+ distance +" cuadras aproximadamente</td></tr>");
-			});
+			if(jsonNew == "") {
+				$( "#tableFound" ).hide();
+				$( ".alerts" ).show();					
+			}
+			else {
+				$.each(jsonNew, function(i, data) {
+					var distance = Math.ceil(data.distance);
+					$( "#tableFound" ).show();	
+					$( ".alerts" ).hide();	
+					$( "#tableFound" ).append("<tr>"+
+												"<td>"+ data.name +" "+ data.surname +"</td>"+
+												"<td>"+
+													"<a href='/Shared-Rides/profile.do?user="+ data.id +"'><img src='resources/profilePic/" + data.picture + "'/></a>" +
+												"</td>"+
+												"<td>"+ $( "#lblBlocks1" ).val() +" "+ distance +" "+ $( "#lblBlocks2" ).val() +"</td>"+
+											  "</tr>");
+				});	
+			}
 		}); 
 	
-	//Traer la lista
+	//Brings the list
 	$( "#mapDriver" ).css('display', 'none');
 	$( "#mapPedestrian" ).css('display', 'none');
 	
@@ -133,9 +145,7 @@ function findUsers(){
 /**
  * Establishes the starting environment
  */
-function start(){
-	//	Establece las propiedades iniciales
-	
+function start() {	
 	highlightStep(_step);		
 	$( "#mapDriver" ).css( 'display', 'none' );
 	$( "#mapPedestrian" ).css( 'display', 'none' );
@@ -148,10 +158,8 @@ function start(){
  * 
  * @param {Number} step - current step
  */
-function update(step)
-{
-	switch(step)
-	{
+function update(step) {
+	switch(step) {
 		case 0:
 			highlightStep(step);
 			$( "#imgSun" ).hide();
@@ -198,9 +206,8 @@ function update(step)
  * 
  * @param {Number} step - current step
  */
-function highlightStep(step){
-	switch(step)
-	{
+function highlightStep(step) {
+	switch(step) {
 		case -1:
 		case 0:
 			$( "#step1" ).css('opacity', '1');
