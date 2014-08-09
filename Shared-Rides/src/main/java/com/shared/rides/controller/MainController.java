@@ -45,12 +45,7 @@ public class MainController {
 	public ModelAndView showContact(HttpServletRequest request){
 		return new ModelAndView("contact");
 	}
-	
-	@RequestMapping(value="notifications.do")
-	public ModelAndView showNotifications(HttpServletRequest request){
-		return new ModelAndView("notifications");
-	}
-	
+
 	@RequestMapping(value="about.do")
 	public ModelAndView showAbout(HttpServletRequest request){
 		return new ModelAndView("about");

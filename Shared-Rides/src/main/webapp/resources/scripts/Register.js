@@ -428,7 +428,7 @@ function signUp()
 					 			},  
 				function(str)
 				{
-				alert("HOLA");
+					 alert("HOLA");
 				}); 
 			}
 
