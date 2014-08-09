@@ -135,7 +135,7 @@
 <script type="text/javascript" src="resources/fancybox2/source/jquery.fancybox.pack.js?v=2.1.5" ></script>
 
 <script type="text/javascript">
-	
+			
 	if("${visible}" == 'false')
 		$( "#privateData" ).hide();
 	
@@ -147,8 +147,8 @@
 	<c:forEach var="day" items="${schPed}">
 		var detSchPed 			= new DetailSchedulePedestrian();
 		detSchPed.day 			= "${day.dayPed}";
-		detSchDriver.allowIn 	= "${day.allowIn}";
-		detSchDriver.allowOut 	= "${day.allowOut}";		
+		detSchPed.allowIn 		= "${day.allowIn}";
+		detSchPed.allowOut 		= "${day.allowOut}";		
 		detSchPed.hourIn 		= "${day.hourInPed}";
 		detSchPed.hourOut 		= "${day.hourOutPed}";
 		detSchPed.hasDriverIn 	= "${day.hasDriverIn}";
