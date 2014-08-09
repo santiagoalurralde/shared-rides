@@ -8,8 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UploadFile {
 
-	public static String uploadFile( MultipartFile file){
-		String name = file.getOriginalFilename();;
+	public static String uploadFile( MultipartFile file, String fileName){
+		String name = fileName;
 		
 		if (!file.isEmpty()) {
 			try {

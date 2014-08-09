@@ -269,8 +269,8 @@ public class SignupUserService {
 		driverDAO.newTrack(driver, track);
 	}
 	
-	public String uploadPicFile(MultipartFile file){
-		return UploadFile.uploadFile(file);			
+	public String uploadPicFile(MultipartFile file, String fileName){
+		return UploadFile.uploadFile(file, fileName);			
 	}
 	
 }

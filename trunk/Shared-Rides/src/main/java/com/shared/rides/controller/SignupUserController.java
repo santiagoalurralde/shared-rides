@@ -84,8 +84,9 @@ public class SignupUserController {
 	}	
 	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public @ResponseBody String uploadFileHandler(@RequestParam("file") MultipartFile file) {
+    public @ResponseBody String uploadFileHandler(@RequestParam("file") MultipartFile file,
+    												@RequestParam("personalId") String personalId) {
 		//TODO: devuelvo un msg? hay que ver a donde tengo que redireccionar.
-		return signupUserService.uploadPicFile(file);
+		return signupUserService.uploadPicFile(file, personalId);
     }
 }
