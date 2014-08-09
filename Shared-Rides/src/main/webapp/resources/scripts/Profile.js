@@ -132,9 +132,9 @@ function fillTable(schedule, type) {
 			if(schedule.hasDriverOut == true || schedule[i].allowOut)
 				btnReqOut 	= "";
 			
-			hdnMapIn	=	'<input class="hdnLat"	type="hidden" value="'+ schedule[i].latIn +'"/>'+
+			hdnsMapIn	=	'<input class="hdnLat"	type="hidden" value="'+ schedule[i].latIn +'"/>'+
 							'<input class="hdnLon"	type="hidden" value="'+ schedule[i].lonIn +'"/>';						
-			hdnMapOut	=	'<input class="hdnLat"	type="hidden" value="'+ schedule[i].latOut +'"/>'+
+			hdnsMapOut	=	'<input class="hdnLat"	type="hidden" value="'+ schedule[i].latOut +'"/>'+
 							'<input class="hdnLon"	type="hidden" value="'+ schedule[i].lonOut +'"/>';	
 		}
 		else{
