@@ -101,13 +101,15 @@
          			</span> 
          			
          			<div class="split"></div>         			
-         		
-          			<span class="blockLeft">
-		               Foto de Perfil:      
-		        	</span>      
-         	  
-					<input type="file" id="picture" name="file" class="blockRight" accept="image/x-png, image/jpeg">
          			
+         			<form action="uploadFile.do" method="POST">
+	          			<span class="blockLeft">
+			               Foto de Perfil:      
+			        	</span>      
+	         	  
+						<input type="file" id="picture" name="file" class="blockRight" accept="image/x-png, image/jpeg">
+	         			<input type="submit" value="Enviar">
+         			</form>
        		    </div>
        		    <!-------------------------------------------------- END of FIRST STEP -------------------------------------------------->
        		    
