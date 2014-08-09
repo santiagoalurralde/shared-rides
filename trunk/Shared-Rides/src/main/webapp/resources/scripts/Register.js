@@ -5,11 +5,12 @@ var _previousTarget	= "";
 var _userType;
 var _days			= new Array();
 var _matrices		= new Array();
+var _projections	= new Array();
 
-for (var loop=0; loop<5; loop++)
-{
-    _days[loop] = null;
-    _matrices[loop] = null;    
+for (var loop=0; loop<5; loop++) {
+    _days[loop] 		= null;
+    _matrices[loop] 	= null;
+    _projections[loop] 	= null;    
 }
 
 /***************************************************************************************
@@ -451,19 +452,18 @@ function saveMap()
 		return false;
 	}
 	
-	if(userTypeDay == "driver")  
-	{
+	if(userTypeDay == "driver") {
 		if(_matrices[index] == null)
 			_matrices[index] = new Matrix();
 		if(_days[index] == null)
 			_days[index] = new Track();
 		
-		if(io == "in"){
+		if(io == "in") {
 			_matrices[index].matrixIn = gpxTrack.matrixify();				
 			_days[index].trackIn = gpxTrack.confirm();
 			_days[index].hourIn = h;
 		}	
-		else{
+		else {
 			_matrices[index].matrixOut = gpxTrack.matrixify();
 			_days[index].trackOut = gpxTrack.confirm();
 			_days[index].hourOut = h;			
@@ -471,23 +471,24 @@ function saveMap()
 		gpxTrack.clear();	
 		$( "#"+ io + " td:nth-child("+ nthChild +")" ).find("#btn" + io).html("Modificar");
 	}
-	else
-	{
-		if(_lon != "" && _lat != "")
-		{
+	else {
+		if(_lon != "" && _lat != "") {
+			if(_projections[index] == null)
+				_projections[index] = new Projection();
 			if(_days[index] == null)
 				_days[index] = new Stop();
-
-			if(io == "in"){
-				var lonlatCurrent = new OpenLayers.LonLat( _lon , _lat );
-				alert(lonlatCurrent);
-				_days[index].stopIn = lonlatCurrent;
-				_days[index].hourIn = h;	
+			
+			if(io == "in") {
+				var lonlatCurrent 			= new OpenLayers.LonLat( _lon , _lat );
+				_days[index].stopIn 		= lonlatCurrent;
+				_days[index].hourIn 		= h;	
+				_projections[index].projIn 	= _days[index].stopIn.transform(proj4326, map.getProjectionObject());
 			}
-			else{
-				var lonlatCurrent = new OpenLayers.LonLat( _lon , _lat );
-				_days[index].stopOut = lonlatCurrent;
-				_days[index].hourOut = h;					
+			else {
+				var lonlatCurrent 			= new OpenLayers.LonLat( _lon , _lat );
+				_days[index].stopOut		= lonlatCurrent;
+				_days[index].hourOut 		= h;	
+				_projections[index].projOut = _days[index].stopOut.transform(proj4326, map.getProjectionObject());
 			}
 			$( "#"+ io + " td:nth-child("+ nthChild +")" ).find("#btn" + io).html("Modificar");
 		}
@@ -560,11 +561,11 @@ function defineMap(target)
 		_lat = "";
 		if(io == "in" && _days[index] != null)
 			if( _days[index].stopIn != "")
-				drawPreviousMarkers(_days[index].stopIn);
+				drawPreviousMarkers(_projections[index].projIn);
 		
 		if(io == "out" && _days[index] != null)
 			if( _days[index].stopOut != "")		
-				drawPreviousMarkers(_days[index].stopOut);
+				drawPreviousMarkers(_projections[index].projOut);
 	}
 }
 
@@ -678,4 +679,14 @@ function Matrix()
 	this.matrixIn	= "";
 	this.matrixOut	= "";			
 }
+
+/**
+ * Constructor
+ */
+function Projection()
+{
+	this.projIn		= "";
+	this.projOut	= "";			
+}
+
 
