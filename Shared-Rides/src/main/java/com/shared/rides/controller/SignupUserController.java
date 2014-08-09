@@ -65,6 +65,7 @@ public class SignupUserController {
 											@RequestParam("surname") String surname,
 											@RequestParam("email") String email,
 											@RequestParam("phone") long phoneNumber,
+											@RequestParam("picture") String pic,
 											@RequestParam("street") String street,
 											@RequestParam("number") int numberStreet,
 											@RequestParam("neighborhood") String neighborhood,
@@ -78,13 +79,13 @@ public class SignupUserController {
 											@RequestParam("days") String days
 											){	
 		String licensePlate = plateLetters + " " + plateNumbers;
-		signupUserService.signupUser(organization, personalId, pw, name, surname, phoneNumber, email, street, numberStreet, neighborhood, shift, userType, brand, modelVehicle, licensePlate, numberSeats, days);
+		signupUserService.signupUser(organization, personalId, pw, name, surname, phoneNumber, email, street, numberStreet, neighborhood, shift, userType, brand, modelVehicle, licensePlate, numberSeats, days, pic);
 		return "msg";
 	}	
 	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody String uploadFileHandler(@RequestParam("file") MultipartFile file) {
 		//TODO: devuelvo un msg? hay que ver a donde tengo que redireccionar.
-		return UploadFile.uploadFile(file);
+		return signupUserService.uploadPicFile(file);
     }
 }
