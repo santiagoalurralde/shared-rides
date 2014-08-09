@@ -38,7 +38,6 @@ $( document ).ready(function(){
 	fillTable(_schDriver, "Driver");
 	fillTable(_schPed, "Pedestrian");
 
-	
 	//Fancybox
     $(".ifancybox").fancybox({
         'width'                 :       500,
@@ -95,6 +94,9 @@ function fixView($targetThis, $targetOther){
  */
 function fillTable(schedule, type){
 	
+	alert("entra3");
+	alert(schedule.length);
+
 	var $table, image, btnReqIn = "", btnReqOut = "";
 	
 	if(type == "Driver")
