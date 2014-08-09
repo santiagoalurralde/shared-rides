@@ -39,9 +39,6 @@ public class FindUserService {
 	private IAssociationDAO assocDAO;
 	
 	private List<User> userList;
-	private Address addressUser;
-	private double latitudeUser;
-	private double longitudeUser;
 	private double [][] markers;
 	private int dist;
 	private List<Float> distanceList;
@@ -228,6 +225,7 @@ public class FindUserService {
 			
 			jsonList.add(jsonUser);
 		}		
+		
 		return jsonList;
 	}	
 	
