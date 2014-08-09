@@ -113,23 +113,24 @@ function findUsers() {
 			
 	$.post( "find.do", { "user": _user , "shift": _shift, "mapData": coordsJs }, 
 		function(json) {
-			var jsonNew = $.parseJSON(json);
-			if(jsonNew == "") {
+			var peopleFound = $.parseJSON(json);
+			if(peopleFound == null) {
 				$( "#tableFound" ).hide();
 				$( ".alerts" ).show();					
 			}
 			else {
-				$.each(jsonNew, function(i, data) {
+				$.each(peopleFound, function(i, data) {
 					var distance = Math.ceil(data.distance);
 					$( "#tableFound" ).show();	
 					$( ".alerts" ).hide();	
-					$( "#tableFound" ).append("<tr>"+
-												"<td>"+ data.name +" "+ data.surname +"</td>"+
-												"<td>"+
-													"<a href='/Shared-Rides/profile.do?user="+ data.id +"'><img src='resources/profilePic/" + data.picture + "'/></a>" +
-												"</td>"+
-												"<td>"+ $( "#lblBlocks1" ).val() +" "+ distance +" "+ $( "#lblBlocks2" ).val() +"</td>"+
-											  "</tr>");
+					$( "#tableFound" ).append(
+							"<tr>"+
+								"<td>"+ data.name +" "+ data.surname +"</td>"+
+								"<td>"+
+									"<a href='/Shared-Rides/profile.do?user="+ data.id +"'><img src='resources/profilePic/" + data.picture + "'/></a>" +
+								"</td>"+
+								"<td>"+ $( "#lblBlocks1" ).val() +" "+ distance +" "+ $( "#lblBlocks2" ).val() +"</td>"+
+							"</tr>");
 				});	
 			}
 		}); 
