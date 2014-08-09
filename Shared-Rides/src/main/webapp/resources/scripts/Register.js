@@ -393,7 +393,8 @@ function signUp()
 		var surname 	= $( "#surname" ).val();
 		var email 		= $( "#email" ).val();
 		var phone		= $( "#cellphone" ).val();
-		var picture		= $( "#picture" ).val();				
+		var picture		= $( "#picture" ).val();	
+		picture			= picture.replace(/^.*[\\\/]/, '');
 		var number		= $( "#number" ).val();
 		var street		= $( "#street" ).val();
 		var nbh			= $( "#neighborhood" ).val();
