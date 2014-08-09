@@ -206,12 +206,7 @@ public class ProfileService {
 
 			arraySch.add(day);
 		}
-		model.addObject("schPed", arraySch);
-			
-		float latitude = (float) u.getAddress().getMarker().getLatitude();
-		float longitude = (float) u.getAddress().getMarker().getLongitude();
-		model.addObject("latPed", latitude);
-		model.addObject("lonPed", longitude);	
+		model.addObject("schPed", arraySch);	
 	}
 	
 	/*
