@@ -107,8 +107,10 @@
          			
          			<div class="split"></div>         			
          			
-            		<form 	action="uploadFile.do" method="POST" 
-            				onSubmit="alert('Imagen Enviada');" enctype="multipart/form-data">
+         			<form method="POST" action="uploadFile.do" target="uploaded" 
+         				onSubmit="uploaded = window.open('','uploaded', 'width=300 height=200, status=no scrollbars=no, location=no, resizable=no, manu=no');"
+         				enctype="multipart/form-data"> 
+         				
 	          			<span class="blockLeft">
 			               <spring:message code="label.picture"/>     
 			        	</span>     
