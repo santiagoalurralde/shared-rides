@@ -106,7 +106,7 @@
 		               Foto de Perfil:      
 		        	</span>      
          	  
-					<input type="file" id="picture" name="file" class="blockRight theInputs" accept="image/x-png, image/jpeg">
+					<input type="file" id="picture" name="file" class="blockRight" accept="image/x-png, image/jpeg">
          			
        		    </div>
        		    <!-------------------------------------------------- END of FIRST STEP -------------------------------------------------->
