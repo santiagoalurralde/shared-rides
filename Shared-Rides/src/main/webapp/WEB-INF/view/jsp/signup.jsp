@@ -102,7 +102,7 @@
          			
          			<div class="split"></div>         			
          			
-         			<form action="uploadFile.do" method="POST">
+         			<form action="uploadFile.do" method="POST" enctype="multipart/form-data">
 	          			<span class="blockLeft">
 			               Foto de Perfil:      
 			        	</span>      
