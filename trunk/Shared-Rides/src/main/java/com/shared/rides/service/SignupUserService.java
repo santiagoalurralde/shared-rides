@@ -79,7 +79,6 @@ public class SignupUserService {
 							long phoneNumber, String email, String street, int numberStreet, String neighborhood,
 							String shift, String typeUser, String brand, String model, String licensePlate, int numberSeats, String days, String pic){
 		User u = new User();
-		System.out.println(pic);
 		Organization org = new Organization();
 		org.setOrganizationId(organization);
 		
@@ -108,7 +107,7 @@ public class SignupUserService {
 				u.setShift(Shift.EVENING);	
 			}
 		
-		//Obtengo la foto de perfil desde la sesion
+		u.setPicture(pic);
 		
 
 		userDAO.save(u);
