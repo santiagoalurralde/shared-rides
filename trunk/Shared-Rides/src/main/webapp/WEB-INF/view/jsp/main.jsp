@@ -1,4 +1,5 @@
 <%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <body onLoad="stepNext();">		
 		  
@@ -46,16 +47,20 @@
         			<div id="map2" class="mapSimple"></div>
         		</div>
         	
-        		<!---- Results List		---->     
+        		<!---- Results List ---->     
         		<div id="listFound">
+        			<div class='alerts'><img src='resources/images/message.png'> 
+        				<p><br> <spring:message code="label.foundNone"/>
+        			</div>
+        			
         			<table id="tableFound" class="tableUsers">
 						<tr>
-							<th colspan="4"><spring:message code="label.foundUsers"/> </th>
+							<th colspan="4"><spring:message code="label.foundUsers"/></th>
 						</tr>
 					</table>
         		</div>
         		
-        		<!----	Buttons	---->
+        		<!---- Buttons ---->
         		<div id="buttonsSteps">
         			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepBack();"	/>	
            	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepNext();"	/>		
@@ -65,6 +70,12 @@
        		</form>	        	
         </section>        
 	</div>
+	
+		<c:set var="lblBlocks1"> 	<spring:message code="label.blocks1"	/></c:set>
+		<c:set var="lblBlocks2"> 	<spring:message code="label.blocks2"	/></c:set>	
+		<input type="hidden" id="lblBlocks1" 	value="${lblBlocks1}" 	/>
+		<input type="hidden" id="lblBlocks2" 	value="${lblBlocks2}" 	/>
+		
 	<section>
 		<script src="resources/scripts/MainMenu.js" 	type="text/javascript"></script>
 		<script src="resources/maps/OpenLayers.js"		type="text/javascript"></script>    

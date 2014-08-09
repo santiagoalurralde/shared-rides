@@ -393,6 +393,7 @@ function signUp()
 		var surname 	= $( "#surname" ).val();
 		var email 		= $( "#email" ).val();
 		var phone		= $( "#cellphone" ).val();
+		var picture		= $( "#picture" ).val();				
 		var number		= $( "#number" ).val();
 		var street		= $( "#street" ).val();
 		var nbh			= $( "#neighborhood" ).val();
@@ -403,7 +404,7 @@ function signUp()
 		var plNumb		= $( "#plateNumbers" ).val();
 		var plLett		= $( "#plateLetters" ).val();
 		var nSeats		= $( "#numberSeats" ).find("option:selected").val();
-		
+
 		$.post( "register.do", { "organization": org , 
 								"personalId": 	pId, 
 								"pw": 			pw, 
@@ -411,6 +412,7 @@ function signUp()
 								"surname": 		surname, 
 								"email": 		email, 									
 								"phone": 		phone, 
+								"picture": 		picture, 
 								"street": 		street, 
 								"number": 		number,
 								"neighborhood": nbh,

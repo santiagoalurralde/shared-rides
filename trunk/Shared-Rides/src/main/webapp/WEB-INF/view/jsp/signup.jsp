@@ -104,7 +104,7 @@
          		
          	        			
          			<form action="uploadFile.do" enctype="multipart/form-data" method="post">
-						  <input type="file" name="file" accept="image/x-png, image/jpeg">
+						  <input type="file" id="picture" name="file" accept="image/x-png, image/jpeg">
 						  <input type="submit">
 					</form>
          			
@@ -144,8 +144,8 @@
            				
            				<select id="shift" class="blockRight theInputs" onChange="checkIt(this);">
            					<option value="0" selected>Turno</option>	            					           				
-           					<option value="MOORNING">Mañana</option>	            				
-           					<option value="AFTERNOON">Tarde</option>
+           					<option value="morning">Mañana</option>	            				
+           					<option value="afternoon">Tarde</option>
            				</select>            				
            			</span> 
           				

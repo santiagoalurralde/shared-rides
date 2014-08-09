@@ -116,6 +116,10 @@ function fillTable(schedule, type){
 	
 	for(var i=0; i<schedule.length; i++)
 	{
+		var hdnMapIn, hdnMapOut;
+		var hdnDay	= '<input class="hdnDay"	type="hidden" value="'+ schedule[i].day +'"/>'; 
+		var hdnIn	= '<input class="hdnInOut" 	type="hidden" value="1"/>'; 
+		var hdnOut	= '<input class="hdnInOut"	type="hidden" value="2"/>';
 		
 		if(!$( "#valMine" ).val()){
 			//If it's my profile can't invite myself
@@ -123,7 +127,7 @@ function fillTable(schedule, type){
 			btnReqIn	= '<button 	class="btnRequestAssoc" ><img src="resources/images/'+ image +'"/></button>';
 			btnReqOut	= '<button 	class="btnRequestAssoc" ><img src="resources/images/'+ image +'"/></button>';
 		}
-		
+				
 		if(type == "Pedestrian"){	
 			//If Pedestrian has driver, can't invite him.
 			
@@ -131,20 +135,21 @@ function fillTable(schedule, type){
 				btnReqIn = "";
 			if(schedule.hasDriverOut == true)
 				btnReqOut = "";
+			hdnMapIn	=	'<input class="hdnLat"	type="hidden" value="'+ schedule[i].latIn +'"/>'+
+							'<input class="hdnLon"	type="hidden" value="'+ schedule[i].lonIn +'"/>';						
+			hdnMapOut	=	'<input class="hdnLat"	type="hidden" value="'+ schedule[i].latOut +'"/>'+
+							'<input class="hdnLon"	type="hidden" value="'+ schedule[i].lonOut +'"/>';	
 		}
 		else{
-			//Show driver's free number of seats.
+			hdnsMapOut 	=	'<input class="hdnPath"		type="hidden" value="'+ schedule[i].pathIn +'"/>';
+			hdnsMapIn  	=	'<input class="hdnPath"		type="hidden" value="'+ schedule[i].pathOut +'"/>';						
 		}
 		
-		var hdnDay		= '<input 	class="hdnDay"		type="hidden" value="'+ schedule[i].day +'"/>'; 
-		var hdnIn		= '<input 	class="hdnInOut" 	type="hidden" value="1"/>'; 
-		var hdnOut		= '<input 	class="hdnInOut"	type="hidden" value="2"/>';
-		var hdnPathIn	= '<input 	class="hdnPath"		type="hidden" value="'+ schedule[i].pathIn +'"/>';
-		var hdnPathOut	= '<input 	class="hdnPath"		type="hidden" value="'+ schedule[i].pathOut +'"/>';
-	
 		$table.find("#rDay" ).append("<th>"+ getDayLabel(schedule[i].day) +"</th>");
-		$table.find("#rIn" ).append("<td class='cellCheckMap'>"+ schedule[i].hourIn + btnReqIn + hdnDay + hdnIn + hdnPathIn + "</td>");
-		$table.find("#rOut" ).append("<td class='cellCheckMap'>"+ schedule[i].hourOut + btnReqOut + hdnDay + hdnOut + hdnPathOut + "</td>");
+		$table.find("#rIn" ).append("<td class='cellCheckMap'>"+ schedule[i].hourIn + btnReqIn + hdnDay + hdnIn + hdnsMapIn + "</td>");
+		$table.find("#rOut" ).append("<td class='cellCheckMap'>"+ schedule[i].hourOut + btnReqOut + hdnDay + hdnOut + hdnsMapOut + "</td>");
+		
+		delete hdnMapIn, hdnMapOut, hdnDay, hdnIn, hdnOut;
 	}
 	
 	$( ".cellCheckMap" ).prop( "title", "Ver mapa en este horario");
@@ -157,10 +162,11 @@ function fillTable(schedule, type){
  */
 function showMap(target){
 	if($( target ).closest( "table" ).attr( "id" ) == "tablePed") 
-		setMapPedestrian();					
+		setMapPedestrian($( target ).find(".hdnLat").val(), $( target ).find(".hdnLon").val());					
 	else
 		setMapDriver($( target ).find(".hdnPath").val()); 	
 }
+
 
 /**
  * Requests an association according to selected cell.
@@ -202,6 +208,8 @@ function DetailScheduleDriver(){
 	this.hourOut 		= "";		
 	this.freeSeatsIn 	= "";
 	this.freeSeatsOut 	= "";
-	this.pathIn 		= "";
-	this.pathOut		= "";	
+	this.latIn 			= "";
+	this.latOut			= "";
+	this.lonIn 			= "";
+	this.lonOut			= "";	
 }
