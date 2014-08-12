@@ -1,26 +1,37 @@
-.steps{
-	margin:	3% auto;
-	width:	45%;
+.steps {
+	margin:				3% auto;
+	width:				45%;
 }
 
-#thirdStep{
-	width:	80%;
+#thirdStep { 
+	width:				80%;
 }
 
-.split{
-	height:	2.7em;
+.split {
+	height:				2.7em;
 }
 
-.red{
-	color:	red;
+.red {
+	color:				red;
 }
 
-.painted{
+.painted {
 	box-shadow:         0px 0px 5px 0px rgba(179, 0, 0, 1);
 }
 
-.alerts{
-	display:				none;
+/*------------------------------------------------------------------
+[Starting Conditions]
+------------------------------------------------------------------*/
+
+#btnBack, #btnOK, .alerts, #applyMapDefinition {
+	display	:			none;
+}
+
+/*------------------------------------------------------------------
+[Alerts]
+------------------------------------------------------------------*/
+
+.alerts { 
 	position: 				relative;
 	background-color:		#AD2F2F;
 	color:					white;
@@ -30,8 +41,7 @@
 	width:					41%;	
 }
 
-.alerts:after 
-{
+.alerts:after {
 	content: 		'';
 	position: 		absolute;
 	border-style: 	solid;
@@ -44,6 +54,9 @@
 	left: 			350px;
 }
 
+/*------------------------------------------------------------------
+[Form Elements]
+------------------------------------------------------------------*/
 
 input.theInputs{
 	border:					solid 1px Grey; 	
@@ -51,22 +64,18 @@ input.theInputs{
 	width:					13em;
 }	
 
-select.theInputs{
+select.theInputs {
 	height:					25px;
 	width:					13em;	
 }
 
-.thePassword{
+.thePassword {
 	border:					solid 1px Grey; 	
 	height:					25px;
 	width:					13em;	
 }
 
-#btnOK{
-	display: 				none;
-}
-
-#plateNumbers, #plateLetters, #number{
+#plateNumbers, #plateLetters, #number {
 	width: 					4em;
 }
 
@@ -74,12 +83,7 @@ select.theInputs{
 	width: 					8.8em;		
 }
 
-
-#applyMapDefinition{
-	display: 				none;
-}
-
-#buttonsSteps{
+#buttonsSteps {
 	clear:					both;
 	margin-top:				-1em;
 	position:				relative;
@@ -87,8 +91,11 @@ select.theInputs{
 	width:					100%;
 }
 
-#navSteps
-{
+/*------------------------------------------------------------------
+[Navigation Steps / #navSteps]
+------------------------------------------------------------------*/
+
+#navSteps {
 	background:				-moz-linear-gradient(top, #90AA44, #50A410);
 	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
 	margin:					20px 0 0 0;	
@@ -98,25 +105,25 @@ select.theInputs{
 	width:					100%;
 	z-index:				1000;
 }
-	#navSteps li
-	{
+	#navSteps li {
 		display:			inline-block;
 		height:				30px;
 		list-style-type:	none;
 		width:				33%;
 		
 	}
-	#navSteps li a:active
-	{ 
+	#navSteps li a:active { 
 		background-color:	black; 
 	}
 
-.theSchedule{
-	/* OVERRIDE */
-	font-size:						85%;
-}
+/*------------------------------------------------------------------
+[Tables / OVERRIDE]
+------------------------------------------------------------------*/
 
-.theSchedule th{
-	background:						#EEE
+.theSchedule {
+	font-size:				85%;
 }
+	.theSchedule th {
+		background:			#EEE
+	}
 

@@ -13,7 +13,7 @@ Assigned to:	Santiago Alurralde (sa)
 [Navigation Steps / #navSteps]
 ------------------------------------------------------------------*/
 
-#navSteps{
+#navSteps {
 	background:				-moz-linear-gradient(top, #90AA44, #50A410);
 	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
 	margin:					20px 0 0 0;	
@@ -23,18 +23,18 @@ Assigned to:	Santiago Alurralde (sa)
 	width:					100%;
 	z-index:				1000;
 }
-	#navSteps li{
+	#navSteps li {
 		display:			inline-block;
 		height:				30px;
 		list-style-type:	none;
 		width:				33%;
 		
 	}
-	#navSteps li a:active{ 
+	#navSteps li a:active { 
 		background-color:	black; 
 	}
 	
-#steps{
+#steps {
 	display:				inline;
 }
 
@@ -65,24 +65,28 @@ Assigned to:	Santiago Alurralde (sa)
 	margin-right:			130px;
 }
 
-#imgSun, #imgMoon {
-	display: 				none; 
-}
-
-.alerts{
+.alerts {
 	border:					solid #CFCFCF 1px;
-	box-shadow:         	0 1px 2px #d1d1d1;
+	box-shadow:         	0 1px 2px #D1D1D1;
 	margin:					0 auto;
 	margin-top: 			20px; 	
 	width:					60%;
 	padding:				3%
 }
 
-.alerts img{
+.alerts img {
 	position: 				relative; 
 	left: 					55%; 
 	width:					55px;
 	height: 				50px;
+}
+
+/*------------------------------------------------------------------
+[Starting Conditions]
+------------------------------------------------------------------*/
+
+#btnBack, .alerts, #imgSun, #imgMoon, #listFound {
+	display:				none;
 }
 
 /*------------------------------------------------------------------

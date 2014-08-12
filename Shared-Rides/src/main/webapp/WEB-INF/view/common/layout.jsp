@@ -15,7 +15,7 @@
 		</title>
 
 		<!---- Styles ---->
-		<link  	rel="stylesheet" 	type="text/css" 	href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"	/>
+		<link  	rel="stylesheet" 	type="text/css" 	href="resources/jquery-ui-theme/jquery-ui.css"						/>
 		<link 	rel="stylesheet" 	type="text/css" 	href="resources/styles/style.css" 									/>
 		<link 	rel="stylesheet"	type="text/css" 	href="resources/styles/<tiles:getAsString name="style"/>"			/>
 		<link 	rel="stylesheet"	type="text/css" 	href="http://fonts.googleapis.com/css?family=Raleway:500"  			/>

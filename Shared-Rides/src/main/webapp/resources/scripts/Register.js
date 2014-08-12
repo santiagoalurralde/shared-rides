@@ -46,16 +46,14 @@ function start() {
 	
 	highlightStep(0);
 	
-	$( "#btnBack" ).hide( 0 );		
-	
 	fillRowsInOut("in");		
 	fillRowsInOut("out");
 	
 	var neighborhoods = ["Alta Córdoba","Alto Alberdi","Alto Verde","Argüello","Bella Vista","Centro","Cerro Chico","Cerro de las Rosas","Cerveceros","Chateau Carreras","Cofico","Colinas del Cerro","Country Jockey Club","Country Las Delicias","Country Lomas de la Carolina","Crisol","Dean Funes","Ejército Argentino","El Quebracho","Empalme","Ferreyra","General Bustos","General Paz","General Pueyrredon","Granja De Funes","Güemes","Ituzaingo","Jardín","Juniors","La France","Las Flores","Las Palmas","Las Violetas","Los Boulevares","Los Paraísos","Marques De Sobremonte","Nueva Córdoba","Observatorio","Palermo Bajo","Patricios","Poeta Lugones","San Martín","San Vicente","Urca","Villa Belgrano","Villa Cabrera","Villa Centenario","Villa Warcalde","Yapeyu","Yofre"];
 	
 	for(var loop=0; loop<neighborhoods.length; loop++)
-		$( "#neighborhood" ).append("<option value='"+ neighborhood[loop] +"'>"
-										+ neighborhood[loop] +
+		$( "#neighborhood" ).append("<option value='"+ neighborhoods[loop] +"'>"
+										+ neighborhoods[loop] +
 									"</option>");	
 	
 	var brands = ["Alfa-Romeo", "Audi", "BMW", "Citroen", "Chery", "Chevrolet", "Chrysler", "Daihatsu", "Dodge", "Fiat", "Ford", "Honda", "Hyundai", "Jeep", "Kia", "Land Rover", "Mazda", "Mercedes Benz", "Mini", "Mitsubishi", "Nissan", "Peugeot", "Renault", "Seat",  "Subaru", "Suzuki", "Toyota", "Volkswagen", "Volvo"];
@@ -412,7 +410,7 @@ function checkUserExists(){
  * Event, called when personalId is set. Equals personalId hidden field for picture.
  */
 function setPicturePersonalId() {
-	$( "picturePersonalId" ).val($( "#personalId" ).val());
+	$( "#picturePersonalId" ).val($( "#personalId" ).val());
 }
 
 /**

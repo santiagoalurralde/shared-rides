@@ -36,7 +36,7 @@
 			            </span> 
            				
            				<input 	type="text" id="personalId" class="blockRight theInputs" 
-           						onChange="checkIt(this); setPicturePersonalId(); "/>
+           						onChange="checkIt(this); setPicturePersonalId();"/>
          			</span> 
          				
          			<div class="split"></div>
