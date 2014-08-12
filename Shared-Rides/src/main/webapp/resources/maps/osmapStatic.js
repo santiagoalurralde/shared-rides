@@ -1,4 +1,4 @@
-var _mapPedestrian, _mapDriver, _proj4326, _layerMarker, _layerTrack; 
+var _mapPedestrian, _mapDriver, _proj4326, _layerMarkers, _layerTrack; 
 
 /**
  * Starts Pedestrian's map
@@ -11,10 +11,10 @@ function initMapPedestrian(){
   
 	/*  Layers    */
 	var layerOSM    = new OpenLayers.Layer.OSM("Street Map");
-	_layerMarker = new OpenLayers.Layer.Markers( "Markers" );
+	_layerMarkers = new OpenLayers.Layer.Markers( "Markers" );
 
 	_mapPedestrian.addLayers([layerOSM]);
-	_mapPedestrian.addLayer(_layerMarker);
+	_mapPedestrian.addLayer(_layerMarkers);
 
 	/*  Set Start Position  */
 	var lonlatStart= new OpenLayers.LonLat( -64.183 , -31.416 ) //COMPLETAR CON LON LAT DE CORDOBA
@@ -70,8 +70,10 @@ function setMapPedestrian(lonPed, latPed){
     			_proj4326,
   				_mapPedestrian.getProjectionObject()
   		),icon.clone());
-    _layerMarker.addMarker(markerPed); 	
-    alert(lonPed, latPed);
+
+    _layerMarkers.clearMarkers();
+    _layerMarkers.addMarker(markerPed); 	
+
 }
 
 /**

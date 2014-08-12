@@ -39,8 +39,6 @@ function initMap(){
 	    var lonlatTrans	    = lonlat.transform(map.getProjectionObject(), proj4326);
 	    _lon    	   		= lonlatTrans.lon;
 	    _lat	       		= lonlatTrans.lat;
-	    alert(_lon);
-	    alert(_lat);
 	    var lonlat         	= lonlatTrans.transform(proj4326, map.getProjectionObject());
 	
 	    if(_countMarkers>0)

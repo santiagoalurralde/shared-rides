@@ -36,7 +36,7 @@
 			            </span> 
            				
            				<input 	type="text" id="personalId" class="blockRight theInputs" 
-           						onChange="checkIt(this)"/>
+           						onChange="checkIt(this); setPicturePersonalId(); "/>
          			</span> 
          				
          			<div class="split"></div>
@@ -104,9 +104,11 @@
            				<input 	type="text" id="cellphone" class="blockRight theInputs" 
            						onChange="checkIt(this);" onKeyUp="checkNumeric(this);"/>
          			</span> 
-         			
-         			<div class="split"></div>         			
-         			
+       		    </div>
+       		    <!-------------------------------------------------- END of FIRST STEP -------------------------------------------------->
+       		    
+       		    <div id="secondStep" class="steps" style="display: none">
+
          			<form method="POST" action="uploadFile.do" target="uploaded" 
          				onSubmit="uploaded = window.open('','uploaded', 'width=300 height=200, status=no scrollbars=no, location=no, resizable=no, manu=no');"
          				enctype="multipart/form-data"> 
@@ -116,13 +118,12 @@
 			        	</span>     
 						<input 	type="file" id="picture" name="file" 
 								class="blockRight" accept="image/x-png, image/jpeg">
-	         			<input 	type="submit" value='<spring:message code="label.send"/>'>
+	         			<input 	type="hidden" id="picturePersonalId">								
+	         			<input 	type="submit" class="btn" value='<spring:message code="label.send"/>'>
          			</form>
-       		    </div>
-       		    <!-------------------------------------------------- END of FIRST STEP -------------------------------------------------->
-       		    
-       		    <div id="secondStep" class="steps" style="display: none">
-          				
+          			
+          			<div class="split"></div>         			
+          			
        				<span>
 	           			<span class="blockLeft">
 				         	<spring:message code="label.address"/>          				              	 
@@ -143,8 +144,7 @@
 	           				
 	           			<select id="neighborhood" class="blockRight theInputs" 
 	           					onChange="checkIt(this);">
-	           				<option value="0" selected><spring:message code="label.neighborhood"/></option>	           			
-	           				<option>Arguello</option>
+	           				<option value="0" selected></option>	           			
 	           			</select>
           			</span> 
 
@@ -157,7 +157,7 @@
            				
            				<select id="shift" class="blockRight theInputs" 
            						onChange="checkIt(this);">
-           					<option value="0" selected>	<spring:message code="label.shift"/> 		</option>	            					           				
+           					<option value="0" selected>												</option>	            					           				
            					<option value="morning">	<spring:message code="label.morning"/> 		</option>	            				
            					<option value="afternoon">	<spring:message code="label.afternoon"/> 	</option>
            				</select>            				

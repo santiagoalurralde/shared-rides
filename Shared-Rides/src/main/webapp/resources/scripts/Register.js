@@ -40,8 +40,7 @@ $( document ).ready(function(){
 /**
  * Establishes the starting environment
  */
-function start()
-{
+function start() {
 	$( "#mapDriver" ).css( 'display', 'none' );
 	$( "#mapPedestrian" ).css( 'display', 'none' );
 	
@@ -50,14 +49,28 @@ function start()
 	$( "#btnBack" ).hide( 0 );		
 	
 	fillRowsInOut("in");		
-	fillRowsInOut("out");		
+	fillRowsInOut("out");
+	
+	var neighborhoods = ["Alta Córdoba","Alto Alberdi","Alto Verde","Argüello","Bella Vista","Centro","Cerro Chico","Cerro de las Rosas","Cerveceros","Chateau Carreras","Cofico","Colinas del Cerro","Country Jockey Club","Country Las Delicias","Country Lomas de la Carolina","Crisol","Dean Funes","Ejército Argentino","El Quebracho","Empalme","Ferreyra","General Bustos","General Paz","General Pueyrredon","Granja De Funes","Güemes","Ituzaingo","Jardín","Juniors","La France","Las Flores","Las Palmas","Las Violetas","Los Boulevares","Los Paraísos","Marques De Sobremonte","Nueva Córdoba","Observatorio","Palermo Bajo","Patricios","Poeta Lugones","San Martín","San Vicente","Urca","Villa Belgrano","Villa Cabrera","Villa Centenario","Villa Warcalde","Yapeyu","Yofre"];
+	
+	for(var loop=0; loop<neighborhoods.length; loop++)
+		$( "#neighborhood" ).append("<option value='"+ neighborhood[loop] +"'>"
+										+ neighborhood[loop] +
+									"</option>");	
+	
+	var brands = ["Alfa-Romeo", "Audi", "BMW", "Citroen", "Chery", "Chevrolet", "Chrysler", "Daihatsu", "Dodge", "Fiat", "Ford", "Honda", "Hyundai", "Jeep", "Kia", "Land Rover", "Mazda", "Mercedes Benz", "Mini", "Mitsubishi", "Nissan", "Peugeot", "Renault", "Seat",  "Subaru", "Suzuki", "Toyota", "Volkswagen", "Volvo"];
+	
+	for(var loop=0; loop<brands.length; loop++)
+		$( "#brand" ).append("<option value='"+ brands[loop] +"'>"
+										+ brands[loop] +
+									"</option>");	
 } 
 
 /**
  * Checks if we can add 1 step
  */
-function stepNext() {
-	if((_step == 0 && !checkValues0()) || (_step == 0 && $( "#alert.passwordMatch" ).is(":visible")))
+function stepNext() {	
+	if((_step == 0 && !checkValues0()) || (_step == 0 && $( "#alert.passwordMatch" ).is(":visible")) || (_step == 0 && checkUserExists()) )
 		console.log("mal");
 	else if(_step == 1 && !checkValues1())
 		console.log("mal");
@@ -357,22 +370,38 @@ function checkAlphabetic(event)
  * 
  * @param {element} 
  */
-function checkNumeric(target)
-{
-	if(target.value.length > 0 && isNaN(target.value))							//alert("Este campo no admite letras, sólo números");
-	{									
+function checkNumeric(target) {
+	if(target.value.length > 0 && isNaN(target.value)) {						
 		if(previousTarget != target)
 			previous = "";
 		target.value = previous;
 	}
-	else
-	{
+	else {
 		previous = target.value;
 		previousTarget = target;
 	}
 }
 
-//function checkHours(target){}
+/**
+ * Checks if user with a personalId was already created. Returns true if exists.
+ */
+function checkUserExists(){
+	var pId = $( '#personalId' ).val().toString();
+	var flag = false;
+	alert("entro");
+	
+	$.ajax({
+		  url: "validateNewUser.do",		
+		  type: "GET",
+		  data: { personalId: pId }
+		}).done(function(isValidate) {
+			if(!isValidate){
+				alert("El usuario con el ID especificado ya existe");
+				flag = true;
+			}
+		});
+	return flag;
+}
 
 
 /***************************************************************************************
@@ -380,13 +409,17 @@ function checkNumeric(target)
  ***************************************************************************************/
 
 /**
+ * Event, called when personalId is set. Equals personalId hidden field for picture.
+ */
+function setPicturePersonalId() {
+	$( "picturePersonalId" ).val($( "#personalId" ).val());
+}
+
+/**
  * Sends everything to server.
  */
-function signUp()
-{	
-
-	/*if(checkValues2())
-	{*/
+function signUp() {	
+	if(checkValues2()) {
 		var org 		= $( "#organization" ).find("option:selected").val();
 		var pId 		= $( "#personalId" ).val();
 		var pw 			= $( "#password-first" ).val();
@@ -406,7 +439,7 @@ function signUp()
 		var plNumb		= $( "#plateNumbers" ).val();
 		var plLett		= $( "#plateLetters" ).val();
 		var nSeats		= $( "#numberSeats" ).find("option:selected").val();
-
+						
 		$.post( "register.do", { "organization": org , 
 								"personalId": 	pId, 
 								"pw": 			pw, 
@@ -427,17 +460,16 @@ function signUp()
 								"numberSeats": 	nSeats,
 								"days":			JSON.stringify(_days)
 					 			},  
-				function(str)
-				{
-					 alert("Alta de Usuario Completada");
+				function(str) {
+					 alert("Alta de Usuario Completa");
 				}); 
-			}
+	}
+}
 
 /**
  * Saves map previously defined.
  */
-function saveMap()
-{
+function saveMap() {
 	var d 			= $( "#hdnDay" ).val();
 	var io			= $( "#hdnInOut" ).val();
 	var userTypeDay	= $( "#hdnUserTypeDay" ).val();
@@ -446,8 +478,7 @@ function saveMap()
 	var index 		= Number(d) - 1;
 	//var applyTo		= $( "#selectApply" ).find("option:selected").val();
 
-	if(h == "none")
-	{
+	if(h == "none") {
 		alert("Seleccione la hora a definir");
 		return false;
 	}
@@ -460,12 +491,12 @@ function saveMap()
 		
 		if(io == "in") {
 			_matrices[index].matrixIn = gpxTrack.matrixify();				
-			_days[index].trackIn = gpxTrack.confirm();
+			_days[index].trackIn = gpxTrack.myConfirm();
 			_days[index].hourIn = h;
 		}	
 		else {
 			_matrices[index].matrixOut = gpxTrack.matrixify();
-			_days[index].trackOut = gpxTrack.confirm();
+			_days[index].trackOut = gpxTrack.myConfirm();
 			_days[index].hourOut = h;			
 		}
 		gpxTrack.clear();	
@@ -480,15 +511,16 @@ function saveMap()
 			
 			if(io == "in") {
 				var lonlatCurrent 			= new OpenLayers.LonLat( _lon , _lat );
-				_days[index].stopIn 		= lonlatCurrent;
+				_days[index].stopIn 		= new OpenLayers.LonLat( _lon , _lat );
 				_days[index].hourIn 		= h;	
-				_projections[index].projIn 	= _days[index].stopIn.transform(proj4326, map.getProjectionObject());
+				_projections[index].projIn 	= lonlatCurrent.transform(proj4326, map.getProjectionObject());							
+
 			}
 			else {
 				var lonlatCurrent 			= new OpenLayers.LonLat( _lon , _lat );
-				_days[index].stopOut		= lonlatCurrent;
+				_days[index].stopOut		= new OpenLayers.LonLat( _lon , _lat );
 				_days[index].hourOut 		= h;	
-				_projections[index].projOut = _days[index].stopOut.transform(proj4326, map.getProjectionObject());
+				_projections[index].projOut = lonlatCurrent.transform(proj4326, map.getProjectionObject());
 			}
 			$( "#"+ io + " td:nth-child("+ nthChild +")" ).find("#btn" + io).html("Modificar");
 		}
@@ -509,15 +541,14 @@ function saveMap()
 /**
  * Opens type of map according to user type in day; and shows previously saved maps.
  */
-function defineMap(target)
-{	
+function defineMap(target) {	
 	var d				= $( target ).parent().index();
 	var io 				= $( target ).parent().parent().attr('id');
 	var userTypeDay 	= $( "#userType"+ d ).find("option:selected").val();				/*var selectCommon	= 	'<option value="0" selected></option>' +'<option value="onlythis">Sólo la hora seleccionada</option>';*/
 	var index 			= Number(d) - 1;
 
-	if(userTypeDay == "0")					//No se ha seleccionado ningun tipo de usuario
-	{
+	//No se ha seleccionado ningun tipo de usuario
+	if(userTypeDay == "0") {	
 		alert("Seleccione el tipo de usuario de este día");
 		return false;
 	}
@@ -533,29 +564,25 @@ function defineMap(target)
 	$( "#hdnInOut" ).val(io);
 	$( "#hdnUserTypeDay" ).val(userTypeDay);
 	
-	if(userTypeDay == "pedestrian")
-	{
+	if(userTypeDay == "pedestrian") {
 		$( "#mapDriver" ).hide();		
 		$( "#mapPedestrian" ).show( 'slow' );				/* $( "#selectApply" ).html(	selectCommon + '<option value="allOut">Todas las salidas como peaton</option>'+'<option value="allIn">Todas las entradas como peaton</option>'+'<option value="allSchedule">Todo el horario</option>');	*/
 	}
-	else							
-	{																	
+	else {																	
 		$( "#mapPedestrian" ).hide();	
 		$( "#mapDriver" ).show( 'slow' );
 	}
 	
 	$( "#applyMapDefinition" ).show( 'fast' );				/* $( "#selectApply" ).html(	selectCommon + '<option value="allOut">Todas las salidas como peaton</option>'+ '<option value="allIn">Todas las entradas como peaton</option>'); */
 		
-	if(userTypeDay == "driver")  
-	{
+	if(userTypeDay == "driver") {
 		gpxTrack.clear();
 		if(io == "in" && _days[index] != null)
 			initMapCoords(lonlat, zoom, map, _matrices[index].matrixIn);
 		if(io == "out" && _days[index] != null)
 			initMapCoords(lonlat, zoom, map, _matrices[index].matrixOut);
 	}
-	else
-	{
+	else {
 		clearMarkers();
 		_lon = "";
 		_lat = "";
@@ -574,18 +601,17 @@ function defineMap(target)
  * 
  * @param {String} io - in/out
  */
-function fillRowsInOut(io){
+function fillRowsInOut(io) {
 	var button = "<button id='btn"+ io +"' class='btnDefine' onClick='defineMap(this); return false;'>Definir</button>";
 		
-	for(var d=1;d<6;d++)	//Days
-	{
+	for(var d=1;d<6;d++) {
 		var select 	= "<select id='"+ d + io + "'></select>"; 
 
 		$( "#tableSignUp #"+ io ).append("<td>"+ select + button + "</td>");
 		$( "#"+ d + io ).append("<option value='none'>Seleccionar</option>");					
 		
-		for(var j=0;j<24;j++)	//Hours
-		{
+		//Hours
+		for(var j=0;j<24;j++) { 
 			$( "#"+ d + io ).append("<option value='"+j+":00'>"+j+":00 hs</option>");			
 			$( "#"+ d + io ).append("<option value='"+j+":30'>"+j+":30 hs</option>");
 		}
@@ -597,28 +623,25 @@ function fillRowsInOut(io){
 /**
  * Inserts type of user in first row
  */
-function fillRowType()
-{
+function fillRowType() {
 	$( "#tableSignUp #userTypeRow" ).html("<td>	Tipo de Usuario </td>");
 	
-	for(var d=1; d<6; d++)
-	{
+	for(var d=1; d<6; d++) {
 		var content = "";
-		if(_userType == "driver-pedestrian")				//Select for user type each day
-		{
+		if(_userType == "driver-pedestrian") {
+			//Select for user type each day
 			content = 	"<select id='userType"+ d +"'>"						+
 							"<option value='0'>Seleccionar</option>" 		+
 							"<option value='pedestrian'>Peaton</option>" 	+	
 							"<option value='driver'>Conductor</option>" 	+
 						"</select>"; 
 		}
-		else if(_userType == "driver")
-		{
+		else if(_userType == "driver") {
 			$( "#hdnUserTypeDay" ).val(_userType);
 			content = "Conductor";
 		}
-		else //_userType == "pedestrian"
-		{
+		else {
+			//_userType == "pedestrian"
 			$( "#hdnUserTypeDay" ).val(_userType);			
 			content = "Peaton";
 		}
@@ -631,8 +654,7 @@ function fillRowType()
  * 
  * @param {Element} target
  */
-function userTypeChanged(target)
-{
+function userTypeChanged(target) {
 	_userType = $(target).find("option:selected").val();
 		
 	if(_userType == "pedestrian" || _userType == "0")
@@ -649,8 +671,7 @@ function userTypeChanged(target)
 /**
  * Constructor
  */
-function Track()
-{ 
+function Track() { 
 	this.isPedestrian 	= false;
 	this.trackIn		= "";
 	this.hourIn			= "";	
@@ -661,8 +682,7 @@ function Track()
 /**
  * Constructor
  */
-function Stop()
-{
+function Stop() {
 	this.isPedestrian 	= true;
 	this.stopIn			= "";
 	this.hourIn			= "";	
@@ -674,8 +694,7 @@ function Stop()
 /**
  * Constructor
  */
-function Matrix()
-{
+function Matrix() {
 	this.matrixIn	= "";
 	this.matrixOut	= "";			
 }
@@ -683,10 +702,11 @@ function Matrix()
 /**
  * Constructor
  */
-function Projection()
-{
+function Projection() {
 	this.projIn		= "";
 	this.projOut	= "";			
 }
+
+
 
 
