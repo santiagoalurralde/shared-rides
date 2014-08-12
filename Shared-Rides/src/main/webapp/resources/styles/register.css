@@ -23,7 +23,7 @@
 [Starting Conditions]
 ------------------------------------------------------------------*/
 
-#btnBack, #btnOK, .alerts, #applyMapDefinition {
+#btnBack, #btnOK, .alerts, #applyMapDefinition{
 	display	:			none;
 }
 
