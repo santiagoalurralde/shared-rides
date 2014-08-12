@@ -426,6 +426,8 @@ function signUp() {
 		var phone		= $( "#cellphone" ).val();
 		var picture		= $( "#picture" ).val();	
 		picture			= picture.replace(/^.*[\\\/]/, '');
+		picture			= picture.replace(/(.*)\/.*(\.png|.jpg$)/i, '$1/'+ pId +'$2');
+		
 		var number		= $( "#number" ).val();
 		var street		= $( "#street" ).val();
 		var nbh			= $( "#neighborhood" ).val();
