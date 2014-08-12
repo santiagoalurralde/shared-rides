@@ -424,9 +424,9 @@ function signUp() {
 		var surname 	= $( "#surname" ).val();
 		var email 		= $( "#email" ).val();
 		var phone		= $( "#cellphone" ).val();
-		var picture		= $( "#picture" ).val();	
+		var picture		= $( "#picture" ).val();
+		picture			= picture.replace(/(.*)\/.*(\.jpg$)/i, '$1/'+ pId +'$2');
 		picture			= picture.replace(/^.*[\\\/]/, '');
-		picture			= picture.replace(/(.*)\/.*(\.png|.jpg$)/i, '$1/'+ pId +'$2');
 		
 		var number		= $( "#number" ).val();
 		var street		= $( "#street" ).val();
