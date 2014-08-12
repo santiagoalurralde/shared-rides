@@ -52,7 +52,7 @@ public class SignupUserController {
 	}
 	
 	@RequestMapping("/validateNewUser.do")
-	public boolean validateNewUser(@RequestParam("personalId") String personalId,
+	public @ResponseBody boolean validateNewUser(@RequestParam("personalId") String personalId,
 								HttpServletRequest request){
 		return signupUserService.validateNewUser(personalId);
 	}
@@ -85,8 +85,7 @@ public class SignupUserController {
 	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public @ResponseBody String uploadFileHandler(@RequestParam("file") MultipartFile file,
-    												@RequestParam("personalId") String personalId) {
-		//TODO: devuelvo un msg? hay que ver a donde tengo que redireccionar.
+    												@RequestParam("picturePersonalId") String personalId) {
 		return signupUserService.uploadPicFile(file, personalId);
     }
 }
