@@ -129,9 +129,9 @@
 				         	<spring:message code="label.address"/>          				              	 
 				        </span> 
 	           		
-	           			<input 	type="number"	id="number" class="blockRight theInputs" 
+	           			<input 	type="number" id="number" class="blockRight theInputs" 
 	           				   	onChange="checkIt(this);" onKeyUp="checkNumeric(this);" min="0" max="99999"/>
-	           			<input	type="text"		id="street" class="blockRight theInputs" 
+	           			<input	type="text" id="street" class="blockRight theInputs" 
 	           				   	onChange="checkIt(this);" />
           			</span> 
           				
@@ -157,9 +157,9 @@
            				
            				<select id="shift" class="blockRight theInputs" 
            						onChange="checkIt(this);">
-           					<option value="0" selected>												</option>	            					           				
+           					<option value="0" selected></option>	            					           				
            					<option value="morning">	<spring:message code="label.morning"/> 		</option>	            				
-           					<option value="afternoon">	<spring:message code="label.afternoon"/> 	</option>
+           					<option value="afternoon">	<spring:message code="label.afternoon"/>	</option>
            				</select>            				
            			</span> 
           				
@@ -172,7 +172,7 @@
           				
            				<select id="userType" class="blockRight theInputs"
            						onChange="checkIt(this); userTypeChanged(this);">
-           				    <option value="0" selected> </option>
+           				    <option value="0" selected></option>
            					<option value="pedestrian">			<spring:message code="label.pedestrian"/>	</option>	            				
            					<option value="driver">				<spring:message code="label.driver"/>		</option>
            					<option value="driver-pedestrian">	<spring:message code="label.mixed"/>		</option>	            					
@@ -194,10 +194,7 @@
 				            </span> 
             				
             				<select id="brand" class="blockRight theInputs" onChange="checkIt(this);">
-	            				<option value="0" selected></option>	            					            				            				
-            					<option>Renault	</option>	            				
-            					<option>Fiat	</option>
-            					<option>Ford	</option>	            					
+	            				<option value="0" selected></option>	            					            				            				           					
             				</select>         	            				
             			</span> 
 	            			
@@ -252,45 +249,26 @@
        		    <div id="thirdStep" class="steps" style="display: none">
 					<table id="tableSignUp" class="theSchedule">
 						<tr>
-							<th>
-								<!-- Empty -->
-							</th>	
-							<th>
-								<spring:message code="label.monday"/>
-							</th>
-							<th>
-								<spring:message code="label.tuesday"/>
-							</th>
-							<th>
-								<spring:message code="label.wednesday"/>
-							</th>
-							<th>
-								<spring:message code="label.thursday"/>
-							</th>
-							<th>
-								<spring:message code="label.friday"/>
-							</th>				
+							<th> <!-- Empty --> </th>	
+							<th> <spring:message code="label.monday"/> 		</th>
+							<th> <spring:message code="label.tuesday"/> 	</th>
+							<th> <spring:message code="label.wednesday"/>	</th>
+							<th> <spring:message code="label.thursday"/>	</th>
+							<th> <spring:message code="label.friday"/>		</th>				
 						</tr>
 						<tr id="userTypeRow">
-			
 						</tr>
 						<tr id="in">
-							<td>
-								<spring:message code="label.arrival"/>
-							</td>
+							<td> <spring:message code="label.arrival"/> 	</td>
 						</tr>
 						<tr id="out">
-							<td>
-								<spring:message code="label.departure"/>
-							</td>									
+							<td> <spring:message code="label.departure"/> 	</td>									
 						</tr>
 					</table>
 					
 					<div class="split"></div>
 	      						
           			<span id="applyMapDefinition">
-          				<!-- <span> Aplicar para: </span><select id="selectApply" class="theInputs" onChange="checkIt(this);"></select>-->
-          				
            				<input 	type="button" id="btnMap" class="btn" 
            						value='<spring:message code="label.ready"/>'/>  
            						
@@ -351,7 +329,7 @@
 <script src="resources/maps/track.js" 			type="text/javascript"></script>
 <script src="resources/maps/osmapSimple.js" 	type="text/javascript"></script>
 
-<script >
+<script>
 	initMapCoords(lonlat, zoom, map, null);
 </script>
 
