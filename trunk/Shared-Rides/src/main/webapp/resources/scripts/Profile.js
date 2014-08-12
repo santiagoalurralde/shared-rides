@@ -54,8 +54,10 @@ $( document ).ready(function(){
 	
 	//Request Association
 	$( ".btnRequestAssoc" ).click(function() {
-		requestAssociation(this);	
-		$( this ).prop( "disabled", true );		
+		if(confirm("Confirma el envío de esta petición")) {
+			requestAssociation(this);	
+			$( this ).prop( "disabled", true );
+		}
 	});
 	
 	//Show Current Map
@@ -75,7 +77,7 @@ $( document ).ready(function(){
  * @param {jquery} $targetThis - div that's gonna stay.
  * @param {jquery} $targetOther - div that's gonna be hidden.
  */
-function fixView($targetThis, $targetOther){
+function fixView($targetThis, $targetOther) {
 	$targetOther.css("display", "none");
 	$targetThis.css("float", "none").css("width", "100%").css("text-align","left");
 	$( '.star' ).css("float", "left").css("margin-right", "1%").css("margin-left", "0%");
@@ -112,7 +114,7 @@ function fillTable(schedule, type) {
 	$table.find("#rOut" ).append('<td>'+ $('#lblDeparture').val() +'</td>');
 	
 	for(var i=0; i<schedule.length; i++) {
-		var hdnMapIn, hdnMapOut;
+		var hdnsMapIn, hdnsMapOut;
 		var hdnDay	= '<input class="hdnDay"	type="hidden" value="'+ schedule[i].day +'"/>'; 
 		var hdnIn	= '<input class="hdnInOut" 	type="hidden" value="1"/>'; 
 		var hdnOut	= '<input class="hdnInOut"	type="hidden" value="2"/>';
@@ -120,8 +122,12 @@ function fillTable(schedule, type) {
 		if(!$( "#valMine" ).val()) {
 			//If it's my profile can't invite myself
 
-			btnReqIn	= '<button 	class="btnRequestAssoc" ><img src="resources/images/'+ image +'"/></button>';
-			btnReqOut	= '<button 	class="btnRequestAssoc" ><img src="resources/images/'+ image +'"/></button>';
+			btnReqIn 	=	'<button class="btnRequestAssoc">'+
+								'<img src="resources/images/'+ image +'"/>'+
+							'</button>';
+			btnReqOut	= 	'<button class="btnRequestAssoc">'+
+								'<img src="resources/images/'+ image +'"/>'+
+							'</button>';
 		}
 				
 		if(type == "Pedestrian") {	
@@ -137,7 +143,7 @@ function fillTable(schedule, type) {
 			hdnsMapOut	=	'<input class="hdnLat"	type="hidden" value="'+ schedule[i].latOut +'"/>'+
 							'<input class="hdnLon"	type="hidden" value="'+ schedule[i].lonOut +'"/>';	
 		}
-		else{
+		else {
 			if(schedule.freeSeatsIn == 0 || schedule[i].allowIn)
 				btnReqIn	= "";	//DISABLE!!!!!!!!!!!
 			if(schedule.freeSeatsOut == 0 || schedule[i].allowOut)
@@ -148,10 +154,14 @@ function fillTable(schedule, type) {
 		}
 		
 		$table.find("#rDay" ).append("<th>"+ getDayLabel(schedule[i].day) +"</th>");
-		$table.find("#rIn" ).append("<td class='cellCheckMap'>"+ schedule[i].hourIn + btnReqIn + hdnDay + hdnIn + hdnsMapIn + "</td>");
-		$table.find("#rOut" ).append("<td class='cellCheckMap'>"+ schedule[i].hourOut + btnReqOut + hdnDay + hdnOut + hdnsMapOut + "</td>");
+		$table.find("#rIn" ).append("<td class='cellCheckMap'>"+ 
+										schedule[i].hourIn + btnReqIn + hdnDay + hdnIn + hdnsMapIn + 
+									"</td>");
+		$table.find("#rOut" ).append("<td class='cellCheckMap'>"+ 
+										schedule[i].hourOut + btnReqOut + hdnDay + hdnOut + hdnsMapOut + 
+									 "</td>");
 		
-		delete hdnMapIn, hdnMapOut, hdnDay, hdnIn, hdnOut;
+		delete hdnsMapIn, hdnsMapOut, hdnDay, hdnIn, hdnOut;
 	}
 	
 	$( ".cellCheckMap" ).prop( "title", "Ver mapa en este horario");
@@ -162,7 +172,7 @@ function fillTable(schedule, type) {
  * 
  * @param {javascript} target - clicked cell.
  */
-function showMap(target){
+function showMap(target) {
 	if($( target ).closest( "table" ).attr( "id" ) == "tablePed")
 		setMapPedestrian($( target ).find(".hdnLon").val(), $( target ).find(".hdnLat").val());
 	else
@@ -175,14 +185,13 @@ function showMap(target){
  * 
  * @param {javascript} target - clicked button.
  */
-function requestAssociation(target){
+function requestAssociation(target) {
 	var $day	= $( target ).parent().find(".hdnDay").val();
 	var $inOut	= $( target ).parent().find(".hdnInOut").val();			
 	var $idUser	= $( "#valId" ).val();
 	
 	$.post( "requestAssoc.do", { "day":  $day, "inout": $inOut, "idUser": $idUser },
-		function(msg)
-		{
+		function(msg) {
 			if (msg != '')
 				window.alert(msg);
 		}); 
@@ -191,7 +200,7 @@ function requestAssociation(target){
 /**
  * Constructor
  */
-function DetailSchedulePedestrian(){
+function DetailSchedulePedestrian() {
 	this.day 			= "";
 	this.allowIn 		= "";
 	this.allowOut 		= "";		
@@ -206,7 +215,7 @@ function DetailSchedulePedestrian(){
 /**
  * Constructor
  */
-function DetailScheduleDriver(){
+function DetailScheduleDriver() {
 	this.day 			= "";
 	this.allowIn 		= "";
 	this.allowOut 		= "";	

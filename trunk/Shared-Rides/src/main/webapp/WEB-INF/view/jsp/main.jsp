@@ -49,7 +49,7 @@
         	
         		<!---- Results List ---->     
         		<div id="listFound">
-        			<div class='alerts'><img src='resources/images/message.png'> 
+        			<div class="alerts"><img src="resources/images/message.png"> 
         				<p><br> <spring:message code="label.foundNone"/>
         			</div>
         			

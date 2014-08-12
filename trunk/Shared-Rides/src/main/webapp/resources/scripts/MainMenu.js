@@ -114,7 +114,7 @@ function findUsers() {
 	$.post( "find.do", { "user": _user , "shift": _shift, "mapData": coordsJs }, 
 		function(json) {
 			var peopleFound = $.parseJSON(json);
-			if(peopleFound == null) {
+			if(peopleFound == "") {
 				$( ".alerts" ).show();	
 				$( "#tableFound" ).hide();				
 			}
@@ -150,8 +150,6 @@ function start() {
 	highlightStep(_step);		
 	$( "#mapDriver" ).css( 'display', 'none' );
 	$( "#mapPedestrian" ).css( 'display', 'none' );
-	$( "#btnBack" ).hide();							
-	$( "#listFound" ).hide();
 }
 
 /**
