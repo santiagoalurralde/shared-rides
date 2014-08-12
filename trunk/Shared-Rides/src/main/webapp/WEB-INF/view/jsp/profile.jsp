@@ -56,7 +56,6 @@
 							</b></p><br>
 							<div id="map3" class="mapStatic"></div>
 						</div>
-						
 					</div>
 					
 					<div id="line" class="vrs"></div>
@@ -123,7 +122,7 @@
 
 <!-- LINKS -->
 
-<link 	type="text/css" rel="stylesheet" href="resources/fancybox2/source/jquery.fancybox.css?v=2.1.5"		/>
+<link 	type="text/css" rel="stylesheet" href="resources/fancybox2/source/jquery.fancybox.css?v=2.1.5"	/>
 
 <!-- SCRIPTS -->
 

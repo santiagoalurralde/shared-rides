@@ -65,6 +65,10 @@ Assigned to:	Santiago Alurralde (sa)
 	margin-right:			130px;
 }
 
+.theDialog{
+	font-size:				80%;
+}
+
 .alerts {
 	border:					solid #CFCFCF 1px;
 	box-shadow:         	0 1px 2px #D1D1D1;
@@ -85,7 +89,7 @@ Assigned to:	Santiago Alurralde (sa)
 [Starting Conditions]
 ------------------------------------------------------------------*/
 
-#btnBack, .alerts, #imgSun, #imgMoon, #listFound {
+#btnBack, #btnOK, .alerts, #imgSun, #imgMoon, #listFound, .theDialog {
 	display:				none;
 }
 

@@ -278,6 +278,7 @@ button.ui-button::-moz-focus-inner {
 	padding: 0;
 }
 .ui-dialog {
+	font-size:	70%;
 	overflow: hidden;
 	position: absolute;
 	top: 0;
@@ -306,6 +307,11 @@ button.ui-button::-moz-focus-inner {
 	padding: 1px;
 	height: 20px;
 }
+
+.no-close .ui-dialog-titlebar-close {
+	display: none 
+}
+
 .ui-dialog .ui-dialog-content {
 	position: relative;
 	border: 0;

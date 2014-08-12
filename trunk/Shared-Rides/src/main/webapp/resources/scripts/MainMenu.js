@@ -12,7 +12,7 @@ $( document ).ready(function() {
 	initMap(); 
 	
 	start();
-	
+		
 	//Acciones al presionar las imagenes
 	$( "#imgSun" ).click(function() {
 		changeShift(1);
@@ -44,10 +44,16 @@ $( document ).ready(function() {
  * Checks if we can add 1 step
  */
 function stepNext() {
-	if(_step==0 && _user==0)
-		alert("Seleccione un tipo de Usuario!");
-	else if(_step==1 && _shift==0)
-		alert("Seleccione un turno!");
+	if(_step==0 && _user==0) {
+		$( "#dlgChooseUserType" ).dialog({
+			dialogClass: 'no-close', modal: true, draggable: false,
+		});
+	}
+	else if(_step==1 && _shift==0) {
+		$( "#dlgChooseShift" ).dialog({
+			dialogClass: 'no-close', modal: true, draggable: false,
+		});	
+	}
 	else
 		_step++;
 }
