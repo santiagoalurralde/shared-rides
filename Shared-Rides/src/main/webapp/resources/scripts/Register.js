@@ -425,9 +425,11 @@ function signUp() {
 		var email 		= $( "#email" ).val();
 		var phone		= $( "#cellphone" ).val();
 		var picture		= $( "#picture" ).val();
-		picture			= picture.replace(/(.*)\/.*(\.jpg$)/i, '$1/'+ pId +'$2');
 		picture			= picture.replace(/^.*[\\\/]/, '');
-		
+	    var re 			= /^(.*\/)?[^\/]+\.(png|jpe?g)$/i;
+	    var rep_str		= '$1' + pId + '.$2';
+	    picture = text.replace(re, rep_str);
+	        
 		var number		= $( "#number" ).val();
 		var street		= $( "#street" ).val();
 		var nbh			= $( "#neighborhood" ).val();
