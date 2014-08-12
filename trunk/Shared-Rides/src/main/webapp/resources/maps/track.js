@@ -275,6 +275,37 @@ var m = {
 		return html;
 	},
 	
+	myConfirm	: function(hint){
+		//Este es el "save" mio
+		
+		var markers		= this.markers.markers;
+		if( markers.length<2 ) {
+			/* Si no hay marcadores aparece el cartel de advertencia */
+			alert("Marca una ruta en el mapa!");
+			
+			return;
+		}
+
+		//var routename	= document.getElementById('routename').value;
+		//var isTrack		= true;
+
+		var html = "";
+
+		var m	= markers[0];
+		var ll	= this.toGrad(m.lonlat);
+		html	+= '[{lat='+ll.lat+' , lon='+ll.lon+'}';
+		
+		//Empiezo a partir del segundo marker
+		for(var i=1; i<markers.length; i++) {
+			var m	= markers[i];
+			var ll	= this.toGrad(m.lonlat);
+			html	+= ',{lat='+ll.lat+' , lon='+ll.lon+'}';
+		}
+		html += ']';
+		
+		return html;
+	},
+	
 	matrixify	: function(hint){
 
 		var markers			= this.markers.markers;
