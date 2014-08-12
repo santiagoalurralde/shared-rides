@@ -69,9 +69,9 @@ function start() {
  */
 function stepNext() {	
 	if((_step == 0 && !checkValues0()) || (_step == 0 && $( "#alert.passwordMatch" ).is(":visible")) || (_step == 0 && checkUserExists()) )
-		console.log("mal");
+		console.log("No es posible avanzar al segundo paso");
 	else if(_step == 1 && !checkValues1())
-		console.log("mal");
+		console.log("No es posible avanzar al terccer paso");
 	else
 		_step++;
 }
@@ -263,7 +263,7 @@ function checkValues1()
  */
 function checkValues2()
 {	
-	for (var d=1; d<6; d++)
+	for (var d=0; d<5; d++)
 	{
 		if(_days[d] == null)
 		{
@@ -409,7 +409,7 @@ function checkUserExists(){
  * Event, called when personalId is set. Equals personalId hidden field for picture.
  */
 function setPicturePersonalId() {
-	$( "#picturePersonalId" ).val($( "#personalId" ).val());
+	$( "#picturePersonalId" ).val($( "#personalId" ).val().toString());
 }
 
 /**
