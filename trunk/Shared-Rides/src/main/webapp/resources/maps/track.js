@@ -251,15 +251,12 @@ var m = {
 		if( markers.length<2 ) {
 			/* Si no hay marcadores aparece el cartel de advertencia */
 			alert("Marca una ruta en el mapa!");
-			
 			return;
 		}
-
-		//var routename	= document.getElementById('routename').value;
-		//var isTrack		= true;
+		
+		//###
 
 		var html = "";
-
 		var m	= markers[0];
 		var ll	= this.toGrad(m.lonlat);
 		html	+= '[{lat="'+ll.lat+'" , lon="'+ll.lon+'"}';
@@ -282,18 +279,13 @@ var m = {
 		if( markers.length<2 ) {
 			/* Si no hay marcadores aparece el cartel de advertencia */
 			alert("Marca una ruta en el mapa!");
-			
-			return;
+			return "";
 		}
 
-		//var routename	= document.getElementById('routename').value;
-		//var isTrack		= true;
-
-		var html = "";
-
-		var m	= markers[0];
-		var ll	= this.toGrad(m.lonlat);
-		html	+= '[{lat='+ll.lat+' , lon='+ll.lon+'}';
+		var html 	= "";
+		var m		= markers[0];
+		var ll		= this.toGrad(m.lonlat);
+		html		+= '[{lat='+ll.lat+' , lon='+ll.lon+'}';
 		
 		//Empiezo a partir del segundo marker
 		for(var i=1; i<markers.length; i++) {
@@ -352,3 +344,16 @@ var vectors = new OpenLayers.Layer.Vector("Lines", options);
 map.addLayer(vectors);
 map.addLayer(markers);
 gpxTrack = new GpxTrack(map, {"markers": markers, "vectors": vectors});
+
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+
+//###
+//var routename	= document.getElementById('routename').value;
+//var isTrack		= true;

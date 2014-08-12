@@ -386,7 +386,6 @@ function checkNumeric(target) {
 function checkUserExists(){
 	var pId = $( '#personalId' ).val().toString();
 	var flag = false;
-	alert("entro");
 	
 	$.ajax({
 		  url: "validateNewUser.do",		
@@ -477,7 +476,7 @@ function saveMap() {
 	//var applyTo		= $( "#selectApply" ).find("option:selected").val();
 
 	if(h == "none") {
-		alert("Seleccione la hora a definir");
+		alert("Selecciona la hora a definir");
 		return false;
 	}
 	
@@ -490,11 +489,15 @@ function saveMap() {
 		if(io == "in") {
 			_matrices[index].matrixIn = gpxTrack.matrixify();				
 			_days[index].trackIn = gpxTrack.myConfirm();
+			if(_days[index].trackIn == "")		//Hasn't defined a route.
+				return; 			
 			_days[index].hourIn = h;
 		}	
 		else {
 			_matrices[index].matrixOut = gpxTrack.matrixify();
 			_days[index].trackOut = gpxTrack.myConfirm();
+			if(_days[index].trackOut == "")		//Hasn't defined a route.
+				return; 
 			_days[index].hourOut = h;			
 		}
 		gpxTrack.clear();	
@@ -524,7 +527,7 @@ function saveMap() {
 		}
 		else
 		{
-			alert("Seleccione un punto en el mapa");
+			alert("Selecciona un punto en el mapa");
 			return false;
 		}
 	}
@@ -542,7 +545,7 @@ function saveMap() {
 function defineMap(target) {	
 	var d				= $( target ).parent().index();
 	var io 				= $( target ).parent().parent().attr('id');
-	var userTypeDay 	= $( "#userType"+ d ).find("option:selected").val();				/*var selectCommon	= 	'<option value="0" selected></option>' +'<option value="onlythis">Sólo la hora seleccionada</option>';*/
+	var userTypeDay 	= $( "#userType"+ d ).find("option:selected").val();				
 	var index 			= Number(d) - 1;
 
 	//No se ha seleccionado ningun tipo de usuario
@@ -564,14 +567,14 @@ function defineMap(target) {
 	
 	if(userTypeDay == "pedestrian") {
 		$( "#mapDriver" ).hide();		
-		$( "#mapPedestrian" ).show( 'slow' );				/* $( "#selectApply" ).html(	selectCommon + '<option value="allOut">Todas las salidas como peaton</option>'+'<option value="allIn">Todas las entradas como peaton</option>'+'<option value="allSchedule">Todo el horario</option>');	*/
+		$( "#mapPedestrian" ).show( 'slow' );				
 	}
 	else {																	
 		$( "#mapPedestrian" ).hide();	
 		$( "#mapDriver" ).show( 'slow' );
 	}
 	
-	$( "#applyMapDefinition" ).show( 'fast' );				/* $( "#selectApply" ).html(	selectCommon + '<option value="allOut">Todas las salidas como peaton</option>'+ '<option value="allIn">Todas las entradas como peaton</option>'); */
+	$( "#applyMapDefinition" ).show( 'fast' );				
 		
 	if(userTypeDay == "driver") {
 		gpxTrack.clear();
