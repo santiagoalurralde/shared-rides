@@ -64,17 +64,19 @@
         		<div id="buttonsSteps">
         			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepBack();"	/>	
            	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepNext();"	/>		
-        			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	style="display: none" 	/>  
+        			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	/>  
         		</div> 	  
-            	
        		</form>	        	
         </section>        
 	</div>
 	
-		<c:set var="lblBlocks1"> 	<spring:message code="label.blocks1"	/></c:set>
-		<c:set var="lblBlocks2"> 	<spring:message code="label.blocks2"	/></c:set>	
-		<input type="hidden" id="lblBlocks1" 	value="${lblBlocks1}" 	/>
-		<input type="hidden" id="lblBlocks2" 	value="${lblBlocks2}" 	/>
+	<div id='dlgChooseUserType' title="Oops!" class='theDialog'>Selecciona un tipo de usuario! <br><p>(Presiona Esc. para volver)</div>
+	<div id='dlgChooseShift' 	title="Oops!" class='theDialog'>Selecciona un turno! <br><p>(Presiona Esc. para volver)</div>
+	
+	<c:set var="lblBlocks1"><spring:message code="label.blocks1"/></c:set>
+	<c:set var="lblBlocks2"><spring:message code="label.blocks2"/></c:set>	
+	<input type="hidden" id="lblBlocks1" value="${lblBlocks1}"/>
+	<input type="hidden" id="lblBlocks2" value="${lblBlocks2}"/>
 		
 	<section>
 		<script src="resources/scripts/MainMenu.js" 	type="text/javascript"></script>
