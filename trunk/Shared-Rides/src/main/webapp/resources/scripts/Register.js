@@ -409,7 +409,7 @@ function checkUserExists(){
  * Event, called when personalId is set. Equals personalId hidden field for picture.
  */
 function setPicturePersonalId() {
-	$( "#picturePersonalId" ).val($( "#personalId" ).val().toString());
+	document.getElementById("picturePersonalId").name = $( "#personalId" ).val().toString();
 }
 
 /**
@@ -426,9 +426,6 @@ function signUp() {
 		var phone		= $( "#cellphone" ).val();
 		var picture		= $( "#picture" ).val();
 		picture			= picture.replace(/^.*[\\\/]/, '');
-	    var re 			= /^(.*\/)?[^\/]+\.(png|jpe?g)$/i;
-	    var rep_str		= '$1' + pId + '.$2';
-	    picture 		= picture.replace(re, rep_str);
 		var number		= $( "#number" ).val();
 		var street		= $( "#street" ).val();
 		var nbh			= $( "#neighborhood" ).val();
