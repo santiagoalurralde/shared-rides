@@ -116,9 +116,8 @@
 	          			<span class="blockLeft">
 			               <spring:message code="label.picture"/>     
 			        	</span>     
-						<input 	type="file" id="picture" name="file" 
+						<input 	type="file" id="picture" name="" 
 								class="blockRight" accept="image/x-png, image/jpeg">
-	         			<input 	type="hidden" id="picturePersonalId">								
 	         			<input 	type="submit" class="btn" value='<spring:message code="label.send"/>'>
          			</form>
           			
