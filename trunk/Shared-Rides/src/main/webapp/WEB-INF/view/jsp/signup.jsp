@@ -36,7 +36,7 @@
 			            </span> 
            				
            				<input 	type="text" id="personalId" class="blockRight theInputs" 
-           						onChange="checkIt(this); setPicturePersonalId();"/>
+           						onChange="checkIt(this);"/>
          			</span> 
          				
          			<div class="split"></div>
@@ -109,14 +109,14 @@
        		    
        		    <div id="secondStep" class="steps" style="display: none">
 
-         			<form method="POST" action="uploadFile.do" target="uploaded" 
-         				onSubmit="uploaded = window.open('','uploaded', 'width=300 height=200, status=no scrollbars=no, location=no, resizable=no, manu=no');"
+         			<form method="POST" action="uploadFile.do" target="uploaded"
+						onSubmit="uploaded = window.open('','uploaded', 'width=300 height=200, status=no scrollbars=no, location=no, resizable=no, manu=no');"
          				enctype="multipart/form-data"> 
          				
 	          			<span class="blockLeft">
 			               <spring:message code="label.picture"/>     
 			        	</span>     
-						<input 	type="file" id="picture" name="" 
+						<input 	type="file" name="picture"  
 								class="blockRight" accept="image/x-png, image/jpeg">
 	         			<input 	type="submit" class="btn" value='<spring:message code="label.send"/>'>
          			</form>

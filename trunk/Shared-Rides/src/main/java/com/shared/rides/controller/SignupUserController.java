@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.shared.rides.dao.interfaces.IOrganizationDAO;
 import com.shared.rides.domain.Organization;
 import com.shared.rides.service.SignupUserService;
-import com.shared.rides.util.UploadFile;
 
 //import com.shared.rides.service.SignupUserService;
 
@@ -65,7 +65,7 @@ public class SignupUserController {
 											@RequestParam("surname") String surname,
 											@RequestParam("email") String email,
 											@RequestParam("phone") long phoneNumber,
-											@RequestParam("picture") String pic,
+//											@RequestParam("picture") String pic,
 											@RequestParam("street") String street,
 											@RequestParam("number") int numberStreet,
 											@RequestParam("neighborhood") String neighborhood,
@@ -76,16 +76,18 @@ public class SignupUserController {
 											@RequestParam("plateLetters") String plateLetters,
 											@RequestParam("plateNumbers") String plateNumbers,
 											@RequestParam("numberSeats") int numberSeats,
-											@RequestParam("days") String days
+											@RequestParam("days") String days,
+											HttpServletRequest r
 											){	
+		String pic = r.getSession().getAttribute("pic").toString();
 		String licensePlate = plateLetters + " " + plateNumbers;
 		signupUserService.signupUser(organization, personalId, pw, name, surname, phoneNumber, email, street, numberStreet, neighborhood, shift, userType, brand, modelVehicle, licensePlate, numberSeats, days, pic);
 		return "msg";
 	}	
 	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public @ResponseBody String uploadFileHandler(@RequestParam("file") MultipartFile file,
-    												@RequestParam("picturePersonalId") String personalId) {
-		return signupUserService.uploadPicFile(file, personalId);
+    public @ResponseBody String uploadFileHandler(@RequestParam("picture") MultipartFile file,
+    												HttpServletRequest request) {
+		return signupUserService.uploadPicFile(file, request);
     }
 }
