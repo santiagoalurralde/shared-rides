@@ -1,13 +1,12 @@
 package com.shared.rides.service;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonArray;
@@ -270,7 +269,11 @@ public class SignupUserService {
 		driverDAO.newTrack(driver, track);
 	}
 	
-	public String uploadPicFile(MultipartFile file, String fileName){
+	public String uploadPicFile(MultipartFile file, HttpServletRequest request){
+		Random ran = new Random();
+		String fileName = ran.nextInt(999) + "_" + file.getOriginalFilename();
+		//Seteo el nuevo nombre de la imagen en la sesion para luego obtenerlo de nuevo a la hora de darle de alta al usuario
+		request.getSession().setAttribute("picName", fileName);
 		return UploadFile.uploadFile(file, fileName);			
 	}
 	
