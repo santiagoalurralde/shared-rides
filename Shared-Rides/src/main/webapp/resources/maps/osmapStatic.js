@@ -1,4 +1,4 @@
-var _mapPedestrian, _mapDriver, _proj4326, _layerMarkers, _layerTrack; 
+var _mapPedestrian, _mapDriver, _proj4326, _layerMarkers, _layerTrack, _layerGpx; 
 
 /**
  * Starts Pedestrian's map
@@ -73,7 +73,6 @@ function setMapPedestrian(lonPed, latPed){
 
     _layerMarkers.clearMarkers();
     _layerMarkers.addMarker(markerPed); 	
-
 }
 
 /**
@@ -83,7 +82,9 @@ function setMapDriver(urlGpxDriver){
 	// Define the map layer
 	// Here we use a predefined layer that will be kept up to date with URL changes
 
-	var gpx = new OpenLayers.Layer.Vector("driver track", {
+	_mapDriver.removeLayer(_layerTrack);
+	
+	_layerTrack = new OpenLayers.Layer.Vector("driver track", {
 		strategies: [new OpenLayers.Strategy.Fixed()],
 		protocol: new OpenLayers.Protocol.HTTP({
 		url: 'resources/gpxFiles/'+ urlGpxDriver,
@@ -93,7 +94,7 @@ function setMapDriver(urlGpxDriver){
 	projection: new OpenLayers.Projection("EPSG:4326")
 	});
 	
-	_mapDriver.addLayer(gpx);		
+	_mapDriver.addLayer(_layerTrack);		
 }
 
 
