@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -273,7 +274,8 @@ public class SignupUserService {
 		Random ran = new Random();
 		String fileName = ran.nextInt(999) + "_" + file.getOriginalFilename();
 		//Seteo el nuevo nombre de la imagen en la sesion para luego obtenerlo de nuevo a la hora de darle de alta al usuario
-		request.getSession().setAttribute("picName", fileName);
+		HttpSession s = request.getSession();
+		s.setAttribute("picName", fileName);
 		return UploadFile.uploadFile(file, fileName);			
 	}
 	

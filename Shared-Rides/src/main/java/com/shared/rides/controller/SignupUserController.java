@@ -65,7 +65,6 @@ public class SignupUserController {
 											@RequestParam("surname") String surname,
 											@RequestParam("email") String email,
 											@RequestParam("phone") long phoneNumber,
-//											@RequestParam("picture") String pic,
 											@RequestParam("street") String street,
 											@RequestParam("number") int numberStreet,
 											@RequestParam("neighborhood") String neighborhood,
@@ -79,7 +78,7 @@ public class SignupUserController {
 											@RequestParam("days") String days,
 											HttpServletRequest r
 											){	
-		String pic = r.getSession().getAttribute("pic").toString();
+		String pic = r.getSession().getAttribute("picName").toString();
 		String licensePlate = plateLetters + " " + plateNumbers;
 		signupUserService.signupUser(organization, personalId, pw, name, surname, phoneNumber, email, street, numberStreet, neighborhood, shift, userType, brand, modelVehicle, licensePlate, numberSeats, days, pic);
 		return "msg";
