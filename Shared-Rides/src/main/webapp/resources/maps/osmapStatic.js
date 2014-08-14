@@ -93,7 +93,7 @@ function setMapDriver(urlGpxDriver){
 	projection: new OpenLayers.Projection("EPSG:4326")
 	});
 	
-	map.addLayer(gpx);		
+	_mapDriver.addLayer(gpx);		
 }
 
 
