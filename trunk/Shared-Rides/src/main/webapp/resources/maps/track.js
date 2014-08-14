@@ -282,20 +282,26 @@ var m = {
 			return "";
 		}
 
-		var html 	= "";
+		var route	= new Array();
 		var m		= markers[0];
 		var ll		= this.toGrad(m.lonlat);
-		html		+= '[{lat='+ll.lat+' , lon='+ll.lon+'}';
 		
+		var lonLat	= new LonLat();
+		lonLat.lat  = parseFloat(ll.lat);
+		lonLat.lon  = parseFloat(ll.lon);
+		route.push(lonLat);
+
 		//Empiezo a partir del segundo marker
 		for(var i=1; i<markers.length; i++) {
+			var lonLatAux = new LonLat();
 			var m	= markers[i];
 			var ll	= this.toGrad(m.lonlat);
-			html	+= ',{lat='+ll.lat+' , lon='+ll.lon+'}';
+			lonLatAux.lat = parseFloat(ll.lat);
+			lonLatAux.lon = parseFloat(ll.lon);
+			route.push(lonLatAux);
 		}
-		html += ']';
 		
-		return html;
+		return route;
 	},
 	
 	matrixify	: function(hint){
@@ -357,3 +363,8 @@ gpxTrack = new GpxTrack(map, {"markers": markers, "vectors": vectors});
 //###
 //var routename	= document.getElementById('routename').value;
 //var isTrack		= true;
+
+function LonLat(){
+	this.lat = 0;
+	this.lon = 0;
+}
