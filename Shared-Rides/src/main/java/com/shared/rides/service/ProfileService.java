@@ -53,12 +53,12 @@ public class ProfileService {
 	private boolean isAssociation = false;
 	private boolean myProfile;
 	private ModelAndView model;
-	private long userId;
+	private long userLogInId;
 	
-	public ModelAndView getProfile(long userId, HttpServletRequest req, boolean myProf){
-		this.userId = userId;
+	public ModelAndView getProfile(long userId, HttpServletRequest req, boolean myProf){	
 		HttpSession s = req.getSession(false);
 		User u = (User)s.getAttribute("user");
+		this.userLogInId = u.getUserId();
 		myProfile = myProf;
 		
 		//Si no es mi profile, entonces veo si tengo asociacion con esa persona
@@ -136,7 +136,7 @@ public class ProfileService {
 		}
 		else{
 			model.addObject("visible", false);			
-			model.addObject("picture", "user.jpg");
+			model.addObject("picture", "user.png");
 		}
 	}
 	
@@ -163,7 +163,7 @@ public class ProfileService {
 			day.put("hourOutDriver", sch.getHourOut());
 			day.put("freeSeatsOut", freeSeatsOut);
 			day.put("trackOut", getNameTrack(d, sch, 1));
-			day.put("allowIn", allowRequest(u.getUserId(), sch.getDay(), 0));
+			day.put("allowOut", allowRequest(u.getUserId(), sch.getDay(), 1));
 			
 			arraySch.add(i, day);
 		}
@@ -272,23 +272,23 @@ public class ProfileService {
 	 * Metodo que verifica si ya hay asociacion entre esas dos personas para ese dia y horario; para que no se pueda mandar
 	 * dos veces una misma asociacion
 	 */
-	private boolean allowRequest(long logInUserId, int day, int inout){
+	private boolean allowRequest(long userId, int day, int inout){
 		boolean allowFlag = true;
-		User logInUser = new User(logInUserId);
-		logInUser = userDAO.load(logInUser);
+		User user = new User(userId);
+		user = userDAO.load(user);
 		
-		User userAssoc = new User(this.userId);
+		User userAssoc = new User(this.userLogInId);
 		userAssoc = userDAO.load(userAssoc);
 		
-		if(logInUserId == this.userId){
+		if(userId == this.userLogInId){
 			allowFlag = false;
 		}
 		else{
-			for(Association a : logInUser.getAssociations()){
+			for(Association a : user.getAssociations()){
 				if (a.getDay() == day && 
 					a.getInout() == inout && 
 					!(a.getState().equals(State.CANCELLED)) &&
-					a.getApplicantID().getUserId() == this.userId){
+					a.getApplicantID().getUserId() == this.userLogInId){
 						allowFlag = false; 
 				}
 			}
@@ -296,7 +296,7 @@ public class ProfileService {
 				if (a.getDay() == day && 
 					a.getInout() == inout && 
 					!(a.getState().equals(State.CANCELLED)) &&
-					a.getApplicantID().getUserId() == logInUserId){
+					a.getApplicantID().getUserId() == userId){
 						allowFlag = false;			
 				}
 			}	
