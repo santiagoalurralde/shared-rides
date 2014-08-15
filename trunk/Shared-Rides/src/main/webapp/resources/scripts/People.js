@@ -52,11 +52,12 @@ function load()
 			$( "#alertAssociated" ).hide();
 		});	
 		
-		if(jsonNew[0] == "")
-			$( "#pending" ).append("<div class='alerts' id='alertPending'><img src='resources/images/message.png'> <p><br> No cuenta con peticiones pendientes </div>");
-		if(jsonNew[1] == "")
+		if(jsonNew[0] == "" && $("#pending").find(".alerts").length == 0) {
+			$( "#pending" ).append("<div class='alerts' id='alertPending'><img src='resources/images/message.png'> <p><br> No cuenta con peticiones pendientes </div>");			
+		}
+		if(jsonNew[1] == "" && $("#associated").find(".alerts").length == 0) {			
 			$( "#associated" ).append("<div class='alerts' id='alertAssociated'><img src='resources/images/message.png'> <p><br> Actualmente no posee asociaciones </div>");
-
+		}
 	});
 }
 
@@ -215,7 +216,6 @@ function actionAssociation(target, action)
 			function(){
 				alert("Acción Completada");
 				load();
-
 				listenerSchedule(_listenerScheduleTarget);
 			}
 	);
