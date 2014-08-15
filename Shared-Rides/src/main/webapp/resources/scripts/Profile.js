@@ -130,7 +130,7 @@ function fillTable(schedule, type) {
 	$table.find("#rIn").append('<td>' + $('#lblArrival').val() + '</td>');
 	$table.find("#rOut").append('<td>' + $('#lblDeparture').val() + '</td>');
 
-	for ( var i = 0; i < schedule.length; i++) {
+	for (var i = 0; i < schedule.length; i++) {
 		var hdnsMapIn, hdnsMapOut;
 		var hdnDay = '<input class="hdnDay"	type="hidden" value="'
 				+ schedule[i].day + '"/>';
@@ -150,17 +150,6 @@ function fillTable(schedule, type) {
 		}
 
 		if (type == "Pedestrian") {
-			// If Pedestrian has driver, can't invite him.
-
-			if (schedule.hasDriverIn == true || schedule[i].allowIn){
-				$("#btnReqIn"+schedule[i].day).prop('disabled', true);
-				checkDisabled($("#btnReqIn"+ schedule[i].day));
-			}
-			if (schedule.hasDriverOut == true || schedule[i].allowOut){
-				$("#btnReqOut"+schedule[i].day).prop('disabled', true);
-				checkDisabled($("#btnReqOut"+ schedule[i].day));				
-			}
-				
 			hdnsMapIn = '<input class="hdnLat"	type="hidden" value="'
 					+ schedule[i].latIn + '"/>'
 					+ '<input class="hdnLon"	type="hidden" value="'
@@ -169,18 +158,8 @@ function fillTable(schedule, type) {
 					+ schedule[i].latOut + '"/>'
 					+ '<input class="hdnLon"	type="hidden" value="'
 					+ schedule[i].lonOut + '"/>';
-		} else {
-			if (schedule.freeSeatsIn == 0 || schedule[i].allowIn)
-			{
-				$("#btnReqIn"+ schedule[i].day).prop('disabled', true); // DISABLE!!!!!!!!!!!
-				checkDisabled($("#btnReqIn"+ schedule[i].day));
-			}
-			if (schedule.freeSeatsOut == 0 || schedule[i].allowOut)
-			{
-				$("#btnReqOut"+ schedule[i].day).prop('disabled', true);
-				checkDisabled($("#btnReqOut"+ schedule[i].day));
-			}
-
+		} 
+		else {
 			hdnsMapOut = '<input class="hdnPath"	type="hidden" value="'
 					+ schedule[i].pathIn + '"/>';
 			hdnsMapIn = '<input class="hdnPath"	type="hidden" value="'
@@ -200,6 +179,41 @@ function fillTable(schedule, type) {
 	}
 
 	$(".cellCheckMap").prop("title", "Ver mapa en este horario");
+	
+	disableRequests(schedule, type);
+}
+
+function disableRequests(schedule, type){
+
+	for (var i = 0; i < schedule.length; i++) {
+		if (type == "Pedestrian") {
+			// If Pedestrian has driver, can't invite him.
+			if (schedule.hasDriverIn == true || schedule[i].allowIn){
+				alert("#btnReqIn"+ schedule[i].day);								
+				$("#btnReqIn"+schedule[i].day).prop("disabled", true);
+				checkDisabled($("#btnReqIn"+ schedule[i].day));
+			}
+			if (schedule.hasDriverOut == true || schedule[i].allowOut){
+				alert("#btnReqOut"+ schedule[i].day);								
+				$("#btnReqOut"+schedule[i].day).prop("disabled", true);
+				checkDisabled($("#btnReqOut"+ schedule[i].day));				
+			}
+		} 
+		else {
+			if (schedule.freeSeatsIn == 0 || schedule[i].allowIn)
+			{
+				alert("#btnReqIn"+schedule[i].day);								
+				$("#btnReqIn"+schedule[i].day).prop("disabled", true); // DISABLE!!!!!!!!!!!
+				checkDisabled($("#btnReqIn"+ schedule[i].day));
+			}
+			if (schedule.freeSeatsOut == 0 || schedule[i].allowOut)
+			{
+				alert("#btnReqOut"+schedule[i].day);				
+				$("#btnReqOut"+schedule[i].day).prop("disabled", true);
+				checkDisabled($("#btnReqOut"+ schedule[i].day));
+			}
+		}
+	}
 }
 
 /**
