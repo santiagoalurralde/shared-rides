@@ -131,7 +131,7 @@ public class FindUserService {
 		if (profile == 1 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
-				if(u.getPedestrian() == null || !(u.getShift().equals(Shift.MOORNING))){
+				if(u.getPedestrian() == null || !(u.getShift().equals(Shift.MORNING))){
 					userList.remove(i);
 					isDelete = true;
 				}
@@ -159,7 +159,7 @@ public class FindUserService {
 		if (profile == 2 && shift == 1){
 			for(int i = 0; i < userList.size(); i++){
 				User u = userList.get(i);
-				if(u.getDriver() == null || !(u.getShift().equals(Shift.MOORNING))){
+				if(u.getDriver() == null || !(u.getShift().equals(Shift.MORNING))){
 					userList.remove(i);
 					isDelete = true;				
 				}			

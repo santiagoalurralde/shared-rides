@@ -1,7 +1,7 @@
 package com.shared.rides.domain;
 
 public enum Shift {
-	MOORNING("Mañana"), AFTERNOON("Tarde"), EVENING("Noche");
+	MORNING("Mañana"), AFTERNOON("Tarde"), EVENING("Noche");
 
 	private String shiftName;
 	
