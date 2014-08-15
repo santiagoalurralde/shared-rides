@@ -45,11 +45,14 @@ public class LoginController {
 	public ModelAndView userValidation(@RequestParam("email") String email , @RequestParam("pwd") String pwd, HttpServletRequest request)
             throws ServletException, IOException {
         logger.info("Returning hello view");
-        	
+        ModelAndView model = new ModelAndView();
+        
         if(loginService.validate(email, pwd, request)){
-        	return new ModelAndView("redirect:/main.do");
+            return new ModelAndView("redirect:/main.do");
         }
-     return new ModelAndView("redirect:/");
+        model.addObject("validate", false);	
+        model.setViewName("login");
+        return model;
     }
 	
 	@RequestMapping(value="logout.do")

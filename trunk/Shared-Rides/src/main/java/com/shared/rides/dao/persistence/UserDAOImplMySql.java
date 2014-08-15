@@ -48,7 +48,8 @@ public class UserDAOImplMySql implements IUserDAO {
 		String hql = "FROM User u WHERE u.email = ?";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter(0, user.getEmail());
-		return (User) query.list().get(0);	
+		if (query.list().size() != 0) return (User) query.list().get(0);
+		else return null;
 	}
 
 	public User update(User user) {

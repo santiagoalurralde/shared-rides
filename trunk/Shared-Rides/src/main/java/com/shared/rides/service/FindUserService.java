@@ -221,7 +221,7 @@ public class FindUserService {
 				}
 			}
 			if (isAssociation) jsonUser.addProperty("picture", list.get(i).getPicture());
-			else jsonUser.addProperty("picture", "user.jpg");
+			else jsonUser.addProperty("picture", "user.png");
 			
 			jsonList.add(jsonUser);
 		}		
