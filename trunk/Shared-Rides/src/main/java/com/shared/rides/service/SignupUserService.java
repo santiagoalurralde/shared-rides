@@ -100,8 +100,8 @@ public class SignupUserService {
 		u.setOrganization(org);
 		u.setEmail(email);
 		
-		if (shift.equalsIgnoreCase(Shift.MOORNING.toString())){
-			u.setShift(Shift.MOORNING);
+		if (shift.equalsIgnoreCase(Shift.MORNING.toString())){
+			u.setShift(Shift.MORNING);
 		}else if (shift.equalsIgnoreCase(Shift.AFTERNOON.toString())){
 			u.setShift(Shift.AFTERNOON);
 			}else{
