@@ -152,7 +152,7 @@
 		detSchPed.hourOut 		= "${day.hourOutPed}";
 		detSchPed.hasDriverIn 	= "${day.hasDriverIn}";
 		detSchPed.hasDriverOut	= "${day.hasDriverOut}";
-		alert(detSchPed.hasDriverIn);
+		//alert(detSchPed.hasDriverIn);
 		detSchPed.latIn 		= "${day.stopLatIn}";
 		detSchPed.latOut 		= "${day.stopLatOut}";
 		detSchPed.lonIn 		= "${day.stopLonIn}";
@@ -165,7 +165,7 @@
 		detSchDriver.day 			= "${day.dayDriver}";
 		detSchDriver.allowIn 		= "${day.allowIn}";
 		detSchDriver.allowOut 		= "${day.allowOut}";	
-		alert(detSchDriver.allowIn);
+		//alert(detSchDriver.allowIn);
 		detSchDriver.hourIn 		= "${day.hourInDriver}";
 		detSchDriver.hourOut 		= "${day.hourOutDriver}";
 		detSchDriver.freeSeatsIn 	= "${day.freeSeatsIn}";
