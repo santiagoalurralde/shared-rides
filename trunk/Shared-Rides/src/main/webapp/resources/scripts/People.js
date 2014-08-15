@@ -53,10 +53,12 @@ function load()
 		});	
 		
 		if(jsonNew[0] == "" && $("#pending").find(".alerts").length == 0) {
-			$( "#pending" ).append("<div class='alerts' id='alertPending'><img src='resources/images/message.png'> <p><br> No cuenta con peticiones pendientes </div>");			
+			$( "#pending" ).append("<div class='alerts' id='alertPending'><img src='resources/images/message.png'> <p><br> No cuenta con peticiones pendientes </div>");
+			$( "#tablePending" ).hide();
 		}
 		if(jsonNew[1] == "" && $("#associated").find(".alerts").length == 0) {			
 			$( "#associated" ).append("<div class='alerts' id='alertAssociated'><img src='resources/images/message.png'> <p><br> Actualmente no posee asociaciones </div>");
+			$( "#tableAssociated" ).hide();
 		}
 	});
 }
