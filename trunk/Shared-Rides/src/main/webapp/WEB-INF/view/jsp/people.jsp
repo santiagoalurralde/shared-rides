@@ -8,11 +8,9 @@
 				<div id="listData" class="theBoard lightBorder"> 	
 										
 					<div id="pending" class="blockHalf blockRight"> 		<!-- Lista Solicitudes 	--> 
-					
 						<h2> <spring:message code="label.pending"/> </h2>
 						<table id="tablePending"	class="tableUsers">
-						</table>
-						
+						</table>	
 					</div> 
 					
 					<!-- <div class="vrs"></div> -->
