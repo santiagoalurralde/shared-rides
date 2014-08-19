@@ -33,8 +33,8 @@ public class PeopleController {
 	
 	/*
 	 * Metodo que se llama cuando se envia una nueva asociacion a un usuario
-	 * IN --> 1
-	 * OUT --> 2
+	 * IN --> 0
+	 * OUT --> 1
 	 */
 	@RequestMapping(value = "/requestAssoc.do", method = RequestMethod.POST)
 	public @ResponseBody String sendAssociationRequest(@RequestParam("day") int day,
