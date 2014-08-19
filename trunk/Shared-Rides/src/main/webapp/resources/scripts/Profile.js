@@ -134,8 +134,8 @@ function fillTable(schedule, type) {
 		var hdnsMapIn, hdnsMapOut;
 		var hdnDay = '<input class="hdnDay"	type="hidden" value="'
 				+ schedule[i].day + '"/>';
-		var hdnIn = '<input class="hdnInOut" 	type="hidden" value="1"/>';
-		var hdnOut = '<input class="hdnInOut"	type="hidden" value="2"/>';
+		var hdnIn = '<input class="hdnInOut" 	type="hidden" value="0"/>';
+		var hdnOut = '<input class="hdnInOut"	type="hidden" value="1"/>';
 
 		if ($("#valMine").val() == "false") {
 			// If it's my profile can't invite myself
