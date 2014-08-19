@@ -51,12 +51,14 @@
 	
 	$.post( 'hasResponse.do', 
 			function(json) {
-				var notification = $.parseJSON(json);
-				if (notification != "") {
-					$( '#btnAlert' ).show();
-					var divNotif = "<div class='divNotif'><li><b>"+ notification.name +"</b> Ha respondido a tu peticion</li><div>";
-					$("#listNotifications").append(divNotif);
-				}
-			}
+				var jsonArray = $.parseJSON(json);
+				$.each(jsonArray, function(i, notification){
+					if (notification != "") {
+						$( '#btnAlert' ).show();
+						var divNotif = "<div class='divNotif'><li><b>"+ notification.name +"</b> Ha respondido a tu peticion</li><div>";
+						$("#listNotifications").append(divNotif);
+					}				
+				});
+	}
 		);
 </script>
