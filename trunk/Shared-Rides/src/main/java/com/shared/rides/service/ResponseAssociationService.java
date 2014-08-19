@@ -92,12 +92,12 @@ public class ResponseAssociationService {
 				}
 			}
 		}
-		/*else{
+		else{
 			//Lista de todas las peticiones que yo realice
 			List<Association> myRequestsList = userDAO.getMyRequests(requestUser);
 			
 			for (int i = 0; i < assocList.size(); i++){
-				User assocUser = assocList.get(i).getApplier();
+				User assocUser = assocList.get(i).getApplicantID();
 				if (assocUser.getUserId() == assocUserId && assocList.get(i).getState().equals(State.ACCEPTED)){
 					completeJson(assocList.get(i));
 				}
@@ -107,10 +107,10 @@ public class ResponseAssociationService {
 				long userId = assocDAO.getSupplierId(myRequestsList.get(j));
 				
 				if (userId == assocUserId && myRequestsList.get(j).getState().equals(State.ACCEPTED)){
-					completeJson(assocList.get(j));
+					completeJson(myRequestsList.get(j));
 				}
 			}
-		}*/
+		}
 		json.add("requested", requestedJson);
 		json.add("offered", offeredJson);
 		
