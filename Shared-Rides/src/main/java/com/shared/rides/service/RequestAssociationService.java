@@ -39,8 +39,8 @@ public class RequestAssociationService {
 		u = userDAO.load(u);
 		
 		List<Association> assocList = u.getAssociations();
-		List<String> userAssoc = new ArrayList<String>();
 		JsonArray json = new JsonArray();
+		
 		for(int i = 0; i < assocList.size(); i++){
 			if (assocList.get(i).getState().equals(State.PENDING)){
 				if (assocList.get(i).getDate().compareTo(new Date()) != 10){
