@@ -46,7 +46,7 @@ public class RequestAssociationService {
 				if (assocList.get(i).getDate().compareTo(new Date()) != 10){
 					JsonObject uJson = new JsonObject();
 					User uAssoc = assocList.get(i).getApplicantID();
-					String fullName = uAssoc.getName() + " " + u.getSurname();
+					String fullName = uAssoc.getName() + " " + uAssoc.getSurname();
 					uJson.addProperty("name", fullName);
 					uJson.addProperty("date", assocList.get(i).getDate().toString());
 					json.add(uJson);
