@@ -129,14 +129,14 @@ public class ResponseAssociationService {
 			Schedule sch = new Schedule(schIdList.get(j));
 			sch = scheduleDAO.load(sch);
 			if (assoc.getDay() == sch.getDay()){
-				if (assoc.getInout() == 1) jsonSchedule.addProperty("hour", sch.getHourIn());
+				if (assoc.getInout() == 0) jsonSchedule.addProperty("hour", sch.getHourIn());
 				else jsonSchedule.addProperty("hour", sch.getHourOut());
 				break;
 			}
 		}
 		/*
-		 * Si es 1; solicito un asiento, es decir yo soy conductor
-		 * Si es 2; ofrece asiento, soy peaton
+		 * Si es 0; solicito un asiento, es decir yo soy conductor
+		 * Si es 1; ofrece asiento, soy peaton
 		 */
 		if (assoc.getApplicantID().getDriver() != null){
 			boolean flag = false;
