@@ -1,7 +1,6 @@
 var _listenerScheduleTarget;
 
-function createTables()
-{
+function createTables() {
 	//Clean Tables at the beginning and after updating.
 	var content = "<tr><th> Usuario  </th></tr>";
 	
@@ -11,12 +10,11 @@ function createTables()
 
 load();
 
-function load()
-{
+function load() {
 	createTables();
 	
 	$.post( 'loadAssociations.do', 
-		function(json){
+		function(json) {
 		
 		/* Brings people info. JsonArray with 2 JsonArray: One with pending and another one 
 		 * with accepted associations. Each one contains association id and full name.
@@ -24,7 +22,7 @@ function load()
 		 
 		var jsonNew = $.parseJSON(json);
 
-		$.each(jsonNew[0], function(i, data){
+		$.each(jsonNew[0], function(i, data) {
 			var applicant =	"<div>"+
 								"<a style='float: left; margin-right: 25px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
 									"<img src='resources/profilePic/"+ data.pic +"'>"+
@@ -38,7 +36,7 @@ function load()
 			$( "#alertPending" ).hide();
 		});		
 		
-		$.each(jsonNew[1], function(i, data){
+		$.each(jsonNew[1], function(i, data) {
 			var applicant =	"<div>"+
 								"<a style='float: left; margin-right: 25px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
 									"<img src='resources/profilePic/"+ data.pic +"'>"+
@@ -63,8 +61,7 @@ function load()
 	});
 }
 
-function listenerSchedule(target)
-{
+function listenerSchedule(target) {
 	// Receives button object that shares cell with input that contains id.
 	
 	_listenerScheduleTarget = target;
@@ -73,20 +70,19 @@ function listenerSchedule(target)
 	
 	if($(target).hasClass("pending"))
 		$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 0}, 
-			function(json){
+			function(json) {
 				viewSchedule(json, 0);
 			}
 		);
 	else
 		$.post( "viewSchedule.do", { "userId": $userId , "typeAssoc": 1}, 
-			function(json){
+			function(json) {
 				viewSchedule(json, 1);
 			}
 		);	
 }
 
-function viewSchedule(json, typeAssoc)
-{
+function viewSchedule(json, typeAssoc) {
 	// Performs all the work by calling other functions
 	
 	var jsonNew = $.parseJSON(json);
@@ -94,7 +90,7 @@ function viewSchedule(json, typeAssoc)
 	var days	= new Array();
 	days[7] 	= null;	
 	
-	$.each(jsonNew.requested, function(i, data){	
+	$.each(jsonNew.requested, function(i, data) {	
 		fetchDays(days, data);
 	});	
 	printSchedule(days, $("#tableRequested"), typeAssoc);
@@ -102,44 +98,39 @@ function viewSchedule(json, typeAssoc)
 	days		= new Array();
 	days[7] 	= null;	
 	
-	$.each(jsonNew.offered, function(i, data){	
+	$.each(jsonNew.offered, function(i, data) {	
 		fetchDays(days, data);
 	});
 	printSchedule(days, $("#tableOffered"), typeAssoc);
 	
-	if(jsonNew.requested == "")
-	{
+	if(jsonNew.requested == "") {
 		$( "#requested" ).hide();
 		$( "#offered" ).css("float", "none").css("width", "100%");
 	}
-	if(jsonNew.offered == "")
-	{
+	if(jsonNew.offered == "") {
 		$( "#offered" ).hide();
 		$( "#requested" ).css("float", "none").css("width", "100%");
 	}
 }
 
-function fetchDays(days, data)
-{
+function fetchDays(days, data) {
 	// Fills up array "days" with objects
 	
 	if(days[data.day] == null)
 		days[data.day] = new Day();
 
-	if(data.inout == 1)	//in
-	{
+	//in
+	if(data.inout == 1)	{
 		days[data.day].inHour 		= data.hour;
 		days[data.day].assocIdIn	= data.assocId;
 	}
-	else
-	{
+	else {
 		days[data.day].outHour 		= data.hour;
 		days[data.day].assocIdOut 	= data.assocId;
 	}	
 }
 
-function printSchedule(days, $table, typeAssoc)
-{	
+function printSchedule(days, $table, typeAssoc) {	
 	// Prints both schedules
 	
 	if(!$( "#scheduleData" ).is(":visible"))			//Display schedules' section
@@ -152,10 +143,8 @@ function printSchedule(days, $table, typeAssoc)
 	var btnCancel 	= "<button onclick='actionAssociation(this, false)' style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>";
 	var btnAccept  	= "<button onclick='actionAssociation(this, true)' style='margin-left: 4px'><img src='resources/images/accept.png' width='15px'></button>";
 	
-	for(var i=1;i<days.length;i++)
-	{
-		if(days[i]!=null)
-		{
+	for(var i=1;i<days.length;i++) {
+		if(days[i]!=null) {
 			var buttons;
 			
 			$table.find( "tr:first" ).append("<th id='"+ i +"'>"+ getDayLabel(i) +"</th>"); 		//Create label for current day
@@ -173,8 +162,7 @@ function printSchedule(days, $table, typeAssoc)
 			
 			var content;
 			
-			if(days[i].inHour != "" && days[i].outHour == "")
-			{	     
+			if(days[i].inHour != "" && days[i].outHour == "") {	     
 				//Just IN 
 				content = 	days[i].inHour + buttons +
 							"<input type='hidden' value='"+ days[i].assocIdIn +"' id='assocId'>";
@@ -182,8 +170,7 @@ function printSchedule(days, $table, typeAssoc)
 				$table.find( "#in" ).append("<td>"+ content +"</td>");
 				$table.find( "#out" ).append("<td class='emptyCells'></td>"); 			
 			}
-			else if(days[i].inHour != "" && days[i].outHour != "")
-			{
+			else if(days[i].inHour != "" && days[i].outHour != "") {
 				//IN & OUT
 				content = 	days[i].inHour + buttons +
 							"<input type='hidden' value='"+ days[i].assocIdIn +"' id='assocId'>";
@@ -195,8 +182,7 @@ function printSchedule(days, $table, typeAssoc)
 				$table.find( "#out" ).append("<td>"+ content2 +"</td>");
 
 			}
-			else	
-			{	
+			else {	
 				//Just OUT
 				content =	days[i].outHour + buttons +
 							"<input type='hidden' value='"+ days[i].assocIdOut +"' id='assocId'>";
@@ -208,23 +194,21 @@ function printSchedule(days, $table, typeAssoc)
 	}	
 }
 
-function actionAssociation(target, action)
-{	
+function actionAssociation(target, action) {	
 	// Cancels or Accepts the request.
 	
-	var $assocId = $(target).parent().find("#assocId").val();
+	var $assocId = $( target ).parent().find( "#assocId" ).val();
 		
-	$.post( "responseAssoc.do", { "assocId": $assocId , "response": action}, 
-			function(){
-				alert("Acción Completada");
-				load();
-				listenerSchedule(_listenerScheduleTarget);
-			}
+	$.post( "responseAssoc.do", {"assocId": $assocId , "response": action}, 
+		function() {
+			alert("Acción Completada");
+			load();
+			listenerSchedule(_listenerScheduleTarget);
+		}
 	);
 }
 
-function Day()
-{ 
+function Day() { 
 	// Constructor
 
 	this.assocIdIn	= "";

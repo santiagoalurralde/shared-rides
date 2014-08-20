@@ -17,21 +17,21 @@ if ($("#valPedestrian").val() === 'false') // It's not a pedestrian
 
 $(function() {
 	$(document).tooltip(
-			{
-				position : {
-					my : "center bottom-20",
-					at : "center top",
-					using : function(position, feedback) {
-						$(this).css(position);
-						$("<div>").addClass("arrow")
-								.addClass(feedback.vertical).addClass(
-										feedback.horizontal).appendTo(this);
-					}
+		{
+			position : {
+				my : "center bottom-20",
+				at : "center top",
+				using : function(position, feedback) {
+					$(this).css(position);
+					$("<div>").addClass("arrow")
+							.addClass(feedback.vertical).addClass(
+									feedback.horizontal).appendTo(this);
 				}
-			});
+			}
+		});
 });
 
-$(document).ready(function() {
+$( document ).ready(function() {
 
 	fillTable(_schDriver, "Driver");
 	fillTable(_schPed, "Pedestrian");
@@ -46,9 +46,8 @@ $(document).ready(function() {
 	});
 
 	// If it's my profile, it shouldn't rate
-	if ($("#valMine").val() == "true") {
+	if ($("#valMine").val() == "true")
 		$(".star").unwrap();
-	}
 
 	// Request Association
 	$(".btnRequestAssoc").click(function() {
@@ -90,8 +89,7 @@ function checkDisabled($target) {
  */
 function fixView($targetThis, $targetOther) {
 	$targetOther.css("display", "none");
-	$targetThis.css("float", "none").css("width", "100%").css("text-align",
-			"left");
+	$targetThis.css("float", "none").css( "width", "100%" ).css( "text-align", "left" );
 	$('.star').css("float", "left").css("margin-right", "1%").css(
 			"margin-left", "0%");
 	$('.theRating').css("margin", "2% 0% 0% 0%");

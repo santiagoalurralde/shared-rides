@@ -9,78 +9,78 @@ Assigned to:	Santiago Alurralde (sa)
 
 /*-----------------------------------------------------------------*/
 
-#userData{
-	margin-top: 				1.5%;	
-	height:						110px;
+#userData {
+	margin-top: 1.5%;	
+	height:		110px;
 }
 
-.theBoard{	
+.theBoard {	
 	/*	Container with white background */
 	
-	background-color:		white;
-	padding:				20px 0 35px 0;
-	width:					100%;	
+	background-color:	white;
+	padding:			20px 0 35px 0;
+	width:				100%;	
 }
 
-#publicData{
-	float:					left;	
-	width: 					35%;
+#publicData {
+	float:				left;	
+	width: 				35%;
 }
 
-#privateData{
-	float:					right;
-	width: 					40%;
+#privateData {
+	float:				right;
+	width: 				40%;
 }
 
-#pictureData{
-	float:					left;
-	width:					19%;
-	margin-left:			3%;
-	margin-right:			2%;
+#pictureData {
+	float:				left;
+	width:				19%;
+	margin-left:		3%;
+	margin-right:		2%;
 }
 
-.star{
-	width:					50px;
-	float:					left;
-	margin-right:			2%";
+.star {
+	width:				50px;
+	float:				left;
+	margin-right:		2%";
 }
 
-#thePic{
-	box-shadow:				.45px 1px 3.5px #444444;
-	color:					Black;
-	border:					solid White 4px; 	
-	width:					140px;
-	height:					150px;
-	z-index:				500;
+#thePic {
+	box-shadow:			.45px 1px 3.5px #444;
+	color:				#000;
+	border:				solid #FFF 4px; 	
+	width:				140px;
+	height:				150px;
+	z-index:			500;
 }
 
-#profileData{
-	padding-left: 				20px;
-	padding-right: 				20px;
-	overflow:					auto;
-	min-height:					500px;
+#profileData {
+	padding-left: 		20px;
+	padding-right: 		20px;
+	overflow:			auto;
+	min-height:			500px;
 }
 
-#line{
-	height: 				778px;
-	position:				absolute;
-	left:					480px; 
-	top:					0px;		
+#line {
+	height: 			778px;
+	position:			absolute;
+	left:				480px; 
+	top:				0;		
 }
 
-#driverData{
+#driverData {
 }
 
-#pedestrianData{
-	text-align: 				right;
+#pedestrianData {
+	text-align: 		right;
 }
 
-.btnRequestAssoc{
-	margin-left: 				3px;
+.btnRequestAssoc {
+	margin-left: 		3px;
 }
 
-.btnRequestAssoc img{
-	width:						25px;	
+.btnRequestAssoc img {
+	width:				25px;	
 }
 
 
@@ -88,99 +88,99 @@ Assigned to:	Santiago Alurralde (sa)
 [Rating / ]
 ------------------------------------------------------------------*/
 
-.theRating{
-	margin: 					5% 0 8% 0;
+.theRating {
+	margin: 			5% 0 8% 0;
 }
 
-#wrapperRate{
-	height: 100%;
-	padding:0;
-	margin:0;
-	box-sizing: border-box;
-	text-align: center;  
-	vertical-align: middle;
+#wrapperRate {
+	height: 			100%;
+	padding:			0;
+	margin:				0;
+	box-sizing: 		border-box;
+	text-align: 		center;  
+	vertical-align: 	middle;
 }
 
-.star-rating{
-  font-size: 					0;
-  white-space: 					nowrap;
-  display: 						inline-block;
-  width: 						250px;
-  height: 						50px;
-  overflow: 					hidden;
-  position: 					relative;
-  background:					url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
-  background-size: 				contain;
+.star-rating {
+  font-size: 			0;
+  white-space: 			nowrap;
+  display: 				inline-block;
+  width: 				250px;
+  height: 				50px;
+  overflow: 			hidden;
+  position: 			relative;
+  background:			url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+  background-size: 		contain;
 }
 
-.star-rating i{
-  opacity: 						0;
-  position:						absolute;
-  left: 						0;
-  top: 							0;
-  height: 						100%;
-  width: 						20%;
-  z-index: 						1;
-  background: 					url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjRkZERjg4IiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
-  background-size: 				contain;
+.star-rating i {
+  opacity: 				0;
+  position:				absolute;
+  left: 				0;
+  top: 					0;
+  height: 				100%;
+  width: 				20%;
+  z-index: 				1;
+  background: 			url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjRkZERjg4IiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+  background-size: 		contain;
 }
 
-.star-rating input{
-  -moz-appearance: 				none;
-  -webkit-appearance: 			none;
-  opacity: 						0;
-  display: 						inline-block;
-  width: 						20%;
-  height: 						100%;
-  margin: 						0;
-  padding: 						0;
-  z-index: 						2;
-  position: 					relative;
+.star-rating input {
+  -moz-appearance: 		none;
+  -webkit-appearance: 	none;
+  opacity: 				0;
+  display: 				inline-block;
+  width: 				20%;
+  height: 				100%;
+  margin: 				0;
+  padding: 				0;
+  z-index: 				2;
+  position: 			relative;
 }
 
 .star-rating input:hover + i, .star-rating input:checked + i{
-  opacity: 						1;
+  opacity: 				1;
 }
 
 .star-rating i ~ i {
-  width: 40%;
+  width: 				40%;
 }
 
 .star-rating i ~ i ~ i {
-  width: 60%;
+  width: 				60%;
 }
 
 .star-rating i ~ i ~ i ~ i {
-  width: 80%;
+  width: 				80%;
 }
 
 .star-rating i ~ i ~ i ~ i ~ i {
-  width: 100%;
+  width: 				100%;
 }
 
 
 .btn{
-	border-radius:	2px;	
-	background: 	-webkit-linear-gradient(top, #90AA44, #9ED474);
-	background: 	-moz-linear-gradient(top, #90AA44, #9ED474);
-	box-shadow: 	0 1px 2px rgba(0,0,0,.2);
-	border: 		solid 1px #90AA44;
-	color:			white;
-	font-size:		100%;
-	font-weight:	bold;
-	height:			30px;
-	margin:			10px 0px 10px 0px;
-	text-shadow: 	0 1px 1px rgba(0,0,0,.3);
-	width:			130px;
+	border-radius:		2px;	
+	background: 		-webkit-linear-gradient(top, #90AA44, #9ED474);
+	background: 		-moz-linear-gradient(top, #90AA44, #9ED474);
+	box-shadow: 		0 1px 2px rgba(0,0,0,.2);
+	border: 			solid 1px #90AA44;
+	color:				#FFF;
+	font-size:			100%;
+	font-weight:		bold;
+	height:				30px;
+	margin:				10px 0px 10px 0px;
+	text-shadow: 		0 1px 1px rgba(0,0,0,.3);
+	width:				130px;
 }
 
-.btn:hover{
-	background: 	-webkit-linear-gradient(top, #99BB66, #9ED474);
-	background: 	-moz-linear-gradient(top, #99BB66, #9ED474);
+.btn:hover {
+	background: 		-webkit-linear-gradient(top, #99BB66, #9ED474);
+	background: 		-moz-linear-gradient(top, #99BB66, #9ED474);
 }
 
-.cellCheckMap{
-	cursor:			pointer	
+.cellCheckMap {
+	cursor:				pointer	
 }
 
 
@@ -191,15 +191,7 @@ Assigned to:	Santiago Alurralde (sa)
 .theSchedule tr .cellCheckMap:hover {
 	/* Change individual cell color */
 	
-	background:		-webkit-linear-gradient(top, #f4f4f4, #E0E0E0);
-	background:		-moz-linear-gradient(top,  #f4f4f4,  #E0E0E0);
+	background:		-webkit-linear-gradient(top, #F4F4F4, #E0E0E0);
+	background:		-moz-linear-gradient(top,  #F4F4F4,  #E0E0E0);
 }
 
-/*
-.txtHelp{
-	position: 		absolute;
-	display:		none;
-	z-index:		10000
-	
-}
-*/
