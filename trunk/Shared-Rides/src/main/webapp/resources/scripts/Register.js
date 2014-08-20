@@ -35,10 +35,6 @@ $( document ).ready(function(){
 	$( "#btnOK" ).click(function(){
 		signUp();
 	});
-	
-	$( ".chkActive" ).change(function(){
-		
-	});
 });
 
 /**
@@ -253,11 +249,16 @@ function checkValues1() {
  * @return {Boolean} TRUE values are OK
  */
 function checkValues2() {	
+	
 	for (var d=0; d<5; d++) {
-		if(_days[d] == null) {
-			alert("Quedan dias por completar");
-			return false;
-		}
+		aux = d+1;
+		if($( ".chkActive"+aux ).prop("checked"))
+			_days[d] = "Unsuscribed";
+		else	
+			if(_days[d] == null) {
+				alert("Quedan dias por completar");
+				return false;
+			}
 	}
 	return true;
 }
@@ -382,6 +383,18 @@ function checkUserExists() {
 	return flag;
 }
 
+/* Disables day if unsuscribed */
+function suscribes($target){
+	var d = $target.parent().index() + 1;
+	if($target.prop( "checked" )){
+		$( "#in td:nth-child("+ d +") #btnin" ).prop( "disabled", true ).removeClass( "btnDefine" ).addClass( "unsuscribed" );
+		$( "#out td:nth-child("+ d +") #btnout" ).prop( "disabled", true ).removeClass( "btnDefine" ).addClass( "unsuscribed" );
+	}
+	else {
+		$( "#in td:nth-child("+ d +") #btnin" ).prop( "disabled", false ).removeClass( "unsuscribed" ).addClass( "btnDefine" );
+		$( "#out td:nth-child("+ d +") #btnout" ).prop( "disabled", false ).removeClass( "unsuscribed" ).addClass( "btnDefine" );		
+	}
+}
 
 /***************************************************************************************
  * FUNCTIONS
@@ -409,7 +422,7 @@ function signUp() {
 		var plNumb		= $( "#plateNumbers" ).val();
 		var plLett		= $( "#plateLetters" ).val();
 		var nSeats		= $( "#numberSeats" ).find("option:selected").val();
-						
+		
 		$.post( "register.do", { "organization": org , 
 								"personalId": 	pId, 
 								"pw": 			pw, 
@@ -505,6 +518,7 @@ function saveMap() {
 	}
 	
 	$( ".btnDefine" ).prop( "disabled", false );
+	$( "input[name='chkActive']" ).prop( "disabled", false );		
 	$( "#"+ d + io ).prop( "disabled", true );	
 	$( "#mapDriver" ).hide();
 	$( "#mapPedestrian" ).hide();
@@ -527,6 +541,7 @@ function defineMap(target) {
 	}
 
 	$( ".btnDefine" ).prop( "disabled", true );
+	$( "input[name='chkActive']" ).prop( "disabled", true );	
 	$( "#"+ d + io ).prop( "disabled", false );
 	
 	if(_userType != "driver-pedestrian")	//Si no es mixto, todos los días es el mismo usertType
@@ -618,7 +633,9 @@ function fillRowType() {
 			$( "#hdnUserTypeDay" ).val(_userType);			
 			content =	"Peaton";
 		}
-		content += "<br><br><input type='checkbox' name='chkActive' class='chkActive'>"+ $( "#lblActive" ).val();
+		content += 	"<br><br>";
+		content += 	"<input type='checkbox' name='chkActive' class='chkActive"+ d +"'" +
+				 		"onclick='suscribes($(this));'>"+ $( "#lblActive" ).val();
 		$( "#tableSignUp #userTypeRow" ).append("<td>"+ content +"</td>");			 
 	}
 }
