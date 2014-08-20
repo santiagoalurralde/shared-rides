@@ -133,15 +133,22 @@ function fetchDays(days, data) {
 function printSchedule(days, $table, typeAssoc) {	
 	// Prints both schedules
 	
-	if(!$( "#scheduleData" ).is(":visible"))			//Display schedules' section
+	if(!$( "#scheduleData" ).is( ":visible" ))			//Display schedules' section
 		$( "#scheduleData" ).show( "bounce", 400 );
 	
 	$table.html("<tr><th></th></tr>");
 	
-	var rIn 		= "<tr id='in'><td>"+ $('#lblArrival').val() +"</td></tr>";
-	var rOut		= "<tr id='out'><td>"+ $('#lblDeparture').val() +"</td></tr>";
-	var btnCancel 	= "<button onclick='actionAssociation(this, false)' style='margin-left: 4px'><img src='resources/images/cancel.png' width='15px'></button>";
-	var btnAccept  	= "<button onclick='actionAssociation(this, true)' style='margin-left: 4px'><img src='resources/images/accept.png' width='15px'></button>";
+	var rIn 	= "<tr id='in'><td>"+ $('#lblArrival').val() +"</td></tr>";
+	var rOut 	= "<tr id='out'><td>"+ $('#lblDeparture').val() +"</td></tr>";
+	var bCancelAssoc	=	"<button class='btn-schedule' title='Cancel Association' onclick='actionAssociation(this, false)'>" +
+								"<img src='resources/images/cancel.png' class='img-schedule'>" +
+							"</button>";	
+	var bCancelPetit	= 	"<button class='btn-schedule' title='Cancel Petition' onclick='actionAssociation(this, false)'>" +
+								"<img src='resources/images/cancel.png' class='img-schedule'>" +
+							"</button>";
+	var bAcceptPetit	= 	"<button class='btn-schedule' title='Accept Petition' onclick='actionAssociation(this, true)'>" +
+								"<img src='resources/images/accept.png' class='img-schedule'>" +
+							"</button>";
 	
 	for(var i=1;i<days.length;i++) {
 		if(days[i]!=null) {
@@ -156,9 +163,9 @@ function printSchedule(days, $table, typeAssoc) {
 				$table.append(rOut);
 
 			if(typeAssoc == 0)
-				buttons = 	btnAccept + btnCancel;
+				buttons = 	bAcceptPetit + bCancelPetit;
 			else
-				buttons = 	btnCancel;
+				buttons = 	bCancelAssoc;
 			
 			var content;
 			
