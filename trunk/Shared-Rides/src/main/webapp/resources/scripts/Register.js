@@ -249,7 +249,6 @@ function checkValues1() {
  * @return {Boolean} TRUE values are OK
  */
 function checkValues2() {	
-	
 	for (var d=0; d<5; d++) {
 		aux = d+1;
 		if($( ".chkActive"+aux ).prop("checked"))
