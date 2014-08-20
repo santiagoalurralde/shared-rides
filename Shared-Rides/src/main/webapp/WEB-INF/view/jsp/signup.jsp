@@ -318,6 +318,9 @@
 		</section>
 	
 	</div>
+	
+	<c:set var="lblActive"><spring:message code="label.active" /></c:set>	
+	<input type="hidden" id="lblActive" value="${lblActive}" />
 </body>
 
 <script src="resources/scripts/Register.js" 	type="text/javascript"></script>

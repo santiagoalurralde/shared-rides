@@ -1,8 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<% 
-	String id = request.getParameter("user");
-%>
+<%  String id = request.getParameter("user"); %>
 
 <body>
 	<div id="theContent">	
@@ -138,10 +136,8 @@
 	if("${visible}" == 'false')
 		$( "#privateData" ).hide();
 	
-	//##
-	
-	initMapPedestrian();	//"${lonPed}", "${latPed}"
-	initMapDriver(); 		//"caro1in.gpx"
+	initMapPedestrian();
+	initMapDriver(); 	
 
 	<c:forEach var="day" items="${schPed}">
 		var detSchPed 			= new DetailSchedulePedestrian();
@@ -174,10 +170,3 @@
 		_schDriver.push(detSchDriver);
 	</c:forEach>
 </script>
-
-<!-- ## 	
-	//WOULD NOT BE USEFUL ANYMORE
-	//var _lonPed = "${lonPed}";
-	//var _latPed = "${latPed}";
-	//Do the same for driver's gpx
- -->

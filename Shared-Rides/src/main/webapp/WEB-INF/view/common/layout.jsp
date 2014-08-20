@@ -18,12 +18,12 @@
 		<link  	rel="stylesheet" 	type="text/css" 	href="resources/jquery-ui-theme/jquery-ui.css"						/>
 		<link 	rel="stylesheet" 	type="text/css" 	href="resources/styles/style.css" 									/>
 		<link 	rel="stylesheet"	type="text/css" 	href="resources/styles/<tiles:getAsString name="style"/>"			/>
-		<link 	rel="stylesheet"	type="text/css" 	href="http://fonts.googleapis.com/css?family=Raleway:500"  			/>
 		<link 	rel="shortcut icon" type="image/x-icon"	href="resources/images/favLogo.ico" 								/>
 
 		<!---- Scripts ---->
 		<script src="resources/scripts/jquery-1.10.2.js">	</script>
 		<script src="resources/scripts/jquery-ui.js">		</script>	
+		<script src="resources/scripts/Notifications.js">	</script>
 	</head> 
 	<body> 
     	<tiles:insertAttribute name="header"/> 
