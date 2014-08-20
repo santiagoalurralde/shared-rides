@@ -1,3 +1,11 @@
+/*------------------------------------------------------------------
+[Register Stylesheet]
+
+Project:		Shared Rides
+Last change:	19/08/2014
+Assigned to:	Santiago Alurralde (sa)
+-------------------------------------------------------------------*/
+
 .steps {
 	margin:			3% auto;
 	font-family:	'Raleway', sans-serif;	
@@ -5,19 +13,19 @@
 }
 
 #thirdStep { 
-	width:			80%;
+	width: 			80%;
 }
 
 .split {
-	height:			2.7em;
+	height: 		2.7em;
 }
 
 .red {
-	color:			red;
+	color: 			red;
 }
 
 .painted {
-	box-shadow:     0 0 5px 0 rgba(179, 0, 0, 1);
+	box-shadow: 	0 0 5px 0 rgba(179, 0, 0, 1);
 }
 
 /*------------------------------------------------------------------
@@ -25,7 +33,7 @@
 ------------------------------------------------------------------*/
 
 #btnBack, #btnOK, .alerts, #applyMapDefinition{
-	display	:			none;
+	display: none;
 }
 
 /*------------------------------------------------------------------
@@ -60,26 +68,15 @@
 [Form Elements]
 ------------------------------------------------------------------*/
 
-input {
+.theInputs {
 	font-family: 	'Raleway', sans-serif;	
+	height:			25px;
+	width:			13em;	
 }
 
 input.theInputs{
 	border:			solid 1px Grey; 	
-	height:			25px;
-	width:			13em;
 }	
-
-select.theInputs {
-	height:			25px;
-	width:			13em;	
-}
-
-.thePassword {
-	border:			solid 1px Grey; 	
-	height:			25px;
-	width:			13em;	
-}
 
 #plateNumbers, #plateLetters, #number {
 	width: 			4em;
