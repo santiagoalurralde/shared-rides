@@ -35,6 +35,10 @@ $( document ).ready(function(){
 	$( "#btnOK" ).click(function(){
 		signUp();
 	});
+	
+	$( ".chkActive" ).change(function(){
+		
+	});
 });
 
 /**
@@ -607,13 +611,14 @@ function fillRowType() {
 		}
 		else if(_userType == "driver") {
 			$( "#hdnUserTypeDay" ).val(_userType);
-			content = "Conductor";
+			content =	"Conductor";
 		}
 		else {
 			//_userType == "pedestrian"
 			$( "#hdnUserTypeDay" ).val(_userType);			
-			content = "Peaton";
+			content =	"Peaton";
 		}
+		content += "<br><br><input type='checkbox' name='chkActive' class='chkActive'>"+ $( "#lblActive" ).val();
 		$( "#tableSignUp #userTypeRow" ).append("<td>"+ content +"</td>");			 
 	}
 }
