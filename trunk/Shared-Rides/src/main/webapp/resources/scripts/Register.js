@@ -60,8 +60,8 @@ function start() {
 	
 	for(var loop=0; loop<brands.length; loop++)
 		$( "#brand" ).append("<option value='"+ brands[loop] +"'>"
-										+ brands[loop] +
-									"</option>");	
+							 	+ brands[loop] +
+							 "</option>");	
 } 
 
 /**
@@ -81,7 +81,7 @@ function stepNext() {
  */
 function stepBack() {
 	$( "#alert" ).hide();
-	$( "#alert" ).removeClass("passwordMatch");
+	$( "#alert" ).removeClass( "passwordMatch" );
 	_step--;
 }
 
@@ -98,8 +98,8 @@ function update(step){
 			highlightStep(step);
 			$( "#firstStep" ).show();
 			$( "#secondStep" ).hide();
-			$( "#btnBack" ).hide( 'fast' );
-			$( "#btnNext" ).show( 'slow' );
+			$( "#btnBack" ).hide( "fast" );
+			$( "#btnNext" ).show( "slow" );
 			break;
 		case 1:
 			highlightStep(step);	
@@ -108,17 +108,17 @@ function update(step){
 			$( "#firstStep" ).hide();
 			$( "#secondStep" ).show();
 			$( "#thirdStep" ).hide();
-			$( "#btnBack" ).show( 'fast' );
-			$( "#btnNext" ).show( 'fast' );			
-			$( "#btnOK" ).hide( 'fast' );
+			$( "#btnBack" ).show( "fast" );
+			$( "#btnNext" ).show( "fast" );			
+			$( "#btnOK" ).hide( "fast" );
 			break;
 		case 2:
 			highlightStep(step);	
 			fillRowType();
 			$( "#secondStep" ).hide();
 			$( "#thirdStep" ).show();
-			$( "#btnNext" ).hide( 'fast' );
-			$( "#btnOK" ).show( 'slow' );
+			$( "#btnNext" ).hide( "fast" );
+			$( "#btnOK" ).show( "slow" );
 			break;
 	}
 }
@@ -134,17 +134,17 @@ function highlightStep(step){
 	{
 		case 0:
 			$( "#stepSignUp1" ).css('opacity', '1');
-			$( "#stepSignUp2" ).css('opacity', '0.2');
-			$( "#stepSignUp3" ).css('opacity', '0.2');
+			$( "#stepSignUp2" ).css('opacity', '.2');
+			$( "#stepSignUp3" ).css('opacity', '.2');
 			break;
 		case 1:
-			$( "#stepSignUp1" ).css('opacity', '0.2');
+			$( "#stepSignUp1" ).css('opacity', '.2');
 			$( "#stepSignUp2" ).css('opacity', '1');
-			$( "#stepSignUp3" ).css('opacity', '0.2');
+			$( "#stepSignUp3" ).css('opacity', '.2');
 			break;
 		case 2:
-			$( "#stepSignUp1" ).css('opacity', '0.2');
-			$( "#stepSignUp2" ).css('opacity', '0.2');
+			$( "#stepSignUp1" ).css('opacity', '.2');
+			$( "#stepSignUp2" ).css('opacity', '.2');
 			$( "#stepSignUp3" ).css('opacity', '1');
 			break;
 	}
@@ -164,20 +164,17 @@ function checkValues0()
 {		
 	var flag = true;
 
-	var lastElement = $( "#firstStep input" ).index( $("#cellphone") );
+	var lastElement = $( "#firstStep input" ).index( $( "#cellphone" ) );
 	
 	for(var loop=0; loop<lastElement+1; loop++)
-		if($($( "#firstStep input" )[ loop ]).val().length == 0)
-		{
+		if($($( "#firstStep input" )[ loop ]).val().length == 0) {
 			flag = false;
 			paint($($( "#firstStep input" )[ loop ]), true);
 		}
 	
-	
-	if(!flag)
-	{
+	if(!flag) {
 		$( "#alert" ).html("<p>Los campos señalados están incompletos, debe llenarlos para proceder.");
-		$( "#alert" ).show( 'fast' );		
+		$( "#alert" ).show( "fast" );		
 	}
 	
 	return flag;
@@ -188,69 +185,59 @@ function checkValues0()
  * 
  * @return {Boolean} TRUE values are OK
  */
-function checkValues1()
-{
+function checkValues1() {
 	var flag 	= true;
 	var max 	= 3;
 	
-	if(_userType != "pedestrian")		//Is not a pedestrian
-	{
+	//Is not a pedestrian
+	if(_userType != "pedestrian") {
 		max = 4;
 				
-		if($( "#plateLetters").val().length == 0)
-		{
+		if($( "#plateLetters" ).val().length == 0) {
 			flag = false;
 			paint($( "#plateLetters" ), true);		
 		}
 		
-		if($( "#plateNumbers").val().length == 0)
-		{
+		if($( "#plateNumbers" ).val().length == 0) {
 			flag = false;
 			paint($( "#plateNumbers" ), true);		
 		}
 		
-		if($( "#model").val().length == 0)
-		{
+		if($( "#model" ).val().length == 0) {
 			flag = false;
 			paint($( "#model" ), true);		
 		}
 		
-		if($( "#numberSeats").val() == "0")
-		{
+		if($( "#numberSeats").val() == "0") {
 			flag = false;
-			paint($( "#numberSeats"), true);
+			paint($( "#numberSeats" ), true);
 		}
 	}
 	
 	for(var loop=0; loop<max; loop++)
-		if($($( "#secondStep select" )[ loop ]).val() == "0")
-		{
+		if($($( "#secondStep select" )[ loop ]).val() == "0") {
 			flag = false;
 			paint($($( "#secondStep select" )[ loop ]), true);
 		}
 	
-	if($( "#street").val().length == 0)
-	{
+	if($( "#street").val().length == 0) {
 		flag = false;
 		paint($( "#street" ), true);		
 	}
-	if($( "#number").val().length == 0)
-	{
+	if($( "#number").val().length == 0) {
 		flag = false;
 		paint($( "#number" ), true);		
 	}
 	
 	for(var loop=0; loop<3; loop++)
-		if($($( "#secondStep select" )[ loop ]).val() == "0")
-		{
+		if($($( "#secondStep select" )[ loop ]).val() == "0") {
 			flag = false;
 			paint($($( "#secondStep select" )[ loop ]), true);
 		}
 	
-	if(!flag)
-	{
+	if(!flag) {
 		$( "#alert" ).html("<p>Los campos señalados están incompletos, debe llenarlos para proceder.");
-		$( "#alert" ).show( 'fast' );		
+		$( "#alert" ).show( "fast" );		
 	}
 
 	return flag;
@@ -261,12 +248,9 @@ function checkValues1()
  * 
  * @return {Boolean} TRUE values are OK
  */
-function checkValues2()
-{	
-	for (var d=0; d<5; d++)
-	{
-		if(_days[d] == null)
-		{
+function checkValues2() {	
+	for (var d=0; d<5; d++) {
+		if(_days[d] == null) {
 			alert("Quedan dias por completar");
 			return false;
 		}
@@ -278,26 +262,24 @@ function checkValues2()
  * Checks if passwords are the same
  * 
  */
-function checkPassword(){
-	$( "#password-first" ).on("change", function(event) { 
+function checkPassword() {
+	$( "#password-first" ).on( "change", function(event) { 
 	     checkPassword();
 	});
 
-	if($( "#password-first" ).val() != $( "#password-check" ).val())
-	{
+	if($( "#password-first" ).val() != $( "#password-check" ).val()) {
 		paint($( "#password-first" ), true);	
 		paint($( "#password-check" ), true);
-		$( "#alert" ).html("<p>Las contraseñas deben coincidir");
-		$( "#alert" ).show( 'fast' );	
+		$( "#alert" ).html( "<p>Las contraseñas deben coincidir" );
+		$( "#alert" ).show( "fast" );	
 		$( "#alert" ).addClass( 'passwordMatch' );	
 		return false;
 	}		
-	else
-	{
+	else {
 		paint($( "#password-first" ), false);	
 		paint($( "#password-check" ), false);	
-		$( "#alert" ).removeClass( 'passwordMatch' );	
-		$( "#alert" ).hide( 'fast' );	
+		$( "#alert" ).removeClass( "passwordMatch" );	
+		$( "#alert" ).hide( "fast" );	
 		return true;
 	}
 }
@@ -307,9 +289,9 @@ function checkPassword(){
  * 
  * @param {element} 
  */
-function checkIt(target){
-	if(!$( "#alert" ).hasClass( 'passwordMatch' ))
-		$( "#alert" ).hide( 'fast' );		
+function checkIt(target) {
+	if(!$( "#alert" ).hasClass( "passwordMatch" ))
+		$( "#alert" ).hide( "fast" );		
 	
 	if($(target).val().length == 0 || $(target).val() == "0")
 		paint($(target), true);
@@ -323,8 +305,7 @@ function checkIt(target){
  * @param {Element} 
  * @param {Bool} flag - TRUE for painting element
  */
-function paint($target, flag)
-{
+function paint($target, flag) {
 	if(flag)
 		$target.addClass('painted');
 	else
@@ -337,10 +318,8 @@ function paint($target, flag)
  * @param {element}
  * @param {val} Minimum limit
  */
-function checkBounds(target, val)
-{
-	if(target.value > val)
-	{
+function checkBounds(target, val) {
+	if(target.value > val) {
 		alert("Este campo no admite valores mayores a " + val);
 		target.value = previous2;
 	}
@@ -354,11 +333,9 @@ function checkBounds(target, val)
  * @param {element}
  * @param {val} Minimum limit
  */
-function checkAlphabetic(event)
-{
+function checkAlphabetic(event) {
     var inputValue = event.charCode;
-    if((inputValue > 47 && inputValue < 58) && (inputValue != 32))
-    {
+    if((inputValue > 47 && inputValue < 58) && (inputValue != 32)) {
         event.preventDefault();
     }
 }
@@ -383,20 +360,21 @@ function checkNumeric(target) {
 /**
  * Checks if user with a personalId was already created. Returns true if exists.
  */
-function checkUserExists(){
+function checkUserExists() {
 	var pId = $( '#personalId' ).val().toString();
 	var flag = false;
 	
 	$.ajax({
-		  url: "validateNewUser.do",		
-		  type: "GET",
-		  data: { personalId: pId }
+		url: "validateNewUser.do",		
+		type: "GET",
+		data: { personalId: pId }
 		}).done(function(isValidate) {
-			if(!isValidate){
+			if(!isValidate) {
 				alert("El usuario con el ID especificado ya existe");
 				flag = true;
 			}
 		});
+	
 	return flag;
 }
 
@@ -534,8 +512,8 @@ function saveMap() {
  */
 function defineMap(target) {	
 	var d				= $( target ).parent().index();
-	var io 				= $( target ).parent().parent().attr('id');
-	var userTypeDay 	= $( "#userType"+ d ).find("option:selected").val();				
+	var io 				= $( target ).parent().parent().attr( "id" );
+	var userTypeDay 	= $( "#userType"+ d ).find( "option:selected" ).val();				
 	var index 			= Number(d) - 1;
 
 	//No se ha seleccionado ningun tipo de usuario
@@ -557,11 +535,11 @@ function defineMap(target) {
 	
 	if(userTypeDay == "pedestrian") {
 		$( "#mapDriver" ).hide();		
-		$( "#mapPedestrian" ).show( 'slow' );				
+		$( "#mapPedestrian" ).show( "slow" );				
 	}
 	else {																	
 		$( "#mapPedestrian" ).hide();	
-		$( "#mapDriver" ).show( 'slow' );
+		$( "#mapDriver" ).show( "slow" );
 	}
 	
 	$( "#applyMapDefinition" ).show( 'fast' );				
