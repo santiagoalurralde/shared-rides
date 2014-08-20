@@ -2,52 +2,52 @@
 [People Stylesheet]
 
 Project:		Shared Rides
-Last change:	19/06/2014
+Last change:	19/08/2014
 Assigned to:	Santiago Alurralde (sa)
 -------------------------------------------------------------------*/
 
 
 /*-----------------------------------------------------------------*/
 
-#listData{
-	margin-top: 				10px;
-	overflow:					auto;
+#listData {
+	margin-top:		10px;
+	overflow:		auto;
+}
+ 
+.blockHalf {
+	width:			47%;
 }
 
-.blockHalf{
-	width:						47%;
+#pending, #offered { 
+	padding-right:	3%;
 }
 
-#pending, #offered{
-	padding-right:				3%;
+#associated, #requested {
+	padding-left:	3%;
 }
 
-#associated, #requested{
-	padding-left:				3%;
+#scheduleData {
+	display:		none;
+	min-height:		175px;
 }
 
-#scheduleData{
-	display:					none;
-	min-height:					175px;
+.alerts {
+	border:			solid #CFCFCF 1px;
+	box-shadow:     0 1px 2px #D1D1D1;
+	margin:			0 auto;
+	margin-top: 	20px; 	
+	width:			60%;
+	padding:		3%
 }
 
-.alerts{
-	border:					solid #CFCFCF 1px;
-	box-shadow:         	0 1px 2px #d1d1d1;
-	margin:					0 auto;
-	margin-top: 			20px; 	
-	width:					60%;
-	padding:				3%
+.alerts img {
+	position: 		relative; 
+	left: 			55%; 
+	width:			55px;
+	height: 		50px;
 }
 
-.alerts img{
-	position: 				relative; 
-	left: 					55%; 
-	width:					55px;
-	height: 				50px;
-}
-
-.btn{
+.btn {
 	font-size:		85%;
 	width:			120px;
 }
@@ -58,39 +58,40 @@ Assigned to:	Santiago Alurralde (sa)
 [Tables / ]
 ------------------------------------------------------------------*/
 
-.tableUsers{
-	display:					none;
-	margin:						0 auto;
-	margin-top: 				20px; 
-	width:						85%;
+.tableUsers {
+	display: 		none;
+	margin:			0 auto;
+	margin-top: 	20px; 
+	width: 			85%;
 }
 
-.tableUsers th{
-	background:					-moz-linear-gradient(top, #90AA44, #50A410);
-	background:					-webkit-linear-gradient(top, #90AA44, #50A410);
-	padding:					10px 10px 10px 10px;
-	border-bottom:				1px solid #e0e0e0;
+.tableUsers th {
+	background:		-moz-linear-gradient(top, #90AA44, #50A410);
+	background:		-webkit-linear-gradient(top, #90AA44, #50A410);
+	padding:		10px 10px 10px 10px;
+	border-bottom:	1px solid #e0e0e0;
 }
 
-.tableUsers td{
-	width:						100%;
+.tableUsers td {
+	width:			100%;
 }
 
-.tableUsers img{					
-	width: 						50px;
-	height:						50px;
+.tableUsers img {					
+	width:			50px;
+	height:			50px;
 }
 
-.theSchedule{
-	margin-top: 				3%;
+.theSchedule {
+	margin-top:		3%;
 	
 }
 
 /*------------------------------------------------------------------
 [Footer / #theFooter]
 -------------------------------------------------------------------*/
-#theFooter{
-	margin-top: 			-1.25em;
+
+#theFooter {
+	margin-top:		-1.25em;
 }
 
 
