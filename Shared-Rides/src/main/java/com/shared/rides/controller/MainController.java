@@ -51,16 +51,6 @@ public class MainController {
 		return new ModelAndView("about");
 	}
 	
-//	@RequestMapping(value="contactNew.do")
-//	public ModelAndView showContactNew(HttpServletRequest request){
-//		return new ModelAndView("contactNew");
-//	}
-//
-//	@RequestMapping(value="aboutNew.do")
-//	public ModelAndView showAboutNew(HttpServletRequest request){
-//		return new ModelAndView("aboutNew");
-//	}
-	
 	//Metodo que se llama para ver si el usuario tiene nuevas asociaciones
 	@RequestMapping(value = "/hasAssociation.do", method = RequestMethod.POST)
 	public @ResponseBody String hasAssoc(HttpServletRequest request){
@@ -84,5 +74,13 @@ public class MainController {
 		User u = (User) request.getSession().getAttribute("user");
 		return findUserService.findUsers(u.getUserId(), prof, shift, map);
 	} 
+	
+	@RequestMapping(value = "/defaultFind.do", method = RequestMethod.POST)
+	public @ResponseBody String search(@RequestParam("user") int prof,
+									@RequestParam("shift") int shift,
+									HttpServletRequest request){
+		User u = (User) request.getSession().getAttribute("user");
+		return findUserService.defaultFindUser(u.getUserId(), prof, shift);
+	}
 	
 }

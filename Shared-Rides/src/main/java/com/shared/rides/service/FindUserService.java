@@ -123,6 +123,105 @@ public class FindUserService {
 	
 		return createJson(userList, userId).toString();
 	}
+
+	
+	public String defaultFindUser(long userId, int profile, int shift){
+		boolean needRemove;
+		float minDistance = 1000;
+		distanceList = new ArrayList<Float>();
+		userList = userDAO.listAll();
+		
+		User u = new User(userId);
+		u = userDAO.load(u);
+		/*
+		 * Me elimino a mi mismo de la lista para no aparecer
+		 */
+		for (int i = 0; i < userList.size(); i++){
+			if (userList.get(i).getUserId() == userId) userList.remove(i);
+		}
+		//Filtro la lista de acuerdo al perfil y el turno
+		filterList(profile, shift);
+		//Con la lista filtrada, vemos que usuarios tienen una distancia menor a 10 cuadras = 1000 mts.
+	
+		if (profile == 1){
+			//Si estoy buscando un peatón; quiere decir que soy un conductor y que en la vista marque un
+			//track; por ende tengo varios markers y los tengo que comparar con la direccion de cada peaton
+			for(int i = 0; i < userList.size() ; i++){
+				minDistance = 1000;
+				
+				List<Stop> stopList = userList.get(i).getPedestrian().getStops();
+				//Aca obtengo toda la lista de tracks del usuario logueado
+				List<Track> trackList = u.getDriver().getTracks();
+				needRemove = true;
+				
+				for (Stop s : stopList){
+					for(Track t : trackList){
+						//Comparo solamente los stops con los tracks que corresponden al mismo dia e inout
+						if (s.getDay() == t.getDay() && s.getInout() == t.getInout()){
+							double [][] track = ReadGPXFile.readFile(t.getPathFile());
+							
+							for(int j = 0; j < track.length; j++){
+								dist = DistanceHaversine.calculateDistance(track[j][1], track[j][0], s.getLat(), s.getLon());
+								if (dist < 1000){ 
+									needRemove = false;
+									if (dist < minDistance) minDistance = dist;
+								}	
+							}	
+						}
+					}
+				}
+				if (needRemove){ 
+					userList.remove(i);
+					i--;
+				}
+				else{
+					distanceList.add(minDistance);
+				}
+			}
+		}
+		else{
+			//Sino estamos buscando un conductor; por ende tenemos que comparar todos tracks de los conductores
+			//con el único marker que se encuentra en la matriz "markers" 
+			for(int i = 0; i < userList.size(); i++){
+				minDistance = 1000;
+				List<Track> trackList = userList.get(i).getDriver().getTracks();
+				//Obtengo los stops del usuario logueado
+				List<Stop> stopList = u.getPedestrian().getStops();
+				
+				//Por cada track asociado, tengo que buscar todos los puntos de ese track
+				for(int j = 0; j < trackList.size(); j++){
+					needRemove = true;
+					for(Stop s : stopList){
+						if(s.getDay() == trackList.get(j).getDay() && s.getInout() == trackList.get(j).getInout()){
+							double [][] trackPoints = ReadGPXFile.readFile(trackList.get(j).getPathFile());	
+							for (int k = 0; k < trackPoints.length; k++){						
+								dist = DistanceHaversine.calculateDistance(s.getLat(), s.getLon(), trackPoints[k][0], trackPoints[k][1]);
+								if (dist < 1000){ 
+									needRemove = false;
+									if (dist < minDistance) minDistance = dist;
+								}	
+							}
+						}
+					}
+					if (needRemove){
+						trackList.remove(j);
+						j--;
+					}
+				}
+				//Si no hay ningun track que pase cerca elimino el usuario de la lista
+				if(trackList.isEmpty()){ 
+					userList.remove(i);
+					i--;
+				}
+				else{
+					distanceList.add(minDistance);
+				}
+			}
+		}
+		return createJson(userList, userId).toString();
+
+	}
+	
 	
 	//Funcion que filtra la lista de usuarios dependiendo el perfil y el turno
 	private void filterList(int profile, int shift){
@@ -242,7 +341,6 @@ public class FindUserService {
 			markers[i][1] = jsonMarker.get("lat").getAsFloat();
 		}
 	}
-		
 }
 
 	
