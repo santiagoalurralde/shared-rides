@@ -10,8 +10,8 @@
 							
 			<div id="userData" class="theBoard lightBorder">	<!-- Datos 	-->
 				<div id="pictureData">							<!-- Foto 	-->
-					<img id="thePic" src="resources/profilePic/${picture}" />  
-<!-- 						<img src="/loadPic.do" /> -->
+<%-- 					<img id="thePic" src="resources/profilePic/${picture}" />   --%>
+						<img id="thePic" src="printImgFile.do?user=${id}" />
 				</div>
 				
 				<div id="publicData"> 		<!-- Datos Publicos	--> 

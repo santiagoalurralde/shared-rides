@@ -16,7 +16,7 @@ public class UploadFile {
 				byte[] bytes = file.getBytes();
 
 				// Creando el directorio
-				String rootPath = "/home/leandrobagur/WORKSPACE/trunk/Shared-Rides/src/main/webapp/resources/profilePic";
+				String rootPath = "/home/leandrobagur/profilePic";
 				File dir = new File(rootPath + File.separator);
         
 				// Creo el archivo en el server
