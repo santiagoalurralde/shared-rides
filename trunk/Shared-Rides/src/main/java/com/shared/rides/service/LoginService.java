@@ -29,8 +29,6 @@ public class LoginService {
 		if (u != null){
 			password = u.getPw().toString();
 			if (password.equals(pw)){
-				//Actualizamos la ultima fecha de logueo
-	    		saveLastLoginDate(u.getUserId());
 				//Seteamos a la session el atributo user	    		
 				HttpSession session = r.getSession(false);
 				session.setAttribute("user", u);
@@ -41,7 +39,7 @@ public class LoginService {
 		return false;
 	}
 	
-	private void saveLastLoginDate(long userId){
+	public void saveLastLoginDate(long userId){
 		User u = new User(userId);
 		u = userDAO.load(u);
 		u.setLastLoginDate(new Date());

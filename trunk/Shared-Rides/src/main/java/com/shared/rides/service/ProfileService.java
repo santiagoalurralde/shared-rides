@@ -68,19 +68,19 @@ public class ProfileService {
 					isAssociation = true;
 					break;
 				}
-				if (!isAssociation){
-					List<Association> myRequestsList = userDAO.getMyRequests(u);
-					for (int j = 0; j < myRequestsList.size(); j++){
-						//Obtengo el id del usuario al cual le envie la peticion
-						long supplierId = assocDAO.getSupplierId(myRequestsList.get(j));
-				
-						if (userId == supplierId && myRequestsList.get(j).getState().equals(State.ACCEPTED)){
-							isAssociation = true;
-							break;
-						}
+			}
+			
+			if (!isAssociation){
+				List<Association> myRequestsList = userDAO.getMyRequests(u);
+				for (int j = 0; j < myRequestsList.size(); j++){
+					//Obtengo el id del usuario al cual le envie la peticion
+					long supplierId = assocDAO.getSupplierId(myRequestsList.get(j));
+					if (userId == supplierId && myRequestsList.get(j).getState().equals(State.ACCEPTED)){
+						isAssociation = true;
+						break;
 					}
 				}
-		}
+			}
 			
 		User userAssoc = new User(userId);
 		userAssoc = userDAO.load(userAssoc);
