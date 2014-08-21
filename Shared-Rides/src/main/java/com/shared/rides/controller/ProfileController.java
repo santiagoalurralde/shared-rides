@@ -1,11 +1,14 @@
 package com.shared.rides.controller;
 
+import java.io.FileInputStream;
+import java.io.OutputStream;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,6 +50,7 @@ public class ProfileController {
 			
 			model = showProfileService.getProfile(id, request, false);
 			model.setViewName("profile");
+			System.out.println(model);
 			return model;
 		}
 		

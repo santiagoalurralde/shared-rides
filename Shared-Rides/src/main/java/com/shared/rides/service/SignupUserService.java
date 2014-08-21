@@ -170,53 +170,54 @@ public class SignupUserService {
 		JsonArray arrayMarkers = (JsonArray) obj;
 		
 		for (int i = 0; i < arrayMarkers.size(); i++){
-			JsonObject jsonDay = (JsonObject) arrayMarkers.get(i);
+			if(!(arrayMarkers.get(i).toString().equalsIgnoreCase('"'+"Unsuscribed"+'"'))){
+				JsonObject jsonDay = (JsonObject) arrayMarkers.get(i);
 			
-			Schedule sch = new Schedule();
+				Schedule sch = new Schedule();
 		
-			sch.setDay(i+1);
-			String hourIn = jsonDay.get("hourIn").toString();
-			hourIn = hourIn.replace('"', ' ');
-			sch.setHourIn(hourIn);
-			String hourOut = jsonDay.get("hourOut").toString();
-			hourOut = hourOut.replace('"', ' ');
-			sch.setHourOut(hourOut);
+				sch.setDay(i+1);
+				String hourIn = jsonDay.get("hourIn").toString();
+				hourIn = hourIn.replace('"', ' ');
+				sch.setHourIn(hourIn);
+				String hourOut = jsonDay.get("hourOut").toString();
+				hourOut = hourOut.replace('"', ' ');
+				sch.setHourOut(hourOut);
 			
-			schDAO.save(sch);
+				schDAO.save(sch);
 			
-			if(type.equalsIgnoreCase("pedestrian")){			
-				Pedestrian ped = pedDAO.getLastPedestrian();
-				sch = schDAO.getLastSchedule();
-				pedDAO.newSch(ped, sch);
-				
-				saveStop(jsonDay, ped, i, u.getPersonalId(), "stopIn", "in");
-				saveStop(jsonDay, ped, i, u.getPersonalId(), "stopOut", "out");
-			}
-			else if (type.equalsIgnoreCase("driver")){
-				Driver driver = driverDAO.getLastDriver();
-				driverDAO.newSch(driver, sch);
-				
-				saveTrack(jsonDay, driver, i, u.getPersonalId(), "trackIn", "in");
-				saveTrack(jsonDay, driver, i, u.getPersonalId(), "trackOut", "out");
-			}
-			else{
-				if (jsonDay.has("stopIn")){
+				if(type.equalsIgnoreCase("pedestrian")){			
 					Pedestrian ped = pedDAO.getLastPedestrian();
 					sch = schDAO.getLastSchedule();
 					pedDAO.newSch(ped, sch);
-					
+				
 					saveStop(jsonDay, ped, i, u.getPersonalId(), "stopIn", "in");
 					saveStop(jsonDay, ped, i, u.getPersonalId(), "stopOut", "out");
-
 				}
-				else{
+				else if (type.equalsIgnoreCase("driver")){
 					Driver driver = driverDAO.getLastDriver();
 					driverDAO.newSch(driver, sch);
-
+				
 					saveTrack(jsonDay, driver, i, u.getPersonalId(), "trackIn", "in");
 					saveTrack(jsonDay, driver, i, u.getPersonalId(), "trackOut", "out");
 				}
-			
+				else{
+					if (jsonDay.has("stopIn")){
+						Pedestrian ped = pedDAO.getLastPedestrian();
+						sch = schDAO.getLastSchedule();
+						pedDAO.newSch(ped, sch);
+						
+						saveStop(jsonDay, ped, i, u.getPersonalId(), "stopIn", "in");
+						saveStop(jsonDay, ped, i, u.getPersonalId(), "stopOut", "out");
+
+					}
+					else{
+						Driver driver = driverDAO.getLastDriver();
+						driverDAO.newSch(driver, sch);
+						
+						saveTrack(jsonDay, driver, i, u.getPersonalId(), "trackIn", "in");
+						saveTrack(jsonDay, driver, i, u.getPersonalId(), "trackOut", "out");
+					}
+				}
 			}
 		}
 	}
@@ -275,7 +276,7 @@ public class SignupUserService {
 		String fileName = ran.nextInt(999) + "_" + file.getOriginalFilename();
 		//Seteo el nuevo nombre de la imagen en la sesion para luego obtenerlo de nuevo a la hora de darle de alta al usuario
 		HttpSession s = request.getSession();
-		s.setAttribute("picName", fileName);
+		s.setAttribute("picName", fileName);	
 		return UploadFile.uploadFile(file, fileName);			
 	}
 	

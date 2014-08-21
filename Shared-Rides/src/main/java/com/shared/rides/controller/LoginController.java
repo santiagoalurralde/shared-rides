@@ -57,6 +57,9 @@ public class LoginController {
 	
 	@RequestMapping(value="logout.do")
 	public ModelAndView logOut(HttpServletRequest request){
+		User u = (User) request.getSession().getAttribute("user");
+		//Actualizamos la ultima fecha de logueo
+		loginService.saveLastLoginDate(u.getUserId());
 		request.getSession().invalidate();
 		return new ModelAndView("redirect:/");
 	}
