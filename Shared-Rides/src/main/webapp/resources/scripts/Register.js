@@ -24,15 +24,15 @@ $(document).ready(function() {
     start();
 
     //Pressing next or back
-    $("#btnNext, #btnBack").click(function(){
+    $(".btn-next, .btn-back").click(function(){
         update(_step);
     });
    
-    $("#btnMap").click(function(){
+    $(".btn-map").click(function(){
         saveMap();              
     });
    
-    $("#btnOK").click(function(){
+    $(".btn-OK").click(function(){
         signUp();
     });
 });
@@ -49,8 +49,8 @@ function start() {
     fillRowsInOut("out");
    
     var	l,
-		neighborhoods = ["Alta Córdoba","Alto Alberdi","Alto Verde","Argüello","Bella Vista","Centro","Cerro Chico","Cerro de las Rosas","Cerveceros","Chateau Carreras","Cofico","Colinas del Cerro","Country Jockey Club","Country Las Delicias","Country Lomas de la Carolina","Crisol","Dean Funes","Ejército Argentino","El Quebracho","Empalme","Ferreyra","General Bustos","General Paz","General Pueyrredon","Granja De Funes","Güemes","Ituzaingo","Jardín","Juniors","La France","Las Flores","Las Palmas","Las Violetas","Los Boulevares","Los Paraísos","Marques De Sobremonte","Nueva Córdoba","Observatorio","Palermo Bajo","Patricios","Poeta Lugones","San Martín","San Vicente","Urca","Villa Belgrano","Villa Cabrera","Villa Centenario","Villa Warcalde","Yapeyu","Yofre"],
-		brands = ["Alfa-Romeo", "Audi", "BMW", "Citroen", "Chery", "Chevrolet", "Chrysler", "Daihatsu", "Dodge", "Fiat", "Ford", "Honda", "Hyundai", "Jeep", "Kia", "Land Rover", "Mazda", "Mercedes Benz", "Mini", "Mitsubishi", "Nissan", "Peugeot", "Renault", "Seat",  "Subaru", "Suzuki", "Toyota", "Volkswagen", "Volvo"];
+		neighborhoods 	= ["Alta Córdoba","Alto Alberdi","Alto Verde","Argüello","Bella Vista","Centro","Cerro Chico","Cerro de las Rosas","Cerveceros","Chateau Carreras","Cofico","Colinas del Cerro","Country Jockey Club","Country Las Delicias","Country Lomas de la Carolina","Crisol","Dean Funes","Ejército Argentino","El Quebracho","Empalme","Ferreyra","General Bustos","General Paz","General Pueyrredon","Granja De Funes","Güemes","Ituzaingo","Jardín","Juniors","La France","Las Flores","Las Palmas","Las Violetas","Los Boulevares","Los Paraísos","Marques De Sobremonte","Nueva Córdoba","Observatorio","Palermo Bajo","Patricios","Poeta Lugones","San Martín","San Vicente","Urca","Villa Belgrano","Villa Cabrera","Villa Centenario","Villa Warcalde","Yapeyu","Yofre"],
+		brands 			= ["Alfa-Romeo", "Audi", "BMW", "Citroen", "Chery", "Chevrolet", "Chrysler", "Daihatsu", "Dodge", "Fiat", "Ford", "Honda", "Hyundai", "Jeep", "Kia", "Land Rover", "Mazda", "Mercedes Benz", "Mini", "Mitsubishi", "Nissan", "Peugeot", "Renault", "Seat",  "Subaru", "Suzuki", "Toyota", "Volkswagen", "Volvo"];
 
     for(l=0; l<neighborhoods.length; l++)
         $("#neighborhood").append(	"<option value='"+ neighborhoods[l] +"'>"
@@ -66,7 +66,7 @@ function start() {
  * Checks if we can add 1 step
  */
 function stepNext() {  
-	if(	_step == 0 && (!checkValues0() || $("#alert.passwordMatch").is(":visible") || checkUserExists()))
+	if(	_step == 0 && (!checkValues0() || $(".alerts.alert-pw-match").is(":visible") || checkUserExists()))
 		console.log("No es posible avanzar al segundo paso");
     else if(_step == 1 && !checkValues1())
     	console.log("No es posible avanzar al terccer paso");
@@ -78,7 +78,7 @@ function stepNext() {
  * Moves back 1 step
  */
 function stepBack() {
-    $("#alert").removeClass("passwordMatch").hide();
+	toggleAlert(false, "", "alert-pw-match");
     _step--;
 }
 
@@ -91,24 +91,24 @@ function update(step) {
     switch(step) {
         case 0:
             highlightStep(step);
-            $("#firstStep, #btnNext").show();
-            $("#secondStep").hide();
-            $("#btnBack").hide("fast");
+            $(".step-first, .btn-next").show();
+            $(".step-second").hide();
+            $(".btn-back").hide("fast");
             break;
         case 1:
             highlightStep(step);    
-            $("#mapDriver, #mapPedestrian, #firstStep, #thirdStep").hide();
-            $("#secondStep").show();
-            $("#btnBack, #btnNext").show("fast");                
-            $("#btnOK").hide("fast");
+            $("#mapDriver, #mapPedestrian, .step-first, .step-third").hide();
+            $(".step-second, .split-beginning").show();
+            $(".btn-back, .btn-next").show("fast");                
+            $(".btn-OK").hide("fast");
             break;
         case 2:
             highlightStep(step);    
             fillRowType();
-            $("#secondStep").hide();
-            $("#thirdStep").show();
-            $("#btnNext").hide("fast");
-            $("#btnOK").show("slow");
+            $(".step-second, .split-beginning").hide();
+            $(".step-third").show();
+            $(".btn-next").hide("fast");
+            $(".btn-OK").show("slow");
             break;
      }
 }
@@ -146,17 +146,21 @@ function highlightStep(step){
  * @return {Boolean} TRUE values are OK
  */
 function checkValues0() {              
-    var	flag = true,
-		lastElement = $("#firstStep input").index($("#cellphone"));
+    var	flag 		= true,
+    	ipts 		= $(".step-first input"),
+		lastElement	= ipts.index($("#cellphone")),
+    	iptL;
    
-    for(var l=0; l<lastElement+1; l++)
-        if($($("#firstStep input")[l]).val().length == 0) {
-        	flag = false;
-            paint($($("#firstStep input")[l]), true);
-        }
-   
-    activateAlert(flag);
-   
+    for(var l=0; l<lastElement+1; l++) {
+    	iptL = $(ipts[l]);
+        flag = checkLength(iptL);
+	}
+    
+	if(!flag) {
+		//TODO spring message INCOMPLETE INPUTS
+		var msg = "Los campos señalados están incompletos, debe llenarlos para proceder.";
+		toggleAlert(true, msg, "alert-inputs");
+	}
 	return flag;
 }
 
@@ -167,56 +171,43 @@ function checkValues0() {
  */
 function checkValues1() {
     var	flag 	= true,
-    	max 	= 3;
+    	max 	= 3,
+		selects	= $(".step-second select"),
+		selectL;
    
-    //Is not a pedestrian
     if(_userType != "pedestrian") {
-        max = 4;
-                       
-        if($("#plateLetters").val().length == 0) {
-            flag = false;
-            paint($("#plateLetters"), true);              
-        }
-       
-        if($("#plateNumbers").val().length == 0) {
-            flag = false;
-            paint($("#plateNumbers"), true);              
-        }
-       
-        if($("#model").val().length == 0) {
-            flag = false;
-            paint($("#model"), true);            
-        }
-       
-        if($("#numberSeats").val() == "0") {
-            flag = false;
-            paint($("#numberSeats"), true);
-        }
+    	/* Is not a pedestrian */
+        max = 4;     
+        flag = checkLength($("#plateLetters"));
+        flag = checkLength($("#plateNumbers"));
+        flag = checkLength($("#model"));
+        flag = checkLength($("#numberSeats"));
     }
    
-    for(var l=0; l<max; l++)
-	    if($($("#secondStep select")[l]).val() == "0") {
+    for(var l=0; l<max; l++){
+    	selectL = $(selects[l]);
+	    if(selectL.val() == "0") {
 	        flag = false;
-	        paint($($("#secondStep select")[l]), true);
+	        paint(selectL, true);
 	    }
-   
-    if($("#street").val().length == 0) {
-        flag = false;
-        paint($("#street"), true);            
-    }
-    if($("#number").val().length == 0) {
-        flag = false;
-        paint($("#number"), true);            
     }
    
-    for(var l=0; l<3; l++)
-        if($($("#secondStep select")[l]).val() == "0") {
+    flag = checkLength($("#street"));
+    flag = checkLength($("#number"));
+   
+    for(var l=0; l<3; l++){
+    	selectL = $(selects[l]);
+        if(selectL.val() == "0") {
             flag = false;
-            paint($($("#secondStep select")[l]), true);
+            paint(selectL, true);
         }
+    }
    
-    activateAlert(flag);
-
+	if(!flag) {
+		//TODO spring message INCOMPLETE INPUTS
+		var msg = "Los campos señalados están incompletos, debe llenarlos para proceder.";
+		toggleAlert(true, msg, "alert-inputs");
+	}
     return flag;
 }
 
@@ -232,7 +223,8 @@ function checkValues2() {
             _days[d] = "Unsuscribed";
         else    
             if(_days[d] == null) {
-                alert("Quedan dias por completar");
+            	var msg = "Quedan dias por completar";
+            	toggleAlert(true, msg, "alert-schedules");
                 return false;
             }
     }
@@ -251,16 +243,14 @@ function checkPassword() {
     if($("#password-first").val() != $("#password-check").val()) {
         paint($("#password-first"), true);    
         paint($("#password-check"), true);
-        $("#alert").html("<p>Las contraseñas deben coincidir");
-        $("#alert").show("fast");  
-        $("#alert").addClass("passwordMatch");      
+        var msg = ("Las contraseñas deben coincidir");
+		toggleAlert(true, msg, "alert-pw-match");    
         return false;
     }              
     else {
 	    paint($("#password-first"), false);  
 	    paint($("#password-check"), false);  
-	    $("#alert").removeClass("passwordMatch");  
-	    $("#alert").hide("fast");  
+		toggleAlert(false, "", "alert-pw-match");    
 	    return true;
     }
 }
@@ -271,13 +261,27 @@ function checkPassword() {
  * @param {element}
  */
 function checkIt(target) {
-    if(!$("#alert").hasClass("passwordMatch"))
-        $("#alert").hide("fast");          
+    if($(".alerts").hasClass("alert-inputs"))
+    	toggleAlert(false, "", "alert-inputs");         
    
     if($(target).val().length == 0 || $(target).val() == "0")
         paint($(target), true);
     else
         paint($(target), false);
+}
+
+/**
+ * Checks if element is not null and paints or not.
+ *
+ * @param {jquery} - element we're gonna check.
+ */
+function checkLength($target) {
+    if($target.val().length == 0) {
+        paint($target, true); 
+        return false;
+    }
+    else
+    	return true;
 }
 
 /**
@@ -294,14 +298,21 @@ function paint($target, flag) {
 }
 
 /**
- * Shows alert.
+ * Shows or hides alert.
  *
  * @param {Bool} flag - TRUE for activating alert.
+ * @param {String} msg - Text that the alert is going to contain.
+ * @param {String} flag - Additional class for the alert.
  */
-function activateAlert(flag){
-    if(!flag) {
-        $("#alert").html("<p>Los campos señalados están incompletos, debe llenarlos para proceder.");
-        $("#alert").show("fast");          
+function toggleAlert(flag, msg, cls){
+    if(flag) {
+        $(".alerts").addClass(cls);    	
+        $(".alerts."+cls).html("<p>"+ msg);
+        $(".alerts."+cls).show("fast");          
+    }
+    else {
+    	$(".alerts."+cls).hide("fast");
+        $(".alerts."+cls).removeClass(cls);    	
     }
 }
 
@@ -314,10 +325,10 @@ function activateAlert(flag){
 function checkBounds(target, val) {
     if(target.value > val) {
         alert("Este campo no admite valores mayores a "+ val);
-        target.value = previous2;
+        target.value = _previous2;
     }
     else
-        previous2 = target.value;
+        _previous2 = target.value;
 }
 
 /**
@@ -340,13 +351,13 @@ function checkAlphabetic(event) {
  */
 function checkNumeric(target) {
     if(target.value.length > 0 && isNaN(target.value)) {                                            
-    	if(previousTarget != target)
-            previous = "";
-        target.value = previous;
+    	if(_previousTarget != target)
+            _previous = "";
+        target.value = _previous;
     }
     else {
-        previous = target.value;
-        previousTarget = target;
+        _previous = target.value;
+        _previousTarget = target;
     }
 }
 
@@ -363,12 +374,43 @@ function checkUserExists() {
         data: { personalId: pId }
         }).done(function(isValidate) {
             if(!isValidate) {
-                alert("El usuario con el ID especificado ya existe");
-                flag = true;
+            	var msg = "El usuario con el ID especificado ya existe";
+                flag = true;            	
+            	toggleAlert(flag, msg, "alert-inputs");
             }
-        });
+    });
    
-    return flag;
+	return flag;
+}
+
+/**
+ * Checks if hours are valid.
+ */
+function checkHours(target){
+	var	id  	= $(target).attr("id"),
+		d 		= id.slice(0,1),
+		io		= id.substring(1, id.length),
+		flag	= true,
+		hourOut	= $("#"+ d +"out").find("option:selected").val(),
+		hourIn	= $("#"+ d +"in").find("option:selected").val();
+	
+	if(io == "out")
+	    $("#"+ d +"in").on("change", function(event) {
+	    	checkHours();
+	    });	
+
+	if(hourOut < hourIn){
+		//TODO MESSAGE
+		$("#applyMapDefinition").hide();
+		var msg = "La hora de salida debe ser después de la hora de entrada";
+    	toggleAlert(true, msg, "alert-schedules");
+		$(".btn-map").prop("disabled", true);
+	}
+	else {
+		$("#applyMapDefinition").show();		
+    	toggleAlert(false, "", "alert-schedules");		
+		$(".btn-map").prop("disabled", false);
+	}
 }
 
 /**
@@ -436,6 +478,7 @@ function signUp() {
                                    "days":         JSON.stringify(_days)
                                    },  
 	            function(str) {
+                     //TODO message
                      alert("Alta de Usuario Completa");
 	            });
     }
@@ -453,6 +496,7 @@ function saveMap() {
     	index 		= Number(d)-1;
 
     if(h == "none") {
+    	//TODO MESSAGE
         alert("Selecciona la hora a definir");
         return false;
     }
@@ -488,16 +532,16 @@ function saveMap() {
                 _days[index] = new Stop();
            
             if(io == "in") {
-                var	lonlatCurrent = new OpenLayers.LonLat(_lon, _lat);
-                	_days[index].stopIn = new OpenLayers.LonLat(_lon, _lat);
-                    _days[index].hourIn = h;    
-                    _projections[index].projIn = lonlatCurrent.transform(proj4326, map.getProjectionObject());                                                
+                var	lonlatCurrent 				= new OpenLayers.LonLat(_lon, _lat);
+                	_days[index].stopIn 		= new OpenLayers.LonLat(_lon, _lat);
+                    _days[index].hourIn 		= h;    
+                    _projections[index].projIn 	= lonlatCurrent.transform(proj4326, map.getProjectionObject());                                                
             }
             else {
-                var	lonlatCurrent = new OpenLayers.LonLat(_lon, _lat);
-                	_days[index].stopOut = new OpenLayers.LonLat(_lon, _lat);
-                	_days[index].hourOut = h;    
-                	_projections[index].projOut = lonlatCurrent.transform(proj4326, map.getProjectionObject());
+                var	lonlatCurrent 				= new OpenLayers.LonLat(_lon, _lat);
+                	_days[index].stopOut 		= new OpenLayers.LonLat(_lon, _lat);
+                	_days[index].hourOut 		= h;    
+                	_projections[index].projOut	= lonlatCurrent.transform(proj4326, map.getProjectionObject());
             }
             $("#"+ io +" td:nth-child("+ nthChild +")").find("#btn"+ io).html("Modificar");
         }
@@ -521,16 +565,20 @@ function defineMap(target) {
      	userTypeDay	= $("#userType"+ d).find("option:selected").val(),                         
      	index 		= Number(d)-1;
 
-    //No se ha seleccionado ningun tipo de usuario
-    if(userTypeDay == "0") {        
-        alert("Seleccione el tipo de usuario de este día");
+    if(userTypeDay == "0") {  
+    	/* Hasn't selected any user type for this day. */
+    	//TODO MESSAGE
+    	var msg = "Seleccione el tipo de usuario de este día";
+    	toggleAlert(true, msg, "alert-schedule");
         return false;
     }
+	toggleAlert(false, "", "alert-schedule");    
 
     $("input[name='chkActive'], .btnDefine").prop("disabled", true);                    
     $("#"+ d + io).prop("disabled", false);
    
-    if(_userType != "driver-pedestrian")    //Si no es mixto, todos los días es el mismo usertType
+    if(_userType != "driver-pedestrian")    
+    	/* If it's not mixed, every day has the same user type */
         userTypeDay = _userType;
    
     /* Save in Hidden fields */
@@ -562,7 +610,6 @@ function defineMap(target) {
         _lat = "";
         if((io == "in" && _days[index] != null) && _days[index].stopIn != "")
         	drawPreviousMarkers(_projections[index].projIn);
-       
         if((io == "out" && _days[index] != null) && _days[index].stopOut != "")
         	drawPreviousMarkers(_projections[index].projOut);
     }
@@ -574,21 +621,25 @@ function defineMap(target) {
  * @param {String} io - in/out
  */
 function fillRowsInOut(io) {
-    var button = "<button id='btn"+ io +"' class='btnDefine' onClick='defineMap(this); return false;'>Definir</button>";
+    var	button = "<button id='btn"+ io +"' class='btnDefine' " +
+    				"onClick='defineMap(this); return false;'>Definir</button>",
+    	select = "";
            
     for(var d=1; d<6; d++) {
-        var select = "<select id='"+ d + io +"' onchange='checkHours("+ io +", this);'></select>";
+        /* Days */
+        select = "<select id='"+ d + io +"' onchange='checkHours(this);'></select>";
 
-        $("#tableSignUp #"+ io).append("<td>"+ select + button +"</td>");
+        $(".tableSignUp #"+ io).append("<td>"+ select + button +"</td>");
         $("#"+ d + io).append("<option value='none'>Hora</option>");                                  
        
-        //Hours
         for(var j=0; j<24; j++) {
+            /* Hours */
             $("#"+ d + io).append("<option value='"+ j +":00'>"+ j +":00 hs</option>");                      
             $("#"+ d + io).append("<option value='"+ j +":30'>"+ j +":30 hs</option>");
         }
        
-        $("#"+ d + io).prop("disabled", true);              /* Disable hour selects -> Enabled when defining map */
+        /* Disable hour selects -> Enabled when defining map */
+        $("#"+ d + io).prop("disabled", true);              
     }
 }
 
@@ -596,12 +647,13 @@ function fillRowsInOut(io) {
  * Inserts type of user in first row
  */
 function fillRowType() {
-    $("#tableSignUp #userTypeRow").html("<td> Tipo de Usuario </td>");
-   
+    $(".userTypeRow").html("<td> Tipo de Usuario </td>");
+    var content = "";
+    
     for(var d=1; d<6; d++) {
-        var content = "";
         if(_userType == "driver-pedestrian") {
-            //Select for user type each day
+            /* Select for user type each day */
+        	//TODO SELECCIONAR MESSAGE
             content =	"<select id='userType"+ d +"'>"+
                         	"<option value='0'>Seleccionar</option>"+
                         	"<option value='pedestrian'>Peaton</option>"+      
@@ -610,17 +662,18 @@ function fillRowType() {
         }
         else if(_userType == "driver") {
             $("#hdnUserTypeDay").val(_userType);
+        	//TODO CONDUCTOR MESSAGE            
             content = "Conductor";
         }
-        else {
-            //_userType == "pedestrian"
-            $("#hdnUserTypeDay").val(_userType);                  
+        else { /* _userType == "pedestrian" */
+            $("#hdnUserTypeDay").val(_userType); 
+        	//TODO PEATON MESSAGE            
             content = "Peaton";
         }
         content += "<br><br>";
         content += "<input type='checkbox' name='chkActive' class='chkActive"+ d +"'"+
-                   	"onclick='suscribes($(this));'>"+ $("#lblActive").val();
-        $("#tableSignUp #userTypeRow").append("<td>"+ content +"</td>");                      
+                   	"onclick='suscribes($(this));'>"+ $("#lblUnsuscribe").val();
+        $(".userTypeRow").append("<td>"+ content +"</td>");                      
     }
 }
 
@@ -647,22 +700,22 @@ function userTypeChanged(target) {
  * Constructor
  */
 function Track() {
-    this.isPedestrian = false;
-    this.trackIn = "";
-    this.hourIn = "";  
-    this.trackOut = "";  
-    this.hourOut = "";          
+    this.isPedestrian 	= false;
+    this.trackIn 		= "";
+    this.hourIn	 		= "";  
+    this.trackOut 		= "";  
+    this.hourOut 		= "";          
 }
 
 /**
  * Constructor
  */
 function Stop() {
-    this.isPedestrian = true;
-    this.stopIn = "";
-    this.hourIn = "";  
-    this.stopOut = "";
-    this.hourOut = "";          
+    this.isPedestrian 	= true;
+    this.stopIn 		= "";
+    this.hourIn 		= "";  
+    this.stopOut 		= "";
+    this.hourOut		= "";          
 }
 
 
@@ -670,15 +723,15 @@ function Stop() {
  * Constructor
  */
 function Matrix() {
-    this.matrixIn = "";
-    this.matrixOut = "";                  
+    this.matrixIn 	= "";
+    this.matrixOut 	= "";                  
 }
 
 /**
  * Constructor
  */
 function Projection() {
-    this.projIn = "";
-    this.projOut = "";                  
+    this.projIn		= "";
+    this.projOut 	= "";                  
 }
 

@@ -89,8 +89,6 @@
 	</section>
 </body>
 
-
-
 <script>
 	initMapCoords(lonlat, zoom, map);
 	
