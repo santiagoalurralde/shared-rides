@@ -82,8 +82,7 @@ public class ProfileService {
 				}
 			}
 			
-		User userAssoc = new User(userId);
-		userAssoc = userDAO.load(userAssoc);
+		User userAssoc = userDAO.load(userId);
 		createModel(userAssoc);		
 		return model;
 		}
@@ -274,11 +273,9 @@ public class ProfileService {
 	 */
 	private boolean allowRequest(long userId, int day, int inout){
 		boolean allowFlag = true;
-		User user = new User(userId);
-		user = userDAO.load(user);
+		User user = userDAO.load(userId);
 		
-		User userAssoc = new User(this.userLogInId);
-		userAssoc = userDAO.load(userAssoc);
+		User userAssoc = userDAO.load(this.userLogInId);
 		
 		if(userId == this.userLogInId){
 			allowFlag = false;
@@ -311,10 +308,8 @@ public class ProfileService {
 	 * Si me pasa un 0 es un Peaton, sino es un Driver
 	 */
 	public boolean calculateRating(long requestUserID, long userID, int profile, int rating){
-		User u = new User(userID);
-		u = userDAO.load(u);
-		User requestUser = new User(requestUserID);
-		requestUser = userDAO.load(requestUser);
+		User u = userDAO.load(userID);
+		User requestUser = userDAO.load(requestUserID);
 		boolean isValidate = false;
 		
 		/*

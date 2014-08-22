@@ -9,11 +9,11 @@ import com.shared.rides.domain.Track;
 public interface IDriverDAO {
 	
 		public boolean save(Driver driver);
-		public Driver load(Driver driver);
+		public Driver load(long id);
 		public Driver update(Driver driver);
 		public Driver delete(Driver driver);
 	    public List<Driver> listAll();
 	    public Driver getLastDriver();
-	    public void newSch(Driver driver, Schedule sch);
-	    public void newTrack(Driver driver, Track track);
+	    public void newSch(long driverId, long schId);
+	    public void newTrack(long driverId, long trackId);
 }

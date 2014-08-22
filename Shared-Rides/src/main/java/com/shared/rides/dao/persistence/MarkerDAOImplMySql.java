@@ -23,8 +23,8 @@ public class MarkerDAOImplMySql implements IMarkerDAO{
 		return false;
 	}
 
-	public Marker load(Marker marker) {
-		return (Marker) sessionFactory.getCurrentSession().get(Marker.class, marker.getMarkerId());	
+	public Marker load(long id) {
+		return (Marker) sessionFactory.getCurrentSession().get(Marker.class, id);	
 	}
 
 	public Marker delete(Marker marker) {

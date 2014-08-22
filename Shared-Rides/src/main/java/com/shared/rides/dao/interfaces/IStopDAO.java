@@ -6,7 +6,7 @@ import com.shared.rides.domain.Stop;
 
 public interface IStopDAO {
 	public boolean save(Stop stop);
-	public Stop load(Stop stop);
+	public Stop load(long id);
 	public Stop update(Stop stop);
 	public Stop delete(Stop stop);
 	public List<Stop> listAll();

@@ -26,8 +26,8 @@ public class StopDAOImplMySql implements IStopDAO{
 		return false;
 	}
 
-	public Stop load(Stop stop) {
-		return (Stop) sessionFactory.getCurrentSession().get(Stop.class, stop.getStopId());
+	public Stop load(long id) {
+		return (Stop) sessionFactory.getCurrentSession().get(Stop.class, id);
 	}
 
 	public Stop update(Stop stop) {

@@ -24,8 +24,8 @@ public class VehicleDAOImplMySql implements IVehicleDAO{
 		return true;
 	}
 
-	public Vehicle load(Vehicle vehicle) {
-		return (Vehicle) sessionFactory.getCurrentSession().get(Vehicle.class, vehicle.getVehicleId());	
+	public Vehicle load(long id) {
+		return (Vehicle) sessionFactory.getCurrentSession().get(Vehicle.class, id);	
 	}
 
 	public Vehicle delete(Vehicle vehicle) {

@@ -30,8 +30,7 @@ public class DownloadImgController {
 	    @RequestMapping(value = "printImgFile.do")
 	    protected void downloadImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	        long userId = Long.parseLong(request.getParameter("user"));
-	        User u = new User(userId);
-	        u = userDAO.load(u);
+	        User u = userDAO.load(userId);
 	        
 	        try{
 	            FileInputStream inputStream = new FileInputStream("/home/leandrobagur/profilePic/" + u.getPicture()); 

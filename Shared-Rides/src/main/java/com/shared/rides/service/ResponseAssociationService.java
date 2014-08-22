@@ -37,8 +37,7 @@ public class ResponseAssociationService {
 	private List<Long> schIdList;
 
 	public String hasResponse(long userId){
-		User u = new User(userId);
-		u = userDAO.load(u);
+		User u = userDAO.load(userId);
 		
 		List<Association> myRequestList = userDAO.getMyRequests(u);
 		JsonArray json = new JsonArray();
@@ -47,8 +46,7 @@ public class ResponseAssociationService {
 			if(assoc.getState().equals(State.ACCEPTED) || assoc.getState().equals(State.CANCELLED)){
 				if(assoc.getDate().after(u.getLastLoginDate())){
 					long uAssocId = assocDAO.getSupplierId(assoc);
-					User uAssoc = new User(uAssocId);
-					uAssoc = userDAO.load(uAssoc);
+					User uAssoc = userDAO.load(uAssocId);
 					String fullName = uAssoc.getName() + " " + uAssoc.getSurname();
 					JsonObject uJson = new JsonObject();
 					uJson.addProperty("name", fullName);
@@ -66,8 +64,7 @@ public class ResponseAssociationService {
 	 * Si es 1 --> Asociado
 	 */
 	public String showAssociationSchedule(long requestUserId, long assocUserId, int assocType){
-		User requestUser = new User(requestUserId);
-		requestUser = userDAO.load(requestUser);
+		User requestUser = userDAO.load(requestUserId);
 		
 		json = new JsonObject();
 		requestedJson = new JsonArray();
@@ -126,8 +123,7 @@ public class ResponseAssociationService {
 		jsonSchedule.addProperty("inout", assoc.getInout());
 		
 		for (int j = 0; j < schIdList.size(); j++){
-			Schedule sch = new Schedule(schIdList.get(j));
-			sch = scheduleDAO.load(sch);
+			Schedule sch = scheduleDAO.load(schIdList.get(j));
 			if (assoc.getDay() == sch.getDay()){
 				if (assoc.getInout() == 0) jsonSchedule.addProperty("hour", sch.getHourIn());
 				else jsonSchedule.addProperty("hour", sch.getHourOut());
@@ -161,8 +157,7 @@ public class ResponseAssociationService {
 	 * Metodo que se encarga de cambiar el estado de la asociacion cuando un usuario responde a una solicitud
 	 */
 	public String sendResponseAssoc(long assocId, boolean response){
-		Association assoc = new Association(assocId);
-		assoc = assocDAO.load(assoc);
+		Association assoc = assocDAO.load(assocId);
 		Date date = new Date();
 		String msg = null;
 		

@@ -24,8 +24,8 @@ public class OrganizationDAOImplMySql implements IOrganizationDAO {
 		return false;
 	}
 
-	public Organization load(Organization org) {
-		return (Organization) sessionFactory.getCurrentSession().get(Organization.class, org.getOrganizationId());	
+	public Organization load(long id) {
+		return (Organization) sessionFactory.getCurrentSession().get(Organization.class, id);	
 	}
 
 	public Organization delete(Organization org) {

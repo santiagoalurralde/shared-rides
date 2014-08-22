@@ -8,7 +8,7 @@ import com.shared.rides.domain.User;
 public interface IAssociationDAO {
 	
 	public boolean save(Association assoc);
-	public Association load(Association assoc);
+	public Association load(long id);
 	public Association update(Association assoc);
 	public Association delete(Association assoc);
 	public List<Association> listAll();

@@ -27,8 +27,8 @@ public class PedestrianDAOImplMySql implements IPedestrianDAO {
 		return false;
 	}
 
-	public Pedestrian load(Pedestrian ped) {
-		return (Pedestrian) sessionFactory.getCurrentSession().get(Pedestrian.class, ped.getPedestrianId());	
+	public Pedestrian load(long id) {
+		return (Pedestrian) sessionFactory.getCurrentSession().get(Pedestrian.class, id);	
 	}
 
 	public Pedestrian delete(Pedestrian ped) {
@@ -55,18 +55,14 @@ public class PedestrianDAOImplMySql implements IPedestrianDAO {
 		return (Pedestrian) sessionFactory.getCurrentSession().get(Pedestrian.class, id.longValue());
 	}
 
-	public void newSch(Pedestrian ped, Schedule sch) {
-		Long idSch = sch.getScheduleId();
-		Long idPed = ped.getPedestrianId();
-		String sql = "INSERT INTO Pedestrian_Schedule (pedestrianID, scheduleID) VALUES ( "+ idPed +" , "+ idSch +"  )";
+	public void newSch(long pedId, long schId) {
+		String sql = "INSERT INTO Pedestrian_Schedule (pedestrianID, scheduleID) VALUES ( "+ pedId +" , "+ schId +"  )";
 		Query query  = sessionFactory.getCurrentSession().createSQLQuery(sql);
 		query.executeUpdate();
 	}
 
-	public void newStop(Pedestrian ped, Stop stop) {
-		Long idStop = stop.getStopId();
-		Long idPed = ped.getPedestrianId();
-		String sql = "INSERT INTO Pedestrian_Stop (pedestrianID, stopID) VALUES ( "+ idPed +" , "+ idStop +"  )";
+	public void newStop(long pedId, long stopId) {
+		String sql = "INSERT INTO Pedestrian_Stop (pedestrianID, stopID) VALUES ( "+ pedId +" , "+ stopId +"  )";
 		Query query  = sessionFactory.getCurrentSession().createSQLQuery(sql);
 		query.executeUpdate();
 	}

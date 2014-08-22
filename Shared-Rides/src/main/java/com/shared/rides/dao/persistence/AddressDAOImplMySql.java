@@ -23,8 +23,8 @@ public class AddressDAOImplMySql implements IAddressDAO {
 		return true;
 	}
 
-	public Address load(Address address) {
-		return (Address) sessionFactory.getCurrentSession().get(Address.class, address.getAddressId());	
+	public Address load(long id) {
+		return (Address) sessionFactory.getCurrentSession().get(Address.class, id);	
 	}
 
 	public Address delete(Address address) {
