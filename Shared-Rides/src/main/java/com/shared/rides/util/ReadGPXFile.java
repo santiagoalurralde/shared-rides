@@ -15,8 +15,9 @@ public class ReadGPXFile {
 	
 	public static double[][] readFile(String pathFile){
 		try {
-
-			File fGPXFile = new File("/home/leandrobagur/WORKSPACE/trunk/Shared-Rides/src/main/webapp/resources/gpxFiles/" + pathFile);
+        	//leandro: /home/leandrobagur/WORKSPACE/
+        	//santiago:/home/santiago/workspace/ 
+			File fGPXFile = new File("/home/santiago/workspace/trunk/Shared-Rides/src/main/webapp/resources/gpxFiles/" + pathFile);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fGPXFile);

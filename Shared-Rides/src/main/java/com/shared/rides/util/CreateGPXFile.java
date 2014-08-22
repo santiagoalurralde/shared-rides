@@ -34,7 +34,9 @@ public class CreateGPXFile {
         xmlOutput.setFormat(Format.getPrettyFormat());
         
         try {
-			xmlOutput.output(doc, new FileWriter("/home/leandrobagur/WORKSPACE/trunk/Shared-Rides/src/main/webapp/resources/gpxFiles/" + name));
+        	//leandro: /home/leandrobagur/WORKSPACE/
+        	//santiago:/home/santiago/workspace/ 
+			xmlOutput.output(doc, new FileWriter("/home/santiago/workspace/trunk/Shared-Rides/src/main/webapp/resources/gpxFiles/" + name));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

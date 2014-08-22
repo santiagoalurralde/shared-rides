@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UploadFile {
 
-	public static String uploadFile( MultipartFile file, String fileName){
+	public static String uploadFile(MultipartFile file, String fileName){
 		String name = fileName;
 		
 		if (!file.isEmpty()) {
@@ -16,6 +16,8 @@ public class UploadFile {
 				byte[] bytes = file.getBytes();
 
 				// Creando el directorio
+	        	//leandro: /home/leandrobagur/profilePic/
+	        	//santiago:/home/santiago/profilePic/ 
 				String rootPath = "/home/leandrobagur/profilePic";
 				File dir = new File(rootPath + File.separator);
         
@@ -30,7 +32,7 @@ public class UploadFile {
 				return "Fallo al cargar el archivo " + name + " => " + e.getMessage();
 			}
 			} else {
-					return "Fallo al cargar el archivo " + name + " porque el mismo esta vacio.";
+				return "Fallo al cargar el archivo " + name + " porque el mismo esta vacio.";
 			}
 	}
 }
