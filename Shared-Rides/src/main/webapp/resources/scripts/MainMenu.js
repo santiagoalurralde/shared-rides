@@ -160,22 +160,22 @@ function update(step) {
             highlightStep(step);
             $("#imgSun, #imgMoon").hide();
             $("#imgBoot, #imgSteering").show("fast");
-            $("#btnBack").hide("fast");
-            $("#btnNext").css("marginLeft", "0");
+            $("#btnBack, #btnDefault").hide("fast");
+            $("#btnNext, #btnDefault").css("margin-left", "0");
             break;
         case 1:
             highlightStep(step);                    
             $("#mapDriver, #mapPedestrian, #imgBoot, #imgSteering").hide();
             $("#imgSun, #imgMoon, #btnBack").show("fast");
             $("#btnOK, #listFound").hide("fast");
-            $("#btnNext").show("slow");
-            $("#btnNext").css("margin-left", "60px");
+            $("#btnNext, #btnDefault").show("slow");
+            $("#btnNext, #btnDefault").css("margin-left", "60px");
             $("#tableFound td").remove();
             break;
         case 2:
             highlightStep(step);                    
             $("#imgSun, #imgMoon, #btnNext").hide();
-                    
+                  
             _user == 2 ? $("#mapPedestrian").show("slow") : $("#mapDriver").show("slow");
 
             $("#btnOK").css("margin-left", "60px").show("slow");

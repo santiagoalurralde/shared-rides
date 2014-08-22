@@ -269,7 +269,7 @@
 					
 					<span id="applyMapDefinition">
 	       				<input	type="button" class="btn btn-map" 
-	       						value='<spring:message code="label.ready"/>'/>      
+	       						value='<spring:message code="label.button-ready"/>'/>      
 	       						 						
 	       				<input 	type="hidden" id="hdnInOut"/>  
 	         			<input 	type="hidden" id="hdnDay"/>
@@ -305,13 +305,13 @@
 				<!---- Buttons ---->
         		<div id="buttonsSteps">
         			<input 	type="button" class="btn btn-back"  
-        					value='<spring:message code="label.previous"/>'	
+        					value='<spring:message code="label.button-previous"/>'	
         					onClick="stepBack();"/>	
            	   		<input 	type="button" class="btn btn-next"  	
-							value='<spring:message code="label.next"/>'		
+							value='<spring:message code="label.button-next"/>'		
 							onClick="stepNext();"/>	
         			<input 	type="button" class="btn btn-OK"
-        					value='<spring:message code="label.confirm"/>'/>  
+        					value='<spring:message code="label.button-confirm"/>'/>  
         		</div> 	  
        		</div>	  
 			<div class="clearer"></div>
