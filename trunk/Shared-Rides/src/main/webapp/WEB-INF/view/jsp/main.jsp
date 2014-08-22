@@ -62,28 +62,30 @@
         		
         		<!---- Buttons ---->
         		<div id="buttonsSteps">
-        			<!-- TODO labels--> 
         			<input type="button" class="btn" id="btnBack" 		
         				value="<spring:message code="label.button-previous"	/>" onClick="stepBack();"/>	
+        			<input type="button" class="btn" id="btnDefault" 	
+        				value="<spring:message code="label.button-search"	/>"/>         				
            	   		<input type="button" class="btn" id="btnNext" 		
            	   			value="<spring:message code="label.button-next"		/>" onClick="stepNext();"/>		
         			<input type="button" class="btn" id="btnOK" 		
-        				value="<spring:message code="label.button-confirm" 	/>"/>  
-        			<input type="button" class="btn" id="btnDefault" 	
-        				value="<spring:message code="label.button-search"	/>"/>          			
+        				value="<spring:message code="label.button-confirm" 	/>"/>           			
         		</div> 	 
        		</form>	        	
         </section>        
 	</div>
 	
+	<!-- TODO labels-->
 	<div id='dlgChooseUserType' title="Oops!" class='theDialog'>Selecciona un tipo de usuario! <br><p>(Presiona Esc. para volver)</div>
 	<div id='dlgChooseShift' 	title="Oops!" class='theDialog'>Selecciona un turno! <br><p>(Presiona Esc. para volver)</div>
 	
 	<c:set var="lblBlocks1"><spring:message code="label.blocks1"/></c:set>
 	<c:set var="lblBlocks2"><spring:message code="label.blocks2"/></c:set>	
-	<input type="hidden" id="lblBlocks1" value="${lblBlocks1}"/>
-	<input type="hidden" id="lblBlocks2" value="${lblBlocks2}"/>
-		
+	<input type="hidden" id="lblBlocks1" 	value="${lblBlocks1}"/>
+	<input type="hidden" id="lblBlocks2" 	value="${lblBlocks2}"/>
+	
+	<input type="hidden" id="hdnValidate"	value="${validate}"/>	
+	
 	<section>
 		<script src="resources/scripts/MainMenu.js" 	type="text/javascript"></script>
 		<script src="resources/maps/OpenLayers.js"		type="text/javascript"></script>    

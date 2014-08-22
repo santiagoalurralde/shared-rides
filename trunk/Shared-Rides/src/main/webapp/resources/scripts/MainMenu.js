@@ -35,8 +35,12 @@ $(document).ready(function() {
     });
    
     $("#btnOK").click(function() {
-        findUsers();
+        customSearch();
     });
+    
+    $("#btnDefault").click(function() {
+        defaultSearch();
+    });    
 });
 
 /**
@@ -99,10 +103,42 @@ function changeUserType(u) {
     }
 }
 
+function defaultSearch() {
+	$.post("defaultFind.do", {"user": _user , "shift": _shift},
+	        function(json) {
+	            var peopleFound = $.parseJSON(json);
+	            if(peopleFound == "") {
+                    $(".alerts").show();  
+                    $("#tableFound").hide();                              
+	            }
+	            else {
+	                $.each(peopleFound, function(i, data) {
+	                    var distance = Math.ceil(data.distance);
+	                    $("#tableFound").show();      
+	                    $(".alerts").hide();  
+	                    $("#tableFound").append(
+	                        "<tr>"+
+	                            "<td>"+ data.name +" "+ data.surname +"</td>"+
+	                            "<td>"+
+	                                "<a href='/Shared-Rides/profile.do?user="+ data.id +"'>"+
+	                                    "<img src='printImgFile.do?pic="+ data.picture +"'/>"+
+	                                "</a>"+
+	                            "</td>"+
+	                            "<td>"+ $("#lblBlocks1").val() +" "+ distance +" "+ $("#lblBlocks2").val() +"</td>"+
+	                        "</tr>");
+	                });    
+	            }
+	    });
+	   
+    //Brings the list
+    $("#mapDriver, #mapPedestrian, #btnOK, #btnDefault").hide();       
+    $("#listFound").show("fast");	
+}
+
 /**
  * Sends all data collected through post, and shows results
  */
-function findUsers() {
+function customSearch() {
     var coordsJs;                           //Datos de coordenadas
 
     if(_user == 2)
@@ -114,8 +150,8 @@ function findUsers() {
         function(json) {
             var peopleFound = $.parseJSON(json);
             if(peopleFound == "") {
-                    $(".alerts").show();  
-                    $("#tableFound").hide();                              
+                $(".alerts").show();  
+                $("#tableFound").hide();                              
             }
             else {
                 $.each(peopleFound, function(i, data) {
@@ -161,24 +197,21 @@ function update(step) {
             $("#imgSun, #imgMoon").hide();
             $("#imgBoot, #imgSteering").show("fast");
             $("#btnBack, #btnDefault").hide("fast");
-            $("#btnNext, #btnDefault").css("margin-left", "0");
+            $("#btnNext").css("margin-left", "0");
             break;
         case 1:
             highlightStep(step);                    
-            $("#mapDriver, #mapPedestrian, #imgBoot, #imgSteering").hide();
-            $("#imgSun, #imgMoon, #btnBack").show("fast");
-            $("#btnOK, #listFound").hide("fast");
-            $("#btnNext, #btnDefault").show("slow");
-            $("#btnNext, #btnDefault").css("margin-left", "60px");
+            $("#mapDriver, #mapPedestrian, #imgBoot, #imgSteering, #btnOK, #listFound").hide();
+            $("#imgSun, #imgMoon, #btnBack, #btnNext").show("fast");
+            if($("#hdnValidate").val() == "true")
+            	$("#btnDefault").show("fast");
+            $("#btnNext").css("margin-left", "60px");
             $("#tableFound td").remove();
             break;
         case 2:
             highlightStep(step);                    
-            $("#imgSun, #imgMoon, #btnNext").hide();
-                  
-            _user == 2 ? $("#mapPedestrian").show("slow") : $("#mapDriver").show("slow");
-
-            $("#btnOK").css("margin-left", "60px").show("slow");
+            $("#imgSun, #imgMoon, #btnNext, #btnDefault").hide();
+            _user == 2 ? $("#btnOK, #mapPedestrian").show("slow") : $("#btnOK, #mapDriver").show("slow");
             break;
     }      
 }
