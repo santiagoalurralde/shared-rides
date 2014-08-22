@@ -11,9 +11,7 @@
 				<img class="aboutPic" src="resources/profilePic/santi.jpg" >
 				<br>
 				<h4 class="aboutName"> SANTIAGO ALURRALDE </h4>		
-				<span><spring:message code="label.frontenddev"/> / <spring:message code="label.uidesigner"/></span>
-
-						
+				<span><spring:message code="label.frontenddev"/> / <spring:message code="label.uidesigner"/></span>		
 			</div>
 			
 			<div class="blockRight blockHalf">

@@ -105,10 +105,10 @@ function update(step) {
         case 2:
             highlightStep(step);    
             fillRowType();
-            $( "#secondStep" ).hide();
-            $( "#thirdStep" ).show();
-            $( "#btnNext" ).hide("fast");
-            $( "#btnOK" ).show("slow");
+            $("#secondStep").hide();
+            $("#thirdStep").show();
+            $("#btnNext").hide("fast");
+            $("#btnOK").show("slow");
             break;
      }
 }
@@ -121,16 +121,16 @@ function update(step) {
 function highlightStep(step){
     switch(step) {
         case 0:
-            $("#stepSignUp2, #stepSignUp3").css('opacity', '.2');
-            $("#stepSignUp1" ).css('opacity', '1');
+            $("#stepSignUp2, #stepSignUp3").css("opacity", ".2");
+            $("#stepSignUp1").css("opacity", "1");
             break;
         case 1:
-            $("#stepSignUp1, #stepSignUp3").css('opacity', '.2');
-            $("#stepSignUp2").css('opacity', '1');
+            $("#stepSignUp1, #stepSignUp3").css("opacity", ".2");
+            $("#stepSignUp2").css("opacity", "1");
             break;
         case 2:
-            $("#stepSignUp1, #stepSignUp2").css('opacity', '.2');
-            $("#stepSignUp3").css('opacity', '1');
+            $("#stepSignUp1, #stepSignUp2").css("opacity", ".2");
+            $("#stepSignUp3").css("opacity", "1");
             break;
     }
 }
@@ -155,10 +155,7 @@ function checkValues0() {
             paint($($("#firstStep input")[l]), true);
         }
    
-    if(!flag) {
-        $("#alert").html("<p>Los campos señalados están incompletos, debe llenarlos para proceder.");
-        $("#alert").show( "fast" );          
-    }
+    activateAlert(flag);
    
 	return flag;
 }
@@ -169,8 +166,8 @@ function checkValues0() {
  * @return {Boolean} TRUE values are OK
  */
 function checkValues1() {
-    var	flag = true,
-    	max = 3;
+    var	flag 	= true,
+    	max 	= 3;
    
     //Is not a pedestrian
     if(_userType != "pedestrian") {
@@ -218,10 +215,7 @@ function checkValues1() {
             paint($($("#secondStep select")[l]), true);
         }
    
-    if(!flag) {
-        $("#alert").html("<p>Los campos señalados están incompletos, debe llenarlos para proceder.");
-        $("#alert").show("fast");          
-    }
+    activateAlert(flag);
 
     return flag;
 }
@@ -297,6 +291,18 @@ function paint($target, flag) {
         $target.addClass("painted");
     else
         $target.removeClass("painted");
+}
+
+/**
+ * Shows alert.
+ *
+ * @param {Bool} flag - TRUE for activating alert.
+ */
+function activateAlert(flag){
+    if(!flag) {
+        $("#alert").html("<p>Los campos señalados están incompletos, debe llenarlos para proceder.");
+        $("#alert").show("fast");          
+    }
 }
 
 /**
@@ -571,10 +577,10 @@ function fillRowsInOut(io) {
     var button = "<button id='btn"+ io +"' class='btnDefine' onClick='defineMap(this); return false;'>Definir</button>";
            
     for(var d=1; d<6; d++) {
-        var select = "<select id='"+ d + io +"'></select>";
+        var select = "<select id='"+ d + io +"' onchange='checkHours("+ io +", this);'></select>";
 
         $("#tableSignUp #"+ io).append("<td>"+ select + button +"</td>");
-        $("#"+ d + io).append("<option value='none'>Seleccionar</option>");                                  
+        $("#"+ d + io).append("<option value='none'>Hora</option>");                                  
        
         //Hours
         for(var j=0; j<24; j++) {
