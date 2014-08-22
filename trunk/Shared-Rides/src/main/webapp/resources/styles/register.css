@@ -6,18 +6,23 @@ Last change:	19/08/2014
 Assigned to:	Santiago Alurralde (sa)
 -------------------------------------------------------------------*/
 
-.steps {
-	margin:			3% auto;
+.step {
+	margin:			2% auto;
 	font-family:	'Raleway', sans-serif;	
 	width:			45%;	
 }
 
-#thirdStep { 
+.step-third { 
+	margin-bottom:	1.5%;
 	width: 			80%;
 }
 
 .split {
 	height: 		2.7em;
+}
+
+.split.split-table {
+	height: 		1.1em;
 }
 
 .red {
@@ -32,7 +37,7 @@ Assigned to:	Santiago Alurralde (sa)
 [Starting Conditions]
 ------------------------------------------------------------------*/
 
-#btnBack, #btnOK, .alerts, #applyMapDefinition{
+.step-second, .step-third, .btn-back, .btn-OK, .alerts, #applyMapDefinition {
 	display: none;
 }
 
@@ -92,6 +97,14 @@ input.theInputs{
 	position:		relative;
 	text-align:		center;
 	width:			100%;
+}
+
+/*------------------------------------------------------------------
+[Maps]
+------------------------------------------------------------------*/
+
+#mapPedestrian, #mapDriver{
+	margin-bottom:	30px;
 }
 
 /*------------------------------------------------------------------

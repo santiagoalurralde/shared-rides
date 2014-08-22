@@ -16,7 +16,7 @@
         	
 			<div class="theBoard lightBorder">
        		    	        		    	
-       		    <div id="firstStep" class="steps">
+       		    <div class="step step-first">
          			<span>
            				<span class="blockLeft">
 			               	<spring:message code="label.organization"/>	          
@@ -107,7 +107,7 @@
        		    </div>
        		    <!-------------------------------------------------- END of FIRST STEP -------------------------------------------------->
        		    
-       		    <div id="secondStep" class="steps" style="display: none">
+       		    <div class="step step-second">
 
          			<form method="POST" action="uploadFile.do" target="uploaded"
 						onSubmit="uploaded = window.open('','uploaded', 'width=300 height=200, status=no scrollbars=no, location=no, resizable=no, manu=no');"
@@ -245,8 +245,8 @@
 				<!---------------------------------------- END of SECOND STEP ---------------------------------------->
 
 
-       		    <div id="thirdStep" class="steps" style="display: none">
-					<table id="tableSignUp" class="theSchedule">
+       		    <div class="step step-third">
+					<table class="tableSignUp theSchedule">
 						<tr>
 							<th> <!-- Empty --> </th>	
 							<th> <spring:message code="label.monday"/> 		</th>
@@ -255,32 +255,37 @@
 							<th> <spring:message code="label.thursday"/>	</th>
 							<th> <spring:message code="label.friday"/>		</th>				
 						</tr>
-						<tr id="userTypeRow">
+						<tr class="userTypeRow">
 						</tr>
 						<tr id="in">
-							<td> <spring:message code="label.arrival"/> 	</td>
+							<td> <spring:message code="label.arrival"/> </td>
 						</tr>
 						<tr id="out">
-							<td> <spring:message code="label.departure"/> 	</td>									
+							<td> <spring:message code="label.departure"/> </td>									
 						</tr>
-					</table>
+					</table>	
 					
-					<div class="split"></div>
-	      						
-          			<span id="applyMapDefinition">
-           				<input 	type="button" id="btnMap" class="btn" 
-           						value='<spring:message code="label.ready"/>'/>  
-           						
-           				<input type="hidden" id="hdnInOut" 		/>  
-             			<input type="hidden" id="hdnDay" 		/>
-              			<input type="hidden" id="hdnUserTypeDay"/>
-             			  	            						            						
-           			</span>  	
+					<div class="split split-table"></div>        								         													            			      				
+					
+					<span id="applyMapDefinition">
+	       				<input	type="button" class="btn btn-map" 
+	       						value='<spring:message code="label.ready"/>'/>      
+	       						 						
+	       				<input 	type="hidden" id="hdnInOut"/>  
+	         			<input 	type="hidden" id="hdnDay"/>
+	          			<input 	type="hidden" id="hdnUserTypeDay"/>  	            						            						
+        			</span> 
 				</div>
+				
+				<div class="split split-beginning"></div> 
+				       								         													            			      				
+				<!---- Alerts Dialog ---->	
+				<div class="alerts"></div>
+				
 				<!---------------------------------------- END of THIRD STEP ---------------------------------------->
 				
 				
-				<!----	Map Driver		---->		
+				<!---- Map Driver ---->		
 				<div id="mapDriver">
 					<div id="map"></div>
 					<span class="t1" style = "visibility:hidden">
@@ -292,25 +297,20 @@
 					</span>						
 				</div>
 				
-				<!----	Map Pedestrian	---->	
+				<!---- Map Pedestrian ---->	
         		<div id="mapPedestrian">
         			<div id="map2" class="mapSimple"></div>
         		</div>
-
-				<div class="split"></div>        								         													            			
-	
-				<!----	Red Alerts 	----->
-				<div id="alert" class="alerts"></div>          				
-				
-        		<!----	Buttons	---->
+        		        		
+				<!---- Buttons ---->
         		<div id="buttonsSteps">
-        			<input 	type="button" class="btn" id="btnBack" 
+        			<input 	type="button" class="btn btn-back"  
         					value='<spring:message code="label.previous"/>'	
         					onClick="stepBack();"/>	
-           	   		<input 	type="button" class="btn" id="btnNext" 	
+           	   		<input 	type="button" class="btn btn-next"  	
 							value='<spring:message code="label.next"/>'		
 							onClick="stepNext();"/>	
-        			<input 	type="button" class="btn" id="btnOK" 	
+        			<input 	type="button" class="btn btn-OK"
         					value='<spring:message code="label.confirm"/>'/>  
         		</div> 	  
        		</div>	  
@@ -319,8 +319,8 @@
 	
 	</div>
 	
-	<c:set var="lblActive"><spring:message code="label.active" /></c:set>	
-	<input type="hidden" id="lblActive" value="${lblActive}" />
+	<c:set var="lblUnsuscribe"><spring:message code="label.unsuscribe" /></c:set>	
+	<input type="hidden" id="lblUnsuscribe" value="${lblUnsuscribe}" />
 </body>
 
 <script src="resources/scripts/Register.js" 	type="text/javascript"></script>
