@@ -119,8 +119,8 @@ Assigned to:	Santiago Alurralde (sa)
 }
 
 .tableUsers th {
-	background:				-moz-linear-gradient(top, #FAFAFA, #EEE);
-	background:				-webkit-linear-gradient(top, #FAFAFA, #EEE);
+	background:				-moz-linear-gradient(top, #FAFAFA, #F0F0F0);
+	background:				-webkit-linear-gradient(top, #FAFAFA, #F0F0F0);
 	padding:				20px 25px 25px 25px;
 	border-bottom:			1px solid #e0e0e0;
 }
