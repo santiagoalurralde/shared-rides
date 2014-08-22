@@ -46,7 +46,7 @@ function stepNext() {
     if(_step == 0 && _user == 0)
         $("#dlgChooseUserType").dialog({dialogClass: 'no-close', modal: true, draggable: false});
     else if(_step == 1 && _shift == 0)
-        $("#dlgChooseShift").dialog({ dialogClass: 'no-close', modal: true, draggable: false});    
+        $("#dlgChooseShift").dialog({dialogClass: 'no-close', modal: true, draggable: false});    
     else
         _step++;
 }
@@ -127,7 +127,7 @@ function findUsers() {
                             "<td>"+ data.name +" "+ data.surname +"</td>"+
                             "<td>"+
                                 "<a href='/Shared-Rides/profile.do?user="+ data.id +"'>"+
-                                    "<img src='resources/profilePic/" + data.picture + "'/>"+
+                                    "<img src='resources/profilePic/"+ data.picture +"'/>"+
                                 "</a>"+
                             "</td>"+
                             "<td>"+ $("#lblBlocks1").val() +" "+ distance +" "+ $("#lblBlocks2").val() +"</td>"+

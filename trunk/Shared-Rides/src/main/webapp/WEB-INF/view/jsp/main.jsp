@@ -29,7 +29,7 @@
 					<img id="imgSun" 		title="Dia"			class="imagesSteps"	src="resources/images/sun.png" 		/>
 					<img id="imgMoon"		title="Tarde/Noche"	class="imagesSteps"	src="resources/images/moon.png" 	/>
         		</div>
-
+				
         		<!----	Map Driver		---->		
 				<div id="mapDriver">
 					<div id="map"></div>
@@ -56,7 +56,7 @@
         			<table id="tableFound" class="tableUsers">
 						<tr>
 							<th colspan="4"><spring:message code="label.foundUsers"/></th>
-						</tr>
+						</tr>													
 					</table>
         		</div>
         		
@@ -95,12 +95,12 @@
 	initMapCoords(lonlat, zoom, map);
 	
 	$(function() {
-		$( document ).tooltip({
+		$(document).tooltip({
 			track: true,
 			position: {
 				my: "center top+60",
-				using: function( position, feedback ) {
-					$( this ).css( position );
+				using: function(position, feedback) {
+					$(this).css(position);
 				}
 			}
 		 });
