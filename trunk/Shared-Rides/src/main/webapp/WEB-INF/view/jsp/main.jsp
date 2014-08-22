@@ -62,10 +62,16 @@
         		
         		<!---- Buttons ---->
         		<div id="buttonsSteps">
-        			<input type="button" class="btn" id="btnBack" 	value="Anterior" 	onClick="stepBack();"	/>	
-           	   		<input type="button" class="btn" id="btnNext" 	value="Siguiente"	onClick="stepNext();"	/>		
-        			<input type="button" class="btn" id="btnOK" 	value="Confirmar" 	/>  
-        		</div> 	  
+        			<!-- TODO labels--> 
+        			<input type="button" class="btn" id="btnBack" 		
+        				value="<spring:message code="label.button-previous"	/>" onClick="stepBack();"/>	
+           	   		<input type="button" class="btn" id="btnNext" 		
+           	   			value="<spring:message code="label.button-next"		/>" onClick="stepNext();"/>		
+        			<input type="button" class="btn" id="btnOK" 		
+        				value="<spring:message code="label.button-confirm" 	/>"/>  
+        			<input type="button" class="btn" id="btnDefault" 	
+        				value="<spring:message code="label.button-search"	/>"/>          			
+        		</div> 	 
        		</form>	        	
         </section>        
 	</div>

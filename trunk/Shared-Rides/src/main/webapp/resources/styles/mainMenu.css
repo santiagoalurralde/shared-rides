@@ -89,7 +89,7 @@ Assigned to:	Santiago Alurralde (sa)
 [Starting Conditions]
 ------------------------------------------------------------------*/
 
-#btnBack, #btnOK, .alerts, #imgSun, #imgMoon, #listFound, .theDialog {
+#btnBack, #btnOK, #btnDefault, .alerts, #imgSun, #imgMoon, #listFound, .theDialog {
 	display:				none;
 }
 
