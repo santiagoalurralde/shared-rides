@@ -27,8 +27,8 @@ public class DriverDAOImplMySql implements IDriverDAO {
 		return true;
 	}
 
-	public Driver load(Driver driver) {
-		return (Driver) sessionFactory.getCurrentSession().get(Driver.class, driver.getDriverId());	
+	public Driver load(long id) {
+		return (Driver) sessionFactory.getCurrentSession().get(Driver.class, id);	
 	}
 
 	public Driver delete(Driver driver) {
@@ -55,18 +55,14 @@ public class DriverDAOImplMySql implements IDriverDAO {
 		return (Driver) sessionFactory.getCurrentSession().get(Driver.class, id.longValue());
 	}
 
-	public void newSch(Driver driver, Schedule sch) {
-		Long idSch = sch.getScheduleId();
-		Long idDriver = driver.getDriverId();
-		String sql = "INSERT INTO Driver_Schedule (driverID, scheduleID) VALUES ( "+ idDriver +" , "+ idSch +"  )";
+	public void newSch(long driverId, long schId) {
+		String sql = "INSERT INTO Driver_Schedule (driverID, scheduleID) VALUES ( "+ driverId +" , "+ schId +"  )";
 		Query query  = sessionFactory.getCurrentSession().createSQLQuery(sql);
 		query.executeUpdate();		
 	}
 
-	public void newTrack(Driver driver, Track track) {
-		Long idTrack = track.getTrackId();
-		Long idDriver = driver.getDriverId();
-		String sql = "INSERT INTO Driver_Track (driverID, trackID) VALUES ( "+ idDriver +" , "+ idTrack +"  )";
+	public void newTrack(long driverId, long trackId) {
+		String sql = "INSERT INTO Driver_Track (driverID, trackID) VALUES ( "+ driverId +" , "+ trackId +"  )";
 		Query query  = sessionFactory.getCurrentSession().createSQLQuery(sql);
 		query.executeUpdate();				
 	}

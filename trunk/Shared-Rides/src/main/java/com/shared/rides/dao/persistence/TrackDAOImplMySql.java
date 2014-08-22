@@ -27,8 +27,8 @@ public class TrackDAOImplMySql implements ITrackDAO {
 		return false;
 	}
 
-	public Track load(Track track) {
-		return (Track) sessionFactory.getCurrentSession().get(Track.class, track.getTrackId());	
+	public Track load(long id) {
+		return (Track) sessionFactory.getCurrentSession().get(Track.class, id);	
 	}
 
 	public Track delete(Track track) {

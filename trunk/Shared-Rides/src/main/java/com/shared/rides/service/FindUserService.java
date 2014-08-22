@@ -131,8 +131,7 @@ public class FindUserService {
 		distanceList = new ArrayList<Float>();
 		userList = userDAO.listAll();
 		
-		User u = new User(userId);
-		u = userDAO.load(u);
+		User u = userDAO.load(userId);
 		/*
 		 * Me elimino a mi mismo de la lista para no aparecer
 		 */
@@ -286,8 +285,7 @@ public class FindUserService {
 	
 	//Funcion que me convierte la lista de usuarios en un JSONArray
 	private JsonArray createJson(List<User> list, long userId){
-		User u = new User(userId);
-		u = userDAO.load(u);
+		User u = userDAO.load(userId);
 		boolean isAssociation;
 		
 		JsonArray jsonList = new JsonArray();

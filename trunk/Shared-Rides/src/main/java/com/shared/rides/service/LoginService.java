@@ -40,8 +40,7 @@ public class LoginService {
 	}
 	
 	public void saveLastLoginDate(long userId){
-		User u = new User(userId);
-		u = userDAO.load(u);
+		User u = userDAO.load(userId);
 		u.setLastLoginDate(new Date());
 		userDAO.update(u);		
 	}

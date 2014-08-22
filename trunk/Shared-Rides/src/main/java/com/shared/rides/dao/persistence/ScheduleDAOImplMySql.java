@@ -25,8 +25,8 @@ public class ScheduleDAOImplMySql implements IScheduleDAO {
 		return false;
 	}
 
-	public Schedule load(Schedule sch) {
-		return (Schedule) sessionFactory.getCurrentSession().get(Schedule.class, sch.getScheduleId());	
+	public Schedule load(long id) {
+		return (Schedule) sessionFactory.getCurrentSession().get(Schedule.class, id);	
 	}
 
 	public Schedule delete(Schedule sch) {

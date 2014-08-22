@@ -35,8 +35,7 @@ public class RequestAssociationService {
 	 * Funcion que se usa para verificar si el usuario posee asociaciones nuevas
 	 */
 	public String hasAssociation(long userId){
-		User u = new User(userId);
-		u = userDAO.load(u);
+		User u = userDAO.load(userId);
 		
 		List<Association> assocList = u.getAssociations();
 		JsonArray json = new JsonArray();
@@ -65,14 +64,10 @@ public class RequestAssociationService {
 		Date date = new Date();
 		message = "No se pudo enviar la solicitud correctamente.";
 		//Persona que hace la peticion
-		applicantUser = new User();
-		applicantUser.setUserId(idApplicant);
-		applicantUser = userDAO.load(applicantUser);
+		applicantUser = userDAO.load(idApplicant);
 		
 		//Persona que tiene que responder
-		supplierUser = new User();
-		supplierUser.setUserId(idUser);
-		supplierUser = userDAO.load(supplierUser);
+		supplierUser = userDAO.load(idUser);
 		
 		if (validateData(day)){
 			if(validateAssoc(day, inout)){

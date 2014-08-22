@@ -9,11 +9,11 @@ import com.shared.rides.domain.Stop;
 public interface IPedestrianDAO {
 
 	public boolean save(Pedestrian ped);
-	public Pedestrian load(Pedestrian ped);
+	public Pedestrian load(long id);
 	public Pedestrian update(Pedestrian ped);
 	public Pedestrian delete(Pedestrian ped);
 	public List<Pedestrian> listAll();
 	public Pedestrian getLastPedestrian();
-	public void newSch(Pedestrian ped, Schedule sch);
-	public void newStop(Pedestrian ped, Stop stop);
+	public void newSch(long pedId, long schId);
+	public void newStop(long pedId, long stopId);
 }

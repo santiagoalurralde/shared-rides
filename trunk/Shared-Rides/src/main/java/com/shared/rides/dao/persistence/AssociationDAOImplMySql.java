@@ -27,8 +27,8 @@ public class AssociationDAOImplMySql implements IAssociationDAO {
 		return true;
 	}
 
-	public Association load(Association assoc) {
-		return (Association) sessionFactory.getCurrentSession().get(Association.class, assoc.getAssociationId());	
+	public Association load(long id) {
+		return (Association) sessionFactory.getCurrentSession().get(Association.class, id);	
 	}
 
 	public Association delete(Association assoc) {

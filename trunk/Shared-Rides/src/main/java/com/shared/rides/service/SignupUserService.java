@@ -80,10 +80,7 @@ public class SignupUserService {
 							long phoneNumber, String email, String street, int numberStreet, String neighborhood,
 							String shift, String typeUser, String brand, String model, String licensePlate, int numberSeats, String days, String pic){
 		User u = new User();
-		Organization org = new Organization();
-		org.setOrganizationId(organization);
-		
-		org = orgDAO.load(org);
+		Organization org = orgDAO.load(organization);
 		
 		Address address = new Address();
 		address.setStreet(street);
@@ -110,7 +107,6 @@ public class SignupUserService {
 		
 		u.setPicture(pic);
 		
-
 		userDAO.save(u);
 		
 		if(typeUser.equalsIgnoreCase("pedestrian")){
@@ -184,40 +180,39 @@ public class SignupUserService {
 				sch.setHourOut(hourOut);
 			
 				schDAO.save(sch);
-			
+				sch = schDAO.getLastSchedule();
+				
 				if(type.equalsIgnoreCase("pedestrian")){			
-					Pedestrian ped = pedDAO.getLastPedestrian();
-					sch = schDAO.getLastSchedule();
-					pedDAO.newSch(ped, sch);
+					Pedestrian ped = pedDAO.getLastPedestrian();	
+					pedDAO.newSch(ped.getPedestrianId(), sch.getScheduleId());
 				
 					saveStop(jsonDay, ped, i, u.getPersonalId(), "stopIn", "in");
 					saveStop(jsonDay, ped, i, u.getPersonalId(), "stopOut", "out");
 				}
 				else if (type.equalsIgnoreCase("driver")){
 					Driver driver = driverDAO.getLastDriver();
-					driverDAO.newSch(driver, sch);
+					driverDAO.newSch(driver.getDriverId(), sch.getScheduleId());
 				
 					saveTrack(jsonDay, driver, i, u.getPersonalId(), "trackIn", "in");
 					saveTrack(jsonDay, driver, i, u.getPersonalId(), "trackOut", "out");
-				}
-				else{
-					if (jsonDay.has("stopIn")){
-						Pedestrian ped = pedDAO.getLastPedestrian();
-						sch = schDAO.getLastSchedule();
-						pedDAO.newSch(ped, sch);
+					}
+					else{	//Sino quiere decir que es conductor y peaton y tengo que averiguar cual es en ese dia
+						if (jsonDay.has("stopIn")){
+							Pedestrian ped = pedDAO.getLastPedestrian();
+							pedDAO.newSch(ped.getPedestrianId(), sch.getScheduleId());
 						
-						saveStop(jsonDay, ped, i, u.getPersonalId(), "stopIn", "in");
-						saveStop(jsonDay, ped, i, u.getPersonalId(), "stopOut", "out");
+							saveStop(jsonDay, ped, i, u.getPersonalId(), "stopIn", "in");
+							saveStop(jsonDay, ped, i, u.getPersonalId(), "stopOut", "out");
 
+						}
+						else{
+							Driver driver = driverDAO.getLastDriver();
+							driverDAO.newSch(driver.getDriverId(), sch.getScheduleId());
+							
+							saveTrack(jsonDay, driver, i, u.getPersonalId(), "trackIn", "in");
+							saveTrack(jsonDay, driver, i, u.getPersonalId(), "trackOut", "out");
+						}
 					}
-					else{
-						Driver driver = driverDAO.getLastDriver();
-						driverDAO.newSch(driver, sch);
-						
-						saveTrack(jsonDay, driver, i, u.getPersonalId(), "trackIn", "in");
-						saveTrack(jsonDay, driver, i, u.getPersonalId(), "trackOut", "out");
-					}
-				}
 			}
 		}
 	}
@@ -239,7 +234,7 @@ public class SignupUserService {
 		
 		stopDAO.save(stop);
 		stop = stopDAO.getLastStop();
-		pedDAO.newStop(ped, stop);
+		pedDAO.newStop(ped.getPedestrianId(), stop.getStopId());
 	}
 	
 	private void saveTrack(JsonObject jsonDay, Driver driver, int day, String personalId, String tagName, String inout){
@@ -268,7 +263,7 @@ public class SignupUserService {
 		
 		trackDAO.save(track);
 		track = trackDAO.getLastTrack();
-		driverDAO.newTrack(driver, track);
+		driverDAO.newTrack(driver.getDriverId(), track.getTrackId());
 	}
 	
 	public String uploadPicFile(MultipartFile file, HttpServletRequest request){

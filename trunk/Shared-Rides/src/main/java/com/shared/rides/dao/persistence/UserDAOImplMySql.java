@@ -29,8 +29,8 @@ public class UserDAOImplMySql implements IUserDAO {
 		return false;
 	}
 
-	public User load(User user) {
-		return (User) sessionFactory.getCurrentSession().get(User.class, user.getUserId());	
+	public User load(long id) {
+		return (User) sessionFactory.getCurrentSession().get(User.class, id);	
 	}
 
 	public User delete(User user) {
@@ -58,9 +58,9 @@ public class UserDAOImplMySql implements IUserDAO {
 	}
 	
 	public void newAssoc(User u, Association assoc){
-		long idAssoc = assoc.getAssociationId();
-		long idUser = u.getUserId();
-		String hql = "INSERT INTO User_Assoc (userID, associationID) VALUES ( "+ idUser +" , "+ idAssoc +"  )";
+		long uId = u.getUserId();
+		long assocId = assoc.getAssociationId();
+		String hql = "INSERT INTO User_Assoc (userID, associationID) VALUES ( "+ uId +" , "+ assocId +"  )";
 		Query query  = sessionFactory.getCurrentSession().createSQLQuery(hql);
 		query.executeUpdate();
 	}
@@ -96,17 +96,17 @@ public class UserDAOImplMySql implements IUserDAO {
 	}
 	
 	public void newPed(User u, Pedestrian ped) {
-		Long idUser = u.getUserId();
-		Long idPed = ped.getPedestrianId();
-		String sql = "INSERT INTO User_Pedestrian (userID, pedestrianID) VALUES ( "+ idUser +" , "+ idPed +"  )";
+		long uId = u.getUserId();
+		long pedId = ped.getPedestrianId();
+		String sql = "INSERT INTO User_Pedestrian (userID, pedestrianID) VALUES ( "+ uId +" , "+ pedId +"  )";
 		Query query  = sessionFactory.getCurrentSession().createSQLQuery(sql);
 		query.executeUpdate();
 	}
 	
 	public void newDriver(User u, Driver driver) {
-		Long idUser = u.getUserId();
-		Long idDriver = driver.getDriverId();
-		String sql = "INSERT INTO User_Driver (userID, driverID) VALUES ( "+ idUser +" , "+ idDriver +"  )";
+		long uId = u.getUserId();
+		long driverId = driver.getDriverId();
+		String sql = "INSERT INTO User_Driver (userID, driverID) VALUES ( "+ uId +" , "+ driverId +"  )";
 		Query query  = sessionFactory.getCurrentSession().createSQLQuery(sql);
 		query.executeUpdate();
 	}

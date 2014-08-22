@@ -38,8 +38,7 @@ public class PeopleService {
 	private IAssociationDAO assocDAO;
 	
 	public String getPeople(long userId){
-		User u = new User(userId);
-		u = userDAO.load(u);
+		User u = userDAO.load(userId);
 		
 		List <Association> applicantAssocList = u.getAssociations();
 		List <Association> supplierAssocList = userDAO.getMyRequests(u);	
@@ -66,8 +65,7 @@ public class PeopleService {
 			Association assoc = supplierAssocList.get(j);
 			long idSupplier = assocDAO.getSupplierId(assoc);
 			
-			User supplier = new User(idSupplier);
-			supplier = userDAO.load(supplier);
+			User supplier = userDAO.load(idSupplier);
 			
 			if (assoc.getState().equals(State.ACCEPTED) && acceptedIdList.contains(supplier.getUserId())==false){
 				completeList(supplier, acceptedIdList, acceptedList, false);

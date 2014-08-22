@@ -7,7 +7,7 @@ import com.shared.rides.domain.Schedule;
 public interface IScheduleDAO {
 
 	public boolean save(Schedule sch);
-	public Schedule load(Schedule sch);
+	public Schedule load(long id);
 	public Schedule update(Schedule sch);
 	public Schedule delete(Schedule sch);
 	public List<Schedule> listAll();
