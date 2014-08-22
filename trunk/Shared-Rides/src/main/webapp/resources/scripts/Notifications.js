@@ -2,15 +2,15 @@
  * EVENTS
  ******************************************************************************/
 
-$( document ).ready(function(){
-	$( ".btnAlert" ).click(function() {
-		if ($( "#boxNotifications" ).is( ":visible" ))
-			$( "#boxNotifications" ).hide();
+$(document).ready(function(){
+	$(".btnAlert").click(function() {
+		if ($("#boxNotifications").is(":visible"))
+			$("#boxNotifications").hide();
 		else
-			$( "#boxNotifications" ).show();	
+			$("#boxNotifications").show();	
 	});
 
-	$( ".divNotif" ).click(function() {
+	$(".divNotif").click(function() {
 		window.location.href = "people.do";
 	});	
 });
@@ -19,7 +19,7 @@ $( document ).ready(function(){
  * AJAX CALLS
  ******************************************************************************/
 
-$.post( 'hasAssociation.do', 
+$.post("hasAssociation.do", 
 	function(json) {
 		var jsonArray = $.parseJSON(json);
 		$.each(jsonArray, function(i, notification) {
@@ -31,7 +31,7 @@ $.post( 'hasAssociation.do',
 	}
 );
 
-$.post( 'hasResponse.do', 
+$.post("hasResponse.do", 
 	function(json) {
 		var jsonArray = $.parseJSON(json);
 		$.each(jsonArray, function(i, notification) {
