@@ -8,14 +8,14 @@
         	<h3><spring:message code="label.whoweare"/></h3>
         	
 			<div class="blockLeft blockHalf">
-				<img class="aboutPic" src="resources/profilePic/santi.jpg" >
+				<img class="aboutPic" src="resources/images/santi.jpg" >
 				<br>
 				<h4 class="aboutName"> SANTIAGO ALURRALDE </h4>		
 				<span><spring:message code="label.frontenddev"/> / <spring:message code="label.uidesigner"/></span>		
 			</div>
 			
 			<div class="blockRight blockHalf">
-				<img class="aboutPic" src="resources/profilePic/leandro.jpg" >
+				<img class="aboutPic" src="resources/images/leandro.jpg" >
 				<br>
 				<h4 class="aboutName"> LEANDRO BAGUR </h4>		
 				<span><spring:message code="label.backenddev"/> / <spring:message code="label.dbadmin"/></span>

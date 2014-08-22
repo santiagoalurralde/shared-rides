@@ -17,23 +17,16 @@ import com.shared.rides.domain.User;
 
 @Controller
 public class DownloadImgController {
-//	    private static final long serialVersionUID = 1L;
-//	        
-//	    @Override
-//	    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//	        doPost(request,response);
-//	    }
 	
 		@Autowired
 		private IUserDAO userDAO;
 	
 	    @RequestMapping(value = "printImgFile.do")
 	    protected void downloadImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	        long userId = Long.parseLong(request.getParameter("user"));
-	        User u = userDAO.load(userId);
-	        
+	        String picName = request.getParameter("pic");
+	  
 	        try{
-	            FileInputStream inputStream = new FileInputStream("/home/leandrobagur/profilePic/" + u.getPicture()); 
+	            FileInputStream inputStream = new FileInputStream("/home/leandrobagur/profilePic/" + picName); 
 	            response.setContentType("image/png");
 	            OutputStream out = response.getOutputStream();
 	            byte[] bbuf = new byte[512];
