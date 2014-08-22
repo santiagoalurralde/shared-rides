@@ -127,7 +127,7 @@ function findUsers() {
                             "<td>"+ data.name +" "+ data.surname +"</td>"+
                             "<td>"+
                                 "<a href='/Shared-Rides/profile.do?user="+ data.id +"'>"+
-                                    "<img src='resources/profilePic/"+ data.picture +"'/>"+
+                                    "<img src='printImgFile.do?pic="+ data.picture +"'/>"+
                                 "</a>"+
                             "</td>"+
                             "<td>"+ $("#lblBlocks1").val() +" "+ distance +" "+ $("#lblBlocks2").val() +"</td>"+

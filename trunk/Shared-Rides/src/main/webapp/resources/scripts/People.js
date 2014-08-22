@@ -32,7 +32,7 @@ function load() {
 			$.each(jsonNew[0], function(i, data) {
 				var applicant =	"<div>"+
 									"<a style='float: left; margin-right: 25px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
-										"<img src='resources/profilePic/"+ data.pic +"'>"+
+										"<img src='printImgFile.do?pic="+ data.pic +"'>"+
 									"</a>"+
 									"<span style='float: left; vertical-align: top;'>"+ data.name +"</span>"+
 									"<input type='hidden' id="+ data.userId +">"+ 			
@@ -47,7 +47,7 @@ function load() {
 			$.each(jsonNew[1], function(i, data) {
 				var friend =	"<div>"+
 									"<a style='float: left; margin-right: 25px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
-										"<img src='resources/profilePic/"+ data.pic +"'>"+
+										"<img src='printImgFile.do?pic="+ data.pic +"'>"+
 									"</a>"+
 									"<span style='float: left; vertical-align: top;'>"+ data.name +"</span>"+
 									"<input type='hidden' id="+ data.userId +">"+ 	
