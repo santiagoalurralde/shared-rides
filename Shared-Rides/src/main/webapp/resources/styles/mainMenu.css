@@ -2,7 +2,7 @@
 [Main Menu Stylesheet]
 
 Project:		Shared Rides
-Last change:	19/06/2014
+Last change:	21/08/2014
 Assigned to:	Santiago Alurralde (sa)
 -------------------------------------------------------------------*/
 
@@ -90,7 +90,15 @@ Assigned to:	Santiago Alurralde (sa)
 ------------------------------------------------------------------*/
 
 #btnBack, #btnOK, #btnDefault, .alerts, #imgSun, #imgMoon, #listFound, .theDialog {
-	display:				none;
+	display:	none;
+}
+
+#btnDefault, #btnOK{
+	margin-left: 60px
+}
+
+#btnDefault{
+	width:		200px;
 }
 
 /*------------------------------------------------------------------
@@ -106,9 +114,13 @@ Assigned to:	Santiago Alurralde (sa)
 	margin:					0 auto;
 }
 
+.tableUsers {
+	font-family: 			'Raleway-Thin', sans-serif;	
+}
+
 .tableUsers th {
-	background:				-moz-linear-gradient(top, #90AA44, #50A410);
-	background:				-webkit-linear-gradient(top, #90AA44, #50A410);
+	background:				-moz-linear-gradient(top, #FAFAFA, #EEE);
+	background:				-webkit-linear-gradient(top, #FAFAFA, #EEE);
 	padding:				20px 25px 25px 25px;
 	border-bottom:			1px solid #e0e0e0;
 }
