@@ -34,27 +34,27 @@ public class RequestAssociationService {
 	/*
 	 * Funcion que se usa para verificar si el usuario posee asociaciones nuevas
 	 */
-	public String hasAssociation(long userId){
-		User u = userDAO.load(userId);
-		
-		List<Association> assocList = u.getAssociations();
-		JsonArray json = new JsonArray();
-		
-		for(int i = 0; i < assocList.size(); i++){
-			if (assocList.get(i).getState().equals(State.PENDING)){
-				if (assocList.get(i).getDate().compareTo(new Date()) != 10){
-					JsonObject uJson = new JsonObject();
-					User uAssoc = assocList.get(i).getApplicantID();
-					String fullName = uAssoc.getName() + " " + uAssoc.getSurname();
-					uJson.addProperty("name", fullName);
-					uJson.addProperty("date", assocList.get(i).getDate().toString());
-					json.add(uJson);
-				}
-				else assocList.get(i).setState(State.CANCELLED);
-			}
-		}
-		return json.toString();
-	}
+//	public String hasAssociation(long userId){
+//		User u = userDAO.load(userId);
+//		
+//		List<Association> assocList = u.getAssociations();
+//		JsonArray json = new JsonArray();
+//		
+//		for(int i = 0; i < assocList.size(); i++){
+//			if (assocList.get(i).getState().equals(State.PENDING)){
+//				if (assocList.get(i).getDate().compareTo(new Date()) != 10){
+//					JsonObject uJson = new JsonObject();
+//					User uAssoc = assocList.get(i).getApplicantID();
+//					String fullName = uAssoc.getName() + " " + uAssoc.getSurname();
+//					uJson.addProperty("name", fullName);
+//					uJson.addProperty("date", assocList.get(i).getDate().toString());
+//					json.add(uJson);
+//				}
+//				else assocList.get(i).setState(State.CANCELLED);
+//			}
+//		}
+//		return json.toString();
+//	}
 	
 	/*
 	 * Funcion que se usa cuando el usuario envia una peticion de asociacion a otro usuario

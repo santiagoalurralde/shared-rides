@@ -19,26 +19,32 @@ $(document).ready(function(){
  * AJAX CALLS
  ******************************************************************************/
 
-$.post("hasAssociation.do", 
+$.post("getNotifications.do", 
 	function(json) {
 		var jsonArray = $.parseJSON(json);
 		$.each(jsonArray, function(i, notification) {
 			if (notification != "") {
-				var divNotif = "<div class='divNotif'><li>Has recibido una peticion de <b>"+ notification.name +"</b></li></div>";
-				$(".listNotifications").append(divNotif);
+				if (notification.type == "request"){
+					var divNotif = "<div class='divNotif'><li>Has recibido una peticion de <b>"+ notification.name +"</b></li></div>";
+					$(".listNotifications").append(divNotif);
+				}
+				else{
+					var divNotif = "<div class='divNotif'><li><b>"+ notification.name +"</b> ha respondido a tu peticion</li></div>";
+					$(".listNotifications").append(divNotif);
+				}
 			}				
 		});
 	}
 );
 
-$.post("hasResponse.do", 
-	function(json) {
-		var jsonArray = $.parseJSON(json);
-		$.each(jsonArray, function(i, notification) {
-			if (notification != "") {
-				var divNotif = "<div class='divNotif'><li><b>"+ notification.name +"</b> Ha respondido a tu peticion</li></div>";
-				$(".listNotifications").append(divNotif);
-			}				
-		});
-	}
-);
+//$.post("hasResponse.do", 
+//	function(json) {
+//		var jsonArray = $.parseJSON(json);
+//		$.each(jsonArray, function(i, notification) {
+//			if (notification != "") {
+//				var divNotif = "<div class='divNotif'><li><b>"+ notification.name +"</b> Ha respondido a tu peticion</li></div>";
+//				$(".listNotifications").append(divNotif);
+//			}				
+//		});
+//	}
+//);

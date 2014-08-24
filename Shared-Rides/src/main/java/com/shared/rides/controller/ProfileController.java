@@ -50,7 +50,7 @@ public class ProfileController {
 			
 			model = showProfileService.getProfile(id, request, false);
 			model.setViewName("profile");
-			System.out.println(model);
+			
 			return model;
 		}
 		
