@@ -1,5 +1,7 @@
 package com.shared.rides.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.shared.rides.dao.interfaces.IAssociationDAO;
 import com.shared.rides.dao.interfaces.IPedestrianDAO;
 import com.shared.rides.dao.interfaces.IUserDAO;
@@ -357,6 +361,78 @@ public class ProfileService {
 			return true;
 		}
 		return false;
+	}
+	
+	public String getNotifications(long userId){
+		User u = userDAO.load(userId);
+		boolean newNotification = false;
+		
+		//Lista de asociaciones que yo envie, o sea que me tienen que responder
+		List<Association> myRequestList = userDAO.getMyRequests(u);
+		JsonArray notifications = new JsonArray();
+		JsonObject json = new JsonObject();
+		
+		for(Association assoc : myRequestList){
+			if(assoc.getState().equals(State.ACCEPTED) || assoc.getState().equals(State.CANCELLED)){
+				long uAssocId = assocDAO.getSupplierId(assoc);
+				User uAssoc = userDAO.load(uAssocId);
+				String fullName = uAssoc.getName() + " " + uAssoc.getSurname();
+				JsonObject uJson = new JsonObject();
+				uJson.addProperty("type", "response");
+				uJson.addProperty("name", fullName);
+				uJson.addProperty("date", assoc.getDate().toString());
+				notifications.add(uJson);
+				if(assoc.getDate().after(u.getLastLoginDate())) newNotification = true; 
+			}
+		}
+			
+		//Lista de asociaciones que me mandaron, o sea, que yo tengo que responder
+		List<Association> assocList = u.getAssociations();
+		
+		for(int i = 0; i < assocList.size(); i++){
+			if (assocList.get(i).getState().equals(State.PENDING)){
+				//Si no respondi la nueva solicitud en 10 dias, se cancela automaticamente
+				if (assocList.get(i).getDate().compareTo(new Date()) != 10){
+					JsonObject uJson = new JsonObject();
+					User uAssoc = assocList.get(i).getApplicantID();
+					String fullName = uAssoc.getName() + " " + uAssoc.getSurname();
+					uJson.addProperty("type", "request");
+					uJson.addProperty("name", fullName);
+					uJson.addProperty("date", assocList.get(i).getDate().toString());
+					notifications.add(uJson);
+				}
+				else{
+					assocList.get(i).setState(State.CANCELLED);
+				}
+				if(assocList.get(i).getDate().after(u.getLastLoginDate())) newNotification = true;
+			}
+		}
+		
+//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//		
+		//Ordeno la lista de notificaciones
+//		if (notifications.size() != 0){
+//			JsonArray aux = notifications;  
+//			
+//			for(int i = 0; i < aux.size(); i++){
+//				JsonObject uJson = aux.get(i).getAsJsonObject();
+//				
+//				String dateInString = uJson.get("date").getAsString();
+//				String formatDate = null;
+//				try{
+//					Date date = formatter.parse(dateInString);
+//					formatDate = formatter.format(date);
+//				}
+//				catch(ParseException e){
+//					e.printStackTrace();
+//				}
+//			}	
+//		}
+		
+		json.addProperty("newNotification", newNotification);
+		json.add("notifications", notifications);
+		
+		return json.toString();
 	}
 	
 }

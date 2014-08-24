@@ -21,6 +21,7 @@ import com.google.gson.JsonParser;
 import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
 import com.shared.rides.domain.User;
 import com.shared.rides.service.FindUserService;
+import com.shared.rides.service.ProfileService;
 import com.shared.rides.service.RequestAssociationService;
 import com.shared.rides.service.ResponseAssociationService;
 
@@ -30,10 +31,12 @@ public class MainController {
 
 	@Autowired
 	private FindUserService findUserService;
+//	@Autowired
+//	private RequestAssociationService requestAssocService;
+//	@Autowired
+//	private ResponseAssociationService responseAssocService;
 	@Autowired
-	private RequestAssociationService requestAssocService;
-	@Autowired
-	private ResponseAssociationService responseAssocService;
+	private ProfileService profileService;
 	
 	
 	@RequestMapping(value="main.do")
@@ -52,17 +55,24 @@ public class MainController {
 	}
 	
 	//Metodo que se llama para ver si el usuario tiene nuevas asociaciones
-	@RequestMapping(value = "/hasAssociation.do", method = RequestMethod.POST)
-	public @ResponseBody String hasAssoc(HttpServletRequest request){
-	   	User u = (User) request.getSession().getAttribute("user");
-	   	return requestAssocService.hasAssociation(u.getUserId());
-	}
+//	@RequestMapping(value = "/hasAssociation.do", method = RequestMethod.POST)
+//	public @ResponseBody String hasAssoc(HttpServletRequest request){
+//	   	User u = (User) request.getSession().getAttribute("user");
+//	   	return requestAssocService.hasAssociation(u.getUserId());
+//	}
 	
-	@RequestMapping(value = "/hasResponse.do", method = RequestMethod.POST)
-	public @ResponseBody String hasResponse(HttpServletRequest request){
-		User u = (User) request.getSession().getAttribute("user");
-		return responseAssocService.hasResponse(u.getUserId());
+//	@RequestMapping(value = "/hasResponse.do", method = RequestMethod.POST)
+//	public @ResponseBody String hasResponse(HttpServletRequest request){
+//		User u = (User) request.getSession().getAttribute("user");
+//		return responseAssocService.hasResponse(u.getUserId());
+//	}
+	
+	@RequestMapping(value = "/getNotifications.do", method = RequestMethod.POST)
+	public @ResponseBody String getNotifications(HttpServletRequest request){
+	   	User u = (User) request.getSession().getAttribute("user");
+	   	return profileService.getNotifications(u.getUserId());
 	}
+
 	
 	//Metodo que se encarga de realizar la busqueda de los usuarios de acuerdo a los parametros recibidos
 	@RequestMapping(value = "/find.do", method = RequestMethod.POST)

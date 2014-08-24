@@ -1,5 +1,6 @@
 package com.shared.rides.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -106,6 +107,7 @@ public class SignupUserService {
 			}
 		
 		u.setPicture(pic);
+		u.setLastLoginDate(new Date());
 		
 		userDAO.save(u);
 		
