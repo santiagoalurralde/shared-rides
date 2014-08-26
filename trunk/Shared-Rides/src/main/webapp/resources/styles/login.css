@@ -2,14 +2,19 @@
 [Login Stylesheet]
 
 Project:		Shared Rides
-Last change:	24/08/2014
+Last change:	25/08/2014
 Assigned to:	Santiago Alurralde (sa)
 -------------------------------------------------------------------*/
 
 
 /*-----------------------------------------------------------------*/
 
-#i18n{
+body {
+	background: 		url(resources/images/pic1.jpg); 
+	background-size: 	cover
+}
+
+#i18n {
 	box-shadow:			0 1px 1px #000000;
 	background-color: 	rgba(0, 0, 0, 0.7);	
 	float: 				right;

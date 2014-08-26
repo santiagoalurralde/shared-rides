@@ -13,7 +13,7 @@ $(document).ready(function() {
     start();
 
     //Acciones al presionar las imagenes
-    $(".steps img").click(function() {
+    $(".choices").click(function() {
         highlightImage($(this));
         changeDecision($(this));
     });
@@ -37,9 +37,9 @@ $(document).ready(function() {
  */
 function stepNext() {
     if(_step == 0 && _user == 0)
-        $("#dlg-choose-type").dialog({dialogClass: 'no-close', modal: true, draggable: false});    
+        $("#dlg-choose-type").dialog({modal: true, draggable: false});    
     else if(_step == 1 && _shift == 0)
-        $("#dlg-choose-shift").dialog({dialogClass: 'no-close', modal: true, draggable: false});    
+        $("#dlg-choose-shift").dialog({modal: true, draggable: false});    
     else
         _step++;
 }
@@ -171,7 +171,7 @@ function update(step) {
         case 2:
             highlightStep(step);                    
             $(".step-shift, .btn-next, .btn-default").hide();
-            _user == 2 ? $(".btn-OK, .map-pedestrian").show("slow") : $(".btn-OK, .map-driver").show("slow");
+            (_user == 2) ? $(".btn-OK, .map-pedestrian").show("slow") : $(".btn-OK, .map-driver").show("slow");
             break;
     }      
 }
@@ -194,7 +194,7 @@ function highlightStep(index) {
  * @param {jquery} $target - Clicked Image
  */
 function highlightImage($target) {
-    $target.siblings().css("opacity", ".05");  
+    $target.siblings().css("opacity", ".08");  
     $target.css("opacity", "1");
 }
 
@@ -205,13 +205,13 @@ function highlightImage($target) {
  */
 function changeDecision($target){
     //1: Pedestrian - 2: Driver
-    //1: Day - 2: Afternoon
+    //1: Morning - 2: Afternoon
 
-    if($target.hasClass("img-boot"))
+    if($target.hasClass("choice-pedestrian"))
         _user  = 1;  
-    else if($target.hasClass("img-steering"))
+    else if($target.hasClass("choice-driver"))
         _user  = 2; 
-    else if($target.hasClass("img-sun"))
+    else if($target.hasClass("choice-morning"))
         _shift = 1; 
     else
         _shift = 2;     

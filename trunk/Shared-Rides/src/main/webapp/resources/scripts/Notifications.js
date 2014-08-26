@@ -22,7 +22,7 @@ $(document).ready(function() {
 $.post("getNotifications.do", 
     function(json) {
         var jsonArray = $.parseJSON(json);
-        $.each(jsonArray, function(i, notification) {
+        $.each(jsonArray.notifications, function(i, notification) {
             if (notification != "") {
                 if (notification.type == "request") {
                 	$("<div></div>", {

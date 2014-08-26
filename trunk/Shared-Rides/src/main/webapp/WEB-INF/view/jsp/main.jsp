@@ -6,16 +6,16 @@
     <div class="sr-content">
 
         <section class="sr-tupper"> 
-       		<h4> <spring:message code="label.messageFind"/> </h4>
+       		<h4> <spring:message code="lbl.messageFind"/> </h4>
         
 			<!-----------------------------------------
 			[Steps]
 			------------------------------------------>
         	<div class="nav-steps border-light"> 
         		<ul>
-        			<li class="step1"><b>1. </b><spring:message code="label.step1"/></li>
-        			<li class="step2"><b>2. </b><spring:message code="label.step2"/></li>
-        			<li class="step3"><b>3. </b><spring:message code="label.step3"/></li>
+        			<li class="step1"><b>1. </b><spring:message code="lbl.step1"/></li>
+        			<li class="step2"><b>2. </b><spring:message code="lbl.step2"/></li>
+        			<li class="step3"><b>3. </b><spring:message code="lbl.step3"/></li>
         		</ul>
         	</div>
         	
@@ -28,13 +28,29 @@
 				[Images]
 				------------------------------------------>
         		<div class="steps step-usertype">
-		        	<img class="img-boot" 	 	title="Peaton"		src="resources/images/boot.png" 	/>
-					<img class="img-steering"	title="Conductor"	src="resources/images/steering.png" />
+        			<ul>
+	        			<li class="choices choice-pedestrian">
+				        	<img src="resources/images/boot.png"/>
+				        	<label><spring:message code="lbl.pedestrian"/></label>
+				        </li>
+			        	<li class="choices choice-driver">
+							<img src="resources/images/steering.png"/>
+				        	<label><spring:message code="lbl.driver"/></label>		
+			        	</li>	
+		        	</ul>		
         		</div>
 
         		<div class="steps step-shift">
-					<img class="img-sun" 		title="Dia"			src="resources/images/sun.png" 		/>
-					<img class="img-moon"		title="Tarde/Noche"	src="resources/images/moon.png" 	/>
+        			<ul>
+	        			<li class="choices choice-morning">
+							<img src="resources/images/sun.png"/>
+				        	<label><spring:message code="lbl.morning"/></label>
+				        </li>
+			        	<li class="choices choice-afternoon">
+							<img src="resources/images/moon.png"/>
+				        	<label><spring:message code="lbl.afternoon"/></label>		
+			        	</li>	
+		        	</ul>	        		
         		</div>
 				
 				<!-----------------------------------------
@@ -60,39 +76,38 @@
 				------------------------------------------>   
         		<div class="search-results">
         			<div class="alerts"><img src="resources/images/message.png"> 
-        				<p><br> <spring:message code="label.foundNone"/>
+        				<p><br> <spring:message code="lbl.foundNone"/>
         			</div>
         			
         			<table class="sr-table-users table-found">
 						<tr>
-							<th colspan="4"><spring:message code="label.foundUsers"/></th>
+							<th colspan="4"><spring:message code="lbl.foundUsers"/></th>
 						</tr>													
 					</table>
         		</div>
         		
         		<div class="buttons-steps">
         			<input type="button" class="btn btn-back" 		
-        				value="<spring:message code="label.button-previous"	/>" onClick="stepBack();"/>	
+        				value="<spring:message code="lbl.button-previous"	/>" onClick="stepBack();"/>	
         			<input type="button" class="btn btn-default"  	
-        				value="<spring:message code="label.button-search"	/>"/>         				
+        				value="<spring:message code="lbl.button-search"	/>"/>         				
            	   		<input type="button" class="btn btn-next" 		
-           	   			value="<spring:message code="label.button-next"		/>" onClick="stepNext();"/>		
+           	   			value="<spring:message code="lbl.button-next"		/>" onClick="stepNext();"/>		
         			<input type="button" class="btn btn-OK"	
-        				value="<spring:message code="label.button-confirm" 	/>"/>           			
+        				value="<spring:message code="lbl.button-confirm" 	/>"/>           			
         		</div> 	 
        		</form>	        	
         </section>        
 	</div>
 	
-	<!-- TODO labels-->
-	<div id="dlg-choose-type"	title="Oops!" class="sr-dialog">Selecciona un tipo de usuario! <br><p>(Presiona Esc. para volver)</div>
-	<div id="dlg-choose-shift"	title="Oops!" class="sr-dialog">Selecciona un turno! <br><p>(Presiona Esc. para volver)</div>
+	<div id="dlg-choose-type"	title="Oops!" class="sr-dialog"><spring:message code="lbl.alert-choose-type"/></div>
+	<div id="dlg-choose-shift"	title="Oops!" class="sr-dialog"><spring:message code="lbl.alert-choose-shift"/></div>
 
 	<!-----------------------------------------
 	[Labels]
 	------------------------------------------>
-	<c:set var="lblBlocks1"><spring:message code="label.blocks1"/></c:set>
-	<c:set var="lblBlocks2"><spring:message code="label.blocks2"/></c:set>	
+	<c:set var="lblBlocks1"><spring:message code="lbl.blocks1"/></c:set>
+	<c:set var="lblBlocks2"><spring:message code="lbl.blocks2"/></c:set>	
 	<input type="hidden" id="lbl-blocks1" 	value="${lblBlocks1}"/>
 	<input type="hidden" id="lbl-blocks2" 	value="${lblBlocks2}"/>
 
@@ -116,17 +131,5 @@
 
 <script>
 	initMapCoords(lonlat, zoom, map);
-	
-	$(function() {
-		$(document).tooltip({
-			track: true,
-			position: {
-				my: "center top+60",
-				using: function(position, feedback) {
-					$(this).css(position);
-				}
-			}
-		 });
-	 });
 </script>
 

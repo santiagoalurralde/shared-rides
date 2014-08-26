@@ -9,8 +9,7 @@ var _listenerScheduleTarget;
  * Cleans Tables at the beginning and after updating.
  */
 function createTables() {
-	//TODO MESSAGE
-	var content = "<tr><th> Usuario </th></tr>";	
+	var content = "<tr><th>"+ $('#lbl-user').val() +"</th></tr>";	
 	$(".table-pending, .table-associated").html(content);
 }
 
@@ -26,8 +25,8 @@ function load() {
 		$associated      = $(".associated"),
 		$tablePending    = $(".table-pending"),
 		$tableAssociated = $(".table-associated"),
-		$alertPending 	 = $("#alertPending"),
-		$alertAssociated = $("#alertAssociated");
+		$alertPending 	 = $(".alert-pending"),
+		$alertAssociated = $(".alert-associated");
 
 	/* Brings people info. JsonArray with 2 JsonArray: One with pending and another one 
 	 * with accepted associations. Each one contains association id and full name.
@@ -39,10 +38,10 @@ function load() {
 			//Pending
 			$.each(jsonNew[0], function(i, data) {
 				var applicant =	"<div>"+
-									"<a style='float: left; margin-right: 25px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
+									"<a href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
 										"<img src='printImgFile.do?pic="+ data.pic +"'>"+
 									"</a>"+
-									"<span style='float: left; vertical-align: top;'>"+ data.name +"</span>"+
+									"<span>"+ data.name +"</span>"+
 									"<input type='hidden' id="+ data.userId +">"+ 			
 									"<button class='btn btn-pending' onclick='listenerSchedule(this)'>"+ $('#lbl-request').val() +"</button>"+
 								"</div>";
@@ -54,10 +53,10 @@ function load() {
 			//Associated
 			$.each(jsonNew[1], function(i, data) {
 				var friend =	"<div>"+
-									"<a style='float: left; margin-right: 25px' href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
+									"<a href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
 										"<img src='printImgFile.do?pic="+ data.pic +"'>"+
 									"</a>"+
-									"<span style='float: left; vertical-align: top;'>"+ data.name +"</span>"+
+									"<span>"+ data.name +"</span>"+
 									"<input type='hidden' id="+ data.userId +">"+ 	
 									"<button class='btn btn-associated' onclick='listenerSchedule(this)'>"+ $('#lbl-association').val() +"</button>"+
 								"</div>";
@@ -66,13 +65,20 @@ function load() {
 				$alertAssociated.hide();
 			});	
 			
-			//TODO MESSAGES
 			if(jsonNew[0] == "" && $pending.find(".alerts").length == 0) {
-				$pending.append("<div class='alerts' id='alertPending'><img src='resources/images/message.png'> <p><br> No cuenta con peticiones pendientes </div>");
+				$("<div></div>", {
+					"class": "alerts alert-pending",
+					html: "<img src='resources/images/message.png'> <p><br>"+ $('#lbl-norequests').val()
+				}).appendTo($pending);
+
 				$tablePending.hide();
 			}
-			if(jsonNew[1] == "" && $associated.find(".alerts").length == 0) {			
-				$associated.append("<div class='alerts' id='alertAssociated'><img src='resources/images/message.png'> <p><br> Actualmente no posee asociaciones </div>");
+			if(jsonNew[1] == "" && $associated.find(".alerts").length == 0) {
+				$("<div></div>", {
+					"class": "alerts alert-associated",
+					html: "<img src='resources/images/message.png'> <p><br>"+ $('#lbl-noassocs').val(),
+				}).appendTo($associated);						
+
 				$tableAssociated.hide();
 			}
 	});
@@ -147,14 +153,14 @@ function printSchedule(days, $table, typeAssoc) {
 	
 	var	rIn 			= "<tr id='in'><td>"+ $('#lbl-arrival').val() +"</td></tr>", 
 		rOut 			= "<tr id='out'><td>"+ $('#lbl-departure').val() +"</td></tr>",
-		bCancelAssoc	=	"<button class='btn-schedule' title='Cancel Association' onclick='actionAssociation(this, false)'>" +
-								"<img src='resources/images/cancel.png' class='img-schedule'>" +
+		bCancelAssoc	=	"<button title='Cancel Association' onclick='actionAssociation(this, false)'>" +
+								"<img src='resources/images/cancel.png'>" +
 							"</button>",
-	    bCancelPetit	= 	"<button class='btn-schedule' title='Cancel Petition' onclick='actionAssociation(this, false)'>" +
-								"<img src='resources/images/cancel.png' class='img-schedule'>" +
+	    bCancelPetit	= 	"<button title='Cancel Petition' onclick='actionAssociation(this, false)'>" +
+								"<img src='resources/images/cancel.png'>" +
 							"</button>",
-		bAcceptPetit	= 	"<button class='btn-schedule' title='Accept Petition' onclick='actionAssociation(this, true)'>" +
-								"<img src='resources/images/accept.png' class='img-schedule'>" +
+		bAcceptPetit	= 	"<button title='Accept Petition' onclick='actionAssociation(this, true)'>" +
+								"<img src='resources/images/accept.png'>" +
 							"</button>",
 		$rowIn			=	$table.find("#in"),
 		$rowOut			=	$table.find("#out"),
@@ -275,8 +281,7 @@ function actionAssociation(target, action) {
 		
 	$.post("responseAssoc.do", {"assocId": $assocId, "response": action}, 
 		function() {
-			//TODO MESSAGE
-			alert("Acción Completada");
+			alert($('#lbl-action').val());
 			load();
 			listenerSchedule(_listenerScheduleTarget);
 		}
