@@ -7,10 +7,10 @@
 <div class="sr-nav">
     <ul>       
         <li><a class="" 			href="main.do"> 		<span class="logo"> Shared Rides </span> 	</a></li>
-        <li><a class="highlight"	href="myProfile.do">	<spring:message code="label.profile"	/>	</a></li>
-        <li><a class="highlight"	href="people.do">       <spring:message code="label.people"		/>	</a></li>
-        <li><a class="highlight"	href="contact.do">     	<spring:message code="label.contact"	/>	</a></li>
-        <li><a class="highlight"	href="about.do">        <spring:message code="label.about"		/>	</a></li>
+        <li><a class="highlight"	href="myProfile.do">	<spring:message code="lbl.profile"	/>	</a></li>
+        <li><a class="highlight"	href="people.do">       <spring:message code="lbl.people"		/>	</a></li>
+        <li><a class="highlight"	href="contact.do">     	<spring:message code="lbl.contact"	/>	</a></li>
+        <li><a class="highlight"	href="about.do">        <spring:message code="lbl.about"		/>	</a></li>
     </ul>
 	
 	<img class="btn-alert" src="resources/images/bell.png"/>
