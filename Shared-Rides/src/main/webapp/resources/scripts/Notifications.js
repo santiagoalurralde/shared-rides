@@ -2,37 +2,41 @@
  * EVENTS
  ******************************************************************************/
 
-$(document).ready(function(){
-        $(".btnAlert").click(function() {
-                if ($("#boxNotifications").is(":visible"))
-                        $("#boxNotifications").hide();
-                else
-                        $("#boxNotifications").show();  
-        });
+$(document).ready(function() {
+    var $notificationsBox = $("#notifications-box");
 
-        $(".divNotif").click(function() {
-                window.location.href = "people.do";
-        });     
+    $(".btn-alert").click(function() {
+    	$notificationsBox.toggle();
+    });
+
+    $(".notification-item").click(function() {
+        window.location.href = "people.do";
+    });     
 });
+
 
 /*******************************************************************************
  * AJAX CALLS
  ******************************************************************************/
 
 $.post("getNotifications.do", 
-        function(json) {
-                var jsonArray = $.parseJSON(json);
-                $.each(jsonArray, function(i, notification) {
-                        if (notification != "") {
-                                if (notification.type == "request"){
-                                        var divNotif = "<div class='divNotif'><li>Has recibido una peticion de <b>"+ notification.name +"</b></li></div>";
-                                        $(".listNotifications").append(divNotif);
-                                }
-                                else{
-                                        var divNotif = "<div class='divNotif'><li><b>"+ notification.name +"</b> ha respondido a tu peticion</li></div>";
-                                        $(".listNotifications").append(divNotif);
-                                }
-                        }                               
-                });
-        }
+    function(json) {
+        var jsonArray = $.parseJSON(json);
+        $.each(jsonArray, function(i, notification) {
+            if (notification != "") {
+                if (notification.type == "request") {
+                	$("<div></div>", {
+                		html: "<li>Has recibido una peticion de <b>"+ notification.name +" "+ notification.date +"</b></li>",
+                		class: "notification-item"
+                	}).appendTo(".notifications-list");
+                }
+                else {
+                	$("<div></div>", {
+                		html: "<li><b>"+ notification.name +"</b> ha respondido a tu peticion "+ notification.date +"</li>",
+                		class: "notification-item"
+                	}).appendTo(".notifications-list");                	
+                }
+            }                               
+        });
+    }
 );

@@ -9,8 +9,9 @@ var _listenerScheduleTarget;
  * Cleans Tables at the beginning and after updating.
  */
 function createTables() {
+	//TODO MESSAGE
 	var content = "<tr><th> Usuario </th></tr>";	
-	$("#tablePending, #tableAssociated").html(content);
+	$(".table-pending, .table-associated").html(content);
 }
 
 load();
@@ -21,10 +22,10 @@ load();
 function load() {
 	createTables();
 
-	var $pending         = $("#pending"),
-		$associated      = $("#associated"),
-		$tablePending    = $("#tablePending"),
-		$tableAssociated = $("#tableAssociated"),
+	var $pending         = $(".pending"),
+		$associated      = $(".associated"),
+		$tablePending    = $(".table-pending"),
+		$tableAssociated = $(".table-associated"),
 		$alertPending 	 = $("#alertPending"),
 		$alertAssociated = $("#alertAssociated");
 
@@ -43,7 +44,7 @@ function load() {
 									"</a>"+
 									"<span style='float: left; vertical-align: top;'>"+ data.name +"</span>"+
 									"<input type='hidden' id="+ data.userId +">"+ 			
-									"<button class='btn pending' onclick='listenerSchedule(this)' style='float: right; vertical-align: top'>"+ $('#lbl-request').val() +"</button>"+
+									"<button class='btn btn-pending' onclick='listenerSchedule(this)'>"+ $('#lbl-request').val() +"</button>"+
 								"</div>";
 	
 				$tablePending.append("<tr><td>"+ applicant +"</td></tr>").show();
@@ -58,7 +59,7 @@ function load() {
 									"</a>"+
 									"<span style='float: left; vertical-align: top;'>"+ data.name +"</span>"+
 									"<input type='hidden' id="+ data.userId +">"+ 	
-									"<button class='btn associated' onclick='listenerSchedule(this)' style='float: right; vertical-align: top'>"+ $('#lbl-association').val() +"</button>"+
+									"<button class='btn btn-associated' onclick='listenerSchedule(this)'>"+ $('#lbl-association').val() +"</button>"+
 								"</div>";
 	
 				$tableAssociated.append("<tr><td>"+ friend +"</td></tr>").show();
@@ -86,15 +87,15 @@ function load() {
 function viewSchedule(json, typeAssoc) {	
 	var jsonNew		= $.parseJSON(json),
 		days		= new Array(),
-		$requested 	= $("#requested"),
-		$offered 	= $("#offered");
+		$requested 	= $(".requested"),
+		$offered 	= $(".offered");
 	
 	days[7] = null;	
 	
 	$.each(jsonNew.requested, function(i, data) {	
 		fetchDays(days, data);
 	});	
-	printSchedule(days, $("#tableRequested"), typeAssoc);
+	printSchedule(days, $(".table-requested"), typeAssoc);
 	
 	days		= new Array();
 	days[7] 	= null;	
@@ -102,9 +103,8 @@ function viewSchedule(json, typeAssoc) {
 	$.each(jsonNew.offered, function(i, data) {	
 		fetchDays(days, data);
 	});
-	printSchedule(days, $("#tableOffered"), typeAssoc);
+	printSchedule(days, $(".table-offered"), typeAssoc);
 	
-	//HERE APPLIED SIBLINGS
 	if(jsonNew.requested == "") {
 		$requested.hide();
 		$requested.siblings().css("float", "none").css("width", "100%");
@@ -159,14 +159,14 @@ function printSchedule(days, $table, typeAssoc) {
 		$rowIn			=	$table.find("#in"),
 		$rowOut			=	$table.find("#out"),
 		$rowDays		= 	$table.find("tr:first"),
-		$scheduleData 	= 	$("#scheduleData");
+		$scheduleData 	= 	$(".schedule-data");
 
 	if(!$scheduleData.is(":visible"))			//Display schedules' section
 		$scheduleData.show("bounce", 400);
 	
 	$table.html("<tr><th></th></tr>");
 	
-	for(var i=1;i<days.length;i++) {
+	for(var i=1; i<days.length; i++) {
 		if(days[i]!=null) {
 			var buttons;
 			
@@ -180,35 +180,56 @@ function printSchedule(days, $table, typeAssoc) {
 
 			buttons = (typeAssoc == 0) ? bAcceptPetit + bCancelPetit : bCancelAssoc;
 			
-			var content;
-			
+			var contentIn,
+				contentOut,
+				$inputIn,
+				$inputOut;
+
 			if(days[i].inHour != "" && days[i].outHour == "") {	     
-				//Just IN 
-				content = 	days[i].inHour + buttons +
-							"<input type='hidden' value='"+ days[i].assocIdIn +"' id='assocId'>";
+				//Just IN
+				$inputIn = 
+					$("<input type='hidden'>", {
+						"class": "assoc-id",
+						value: days[i].assocIdIn 
+					});
+
+				contentIn = days[i].inHour + buttons + $inputIn;
 				
-				$rowIn.append("<td>"+ content +"</td>");
-				$rowOut.append("<td class='emptyCells'></td>"); 			
+				$rowIn.append("<td>"+ contentIn +"</td>");
+				$rowOut.append("<td></td>"); 			
 			}
 			else if(days[i].inHour != "" && days[i].outHour != "") {
 				//IN & OUT
-				content = 	days[i].inHour + buttons +
-							"<input type='hidden' value='"+ days[i].assocIdIn +"' id='assocId'>";
-				
-				var content2 =	days[i].outHour + buttons +
-								"<input type='hidden' value='"+ days[i].assocIdOut +"' id='assocId'>";
-				
-				$rowIn.append("<td>"+ content +"</td>");				
-				$rowOut.append("<td>"+ content2 +"</td>");
 
+				$inputIn = 
+					$("<input type='hidden'>", {
+						"class": "assoc-id",
+						value: days[i].assocIdIn 
+					});
+				$inputOut = 
+					$("<input type='hidden'>", {
+						"class": "assoc-id",
+						value: days[i].assocIdOut 
+					});
+
+				contentIn 	= days[i].inHour + buttons + $inputIn;
+				contentOut 	= days[i].outHour + buttons + $inputOut;
+								
+				$rowIn.append("<td>"+ contentIn +"</td>");				
+				$rowOut.append("<td>"+ contentOut +"</td>");
 			}
 			else {	
 				//Just OUT
-				content = 	days[i].outHour + buttons +
-							"<input type='hidden' value='"+ days[i].assocIdOut +"' id='assocId'>";
+				$inputOut = 
+					$("<input type='hidden'>", {
+						"class": "assoc-id",
+						value: days[i].assocIdOut 
+					});
+
+				contentOut = days[i].outHour + buttons + $inputOut;
 				
-				$rowIn.append("<td class='emptyCells'></td>");
-				$rowOut.append("<td>"+ content +"</td>");
+				$rowIn.append("<td></td>");
+				$rowOut.append("<td>"+ contentOut +"</td>");
 			}
 		}
 	}	
@@ -227,9 +248,9 @@ function printSchedule(days, $table, typeAssoc) {
 function listenerSchedule(target) {
 	_listenerScheduleTarget = target;
 	
-	$userId = $(target).parent().find("input").attr("id");
+	$userId = $(target).siblings("input").attr("id");
 	
-	if($(target).hasClass("pending"))
+	if($(target).hasClass("btn-pending"))
 		$.post( "viewSchedule.do", {"userId": $userId , "typeAssoc": 0}, 
 			function(json) {
 				viewSchedule(json, 0);
@@ -250,7 +271,7 @@ function listenerSchedule(target) {
  * @param {string} action - Accept or Cancel
  */
 function actionAssociation(target, action) {			
-	var $assocId = $(target).parent().find("#assocId").val();
+	var $assocId = $(target).siblings(".assoc-id").val();
 		
 	$.post("responseAssoc.do", {"assocId": $assocId, "response": action}, 
 		function() {

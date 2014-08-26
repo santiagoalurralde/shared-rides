@@ -9,24 +9,24 @@ Assigned to:	Santiago Alurralde (sa)
 
 /*-----------------------------------------------------------------*/
 
-#listData {
+.list-data {
 	margin-top:		10px;
 	overflow:		auto;
 }
  
-.blockHalf {
+.block-half {
 	width:			47%;
 }
 
-#pending, #offered { 
+.pending, .offered { 
 	padding-right:	3%;
 }
 
-#associated, #requested {
+.associated, .requested {
 	padding-left:	3%;
 }
 
-#scheduleData {
+.schedule-data {
 	display:		none;
 	min-height:		175px;
 }
@@ -56,6 +56,11 @@ Assigned to:	Santiago Alurralde (sa)
 	margin-left: 	4px;
 }
 
+.btn-pending, .btn-associated{
+	float: 			right; 
+	vertical-align: top;
+}
+
 .img-schedule {
 	width:			15px;
 }
@@ -66,39 +71,38 @@ Assigned to:	Santiago Alurralde (sa)
 [Tables / ]
 ------------------------------------------------------------------*/
 
-.tableUsers {
+.sr-table-users {
 	display: 		none;
 	margin:			0 auto;
 	margin-top: 	20px; 
 	width: 			85%;
 }
 
-.tableUsers th {
+.sr-table-users th {
 	background:		-moz-linear-gradient(top, #90AA44, #50A410);
 	background:		-webkit-linear-gradient(top, #90AA44, #50A410);
 	padding:		10px 10px 10px 10px;
 	border-bottom:	1px solid #e0e0e0;
 }
 
-.tableUsers td {
+.sr-table-users td {
 	width:			100%;
 }
 
-.tableUsers img {					
+.sr-table-users img {					
 	width:			50px;
 	height:			50px;
 }
 
-.theSchedule {
+.sr-schedule {
 	margin-top:		3%;
-	
 }
 
 /*------------------------------------------------------------------
 [Footer / #theFooter]
 -------------------------------------------------------------------*/
 
-#theFooter {
+.sr-footer {
 	margin-top:		-1.25em;
 }
 
