@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c" %>
 
 <body onLoad="stepNext();">
-
 	<div class="sr-content">	
 
 		<section title="Contact" class="sr-tupper">
@@ -249,7 +248,7 @@
 
        		    <div class="step step-third">
 
-	       		    <!-----------------------------------------
+	       			<!-----------------------------------------
 					[Table for Definition]
 					------------------------------------------> 
 

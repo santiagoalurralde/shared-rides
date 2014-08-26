@@ -10,7 +10,7 @@ Assigned to:	Santiago Alurralde (sa)
 /*-----------------------------------------------------------------*/
 
 body {
-	background: 		url(resources/images/pic1.jpg); 
+	background: 		url(../images/pic1.jpg); 
 	background-size: 	cover
 }
 

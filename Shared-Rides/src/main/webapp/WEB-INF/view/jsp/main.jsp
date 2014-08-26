@@ -57,13 +57,8 @@
 				------------------------------------------>	
 				<div class="map-driver">
 					<div id="map"></div>
-					<span class="t1" style = "visibility:hidden">
-						<a id="permalink" href=""></a>
-					</span>
-
-					<span id="mapinfo">
-						<span id="currentscale" style="display:none"></span>
-					</span>						
+					<span class="t1" style = "visibility:hidden"><a id="permalink" href=""></a></span>
+					<span id="mapinfo"><span id="currentscale" style="display:none"></span></span>						
 				</div>
 					
         		<div class="map-pedestrian">
@@ -81,7 +76,20 @@
         			<table class="sr-table-users table-found">
 						<tr>
 							<th colspan="4"><spring:message code="lbl.foundUsers"/></th>
-						</tr>													
+						</tr>	
+						<script id="temp-table-found" type="text/x-handlebars-template">
+							<tr>
+								<td>{{name}} {{surname}}</td>
+								<td>
+							        <a href='/Shared-Rides/profile.do?user={{id}}'>
+							            <img src='printImgFile.do?pic={{picture}}'/>
+							        </a>
+								</td>
+								<td> 
+									<spring:message code="lbl.blocks1"/> {{distance}} <spring:message code="lbl.blocks2"/> 
+								</td>
+							</tr>
+						</script>												
 					</table>
         		</div>
         		
@@ -99,8 +107,8 @@
         </section>        
 	</div>
 	
-	<div id="dlg-choose-type"	title="Oops!" class="sr-dialog"><spring:message code="lbl.alert-choose-type"/></div>
-	<div id="dlg-choose-shift"	title="Oops!" class="sr-dialog"><spring:message code="lbl.alert-choose-shift"/></div>
+	<div id="dlg-choose-type"	title="Oops!" class="sr-dialog"><spring:message code="lbl.alert-pick-type"/></div>
+	<div id="dlg-choose-shift"	title="Oops!" class="sr-dialog"><spring:message code="lbl.alert-pick-shift"/></div>
 
 	<!-----------------------------------------
 	[Labels]
