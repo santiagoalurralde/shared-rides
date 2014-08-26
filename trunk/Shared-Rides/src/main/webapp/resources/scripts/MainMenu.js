@@ -97,15 +97,16 @@ function defaultSearch() {
  * Sends all data collected through post, and shows results
  */
 function customSearch() {
-    var coordsJs,                           //Datos de coordenadas
-        $tableFound = $(".table-found");
+    var coords,                           
+        $tableFound     = $(".table-found");
+        templateFound   = Handlebars.compile($("#temp-table-found").html()); 
 
     if(_user == 2)
-        coordsJs = "[{lon=" + _lon.toString() + " , lat=" + _lat.toString() + "}]";
+        coords = "[{lon=" + _lon.toString() + " , lat=" + _lat.toString() + "}]";
     else
-        coordsJs = gpxTrack.confirm();
+        coords = gpxTrack.confirm();
                    
-    $.post("find.do", {"user": _user , "shift": _shift, "mapData": coordsJs},
+    $.post("find.do", {"user": _user , "shift": _shift, "mapData": coords},
         function(json) {
             var peopleFound = $.parseJSON(json);
             if(peopleFound == "") {
@@ -114,19 +115,11 @@ function customSearch() {
             }
             else {
                 $.each(peopleFound, function(i, data) {
-                    var distance = Math.ceil(data.distance);
-                    $tableFound.show();      
+                    data.distance = Math.ceil(data.distance);                    
+                    var resultFound = templateFound(data);
                     $(".alerts").hide();  
-                    $tableFound.append(
-                        "<tr>"+
-                            "<td>"+ data.name +" "+ data.surname +"</td>"+
-                            "<td>"+
-                                "<a href='/Shared-Rides/profile.do?user="+ data.id +"'>"+
-                                    "<img src='printImgFile.do?pic="+ data.picture +"'/>"+
-                                "</a>"+
-                            "</td>"+
-                            "<td>"+ $("#lbl-blocks1").val() +" "+ distance +" "+ $("#lbl-blocks2").val() +"</td>"+
-                        "</tr>");
+                    $tableFound.append(resultFound);
+                    $tableFound.show();      
                 });    
             }
     });
