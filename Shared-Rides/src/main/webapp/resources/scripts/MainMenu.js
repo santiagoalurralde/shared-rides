@@ -1,44 +1,33 @@
-var	_step	= -1,   //Contador de Pasos
-   	_user	= 0,    //Tipo de Usuario
-	_shift	= 0;	//Turno
+var _step   = -1,   //Contador de Pasos
+    _user   = 0,    //Tipo de Usuario
+    _shift  = 0;    //Turno
 
 
-/***************************************************************************************
+/*******************************************************
  * STEPS
- ***************************************************************************************/
+ *******************************************************/
 
 $(document).ready(function() {    
     initMap();
    
     start();
-           
-    //Acciones al presionar las imagenes
-    $("#imgSun").click(function() {
-        changeShift(1);
-    });
-   
-    $("#imgMoon").click(function() {
-        changeShift(2);
-    });
-   
-    $("#imgBoot").click(function() {
-        changeUserType(1);
-    });
-   
-    $("#imgSteering").click(function() {
-        changeUserType(2);
-    });
 
+    //Acciones al presionar las imagenes
+    $(".steps img").click(function() {
+        highlightImage($(this));
+        changeDecision($(this));
+    });
+    
     //Pressing next or back
-    $("#btnNext, #btnBack").click(function() {
+    $(".btn-next, .btn-back").click(function() {
         update(_step);
     });
    
-    $("#btnOK").click(function() {
+    $(".btn-OK").click(function() {
         customSearch();
     });
     
-    $("#btnDefault").click(function() {
+    $(".btn-default").click(function() {
         defaultSearch();
     });    
 });
@@ -48,9 +37,9 @@ $(document).ready(function() {
  */
 function stepNext() {
     if(_step == 0 && _user == 0)
-        $("#dlgChooseUserType").dialog({dialogClass: 'no-close', modal: true, draggable: false});
+        $("#dlg-choose-type").dialog({dialogClass: 'no-close', modal: true, draggable: false});    
     else if(_step == 1 && _shift == 0)
-        $("#dlgChooseShift").dialog({dialogClass: 'no-close', modal: true, draggable: false});    
+        $("#dlg-choose-shift").dialog({dialogClass: 'no-close', modal: true, draggable: false});    
     else
         _step++;
 }
@@ -63,83 +52,53 @@ function stepBack() {
 }
 
 
-/***************************************************************************************
+/*******************************************************
  * FUNCTIONS
- ***************************************************************************************/
+ *******************************************************/
 
 /**
- * Selects type of shift and highlights related icon.
+ * Performs search with previously selected maps or markers.
  */
-function changeShift(s) {
-    _shift = s;
-   
-    if(_shift == 1) {
-        //Morning
-        $("#imgMoon").css("opacity", ".05");  
-        $("#imgSun").css("opacity", "1");
-    }
-    else {
-        //Afternoon
-        $("#imgMoon").css("opacity", "1");
-        $("#imgSun").css("opacity", ".05");  
-    }      
-}
-
-/**
- * Selects type of user and highlights related icon.
- */
-function changeUserType(u) {
-    _user = u;
-   
-    if(_user == 1) {
-        //Pedestrian
-        $("#imgBoot").css("opacity", "1");
-        $("#imgSteering").css("opacity", ".05");    
-    }
-    else {
-        //Driver
-        $("#imgSteering").css("opacity", "1");
-        $("#imgBoot").css("opacity", ".05");
-    }
-}
-
 function defaultSearch() {
-	$.post("defaultFind.do", {"user": _user , "shift": _shift},
-	        function(json) {
-	            var peopleFound = $.parseJSON(json);
-	            if(peopleFound == "") {
+    var $tableFound = $(".table-found");
+
+    $.post("defaultFind.do", {"user": _user , "shift": _shift},
+            function(json) {
+                var peopleFound = $.parseJSON(json);
+                if(peopleFound == "") {
                     $(".alerts").show();  
-                    $("#tableFound").hide();                              
-	            }
-	            else {
-	                $.each(peopleFound, function(i, data) {
-	                    var distance = Math.ceil(data.distance);
-	                    $("#tableFound").show();      
-	                    $(".alerts").hide();  
-	                    $("#tableFound").append(
-	                        "<tr>"+
-	                            "<td>"+ data.name +" "+ data.surname +"</td>"+
-	                            "<td>"+
-	                                "<a href='/Shared-Rides/profile.do?user="+ data.id +"'>"+
-	                                    "<img src='printImgFile.do?pic="+ data.picture +"'/>"+
-	                                "</a>"+
-	                            "</td>"+
-	                            "<td>"+ $("#lblBlocks1").val() +" "+ distance +" "+ $("#lblBlocks2").val() +"</td>"+
-	                        "</tr>");
-	                });    
-	            }
-	    });
-	   
+                    $tableFound.hide();                              
+                }
+                else {
+                    $.each(peopleFound, function(i, data) {
+                        var distance = Math.ceil(data.distance);
+                        $tableFound.show();      
+                        $(".alerts").hide();  
+                        $tableFound.append(
+                            "<tr>"+
+                                "<td>"+ data.name +" "+ data.surname +"</td>"+
+                                "<td>"+
+                                    "<a href='/Shared-Rides/profile.do?user="+ data.id +"'>"+
+                                        "<img src='printImgFile.do?pic="+ data.picture +"'/>"+
+                                    "</a>"+
+                                "</td>"+
+                                "<td>"+ $("#lbl-blocks1").val() +" "+ distance +" "+ $("#lbl-blocks2").val() +"</td>"+
+                            "</tr>");
+                    });    
+                }
+        });
+       
     //Brings the list
-    $("#mapDriver, #mapPedestrian, #btnOK, #btnDefault").hide();       
-    $("#listFound").show("fast");	
+    $(".map-driver, .map-pedestrian, .btn-OK, .btn-default").hide();       
+    $(".search-results").show("fast");   
 }
 
 /**
  * Sends all data collected through post, and shows results
  */
 function customSearch() {
-    var coordsJs;                           //Datos de coordenadas
+    var coordsJs,                           //Datos de coordenadas
+        $tableFound = $(".table-found");
 
     if(_user == 2)
         coordsJs = "[{lon=" + _lon.toString() + " , lat=" + _lat.toString() + "}]";
@@ -151,14 +110,14 @@ function customSearch() {
             var peopleFound = $.parseJSON(json);
             if(peopleFound == "") {
                 $(".alerts").show();  
-                $("#tableFound").hide();                              
+                $tableFound.hide();                              
             }
             else {
                 $.each(peopleFound, function(i, data) {
                     var distance = Math.ceil(data.distance);
-                    $("#tableFound").show();      
+                    $tableFound.show();      
                     $(".alerts").hide();  
-                    $("#tableFound").append(
+                    $tableFound.append(
                         "<tr>"+
                             "<td>"+ data.name +" "+ data.surname +"</td>"+
                             "<td>"+
@@ -166,15 +125,15 @@ function customSearch() {
                                     "<img src='printImgFile.do?pic="+ data.picture +"'/>"+
                                 "</a>"+
                             "</td>"+
-                            "<td>"+ $("#lblBlocks1").val() +" "+ distance +" "+ $("#lblBlocks2").val() +"</td>"+
+                            "<td>"+ $("#lbl-blocks1").val() +" "+ distance +" "+ $("#lbl-blocks2").val() +"</td>"+
                         "</tr>");
                 });    
             }
     });
    
     //Brings the list
-    $("#mapDriver, #mapPedestrian, #btnOK").hide();       
-    $("#listFound").show("fast");
+    $(".map-driver, .map-pedestrian, .btn-OK").hide();       
+    $(".search-results").show("fast");
 }
 
 /**
@@ -182,7 +141,7 @@ function customSearch() {
  */
 function start() {      
     highlightStep(_step);          
-    $("#mapDriver, #mapPedestrian").hide();       
+    $(".map-driver, .map-pedestrian").hide();       
 }
 
 /**
@@ -194,24 +153,25 @@ function update(step) {
     switch(step) {
         case 0:
             highlightStep(step);
-            $("#imgSun, #imgMoon").hide();
-            $("#imgBoot, #imgSteering").show("fast");
-            $("#btnBack, #btnDefault").hide("fast");
-            $("#btnNext").css("margin-left", "0");
+            $(".step-shift").hide();
+            $(".step-usertype").show("fast");
+            $(".btn-back, .btn-default").hide("fast");
+            $(".btn-next").css("margin-left", "0");
             break;
         case 1:
             highlightStep(step);                    
-            $("#mapDriver, #mapPedestrian, #imgBoot, #imgSteering, #btnOK, #listFound").hide();
-            $("#imgSun, #imgMoon, #btnBack, #btnNext").show("fast");
-            if($("#hdnValidate").val() == "true")
-            	$("#btnDefault").show("fast");
-            $("#btnNext").css("margin-left", "60px");
-            $("#tableFound td").remove();
+            $(".map-driver, .map-pedestrian, .btn-OK, .search-results, .step-usertype").hide();
+            $(".btn-back, .btn-next").show("fast");
+            $(".step-shift").show("fast");
+            if($("#hdn-validate").val() == "true")
+                $(".btn-default").show("fast");
+            $(".btn-next").css("margin-left", "60px");
+            $(".table-found td").remove();
             break;
         case 2:
             highlightStep(step);                    
-            $("#imgSun, #imgMoon, #btnNext, #btnDefault").hide();
-            _user == 2 ? $("#btnOK, #mapPedestrian").show("slow") : $("#btnOK, #mapDriver").show("slow");
+            $(".step-shift, .btn-next, .btn-default").hide();
+            _user == 2 ? $(".btn-OK, .map-pedestrian").show("slow") : $(".btn-OK, .map-driver").show("slow");
             break;
     }      
 }
@@ -221,22 +181,41 @@ function update(step) {
  *
  * @param {Number} step - current step
  */
-function highlightStep(step) {
-    switch(step) {
-        case -1:
-        case 0:
-            $("#step2, #step3").css("opacity", ".2");
-            $("#step1").css("opacity", "1");
-            break;
-        case 1:
-            $("#step1, #step3").css("opacity", ".2");
-            $("#step2").css("opacity", "1");
-            break;
-        case 2:
-            $("#step1, #step2").css("opacity", ".2");
-            $("#step3").css("opacity", "1");
-            break;
-    }
+function highlightStep(index) {
+    index = (index == -1) ? Math.abs(index) : index+1;   //If it's -1
+    var $step = $(".step"+ index);
+    $step.css("opacity", "1");
+    $step.siblings().css("opacity", ".2");
 }
+
+/**
+ * Highlights related icon.
+ *
+ * @param {jquery} $target - Clicked Image
+ */
+function highlightImage($target) {
+    $target.siblings().css("opacity", ".05");  
+    $target.css("opacity", "1");
+}
+
+/**
+ * Changes values of decisions in search form.
+ *
+ * @param {jquery} $target - img pressed.
+ */
+function changeDecision($target){
+    //1: Pedestrian - 2: Driver
+    //1: Day - 2: Afternoon
+
+    if($target.hasClass("img-boot"))
+        _user  = 1;  
+    else if($target.hasClass("img-steering"))
+        _user  = 2; 
+    else if($target.hasClass("img-sun"))
+        _shift = 1; 
+    else
+        _shift = 2;     
+}
+
 
 

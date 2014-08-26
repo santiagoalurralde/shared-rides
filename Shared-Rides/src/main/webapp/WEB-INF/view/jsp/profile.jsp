@@ -3,96 +3,111 @@
 <%  String id = request.getParameter("user"); %>
 
 <body>
-	<div id="theContent">	
-		
-		<section title="" class="tupper">
+	<div class="sr-content">	
+
+		<!-----------------------------------------
+		[Data]
+		------------------------------------------>			
+		<section class="sr-tupper">
 			<h2>${name}	${surname}</h2>
-							
-			<div id="userData" class="theBoard lightBorder">	<!-- Datos 	-->
-				<div id="pictureData">							<!-- Foto 	-->
-						<img id="thePic" src="printImgFile.do?pic=${picture}" />
+
+			<div class="user-data sr-board border-light">
+				<div class="picture-data">							
+					<img class="picture-profile" src="printImgFile.do?pic=${picture}"/>
 				</div>
-				
-				<div id="publicData"> 		<!-- Datos Publicos	--> 
-					<p><b><spring:message code="label.basicInfo"/></b></p><br>
-					<p><img class="helpIcon" src="resources/images/location.png" />${address}		</p><br>
-					<p><img class="helpIcon" src="resources/images/house.png" 	 />${neighborhood}	</p>		
+
+				<!-----------------------------------------
+				[Public Data]
+				------------------------------------------>	
+				<div class="public-data"> 		
+					<p class="text-bold"><spring:message code="label.basicInfo"/>					</p><br>
+					<p><img class="helpIcon" src="resources/images/location.png"/>${address}		</p><br>
+					<p><img class="helpIcon" src="resources/images/house.png"	/>${neighborhood}	</p>
 				</div> 
-				 		
-				<div id="privateData"> 		<!-- Datos Privados	-->
-					<p><b><spring:message code="label.contactInfo"/></b></p><br>
-					<p><img class="helpIcon" src="resources/images/phone.png"	/>${telephone}		</p><br>
-					<p><img class="helpIcon" src="resources/images/email.png" 	/>${email} 			</p>
+				
+				<!-----------------------------------------
+				[Private Data]
+				------------------------------------------>				 	
+				<div class="private-data"> 		
+					<p class="text-bold"><spring:message code="label.contactInfo"/>			</p><br>
+					<p><img class="helpIcon" src="resources/images/phone.png"/>${telephone}	</p><br>
+					<p><img class="helpIcon" src="resources/images/email.png"/>${email}		</p>
 				</div>		
 			</div>	
 		</section>
 		
-		<section title="" class="tupper" style="margin-top: 50px">
-			<div class="theBoard lightBorder"> 		
-				<div id="profileData">											<!-- Resto del Perfil --> 
-					<div id="driverData" class="blockLeft blockHalf">			<!-- Perfil conductor -->		 		
+		<!----------------------------------------- 
+		[Profile Content]
+		------------------------------------------>
+		<section class="sr-tupper sr-tupper-bottom">
+			<div class="sr-board border-light"> 		
+				<div class="profile-data">
+
+					<!-----------------------------------------
+					[Driver Profile]
+					------------------------------------------>															
+					<div class="driver-data block-half block-left">				 		
 						<h2><spring:message code="label.driver"/></h2>	 	
-						
-						<div class="theRating"> 	<!-- Puntuacion -->	
+
+						<div class="rating"> 
 							<a class="ifancybox" href="rate.do">
 								<img class="star" src="resources/images/star.png" />
 							</a>
 							
-							<span style="position: relative; top: 12px">
+							<span class="rating-grade">
 								${ratingDriver}
 							</span>	
 						</div>	 	
-														 							 		
-						<div> 	<!-- Horario --> 	
-							<table id="tableDriver" class="theSchedule">
-							</table>					
+												 							 
+						<div> 	
+							<table class="sr-schedule table-driver"></table>					
 						</div>	
 						
-						<div class="mapContainer" style="margin-top: 45px; margin-left: 17px">	<!-- Mapa	-->	
-							<p style="text-align: left"><b>
-								<spring:message code="label.track"/>
-							</b></p><br>
-							<div id="map3" class="mapStatic"></div>
+						<div class="map-container">	
+							<p class="text-left text-bold"><spring:message code="label.track"/></p><br>
+							<div id="map-driver" class="map-static"></div>
 						</div>
 					</div>
 					
 					<div id="line" class="vrs"></div>
-					
-					<div id="pedestrianData" class="blockRight blockHalf">		<!-- Perfil peaton 	-->		 		
-						<h2>
-							<spring:message code="label.pedestrian"/>
-						</h2>
-							
-						<div class="theRating"> 	<!-- Puntuacion -->	
-							<span style="position: relative; top: 12px">
+
+					<!-----------------------------------------
+					[Pedestrian Profile]
+					------------------------------------------>							
+					<div class="pedestrian-data block-half block-right">				 		
+						<h2> <spring:message code="label.pedestrian"/> </h2>
+											
+						<div class="rating"> 		
+							<span class="rating-grade">
 								${ratingPedestrian}
 							</span>
 							<a class="ifancybox" href="rate.do">
-								<img class="star" src="resources/images/star.png" width="50px" style="float:right; margin-left:2%"/>
+								<img class="star" src="resources/images/star.png"/>
 							</a>
 						</div>	 	
-						 		
-						<div> 	<!-- Horario --> 	
-							<table id="tablePed" class="theSchedule">
-							</table>	
+						 
+						<div> 		
+							<table class="sr-schedule table-ped"></table>	
 						</div>	
-						
-						<div class="mapContainer" style="margin-top: 45px; margin-left: 40px"> 	<!-- Mapa -->		
-							<p style="text-align: left"><b>
-								<spring:message code="label.location"/>
-							</b></p><br>
-							<div id="map2" class="mapStatic"></div>
+
+						<div class="map-container"> 	
+							<p class="text-left text-bold"><spring:message code="label.location"/></p><br>
+							<div id="map-pedestrian" class="map-static"></div>
 						</div>
-							 
 					</div>
 				</div>	
 			</div>
 		</section>
 	</div>
 	
-	<!-- HIDDEN -->
+	<!-----------------------------------------
+	[Hidden]
+	------------------------------------------>	
 	<section>
-		<!-- LABELS -->
+
+		<!-----------------------------------------
+		[Labels]
+		------------------------------------------>	
 		<c:set var="lblArrival"> 	<spring:message code="label.arrival" 	/></c:set>	
 		<c:set var="lblDeparture"> 	<spring:message code="label.departure" 	/></c:set>	
 		<c:set var="lblMonday"> 	<spring:message code="label.monday" 	/></c:set>	
@@ -101,29 +116,33 @@
 		<c:set var="lblThursday"> 	<spring:message code="label.thursday" 	/></c:set>	
 		<c:set var="lblFriday"> 	<spring:message code="label.friday"		/></c:set>	
 		
-		<input type="hidden" id="lblArrival" 	value="${lblArrival}" 	/>
-		<input type="hidden" id="lblDeparture" 	value="${lblDeparture}" />
-		<input type="hidden" id="lblMonday" 	value="${lblMonday}" 	/>
-		<input type="hidden" id="lblTuesday" 	value="${lblTuesday}" 	/>
-		<input type="hidden" id="lblWednesday" 	value="${lblWednesday}" />
-		<input type="hidden" id="lblThursday" 	value="${lblThursday}" 	/>
-		<input type="hidden" id="lblFriday" 	value="${lblFriday}"	/>
+		<input type="hidden" id="lbl-arrival" 	value="${lblArrival}" 	/>
+		<input type="hidden" id="lbl-departure"	value="${lblDeparture}" />
+		<input type="hidden" id="lbl-monday" 	value="${lblMonday}" 	/>
+		<input type="hidden" id="lbl-tuesday" 	value="${lblTuesday}" 	/>
+		<input type="hidden" id="lbl-wednesday"	value="${lblWednesday}" />
+		<input type="hidden" id="lbl-thursday" 	value="${lblThursday}" 	/>
+		<input type="hidden" id="lbl-friday" 	value="${lblFriday}"	/>
 		
-		<!-- VARIABLES -->
-		<input type="hidden" id="valDriver" 	value="${driver}"		/>
-		<input type="hidden" id="valPedestrian" value="${pedestrian}"	/>
-		<input type="hidden" id="valId" 		value="${id}"			/>
-		<input type="hidden" id="valMine" 		value="${mine}"			/>
+		<!-----------------------------------------
+		[Variables]
+		------------------------------------------>	
+		<input type="hidden" id="val-driver" 		value="${driver}"		/>
+		<input type="hidden" id="val-pedestrian"	value="${pedestrian}"	/>
+		<input type="hidden" id="val-id" 			value="${id}"			/>
+		<input type="hidden" id="val-mine" 			value="${mine}"			/>
 		
 	</section>
 </body>
 
-<!-- LINKS -->
+<!-----------------------------------------
+[Links]
+------------------------------------------>	
+<link 	type="text/css" rel="stylesheet" href="resources/fancybox2/source/jquery.fancybox.css?v=2.1.5"/>
 
-<link 	type="text/css" rel="stylesheet" href="resources/fancybox2/source/jquery.fancybox.css?v=2.1.5"	/>
-
-<!-- SCRIPTS -->
-
+<!-----------------------------------------
+[Scripts]
+------------------------------------------>	
 <script type="text/javascript" src="resources/maps/OpenLayers.js"	></script>    
 <script type="text/javascript" src="resources/maps/OpenStreetMap.js"></script>
 <script type="text/javascript" src="resources/maps/osmapStatic.js"	></script>	
@@ -133,14 +152,14 @@
 
 <script type="text/javascript">
 			
-	if("${visible}" == 'false')
-		$( "#privateData" ).hide();
+	if("${visible}" == "false")
+		$(".private-data").hide();
 	
 	initMapPedestrian();
 	initMapDriver(); 	
-
+	
 	<c:forEach var="day" items="${schPed}">
-		var detSchPed 			= new DetailSchedulePedestrian();
+		var	detSchPed			= new DetailSchedulePedestrian();	
 		detSchPed.day 			= "${day.dayPed}";
 		detSchPed.allowIn 		= "${day.allowIn}";
 		detSchPed.allowOut 		= "${day.allowOut}";
@@ -156,7 +175,7 @@
 	</c:forEach>
 	
 	<c:forEach var="day" items="${schDriver}">
-		var detSchDriver 			= new DetailScheduleDriver();
+		var detSchDriver			= new DetailScheduleDriver();	
 		detSchDriver.day 			= "${day.dayDriver}";
 		detSchDriver.allowIn 		= "${day.allowIn}";
 		detSchDriver.allowOut 		= "${day.allowOut}";	
@@ -166,7 +185,6 @@
 		detSchDriver.freeSeatsOut 	= "${day.freeSeatsOut}";
 		detSchDriver.pathIn 		= "${day.trackIn}";
 		detSchDriver.pathOut 		= "${day.trackOut}";
-		
 		_schDriver.push(detSchDriver);
 	</c:forEach>
 </script>

@@ -1,6 +1,14 @@
 @CHARSET "UTF-8";
 
-h3, .blockHalf{
+/*------------------------------------------------------------------
+[About Stylesheet]
+
+Project:		Shared Rides
+Last change:	24/08/2014
+Assigned to:	Santiago Alurralde (sa)
+-------------------------------------------------------------------*/
+
+h3, .block-half{
 	text-align: center;
 }
 
@@ -8,33 +16,33 @@ h3{
 	margin-bottom:	5%
 }
 
-.aboutPic{
+.about-pic{
 	border-radius:	100px;
 	width:			150px;
 	height:			150px;
 }
 
-.aboutName{
+.about-name{
 	line-height: 	4em
 }
 
 span{
 }
 
-.advanPic{
+.advan-pic{
 	width:			110px;
 	height:			110px;
 	margin-bottom:	2%;
 }
 
-#advantages{
+.advantages{
 	width:				100%;
 	margin-top:			5%;
 	padding:			2% 0%;
 	background-color: 	#FAFAFA;
 }
 
-.blockThird{
+.block-third{
 	text-align:		center;
 	width:			33.2%;
 	float:			left

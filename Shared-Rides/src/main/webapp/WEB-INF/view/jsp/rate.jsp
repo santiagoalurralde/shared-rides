@@ -9,28 +9,32 @@
 		<link 	type="text/css"				rel="stylesheet" href="resources/styles/profile.css">
 		<script src="resources/scripts/jquery-1.10.2.js">	</script>
 		<script>
-			$(document).ready(function(){
-				$( "input[name='rating']" ).change(function(){
-					$('.choice').html( this.value );
-					$('#valRate').val( this.value );				
+			$(document).ready(function() {
+				$( "input[name='rating']" ).change(function() {
+					$('.choice').html(this.value);
+					$('#val-rate').val(this.value);				
 				});
 				
-				$( '#btnRate' ).click(function(){
+				$(".btn-rate").click(function(){
 					// TODO: Post method that sends valueRate
 					// Need to specify if this is a driver or ped.
 					// Shouldn't rate if it's us.
-					var stars = $('#valRate').val();
+					var stars = $('#val-rate').val();
 					var userType;
-					var id = window.parent.document.getElementById("valId").value;
+					var id = window.parent.document.getElementById("val-id").value;
 					
-					if(window.parent.document.getElementById("valPedestrian").value)
+					if(window.parent.document.getElementById("val-pedestrian").value)
 						userType = "0";	//Pedestrian
 					else
 						userType = "1";	//Driver
 
-					$.post( 'updateRating.do', { userId: id, prof: userType, rating: stars }, 
-						function(msg)
+					$.post( 'updateRating.do', 
 						{
+							userId: id, 
+							prof: 	userType, 
+							rating: stars 
+						}, 
+						function(msg) {
 							alert(msg);
 						});
 				});	
@@ -41,13 +45,11 @@
 	
 	<body>
 	 
-		<div class="theRating" id="wrapperRate"> 	<!-- Puntuacion	-->	
+		<div class="rating" id="wrapper-rating"> 	<!-- Puntuacion	-->	
 			<h2>Puntuación de Usuarios</h2>
 			
-			<p>
-			Seleccione la puntuación que otorgará al usuario con el que está asociado.
-			
-			<p>
+			<!-- TODO MESSAGE -->
+			<p> Seleccione la puntuación que otorgará al usuario con el que está asociado. </p>
 			<span class="star-rating">
 				<input type="radio" name="rating" value="1"><i></i>
 				<input type="radio" name="rating" value="2"><i></i>
@@ -55,21 +57,14 @@
 				<input type="radio" name="rating" value="4"><i></i>
 				<input type="radio" name="rating" value="5"><i></i>
 			</span>
-			<!-- 
-			@RequestMapping(value = "/updateRating.do", method = RequestMethod.POST)
-				public @ResponseBody String updateRating(@RequestParam("userId") long userId,
-										@RequestParam("prof") int profile,
-										@RequestParam("rating") int rating,
-										HttpServletRequest request){
-			 -->
 			<br>
 			<p>
 			
 			Has asignado <strong class="choice"></strong> estrellas.
 			
 			<p>			
-			<input type="hidden" id="valRate" />	
-			<input type="button" class="btn" id="btnRate" value="Aceptar"/>							
+			<input type="hidden" id="val-rate"/>	
+			<input type="button" class="btn btn-rate" value="Aceptar"/>							
 		</div>
 	
 	</body>

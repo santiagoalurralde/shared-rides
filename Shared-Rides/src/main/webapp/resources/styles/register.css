@@ -37,7 +37,7 @@ Assigned to:	Santiago Alurralde (sa)
 [Starting Conditions]
 ------------------------------------------------------------------*/
 
-.step-second, .step-third, .btn-back, .btn-OK, .alerts, #applyMapDefinition {
+.step-second, .step-third, .btn-back, .btn-OK, .alerts, .map-definition, .drives {
 	display: none;
 }
 
@@ -73,17 +73,17 @@ Assigned to:	Santiago Alurralde (sa)
 [Form Elements]
 ------------------------------------------------------------------*/
 
-.theInputs {
+.sr-inputs {
 	font-family: 	'Raleway', sans-serif;	
 	height:			25px;
 	width:			13em;	
 }
 
-input.theInputs{
+input.sr-inputs{
 	border:			solid 1px Grey; 	
 }	
 
-#plateNumbers, #plateLetters, #number {
+#plate-numbers, #plate-letters, #number {
 	width: 			4em;
 }
 
@@ -91,7 +91,7 @@ input.theInputs{
 	width: 			8.8em;		
 }
 
-#buttonsSteps {
+.buttons-steps {
 	clear:			both;
 	margin-top:		-1em;
 	position:		relative;
@@ -103,15 +103,15 @@ input.theInputs{
 [Maps]
 ------------------------------------------------------------------*/
 
-#mapPedestrian, #mapDriver{
+.map-pedestrian, .map-driver{
 	margin-bottom:	30px;
 }
 
 /*------------------------------------------------------------------
-[Navigation Steps / #navSteps]
+[Navigation Steps / .nav-steps]
 ------------------------------------------------------------------*/
 
-#navSteps {
+.nav-steps {
 	background:		-moz-linear-gradient(top, #90AA44, #50A410);
 	background:		-webkit-linear-gradient(top, #90AA44, #50A410);
 	margin:			20px 0 0 0;	
@@ -121,14 +121,14 @@ input.theInputs{
 	width:			100%;
 	z-index:		1000;
 }
-	#navSteps li {
+	.nav-steps li {
 		display:			inline-block;
 		height:				30px;
 		list-style-type:	none;
 		width:				33%;
 		
 	}
-	#navSteps li a:active { 
+	.nav-steps li a:active { 
 		background-color:	black; 
 	}
 
@@ -136,10 +136,10 @@ input.theInputs{
 [Tables / OVERRIDE]
 ------------------------------------------------------------------*/
 
-.theSchedule {
+.sr-schedule {
 	font-size:	85%;
 }
-	.theSchedule th {
+	.sr-schedule th {
 		background:	#EEE
 	}
 

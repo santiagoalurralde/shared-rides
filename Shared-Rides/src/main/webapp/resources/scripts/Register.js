@@ -1,21 +1,21 @@
-var _step 			= -1,	//Contador de Pasos
-	_previous 		= "",
-	_previous2 		= "",
-	_previousTarget = "",
-	_userType,
-	_days 			= new Array(),
-	_matrices 		= new Array(),
-	_projections 	= new Array();
+var _step           = -1,   //Contador de Pasos
+    _previous       = "",
+    _previous2      = "",
+    _previousTarget = "",
+    _userType,
+    _days           = new Array(),
+    _matrices       = new Array(),
+    _projections    = new Array();
 
 for (var l=0; l<5; l++) {
-    _days[l] 		= null;
-    _matrices[l] 	= null;
-    _projections[l]	= null;    
+    _days[l]        = null;
+    _matrices[l]    = null;
+    _projections[l] = null;    
 }
 
-/***************************************************************************************
+/*******************************************************
  * STEPS
- ***************************************************************************************/
+ *******************************************************/
 
 $(document).ready(function() {
     //Start pedestrians map.
@@ -41,44 +41,44 @@ $(document).ready(function() {
  * Establishes the starting environment
  */
 function start() {
-    $("#mapDriver, #mapPedestrian").hide();
+    $(".map-driver, .map-pedestrian").hide();
    
     highlightStep(0);
    
     fillRowsInOut("in");            
     fillRowsInOut("out");
    
-    var	l,
-		neighborhoods 	= ["Alta Córdoba","Alto Alberdi","Alto Verde","Argüello","Bella Vista","Centro","Cerro Chico","Cerro de las Rosas","Cerveceros","Chateau Carreras","Cofico","Colinas del Cerro","Country Jockey Club","Country Las Delicias","Country Lomas de la Carolina","Crisol","Dean Funes","Ejército Argentino","El Quebracho","Empalme","Ferreyra","General Bustos","General Paz","General Pueyrredon","Granja De Funes","Güemes","Ituzaingo","Jardín","Juniors","La France","Las Flores","Las Palmas","Las Violetas","Los Boulevares","Los Paraísos","Marques De Sobremonte","Nueva Córdoba","Observatorio","Palermo Bajo","Patricios","Poeta Lugones","San Martín","San Vicente","Urca","Villa Belgrano","Villa Cabrera","Villa Centenario","Villa Warcalde","Yapeyu","Yofre"],
-		brands 			= ["Alfa-Romeo", "Audi", "BMW", "Citroen", "Chery", "Chevrolet", "Chrysler", "Daihatsu", "Dodge", "Fiat", "Ford", "Honda", "Hyundai", "Jeep", "Kia", "Land Rover", "Mazda", "Mercedes Benz", "Mini", "Mitsubishi", "Nissan", "Peugeot", "Renault", "Seat",  "Subaru", "Suzuki", "Toyota", "Volkswagen", "Volvo"];
+    var l,
+        neighborhoods   = ["Alta Córdoba","Alto Alberdi","Alto Verde","Argüello","Bella Vista","Centro","Cerro Chico","Cerro de las Rosas","Cerveceros","Chateau Carreras","Cofico","Colinas del Cerro","Country Jockey Club","Country Las Delicias","Country Lomas de la Carolina","Crisol","Dean Funes","Ejército Argentino","El Quebracho","Empalme","Ferreyra","General Bustos","General Paz","General Pueyrredon","Granja De Funes","Güemes","Ituzaingo","Jardín","Juniors","La France","Las Flores","Las Palmas","Las Violetas","Los Boulevares","Los Paraísos","Marques De Sobremonte","Nueva Córdoba","Observatorio","Palermo Bajo","Patricios","Poeta Lugones","San Martín","San Vicente","Urca","Villa Belgrano","Villa Cabrera","Villa Centenario","Villa Warcalde","Yapeyu","Yofre"],
+        brands          = ["Alfa-Romeo", "Audi", "BMW", "Citroen", "Chery", "Chevrolet", "Chrysler", "Daihatsu", "Dodge", "Fiat", "Ford", "Honda", "Hyundai", "Jeep", "Kia", "Land Rover", "Mazda", "Mercedes Benz", "Mini", "Mitsubishi", "Nissan", "Peugeot", "Renault", "Seat",  "Subaru", "Suzuki", "Toyota", "Volkswagen", "Volvo"];
 
     for(l=0; l<neighborhoods.length; l++)
-        $("#neighborhood").append(	"<option value='"+ neighborhoods[l] +"'>"
-                           				+ neighborhoods[l] +
-                            		"</option>");         
+        $("#neighborhood").append(  "<option value='"+ neighborhoods[l] +"'>"
+                                        + neighborhoods[l] +
+                                    "</option>");         
     for(l=0; l<brands.length; l++)
-        $("#brand").append(	"<option value='"+ brands[l] +"'>"
-                         		+ brands[l] +
-                      		"</option>");  
+        $("#brand").append( "<option value='"+ brands[l] +"'>"
+                                + brands[l] +
+                            "</option>");  
 }
 
 /**
  * Checks if we can add 1 step
  */
 function stepNext() {  
-	if(	_step == 0 && (!checkValues0() || $(".alerts.alert-pw-match").is(":visible") || checkUserExists()))
-		console.log("No es posible avanzar al segundo paso");
+    if(_step == 0 && (!checkValues0() || $(".alerts.alert-pw-match").is(":visible") || checkUserExists()))
+        console.log("No es posible avanzar al segundo paso");
     else if(_step == 1 && !checkValues1())
-    	console.log("No es posible avanzar al terccer paso");
+        console.log("No es posible avanzar al terccer paso");
     else
-    	_step++;
+        _step++;
 }
 
 /**
  * Moves back 1 step
  */
 function stepBack() {
-	toggleAlert(false, "", "alert-pw-match");
+    toggleAlert(false, "", "alert-pw-match");
     _step--;
 }
 
@@ -97,7 +97,7 @@ function update(step) {
             break;
         case 1:
             highlightStep(step);    
-            $("#mapDriver, #mapPedestrian, .step-first, .step-third").hide();
+            $(".map-driver, .map-pedestrian, .step-first, .step-third").hide();
             $(".step-second, .split-beginning").show();
             $(".btn-back, .btn-next").show("fast");                
             $(".btn-OK").hide("fast");
@@ -118,27 +118,22 @@ function update(step) {
  *
  * @param {Number} step - current step
  */
-function highlightStep(step){
-    switch(step) {
-        case 0:
-            $("#stepSignUp2, #stepSignUp3").css("opacity", ".2");
-            $("#stepSignUp1").css("opacity", "1");
-            break;
-        case 1:
-            $("#stepSignUp1, #stepSignUp3").css("opacity", ".2");
-            $("#stepSignUp2").css("opacity", "1");
-            break;
-        case 2:
-            $("#stepSignUp1, #stepSignUp2").css("opacity", ".2");
-            $("#stepSignUp3").css("opacity", "1");
-            break;
-    }
+
+ /**
+ * Highlights current step
+ *
+ * @param {Number} step - current step
+ */
+function highlightStep(index) {
+    var $step = $(".step-signup"+index);
+    $step.css("opacity", "1");
+    $step.siblings().css("opacity", ".2");
 }
 
 
-/***************************************************************************************
+/*******************************************************
  * CHECKERS
- ***************************************************************************************/
+ *******************************************************/
 
 /**
  * Checks if values in step 1 are filled.
@@ -146,22 +141,22 @@ function highlightStep(step){
  * @return {Boolean} TRUE values are OK
  */
 function checkValues0() {              
-    var	flag 		= true,
-    	ipts 		= $(".step-first input"),
-		lastElement	= ipts.index($("#cellphone")),
-    	iptL;
+    var flag        = true,
+        ipts        = $(".step-first input"),
+        lastElement = ipts.index($("#cellphone")),
+        iptL;
    
     for(var l=0; l<lastElement+1; l++) {
-    	iptL = $(ipts[l]);
+        iptL = $(ipts[l]);
         flag = checkLength(iptL);
-	}
+    }
     
-	if(!flag) {
-		//TODO spring message INCOMPLETE INPUTS
-		var msg = "Los campos señalados están incompletos, debe llenarlos para proceder.";
-		toggleAlert(true, msg, "alert-inputs");
-	}
-	return flag;
+    if(!flag) {
+        //TODO spring message INCOMPLETE INPUTS
+        var msg = "Los campos señalados están incompletos, debe llenarlos para proceder.";
+        toggleAlert(true, msg, "alert-inputs");
+    }
+    return flag;
 }
 
 /**
@@ -170,44 +165,44 @@ function checkValues0() {
  * @return {Boolean} TRUE values are OK
  */
 function checkValues1() {
-    var	flag 	= true,
-    	max 	= 3,
-		selects	= $(".step-second select"),
-		selectL;
+    var flag    = true,
+        max     = 3,
+        selects = $(".step-second select"),
+        selectL;
    
     if(_userType != "pedestrian") {
-    	/* Is not a pedestrian */
+        /* Is not a pedestrian */
         max = 4;     
-        flag = checkLength($("#plateLetters"));
-        flag = checkLength($("#plateNumbers"));
+        flag = checkLength($("#plate-letters"));
+        flag = checkLength($("#plate-numbers"));
         flag = checkLength($("#model"));
-        flag = checkLength($("#numberSeats"));
+        flag = checkLength($("#number-seats"));
     }
    
     for(var l=0; l<max; l++){
-    	selectL = $(selects[l]);
-	    if(selectL.val() == "0") {
-	        flag = false;
-	        paint(selectL, true);
-	    }
-    }
-   
-    flag = checkLength($("#street"));
-    flag = checkLength($("#number"));
-   
-    for(var l=0; l<3; l++){
-    	selectL = $(selects[l]);
+        selectL = $(selects[l]);
         if(selectL.val() == "0") {
             flag = false;
             paint(selectL, true);
         }
     }
    
-	if(!flag) {
-		//TODO spring message INCOMPLETE INPUTS
-		var msg = "Los campos señalados están incompletos, debe llenarlos para proceder.";
-		toggleAlert(true, msg, "alert-inputs");
-	}
+    flag = checkLength($("#street"));
+    flag = checkLength($("#number"));
+   
+    for(var l=0; l<3; l++){
+        selectL = $(selects[l]);
+        if(selectL.val() == "0") {
+            flag = false;
+            paint(selectL, true);
+        }
+    }
+   
+    if(!flag) {
+        //TODO spring message INCOMPLETE INPUTS
+        var msg = "Los campos señalados están incompletos, debe llenarlos para proceder.";
+        toggleAlert(true, msg, "alert-inputs");
+    }
     return flag;
 }
 
@@ -223,8 +218,8 @@ function checkValues2() {
             _days[d] = "Unsuscribed";
         else    
             if(_days[d] == null) {
-            	var msg = "Quedan dias por completar";
-            	toggleAlert(true, msg, "alert-schedules");
+                var msg = "Quedan dias por completar";
+                toggleAlert(true, msg, "alert-schedules");
                 return false;
             }
     }
@@ -232,63 +227,76 @@ function checkValues2() {
 }
 
 /**
- * Checks if passwords are the same
+ * Checks if passwords are the same.
  *
  */
 function checkPassword() {
-    $("#password-first").on("change", function(event) {
-    	checkPassword();
+    var $passwordFirst = $("#password-first"),
+        $passwordCheck = $("#password-check");
+
+    $passwordFirst.on("change", function(event) {
+        checkPassword();
     });
 
-    if($("#password-first").val() != $("#password-check").val()) {
-        paint($("#password-first"), true);    
-        paint($("#password-check"), true);
+    if($passwordFirst.val() != $passwordCheck.val()) {
+        paint($passwordFirst, true);    
+        paint($passwordCheck, true);
+        //TODO MESSAGE
         var msg = ("Las contraseñas deben coincidir");
-		toggleAlert(true, msg, "alert-pw-match");    
+        toggleAlert(true, msg, "alert-pw-match");    
         return false;
     }              
     else {
-	    paint($("#password-first"), false);  
-	    paint($("#password-check"), false);  
-		toggleAlert(false, "", "alert-pw-match");    
-	    return true;
+        paint($passwordFirst, false);  
+        paint($passwordCheck, false);  
+        toggleAlert(false, "", "alert-pw-match");    
+        return true;
     }
 }
 
 /**
- * Checks if element is not null and hides alerts
+ * Checks if email is cool. Returns TRUE if it is.
  *
- * @param {element}
  */
-function checkIt(target) {
-    if($(".alerts").hasClass("alert-inputs"))
-    	toggleAlert(false, "", "alert-inputs");         
-   
-    if($(target).val().length == 0 || $(target).val() == "0")
-        paint($(target), true);
-    else
-        paint($(target), false);
+function checkEmail(target) {
+    var email   = $(target).val(),
+        re      = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
 }
 
 /**
- * Checks if element is not null and paints or not.
+ * Checks each element and hides alerts. (Calls checkLength).
  *
- * @param {jquery} - element we're gonna check.
+ * @param {Element} target - element we're gonna check.
+ */
+function checkIt(target) {
+    if($(".alerts").hasClass("alert-inputs"))
+        toggleAlert(false, "", "alert-inputs");         
+   
+    checkLength($(target));   
+}
+
+/**
+ * Checks if element is complete.
+ *
+ * @param {jquery} $target - element we're gonna check.
  */
 function checkLength($target) {
     if($target.val().length == 0) {
         paint($target, true); 
         return false;
     }
-    else
-    	return true;
+    else {
+        paint($(target), false)
+        return true;
+    }
 }
 
 /**
  * Paints or Unpaints element.
  *
- * @param {Element}
- * @param {Bool} flag - TRUE for painting element
+ * @param {jquery} $target - element we're gonna paint.
+ * @param {Bool} flag - TRUE for painting element.
  */
 function paint($target, flag) {
     if(flag)
@@ -305,21 +313,23 @@ function paint($target, flag) {
  * @param {String} flag - Additional class for the alert.
  */
 function toggleAlert(flag, msg, cls){
+    var $alertPlusClass = $(".alerts."+cls);
+
     if(flag) {
-        $(".alerts").addClass(cls);    	
-        $(".alerts."+cls).html("<p>"+ msg);
-        $(".alerts."+cls).show("fast");          
+        $(".alerts").addClass(cls);     
+        $alertPlusClass.html("<p>"+ msg);
+        $alertPlusClass.show("fast");          
     }
     else {
-    	$(".alerts."+cls).hide("fast");
-        $(".alerts."+cls).removeClass(cls);    	
+        $alertPlusClass.hide("fast");
+        $alertPlusClass.removeClass(cls);       
     }
 }
 
 /**
  * Checks if value in element is smaller than limit
  *
- * @param {element}
+ * @param {Element}
  * @param {val} Minimum limit
  */
 function checkBounds(target, val) {
@@ -334,7 +344,7 @@ function checkBounds(target, val) {
 /**
  * Checks if key pressed is in the alphabet
  *
- * @param {element}
+ * @param {Element}
  * @param {val} Minimum limit
  */
 function checkAlphabetic(event) {
@@ -347,26 +357,26 @@ function checkAlphabetic(event) {
 /**
  * Checks if value in element is numeric
  *
- * @param {element}
+ * @param {Element}
  */
 function checkNumeric(target) {
     if(target.value.length > 0 && isNaN(target.value)) {                                            
-    	if(_previousTarget != target)
+        if(_previousTarget != target)
             _previous = "";
         target.value = _previous;
     }
     else {
-        _previous = target.value;
+        _previous       = target.value;
         _previousTarget = target;
     }
 }
 
 /**
- * Checks if user with a personalId was already created. Returns true if exists.
+ * Checks if user with a personal-id was already created. Returns true if exists.
  */
 function checkUserExists() {
-    var	pId = $("#personalId").val().toString(),
-    	flag = false;
+    var pId = $("#personal-id").val().toString(),
+        flag = false;
    
     $.ajax({
         url: "validateNewUser.do",              
@@ -374,92 +384,94 @@ function checkUserExists() {
         data: { personalId: pId }
         }).done(function(isValidate) {
             if(!isValidate) {
-            	var msg = "El usuario con el ID especificado ya existe";
-                flag = true;            	
-            	toggleAlert(flag, msg, "alert-inputs");
+                //TODO MESSAGE
+                var msg = "El usuario con el ID especificado ya existe";
+                flag = true;                
+                toggleAlert(flag, msg, "alert-inputs");
             }
     });
-   
-	return flag;
+    return flag;
 }
 
 /**
  * Checks if hours are valid.
  */
 function checkHours(target){
-	var	id  	= $(target).attr("id"),
-		d 		= id.slice(0,1),
-		io		= id.substring(1, id.length),
-		flag	= true,
-		hourOut	= $("#"+ d +"out").find("option:selected").val(),
-		hourIn	= $("#"+ d +"in").find("option:selected").val();
-	
-	if(io == "out")
-	    $("#"+ d +"in").on("change", function(event) {
-	    	checkHours();
-	    });	
+    var id      = $(target).attr("id"),
+        d       = id.slice(0,1),
+        io      = id.substring(1, id.length),
+        flag    = true,
+        hourOut = $("#"+ d +"out").find("option:selected").val(),
+        hourIn  = $("#"+ d +"in").find("option:selected").val();
+    
+    if(io == "out")
+        $("#"+ d +"in").on("change", function(event) {
+            checkHours();
+        }); 
 
-	if(hourOut < hourIn){
-		//TODO MESSAGE
-		$("#applyMapDefinition").hide();
-		var msg = "La hora de salida debe ser después de la hora de entrada";
-    	toggleAlert(true, msg, "alert-schedules");
-		$(".btn-map").prop("disabled", true);
-	}
-	else {
-		$("#applyMapDefinition").show();		
-    	toggleAlert(false, "", "alert-schedules");		
-		$(".btn-map").prop("disabled", false);
-	}
+    if(hourOut < hourIn){
+        //TODO MESSAGE
+        $(".map-definition").hide();
+        var msg = "La hora de salida debe ser después de la hora de entrada";
+        toggleAlert(true, msg, "alert-schedules");
+        $(".btn-map").prop("disabled", true);
+    }
+    else {
+        $(".map-definition").show();        
+        toggleAlert(false, "", "alert-schedules");      
+        $(".btn-map").prop("disabled", false);
+    }
 }
 
 /**
  * Disables day if unsuscribed
- * 	
+ *  
  * @param {jquery} $target - checkbox that indicates if suscribed and has changed.
  */
 function suscribes($target){
-    var d = $target.parent().index()+1;
-    
+    var d       = $target.parent().index()+1,
+        $btnIn  = $("#in td:nth-child("+ d +") #btnin"),
+        $btnOut = $("#out td:nth-child("+ d +") #btnout");
+ 
     if($target.prop("checked")) {
-        $("#in td:nth-child("+ d +") #btnin").prop("disabled", true).removeClass("btnDefine").addClass("unsuscribed");
-        $("#out td:nth-child("+ d +") #btnout").prop("disabled", true).removeClass("btnDefine").addClass("unsuscribed");
+        $btnIn.prop("disabled", true).removeClass("btnDefine").addClass("unsuscribed");
+        $btnOut.prop("disabled", true).removeClass("btnDefine").addClass("unsuscribed");
     }
     else {
-        $("#in td:nth-child("+ d +") #btnin").prop("disabled", false).removeClass("unsuscribed").addClass("btnDefine");
-        $("#out td:nth-child("+ d +") #btnout").prop("disabled", false).removeClass("unsuscribed").addClass("btnDefine");              
+        $btnIn.prop("disabled", false).removeClass("unsuscribed").addClass("btnDefine");
+        $btnOut.prop("disabled", false).removeClass("unsuscribed").addClass("btnDefine");              
     }
 }
 
-/***************************************************************************************
+/*******************************************************
  * FUNCTIONS
- ***************************************************************************************/
+ *******************************************************/
 
 /**
  * Sends everything to server.
  */
 function signUp() {    
     if(checkValues2()) {
-	    var	org             = $("#organization").find("option:selected").val(),
-	    	pId             = $("#personalId").val(),
-	     	pw              = $("#password-first" ).val(),
-	     	name            = $("#name").val(),
-	     	surname     	= $("#surname").val(),
-	     	email           = $("#email").val(),
-	     	phone           = $("#cellphone").val(),
-	     	number          = $("#number").val(),
-	     	street          = $("#street").val(),
-	     	nbh             = $("#neighborhood").val(),
-	     	shift           = $("#shift").val(),
-	     	usType          = $("#userType").find("option:selected").val(),
-	     	brand           = $("#brand").find("option:selected").val(),
-	     	modelVehicle	= $("#model").val(),
-	     	plNumb          = $("#plateNumbers").val(),
-	     	plLett          = $("#plateLetters").val(),
-	     	nSeats			= $("#numberSeats").find("option:selected").val();
+        var org             = $("#organization").find("option:selected").val(),
+            pId             = $("#personal-id").val(),
+            pw              = $("#password-first" ).val(),
+            name            = $("#name").val(),
+            surname         = $("#surname").val(),
+            email           = $("#email").val(),
+            phone           = $("#cellphone").val(),
+            number          = $("#number").val(),
+            street          = $("#street").val(),
+            nbh             = $("#neighborhood").val(),
+            shift           = $("#shift").val(),
+            usType          = $("#userType").find("option:selected").val(),
+            brand           = $("#brand").find("option:selected").val(),
+            modelVehicle    = $("#model").val(),
+            plNumb          = $("#plate-numbers").val(),
+            plLett          = $("#plate-letters").val(),
+            nSeats          = $("#number-seats").find("option:selected").val();
            
             $.post("register.do", {"organization": org ,
-                                   "personalId":   pId,
+                                   "personal-id":   pId,
                                    "pw":           pw,
                                    "name":         name,
                                    "surname":      surname,
@@ -472,15 +484,15 @@ function signUp() {
                                    "userType":     usType,
                                    "brand":        brand,
                                    "modelVehicle": modelVehicle,
-                                   "plateLetters": plNumb,
-                                   "plateNumbers": plLett,
-                                   "numberSeats":  nSeats,
+                                   "plate-letters": plNumb,
+                                   "plate-numbers": plLett,
+                                   "number-seats":  nSeats,
                                    "days":         JSON.stringify(_days)
                                    },  
-	            function(str) {
+                function(str) {
                      //TODO message
                      alert("Alta de Usuario Completa");
-	            });
+                });
     }
 }
 
@@ -488,15 +500,15 @@ function signUp() {
  * Saves map previously defined.
  */
 function saveMap() {
-    var d 			= $("#hdnDay").val(),
-        io 			= $("#hdnInOut").val(),
-        userTypeDay = $("#hdnUserTypeDay").val(),
-    	h 			= $("#"+ d + io ).find("option:selected").val(),
-    	nthChild 	= Number(d)+1,
-    	index 		= Number(d)-1;
+    var d           = $("#hdn-day").val(),
+        io          = $("#hdn-inout").val(),
+        userTypeDay = $("#hdn-usertype-day").val(),
+        h           = $("#"+ d + io ).find("option:selected").val(),
+        nthChild    = Number(d)+1,
+        index       = Number(d)-1;
 
     if(h == "none") {
-    	//TODO MESSAGE
+        //TODO MESSAGE
         alert("Selecciona la hora a definir");
         return false;
     }
@@ -509,19 +521,21 @@ function saveMap() {
        
         if(io == "in") {
             _matrices[index].matrixIn = gpxTrack.matrixify();                              
-            _days[index].trackIn = gpxTrack.myConfirm();
+            _days[index].trackIn      = gpxTrack.myConfirm();
             if(_days[index].trackIn == "")          //Hasn't defined a route.
-            	return;                        
+                return;                        
             _days[index].hourIn = h;
         }      
         else {
             _matrices[index].matrixOut = gpxTrack.matrixify();
-            _days[index].trackOut = gpxTrack.myConfirm();
+            _days[index].trackOut      = gpxTrack.myConfirm();
             if(_days[index].trackOut == "")         //Hasn't defined a route.
-            	return;
+                return;
             _days[index].hourOut = h;                      
         }
-        gpxTrack.clear();      
+        gpxTrack.clear();
+
+        //TODO MESSAGE
         $("#"+ io + " td:nth-child("+ nthChild +")").find("#btn"+ io).html("Modificar");
     }
     else {
@@ -532,16 +546,16 @@ function saveMap() {
                 _days[index] = new Stop();
            
             if(io == "in") {
-                var	lonlatCurrent 				= new OpenLayers.LonLat(_lon, _lat);
-                	_days[index].stopIn 		= new OpenLayers.LonLat(_lon, _lat);
-                    _days[index].hourIn 		= h;    
-                    _projections[index].projIn 	= lonlatCurrent.transform(proj4326, map.getProjectionObject());                                                
+                var lonlatCurrent               = new OpenLayers.LonLat(_lon, _lat);
+                    _days[index].stopIn         = new OpenLayers.LonLat(_lon, _lat);
+                    _days[index].hourIn         = h;    
+                    _projections[index].projIn  = lonlatCurrent.transform(proj4326, map.getProjectionObject());                                                
             }
             else {
-                var	lonlatCurrent 				= new OpenLayers.LonLat(_lon, _lat);
-                	_days[index].stopOut 		= new OpenLayers.LonLat(_lon, _lat);
-                	_days[index].hourOut 		= h;    
-                	_projections[index].projOut	= lonlatCurrent.transform(proj4326, map.getProjectionObject());
+                var lonlatCurrent               = new OpenLayers.LonLat(_lon, _lat);
+                    _days[index].stopOut        = new OpenLayers.LonLat(_lon, _lat);
+                    _days[index].hourOut        = h;    
+                    _projections[index].projOut = lonlatCurrent.transform(proj4326, map.getProjectionObject());
             }
             $("#"+ io +" td:nth-child("+ nthChild +")").find("#btn"+ io).html("Modificar");
         }
@@ -553,49 +567,49 @@ function saveMap() {
    
     $("input[name='chkActive'], .btnDefine").prop("disabled", false);              
     $("#"+ d + io ).prop("disabled", true);      
-    $("#mapDriver, #mapPedestrian, #applyMapDefinition").hide();    
+    $(".map-driver, .map-pedestrian, .map-definition").hide();    
 }
 
 /**
  * Opens type of map according to user type in day; and shows previously saved maps.
  */
 function defineMap(target) {    
-    var	d 			= $(target).parent().index(),
-     	io 			= $(target).parent().parent().attr("id"),
-     	userTypeDay	= $("#userType"+ d).find("option:selected").val(),                         
-     	index 		= Number(d)-1;
+    var d           = $(target).parent().index(),
+        io          = $(target).parent().parent().attr("id"),
+        userTypeDay = $("#userType"+ d).find("option:selected").val(),                         
+        index       = Number(d)-1;
 
     if(userTypeDay == "0") {  
-    	/* Hasn't selected any user type for this day. */
-    	//TODO MESSAGE
-    	var msg = "Seleccione el tipo de usuario de este día";
-    	toggleAlert(true, msg, "alert-schedule");
+        /* Hasn't selected any user type for this day. */
+        //TODO MESSAGE
+        var msg = "Seleccione el tipo de usuario de este día";
+        toggleAlert(true, msg, "alert-schedule");
         return false;
     }
-	toggleAlert(false, "", "alert-schedule");    
+    toggleAlert(false, "", "alert-schedule");    
 
     $("input[name='chkActive'], .btnDefine").prop("disabled", true);                    
     $("#"+ d + io).prop("disabled", false);
    
     if(_userType != "driver-pedestrian")    
-    	/* If it's not mixed, every day has the same user type */
+        /* If it's not mixed, every day has the same user type */
         userTypeDay = _userType;
    
     /* Save in Hidden fields */
-    $("#hdnDay").val(d);
-    $("#hdnInOut").val(io);
-    $("#hdnUserTypeDay").val(userTypeDay);
+    $("#hdn-day").val(d);
+    $("#hdn-inout").val(io);
+    $("#hdn-usertype-day").val(userTypeDay);
    
     if(userTypeDay == "pedestrian") {
-        $("#mapDriver").hide();              
-        $("#mapPedestrian").show("slow");                          
+        $(".map-driver").hide();              
+        $(".map-pedestrian").show("slow");                          
     }
     else {                                                                                                                                  
-        $("#mapPedestrian").hide();  
-        $("#mapDriver" ).show("slow");
+        $(".map-pedestrian").hide();  
+        $(".map-driver" ).show("slow");
     }
    
-    $( "#applyMapDefinition" ).show("fast");                              
+    $( ".map-definition" ).show("fast");                              
            
     if(userTypeDay == "driver") {
         gpxTrack.clear();
@@ -609,9 +623,9 @@ function defineMap(target) {
         _lon = "";
         _lat = "";
         if((io == "in" && _days[index] != null) && _days[index].stopIn != "")
-        	drawPreviousMarkers(_projections[index].projIn);
+            drawPreviousMarkers(_projections[index].projIn);
         if((io == "out" && _days[index] != null) && _days[index].stopOut != "")
-        	drawPreviousMarkers(_projections[index].projOut);
+            drawPreviousMarkers(_projections[index].projOut);
     }
 }
 
@@ -621,25 +635,26 @@ function defineMap(target) {
  * @param {String} io - in/out
  */
 function fillRowsInOut(io) {
-    var	button = "<button id='btn"+ io +"' class='btnDefine' " +
-    				"onClick='defineMap(this); return false;'>Definir</button>",
-    	select = "";
+    var button = "<button id='btn"+ io +"' class='btnDefine' " +
+                    "onClick='defineMap(this); return false;'>Definir</button>",
+        select = "";
            
     for(var d=1; d<6; d++) {
         /* Days */
         select = "<select id='"+ d + io +"' onchange='checkHours(this);'></select>";
+        var $currentCell = $("#"+ d + io);
 
-        $(".tableSignUp #"+ io).append("<td>"+ select + button +"</td>");
-        $("#"+ d + io).append("<option value='none'>Hora</option>");                                  
+        $(".table-signup #"+ io).append("<td>"+ select + button +"</td>");
+        $currentCell.append("<option value='none'>Hora</option>");                                  
        
         for(var j=0; j<24; j++) {
             /* Hours */
-            $("#"+ d + io).append("<option value='"+ j +":00'>"+ j +":00 hs</option>");                      
-            $("#"+ d + io).append("<option value='"+ j +":30'>"+ j +":30 hs</option>");
+            $currentCell.append("<option value='"+ j +":00'>"+ j +":00 hs</option>");                      
+            $currentCell.append("<option value='"+ j +":30'>"+ j +":30 hs</option>");
         }
        
         /* Disable hour selects -> Enabled when defining map */
-        $("#"+ d + io).prop("disabled", true);              
+        $currentCell.prop("disabled", true);              
     }
 }
 
@@ -647,33 +662,35 @@ function fillRowsInOut(io) {
  * Inserts type of user in first row
  */
 function fillRowType() {
-    $(".userTypeRow").html("<td> Tipo de Usuario </td>");
-    var content = "";
+    var content      = "";   
+        $userTypeRow = $(".usertype-row");
     
+    $userTypeRow.html("<td> Tipo de Usuario </td>");
+
     for(var d=1; d<6; d++) {
         if(_userType == "driver-pedestrian") {
             /* Select for user type each day */
-        	//TODO SELECCIONAR MESSAGE
-            content =	"<select id='userType"+ d +"'>"+
-                        	"<option value='0'>Seleccionar</option>"+
-                        	"<option value='pedestrian'>Peaton</option>"+      
+            //TODO SELECCIONAR MESSAGE
+            content =   "<select id='userType"+ d +"'>"+
+                            "<option value='0'>Seleccionar</option>"+
+                            "<option value='pedestrian'>Peaton</option>"+      
                             "<option value='driver'>Conductor</option>"+
                         "</select>";
         }
         else if(_userType == "driver") {
-            $("#hdnUserTypeDay").val(_userType);
-        	//TODO CONDUCTOR MESSAGE            
+            $("#hdn-usertype-day").val(_userType);
+            //TODO CONDUCTOR MESSAGE            
             content = "Conductor";
         }
         else { /* _userType == "pedestrian" */
-            $("#hdnUserTypeDay").val(_userType); 
-        	//TODO PEATON MESSAGE            
+            $("#hdn-usertype-day").val(_userType); 
+            //TODO PEATON MESSAGE            
             content = "Peaton";
         }
         content += "<br><br>";
         content += "<input type='checkbox' name='chkActive' class='chkActive"+ d +"'"+
-                   	"onclick='suscribes($(this));'>"+ $("#lblUnsuscribe").val();
-        $(".userTypeRow").append("<td>"+ content +"</td>");                      
+                    "onclick='suscribes($(this));'>"+ $("#lbl-unsuscribe").val();
+        $userTypeRow.append("<td>"+ content +"</td>");                      
     }
 }
 
@@ -686,52 +703,51 @@ function userTypeChanged(target) {
     _userType = $(target).find("option:selected").val();
            
     if(_userType == "pedestrian" || _userType == "0")
-        $("#drives").hide("slow");
+        $(".drives").hide("slow");
     else
-        $("#drives").show("slow");
+        $(".drives").show("slow");
 }
 
 
-/***************************************************************************************
+/*******************************************************
  * CONSTRUCTORS
- ***************************************************************************************/
+ *******************************************************/
 
 /**
  * Constructor
  */
 function Track() {
-    this.isPedestrian 	= false;
-    this.trackIn 		= "";
-    this.hourIn	 		= "";  
-    this.trackOut 		= "";  
-    this.hourOut 		= "";          
+    this.isPedestrian   = false;
+    this.trackIn        = "";
+    this.hourIn         = "";  
+    this.trackOut       = "";  
+    this.hourOut        = "";          
 }
 
 /**
  * Constructor
  */
 function Stop() {
-    this.isPedestrian 	= true;
-    this.stopIn 		= "";
-    this.hourIn 		= "";  
-    this.stopOut 		= "";
-    this.hourOut		= "";          
+    this.isPedestrian   = true;
+    this.stopIn         = "";
+    this.hourIn         = "";  
+    this.stopOut        = "";
+    this.hourOut        = "";          
 }
-
 
 /**
  * Constructor
  */
 function Matrix() {
-    this.matrixIn 	= "";
-    this.matrixOut 	= "";                  
+    this.matrixIn  = "";
+    this.matrixOut = "";                  
 }
 
 /**
  * Constructor
  */
 function Projection() {
-    this.projIn		= "";
-    this.projOut 	= "";                  
+    this.projIn  = "";
+    this.projOut = "";                  
 }
 
