@@ -8,24 +8,24 @@
 		[List Data]
 		------------------------------------------>
 		<section class="sr-tupper">
-			<div id="listData" class="sr-board border-light"> 	
+
+			<div class="list-data sr-board border-light "> 	
 									
-				<div id="pending" class="block-half block-right"> 		<!-- Lista Solicitudes 	--> 
-					<h2> <spring:message code="label.pending"/> </h2>
-					<table id="tablePending"	class="tableUsers">
-					</table>	
+				<div class="pending block-half block-right"> 		
+					<h2> <spring:message code="label.pending"/></h2>
+					<table class="table-pending sr-table-users"></table>	
 				</div> 
 				
 				<!-- <div class="vrs"></div> -->
 					
-				<div id="associated" class="block-half block-left">		<!-- Lista Asociados 	-->
-					<h2> <spring:message code="label.associated"/> </h2>
-					<table id="tableAssociated"	class="tableUsers">
-					</table>
+				<div class="associated block-half block-left">		
+					<h2> <spring:message code="label.associated"/></h2>
+					<table class="table-associated sr-table-users"></table>
 				</div>		
 			
 				<div class="clearer"></div>
 			</div>
+			
 		</section>
 
 		<!-----------------------------------------
@@ -33,23 +33,21 @@
 		------------------------------------------>		
 		<section class="sr-tupper" style="margin-top: 20px">
 
-			<div id="scheduleData" class="sr-board border-light">
+			<div class="sr-board border-light schedule-data">
 
-				<div id="requested" class="block-half block-left">		
+				<div class="requested block-half block-left">		
 					<h2> <spring:message code="label.requested"/> </h2>
 				
-					<div> 			<!-- Horario	-->
-						<table id="tableRequested" class="sr-schedule">
-						</table>					
+					<div> 			
+						<table class="table-requested sr-schedule"></table>					
 					</div>	
 				</div>
 				
-				<div id="offered" class="block-half block-right">
+				<div class="offered block-half block-right">
 					<h2> <spring:message code="label.offered"/> </h2>	
 				
-					<div> 			<!-- Horario	-->
-						<table id="tableOffered" class="sr-schedule">
-						</table>					
+					<div> 			
+						<table class="table-offered sr-schedule"></table>					
 					</div>
 				</div>	
 				
