@@ -18,7 +18,7 @@ $(document).ready(function() {
 /*******************************************************************************
  * AJAX CALLS
  ******************************************************************************/
-
+//TODO MESSAGES
 $.post("getNotifications.do", 
     function(json) {
         var jsonArray = $.parseJSON(json);

@@ -37,7 +37,7 @@
 		</section>
 		
 		<!----------------------------------------- 
-		[Profile Content]
+		[Profile]
 		------------------------------------------>
 		<section class="sr-tupper sr-tupper-bottom">
 			<div class="sr-board border-light"> 		
@@ -109,12 +109,12 @@
 		[Labels]
 		------------------------------------------>	
 		<c:set var="lblArrival"> 	<spring:message code="lbl.arrival" 	/></c:set>	
-		<c:set var="lblDeparture"> 	<spring:message code="lbl.departure" 	/></c:set>	
+		<c:set var="lblDeparture"> 	<spring:message code="lbl.departure"/></c:set>	
 		<c:set var="lblMonday"> 	<spring:message code="lbl.monday" 	/></c:set>	
 		<c:set var="lblTuesday"> 	<spring:message code="lbl.tuesday" 	/></c:set>	
-		<c:set var="lblWednesday"> 	<spring:message code="lbl.wednesday" 	/></c:set>	
-		<c:set var="lblThursday"> 	<spring:message code="lbl.thursday" 	/></c:set>	
-		<c:set var="lblFriday"> 	<spring:message code="lbl.friday"		/></c:set>	
+		<c:set var="lblWednesday"> 	<spring:message code="lbl.wednesday"/></c:set>	
+		<c:set var="lblThursday"> 	<spring:message code="lbl.thursday" /></c:set>	
+		<c:set var="lblFriday"> 	<spring:message code="lbl.friday"	/></c:set>	
 		
 		<input type="hidden" id="lbl-arrival" 	value="${lblArrival}" 	/>
 		<input type="hidden" id="lbl-departure"	value="${lblDeparture}" />
@@ -152,39 +152,39 @@
 
 <script type="text/javascript">
 			
-	if("${visible}" == "false")
-		$(".private-data").hide();
+	if("${visible}" == "true")
+		$(".private-data").show();
 	
 	initMapPedestrian();
 	initMapDriver(); 	
 	
 	<c:forEach var="day" items="${schPed}">
-		var	detSchPed			= new DetailSchedulePedestrian();	
-		detSchPed.day 			= "${day.dayPed}";
-		detSchPed.allowIn 		= "${day.allowIn}";
-		detSchPed.allowOut 		= "${day.allowOut}";
-		detSchPed.hourIn 		= "${day.hourInPed}";
-		detSchPed.hourOut 		= "${day.hourOutPed}";
-		detSchPed.hasDriverIn 	= "${day.hasDriverIn}";
-		detSchPed.hasDriverOut	= "${day.hasDriverOut}";
-		detSchPed.latIn 		= "${day.stopLatIn}";
-		detSchPed.latOut 		= "${day.stopLatOut}";
-		detSchPed.lonIn 		= "${day.stopLonIn}";
-		detSchPed.lonOut 		= "${day.stopLonOut}";		
+		var	detSchPed			  = new DetailSchedulePedestrian();	
+		detSchPed.day             = "${day.dayPed}";
+		detSchPed.allowIn         = "${day.allowIn}";
+		detSchPed.allowOut        = "${day.allowOut}";
+		detSchPed.hourIn          = "${day.hourInPed}";
+		detSchPed.hourOut         = "${day.hourOutPed}";
+		detSchPed.hasDriverIn     = "${day.hasDriverIn}";
+		detSchPed.hasDriverOut    = "${day.hasDriverOut}";
+		detSchPed.latIn           = "${day.stopLatIn}";
+		detSchPed.latOut          = "${day.stopLatOut}";
+		detSchPed.lonIn           = "${day.stopLonIn}";
+		detSchPed.lonOut          = "${day.stopLonOut}";		
 		_schPed.push(detSchPed);
 	</c:forEach>
 	
 	<c:forEach var="day" items="${schDriver}">
-		var detSchDriver			= new DetailScheduleDriver();	
-		detSchDriver.day 			= "${day.dayDriver}";
-		detSchDriver.allowIn 		= "${day.allowIn}";
-		detSchDriver.allowOut 		= "${day.allowOut}";	
-		detSchDriver.hourIn 		= "${day.hourInDriver}";
-		detSchDriver.hourOut 		= "${day.hourOutDriver}";
-		detSchDriver.freeSeatsIn 	= "${day.freeSeatsIn}";
-		detSchDriver.freeSeatsOut 	= "${day.freeSeatsOut}";
-		detSchDriver.pathIn 		= "${day.trackIn}";
-		detSchDriver.pathOut 		= "${day.trackOut}";
+		var detSchDriver          = new DetailScheduleDriver();	
+		detSchDriver.day          = "${day.dayDriver}";
+		detSchDriver.allowIn      = "${day.allowIn}";
+		detSchDriver.allowOut     = "${day.allowOut}";	
+		detSchDriver.hourIn       = "${day.hourInDriver}";
+		detSchDriver.hourOut      = "${day.hourOutDriver}";
+		detSchDriver.freeSeatsIn  = "${day.freeSeatsIn}";
+		detSchDriver.freeSeatsOut = "${day.freeSeatsOut}";
+		detSchDriver.pathIn       = "${day.trackIn}";
+		detSchDriver.pathOut      = "${day.trackOut}";
 		_schDriver.push(detSchDriver);
 	</c:forEach>
 </script>

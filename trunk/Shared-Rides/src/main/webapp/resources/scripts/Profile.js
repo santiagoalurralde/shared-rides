@@ -99,12 +99,11 @@ function disable($target, flag) {
  */
 function fixView($target) {
 	$target.siblings().hide();
-	$target.css("float", "none").css("width", "100%").css("text-align", "left").show();
-
-	$('.star').css("float", "left").css("margin-right", "1%").css("margin-left", "0");
+	$target.css({"float":"none", "width":"100%", "text-align":"left"}).show();
+	$('.star').css({"float":"left", "margin-right":"1%", "margin-left":"0"});
 	$('.rating').css("margin", "2% 0 0 0");
-	$('.profile-data').css("padding-right", "70px").css("padding-left", "70px");
-	$('.map-static').css("height", "400px").css("width", "760px");
+	$('.profile-data').css({"padding-right":"70px", "padding-left":"70px"});
+	$('.map-static').css({"height":"400px", "width":"760px"});
 	$('.map-container').css("margin-left", "0");
 }
 
@@ -249,13 +248,18 @@ function showMap(target) {
 function requestAssociation(target) {
 	var $day    	= $(target).siblings(".hdn-day").val(),
 		$inOut  	= $(target).siblings(".hdn-inout").val(),
+
 		$idUser 	= $("#val-id").val();
 		$btnReqIn	= $(".btn-req-in"+ schedule[i].day),
 		$btnReqOut	= $(".btn-req-out"+ schedule[i].day);
 
-	if ($inOut == "in")
+//TRY THIS OUT
+//$(target).closest("tr").attr("id");
+//$(target).closest("td").index()+1
+
+	if ($inOut == "1")
 		disable($btnReqIn, true);
-	if ($inOut == "out")
+	if ($inOut == "0")
 		disable($btnReqOut, true);
 
 	$.post("requestAssoc.do",

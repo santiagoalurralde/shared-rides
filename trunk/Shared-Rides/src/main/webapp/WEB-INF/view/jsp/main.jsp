@@ -3,8 +3,7 @@
 
 <body onLoad="stepNext();">		
 		  
-    <div class="sr-content">
-
+    <div class="sr-content">	
         <section class="sr-tupper"> 
        		<h4> <spring:message code="lbl.messageFind"/> </h4>
         
@@ -35,7 +34,7 @@
 				        </li>
 			        	<li class="choices choice-driver">
 							<img src="resources/images/steering.png"/>
-				        	<label><spring:message code="lbl.driver"/></label>		
+				        	<label><spring:message code="lbl.driver"/></label>
 			        	</li>	
 		        	</ul>		
         		</div>
@@ -48,7 +47,7 @@
 				        </li>
 			        	<li class="choices choice-afternoon">
 							<img src="resources/images/moon.png"/>
-				        	<label><spring:message code="lbl.afternoon"/></label>		
+				        	<label><spring:message code="lbl.afternoon"/></label>	
 			        	</li>	
 		        	</ul>	        		
         		</div>
@@ -90,11 +89,11 @@
         			<input type="button" class="btn btn-back" 		
         				value="<spring:message code="lbl.button-previous"	/>" onClick="stepBack();"/>	
         			<input type="button" class="btn btn-default"  	
-        				value="<spring:message code="lbl.button-search"	/>"/>         				
+        				value="<spring:message code="lbl.button-search"		/>"/>         			
            	   		<input type="button" class="btn btn-next" 		
            	   			value="<spring:message code="lbl.button-next"		/>" onClick="stepNext();"/>		
         			<input type="button" class="btn btn-OK"	
-        				value="<spring:message code="lbl.button-confirm" 	/>"/>           			
+        				value="<spring:message code="lbl.button-confirm" 	/>"/>		
         		</div> 	 
        		</form>	        	
         </section>        

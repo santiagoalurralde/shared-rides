@@ -106,7 +106,8 @@
            						onChange="checkIt(this);" onKeyUp="checkNumeric(this);"/>
          			</span> 
        		    </div>
-       		    <!-------------------------------------------------- END of FIRST STEP -------------------------------------------------->
+				<!---------------------------------- END of FIRST STEP ---------------------------------->
+
        		    
        		    <div class="step step-second">
 
@@ -157,8 +158,8 @@
            				
            				<select id="shift" class="block-right sr-inputs" 
            						onChange="checkIt(this);">
-           					<option value="0" selected></option>	            					           				
-           					<option value="morning">	<spring:message code="lbl.morning"/> 		</option>	            				
+           					<option value="0" selected></option>
+           					<option value="morning">	<spring:message code="lbl.morning"/>	</option>	
            					<option value="afternoon">	<spring:message code="lbl.afternoon"/>	</option>
            				</select>            				
            			</span> 
@@ -174,7 +175,7 @@
            						onChange="checkIt(this); userTypeChanged(this);">
 
            				    <option value="0" selected></option>
-           					<option value="pedestrian">			<spring:message code="lbl.pedestrian"/>	</option>	            			
+           					<option value="pedestrian">			<spring:message code="lbl.pedestrian"/>	</option>
            					<option value="driver">				<spring:message code="lbl.driver"/>		</option>
            					<option value="driver-pedestrian">	<spring:message code="lbl.mixed"/>		</option>	            					
            				</select>               				
@@ -232,19 +233,19 @@
 				            </span> 
 		            				
    	        				<select id="number-seats" class="block-right sr-inputs" onChange="checkIt(this);">
-            					<option value="0" selected></option>	            					            				
+            					<option value="0" selected></option>	            					
             					<option value="1">1</option>	            				
             					<option value="2">2</option>
             					<option value="3">3</option>	 
             					<option value="4">4</option>	            					
             					<option value="5">5</option>	            					
             					<option value="6">6</option>	            					
-            					<option value="7">7</option>	            					  					
+            					<option value="7">7</option>
             				</select>          						
             			</span>  	
    					</div>
        		    </div>
-				<!---------------------------------------- END of SECOND STEP ---------------------------------------->
+				<!---------------------------------- END of SECOND STEP ---------------------------------->
 
        		    <div class="step step-third">
 
@@ -255,14 +256,13 @@
 					<table class="table-signup sr-schedule">
 						<tr>
 							<th> <!-- Empty --> </th>	
-							<th> <spring:message code="lbl.monday"/> 		</th>
+							<th> <spring:message code="lbl.monday"/> 	</th>
 							<th> <spring:message code="lbl.tuesday"/> 	</th>
 							<th> <spring:message code="lbl.wednesday"/>	</th>
 							<th> <spring:message code="lbl.thursday"/>	</th>
-							<th> <spring:message code="lbl.friday"/>		</th>				
+							<th> <spring:message code="lbl.friday"/>	</th>				
 						</tr>
-						<tr class="usertype-row">
-						</tr>
+						<tr class="usertype-row"></tr>
 						<tr id="in">
 							<td> <spring:message code="lbl.arrival"/> </td>
 						</tr>
@@ -275,8 +275,8 @@
 					
 					<span class="map-definition">
 	       				<input	type="button" class="btn btn-map" 
-	       						value='<spring:message code="lbl.button-ready"/>'/>      
-	       						 						
+	       						value='<spring:message code="lbl.button-ready"/>'/>
+
 	       				<input 	type="hidden" id="hdn-inout"		/>  
 	         			<input 	type="hidden" id="hdn-day"			/>
 	          			<input 	type="hidden" id="hdn-usertype-day"	/>  	    
@@ -290,14 +290,14 @@
 				------------------------------------------>   
 				<div class="alerts"></div>
 				
-				<!---------------------------------------- END of THIRD STEP ---------------------------------------->
+				<!---------------------------------- END of THIRD STEP ---------------------------------->
 				
 				<!-----------------------------------------
 				[Maps]
 				------------------------------------------>   	
 				<div class="map-driver">
 					<div id="map"></div>
-					<span class="t1" style = "visibility:hidden">
+					<span class="t1" style="visibility:hidden">
 						<a id="permalink" href=""></a>
 					</span>
 
@@ -307,7 +307,7 @@
 				</div>
 				
 	    		<div class="map-pedestrian">
-	    			<div id="map2" class="mapSimple"></div>
+	    			<div id="map2" class="map-simple"></div>
 	    		</div>
         		        		
 				<!-----------------------------------------
@@ -343,11 +343,11 @@
 ------------------------------------------>	
 <script src="resources/scripts/Register.js" 	type="text/javascript"></script>
 <script src="resources/maps/OpenLayers.js"		type="text/javascript"></script>    
-<script src="resources/maps/OpenStreetMap.js" type="text/javascript"></script>
-<script src="resources/maps/proj4js.js"			  type="text/javascript"></script>
-<script src="resources/maps/osmap.js" 			  type="text/javascript"></script>
-<script src="resources/maps/track.js" 			  type="text/javascript"></script>
-<script src="resources/maps/osmapSimple.js"   type="text/javascript"></script>
+<script src="resources/maps/OpenStreetMap.js"	type="text/javascript"></script>
+<script src="resources/maps/proj4js.js"			type="text/javascript"></script>
+<script src="resources/maps/osmap.js" 			type="text/javascript"></script>
+<script src="resources/maps/track.js" 			type="text/javascript"></script>
+<script src="resources/maps/osmapSimple.js"		type="text/javascript"></script>
 
 <script>
 	initMapCoords(lonlat, zoom, map, null);
