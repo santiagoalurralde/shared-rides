@@ -113,11 +113,11 @@ function viewSchedule(json, typeAssoc) {
 	
 	if(jsonNew.requested == "") {
 		$requested.hide();
-		$requested.siblings().css("float", "none").css("width", "100%");
+		$requested.siblings().css({"float":"none", "width":"100%"});
 	}
 	if(jsonNew.offered == "") {
 		$offered.hide();
-		$offered.siblings().css("float", "none").css("width", "100%");
+		$offered.siblings().css({"float":"none", "width":"100%"});
 	}
 }
 
@@ -257,13 +257,13 @@ function listenerSchedule(target) {
 	$userId = $(target).siblings("input").attr("id");
 	
 	if($(target).hasClass("btn-pending"))
-		$.post( "viewSchedule.do", {"userId": $userId , "typeAssoc": 0}, 
+		$.post("viewSchedule.do", {"userId": $userId , "typeAssoc": 0}, 
 			function(json) {
 				viewSchedule(json, 0);
 			}
 		);
 	else
-		$.post( "viewSchedule.do", {"userId": $userId , "typeAssoc": 1}, 
+		$.post("viewSchedule.do", {"userId": $userId , "typeAssoc": 1}, 
 			function(json) {
 				viewSchedule(json, 1);
 			}
