@@ -1,15 +1,18 @@
-var	_schPed 	= [], 
-	_schDriver 	= [];
+var	_schPed 		= [], 
+	_schDriver      = [],
+	$pedestrianData = $(".pedestrian-data"),
+	$driverData     = $(".driver-data");
+
 
 /*******************************************************************************
  * FIXES
  ******************************************************************************/
 
-if ($("#valDriver").val() === 'false') // It's not a driver
-	fixView($('#pedestrianData'), $('#driverData'));
+if ($("#val-driver").val() == "false") // It's not a driver
+	fixView($pedestrianData);
 
-if ($("#valPedestrian").val() === 'false') // It's not a pedestrian
-	fixView($('#driverData'), $('#pedestrianData'));
+if ($("#val-pedestrian").val() == "false") // It's not a pedestrian
+	fixView($driverData);
 
 
 /*******************************************************************************
@@ -17,48 +20,47 @@ if ($("#valPedestrian").val() === 'false') // It's not a pedestrian
  ******************************************************************************/
 
 $(function() {
-	$(document).tooltip(
-		{
+	$(document).tooltip({
 			position : {
-				my : "center bottom-20",
-				at : "center top",
-				using : function(position, feedback) {
+				my 		: "center bottom-20",
+				at  	: "center top",
+				using	: function(position, feedback) {
 					$(this).css(position);
 					$("<div>").addClass("arrow").addClass(feedback.vertical).addClass(feedback.horizontal).appendTo(this);
 				}
 			}
-		});
+	});
 });
 
 $(document).ready(function() {
 
-	fillTable(_schDriver, "Driver");
-	fillTable(_schPed, "Pedestrian");
+	fillTable(_schPed, false);
+	fillTable(_schDriver, true);
 
 	// Fancybox
 	$(".ifancybox").fancybox({
-		'width' : 500,
-		'height' : 330,
-		'autoSize' : false,
+		'width' 	: 500,
+		'height' 	: 330,
+		'autoSize' 	: false,
 		'fitToView' : false,
-		'type' : 'iframe'
+		'type' 		: 'iframe'
 	});
 
 	// If it's my profile, it shouldn't rate
-	if ($("#valMine").val() == "true")
+	if ($("#val-mine").val() == "true")
 		$(".star").unwrap();
 
 	// Request Association
-	$(".btnRequestAssoc").click(function() {
+	$(".btn-request-assoc").click(function() {
+		//TODO MESSAGE
 		if (confirm("Confirma el envío de esta petición")) {
 			requestAssociation(this);
-			$(this).prop("disabled", true);
-			checkDisabled($(this));
+			disable($(this), true);
 		}
 	});
 
 	// Show Current Map
-	$(".cellCheckMap").click(function() {
+	$(".cell-check-map").click(function() {
 		showMap(this);
 	});
 });
@@ -66,16 +68,22 @@ $(document).ready(function() {
 /**
  * Sets disabled button.
  * 
- * @param {jquery} $target - button that can be disabled.
+ * @param {jquery} $target 	- button that can be disabled.
+ * @param {Boolean} flag 	- TRUE for disabling.
  */
-function checkDisabled($target) {
-	if ($target.prop("disabled"))
-		$target.find("img").attr("src", "resources/images/disabled.png");
+function disable($target, flag) {
+	var $img = $target.find("img");
+
+	if (flag){
+		$target.prop("disabled", true);
+		$img.attr("src", "resources/images/disabled.png");
+	}
 	else {
-		if($target.closest("table").attr("id") == "tablePed")
-			$target.find("img").attr("src", "resources/images/steering.png");
+		$target.prop("disabled", false);
+		if($target.closest("table").hasClass("table-ped"))
+			$img.attr("src", "resources/images/steering.png");
 		else
-			$target.find("img").attr("src", "resources/images/seat.png");
+			$img.attr("src", "resources/images/seat.png");
 	}
 }
 
@@ -89,91 +97,107 @@ function checkDisabled($target) {
  * @param {jquery} $targetThis - div that's gonna stay.
  * @param {jquery} $targetOther - div that's gonna be hidden.
  */
-function fixView($targetThis, $targetOther) {
-	$targetOther.css("display", "none");
-	$targetThis.css("float", "none").css("width", "100%").css("text-align", "left");
+function fixView($target) {
+	$target.siblings().hide();
+	$target.css("float", "none").css("width", "100%").css("text-align", "left").show();
+
 	$('.star').css("float", "left").css("margin-right", "1%").css("margin-left", "0");
-	$('.theRating').css("margin", "2% 0 0 0");
-	$('#profileData').css("padding-right", "70px").css("padding-left", "70px");
-	$('#line').css("display", "none");
-	$('.mapStatic').css("height", "400px").css("width", "760px");
-	$('.mapContainer').css("margin-left", "0");
+	$('.rating').css("margin", "2% 0 0 0");
+	$('.profile-data').css("padding-right", "70px").css("padding-left", "70px");
+	$('.map-static').css("height", "400px").css("width", "760px");
+	$('.map-container').css("margin-left", "0");
 }
 
 /**
  * Completes individual schedule table.
  * 
- * @param {array} schedule - array that contains each day
  * @param {string} type - userType (side of schedule)
  */
-function fillTable(schedule, type) {
+function fillTable(schedule, isDriver) {
 	var $table, 
 		image, 
 		hdnsMapIn, 
 		hdnsMapOut,	
-		hdnIn 	= '<input class="hdnInOut" type="hidden" value="0"/>',
-		hdnOut 	= '<input class="hdnInOut" type="hidden" value="1"/>';
-
-	if (type == "Driver") {
-		$table = $("#tableDriver");
+		hdnIn    = '<input class="hdn-inout" type="hidden" value="0"/>',
+		hdnOut   = '<input class="hdn-inout" type="hidden" value="1"/>',
+		$valMine = $("#val-mine").val();
+	
+	if (isDriver) {
+		$table = $(".table-driver");
 		image = "seat.png";
-	} else {
-		$table = $("#tablePed");
+	}
+	else {
+		$table = $(".table-ped");
 		image = "steering.png";
 	}
 
 	// Create Rows
 	$table.append("<tr id='rDay'></tr><tr id='rIn'></tr><tr id='rOut'></tr>");
-	$table.find("#rDay").append("<th></th>");
-	$table.find("#rIn").append('<td>'+ $("#lblArrival").val() +'</td>');
-	$table.find("#rOut").append('<td>'+ $("#lblDeparture").val() +'</td>');
+	var	$rowDay  = $table.find("#rDay"),
+		$rowOut  = $table.find("#rOut"),
+		$rowIn   = $table.find("#rIn");
 
-	for (var i = 0; i < schedule.length; i++) {
-		var	hdnDay 		= '<input class="hdnDay"	type="hidden" value="'+ schedule[i].day +'"/>',
+	$rowDay.append("<th></th>");
+	$rowIn.append("<td>"+ $("#lbl-arrival").val() +"</td>");
+	$rowOut.append("<td>"+ $("#lbl-departure").val() +"</td>");
+
+	for (var i=0; i<schedule.length; i++) {
+		var	hdnDay 		= '<input class="hdn-day" type="hidden" value="'+ schedule[i].day +'"/>',
 			btnReqIn	= "", 
 			btnReqOut	= "";
 
-		if ($("#valMine").val() == "false") {
+		if ($valMine == "false") {
 			// If it's my profile can't invite myself
-			btnReqIn = '<button class="btnRequestAssoc" id="btnReqIn'
-					+ schedule[i].day +'" onChange="checkDisabled($(this));">'
-					+ '<img src="resources/images/'+ image +'"/>'
-					+ '</button>';
-			btnReqOut = '<button class="btnRequestAssoc" id="btnReqOut'
-					+ schedule[i].day +'" onChange="checkDisabled($(this));">'
-					+ '<img src="resources/images/'+ image +'"/>'
-					+ '</button>';
+			btnReqIn	=	
+				"<button class='btn-request-assoc btn-req-in"				+
+					schedule[i].day +"' onclick='disable($(this), true);'>"	+
+					"<img src='resources/images/"+ image +"'/>"				+
+				"</button>";
+			btnReqOut	= 	
+				"<button class='btn-request-assoc btn-req-out"				+
+					schedule[i].day +"' onclick='disable($(this), true);'>"	+
+					"<img src='resources/images/"+ image +"'/>"				+
+				"</button>";
 		}
 
-		if (type == "Pedestrian") {
-			hdnsMapIn = '<input class="hdnLat" type="hidden" value="'
-					+ schedule[i].latIn +'"/>'
-					+ '<input class="hdnLon" type="hidden" value="'
-					+ schedule[i].lonIn +'"/>';
-			hdnsMapOut = '<input class="hdnLat" type="hidden" value="'
-					+ schedule[i].latOut +'"/>'
-					+ '<input class="hdnLon" type="hidden" value="'
-					+ schedule[i].lonOut +'"/>';
+		if (!isDriver) {
+			hdnsMapIn 	=	
+				"<input class='hdn-lat' type='hidden' value='"	+
+					schedule[i].latIn	+"'/>"					+
+				"<input class='hdn-lon' type='hidden' value='"	+
+					schedule[i].lonIn	+"'/>";	
+			hdnsMapOut	=
+				"<input class='hdn-lat' type='hidden' value='"	+
+					schedule[i].latOut	+"'/>"					+
+			 	"<input class='hdn-lon' type='hidden' value='"	+
+					schedule[i].lonOut	+"'/>";						
 		} 
 		else {
-			hdnsMapOut = '<input class="hdnPath" type="hidden" value="'
-					+ schedule[i].pathIn + '"/>';
-			hdnsMapIn = '<input class="hdnPath" type="hidden" value="'
-					+ schedule[i].pathOut + '"/>';
+			hdnsMapOut	= 	
+			"<input class='hdn-path' type='hidden' value='"	+
+				schedule[i].pathIn	+"'/>";
+			hdnsMapIn 	= 	
+			"<input class='hdn-path' type='hidden' value='"	+
+				schedule[i].pathOut	+"'/>";
 		}
 
-		$table.find("#rDay").append("<th>" + getDayLabel(schedule[i].day) + "</th>");
-		$table.find("#rIn").append(
-			"<td class='cellCheckMap'>" + schedule[i].hourIn + btnReqIn
-				+ hdnDay + hdnIn + hdnsMapIn + "</td>");
-		$table.find("#rOut").append(
-			"<td class='cellCheckMap'>" + schedule[i].hourOut + btnReqOut
-				+ hdnDay + hdnOut + hdnsMapOut + "</td>");
+		$rowDay.append("<th>"+ getDayLabel(schedule[i].day) +"</th>");
+		$rowIn.append(
+			"<td class='cell-check-map'>"			+ 
+				schedule[i].hourIn + btnReqIn	+
+				hdnDay + hdnIn + hdnsMapIn	  	+ 
+			"</td>");
+		$rowOut.append(
+			"<td class='cell-check-map'>"			+ 
+				schedule[i].hourOut + btnReqOut	+
+				hdnDay + hdnOut + hdnsMapOut 	+ 
+			"</td>");
 	}
 
-	$(".cellCheckMap").prop("title", "Ver mapa en este horario");
+	//TODO MESSAGE
+	$(".cell-check-map").prop("title", "Ver mapa en este horario");
 	
-	disableRequests(schedule, type);
+	disableRequests(schedule, isDriver);
 }
 
 /**
@@ -182,28 +206,25 @@ function fillTable(schedule, type) {
  * @param {array} schedule - array with days' length that contains parameters that allow requests or not.
  * @param {string} type - user type ["Pedestrian" | "Driver"].
  */
-function disableRequests(schedule, type) {
+function disableRequests(schedule, isDriver) {
+
 	for (var i=0; i<schedule.length; i++) {
-		if (type == "Pedestrian") {
+		var $btnReqIn	= $(".btn-req-in"+ schedule[i].day),
+			$btnReqOut	= $(".btn-req-out"+ schedule[i].day);
+
+		if (!isDriver) {
 			// If Pedestrian has driver, can't invite him.
-			if (schedule[i].hasDriverIn == "true" || schedule[i].allowIn == "false") {
-				$("#btnReqIn"+schedule[i].day).prop("disabled", true);
-				checkDisabled($("#btnReqIn"+ schedule[i].day));
-			}
-			if (schedule[i].hasDriverOut == "true" || schedule[i].allowOut == "false") {
-				$("#btnReqOut"+schedule[i].day).prop("disabled", true);
-				checkDisabled($("#btnReqOut"+ schedule[i].day));				
-			}
+			if (schedule[i].hasDriverIn == "true" || schedule[i].allowIn == "false")
+				disable($btnReqIn, true);
+			if (schedule[i].hasDriverOut == "true" || schedule[i].allowOut == "false")
+				disable($btnReqOut, true);
 		} 
 		else {
-			if (schedule[i].freeSeatsIn == 0 || schedule[i].allowIn == "false") {		
-				$("#btnReqIn"+schedule[i].day).prop("disabled", true);
-				checkDisabled($("#btnReqIn"+ schedule[i].day));
-			}
-			if (schedule[i].freeSeatsOut == 0 || schedule[i].allowOut == "false") {				
-				$("#btnReqOut"+schedule[i].day).prop("disabled", true);
-				checkDisabled($("#btnReqOut"+ schedule[i].day));
-			}
+			// If Driver has no seats, can't invite him.
+			if (schedule[i].freeSeatsIn == 0 || schedule[i].allowIn == "false")		
+				disable($btnReqIn, true);
+			if (schedule[i].freeSeatsOut == 0 || schedule[i].allowOut == "false")				
+				disable($btnReqOut, true);
 		}
 	}
 }
@@ -214,10 +235,10 @@ function disableRequests(schedule, type) {
  * @param {javascript} target - clicked cell.
  */
 function showMap(target) {
-	if ($(target).closest("table").attr("id") == "tablePed")
-		setMapPedestrian($(target).find(".hdnLon").val(), $(target).find(".hdnLat").val());
+	if ($(target).closest("table").hasClass("table-ped"))
+		setMapPedestrian($(target).find(".hdn-lon").val(), $(target).find(".hdn-lat").val());
 	else
-		setMapDriver($(target).find(".hdnPath").val());
+		setMapDriver($(target).find(".hdn-path").val());
 }
 
 /**
@@ -226,28 +247,26 @@ function showMap(target) {
  * @param {javascript} target - clicked button.
  */
 function requestAssociation(target) {
-	var $day = $(target).parent().find(".hdnDay").val();
-	var $inOut = $(target).parent().find(".hdnInOut").val();
-	var $idUser = $("#valId").val();
+	var $day    	= $(target).siblings(".hdn-day").val(),
+		$inOut  	= $(target).siblings(".hdn-inout").val(),
+		$idUser 	= $("#val-id").val();
+		$btnReqIn	= $(".btn-req-in"+ schedule[i].day),
+		$btnReqOut	= $(".btn-req-out"+ schedule[i].day);
 
-	if ($inOut == "in") {
-		$("#btnReqIn" + $day).prop("disabled", true);
-		checkDisabled($("#btnReqIn" + schedule[i].day));
-	}
-	if ($inOut == "out") {
-		$("#btnReqOut" + $day).prop("disabled", true);		
-		checkDisabled($("#btnReqIn" + schedule[i].day));
-	}
+	if ($inOut == "in")
+		disable($btnReqIn, true);
+	if ($inOut == "out")
+		disable($btnReqOut, true);
 
 	$.post("requestAssoc.do",
 			{
-				"day":$day,
-				"inout":$inOut,
-				"idUser":$idUser
+				"day"	: $day,
+				"inout"	: $inOut,
+				"idUser": $idUser
 			}, 
 			function(msg) {
-				if (msg != '')
-					window.alert(msg);
+				if (msg != "")
+					alert(msg);
 	});
 }
 
@@ -259,30 +278,30 @@ function requestAssociation(target) {
  * Constructor
  */
 function DetailSchedulePedestrian() {
-	this.day = "";
-	this.allowIn = "";
-	this.allowOut = "";
-	this.hourIn = "";
-	this.hourOut = "";
-	this.hasDriverIn = "";
+	this.day          = "";
+	this.allowIn      = "";
+	this.allowOut     = "";
+	this.hourIn       = "";
+	this.hourOut      = "";
+	this.hasDriverIn  = "";
 	this.hasDriverOut = "";
-	this.pathIn = "";
-	this.pathOut = "";
+	this.pathIn       = "";
+	this.pathOut      = "";
 }
 
 /**
  * Constructor
  */
 function DetailScheduleDriver() {
-	this.day = "";
-	this.allowIn = "";
-	this.allowOut = "";
-	this.hourIn = "";
-	this.hourOut = "";
-	this.freeSeatsIn = 0;
+	this.day          = "";
+	this.allowIn      = "";
+	this.allowOut     = "";
+	this.hourIn       = "";
+	this.hourOut      = "";
+	this.freeSeatsIn  = 0;
 	this.freeSeatsOut = 0;
-	this.latIn = "";
-	this.latOut = "";
-	this.lonIn = "";
-	this.lonOut = "";
+	this.latIn        = "";
+	this.latOut       = "";
+	this.lonIn        = "";
+	this.lonOut       = "";
 }

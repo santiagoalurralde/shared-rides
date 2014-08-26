@@ -2,15 +2,14 @@
  * EVENTS
  ******************************************************************************/
 
-$(document).ready(function(){
-	$(".btnAlert").click(function() {
-		if ($("#boxNotifications").is(":visible"))
-			$("#boxNotifications").hide();
-		else
-			$("#boxNotifications").show();	
+$(document).ready(function() {
+	var $notificationsBox = $("#notifications-box");
+
+	$(".btn-alert").click(function() {
+		$notificationsBox.is(":visible") ? $notificationsBox.hide() : $notificationsBox.show();
 	});
 
-	$(".divNotif").click(function() {
+	$(".notification-item").click(function() {
 		window.location.href = "people.do";
 	});	
 });
@@ -24,27 +23,21 @@ $.post("getNotifications.do",
 		var jsonArray = $.parseJSON(json);
 		$.each(jsonArray, function(i, notification) {
 			if (notification != "") {
-				if (notification.type == "request"){
-					var divNotif = "<div class='divNotif'><li>Has recibido una peticion de <b>"+ notification.name +"</b></li></div>";
-					$(".listNotifications").append(divNotif);
-				}
-				else{
-					var divNotif = "<div class='divNotif'><li><b>"+ notification.name +"</b> ha respondido a tu peticion</li></div>";
-					$(".listNotifications").append(divNotif);
-				}
+				var notifItem = "<div class='notification-item'><li>Has recibido una peticion de <b>"+ notification.name +"</b></li></div>";
+				$(".notifications-list").append(notifItem);
 			}				
 		});
 	}
 );
 
-//$.post("hasResponse.do", 
-//	function(json) {
-//		var jsonArray = $.parseJSON(json);
-//		$.each(jsonArray, function(i, notification) {
-//			if (notification != "") {
-//				var divNotif = "<div class='divNotif'><li><b>"+ notification.name +"</b> Ha respondido a tu peticion</li></div>";
-//				$(".listNotifications").append(divNotif);
-//			}				
-//		});
-//	}
-//);
+$.post("hasResponse.do", 
+	function(json) {
+		var jsonArray = $.parseJSON(json);
+		$.each(jsonArray, function(i, notification) {
+			if (notification != "") {
+				var notifItem = "<div class='notification-item'><li><b>"+ notification.name +"</b> Ha respondido a tu peticion</li></div>";
+				$(".notifications-list").append(notifItem);
+			}				
+		});
+	}
+);

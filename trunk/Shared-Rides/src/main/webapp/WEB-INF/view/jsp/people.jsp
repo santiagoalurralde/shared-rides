@@ -2,112 +2,90 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c" %>
 
 <body>
-	<div id="theContent">	
-		
-		<section title="List Data" class="tupper">
-				<div id="listData" class="theBoard lightBorder"> 	
-										
-					<div id="pending" class="blockHalf blockRight"> 		<!-- Lista Solicitudes 	--> 
-						<h2> <spring:message code="label.pending"/> </h2>
-						<table id="tablePending"	class="tableUsers">
-						</table>	
-					</div> 
-					
-					<!-- <div class="vrs"></div> -->
-						
-					<div id="associated" class="blockHalf blockLeft">		<!-- Lista Asociados 	-->
-					
-						<h2> <spring:message code="label.associated"/> </h2>
-						<table id="tableAssociated"	class="tableUsers">
-						</table>
-						
-					</div>		
+	<div class="sr-content">	
+
+		<!-----------------------------------------
+		[List Data]
+		------------------------------------------>
+		<section class="sr-tupper">
+			<div id="listData" class="sr-board border-light"> 	
+									
+				<div id="pending" class="block-half block-right"> 		<!-- Lista Solicitudes 	--> 
+					<h2> <spring:message code="label.pending"/> </h2>
+					<table id="tablePending"	class="tableUsers">
+					</table>	
+				</div> 
 				
-					<div class="clearer"></div>
+				<!-- <div class="vrs"></div> -->
 					
-				</div>
+				<div id="associated" class="block-half block-left">		<!-- Lista Asociados 	-->
+					<h2> <spring:message code="label.associated"/> </h2>
+					<table id="tableAssociated"	class="tableUsers">
+					</table>
+				</div>		
+			
+				<div class="clearer"></div>
+			</div>
 		</section>
-		
-		<section title="Schedule Data" class="tupper" style="margin-top: 20px">
-			<div id="scheduleData" class="theBoard lightBorder"> 		
-				<div id="requested" class="blockLeft blockHalf">		
+
+		<!-----------------------------------------
+		[Schedule Data]
+		------------------------------------------>		
+		<section class="sr-tupper" style="margin-top: 20px">
+
+			<div id="scheduleData" class="sr-board border-light">
+
+				<div id="requested" class="block-half block-left">		
 					<h2> <spring:message code="label.requested"/> </h2>
 				
 					<div> 			<!-- Horario	-->
-						<table id="tableRequested" class="theSchedule">
+						<table id="tableRequested" class="sr-schedule">
 						</table>					
 					</div>	
 				</div>
 				
-				<div id="offered" class="blockRight blockHalf">
+				<div id="offered" class="block-half block-right">
 					<h2> <spring:message code="label.offered"/> </h2>	
 				
 					<div> 			<!-- Horario	-->
-						<table id="tableOffered" class="theSchedule">
+						<table id="tableOffered" class="sr-schedule">
 						</table>					
 					</div>
 				</div>	
 				
 				<div class="clearer"></div>
 			</div>	
+
 		</section>
 	</div>
 	
-	<!--  LABELS  -->
-	
-	<c:set var="labelRequest"><spring:message code="label.request"/></c:set>	
-	<input id="lblRequest" type="hidden" value="${labelRequest}"/>
-	<c:set var="labelAssociation"><spring:message code="label.association"/></c:set>
-	<input id="lblAssociation" type="hidden" value="${labelAssociation}"/>	
-	<c:set var="labelArrival"><spring:message code="label.arrival"/></c:set>	
-	<input id="lblArrival" type="hidden" value="${labelArrival}"/>
-	<c:set var="labelDeparture"><spring:message code="label.departure"/></c:set>	
-	<input id="lblDeparture" type="hidden" value="${labelDeparture}"/>
-	<c:set var="labelMonday"><spring:message code="label.monday"/></c:set>	
-	<input id="lblMonday" type="hidden" value="${labelMonday}"/>
-	<c:set var="labelTuesday"><spring:message code="label.tuesday"/></c:set>	
-	<input id="lblTuesday" type="hidden" value="${labelTuesday}"/>
-	<c:set var="labelWednesday"><spring:message code="label.wednesday"/></c:set>	
-	<input id="lblWednesday" type="hidden" value="${labelWednesday}"/>
-	<c:set var="labelThursday"><spring:message code="label.thursday"/></c:set>	
-	<input id="lblThursday" type="hidden" value="${labelThursday}"/>
-	<c:set var="labelFriday"><spring:message code="label.friday"/></c:set>	
-	<input id="lblFriday" type="hidden" value="${labelFriday}"/>
+	<!-----------------------------------------
+	[Labels]
+	------------------------------------------>		
+	<c:set var="lblRequest">		<spring:message code="label.request"	/></c:set>	
+	<c:set var="lblAssociation">	<spring:message code="label.association"/></c:set>
+	<c:set var="lblArrival"> 		<spring:message code="label.arrival" 	/></c:set>	
+	<c:set var="lblDeparture"> 		<spring:message code="label.departure" 	/></c:set>	
+	<c:set var="lblMonday"> 		<spring:message code="label.monday" 	/></c:set>	
+	<c:set var="lblTuesday"> 		<spring:message code="label.tuesday" 	/></c:set>	
+	<c:set var="lblWednesday"> 		<spring:message code="label.wednesday" 	/></c:set>	
+	<c:set var="lblThursday"> 		<spring:message code="label.thursday" 	/></c:set>	
+	<c:set var="lblFriday"> 		<spring:message code="label.friday"		/></c:set>	
 
-	<!--  SCRIPTS  -->
+	<input type="hidden" id="lbl-arrival" 	value="${lblRequest}" 		/>
+	<input type="hidden" id="lbl-departure"	value="${lblAssociation}" 	/>
+	<input type="hidden" id="lbl-arrival" 	value="${lblArrival}" 		/>
+	<input type="hidden" id="lbl-departure"	value="${lblDeparture}"	 	/>
+	<input type="hidden" id="lbl-monday" 	value="${lblMonday}" 		/>
+	<input type="hidden" id="lbl-tuesday" 	value="${lblTuesday}" 		/>
+	<input type="hidden" id="lbl-wednesday"	value="${lblWednesday}" 	/>
+	<input type="hidden" id="lbl-thursday" 	value="${lblThursday}" 		/>
+	<input type="hidden" id="lbl-friday" 	value="${lblFriday}"		/>
 
+	<!-----------------------------------------
+	[Scripts]
+	------------------------------------------>		
 	<script type="text/javascript" src="resources/scripts/Utils.js">	</script>
 	<script type="text/javascript" src="resources/scripts/People.js">	</script>
 
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-<tr>
-	<td> Steve	 		</td>
-	<td> Jobs			</td>
-	<td> <img src="http://www.igdigital.com/wp-content/uploads/2013/03/steve_jobs_apple1-1.jpeg"/> </td>
-</tr>
-<tr>
-	<td> Clint			</td>
-	<td> Eastwood		</td>
-	<td><img src="http://2.bp.blogspot.com/-Pleua1JUrJg/UajruKT0gaI/AAAAAAAABy4/TDbntFwudPM/s640/Clint-Eastwood-.jpg"/>	</td>		
-</tr>
-<tr>
-	<td> Pablo 			</td>
-	<td> Picasso		</td>
-	<td><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/192px-Pablo_picasso_1.jpg"/>				</td>						
-</tr>
--->

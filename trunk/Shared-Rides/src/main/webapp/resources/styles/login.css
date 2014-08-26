@@ -2,7 +2,7 @@
 [Login Stylesheet]
 
 Project:		Shared Rides
-Last change:	19/06/2014
+Last change:	24/08/2014
 Assigned to:	Santiago Alurralde (sa)
 -------------------------------------------------------------------*/
 
@@ -10,35 +10,39 @@ Assigned to:	Santiago Alurralde (sa)
 /*-----------------------------------------------------------------*/
 
 #i18n{
-	box-shadow:				0px 1px 1px #000000;
-	background-color: 		rgba(0, 0, 0, 0.7);	
-	float: 					right;
-	padding:				0px 2px;
-	text-align:				center;
+	box-shadow:			0 1px 1px #000000;
+	background-color: 	rgba(0, 0, 0, 0.7);	
+	float: 				right;
+	padding:			0 2px;
+	text-align:			center;
 }
 
-#theLogin
-{
+.sr-login {
 	background-color: 	rgba(0, 0, 0, 0.7);	
-	color:				#EEEEEE;
+	color:				#EEE;
 	margin:				0 auto;
 	width: 				30%;
 	padding:			2% 10%;
-	font-family: 		'Open Sans', sans-serif;
 }
 
-.theInputs{
-	border:					solid 1px Grey; 	
-	height:					25px;
-	margin-top:				20px;
-	width:					100%;
+.sr-inputs {
+	border:				solid 1px Grey; 	
+	height:				25px;
+	margin-top:			20px;
+	width:				100%;
 }	
 
-#btnLogin{
-	margin-top:				40px;	
+.sr-logo{
+	margin: 			2% auto;
+	text-align: 		center; 
+	width: 				14%; 	
+}
+
+.btn-login {
+	margin-top:			40px;	
 }	
 
-#btnRegister{
-	margin-top: 			40px;	
-	float:					right;
+.btn-register {
+	margin-top: 		40px;	
+	float:				right;
 }	

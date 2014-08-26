@@ -3,31 +3,29 @@
  * 
  * @param {number} index - number of day to be calculated.
  */
-function getDayLabel(index)
-{
+function getDayLabel(index) {
 	var label;
 	
-	switch (index)
-	{	
+	switch (index) {	
 		case 1:
 		case '1':
-			label = $("#lblMonday").val();
+			label = $("#lbl-monday").val();
 			break;
 		case 2:
 		case '2':
-			label = $("#lblTuesday").val();
+			label = $("#lbl-tuesday").val();
 			break;
 		case 3:
 		case '3':
-			label = $("#lblWednesday").val();
+			label = $("#lbl-wednesday").val();
 			break;
 		case 4:
 		case '4':
-			label = $("#lblThursday").val();
+			label = $("#lbl-thursday").val();
 			break;					
 		case 5:
 		case '5':
-			label = $("#lblFriday").val();		
+			label = $("#lbl-friday").val();		
 			break;
 	}	
 	return label;

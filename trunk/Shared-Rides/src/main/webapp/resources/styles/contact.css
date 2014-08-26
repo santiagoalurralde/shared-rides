@@ -1,40 +1,47 @@
+/*------------------------------------------------------------------
+[Contact Stylesheet]
 
-.spText{
+Project:      Shared Rides
+Last change:  24/08/2014
+Assigned to:  Santiago Alurralde (sa)
+-------------------------------------------------------------------*/
+
+.text-spaced {
   line-height:  2.5em;
   font-size:    80%;
 }
 
-.split{
+.split {
   display:    inline-block;
   margin-bottom:  2.5em;
   height:     1em
 }
 
-input{
+input {
 	height:					25px;
 }
 
-.theInputs{
+.theInputs {
 	border:					solid 1px Grey; 	
 	margin-top:				10%;
 	width:					90%;
 }	
 
-.blockRight{
+.block-right {
   padding-top:  1%;
   padding-bottom: 1%;
   padding-right:   5%;
   width: 	40%;
 }
 
-.blockLeft{
+.block-left {
   padding-top:  		1%;
   padding-bottom: 		1%;
   padding-left: 		9%;  
   width:      			40%;	
 }
 
-#thePic{
+#thePic {
   width:      150px;
   height:     150px;
   border-radius:  105px;
@@ -43,12 +50,12 @@ input{
   box-shadow:	1px 1px 1px Black;
 }
 
-.lightBorder{
+.border-light {
 	margin-top:   10px;
 }
 
-h3{
-	text-transform: uppercase;
-	font-size:		90%;
+h3 {
+	text-transform:  uppercase;
+	font-size:		   90%;
 }
  
