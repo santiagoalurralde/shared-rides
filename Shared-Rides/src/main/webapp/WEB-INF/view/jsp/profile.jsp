@@ -20,7 +20,7 @@
 				[Public Data]
 				------------------------------------------>	
 				<div class="public-data"> 		
-					<p class="text-bold"><spring:message code="label.basicInfo"/>					</p><br>
+					<p class="text-bold"><spring:message code="lbl.basicInfo"/>					</p><br>
 					<p><img class="helpIcon" src="resources/images/location.png"/>${address}		</p><br>
 					<p><img class="helpIcon" src="resources/images/house.png"	/>${neighborhood}	</p>
 				</div> 
@@ -29,7 +29,7 @@
 				[Private Data]
 				------------------------------------------>				 	
 				<div class="private-data"> 		
-					<p class="text-bold"><spring:message code="label.contactInfo"/>			</p><br>
+					<p class="text-bold"><spring:message code="lbl.contactInfo"/>			</p><br>
 					<p><img class="helpIcon" src="resources/images/phone.png"/>${telephone}	</p><br>
 					<p><img class="helpIcon" src="resources/images/email.png"/>${email}		</p>
 				</div>		
@@ -47,7 +47,7 @@
 					[Driver Profile]
 					------------------------------------------>															
 					<div class="driver-data block-half block-left">				 		
-						<h2><spring:message code="label.driver"/></h2>	 	
+						<h2><spring:message code="lbl.driver"/></h2>	 	
 
 						<div class="rating"> 
 							<a class="ifancybox" href="rate.do">
@@ -64,7 +64,7 @@
 						</div>	
 						
 						<div class="map-container">	
-							<p class="text-left text-bold"><spring:message code="label.track"/></p><br>
+							<p class="text-left text-bold"><spring:message code="lbl.track"/></p><br>
 							<div id="map-driver" class="map-static"></div>
 						</div>
 					</div>
@@ -75,7 +75,7 @@
 					[Pedestrian Profile]
 					------------------------------------------>							
 					<div class="pedestrian-data block-half block-right">				 		
-						<h2> <spring:message code="label.pedestrian"/> </h2>
+						<h2> <spring:message code="lbl.pedestrian"/> </h2>
 											
 						<div class="rating"> 		
 							<span class="rating-grade">
@@ -91,7 +91,7 @@
 						</div>	
 
 						<div class="map-container"> 	
-							<p class="text-left text-bold"><spring:message code="label.location"/></p><br>
+							<p class="text-left text-bold"><spring:message code="lbl.location"/></p><br>
 							<div id="map-pedestrian" class="map-static"></div>
 						</div>
 					</div>
@@ -108,13 +108,13 @@
 		<!-----------------------------------------
 		[Labels]
 		------------------------------------------>	
-		<c:set var="lblArrival"> 	<spring:message code="label.arrival" 	/></c:set>	
-		<c:set var="lblDeparture"> 	<spring:message code="label.departure" 	/></c:set>	
-		<c:set var="lblMonday"> 	<spring:message code="label.monday" 	/></c:set>	
-		<c:set var="lblTuesday"> 	<spring:message code="label.tuesday" 	/></c:set>	
-		<c:set var="lblWednesday"> 	<spring:message code="label.wednesday" 	/></c:set>	
-		<c:set var="lblThursday"> 	<spring:message code="label.thursday" 	/></c:set>	
-		<c:set var="lblFriday"> 	<spring:message code="label.friday"		/></c:set>	
+		<c:set var="lblArrival"> 	<spring:message code="lbl.arrival" 	/></c:set>	
+		<c:set var="lblDeparture"> 	<spring:message code="lbl.departure" 	/></c:set>	
+		<c:set var="lblMonday"> 	<spring:message code="lbl.monday" 	/></c:set>	
+		<c:set var="lblTuesday"> 	<spring:message code="lbl.tuesday" 	/></c:set>	
+		<c:set var="lblWednesday"> 	<spring:message code="lbl.wednesday" 	/></c:set>	
+		<c:set var="lblThursday"> 	<spring:message code="lbl.thursday" 	/></c:set>	
+		<c:set var="lblFriday"> 	<spring:message code="lbl.friday"		/></c:set>	
 		
 		<input type="hidden" id="lbl-arrival" 	value="${lblArrival}" 	/>
 		<input type="hidden" id="lbl-departure"	value="${lblDeparture}" />

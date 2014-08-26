@@ -2,7 +2,7 @@
 [Master Stylesheet]
 
 Project:		Shared Rides
-Last change:	19/08/2014
+Last change:	25/08/2014
 Assigned to:	Santiago Alurralde (sa)
 -------------------------------------------------------------------*/
 
@@ -337,7 +337,7 @@ h5 {
 
 .btn:hover {
 	background: 	-webkit-linear-gradient(top, #99BB66, #9ED474);
-	background: 	-moz-linear-gradient(top, #99BB66, #9ED474);
+	background: 	   -moz-linear-gradient(top, #99BB66, #9ED474);
 }
 
 .btn-logout {

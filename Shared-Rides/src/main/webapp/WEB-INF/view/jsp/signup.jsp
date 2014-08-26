@@ -9,9 +9,9 @@
 
 			<div class="nav-steps border-light"> 
         		<ul>
-        			<li class="step-signup1"><b>1. </b><spring:message code="label.suStep1"/></li>
-        			<li class="step-signup2"><b>2. </b><spring:message code="label.suStep2"/></li>
-        			<li class="step-signup3"><b>3. </b><spring:message code="label.suStep3"/></li>
+        			<li class="step-signup1"><b>1. </b><spring:message code="lbl.suStep1"/></li>
+        			<li class="step-signup2"><b>2. </b><spring:message code="lbl.suStep2"/></li>
+        			<li class="step-signup3"><b>3. </b><spring:message code="lbl.suStep3"/></li>
         		</ul>
         	</div>
         	
@@ -20,7 +20,7 @@
        		    <div class="step step-first">
          			<span>
            				<span class="block-left">
-			               	<spring:message code="label.organization"/>	          
+			               	<spring:message code="lbl.organization"/>	          
 			            </span> 
          				<select id="organization" class="block-right sr-inputs">
          					<c:forEach var="org" items="${organizations}">
@@ -33,7 +33,7 @@
          				
          			<span>
            				<span class="block-left">
-			               	<spring:message code="label.personalId"/>	          
+			               	<spring:message code="lbl.personalId"/>	          
 			            </span> 
            				
            				<input 	type="text" id="personal-id" class="block-right sr-inputs" 
@@ -44,7 +44,7 @@
          				
          			<span>
            				<span class="block-left">
-			               <spring:message code="label.firstName"/>	         
+			               <spring:message code="lbl.firstName"/>	         
 			        	</span> 
            				
            				<input 	type="text" id="name" class="block-right sr-inputs" 
@@ -55,7 +55,7 @@
          				
          			<span>
            				<span class="block-left">
-			               <spring:message code="label.lastName"/>	         
+			               <spring:message code="lbl.lastName"/>	         
 			            </span> 
            				
            				<input 	type="text" id="surname" class="block-right sr-inputs" 
@@ -66,7 +66,7 @@
          				
          			<span>
            				<span class="block-left">
-			               <spring:message code="label.email"/>	         
+			               <spring:message code="lbl.email"/>	         
 			            </span> 
            				
            				<input 	type="text" id="email" class="block-right sr-inputs" 
@@ -77,7 +77,7 @@
          				          				
        				<span>
 			            <span class="block-left">
-			               <spring:message code="label.password"/>	
+			               <spring:message code="lbl.password"/>	
             			</span> 
         				
         				<input 	type="password" id="password-first" class="block-right sr-inputs" 
@@ -88,7 +88,7 @@
          				
          			<span>
            				<span class="block-left">
-			               <spring:message code="label.passwordIdem"/>	
+			               <spring:message code="lbl.passwordIdem"/>	
 			            </span> 
            				
            				<input 	type="password" id="password-check" class="block-right sr-inputs" 
@@ -99,7 +99,7 @@
 
          			<span>
            				<span class="block-left">
-			               <spring:message code="label.telephone"/>
+			               <spring:message code="lbl.telephone"/>
 						</span> 
            				
            				<input 	type="text" id="cellphone" class="block-right sr-inputs" 
@@ -115,18 +115,18 @@
          				enctype="multipart/form-data"> 
          				
 	          			<span class="block-left">
-			               <spring:message code="label.picture"/>     
+			               <spring:message code="lbl.picture"/>     
 			        	</span>     
 						<input 	type="file" name="picture"  
 								class="block-right" accept="image/x-png, image/jpeg">
-	         			<input 	type="submit" class="btn" value='<spring:message code="label.send"/>'>
+	         			<input 	type="submit" class="btn" value='<spring:message code="lbl.send"/>'>
          			</form>
           			
           			<div class="split"></div>         			
           			
        				<span>
 	           			<span class="block-left">
-				         	<spring:message code="label.address"/>          				              	 
+				         	<spring:message code="lbl.address"/>          				              	 
 				        </span> 
 	           		
 	           			<input 	type="number" id="number" class="block-right sr-inputs" 
@@ -139,7 +139,7 @@
           				
           			<span>
 	           			<span class="block-left">
-				        	<spring:message code="label.neighborhood"/>          				              	 
+				        	<spring:message code="lbl.neighborhood"/>          				              	 
 				        </span> 
 	           				
 	           			<select id="neighborhood" class="block-right sr-inputs" 
@@ -152,14 +152,14 @@
           				
           			<span>
            				<span class="block-left">
-			               	<spring:message code="label.shift"/>          				              	 
+			               	<spring:message code="lbl.shift"/>          				              	 
 			            </span> 
            				
            				<select id="shift" class="block-right sr-inputs" 
            						onChange="checkIt(this);">
            					<option value="0" selected></option>	            					           				
-           					<option value="morning">	<spring:message code="label.morning"/> 		</option>	            				
-           					<option value="afternoon">	<spring:message code="label.afternoon"/>	</option>
+           					<option value="morning">	<spring:message code="lbl.morning"/> 		</option>	            				
+           					<option value="afternoon">	<spring:message code="lbl.afternoon"/>	</option>
            				</select>            				
            			</span> 
           				
@@ -167,16 +167,16 @@
           				
          			<span>
  				        <span class="block-left">
-		            		<spring:message code="label.userType"/>          			              	 
+		            		<spring:message code="lbl.userType"/>          			              	 
 		           	 	</span> 
           				
            				<select id="userType" class="block-right sr-inputs"
            						onChange="checkIt(this); userTypeChanged(this);">
 
            				    <option value="0" selected></option>
-           					<option value="pedestrian">			<spring:message code="label.pedestrian"/>	</option>	            			
-           					<option value="driver">				<spring:message code="label.driver"/>		</option>
-           					<option value="driver-pedestrian">	<spring:message code="label.mixed"/>		</option>	            					
+           					<option value="pedestrian">			<spring:message code="lbl.pedestrian"/>	</option>	            			
+           					<option value="driver">				<spring:message code="lbl.driver"/>		</option>
+           					<option value="driver-pedestrian">	<spring:message code="lbl.mixed"/>		</option>	            					
            				</select>               				
            			</span>
           				
@@ -185,13 +185,13 @@
           			
        					<hr class="hrs">
        					
-       					<h4><spring:message code="label.vehicleInfo"/></h4>
+       					<h4><spring:message code="lbl.vehicleInfo"/></h4>
        					
        					<div class="split"></div>
          					
            				<span>
             				<span class="block-left">
-				               <spring:message code="label.brand"/>          					               
+				               <spring:message code="lbl.brand"/>          					               
 				            </span> 
             				
             				<select id="brand" class="block-right sr-inputs" onChange="checkIt(this);">
@@ -203,7 +203,7 @@
 	            			
            				<span>
             				<span class="block-left">
-				               <spring:message code="label.modelVehicle"/>          					               
+				               <spring:message code="lbl.modelVehicle"/>          					               
 				            </span> 
             				
             				<input 	type="text" id="model" class="block-right sr-inputs" 
@@ -214,7 +214,7 @@
 	            			
            				<span>
             				<span class="block-left">
-				            	<spring:message code="label.licensePlate"/>         					             
+				            	<spring:message code="lbl.licensePlate"/>         					             
 				            </span> 
             				
             				<input 	type="number" id="plate-numbers" class="block-right sr-inputs" 
@@ -228,7 +228,7 @@
 	      						
            				<span>
             				<span class="block-left">
-				               <spring:message code="label.numberSeats"/>          					           
+				               <spring:message code="lbl.numberSeats"/>          					           
 				            </span> 
 		            				
    	        				<select id="number-seats" class="block-right sr-inputs" onChange="checkIt(this);">
@@ -255,19 +255,19 @@
 					<table class="table-signup sr-schedule">
 						<tr>
 							<th> <!-- Empty --> </th>	
-							<th> <spring:message code="label.monday"/> 		</th>
-							<th> <spring:message code="label.tuesday"/> 	</th>
-							<th> <spring:message code="label.wednesday"/>	</th>
-							<th> <spring:message code="label.thursday"/>	</th>
-							<th> <spring:message code="label.friday"/>		</th>				
+							<th> <spring:message code="lbl.monday"/> 		</th>
+							<th> <spring:message code="lbl.tuesday"/> 	</th>
+							<th> <spring:message code="lbl.wednesday"/>	</th>
+							<th> <spring:message code="lbl.thursday"/>	</th>
+							<th> <spring:message code="lbl.friday"/>		</th>				
 						</tr>
 						<tr class="usertype-row">
 						</tr>
 						<tr id="in">
-							<td> <spring:message code="label.arrival"/> </td>
+							<td> <spring:message code="lbl.arrival"/> </td>
 						</tr>
 						<tr id="out">
-							<td> <spring:message code="label.departure"/> </td>									
+							<td> <spring:message code="lbl.departure"/> </td>									
 						</tr>
 					</table>	
 					
@@ -275,7 +275,7 @@
 					
 					<span class="map-definition">
 	       				<input	type="button" class="btn btn-map" 
-	       						value='<spring:message code="label.button-ready"/>'/>      
+	       						value='<spring:message code="lbl.button-ready"/>'/>      
 	       						 						
 	       				<input 	type="hidden" id="hdn-inout"		/>  
 	         			<input 	type="hidden" id="hdn-day"			/>
@@ -315,15 +315,15 @@
 				------------------------------------------>   
         		<div class="buttons-steps">
         			<input 	type="button" class="btn btn-back"  
-        					value='<spring:message code="label.button-previous"/>'	
+        					value='<spring:message code="lbl.button-previous"/>'	
         					onClick="stepBack();"/>	
 
            	   		<input 	type="button" class="btn btn-next"  	
-							value='<spring:message code="label.button-next"/>'		
+							value='<spring:message code="lbl.button-next"/>'		
 							onClick="stepNext();"/>	
 
         			<input 	type="button" class="btn btn-OK"
-        					value='<spring:message code="label.button-confirm"/>'/>  
+        					value='<spring:message code="lbl.button-confirm"/>'/>  
         		</div> 	  
        		</div>	  
 			<div class="clearer"></div>
@@ -334,7 +334,7 @@
 	<!-----------------------------------------
 	[Labels]
 	------------------------------------------>	
-	<c:set var="lblUnsuscribe"><spring:message code="label.unsuscribe" /></c:set>	
+	<c:set var="lblUnsuscribe"><spring:message code="lbl.unsuscribe" /></c:set>	
 	<input type="hidden" id="lbl-unsuscribe" value="${lblUnsuscribe}" />
 </body>
 
@@ -343,11 +343,11 @@
 ------------------------------------------>	
 <script src="resources/scripts/Register.js" 	type="text/javascript"></script>
 <script src="resources/maps/OpenLayers.js"		type="text/javascript"></script>    
-<script src="resources/maps/OpenStreetMap.js"  	type="text/javascript"></script>
-<script src="resources/maps/proj4js.js"			type="text/javascript"></script>
-<script src="resources/maps/osmap.js" 			type="text/javascript"></script>
-<script src="resources/maps/track.js" 			type="text/javascript"></script>
-<script src="resources/maps/osmapSimple.js" 	type="text/javascript"></script>
+<script src="resources/maps/OpenStreetMap.js" type="text/javascript"></script>
+<script src="resources/maps/proj4js.js"			  type="text/javascript"></script>
+<script src="resources/maps/osmap.js" 			  type="text/javascript"></script>
+<script src="resources/maps/track.js" 			  type="text/javascript"></script>
+<script src="resources/maps/osmapSimple.js"   type="text/javascript"></script>
 
 <script>
 	initMapCoords(lonlat, zoom, map, null);

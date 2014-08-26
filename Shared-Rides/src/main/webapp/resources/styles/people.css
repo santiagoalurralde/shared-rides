@@ -2,7 +2,7 @@
 [People Stylesheet]
 
 Project:		Shared Rides
-Last change:	19/08/2014
+Last change:	25/08/2014
 Assigned to:	Santiago Alurralde (sa)
 -------------------------------------------------------------------*/
 
@@ -52,17 +52,9 @@ Assigned to:	Santiago Alurralde (sa)
 	width:			120px;
 }
 
-.btn-schedule {
-	margin-left: 	4px;
-}
-
 .btn-pending, .btn-associated{
 	float: 			right; 
 	vertical-align: top;
-}
-
-.img-schedule {
-	width:			15px;
 }
 
 
@@ -94,8 +86,26 @@ Assigned to:	Santiago Alurralde (sa)
 	height:			50px;
 }
 
+.sr-table-users span{
+	float: 			left; 
+	vertical-align: top;
+}
+
+.sr-table-users a{
+	float: 			left; 
+	margin-right: 	25px;
+}
+
 .sr-schedule {
 	margin-top:		3%;
+}
+
+.sr-schedule img {
+	width:			15px;
+}
+
+.sr-schedule button {
+	margin-left: 	4px;
 }
 
 /*------------------------------------------------------------------

@@ -8,18 +8,18 @@
 		[Who we are]
 		------------------------------------------>
         <section class="sr-tupper sr-mini">
-        	<h3><spring:message code="label.whoweare"/></h3>
+        	<h3><spring:message code="lbl.whoweare"/></h3>
         	
 			<div class="block-half block-left">
 				<img class="about-pic" src="resources/images/santi.jpg"/> <br>
 				<h4 class="about-name"> SANTIAGO ALURRALDE </h4>		
-				<span><spring:message code="label.frontenddev"/> / <spring:message code="label.uidesigner"/></span>		
+				<span><spring:message code="lbl.frontenddev"/> / <spring:message code="lbl.uidesigner"/></span>		
 			</div>
 			
 			<div class="block-half block-right">
 				<img class="about-pic" src="resources/images/leandro.jpg"/> <br>
 				<h4 class="about-name"> LEANDRO BAGUR </h4>		
-				<span><spring:message code="label.backenddev"/> / <spring:message code="label.dbadmin"/></span>
+				<span><spring:message code="lbl.backenddev"/> / <spring:message code="lbl.dbadmin"/></span>
 			</div> 
 			
 			<div class="clearer"></div>
