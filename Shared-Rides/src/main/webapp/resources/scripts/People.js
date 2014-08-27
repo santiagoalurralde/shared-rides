@@ -176,7 +176,7 @@ function printSchedule(days, $table, typeAssoc) {
 		if(days[i]!=null) {
 			var buttons;
 			
-			$table.find("tr:first").append("<th id='"+ i +"'>"+ getDayLabel(i) +"</th>"); 		//Create label for current day
+			$rowDays.append("<th id='"+ i +"'>"+ getDayLabel(i) +"</th>"); 		//Create label for current day
 			
 			if(!$rowIn.length)		//If IN Row doesn't exist, create it
 				$table.append(rIn);
