@@ -54,7 +54,7 @@ Assigned to:	Santiago Alurralde (sa)
 	text-align: 		right;
 }
 
-.pedestrian-data, .driver-data, .private-data{
+.pedestrian-data, .driver-data, .private-data {
 	display:			none;
 }
 

@@ -20,7 +20,7 @@
 				[Public Data]
 				------------------------------------------>	
 				<div class="public-data"> 		
-					<p class="text-bold"><spring:message code="lbl.basicInfo"/>					</p><br>
+					<p class="text-bold"><spring:message code="lbl.basicInfo"/>						</p><br>
 					<p><img class="helpIcon" src="resources/images/location.png"/>${address}		</p><br>
 					<p><img class="helpIcon" src="resources/images/house.png"	/>${neighborhood}	</p>
 				</div> 

@@ -31,6 +31,7 @@ body {
 }
 
 .sr-inputs {
+	font-family: 		'Raleway', sans-serif;
 	border:				solid 1px Grey; 	
 	height:				25px;
 	margin-top:			20px;

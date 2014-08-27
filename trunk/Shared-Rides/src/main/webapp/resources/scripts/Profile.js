@@ -10,10 +10,10 @@ var	_schPed 		= [],
 
 if ($("#val-driver").val() == "false") // It's not a driver
 	fixView($pedestrianData);
-
-if ($("#val-pedestrian").val() == "false") // It's not a pedestrian
+else if ($("#val-pedestrian").val() == "false") // It's not a pedestrian
 	fixView($driverData);
-
+else
+	$.merge($pedestrianData, $driverData).show();
 
 /*******************************************************************************
  * EVENTS
@@ -100,6 +100,7 @@ function disable($target, flag) {
 function fixView($target) {
 	$target.siblings().hide();
 	$target.css({"float":"none", "width":"100%", "text-align":"left"}).show();
+	$(".sr-schedule").css("font-size", "85%");
 	$('.star').css({"float":"left", "margin-right":"1%", "margin-left":"0"});
 	$('.rating').css("margin", "2% 0 0 0");
 	$('.profile-data').css({"padding-right":"70px", "padding-left":"70px"});
