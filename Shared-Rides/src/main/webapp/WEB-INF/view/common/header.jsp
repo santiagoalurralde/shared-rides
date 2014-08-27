@@ -24,6 +24,18 @@
 ------------------------------------------>
 <div id="notifications-box" class="notifications">
 	<h5> <spring:message code="lbl.notifications"/> </h5>
-	
-	<ul class="notifications-list"></ul>
+
+	<ul class="notifications-list">
+		<script id="temp-notifications" type="text/x-handlebars-template">
+			<li class="notification-item">
+				<a href='people.do'>
+					{{#isRequest type}}
+						Has recibido una peticion de <b> {{name}} {{date}} </b>
+					{{else}}
+						<b>{{name}}</b> ha respondido a tu peticion {{date}}
+					{{/isRequest}}
+				</a>
+			</li>
+		</script>
+	</ul>	
 </div>

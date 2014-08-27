@@ -72,8 +72,8 @@
 							<tr>
 								<td>{{name}} {{surname}}</td>
 								<td>
-							        <a href='/Shared-Rides/profile.do?user={{id}}'>
-							            <img src='printImgFile.do?pic={{picture}}'/>
+							        <a href="/Shared-Rides/profile.do?user={{id}}">
+							            <img src="printImgFile.do?pic={{picture}}"/>
 							        </a>
 								</td>
 								<td> 

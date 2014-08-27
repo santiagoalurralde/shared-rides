@@ -21,7 +21,7 @@ load();
 function load() {
 	createTables();
 
-	var $pending		 = $(".pending"),
+	var	$pending		 = $(".pending"),
 		$associated      = $(".associated"),
 		$tablePending    = $(".table-pending"),
 		$tableAssociated = $(".table-associated"),
@@ -67,7 +67,7 @@ function load() {
 			
 			if(jsonNew[0] == "" && $pending.find(".alerts").length == 0) {
 				$("<div></div>", {
-					"class": "alerts alert-pending",
+					class: "alerts alert-pending",
 					html: "<img src='resources/images/message.png'> <p><br>"+ $('#lbl-norequests').val()
 				}).appendTo($pending);
 
@@ -75,7 +75,7 @@ function load() {
 			}
 			if(jsonNew[1] == "" && $associated.find(".alerts").length == 0) {
 				$("<div></div>", {
-					"class": "alerts alert-associated",
+					class: "alerts alert-associated",
 					html: "<img src='resources/images/message.png'> <p><br>"+ $('#lbl-noassocs').val(),
 				}).appendTo($associated);						
 
@@ -111,14 +111,12 @@ function viewSchedule(json, typeAssoc) {
 	});
 	printSchedule(days, $(".table-offered"), typeAssoc);
 	
-	if(jsonNew.requested == "") {
-		$requested.hide();
-		$requested.siblings().css({"float":"none", "width":"100%"});
-	}
-	if(jsonNew.offered == "") {
-		$offered.hide();
-		$offered.siblings().css({"float":"none", "width":"100%"});
-	}
+	if(jsonNew.requested == "")
+		$requested.hide()
+				  .siblings().css({"float":"none", "width":"100%"});
+	if(jsonNew.offered == "")
+		$offered.hide()
+		        .siblings().css({"float":"none", "width":"100%"});
 }
 
 /**
@@ -132,7 +130,7 @@ function fetchDays(days, data) {
 		days[data.day] = new Day();
 
 	//in
-	if(data.inout == 1)	{
+	if(data.inout == 0)	{
 		days[data.day].inHour 		= data.hour;
 		days[data.day].assocIdIn	= data.assocId;
 	}
@@ -186,60 +184,30 @@ function printSchedule(days, $table, typeAssoc) {
 			
 			var	contentIn,
 				contentOut,
-				$inputIn,
-				$inputOut,
 				$rowIn	= $table.find("#in"),
 				$rowOut	= $table.find("#out");
 
 			if(days[i].inHour != "" && days[i].outHour == "") {	     
-				//Just IN
-				$inputIn = 
-					$("<input type='hidden'>", {
-						"class": "assoc-id",
-						value: days[i].assocIdIn 
-					});
-
+				//Just IN			
 				contentIn = days[i].inHour + buttons;
 				
-				$rowIn.append("<td>"+ contentIn +"</td>");
-				$inputIn.appendTo($rowIn);
+				$rowIn.append("<td data-assoc='"+ days[i].assocIdIn +"'>"+ contentIn +"</td>");
 				$rowOut.append("<td></td>"); 			
 			}
 			else if(days[i].inHour != "" && days[i].outHour != "") {
 				//IN & OUT
-
-				$inputIn = 
-					$("<input type='hidden'>", {
-						"class": "assoc-id",
-						value: days[i].assocIdIn 
-					});
-				$inputOut = 
-					$("<input type='hidden'>", {
-						"class": "assoc-id",
-						value: days[i].assocIdOut 
-					});
-
 				contentIn 	= days[i].inHour + buttons;
 				contentOut 	= days[i].outHour + buttons;
 								
-				$rowIn.append("<td>"+ contentIn +"</td>");		
-				$inputIn.appendTo($rowIn);		
-				$rowOut.append("<td>"+ contentOut +"</td>");
-				$inputOut.appendTo($rowOut);
+				$rowIn.append("<td data-assoc='"+ days[i].assocIdIn +"'>"+ contentIn +"</td>");
+				$rowOut.append("<td data-assoc='"+ days[i].assocIdOut +"'>"+ contentOut +"</td>");
 			}
 			else {	
 				//Just OUT
-				$inputOut = 
-					$("<input type='hidden'>", {
-						"class": "assoc-id",
-						value: days[i].assocIdOut 
-					});
-
 				contentOut = days[i].outHour + buttons;
 				
 				$rowIn.append("<td></td>");
-				$rowOut.append("<td>"+ contentOut +"</td>");
-				$inputOut.appendTo($rowOut);				
+				$rowOut.append("<td data-assoc='"+ days[i].assocIdOut +"'>"+ contentOut +"</td>");
 			}
 		}
 	}	
@@ -281,9 +249,9 @@ function listenerSchedule(target) {
  * @param {string} action - Accept or Cancel
  */
 function actionAssociation(target, action) {			
-	var $assocId = $(target).siblings(".assoc-id").val();
+	var assocId = $(target).parent().data("assoc");
 		
-	$.post("responseAssoc.do", {"assocId": $assocId, "response": action}, 
+	$.post("responseAssoc.do", {"assocId": assocId, "response": action}, 
 		function() {
 			alert($('#lbl-action').val());
 			load();

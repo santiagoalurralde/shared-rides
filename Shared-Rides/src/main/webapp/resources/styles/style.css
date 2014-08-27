@@ -272,6 +272,10 @@ body {
 	font-size:			80%;
 }
 
+.notification-item a{
+	color:				black;
+}
+
 .notification-item:hover {
 	cursor:				pointer;
 }
@@ -417,7 +421,7 @@ h5 {
 /*	TABLA MOSTRAR LISTA USUARIOS	*/
 
 .sr-table-users {
-	font-family:		Arial, Helvetica, sans-serif;
+	font-family: 		'Raleway-Thin', sans-serif;
 	border:				#CCC 1px solid;
 	border-spacing: 	0;
 	

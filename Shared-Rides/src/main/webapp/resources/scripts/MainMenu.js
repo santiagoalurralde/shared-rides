@@ -69,9 +69,9 @@ function defaultSearch() {
                 $tableFound.hide();                              
             }
             else {
-                $.each(peopleFound, function(i, data) {
-                    data.distance = Math.ceil(data.distance);                    
-                    var resultFound = templateFound(data);
+                $.each(peopleFound, function(i, person) {
+                	person.distance = Math.ceil(person.distance);                    
+                    var resultFound = templateFound(person);
                     $(".alerts").hide();  
                     $tableFound.append(resultFound);
                     $tableFound.show();      
