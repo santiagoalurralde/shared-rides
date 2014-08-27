@@ -3,7 +3,6 @@
 <script src="resources/maps/proj4js.js"			type="text/javascript"></script>
 <script src="resources/maps/osmap.js" 			type="text/javascript"></script>
 <script src="resources/maps/track.js" 			type="text/javascript"></script>
-<script src="resources/maps/osmapSimple.js" 	type="text/javascript"></script>
 
 <div class="map-driver">
 	<div id="map"></div>
