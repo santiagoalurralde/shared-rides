@@ -1,5 +1,7 @@
 package com.shared.rides.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Stops")
-public class Stop {
+public class Stop implements Serializable{
 
 	private long stopId;
 	private int day;
