@@ -3,6 +3,7 @@ package com.shared.rides.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -276,13 +277,11 @@ public class ProfileService {
 	 * dos veces una misma asociacion
 	 */
 	private boolean allowRequest(long userId, int day, int inout){
-		boolean allowFlag = true;
-		User user = userDAO.load(userId);
-		
-		User userAssoc = userDAO.load(this.userLogInId);
+		User user = userDAO.load(this.userLogInId);
+		User userAssoc = userDAO.load(userId);
 		
 		if(userId == this.userLogInId){
-			allowFlag = false;
+			return false;
 		}
 		else{
 			for(Association a : user.getAssociations()){
@@ -290,7 +289,7 @@ public class ProfileService {
 					a.getInout() == inout && 
 					!(a.getState().equals(State.CANCELLED)) &&
 					a.getApplicantID().getUserId() == this.userLogInId){
-						allowFlag = false; 
+						return false; 
 				}
 			}
 			for(Association a : userAssoc.getAssociations()){
@@ -298,11 +297,15 @@ public class ProfileService {
 					a.getInout() == inout && 
 					!(a.getState().equals(State.CANCELLED)) &&
 					a.getApplicantID().getUserId() == userId){
-						allowFlag = false;			
+						return false;			
 				}
 			}	
+			
+			if (validateData(day, userLogInId, userId) == false){
+				return false; 
+			}
 		}
-		return allowFlag;
+		return true;
 	}
 	
 	
@@ -363,6 +366,63 @@ public class ProfileService {
 		return false;
 	}
 	
+	private boolean validateData(int day, long userLogInId, long userId){
+		User userLogIn = userDAO.load(this.userLogInId);
+		User user = userDAO.load(userId);
+		
+		if (userLogIn.getPedestrian() != null){
+			if (user.getDriver() != null){
+				Pedestrian pedApplicant = userLogIn.getPedestrian();
+				Driver driverSupplier = user.getDriver();
+				/*
+			 	* Si esto pasa, significa que para el dia en el que se solicito la invitacion, uno es un
+			 	* pedestrian y otro es un driver, lo cual esta bien 
+			 	*/
+				if ( hasSchedule(pedApplicant, day, 0) && hasSchedule(driverSupplier, day, 1) ){
+					return true;
+				}
+			}
+		}
+		if (userLogIn.getDriver() != null){
+			if (user.getPedestrian() != null){
+				Driver driverApplicant = userLogIn.getDriver();
+				Pedestrian pedSupplier = user.getPedestrian();
+				/*
+			 	* Si esto pasa, significa que para el dia en el que se solicito la invitacion, uno es un
+			 	* pedestrian y otro es un driver, lo cual esta bien 
+			 	*/
+				if ( hasSchedule(driverApplicant, day, 1) && hasSchedule(pedSupplier, day, 0) ){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	/*
+	 * Funcion que le paso un objecto (que puede ser un driver o un pedestrian), el dia por el cual quiero buscar
+	 * y el profile que me sirve para luego dentro de la funcion saber de que tipo es el parametro objeto
+	 * Si retorna -1 quiere decir que ese usuario no tiene un schedule para ese dia
+	 */
+	private boolean hasSchedule(Object o, int day, int profile){
+		List<Schedule> schList;
+		if (profile == 0){
+			Pedestrian p = (Pedestrian) o;
+			schList = p.getSchedule();
+		}
+		else{
+			Driver d = (Driver) o;
+			schList = d.getSchedule();
+		}
+		
+		for (int i = 0; i < schList.size(); i++){
+			if (schList.get(i).getDay() == day){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public String getNotifications(long userId){
 		User u = userDAO.load(userId);
 		boolean newNotification = false;
@@ -398,7 +458,17 @@ public class ProfileService {
 					String fullName = uAssoc.getName() + " " + uAssoc.getSurname();
 					uJson.addProperty("type", "request");
 					uJson.addProperty("name", fullName);
-					uJson.addProperty("date", assocList.get(i).getDate().toString());
+					
+					//Guardo la fecha sin horario y con otro formato
+					Calendar calendar = Calendar.getInstance();
+					calendar.setTime(assocList.get(i).getDate());
+					int year = calendar.get(Calendar.YEAR);
+					int month = calendar.get(Calendar.MONTH);
+					int day = calendar.get(Calendar.DAY_OF_WEEK) + 1;
+					
+					String date = ""+ day + "/" + month + "/" + year;
+					
+					uJson.addProperty("date", date);
 					notifications.add(uJson);
 				}
 				else{
@@ -408,27 +478,51 @@ public class ProfileService {
 			}
 		}
 		
-//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//		
-		//Ordeno la lista de notificaciones
-//		if (notifications.size() != 0){
-//			JsonArray aux = notifications;  
-//			
-//			for(int i = 0; i < aux.size(); i++){
-//				JsonObject uJson = aux.get(i).getAsJsonObject();
-//				
-//				String dateInString = uJson.get("date").getAsString();
-//				String formatDate = null;
-//				try{
-//					Date date = formatter.parse(dateInString);
-//					formatDate = formatter.format(date);
-//				}
-//				catch(ParseException e){
-//					e.printStackTrace();
-//				}
-//			}	
-//		}
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		
+		//Ordeno la lista de notificaciones
+		if (notifications.size() != 0){  
+			int[] auxList = new int[notifications.size()];
+			int i, aux;
+			
+			//Utilizo una lista auxiliar donde se van a guardar los indices de las notificaciones ordenadas
+			for (i = 0; i < notifications.size(); i++){
+				auxList[i] = i;
+			}
+			
+			for(i = 0; i < notifications.size()-1; i++){
+				for(int j = 0; j < notifications.size()-i-1; j++){
+					JsonObject uJson1 = notifications.get(j).getAsJsonObject();
+					JsonObject uJson2 = notifications.get(j+1).getAsJsonObject();
+					
+					String dateInString1 = uJson1.get("date").getAsString();
+					String dateInString2 = uJson2.get("date").getAsString();
+					
+					try{
+						Date date1 = formatter.parse(dateInString1);	
+						Date date2 = formatter.parse(dateInString2);
+						
+						if (date2.before(date1)){
+							//Si la fecha date2 es anterior que la fecha date1, entonces cambio los indices
+							aux = auxList[j+i];
+							auxList[j+1] = auxList[j];
+							auxList[j] = aux;
+						}
+					}
+					catch(ParseException e){
+						e.printStackTrace();
+					}
+					
+					JsonArray auxNotifications = new JsonArray();
+					//Reordeno el JsonArray de acuerdo a los indices ordenado en la auxList
+					for(int k = 0; k < auxList.length; k++){
+						auxNotifications.add(notifications.get(auxList[k]));
+					}
+					notifications = auxNotifications;
+				}
+			}	
+		}
+			
 		json.addProperty("newNotification", newNotification);
 		json.add("notifications", notifications);
 		
