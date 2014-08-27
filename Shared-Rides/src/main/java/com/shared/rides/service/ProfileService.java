@@ -434,15 +434,17 @@ public class ProfileService {
 		
 		for(Association assoc : myRequestList){
 			if(assoc.getState().equals(State.ACCEPTED) || assoc.getState().equals(State.CANCELLED)){
-				long uAssocId = assocDAO.getSupplierId(assoc);
-				User uAssoc = userDAO.load(uAssocId);
-				String fullName = uAssoc.getName() + " " + uAssoc.getSurname();
-				JsonObject uJson = new JsonObject();
-				uJson.addProperty("type", "response");
-				uJson.addProperty("name", fullName);
-				uJson.addProperty("date", assoc.getDate().toString());
-				notifications.add(uJson);
-				if(assoc.getDate().after(u.getLastLoginDate())) newNotification = true; 
+				if(assoc.getDate().after(u.getLastLoginDate())) {
+					newNotification = true;
+					long uAssocId = assocDAO.getSupplierId(assoc);
+					User uAssoc = userDAO.load(uAssocId);
+					String fullName = uAssoc.getName() + " " + uAssoc.getSurname();
+					JsonObject uJson = new JsonObject();
+					uJson.addProperty("type", "response");
+					uJson.addProperty("name", fullName);
+					uJson.addProperty("date", assoc.getDate().toString());
+					notifications.add(uJson);
+				}
 			}
 		}
 			
@@ -464,7 +466,7 @@ public class ProfileService {
 					calendar.setTime(assocList.get(i).getDate());
 					int year = calendar.get(Calendar.YEAR);
 					int month = calendar.get(Calendar.MONTH);
-					int day = calendar.get(Calendar.DAY_OF_WEEK) + 1;
+					int day = calendar.get(Calendar.DAY_OF_MONTH);
 					
 					String date = ""+ day + "/" + month + "/" + year;
 					
@@ -502,9 +504,9 @@ public class ProfileService {
 						Date date1 = formatter.parse(dateInString1);	
 						Date date2 = formatter.parse(dateInString2);
 						
-						if (date2.before(date1)){
+						if (date2.after(date1)){
 							//Si la fecha date2 es anterior que la fecha date1, entonces cambio los indices
-							aux = auxList[j+i];
+							aux = auxList[j+1];
 							auxList[j+1] = auxList[j];
 							auxList[j] = aux;
 						}
