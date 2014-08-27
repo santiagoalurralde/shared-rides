@@ -54,6 +54,16 @@ public class MainController {
 		return new ModelAndView("about");
 	}
 	
+	@RequestMapping(value="mapdriver.do")
+	public ModelAndView showMapDriver(HttpServletRequest request){
+		return new ModelAndView("mapdriver");
+	}
+	
+	@RequestMapping(value="mappedestrian.do")
+	public ModelAndView showMapPedestrian(HttpServletRequest request){
+		return new ModelAndView("mappedestrian");
+	}
+	
 	//Metodo que se llama para ver si el usuario tiene nuevas asociaciones
 //	@RequestMapping(value = "/hasAssociation.do", method = RequestMethod.POST)
 //	public @ResponseBody String hasAssoc(HttpServletRequest request){
