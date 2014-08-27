@@ -162,8 +162,6 @@ function printSchedule(days, $table, typeAssoc) {
 		bAcceptPetit	= 	"<button title='Accept Petition' onclick='actionAssociation(this, true)'>" +
 								"<img src='resources/images/accept.png'>" +
 							"</button>",
-		$rowIn			=	$table.find("#in"),
-		$rowOut			=	$table.find("#out"),
 		$rowDays		= 	$table.find("tr:first"),
 		$scheduleData 	= 	$(".schedule-data");
 
@@ -178,10 +176,10 @@ function printSchedule(days, $table, typeAssoc) {
 			
 			$rowDays.append("<th id='"+ i +"'>"+ getDayLabel(i) +"</th>"); 		//Create label for current day
 			
-			if(!$rowIn.length)		//If IN Row doesn't exist, create it
+			if(!$table.find("#in").length)		//If IN Row doesn't exist, create it
 				$table.append(rIn);
-			
-			if(!$rowOut.length)		//If OUT Row doesn't exist, create it
+
+			if(!$table.find("#out").length)		//If OUT Row doesn't exist, create it
 				$table.append(rOut);
 
 			buttons = (typeAssoc == 0) ? (bAcceptPetit + bCancelPetit): bCancelAssoc;
@@ -189,7 +187,9 @@ function printSchedule(days, $table, typeAssoc) {
 			var	contentIn,
 				contentOut,
 				$inputIn,
-				$inputOut;
+				$inputOut,
+				$rowIn	= $table.find("#in"),
+				$rowOut	= $table.find("#out");
 
 			if(days[i].inHour != "" && days[i].outHour == "") {	     
 				//Just IN
@@ -239,7 +239,7 @@ function printSchedule(days, $table, typeAssoc) {
 				
 				$rowIn.append("<td></td>");
 				$rowOut.append("<td>"+ contentOut +"</td>");
-				$inputIn.appendTo($rowOut);				
+				$inputOut.appendTo($rowOut);				
 			}
 		}
 	}	

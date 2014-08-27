@@ -117,8 +117,6 @@ function fillTable(schedule, isDriver) {
 		image, 
 		hdnsMapIn, 
 		hdnsMapOut,	
-		hdnIn    = '<input class="hdn-inout" type="hidden" value="0"/>',
-		hdnOut   = '<input class="hdn-inout" type="hidden" value="1"/>',
 		$valMine = $("#val-mine").val();
 	
 	if (isDriver) {
@@ -131,18 +129,17 @@ function fillTable(schedule, isDriver) {
 	}
 
 	// Create Rows
-	$table.append("<tr id='rDay'></tr><tr id='rIn'></tr><tr id='rOut'></tr>");
-	var	$rowDay  = $table.find("#rDay"),
-		$rowOut  = $table.find("#rOut"),
-		$rowIn   = $table.find("#rIn");
+	$table.append("<tr id='day'></tr><tr id='in'></tr><tr id='out'></tr>");
+	var	$rowDay  = $table.find("#day"),
+		$rowOut  = $table.find("#out"),
+		$rowIn   = $table.find("#in");
 
 	$rowDay.append("<th></th>");
 	$rowIn.append("<td>"+ $("#lbl-arrival").val() +"</td>");
 	$rowOut.append("<td>"+ $("#lbl-departure").val() +"</td>");
 
 	for (var i=0; i<schedule.length; i++) {
-		var	hdnDay 		= '<input class="hdn-day" type="hidden" value="'+ schedule[i].day +'"/>',
-			btnReqIn	= "", 
+		var	btnReqIn	= "", 
 			btnReqOut	= "";
 
 		if ($valMine == "false") {
@@ -182,14 +179,12 @@ function fillTable(schedule, isDriver) {
 
 		$rowDay.append("<th>"+ getDayLabel(schedule[i].day) +"</th>");
 		$rowIn.append(
-			"<td class='cell-check-map'>"			+ 
-				schedule[i].hourIn + btnReqIn	+
-				hdnDay + hdnIn + hdnsMapIn	  	+ 
+			"<td class='cell-check-map'>"+ 
+				schedule[i].hourIn + btnReqIn + hdnsMapIn + 
 			"</td>");
 		$rowOut.append(
-			"<td class='cell-check-map'>"			+ 
-				schedule[i].hourOut + btnReqOut	+
-				hdnDay + hdnOut + hdnsMapOut 	+ 
+			"<td class='cell-check-map'>"+ 
+				schedule[i].hourOut + btnReqOut	+ hdnsMapOut + 
 			"</td>");
 	}
 
@@ -247,7 +242,7 @@ function showMap(target) {
  */
 function requestAssociation(target) {
 	var day    		= $(target).closest("td").index(),
-		inOut  		= ($(target).closest("tr").attr("id") == "rIn") ? "0" : "1";
+		inOut  		= ($(target).closest("tr").attr("id") == "in") ? "0" : "1";
 		idUser 		= $("#val-id").val(),
 		$btnReqIn	= $(".btn-req-in"+ day),
 		$btnReqOut	= $(".btn-req-out"+ day);
