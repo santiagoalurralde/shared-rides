@@ -154,12 +154,11 @@ function update(step) {
             
             break;
         case 2:
+        	var $maps = $(".sr-maps");
             highlightStep(step); 
-            $(".btn-OK, .sr-maps").show();
-            if(_user == 2) 
-                $(".sr-maps").load("mappedestrian.do");
-            else
-                $(".sr-maps").load("mapdriver.do");
+            $(".btn-OK").show();
+            $maps.show();
+            (_user == 2) ? $maps.load("mappedestrian.do") : $maps.load("mapdriver.do");
             $(".step-shift, .btn-next, .btn-default").hide();
 
             break;

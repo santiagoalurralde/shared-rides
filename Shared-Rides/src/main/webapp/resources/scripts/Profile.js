@@ -246,27 +246,26 @@ function showMap(target) {
  * @param {javascript} target - clicked button.
  */
 function requestAssociation(target) {
-	var $day    	= $(target).siblings(".hdn-day").val(),
-		$inOut  	= $(target).siblings(".hdn-inout").val(),
-
-		$idUser 	= $("#val-id").val();
-		$btnReqIn	= $(".btn-req-in"+ schedule[i].day),
-		$btnReqOut	= $(".btn-req-out"+ schedule[i].day);
+	var day    		= $(target).closest("td").index(),
+		inOut  		= ($(target).closest("tr").attr("id") == "rIn") ? "0" : "1";
+		idUser 		= $("#val-id").val(),
+		$btnReqIn	= $(".btn-req-in"+ day),
+		$btnReqOut	= $(".btn-req-out"+ day);
 
 //TRY THIS OUT
-//$(target).closest("tr").attr("id");
+//
 //$(target).closest("td").index()+1
 
-	if ($inOut == "1")
+	if (inOut == "0")
 		disable($btnReqIn, true);
-	if ($inOut == "0")
+	if (inOut == "1")
 		disable($btnReqOut, true);
 
 	$.post("requestAssoc.do",
 			{
-				"day"	: $day,
-				"inout"	: $inOut,
-				"idUser": $idUser
+				"day"	: day,
+				"inout"	: inOut,
+				"idUser": idUser
 			}, 
 			function(msg) {
 				if (msg != "")
