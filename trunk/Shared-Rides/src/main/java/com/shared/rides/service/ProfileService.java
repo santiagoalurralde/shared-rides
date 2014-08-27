@@ -288,7 +288,7 @@ public class ProfileService {
 				if (a.getDay() == day && 
 					a.getInout() == inout && 
 					!(a.getState().equals(State.CANCELLED)) &&
-					a.getApplicantID().getUserId() == this.userLogInId){
+					a.getApplicantID().getUserId() == userId){
 						return false; 
 				}
 			}
@@ -296,7 +296,7 @@ public class ProfileService {
 				if (a.getDay() == day && 
 					a.getInout() == inout && 
 					!(a.getState().equals(State.CANCELLED)) &&
-					a.getApplicantID().getUserId() == userId){
+					a.getApplicantID().getUserId() == this.userLogInId){
 						return false;			
 				}
 			}	
