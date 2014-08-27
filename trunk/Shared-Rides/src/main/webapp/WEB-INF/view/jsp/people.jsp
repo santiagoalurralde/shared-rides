@@ -38,18 +38,12 @@
 
 				<div class="requested block-half block-left">		
 					<h2> <spring:message code="lbl.requested"/> </h2>
-				
-					<div> 			
-						<table class="table-requested sr-schedule"></table>					
-					</div>	
+					<table class="table-requested sr-schedule"></table>					
 				</div>
 				
 				<div class="offered block-half block-right">
 					<h2> <spring:message code="lbl.offered"/> </h2>	
-				
-					<div> 			
-						<table class="table-offered sr-schedule"></table>					
-					</div>
+					<table class="table-offered sr-schedule"></table>					
 				</div>	
 				
 				<div class="clearer"></div>

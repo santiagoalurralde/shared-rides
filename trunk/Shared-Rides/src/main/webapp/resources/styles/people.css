@@ -9,21 +9,14 @@ Assigned to:	Santiago Alurralde (sa)
 
 /*-----------------------------------------------------------------*/
 
+.sr-board{
+	width:			94%;
+	padding:		2% 3%;	
+}
+
 .list-data {
 	margin-top:		10px;
 	overflow:		auto;
-}
- 
-.block-half {
-	width:			47%;
-}
-
-.pending, .offered { 
-	padding-right:	3%;
-}
-
-.associated, .requested {
-	padding-left:	3%;
 }
 
 .schedule-data {

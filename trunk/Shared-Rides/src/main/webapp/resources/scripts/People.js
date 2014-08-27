@@ -151,8 +151,10 @@ function fetchDays(days, data) {
  */
 function printSchedule(days, $table, typeAssoc) {		
 	
-	var	rIn 			= "<tr id='in'><td>"+ $('#lbl-arrival').val() +"</td></tr>", 
-		rOut 			= "<tr id='out'><td>"+ $('#lbl-departure').val() +"</td></tr>",
+	$table.html("<tr><th></th></tr>");
+	
+	var	rIn 			= 	"<tr id='in'><td>"+ $('#lbl-arrival').val() +"</td></tr>", 
+		rOut 			= 	"<tr id='out'><td>"+ $('#lbl-departure').val() +"</td></tr>",
 		bCancelAssoc	=	"<button title='Cancel Association' onclick='actionAssociation(this, false)'>" +
 								"<img src='resources/images/cancel.png'>" +
 							"</button>",
@@ -167,9 +169,7 @@ function printSchedule(days, $table, typeAssoc) {
 
 	if(!$scheduleData.is(":visible"))			//Display schedules' section
 		$scheduleData.show("bounce", 400);
-	
-	$table.html("<tr><th></th></tr>");
-	
+		
 	for(var i=1; i<days.length; i++) {
 		if(days[i]!=null) {
 			var buttons;
