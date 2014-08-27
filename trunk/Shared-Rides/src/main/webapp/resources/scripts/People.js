@@ -186,7 +186,7 @@ function printSchedule(days, $table, typeAssoc) {
 
 			buttons = (typeAssoc == 0) ? bAcceptPetit + bCancelPetit : bCancelAssoc;
 			
-			var contentIn,
+			var	contentIn,
 				contentOut,
 				$inputIn,
 				$inputOut;
