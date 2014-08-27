@@ -21,7 +21,7 @@ load();
 function load() {
 	createTables();
 
-	var $pending         = $(".pending"),
+	var $pending		 = $(".pending"),
 		$associated      = $(".associated"),
 		$tablePending    = $(".table-pending"),
 		$tableAssociated = $(".table-associated"),
@@ -199,9 +199,10 @@ function printSchedule(days, $table, typeAssoc) {
 						value: days[i].assocIdIn 
 					});
 
-				contentIn = days[i].inHour + buttons + $inputIn;
+				contentIn = days[i].inHour + buttons;
 				
 				$rowIn.append("<td>"+ contentIn +"</td>");
+				$inputIn.appendTo($rowIn);
 				$rowOut.append("<td></td>"); 			
 			}
 			else if(days[i].inHour != "" && days[i].outHour != "") {
@@ -218,11 +219,13 @@ function printSchedule(days, $table, typeAssoc) {
 						value: days[i].assocIdOut 
 					});
 
-				contentIn 	= days[i].inHour + buttons + $inputIn;
-				contentOut 	= days[i].outHour + buttons + $inputOut;
+				contentIn 	= days[i].inHour + buttons;
+				contentOut 	= days[i].outHour + buttons;
 								
-				$rowIn.append("<td>"+ contentIn +"</td>");				
+				$rowIn.append("<td>"+ contentIn +"</td>");		
+				$inputIn.appendTo($rowIn);		
 				$rowOut.append("<td>"+ contentOut +"</td>");
+				$inputOut.appendTo($rowOut);
 			}
 			else {	
 				//Just OUT
@@ -232,10 +235,11 @@ function printSchedule(days, $table, typeAssoc) {
 						value: days[i].assocIdOut 
 					});
 
-				contentOut = days[i].outHour + buttons + $inputOut;
+				contentOut = days[i].outHour + buttons;
 				
 				$rowIn.append("<td></td>");
 				$rowOut.append("<td>"+ contentOut +"</td>");
+				$inputIn.appendTo($rowOut);				
 			}
 		}
 	}	
