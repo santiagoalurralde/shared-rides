@@ -99,8 +99,12 @@ Assigned to:	Santiago Alurralde (sa)
 [Starting Conditions]
 ------------------------------------------------------------------*/
 
-.btn-back, .btn-OK, .btn-default, .search-results, .sr-dialog, .alerts, .step-shift, .sr-maps{
+.btn-back, .btn-OK, .btn-default, .search-results, .sr-dialog, .alerts, .step-shift{
 	display:		none;
+}
+
+.sr-maps{
+	visibility:		none;
 }
 
 .btn-default, .btn-OK{

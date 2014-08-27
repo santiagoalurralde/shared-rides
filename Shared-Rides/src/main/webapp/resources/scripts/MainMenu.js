@@ -80,7 +80,7 @@ function defaultSearch() {
     });
    
     //Brings the list
-    $(".map-driver, .map-pedestrian, .btn-OK").hide();       
+    $(".sr-maps, .btn-OK").hide();       
     $(".search-results").show("fast");
 }
 
@@ -116,7 +116,7 @@ function customSearch() {
     });
    
     //Brings the list
-    $(".map-driver, .map-pedestrian, .btn-OK").hide();       
+    $(".sr-maps, .btn-OK").hide();       
     $(".search-results").show("fast");
 }
 
@@ -125,7 +125,6 @@ function customSearch() {
  */
 function start() {      
     highlightStep(_step); 
-    $(".map-driver").css("visibility", "visible"); //Still hidden
 }
 
 /**
@@ -143,25 +142,26 @@ function update(step) {
             $(".btn-next").css("margin-left", "0");
             break;
         case 1:
-            highlightStep(step);                    
-            $(".sr-maps, .btn-OK, .search-results, .step-usertype").hide();
+            highlightStep(step);
+            $(".sr-maps").html("");
+            $(".btn-OK, .search-results, .step-usertype").hide();
             $(".btn-back, .btn-next").show("fast");
             $(".step-shift").show("fast");
             if($("#hdn-validate").val() == "true")
                 $(".btn-default").show("fast");
             $(".btn-next").css("margin-left", "60px");
             $(".table-found td").remove();
+            
             break;
         case 2:
             highlightStep(step); 
-            $(".step-shift, .btn-next, .btn-default").hide();
-            $(".btn-OK, .sr-maps").show("slow");
-
+            $(".btn-OK, .sr-maps").show();
             if(_user == 2) 
                 $(".sr-maps").load("mappedestrian.do");
             else
                 $(".sr-maps").load("mapdriver.do");
-            
+            $(".step-shift, .btn-next, .btn-default").hide();
+
             break;
     }      
 }

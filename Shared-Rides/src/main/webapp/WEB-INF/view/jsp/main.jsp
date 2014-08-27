@@ -118,8 +118,7 @@
 	[Scripts]
 	------------------------------------------>	
 	<script src="resources/scripts/MainMenu.js" 	type="text/javascript"></script>			
-
-
+	
 </body>
 
 
