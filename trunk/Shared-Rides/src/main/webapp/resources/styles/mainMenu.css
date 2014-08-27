@@ -2,7 +2,7 @@
 [Main Menu Stylesheet]
 
 Project:		Shared Rides
-Last change:	21/08/2014
+Last change:	25/08/2014
 Assigned to:	Santiago Alurralde (sa)
 -------------------------------------------------------------------*/
 
@@ -99,7 +99,7 @@ Assigned to:	Santiago Alurralde (sa)
 [Starting Conditions]
 ------------------------------------------------------------------*/
 
-.btn-back, .btn-OK, .btn-default, .search-results, .sr-dialog, .alerts, .step-shift {
+.btn-back, .btn-OK, .btn-default, .search-results, .sr-dialog, .alerts, .step-shift, .sr-maps{
 	display:		none;
 }
 

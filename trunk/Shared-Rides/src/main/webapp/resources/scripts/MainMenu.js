@@ -7,9 +7,7 @@ var _step   = -1,   //Contador de Pasos
  * STEPS
  *******************************************************/
 
-$(document).ready(function() {    
-    initMap();
-   
+$(document).ready(function() {  
     start();
 
     //Acciones al presionar las imagenes
@@ -60,37 +58,30 @@ function stepBack() {
  * Performs search with previously selected maps or markers.
  */
 function defaultSearch() {
-    var $tableFound = $(".table-found");
+    var $tableFound     = $(".table-found"),
+        templateFound   = Handlebars.compile($("#temp-table-found").html()); 
 
-    $.post("defaultFind.do", {"user": _user , "shift": _shift},
-            function(json) {
-                var peopleFound = $.parseJSON(json);
-                if(peopleFound == "") {
-                    $(".alerts").show();  
-                    $tableFound.hide();                              
-                }
-                else {
-                    $.each(peopleFound, function(i, data) {
-                        var distance = Math.ceil(data.distance);
-                        $tableFound.show();      
-                        $(".alerts").hide();  
-                        $tableFound.append(
-                            "<tr>"+
-                                "<td>"+ data.name +" "+ data.surname +"</td>"+
-                                "<td>"+
-                                    "<a href='/Shared-Rides/profile.do?user="+ data.id +"'>"+
-                                        "<img src='printImgFile.do?pic="+ data.picture +"'/>"+
-                                    "</a>"+
-                                "</td>"+
-                                "<td>"+ $("#lbl-blocks1").val() +" "+ distance +" "+ $("#lbl-blocks2").val() +"</td>"+
-                            "</tr>");
-                    });    
-                }
-        });
-       
+    $.post("find.do", {"user": _user , "shift": _shift},
+        function(json) {
+            var peopleFound = $.parseJSON(json);
+            if(peopleFound == "") {
+                $(".alerts").show();  
+                $tableFound.hide();                              
+            }
+            else {
+                $.each(peopleFound, function(i, data) {
+                    data.distance = Math.ceil(data.distance);                    
+                    var resultFound = templateFound(data);
+                    $(".alerts").hide();  
+                    $tableFound.append(resultFound);
+                    $tableFound.show();      
+                });    
+            }
+    });
+   
     //Brings the list
-    $(".map-driver, .map-pedestrian, .btn-OK, .btn-default").hide();       
-    $(".search-results").show("fast");   
+    $(".map-driver, .map-pedestrian, .btn-OK").hide();       
+    $(".search-results").show("fast");
 }
 
 /**
@@ -98,7 +89,7 @@ function defaultSearch() {
  */
 function customSearch() {
     var coords,                           
-        $tableFound     = $(".table-found");
+        $tableFound     = $(".table-found"),
         templateFound   = Handlebars.compile($("#temp-table-found").html()); 
 
     if(_user == 2)
@@ -133,8 +124,8 @@ function customSearch() {
  * Establishes the starting environment
  */
 function start() {      
-    highlightStep(_step);          
-    $(".map-driver, .map-pedestrian").hide();       
+    highlightStep(_step); 
+    $(".map-driver").css("visibility", "visible"); //Still hidden
 }
 
 /**
@@ -153,7 +144,7 @@ function update(step) {
             break;
         case 1:
             highlightStep(step);                    
-            $(".map-driver, .map-pedestrian, .btn-OK, .search-results, .step-usertype").hide();
+            $(".sr-maps, .btn-OK, .search-results, .step-usertype").hide();
             $(".btn-back, .btn-next").show("fast");
             $(".step-shift").show("fast");
             if($("#hdn-validate").val() == "true")
@@ -162,9 +153,15 @@ function update(step) {
             $(".table-found td").remove();
             break;
         case 2:
-            highlightStep(step);                    
+            highlightStep(step); 
             $(".step-shift, .btn-next, .btn-default").hide();
-            (_user == 2) ? $(".btn-OK, .map-pedestrian").show("slow") : $(".btn-OK, .map-driver").show("slow");
+            $(".btn-OK, .sr-maps").show("slow");
+
+            if(_user == 2) 
+                $(".sr-maps").load("mappedestrian.do");
+            else
+                $(".sr-maps").load("mapdriver.do");
+            
             break;
     }      
 }

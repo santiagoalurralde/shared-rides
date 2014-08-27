@@ -33,18 +33,20 @@ Assigned to:	Santiago Alurralde (sa)
 
 .alerts {
 	border:			solid #CFCFCF 1px;
+	border-radius:	4px;
 	box-shadow:     0 1px 2px #D1D1D1;
 	margin:			0 auto;
 	margin-top: 	20px; 	
-	width:			60%;
-	padding:		3%
+	padding:		2%;
+	text-align:		center;
+	width:			60%;	
 }
 
 .alerts img {
 	position: 		relative; 
-	left: 			55%; 
+	left: 			25%; 
+	height: 		50px;	
 	width:			55px;
-	height: 		50px;
 }
 
 .btn {
