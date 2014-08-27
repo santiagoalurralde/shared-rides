@@ -37,33 +37,6 @@ public class ResponseAssociationService {
 	private JsonArray offeredJson;
 	private List<Long> schIdList;
 
-//	public String hasResponse(long userId){
-//		User u = userDAO.load(userId);
-//		boolean newNotification = false;
-//		List<Association> myRequestList = userDAO.getMyRequests(u);
-//		JsonArray notifications = new JsonArray();
-//		JsonObject json = new JsonObject();
-//		
-//		for(Association assoc : myRequestList){
-//			if(assoc.getState().equals(State.ACCEPTED) || assoc.getState().equals(State.CANCELLED)){
-//				long uAssocId = assocDAO.getSupplierId(assoc);
-//				User uAssoc = userDAO.load(uAssocId);
-//				String fullName = uAssoc.getName() + " " + uAssoc.getSurname();
-//				JsonObject uJson = new JsonObject();
-//				uJson.addProperty("type", "response");
-//				uJson.addProperty("name", fullName);
-//				uJson.addProperty("date", assoc.getDate().toString());
-//				notifications.add(uJson);
-//				if(assoc.getDate().after(u.getLastLoginDate())) newNotification = true; 
-//			}
-//		}
-//		
-//		json.addProperty("newNotification", newNotification);
-//		json.add("notifications", notifications);
-//		
-//		return json.toString();
-//	}
-//	
 	/*
 	 * Metodo que se encarga de devolver la lista de horarios entre dos usuarios para mostrarlo en la vista
 	 * Si el tipo de asociacion es 0 --> Pendiente
