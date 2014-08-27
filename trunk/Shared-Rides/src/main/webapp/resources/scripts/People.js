@@ -184,7 +184,7 @@ function printSchedule(days, $table, typeAssoc) {
 			if(!$rowOut.length)		//If OUT Row doesn't exist, create it
 				$table.append(rOut);
 
-			buttons = (typeAssoc == 0) ? bAcceptPetit + bCancelPetit : bCancelAssoc;
+			buttons = (typeAssoc == 0) ? (bAcceptPetit + bCancelPetit): bCancelAssoc;
 			
 			var	contentIn,
 				contentOut,

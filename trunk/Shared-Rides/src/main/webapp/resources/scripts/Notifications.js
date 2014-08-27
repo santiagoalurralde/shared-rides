@@ -10,6 +10,7 @@ $(document).ready(function() {
     });
 
     $(".notification-item").click(function() {
+        alert("click");
         window.location.href = "people.do";
     });     
 });
