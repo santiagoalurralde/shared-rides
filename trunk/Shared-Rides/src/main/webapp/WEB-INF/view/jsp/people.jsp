@@ -10,7 +10,7 @@
 		<section class="sr-tupper">
 
 			<div class="list-data sr-board border-light "> 	
-									
+
 				<div class="pending block-half block-right"> 		
 					<h2> <spring:message code="lbl.pending"/></h2>
 					<table class="table-pending sr-table-users"></table>	
@@ -24,6 +24,7 @@
 				</div>		
 			
 				<div class="clearer"></div>
+				
 			</div>
 			
 		</section>

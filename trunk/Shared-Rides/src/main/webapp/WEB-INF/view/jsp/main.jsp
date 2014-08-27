@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <body onLoad="stepNext();">		
-		  
     <div class="sr-content">	
         <section class="sr-tupper"> 
        		<h4> <spring:message code="lbl.messageFind"/> </h4>
@@ -55,16 +54,8 @@
 				<!-----------------------------------------
 				[Maps]
 				------------------------------------------>	
-				<div class="map-driver">
-					<div id="map"></div>
-					<span class="t1" style = "visibility:hidden"><a id="permalink" href=""></a></span>
-					<span id="mapinfo"><span id="currentscale" style="display:none"></span></span>						
-				</div>
-					
-        		<div class="map-pedestrian">
-        			<div id="map2" class="map-simple"></div>
-        		</div>
-        	
+				<div class="sr-maps"></div>
+
 				<!-----------------------------------------
 				[Results List]
 				------------------------------------------>   
@@ -122,21 +113,15 @@
 	[Variables]
 	------------------------------------------>
 	<input type="hidden" id="hdn-validate"	value="${validate}"/>	
+	
+	<!-----------------------------------------
+	[Scripts]
+	------------------------------------------>	
+	<script src="resources/scripts/MainMenu.js" 	type="text/javascript"></script>			
+
+
 </body>
 
 
-<!-----------------------------------------
-[Scripts]
------------------------------------------->		
-<script src="resources/scripts/MainMenu.js" 	type="text/javascript"></script>
-<script src="resources/maps/OpenLayers.js"		type="text/javascript"></script>    
-<script src="resources/maps/OpenStreetMap.js"  	type="text/javascript"></script>
-<script src="resources/maps/proj4js.js"			type="text/javascript"></script>
-<script src="resources/maps/osmap.js" 			type="text/javascript"></script>
-<script src="resources/maps/track.js" 			type="text/javascript"></script>
-<script src="resources/maps/osmapSimple.js" 	type="text/javascript"></script>
 
-<script>
-	initMapCoords(lonlat, zoom, map);
-</script>
 
