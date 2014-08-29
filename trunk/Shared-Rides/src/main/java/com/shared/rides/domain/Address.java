@@ -20,7 +20,6 @@ public class Address implements Serializable{
 	private int number;
 	private String neighborhood;
 	private String city;
-	private Marker marker;
 	
  
 //-----------CONSTRUCTOR	
@@ -71,17 +70,6 @@ public class Address implements Serializable{
 	public void setCity(String city) {
 		this.city = city;
 	}
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "markerID")
-	public Marker getMarker() {
-		return marker;
-	}
-	public void setMarker(Marker marker) {
-		this.marker = marker;
-	}
-
-
 	
 //-----------------------
 	

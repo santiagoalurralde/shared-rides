@@ -1,4 +1,9 @@
 <%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ page import="com.shared.rides.domain.User"%>
+
+<%	
+	User u = (User) request.getSession().getAttribute("user");
+%>
 
 <!-----------------------------------------
 [Menu]
@@ -11,7 +16,7 @@
         <li><a class="highlight"	href="contact.do">     	<spring:message code="lbl.contact"	/>		</a></li>
         <li><a class="highlight"	href="about.do">        <spring:message code="lbl.about"	/>		</a></li>
     </ul>
-	
+	<span style="position: fixed; top: 0; right: 6%"><%= u.getName() + " " + u.getSurname() %></span>
 	<img class="btn-alert" src="resources/images/bell.png"/>
 	
 	<a href="logout.do">
