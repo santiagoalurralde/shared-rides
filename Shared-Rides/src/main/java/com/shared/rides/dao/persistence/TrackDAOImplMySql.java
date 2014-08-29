@@ -10,9 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.shared.rides.dao.interfaces.ITrackDAO;
-import com.shared.rides.domain.Marker;
 import com.shared.rides.domain.Track;
-import com.shared.rides.domain.User;
 
 
 @Repository
