@@ -37,6 +37,7 @@ html {
 
 a {
 	text-decoration:	none;
+	color:				black;
 }
 
 body {
@@ -165,11 +166,22 @@ body {
 [Navigation / .sr-nav]
 ------------------------------------------------------------------*/
 
-.logo {
+.text-logo {
 	font-family:		'LibelSuit', 'Georgia', serif;
 	font-size:			1.95vw;
-	line-height:        130%;	
 	vertical-align:		middle;
+	position: 			fixed;	
+	top: 				0.75%;	
+	left: 				4%;
+	
+}
+
+.text-logged {
+	position: 			fixed;
+	font-size: 			80%;
+	top: 				2.25%;
+	right: 				6.5%;
+	vertical-align:		middle;	
 }
 
 .sr-nav {
@@ -190,7 +202,7 @@ body {
 	.sr-nav li .highlight {	
 		font-size:			.97vw;
 		font-weight:		bold;	/* Modify for eye-candy */
-		letter-spacing:		1.4px;
+		letter-spacing:		1px;
         text-transform:		uppercase;
 	}
 
@@ -198,7 +210,7 @@ body {
 		color:				black;
 		display:			inline-block;
  		line-height:        300%;	
- 		padding:            .2% 3.55%;
+ 		padding:            .2% 3.5%;
  		
 		/* Color Transition */
 		-webkit-transition:	.4s;
@@ -218,6 +230,7 @@ body {
         background:			   -moz-linear-gradient(top, #90AA44, #A5E580);
 		box-shadow:			0 1px 1px #000;
 	}
+
 
 
 /*------------------------------------------------------------------
@@ -260,12 +273,12 @@ body {
 
 .btn-alert {
     position: 		fixed;
-    right: 			4%;
+    right: 			3.5%;
 }
 
 .btn-alert, .btn-logout {
-    top:			1.75%;
-    width:			1.75%;
+    top:			1.5%;
+    width:			1.7%;
 }
 
 .help-icon {

@@ -61,13 +61,13 @@
 												 							 
 						<div> 	
 							<table class="sr-schedule table-driver">
-								<tr class='row-day'>
+								<tr class="row-day">
 									<th></th>
 								</tr>
-								<tr class='row-in'>
+								<tr class="row-in">
 									<td><spring:message code="lbl.arrival"/></td>
 								</tr>
-								<tr class='row-out'>
+								<tr class="row-out">
 									<td><spring:message code="lbl.departure"/></td>								
 								</tr>
 							</table>					
@@ -98,13 +98,13 @@
 						 
 						<div> 		
 							<table class="sr-schedule table-ped">
-								<tr class='row-day'>
+								<tr class="row-day">
 									<th></th>
 								</tr>
-								<tr class='row-in'>
+								<tr class="row-in">
 									<td><spring:message code="lbl.arrival"/></td>
 								</tr>
-								<tr class='row-out'>
+								<tr class="row-out">
 									<td><spring:message code="lbl.departure"/></td>								
 								</tr>
 							</table>	
