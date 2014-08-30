@@ -12,26 +12,26 @@
 			<h2>${name}	${surname}</h2>
 
 			<div class="user-data sr-board border-light">
-				<div class="picture-data">							
+				<div class="picture-data block-left">
 					<img class="picture-profile" src="printImgFile.do?pic=${picture}"/>
 				</div>
 
 				<!-----------------------------------------
 				[Public Data]
 				------------------------------------------>	
-				<div class="public-data"> 		
-					<p class="text-bold"><spring:message code="lbl.basicInfo"/>						</p><br>
-					<p><img class="helpIcon" src="resources/images/location.png"/>${address}		</p><br>
-					<p><img class="helpIcon" src="resources/images/house.png"	/>${neighborhood}	</p>
+				<div class="public-data block-left">
+					<p class="text-bold"> <spring:message code="lbl.basicInfo"/>                    </p><br>
+					<p><img class="help-icon" src="resources/images/location.png"/>${address}		</p><br>
+					<p><img class="help-icon" src="resources/images/house.png"	/>${neighborhood}	</p>
 				</div> 
 				
 				<!-----------------------------------------
 				[Private Data]
 				------------------------------------------>				 	
-				<div class="private-data"> 		
-					<p class="text-bold"><spring:message code="lbl.contactInfo"/>			</p><br>
-					<p><img class="helpIcon" src="resources/images/phone.png"/>${telephone}	</p><br>
-					<p><img class="helpIcon" src="resources/images/email.png"/>${email}		</p>
+				<div class="private-data block-right">
+					<p class="text-bold"> <spring:message code="lbl.contactInfo"/>			    </p><br>
+					<p><img class="help-icon" src="resources/images/phone.png"/>${telephone}	</p><br>
+					<p><img class="help-icon" src="resources/images/email.png"/>${email}		</p>
 				</div>		
 			</div>	
 		</section>
@@ -60,7 +60,17 @@
 						</div>	 	
 												 							 
 						<div> 	
-							<table class="sr-schedule table-driver"></table>					
+							<table class="sr-schedule table-driver">
+								<tr class='row-day'>
+									<th></th>
+								</tr>
+								<tr class='row-in'>
+									<td><spring:message code="lbl.arrival"/></td>
+								</tr>
+								<tr class='row-out'>
+									<td><spring:message code="lbl.departure"/></td>								
+								</tr>
+							</table>					
 						</div>	
 						
 						<div class="map-container">	
@@ -87,7 +97,17 @@
 						</div>	 	
 						 
 						<div> 		
-							<table class="sr-schedule table-ped"></table>	
+							<table class="sr-schedule table-ped">
+								<tr class='row-day'>
+									<th></th>
+								</tr>
+								<tr class='row-in'>
+									<td><spring:message code="lbl.arrival"/></td>
+								</tr>
+								<tr class='row-out'>
+									<td><spring:message code="lbl.departure"/></td>								
+								</tr>
+							</table>	
 						</div>	
 
 						<div class="map-container"> 	
@@ -105,25 +125,6 @@
 	------------------------------------------>	
 	<section>
 
-		<!-----------------------------------------
-		[Labels]
-		------------------------------------------>	
-		<c:set var="lblArrival"> 	<spring:message code="lbl.arrival" 	/></c:set>	
-		<c:set var="lblDeparture"> 	<spring:message code="lbl.departure"/></c:set>	
-		<c:set var="lblMonday"> 	<spring:message code="lbl.monday" 	/></c:set>	
-		<c:set var="lblTuesday"> 	<spring:message code="lbl.tuesday" 	/></c:set>	
-		<c:set var="lblWednesday"> 	<spring:message code="lbl.wednesday"/></c:set>	
-		<c:set var="lblThursday"> 	<spring:message code="lbl.thursday" /></c:set>	
-		<c:set var="lblFriday"> 	<spring:message code="lbl.friday"	/></c:set>	
-		
-		<input type="hidden" id="lbl-arrival" 	value="${lblArrival}" 	/>
-		<input type="hidden" id="lbl-departure"	value="${lblDeparture}" />
-		<input type="hidden" id="lbl-monday" 	value="${lblMonday}" 	/>
-		<input type="hidden" id="lbl-tuesday" 	value="${lblTuesday}" 	/>
-		<input type="hidden" id="lbl-wednesday"	value="${lblWednesday}" />
-		<input type="hidden" id="lbl-thursday" 	value="${lblThursday}" 	/>
-		<input type="hidden" id="lbl-friday" 	value="${lblFriday}"	/>
-		
 		<!-----------------------------------------
 		[Variables]
 		------------------------------------------>	
@@ -146,7 +147,6 @@
 <script type="text/javascript" src="resources/maps/OpenLayers.js"	></script>    
 <script type="text/javascript" src="resources/maps/OpenStreetMap.js"></script>
 <script type="text/javascript" src="resources/maps/osmapStatic.js"	></script>	
-<script type="text/javascript" src="resources/scripts/Utils.js"		></script>
 <script type="text/javascript" src="resources/scripts/Profile.js"	></script>
 <script type="text/javascript" src="resources/fancybox2/source/jquery.fancybox.pack.js?v=2.1.5" ></script>
 
@@ -187,4 +187,21 @@
 		detSchDriver.pathOut      = "${day.trackOut}";
 		_schDriver.push(detSchDriver);
 	</c:forEach>
+
+    var createLabels = (function (){
+        var labels = {
+            //Labels' name
+            lblAlertConfirm : '<spring:message code="lbl.alert-confirm" />',
+            lblTipCheckMap  : '<spring:message code="lbl.tip-checkmap"  />',
+            lblMonday       : '<spring:message code="lbl.monday"        />',
+            lblTuesday      : '<spring:message code="lbl.tuesday"       />',
+            lblWednesday    : '<spring:message code="lbl.wednesday"     />',
+            lblThursday     : '<spring:message code="lbl.thursday"      />',
+            lblFriday       : '<spring:message code="lbl.friday"        />'
+        }
+        return function () { return labels };
+    })();
 </script>
+
+<script type="text/javascript" src="resources/scripts/Utils.js"></script>
+

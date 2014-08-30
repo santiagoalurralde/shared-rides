@@ -2,7 +2,7 @@
 [Master Stylesheet]
 
 Project:		Shared Rides
-Last change:	25/08/2014
+Last change:	27/08/2014
 Assigned to:	Santiago Alurralde (sa)
 -------------------------------------------------------------------*/
 
@@ -21,8 +21,9 @@ Assigned to:	Santiago Alurralde (sa)
   src: 			url('../fonts/raleway-thin.ttf');
 }
 
+
 /*------------------------------------------------------------------
-[Layout]
+[General]
 -------------------------------------------------------------------*/
 
 * {
@@ -45,31 +46,9 @@ body {
 	text-shadow: 		0 1px 1px rgba(0,0,0,.2);
 }
 
-.hrs {
-	/*	Horizontal and dark lines */
-	
-	background:			black;
-	border: 			0; 
-	height: 			1px; 
-	margin-top:			25px; 
-	margin-bottom:		30px; 
-	text-align: 		center; 
-}
-
-.vrs {
-	/*	Vertical and light lines */
-	
-	border-left: 		thin solid #CFCFCF;
-}
-
-.clearer {
-	/*	Class made for divs that clear floating divs */
-	
-	clear:				both;
-}
 
 /*------------------------------------------------------------------
-[Content / ]
+[Content]
 ------------------------------------------------------------------*/
 
 .sr-content {
@@ -78,12 +57,10 @@ body {
 	background-image:	url(../images/txture1.png); 
 	clear:				both;
 	height:				auto;
-	margin:				0 auto;
-	margin-top:			40px;
+	margin:				40px auto 0;    /* OJO */
 	min-height:			75%;
-	padding:			50px 0px;
-	padding-bottom: 	2em;
-	width:				100%; 
+	padding:			50px 0 2em;
+	width:				100%;
 }
 
 .sr-board {	
@@ -96,9 +73,9 @@ body {
 
 .sr-tupper {
 	/*	Invisible wrapper */
-	
+
+    margin:				0 auto;
 	position:			relative;
-	margin:				0 auto;
 	width:				900px;
 }
 
@@ -109,18 +86,23 @@ body {
 }
 
 .border {
-	/*	Dark border and shadow */
-	
-	box-shadow:			1px 1px 1px #000000;
-	border:				solid 1px; 	
+    /*	Dark border and shadow */
+
+    box-shadow:			1px 1px 1px #000;
+    border:				solid 1px;
 }
 
 .border-light {
-	/*	Light border and shadowless */
+    /*	Light border and shadowless */
 
-	box-shadow:			0 1px 1px rgba(0,0,0,0.15);			
-	border:				solid #CFCFCF 1px;	
+    box-shadow:			0 1px 1px rgba(0, 0, 0, .15);
+    border:				solid #CFCFCF 1px;
 }
+
+
+/*------------------------------------------------------------------
+[Helpers]
+------------------------------------------------------------------*/
 
 .block-half {
 	width:				50%;
@@ -133,6 +115,30 @@ body {
 .block-right {
 	float:				right;
 }
+
+.hrs {
+    /*	Horizontal and dark lines */
+
+    background:			black;
+    border: 			0;
+    height: 			1px;
+    margin-top:			25px;
+    margin-bottom:		30px;
+    text-align: 		center;
+}
+
+.vrs {
+    /*	Vertical and light lines */
+
+    border-left: 		thin solid #CFCFCF;
+}
+
+.clearer {
+    /*	Class made for divs that clear floating divs */
+
+    clear:				both;
+}
+
 
 /*------------------------------------------------------------------
 [Footer / .sr-footer]
@@ -153,6 +159,7 @@ body {
 	width:				100%;
  	z-index: 			10;
 }
+
 
 /*------------------------------------------------------------------
 [Navigation / .sr-nav]
@@ -179,12 +186,14 @@ body {
 		display:			inline;
 		list-style-type:    none;		
 	}
+
 	.sr-nav li .highlight {	
-		text-transform:		uppercase;
 		font-size:			.97vw;
 		font-weight:		bold;	/* Modify for eye-candy */
-		letter-spacing:		1.4px;		
+		letter-spacing:		1.4px;
+        text-transform:		uppercase;
 	}
+
 	.sr-nav li a {
 		color:				black;
 		display:			inline-block;
@@ -192,27 +201,87 @@ body {
  		padding:            .2% 3.55%;
  		
 		/* Color Transition */
-		transition:			.4s;
-		-moz-transition:	.4s;
 		-webkit-transition:	.4s;
-	}	
-	.sr-nav li a.highlight:hover {
-		background:			-moz-linear-gradient(top, #90AA44, #9ED474);
-		background:			-webkit-linear-gradient(top, #90AA44, #9ED474);
-		box-shadow:			0 2px 2px #000;			
-	}
-	.sr-nav .current { 
-		background:			-moz-linear-gradient(top, #90AA44, #A5E580);
-		background:			-webkit-linear-gradient(top, #90AA44, #A5E580);
-		box-shadow:			0 1px 1px #000;			
+           -moz-transition:	.4s;
+                transition:	.4s;
+
 	}
 
+	.sr-nav li a.highlight:hover {
+        background:			-webkit-linear-gradient(top, #90AA44, #9ED474);
+		background:			   -moz-linear-gradient(top, #90AA44, #9ED474);
+		box-shadow:			0 2px 2px #000;
+	}
+
+	.sr-nav .current {
+        background:			-webkit-linear-gradient(top, #90AA44, #A5E580);
+        background:			   -moz-linear-gradient(top, #90AA44, #A5E580);
+		box-shadow:			0 1px 1px #000;
+	}
+
+
 /*------------------------------------------------------------------
-[Notifications / ]
+[Buttons]
+------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+[Buttons / General Button / .btn]
+------------------------------------------------------------------*/
+
+.btn {
+    border-radius:	2px;
+    background: 	-webkit-linear-gradient(top, #90AA44, #9ED474);
+    background: 	   -moz-linear-gradient(top, #90AA44, #9ED474);
+    box-shadow: 	0 1px 2px rgba(0,0,0,.2);
+    border: 		solid 1px #90AA44;
+    color:			white;
+    font-size:		100%;
+    font-weight:	bold;
+    font-family: 	'Raleway-Thin', sans-serif;
+    height:			30px;
+    margin:			10px 0 10px;
+    text-shadow: 	0 1px 1px rgba(0,0,0,.3);
+    width:			130px;
+}
+
+.btn:hover {
+    background: 	-webkit-linear-gradient(top, #99BB66, #9ED474);
+    background: 	   -moz-linear-gradient(top, #99BB66, #9ED474);
+}
+
+/*------------------------------------------------------------------
+[Buttons / Specific Buttons]
+------------------------------------------------------------------*/
+
+.btn-logout {
+    position: 		fixed;
+    right: 			.5%;
+}
+
+.btn-alert {
+    position: 		fixed;
+    right: 			4%;
+}
+
+.btn-alert, .btn-logout {
+    top:			1.75%;
+    width:			1.75%;
+}
+
+.help-icon {
+    width:			20px;
+    margin:			1px 10px 0 0;
+}
+
+
+/*------------------------------------------------------------------
+[Notifications / .notifications]
 ------------------------------------------------------------------*/
 
 #notifications-box {
-	box-shadow:         1px 0px 10px 0px rgba(180, 180, 180, 0.65);	
+    /* Little window for notifications */
+
+	box-shadow:         1px 0 10px 0 rgba(180, 180, 180, .65);
 	display:			none;
 	opacity:			.95;
 	padding:			1.1em;
@@ -223,6 +292,8 @@ body {
 }
 
 .notifications {
+    /* Class for notifications-box: helps with styling */
+
 	top: 				200px;
 	z-index:			5000;
 	background-color:	#E5E5E5;	
@@ -261,14 +332,18 @@ body {
 }
 
 .notifications-list {
+    /* List that contains notification items */
+
 	list-style-type: 	none;
 }
 
 .notification-item {
+    /* Every list item: represents a notification */
+
 	background-color:	#FAFAFA;
 	margin:				1%;
 	padding:			2%;
-	box-shadow:			0 1px 2px rgba(0,0,0,.2);
+	box-shadow:			0 1px 2px rgba(0, 0, 0, .2);
 	font-size:			80%;
 }
 
@@ -285,8 +360,9 @@ h5 {
 	margin-bottom:		10px;
 }
 
+
 /*------------------------------------------------------------------
-[Maps / ]
+[Maps]
 ------------------------------------------------------------------*/
 
 .map-driver {
@@ -304,93 +380,57 @@ h5 {
 }
 
 .map-simple {
-	/*	Class for mapPedestrian */
-	
-	width: 		838px;
-	height: 	450px;	
-	border:		1px solid #CCC;
+	/*	Class for map-pedestrian */
+
+    border:		1px solid #CCC;
+    height: 	450px;
+    width: 		838px;
 }
 
 .map-static {
 	/*	Shown in profiles */
-	
-	width: 		400px;
-	height: 	400px;	
-	border:		1px solid #CCC;
+
+    border:		1px solid #CCC;
+	height: 	400px;
+    width: 		400px;
 }
 
+
 /*------------------------------------------------------------------
-[Buttons / ]
+[Tables]
 ------------------------------------------------------------------*/
 
-.btn {
-	border-radius:	2px;	
-	background: 	-webkit-linear-gradient(top, #90AA44, #9ED474);
-	background: 	-moz-linear-gradient(top, #90AA44, #9ED474);
-	box-shadow: 	0 1px 2px rgba(0,0,0,.2);
-	border: 		solid 1px #90AA44;
-	color:			white;
-	font-size:		100%;
-	font-weight:	bold;
-	font-family: 	'Raleway-Thin', sans-serif;
-	height:			30px;
-	margin:			10px 0 10px 0;
-	text-shadow: 	0 1px 1px rgba(0,0,0,.3);
-	width:			130px;
-}
-
-.btn:hover {
-	background: 	-webkit-linear-gradient(top, #99BB66, #9ED474);
-	background: 	   -moz-linear-gradient(top, #99BB66, #9ED474);
-}
-
-.btn-logout {
-	position: 		fixed; 
-	right: 			.5%;		
-}
-
-.btn-alert {
-	position: 		fixed; 
-	right: 			4%;	
-}
-
-.btn-alert, .btn-logout {
-	top:			1.75%; 
-	width:			1.75%;	
-}
-
-.helpIcon {
-	width:			20px;
-	margin:			1px 10px 0 0;
-}
-
 /*------------------------------------------------------------------
-[Tables / ]
+[Tables / Schedule / .sr-schedule]
 ------------------------------------------------------------------*/
 
 .sr-schedule {
+    /*	Table for displaying weekly schedules */
+
 	font-family: 		'Raleway', sans-serif;
 	font-size:			75%;
-	border:				#CCC 1px solid;
+
+    background:			-webkit-linear-gradient(top, #FDFDFD, #FBFBFB);
+    background:			   -moz-linear-gradient(top, #FDFDFD, #FBFBFB);
+
+	border:				1px solid #CCC;
 	border-spacing: 	0;
 
-	-webkit-box-shadow:	0 1px 2px #D1D1D1;
-	   -moz-box-shadow:	0 1px 2px #D1D1D1;
-	        box-shadow: 0 1px 2px #D1D1D1;
-	
-	background:			-webkit-linear-gradient(top, #FDFDFD, #FBFBFB);
-	background:			   -moz-linear-gradient(top,  #FDFDFD,  #FBFBFB);
+    -webkit-box-shadow:	0 1px 2px #D1D1D1;
+       -moz-box-shadow:	0 1px 2px #D1D1D1;
+            box-shadow: 0 1px 2px #D1D1D1;
 
+    clear:				both;
 	margin:				0 auto;
 	margin-top:			5%;
-	clear:				both;
 }
 
 .sr-schedule th {
 	background:			-webkit-linear-gradient(top, #90AA44, #50A410);
-	background:			   -moz-linear-gradient(top, #90AA44, #50A410);	
-	padding:			10px 15px 15px 15px;
-	border-bottom:		1px solid #e0e0e0;
+	background:			   -moz-linear-gradient(top, #90AA44, #50A410);
+
+    border-bottom:		1px solid #E0E0E0;
+	padding:			10px 15px 15px;
 }
 
 .sr-schedule tr {
@@ -418,19 +458,24 @@ h5 {
 	border-bottom:		0;
 }
 
-/*	TABLA MOSTRAR LISTA USUARIOS	*/
+/*------------------------------------------------------------------
+[Tables / Users / .sr-table-users]
+------------------------------------------------------------------*/
 
 .sr-table-users {
-	font-family: 		'Raleway-Thin', sans-serif;
+    /*	Table for displaying users' list */
+
+    background:			-webkit-linear-gradient(top, #FDFDFD, #FBFBFB);
+    background:			   -moz-linear-gradient(top, #FDFDFD, #FBFBFB);
+
 	border:				#CCC 1px solid;
 	border-spacing: 	0;
 	
 	-webkit-box-shadow: 0 1px 2px #D1D1D1;
 	   -moz-box-shadow:	0 1px 2px #D1D1D1;	
 	        box-shadow: 0 1px 2px #D1D1D1;
-	
-	background:			-webkit-linear-gradient(top, #FDFDFD, #FBFBFB);
-	background:			   -moz-linear-gradient(top, #FDFDFD, #FBFBFB);
+
+    font-family: 		'Raleway-Thin', sans-serif;
 }
 
 .sr-table-users tr {
@@ -442,15 +487,15 @@ h5 {
 }
 
 .sr-table-users td:first-child {
-	padding-left:		20px;
 	border-left: 		0;
+    padding-left:		20px;
 }
 
 .sr-table-users td {
-	padding:			10px;
 	border-top: 		1px solid #FFF;
 	border-bottom:		1px solid #E0E0E0;
 	border-left: 		1px solid #E0E0E0;
+    padding:			10px;
 }
 
 .sr-table-users tr:nth-child(even) {	
@@ -472,20 +517,24 @@ h5 {
 [Tooltip]
 -------------------------------------------------------------------*/
 
+.ui-tooltip {
+    /*	Jquery UI tooltip styling */
+
+    border-radius:		0;
+    box-shadow: 		0 0 5px #555;
+    color: 				black;
+    font-size:			80%;
+    padding: 			10px 20px;
+}
+
 .ui-tooltip, .arrow:after {
 	background-color: 	#FAFAFA;
  	border: 			2px solid #FAFAFA;	
 }
 
-.ui-tooltip {
-	padding: 			10px 20px;
-	color: 				black;
-	font-size:			80%;
-	border-radius:		0;
-	box-shadow: 		0 0 5px #555;
-}	
-
 .arrow {
+    /*	Corresponds to the UI tooltip */
+
 	width: 				70px;
 	height: 			16px;
 	overflow: 			hidden;
@@ -514,8 +563,7 @@ h5 {
  	box-shadow: 		6px 6px 6px -7px #444;	
 	-webkit-transform: 	rotate(45deg);
  	   -moz-transform:	rotate(45deg);		
-	    -ms-transform:	rotate(45deg);
-	        transform: 	rotate(45deg);	    
+	        transform: 	rotate(45deg);
 }
 
 .arrow.top:after {

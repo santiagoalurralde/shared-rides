@@ -86,11 +86,11 @@
         		
         		<div class="buttons-steps">
         			<input type="button" class="btn btn-back" 		
-        				value="<spring:message code="lbl.button-previous"	/>" onClick="stepBack();"/>	
+        				value="<spring:message code="lbl.button-previous"	/>"/>
         			<input type="button" class="btn btn-default"  	
         				value="<spring:message code="lbl.button-search"		/>"/>         			
            	   		<input type="button" class="btn btn-next" 		
-           	   			value="<spring:message code="lbl.button-next"		/>" onClick="stepNext();"/>		
+           	   			value="<spring:message code="lbl.button-next"		/>"/>
         			<input type="button" class="btn btn-OK"	
         				value="<spring:message code="lbl.button-confirm" 	/>"/>		
         		</div> 	 
@@ -99,27 +99,20 @@
 	</div>
 	
 	<div id="dlg-choose-type"	title="Oops!" class="sr-dialog"><spring:message code="lbl.alert-pick-type"/></div>
-	<div id="dlg-choose-shift"	title="Oops!" class="sr-dialog"><spring:message code="lbl.alert-pick-shift"/></div>
-
-	<!-----------------------------------------
-	[Labels]
-	------------------------------------------>
-	<c:set var="lblBlocks1"><spring:message code="lbl.blocks1"/></c:set>
-	<c:set var="lblBlocks2"><spring:message code="lbl.blocks2"/></c:set>	
-	<input type="hidden" id="lbl-blocks1" 	value="${lblBlocks1}"/>
-	<input type="hidden" id="lbl-blocks2" 	value="${lblBlocks2}"/>
+	<div id="dlg-choose-shift"  title="Oops!" class="sr-dialog"><spring:message code="lbl.alert-pick-shift"/></div>
 
 	<!-----------------------------------------
 	[Variables]
 	------------------------------------------>
-	<input type="hidden" id="hdn-validate"	value="${validate}"/>	
+	<input type="hidden" id="val-validate" value="${validate}"/>
 	
 	<!-----------------------------------------
 	[Scripts]
-	------------------------------------------>	
-	<script src="resources/scripts/MainMenu.js" 	type="text/javascript"></script>			
+	------------------------------------------>
+	<script src="resources/scripts/MainMenu.js" type="text/javascript"></script>
 	
 </body>
+
 
 
 

@@ -51,42 +51,32 @@
 
 		</section>
 	</div>
-	
-	<!-----------------------------------------
-	[Labels]
-	------------------------------------------>		
-	<c:set var="lblRequest">		<spring:message code="lbl.request"			/></c:set>	
-	<c:set var="lblAssociation">	<spring:message code="lbl.association"		/></c:set>
-	<c:set var="lblArrival"> 		<spring:message code="lbl.arrival" 			/></c:set>	
-	<c:set var="lblDeparture"> 		<spring:message code="lbl.departure" 		/></c:set>	
-	<c:set var="lblMonday"> 		<spring:message code="lbl.monday" 			/></c:set>	
-	<c:set var="lblTuesday"> 		<spring:message code="lbl.tuesday" 			/></c:set>	
-	<c:set var="lblWednesday"> 		<spring:message code="lbl.wednesday" 		/></c:set>	
-	<c:set var="lblThursday"> 		<spring:message code="lbl.thursday" 		/></c:set>	
-	<c:set var="lblFriday"> 		<spring:message code="lbl.friday"			/></c:set>	
-	<c:set var="lblNoRequests"> 	<spring:message code="lbl.alert-norequests"	/></c:set>	
-	<c:set var="lblNoAssocs"> 		<spring:message code="lbl.alert-noassocs"	/></c:set>	
-	<c:set var="lblUser"> 			<spring:message code="lbl.user"				/></c:set>	
-	<c:set var="lblAction"> 		<spring:message code="lbl.alert-action"		/></c:set>	
-
-	<input type="hidden" id="lbl-request" 		value="${lblRequest}" 		/>
-	<input type="hidden" id="lbl-association"	value="${lblAssociation}"	/>
-	<input type="hidden" id="lbl-arrival" 		value="${lblArrival}" 		/>
-	<input type="hidden" id="lbl-departure"		value="${lblDeparture}"	 	/>
-	<input type="hidden" id="lbl-monday" 		value="${lblMonday}" 		/>
-	<input type="hidden" id="lbl-tuesday" 		value="${lblTuesday}" 		/>
-	<input type="hidden" id="lbl-wednesday"		value="${lblWednesday}" 	/>
-	<input type="hidden" id="lbl-thursday" 		value="${lblThursday}" 		/>
-	<input type="hidden" id="lbl-friday" 		value="${lblFriday}"		/>
-	<input type="hidden" id="lbl-norequests" 	value="${lblNoRequests}" 	/>
-	<input type="hidden" id="lbl-noassocs" 		value="${lblNoAssocs}"		/>
-	<input type="hidden" id="lbl-user" 			value="${lblUser}"			/>
-	<input type="hidden" id="lbl-action" 		value="${lblAction}"		/>
 
 	<!-----------------------------------------
 	[Scripts]
 	------------------------------------------>		
-	<script type="text/javascript" src="resources/scripts/Utils.js">	</script>
-	<script type="text/javascript" src="resources/scripts/People.js">	</script>
+    <script>
+        var createLabels = (function (){
+            var labels = {
+                //Labels' name
+                lblRequest      : '<spring:message code="lbl.request"           />',
+                lblAssociation  : '<spring:message code="lbl.association"       />',
+                lblArrival      : '<spring:message code="lbl.arrival"           />',
+                lblDeparture    : '<spring:message code="lbl.departure"         />',
+                lblMonday       : '<spring:message code="lbl.monday"            />',
+                lblTuesday      : '<spring:message code="lbl.tuesday"           />',
+                lblWednesday    : '<spring:message code="lbl.wednesday"         />',
+                lblThursday     : '<spring:message code="lbl.thursday"          />',
+                lblFriday       : '<spring:message code="lbl.friday"            />',
+                lblNoRequests   : '<spring:message code="lbl.alert-norequests"  />',
+                lblNoAssocs     : '<spring:message code="lbl.alert-noassocs"    />',
+                lblUser         : '<spring:message code="lbl.user"              />',
+                lblAction       : '<spring:message code="lbl.alert-action"      />'
+            }
+            return function () { return labels };
+        })();
+    </script>
+    <script type="text/javascript" src="resources/scripts/Utils.js">	</script>
+	<script type="text/javascript" src="resources/scripts/People.js">	</script>    
 
 </body>
