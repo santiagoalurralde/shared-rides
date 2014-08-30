@@ -29,16 +29,16 @@
 					<h3><spring:message code="lbl.address"/></h3><br>
 					<span class="text-spaced">
 						Universidad Católica de Córdoba		<br>
-						Obispo Trejo 323 - Bº Centro.		<br>
+						Obispo Trejo 323 - B° Centro.		<br>
 						Córdoba, Argentina. 			
 					</span>						
 				</div>
 				
 				<div class="block-half block-right">
 					<input class="sr-inputs" type="text" name="name"	placeholder="Martin Paganni">	<br>
-					<input class="sr-inputs" type="text" name="email"	placeholder="mike@email.com">	<br>			
+					<input class="sr-inputs" type="text" name="email"   placeholder="mike@email.com">	<br>
 					<textarea rows="5" cols="30" class="sr-inputs" placeholder="Mensaje"></textarea>	<br>
-					<input class="btn" type="submit" value="<spring:message code="lbl.send"/>">
+					<input class="btn" type="submit" value='<spring:message code="lbl.send"/>'>
 				</div> 
 				
 				<div class="clearer"></div> 

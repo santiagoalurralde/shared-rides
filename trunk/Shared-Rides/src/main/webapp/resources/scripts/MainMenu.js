@@ -1,4 +1,4 @@
-var _step   = -1,   //Contador de Pasos
+var _step  	= -1,   //Contador de Pasos
     _user   = 0,    //Tipo de Usuario
     _shift  = 0;    //Turno
 
@@ -15,7 +15,7 @@ $(document).ready(function() {
         highlightImage($(this));
         changeDecision($(this));
     });
-    
+
     //Pressing next or back
     $(".btn-next, .btn-back").click(function() {
         update(_step);
@@ -27,19 +27,30 @@ $(document).ready(function() {
     
     $(".btn-default").click(function() {
         defaultSearch();
-    });    
+    });
+
+    $(".btn-next").click(function() {
+        stepNext();
+    });
+
+    $(".btn-back").click(function() {
+        stepBack();
+    });
 });
 
 /**
  * Checks if we can add 1 step
  */
 function stepNext() {
-    if(_step == 0 && _user == 0)
-        $("#dlg-choose-type").dialog({modal: true, draggable: false});    
-    else if(_step == 1 && _shift == 0)
-        $("#dlg-choose-shift").dialog({modal: true, draggable: false});    
-    else
+    if(_step == 0 && _user == 0) {
+        $("#dlg-choose-type").dialog({modal: true, draggable: false});
+    }
+    else if(_step == 1 && _shift == 0) {
+        $("#dlg-choose-shift").dialog({modal: true, draggable: false});
+    }
+    else {
         _step++;
+    }
 }
 
 /**
@@ -73,8 +84,7 @@ function defaultSearch() {
                 	person.distance = Math.ceil(person.distance);                    
                     var resultFound = templateFound(person);
                     $(".alerts").hide();  
-                    $tableFound.append(resultFound);
-                    $tableFound.show();      
+                    $tableFound.append(resultFound).show();
                 });    
             }
     });
@@ -88,14 +98,16 @@ function defaultSearch() {
  * Sends all data collected through post, and shows results
  */
 function customSearch() {
-    var coords,                           
+    var coords,
         $tableFound     = $(".table-found"),
-        templateFound   = Handlebars.compile($("#temp-table-found").html()); 
+        templateFound   = Handlebars.compile($("#temp-table-found").html());
 
-    if(_user == 2)
+    if(_user == 2) {
         coords = "[{lon=" + _lon.toString() + " , lat=" + _lat.toString() + "}]";
-    else
+    }
+    else {
         coords = gpxTrack.confirm();
+    }
                    
     $.post("find.do", {"user": _user , "shift": _shift, "mapData": coords},
         function(json) {
@@ -109,8 +121,7 @@ function customSearch() {
                     data.distance = Math.ceil(data.distance);                    
                     var resultFound = templateFound(data);
                     $(".alerts").hide();  
-                    $tableFound.append(resultFound);
-                    $tableFound.show();      
+                    $tableFound.append(resultFound).show();
                 });    
             }
     });
@@ -147,22 +158,22 @@ function update(step) {
             $(".btn-OK, .search-results, .step-usertype").hide();
             $(".btn-back, .btn-next").show("fast");
             $(".step-shift").show("fast");
-            if($("#hdn-validate").val() == "true")
+
+            if($("#val-validate").val() == "true")
                 $(".btn-default").show("fast");
+
             $(".btn-next").css("margin-left", "60px");
             $(".table-found td").remove();
-            
             break;
         case 2:
         	var $maps = $(".sr-maps");
-            highlightStep(step); 
+            highlightStep(step);
             $(".btn-OK").show();
             $maps.show();
             (_user == 2) ? $maps.load("mappedestrian.do") : $maps.load("mapdriver.do");
             $(".step-shift, .btn-next, .btn-default").hide();
-
             break;
-    }      
+    }
 }
 
 /**
@@ -171,10 +182,9 @@ function update(step) {
  * @param {Number} step - current step
  */
 function highlightStep(index) {
-    index = (index == -1) ? Math.abs(index) : index+1;   //If it's -1
-    var $step = $(".step"+ index);
-    $step.css("opacity", "1");
-    $step.siblings().css("opacity", ".2");
+    index = (index == -1) ? Math.abs(index) : index + 1;
+    $(".step"+ index).css("opacity", "1")
+                     .siblings().css("opacity", ".2");
 }
 
 /**
@@ -183,8 +193,8 @@ function highlightStep(index) {
  * @param {jquery} $target - Clicked Image
  */
 function highlightImage($target) {
-    $target.siblings().css("opacity", ".08");  
-    $target.css("opacity", "1");
+    $target.css("opacity", "1")
+           .siblings().css("opacity", ".08");
 }
 
 /**
@@ -196,15 +206,17 @@ function changeDecision($target){
     //1: Pedestrian - 2: Driver
     //1: Morning - 2: Afternoon
 
-    if($target.hasClass("choice-pedestrian"))
-        _user  = 1;  
-    else if($target.hasClass("choice-driver"))
-        _user  = 2; 
-    else if($target.hasClass("choice-morning"))
-        _shift = 1; 
-    else
-        _shift = 2;     
+    if($target.hasClass("choice-pedestrian")) {
+        _user = 1;
+    }
+    else if($target.hasClass("choice-driver")) {
+        _user = 2;
+    }
+    else if($target.hasClass("choice-morning")) {
+        _shift = 1;
+    }
+    else {
+        _shift = 2;
+    }
 }
-
-
 

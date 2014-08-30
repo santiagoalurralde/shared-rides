@@ -29,20 +29,20 @@
 		[Why Shared Rides]
 		------------------------------------------>
         <div class="advantages">	
-        	<h3>Por qu&eacute; Shared Rides?</h3>
+        	<h3><spring:message code="lbl.why"/></h3>
         	
         	<div>
 				<div class="block-third" >
 					<img class="advan-pic" src="resources/images/green.png"/><br>
-					<span>Cuidar el medioambiente</span>
+					<span><spring:message code="lbl.environment"/></span>
 				</div>
 				<div class="block-third">
 					<img class="advan-pic" src="resources/images/save.png"/><br>
-					<span>Ahorrar</span>				
+					<span><spring:message code="lbl.money"/></span>
 				</div>
 				<div class="block-third">
 					<img class="advan-pic" src="resources/images/traffic.png"/><br>
-					<span>Reducir el trafico</span>
+					<span><spring:message code="lbl.traffic"/></span>
 				</div>
 				<div class="clearer"></div>			
 			</div>

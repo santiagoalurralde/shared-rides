@@ -2,23 +2,25 @@
 [Profile Stylesheet]
 
 Project:		Shared Rides
-Last change:	24/08/2014
+Last change:	28/08/2014
 Assigned to:	Santiago Alurralde (sa)
 -------------------------------------------------------------------*/
 
 
 /*-----------------------------------------------------------------*/
 
-
 .sr-tupper-bottom {
 	/*	Section below */
+
 	margin-top: 		50px
 }
 
-.sr-board {	
+.sr-board {
+    /*  OVERRIDE */
 	/*	Container with white background */
+
 	background-color:	white;
-	padding:			20px 0 35px 0;
+	padding:			20px 0 35px;
 	width:				100%;	
 }
 
@@ -28,26 +30,22 @@ Assigned to:	Santiago Alurralde (sa)
 }
 
 .public-data {
-	float:				left;	
 	width: 				35%;
 }
 
 .private-data {
-	float:				right;
 	width: 				40%;
 }
 
 .picture-data {
-	float:				left;
 	width:				19%;
 	margin:				0 2% 0 3%;
 }
 
 .profile-data {
-	padding-left: 		20px;
-	padding-right: 		20px;
-	overflow:			auto;
-	min-height:			500px;
+    min-height:			500px;
+	overflow:			auto;    
+	padding:            0 20px;
 }
 
 .pedestrian-data {
@@ -59,25 +57,25 @@ Assigned to:	Santiago Alurralde (sa)
 }
 
 .star {
-	width:				50px;
 	float:				left;
-	margin-right:		2%
+	margin-right:		2%;
+    width:				50px;
 }
 
 .picture-profile {
-	box-shadow:			.45px 1px 3.5px #444;
+    border:				solid 4px #FFF;
+    box-shadow:			.45px 1px 3.5px #444;
 	color:				#000;
-	border:				solid #FFF 4px; 	
+    height:				150px;
 	width:				140px;
-	height:				150px;
 	z-index:			500;
 }
 
 #line {
 	height: 			778px;
 	position:			absolute;
-	left:				480px; 
-	top:				0;		
+	left:				480px;
+	top:				0;
 }
 
 .text-bold{
@@ -96,44 +94,49 @@ Assigned to:	Santiago Alurralde (sa)
 	width:				25px;	
 }
 
-.map-container{
-	margin: 			45px 0 0 17px; 
+.map-container {
+    /* Holds the map and its label */
+
+	margin: 			45px 0 17px;
 }
 
 
 /*------------------------------------------------------------------
-[Rating / ]
+[Rating]
 ------------------------------------------------------------------*/
 
 .rating {
+    /* Contains data and interface related to rating */
+
 	margin: 			5% 0 8%;
 }
 
 .rating-grade{
+    /* Contains current rating */
+
 	position: 			relative; 
 	top: 				12px	
 }
 
-
 #wrapper-rating {
+    box-sizing: 		border-box;
 	height: 			100%;
+    margin:				0;
 	padding:			0;
-	margin:				0;
-	box-sizing: 		border-box;
-	text-align: 		center;  
+	text-align: 		center;
 	vertical-align: 	middle;
 }
 
 .star-rating {
-  font-size: 			0;
-  white-space: 			nowrap;
-  display: 				inline-block;
-  width: 				250px;
-  height: 				50px;
-  overflow: 			hidden;
-  position: 			relative;
-  background:			url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
-  background-size: 		contain;
+    font-size: 			0;
+    white-space: 		nowrap;
+    display: 			inline-block;
+    width: 				250px;
+    height: 			50px;
+    overflow: 			hidden;
+    position: 			relative;
+    background:			url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+    background-size: 	contain;
 }
 	.star-rating i {
 	  opacity: 				0;
@@ -147,8 +150,8 @@ Assigned to:	Santiago Alurralde (sa)
 	  background-size: 		contain;
 	}
 	.star-rating input {
-	  -moz-appearance: 		none;
-	  -webkit-appearance: 	none;
+      -webkit-appearance: 	none;
+	     -moz-appearance: 	none;
 	  opacity: 				0;
 	  display: 				inline-block;
 	  width: 				20%;
@@ -175,33 +178,8 @@ Assigned to:	Santiago Alurralde (sa)
 	}
 
 
-.btn{
-	border-radius:		2px;	
-	background: 		-webkit-linear-gradient(top, #90AA44, #9ED474);
-	background: 		   -moz-linear-gradient(top, #90AA44, #9ED474);
-	box-shadow: 		0 1px 2px rgba(0,0,0,.2);
-	border: 			solid 1px #90AA44;
-	color:				#FFF;
-	font-size:			100%;
-	font-weight:		bold;
-	height:				30px;
-	margin:				10px 0;
-	text-shadow: 		0 1px 1px rgba(0,0,0,.3);
-	width:				130px;
-}
-
-.btn:hover {
-	background: 		-webkit-linear-gradient(top, #99BB66, #9ED474);
-	background: 		   -moz-linear-gradient(top, #99BB66, #9ED474);
-}
-
-.cell-check-map {
-	cursor:				pointer	
-}
-
-
 /*------------------------------------------------------------------
-[Tables / ]
+[Tables]
 ------------------------------------------------------------------*/
 
 .sr-schedule tr .cell-check-map:hover {
@@ -211,3 +189,18 @@ Assigned to:	Santiago Alurralde (sa)
 	background:		   -moz-linear-gradient(top, #F4F4F4, #E0E0E0);
 }
 
+.cell-check-map {
+    /* Cell that allows checking that schedule-slot's map */
+
+    cursor:			pointer
+}
+
+/*------------------------------------------------------------------
+[OVERRIDES]
+------------------------------------------------------------------*/
+
+.btn{
+    /*  OVERRIDE */
+
+    margin:	10px 0;
+}

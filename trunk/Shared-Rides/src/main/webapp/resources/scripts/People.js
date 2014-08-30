@@ -1,22 +1,22 @@
 var _listenerScheduleTarget;
 
 
-/*******************************************************************************
+/*******************************************************
  * FUNCTIONS
- ******************************************************************************/
+ *******************************************************/
 
 /**
  * Cleans Tables at the beginning and after updating.
  */
 function createTables() {
-	var content = "<tr><th>"+ $('#lbl-user').val() +"</th></tr>";	
+	var content = "<tr><th>"+ getLabel("lblUser") +"</th></tr>";
 	$(".table-pending, .table-associated").html(content);
 }
 
 load();
 
 /**
- * Receives associations from server and calls createTables().
+ * Receives associations from server, calls createTables().
  */
 function load() {
 	createTables();
@@ -33,17 +33,17 @@ function load() {
 	 */
 	$.post("loadAssociations.do", 
 		function(json) {
-			var jsonNew = $.parseJSON(json);
+			var users = $.parseJSON(json);
 		
 			//Pending
-			$.each(jsonNew[0], function(i, data) {
+			$.each(users[0], function(i, user) {
 				var applicant =	"<div>"+
-									"<a href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
-										"<img src='printImgFile.do?pic="+ data.pic +"'>"+
+									"<a href='/Shared-Rides/profile.do?user="+ user.userId +"'>"+
+										"<img src='printImgFile.do?pic="+ user.pic +"'>"+
 									"</a>"+
-									"<span>"+ data.name +"</span>"+
-									"<input type='hidden' id="+ data.userId +">"+ 			
-									"<button class='btn btn-pending' onclick='listenerSchedule(this)'>"+ $('#lbl-request').val() +"</button>"+
+									"<span>"+ user.name +"</span>"+
+									"<input type='hidden' id="+ user.userId +">"+
+									"<button class='btn btn-pending' onclick='listenerSchedule(this)'>"+ getLabel("lblRequest") +"</button>"+
 								"</div>";
 	
 				$tablePending.append("<tr><td>"+ applicant +"</td></tr>").show();
@@ -51,32 +51,32 @@ function load() {
 			});		
 			
 			//Associated
-			$.each(jsonNew[1], function(i, data) {
+			$.each(users[1], function(i, user) {
 				var friend =	"<div>"+
-									"<a href='/Shared-Rides/profile.do?user="+ data.userId +"'>"+
-										"<img src='printImgFile.do?pic="+ data.pic +"'>"+
+									"<a href='/Shared-Rides/profile.do?user="+ user.userId +"'>"+
+										"<img src='printImgFile.do?pic="+ user.pic +"'>"+
 									"</a>"+
-									"<span>"+ data.name +"</span>"+
-									"<input type='hidden' id="+ data.userId +">"+ 	
-									"<button class='btn btn-associated' onclick='listenerSchedule(this)'>"+ $('#lbl-association').val() +"</button>"+
+									"<span>"+ user.name +"</span>"+
+									"<input type='hidden' id="+ user.userId +">"+
+									"<button class='btn btn-associated' onclick='listenerSchedule(this)'>"+ getLabel("lblAssociation") +"</button>"+
 								"</div>";
 	
 				$tableAssociated.append("<tr><td>"+ friend +"</td></tr>").show();
 				$alertAssociated.hide();
 			});	
 			
-			if(jsonNew[0] == "" && $pending.find(".alerts").length == 0) {
+			if(users[0] == "" && $pending.find(".alerts").length == 0) {
 				$("<div></div>", {
 					class: "alerts alert-pending",
-					html: "<img src='resources/images/message.png'> <p><br>"+ $('#lbl-norequests').val()
+					html: "<img src='resources/images/message.png'> <p><br>"+ getLabel("lblNoRequests")
 				}).appendTo($pending);
 
 				$tablePending.hide();
 			}
-			if(jsonNew[1] == "" && $associated.find(".alerts").length == 0) {
+			if(users[1] == "" && $associated.find(".alerts").length == 0) {
 				$("<div></div>", {
 					class: "alerts alert-associated",
-					html: "<img src='resources/images/message.png'> <p><br>"+ $('#lbl-noassocs').val(),
+					html: "<img src='resources/images/message.png'> <p><br>"+ getLabel("lblNoAssocs")
 				}).appendTo($associated);						
 
 				$tableAssociated.hide();
@@ -91,33 +91,36 @@ function load() {
  * @param {number} typeAssoc - type of association
  */
 function viewSchedule(json, typeAssoc) {	
-	var jsonNew		= $.parseJSON(json),
+	var relations   = $.parseJSON(json),
 		days		= new Array(),
 		$requested 	= $(".requested"),
 		$offered 	= $(".offered");
 	
 	days[7] = null;	
 	
-	$.each(jsonNew.requested, function(i, data) {	
+	$.each(relations.requested, function(i, data) {
 		fetchDays(days, data);
 	});	
 	printSchedule(days, $(".table-requested"), typeAssoc);
 	
 	days		= new Array();
-	days[7] 	= null;	
-	
-	$.each(jsonNew.offered, function(i, data) {	
+	days[7] 	= null;
+
+	$.each(relations.offered, function(i, data) {
 		fetchDays(days, data);
 	});
 	printSchedule(days, $(".table-offered"), typeAssoc);
 	
-	if(jsonNew.requested == "")
+	if(relations.requested == "") {
 		$requested.hide()
 				  .siblings().css({"float":"none", "width":"100%"});
-	if(jsonNew.offered == "")
+	}
+	if(relations.offered == "") {
 		$offered.hide()
 		        .siblings().css({"float":"none", "width":"100%"});
+	}
 }
+
 
 /**
  * Fills up array "days" with objects
@@ -151,8 +154,8 @@ function printSchedule(days, $table, typeAssoc) {
 	
 	$table.html("<tr><th></th></tr>");
 	
-	var	rIn 			= 	"<tr id='in'><td>"+ $('#lbl-arrival').val() +"</td></tr>", 
-		rOut 			= 	"<tr id='out'><td>"+ $('#lbl-departure').val() +"</td></tr>",
+	var	rIn 			= 	"<tr id='in'><td>"+ getLabel("lblArrival") +"</td></tr>", 
+		rOut 			= 	"<tr id='out'><td>"+ getLabel("lblDeparture") +"</td></tr>",
 		bCancelAssoc	=	"<button title='Cancel Association' onclick='actionAssociation(this, false)'>" +
 								"<img src='resources/images/cancel.png'>" +
 							"</button>",
@@ -253,7 +256,7 @@ function actionAssociation(target, action) {
 		
 	$.post("responseAssoc.do", {"assocId": assocId, "response": action}, 
 		function() {
-			alert($('#lbl-action').val());
+			alert(getLabel("lblAction"));
 			load();
 			listenerSchedule(_listenerScheduleTarget);
 		}

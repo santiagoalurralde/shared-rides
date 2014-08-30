@@ -8,29 +8,19 @@ var	_schPed 		= [],
  * FIXES
  ******************************************************************************/
 
-if ($("#val-driver").val() == "false") // It's not a driver
+if ($("#val-driver").val() == "false") {	// It's not a driver
 	fixView($pedestrianData);
-else if ($("#val-pedestrian").val() == "false") // It's not a pedestrian
+}
+else if ($("#val-pedestrian").val() == "false") {	// It's not a pedestrian
 	fixView($driverData);
-else
+}
+else {
 	$.merge($pedestrianData, $driverData).show();
+}
 
 /*******************************************************************************
  * EVENTS
  ******************************************************************************/
-
-$(function() {
-	$(document).tooltip({
-			position : {
-				my 		: "center bottom-20",
-				at  	: "center top",
-				using	: function(position, feedback) {
-					$(this).css(position);
-					$("<div>").addClass("arrow").addClass(feedback.vertical).addClass(feedback.horizontal).appendTo(this);
-				}
-			}
-	});
-});
 
 $(document).ready(function() {
 
@@ -46,22 +36,35 @@ $(document).ready(function() {
 		'type' 		: 'iframe'
 	});
 
+    // Tooltip
+    $(document).tooltip({
+        position : {
+            my 		: "center bottom-20",
+            at  	: "center top",
+            using	: function(position, feedback) {
+                $(this).css(position);
+                $("<div>").addClass("arrow").addClass(feedback.vertical).addClass(feedback.horizontal).appendTo(this);
+            }
+        }
+    });
+
 	// If it's my profile, it shouldn't rate
-	if ($("#val-mine").val() == "true")
+	if ($("#val-mine").val() == "true") {
 		$(".star").unwrap();
+	}
 
 	// Request Association
 	$(".btn-request-assoc").click(function() {
-		//TODO MESSAGE
-		if (confirm("Confirma el envío de esta petición")) {
-			requestAssociation(this);
-			disable($(this), true);
+		var $this = $(this);
+		if (confirm(getLabel("lblAlertConfirm"))) {
+			requestAssociation($this);
+			disable($this, true);
 		}
 	});
 
 	// Show Current Map
 	$(".cell-check-map").click(function() {
-		showMap(this);
+		showMap($(this));
 	});
 });
 
@@ -80,10 +83,12 @@ function disable($target, flag) {
 	}
 	else {
 		$target.prop("disabled", false);
-		if($target.closest("table").hasClass("table-ped"))
+		if($target.closest("table").hasClass("table-ped")) {
 			$img.attr("src", "resources/images/steering.png");
-		else
+		}
+		else {
 			$img.attr("src", "resources/images/seat.png");
+		}
 	}
 }
 
@@ -98,14 +103,18 @@ function disable($target, flag) {
  * @param {jquery} $targetOther - div that's gonna be hidden.
  */
 function fixView($target) {
-	$target.siblings().hide();
-	$target.css({"float":"none", "width":"100%", "text-align":"left"}).show();
+	$target.siblings()
+           .hide();
+	
+	$target.css({"float":"none", "width":"100%", "text-align":"left"})
+           .show();
+
 	$(".sr-schedule").css("font-size", "85%");
-	$('.star').css({"float":"left", "margin-right":"1%", "margin-left":"0"});
-	$('.rating').css("margin", "2% 0 0 0");
-	$('.profile-data').css({"padding-right":"70px", "padding-left":"70px"});
-	$('.map-static').css({"height":"400px", "width":"760px"});
-	$('.map-container').css("margin-left", "0");
+	$(".star").css({"float":"left", "margin-right":"1%", "margin-left":"0"});
+	$(".rating").css("margin", "2% 0 0 0");
+	$(".profile-data").css({"padding-right":"70px", "padding-left":"70px"});
+	$(".map-static").css({"height":"400px", "width":"760px"});
+	$(".map-container").css("margin-left", "0");
 }
 
 /**
@@ -116,8 +125,6 @@ function fixView($target) {
 function fillTable(schedule, isDriver) {
 	var $table, 
 		image, 
-		hdnsMapIn, 
-		hdnsMapOut,	
 		$valMine = $("#val-mine").val();
 	
 	if (isDriver) {
@@ -130,67 +137,83 @@ function fillTable(schedule, isDriver) {
 	}
 
 	// Create Rows
-	$table.append("<tr id='day'></tr><tr id='in'></tr><tr id='out'></tr>");
-	var	$rowDay  = $table.find("#day"),
-		$rowOut  = $table.find("#out"),
-		$rowIn   = $table.find("#in");
-
-	$rowDay.append("<th></th>");
-	$rowIn.append("<td>"+ $("#lbl-arrival").val() +"</td>");
-	$rowOut.append("<td>"+ $("#lbl-departure").val() +"</td>");
+	var	$rowDay  = $table.find(".row-day"),
+		$rowOut  = $table.find(".row-out"),
+		$rowIn   = $table.find(".row-in");
 
 	for (var i=0; i<schedule.length; i++) {
-		var	btnReqIn	= "", 
-			btnReqOut	= "";
-
+		
+		$("<th></th>", {
+			html	: getDayLabel(schedule[i].day)	
+		}).appendTo($rowDay);
+		
+		$("<td></td>", {
+			class	: "cell-check-map",
+			html	: schedule[i].hourIn
+		}).appendTo($rowIn);
+		
+		$("<td></td>", {
+			class	: "cell-check-map",
+			html	: schedule[i].hourOut
+		}).appendTo($rowOut);
+		
+		var	$lastCellIn = $rowIn.find(".cell-check-map:last-child"),
+			$lastCellOut = $rowOut.find(".cell-check-map:last-child");
+		
 		if ($valMine == "false") {
 			// If it's my profile can't invite myself
-			btnReqIn	=	
-				"<button class='btn-request-assoc btn-req-in"				+
-					schedule[i].day +"' onclick='disable($(this), true);'>"	+
-					"<img src='resources/images/"+ image +"'/>"				+
-				"</button>";
-			btnReqOut	= 	
-				"<button class='btn-request-assoc btn-req-out"				+
-					schedule[i].day +"' onclick='disable($(this), true);'>"	+
-					"<img src='resources/images/"+ image +"'/>"				+
-				"</button>";
+			$("<button></button>", {
+				class	: "btn-request-assoc btn-req-in",
+				html	: schedule[i].day + "<img src='resources/images/"+ image +"'/>"
+			}).appendTo($lastCellIn);
+			
+			$("<button></button>", {
+				class	: "btn-request-assoc btn-req-out",
+				html	: schedule[i].day + "<img src='resources/images/"+ image +"'/>"
+			}).appendTo($lastCellOut);
 		}
 
 		if (!isDriver) {
-			hdnsMapIn 	=	
-				"<input class='hdn-lat' type='hidden' value='"	+
-					schedule[i].latIn	+"'/>"					+
-				"<input class='hdn-lon' type='hidden' value='"	+
-					schedule[i].lonIn	+"'/>";	
-			hdnsMapOut	=
-				"<input class='hdn-lat' type='hidden' value='"	+
-					schedule[i].latOut	+"'/>"					+
-			 	"<input class='hdn-lon' type='hidden' value='"	+
-					schedule[i].lonOut	+"'/>";						
+			$("<input>", {
+				type	: "hidden",
+				class	: "hdn-lat",
+				value	: schedule[i].latIn
+			}).appendTo($lastCellIn);
+			
+			$("<input>", {
+				type	: "hidden",
+				class	: "hdn-lon",
+				value	: schedule[i].lonIn
+			}).appendTo($lastCellIn);
+			
+			$("<input>", {
+				type	: "hidden",
+				class	: "hdn-lat",
+				value	: schedule[i].latOut
+			}).appendTo($lastCellOut);
+			
+			$("<input>", {
+				type	: "hidden",
+				class	: "hdn-lon",
+				value	: schedule[i].lonOut
+			}).appendTo($lastCellOut);			
 		} 
 		else {
-			hdnsMapOut	= 	
-			"<input class='hdn-path' type='hidden' value='"	+
-				schedule[i].pathIn	+"'/>";
-			hdnsMapIn 	= 	
-			"<input class='hdn-path' type='hidden' value='"	+
-				schedule[i].pathOut	+"'/>";
+			$("<input>", {
+				type	: "hidden",
+				class	: "hdn-path",
+				value	: schedule[i].pathIn
+			}).appendTo($lastCellIn);
+			
+			$("<input>", {
+				type	: "hidden",
+				class	: "hdn-path",
+				value	: schedule[i].pathOut
+			}).appendTo($lastCellOut);
 		}
-
-		$rowDay.append("<th>"+ getDayLabel(schedule[i].day) +"</th>");
-		$rowIn.append(
-			"<td class='cell-check-map'>"+ 
-				schedule[i].hourIn + btnReqIn + hdnsMapIn + 
-			"</td>");
-		$rowOut.append(
-			"<td class='cell-check-map'>"+ 
-				schedule[i].hourOut + btnReqOut	+ hdnsMapOut + 
-			"</td>");
 	}
 
-	//TODO MESSAGE
-	$(".cell-check-map").prop("title", "Ver mapa en este horario");
+	$(".cell-check-map").prop("title", getLabel("lblTipCheckMap"));
 	
 	disableRequests(schedule, isDriver);
 }
@@ -204,22 +227,26 @@ function fillTable(schedule, isDriver) {
 function disableRequests(schedule, isDriver) {
 
 	for (var i=0; i<schedule.length; i++) {
-		var $btnReqIn	= $(".btn-req-in"+ schedule[i].day),
+		var	$btnReqIn	= $(".btn-req-in"+ schedule[i].day),
 			$btnReqOut	= $(".btn-req-out"+ schedule[i].day);
 
 		if (!isDriver) {
 			// If Pedestrian has driver, can't invite him.
-			if (schedule[i].hasDriverIn == "true" || schedule[i].allowIn == "false")
+			if (schedule[i].hasDriverIn == "true" || schedule[i].allowIn == "false") {
 				disable($btnReqIn, true);
-			if (schedule[i].hasDriverOut == "true" || schedule[i].allowOut == "false")
+			}
+			if (schedule[i].hasDriverOut == "true" || schedule[i].allowOut == "false") {
 				disable($btnReqOut, true);
+			}
 		} 
 		else {
 			// If Driver has no seats, can't invite him.
-			if (schedule[i].freeSeatsIn == 0 || schedule[i].allowIn == "false")		
+			if (schedule[i].freeSeatsIn == 0 || schedule[i].allowIn == "false") {		
 				disable($btnReqIn, true);
-			if (schedule[i].freeSeatsOut == 0 || schedule[i].allowOut == "false")				
+			}
+			if (schedule[i].freeSeatsOut == 0 || schedule[i].allowOut == "false") {				
 				disable($btnReqOut, true);
+			}
 		}
 	}
 }
@@ -227,35 +254,40 @@ function disableRequests(schedule, isDriver) {
 /**
  * Shows current map according to selected cell.
  * 
- * @param {javascript} target - clicked cell.
+ * @param {jquery} $target - clicked cell.
  */
-function showMap(target) {
-	if ($(target).closest("table").hasClass("table-ped"))
-		setMapPedestrian($(target).find(".hdn-lon").val(), $(target).find(".hdn-lat").val());
-	else
-		setMapDriver($(target).find(".hdn-path").val());
+function showMap($target) {
+	var	isPedestrian 	= $target.closest("table").hasClass("table-ped"),
+		hdnLon 			= $target.find(".hdn-lon").val(),
+		hdnLat 			= $target.find(".hdn-lat").val(),
+		hdnPath			= $target.find(".hdn-path").val();
+	
+	if (isPedestrian) {
+		setMapPedestrian(hdnLon, hdnLat);
+	}
+	else {
+		setMapDriver(hdnPath);
+	}
 }
 
 /**
  * Requests an association according to selected cell.
  * 
- * @param {javascript} target - clicked button.
+ * @param {jquery} $target - clicked button.
  */
-function requestAssociation(target) {
-	var day    		= $(target).closest("td").index(),
-		inOut  		= ($(target).closest("tr").attr("id") == "in") ? "0" : "1";
+function requestAssociation($target) {
+	var day    		= $target.closest("td").index(),
+		inOut  		= ($target.closest("tr").hasClass("row-in")) ? "0" : "1",
 		idUser 		= $("#val-id").val(),
 		$btnReqIn	= $(".btn-req-in"+ day),
 		$btnReqOut	= $(".btn-req-out"+ day);
 
-//TRY THIS OUT
-//
-//$(target).closest("td").index()+1
-
-	if (inOut == "0")
+	if (inOut == "0") {
 		disable($btnReqIn, true);
-	if (inOut == "1")
+	}
+	else {
 		disable($btnReqOut, true);
+	}
 
 	$.post("requestAssoc.do",
 			{
@@ -264,8 +296,9 @@ function requestAssociation(target) {
 				"idUser": idUser
 			}, 
 			function(msg) {
-				if (msg != "")
+				if (msg != "") {
 					alert(msg);
+				}
 	});
 }
 
