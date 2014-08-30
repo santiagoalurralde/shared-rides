@@ -9,8 +9,9 @@ var _listenerScheduleTarget;
  * Cleans Tables at the beginning and after updating.
  */
 function createTables() {
-	var content = "<tr><th>"+ getLabel("lblUser") +"</th></tr>";
-	$(".table-pending, .table-associated").html(content);
+	$("<tr></tr>", {
+		html: "<th>"+ getLabel("lblUser") +"</th>"
+	}).htmlTo(".table-pending, .table-associated");
 }
 
 load();
@@ -37,31 +38,27 @@ function load() {
 		
 			//Pending
 			$.each(users[0], function(i, user) {
-				var applicant =	"<div>"+
-									"<a href='/Shared-Rides/profile.do?user="+ user.userId +"'>"+
-										"<img src='printImgFile.do?pic="+ user.pic +"'>"+
-									"</a>"+
-									"<span>"+ user.name +"</span>"+
-									"<input type='hidden' id="+ user.userId +">"+
-									"<button class='btn btn-pending' onclick='listenerSchedule(this)'>"+ getLabel("lblRequest") +"</button>"+
-								"</div>";
+				var applicant =	"<a href='/Shared-Rides/profile.do?user="+ user.userId +"'>"+
+									"<img src='printImgFile.do?pic="+ user.pic +"'>"+
+								"</a>"+
+								"<span>"+ user.name +"</span>"+
+								"<input type='hidden' id="+ user.userId +">"+
+								"<button class='btn btn-pending' onclick='listenerSchedule(this)'>"+ getLabel("lblRequest") +"</button>";
 	
-				$tablePending.append("<tr><td>"+ applicant +"</td></tr>").show();
+				$tablePending.append("<tr><td><div>"+ applicant +"</div></td></tr>").show();
 				$alertPending.hide();
 			});		
 			
 			//Associated
 			$.each(users[1], function(i, user) {
-				var friend =	"<div>"+
-									"<a href='/Shared-Rides/profile.do?user="+ user.userId +"'>"+
-										"<img src='printImgFile.do?pic="+ user.pic +"'>"+
-									"</a>"+
-									"<span>"+ user.name +"</span>"+
-									"<input type='hidden' id="+ user.userId +">"+
-									"<button class='btn btn-associated' onclick='listenerSchedule(this)'>"+ getLabel("lblAssociation") +"</button>"+
-								"</div>";
-	
-				$tableAssociated.append("<tr><td>"+ friend +"</td></tr>").show();
+				var friend =	"<a href='/Shared-Rides/profile.do?user="+ user.userId +"'>"+
+									"<img src='printImgFile.do?pic="+ user.pic +"'>"+
+								"</a>"+
+								"<span>"+ user.name +"</span>"+
+								"<input type='hidden' id="+ user.userId +">"+
+								"<button class='btn btn-associated' onclick='listenerSchedule(this)'>"+ getLabel("lblAssociation") +"</button>";
+
+				$tableAssociated.append("<tr><td><div>"+ friend +"</div></td></tr>").show();
 				$alertAssociated.hide();
 			});	
 			
