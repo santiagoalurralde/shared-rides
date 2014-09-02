@@ -405,7 +405,7 @@ function checkHours($target){
         $hourOut = $("#hour-"+ d + "out"),
         $hourIn  = $("#hour-"+ d + "in");
 
-    if($hourOut.val() < $hourIn.val() && $hourOut.val() != "none") {       
+    if($hourOut.val() < $hourIn.val() && ($hourOut.val() != "none" || $hourIn.val() != "none")) {       
     	toggleAlert(true, getLabel("lblAlertHours"), "alert-schedules");
         $(".map-definition").hide();
         $(".btn-map").prop("disabled", true);
