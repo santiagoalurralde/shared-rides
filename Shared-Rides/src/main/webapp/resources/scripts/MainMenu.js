@@ -146,8 +146,9 @@ function update(step) {
             break;
         case 1:
             $.post("validateDefaultFind.do", {"user": _user},
-                    function(flag) {
-            			(flag == "true") ? $(".btn-default").show("fast") : $(".btn-default").hide();
+                    function(json) {
+            			var jsonNew = $.parseJSON(json);
+            			(jsonNew.validate == true) ? $(".btn-default").show() : $(".btn-default").hide();
             });
         	
             highlightStep(step);
