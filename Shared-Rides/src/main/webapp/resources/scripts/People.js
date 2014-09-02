@@ -9,9 +9,10 @@ var _listenerScheduleTarget;
  * Cleans Tables at the beginning and after updating.
  */
 function createTables() {
-	$("<tr></tr>", {
+	var contentResetter = $("<tr></tr>", {
 		html: "<th>"+ getLabel("lblUser") +"</th>"
-	}).htmlTo(".table-pending, .table-associated");
+	});
+	$(".table-pending, .table-associated").html(contentResetter);
 }
 
 load();
