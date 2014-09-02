@@ -232,7 +232,7 @@ function checkPassword() {
     var $passwordFirst = $("#password-first"),
         $passwordCheck = $("#password-check");
 
-    $passwordFirst.on("change", function(event) {
+    $passwordFirst.change(function(event) {
         checkPassword();
     });
 
@@ -465,7 +465,7 @@ function signUp() {
             nSeats          = $("#number-seats").find("option:selected").val();
            
             $.post("register.do", {"organization": org ,
-                                   "personal-id":   pId,
+                                   "personal-id":  pId,
                                    "pw":           pw,
                                    "name":         name,
                                    "surname":      surname,
@@ -565,7 +565,7 @@ function saveMap() {
  */
 function defineMap($target) {
     var d           = $target.parent().index(),
-        io          = $target.closest(tr).data("io"),
+        io          = $target.closest("tr").data("io"),
         userTypeDay = $("usertype-day-"+ d).val(),
         index       = Number(d)-1;
 
