@@ -154,9 +154,10 @@ function checkValues0() {
         flag = checkLength(iptL);
     }
     
-    if(!flag)
+    if(!flag) {
         toggleAlert(true, getLabel("lblAlertInputs"), "alert-inputs");
-
+    }
+    
     return flag;
 }
 
@@ -314,16 +315,18 @@ function paint($target, flag) {
  * @param {String} flag - Additional class for the alert.
  */
 function toggleAlert(flag, msg, cls) {
-    var $alertPlusClass = $(".alerts."+cls);
-
+	var $alertPlusClass = "";
+	
     if(flag) {
-        $(".alerts").addClass(cls);     
+        $(".alerts").addClass(cls);
+        $alertPlusClass = $(".alerts."+ cls);
         $alertPlusClass.html("<p>"+ msg);
         $alertPlusClass.show("fast");          
     }
     else {
-        $alertPlusClass.hide("fast");
-        $alertPlusClass.removeClass(cls);       
+    	$alertPlusClass = $(".alerts."+ cls);
+    	$alertPlusClass.hide("fast");
+    	$alertPlusClass.removeClass(cls);       
     }
 }
 
@@ -396,24 +399,23 @@ function checkUserExists() {
  * Checks if hours are valid.
  */
 function checkHours($target){
-    var d        = $target.parent().index() + 1,
-        io       = $target.closest("tr").data("io"),
-        $hourOut = $("#hour-"+ d + "out");
+	
+    var d        = $target.parent().index(),
+        $hourOut = $("#hour-"+ d + "out"),
         $hourIn  = $("#hour-"+ d + "in");
 
-    if(io == "out")
-        $hourIn.on("change", function(event) {
-            checkHours(this);
-        }); 
-
-    if($hourOut.val() < $hourIn.val()) {
+    if($hourOut.val() < $hourIn.val() && $hourOut.val() != "none") {
+    	alert("true");
+        
+    	toggleAlert(true, getLabel("lblAlertHours"), "alert-schedules");
         $(".map-definition").hide();
-        toggleAlert(true, getLabel("lblAlertHours"), "alert-schedules");
         $(".btn-map").prop("disabled", true);
     }
     else {
+    	alert("false");
+
+        toggleAlert(false, "", "alert-schedules");      	
         $(".map-definition").show();        
-        toggleAlert(false, "", "alert-schedules");      
         $(".btn-map").prop("disabled", false);
     }
 }
@@ -437,7 +439,7 @@ function subscribes($target){
     else {
         $btnIn.add($btnOut).addClass("btn-define")
 		   .removeClass("btn-unsubscribed")
-		   .prop("disabled", true);      	
+		   .prop("disabled", false);      	
     }
 }
 
