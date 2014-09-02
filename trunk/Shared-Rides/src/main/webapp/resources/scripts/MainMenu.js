@@ -11,14 +11,9 @@ $(document).ready(function() {
     start();
 
     //Acciones al presionar las imagenes
-    $(".choice-driver, .choice-pedestrian").click(function() {
+    $(".choices").click(function() {
         highlightImage($(this));
         changeDecision($(this));
-    });
-    
-    $(".choice-afternoon, .choice-morning").click(function() {
-        highlightImage($(this));
-        (changeDecision($(this)) == "true") ? $(".btn-default").show("fast") : $(".btn-default").hide();
     });
 
     //Pressing next or back
@@ -158,11 +153,16 @@ function update(step) {
             $(".btn-next").css("margin-left", "0");
             break;
         case 1:
+            $.post("validateDefaultFind.do", {"user": _user},
+                    function(flag) {
+            			(flag == "true") ? $(".btn-default").show("fast") : $(".btn-default").hide();
+            });
+        	
             highlightStep(step);
             $(".sr-maps").html("");
             $(".btn-OK, .search-results, .step-usertype").hide();
             $(".btn-back, .btn-next").show("fast");
-            $(".step-shift").show("fast");
+            $(".step-shift").show("fast");               
             $(".btn-next").css("margin-left", "60px");
             $(".table-found td").remove();
             break;
@@ -213,18 +213,11 @@ function changeDecision($target){
     else if($target.hasClass("choice-driver")) {
         _user = 2;
     }
+    else if($target.hasClass("choice-morning")) {
+        _shift = 1;
+    }
     else {
-    	if($target.hasClass("choice-morning")) {
-	        _shift = 1;
-	    }
-	    else {
-	        _shift = 2;
-	    }
-    	  	
-        $.post("validateDefaultFind.do", {"user": _user , "shift": _shift},
-                function(flag) {
-        			return flag;
-        });
+        _shift = 2;
     }
 }
 
