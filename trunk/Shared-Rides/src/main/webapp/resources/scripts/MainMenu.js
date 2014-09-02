@@ -65,7 +65,7 @@ function defaultSearch() {
     var $tableFound     = $(".table-found"),
         templateFound   = Handlebars.compile($("#temp-table-found").html()); 
 
-    $.post("find.do", {"user": _user , "shift": _shift},
+    $.post("defaultFind.do", {"user": _user , "shift": _shift},
         function(json) {
             var peopleFound = $.parseJSON(json);
             if(peopleFound == "") {

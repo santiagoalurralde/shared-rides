@@ -31,8 +31,8 @@
 		------------------------------------------>
 		<script src="resources/jquery/jquery-1.10.2.js">		</script>
 		<script src="resources/jquery/jquery-ui.js">			</script>
-		<!--<script src="resources/handlebars/handlebars-1.3.0.js">	</script>			
-		<script src="resources/scripts/Notifications.js">		</script> -->
+		<script src="resources/handlebars/handlebars-1.3.0.js">	</script>			
+		<script src="resources/scripts/Notifications.js">		</script>
 	</head> 
 
 	<body> 
