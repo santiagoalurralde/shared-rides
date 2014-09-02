@@ -339,6 +339,20 @@ public class FindUserService {
 			markers[i][1] = jsonMarker.get("lat").getAsFloat();
 		}
 	}
+	
+	public String validateDefaultFind(int typeUser, User u){
+		
+		JsonObject json = new JsonObject();
+		boolean validate = true;
+
+		if (typeUser == 1 && u.getPedestrian() != null) validate = false;
+		if (typeUser == 2 && u.getDriver() != null) validate = false;
+
+		json.addProperty("validate", validate);
+		
+		return json.toString();
+	}
+	
 }
 
 	
