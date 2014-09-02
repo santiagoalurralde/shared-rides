@@ -90,16 +90,10 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/validateDefaultFind.do", method = RequestMethod.POST)
-	public ModelAndView validateFind(@RequestParam("user") int typeUser,
+	public @ResponseBody String validateFind(@RequestParam("user") int typeUser,
 								HttpServletRequest request){
-		ModelAndView model = new ModelAndView();
-		boolean validate = false;
 		User u = (User) request.getSession().getAttribute("user");
-		if (typeUser == 1 && u.getPedestrian() != null) validate = true;
-		if (typeUser == 2 && u.getDriver() != null) validate = true;
-
-		model.addObject("validate", validate);
-		return model;
+		return findUserService.validateDefaultFind(typeUser, u);
 	}
 	
 }
