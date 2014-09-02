@@ -168,7 +168,7 @@ public class SignupUserService {
 		JsonArray arrayMarkers = (JsonArray) obj;
 		
 		for (int i = 0; i < arrayMarkers.size(); i++){
-			if(!(arrayMarkers.get(i).toString().equalsIgnoreCase('"'+"Unsuscribed"+'"'))){
+			if(!(arrayMarkers.get(i).toString().equalsIgnoreCase('"'+"Unsubscribed"+'"'))){
 				JsonObject jsonDay = (JsonObject) arrayMarkers.get(i);
 			
 				Schedule sch = new Schedule();
