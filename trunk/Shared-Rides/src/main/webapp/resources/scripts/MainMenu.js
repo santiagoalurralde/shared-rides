@@ -1,6 +1,7 @@
 var _step  	= -1,   //Contador de Pasos
     _user   = 0,    //Tipo de Usuario
     _shift  = 0;    //Turno
+	_isValid = "";
 
 
 /*******************************************************
@@ -147,10 +148,7 @@ function update(step) {
         case 1:
             $.post("validateDefaultFind.do", {"user": _user},
                     function(json) {     	
-		                var isValid = (function (){
-		                	var jsonNew = $.parseJSON(json);
-		                    return function () { return jsonNew.validate; };
-		                })();
+		            	var _isValid = $.parseJSON(json);
             });
         	
             highlightStep(step);
@@ -164,7 +162,7 @@ function update(step) {
         case 2:
         	var $maps = $(".sr-maps");
             highlightStep(step);
-            (isValid() == true) ? $(".btn-default").show() : $(".btn-default").hide();
+            (_isValid.validate == true) ? $(".btn-default").show() : $(".btn-default").hide();
             $(".btn-OK").show();
             $maps.show();
             (_user == 2) ? $maps.load("mappedestrian.do") : $maps.load("mapdriver.do");
