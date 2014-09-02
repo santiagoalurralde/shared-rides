@@ -1,4 +1,3 @@
-<%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page import="com.shared.rides.domain.User"%>
 
 <% User u = (User) request.getSession().getAttribute("user"); %>
