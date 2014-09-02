@@ -424,17 +424,19 @@ function checkHours($target){
  * @param {jquery} $target - checkbox that indicates if subscribed and has changed.
  */
 function subscribes($target){
-    //TODO: Could be changed for indexes.
     var d          = $target.parent().index() + 1,
         $btnIn     = $(".row-in td:nth-child("+ d +") .btn-define"),
         $btnOut    = $(".row-out td:nth-child("+ d +") .btn-define"),
         isDisabled = false;
 
     // If checked, disable buttons.(UNCHECKED by default, see in definition)
-    if($target.prop("checked"))
+    if($target.prop("checked")) {
         isDisabled  = true;
-
-    $btnIn.add($btnOut).prop("disabled", isDisabled);
+    }
+    
+    
+    $btnIn.add($btnOut).addClass("")
+    				   .prop("disabled", isDisabled);
 }
 
 /*******************************************************
@@ -464,24 +466,25 @@ function signUp() {
             plLett          = $("#plate-letters").val(),
             nSeats          = $("#number-seats").find("option:selected").val();
            
-            $.post("register.do", {"organization": org ,
-                                   "personal-id":  pId,
-                                   "pw":           pw,
-                                   "name":         name,
-                                   "surname":      surname,
-                                   "email":        email,                                                                  
-                                   "phone":        phone,  
-                                   "street":       street,
-                                   "number":       number,
-                                   "neighborhood": nbh,
-                                   "shift":        shift,
-                                   "userType":     usType,
-                                   "brand":        brand,
-                                   "modelVehicle": modelVehicle,
-                                   "plate-letters": plNumb,
-                                   "plate-numbers": plLett,
+            $.post("register.do", {
+            					   "organization": 	org,
+                                   "personalId":  	pId,
+                                   "pw":           	pw,
+                                   "name":         	name,
+                                   "surname":      	surname,
+                                   "email":        	email,                                                                  
+                                   "phone":        	phone,  
+                                   "street":       	street,
+                                   "number":       	number,
+                                   "neighborhood": 	nbh,
+                                   "shift":        	shift,
+                                   "userType":     	usType,
+                                   "brand":       	brand,
+                                   "modelVehicle": 	modelVehicle,
+                                   "plateLetters":  plNumb,
+                                   "plateNumbers":  plLett,
                                    "number-seats":  nSeats,
-                                   "days":         JSON.stringify(_days)
+                                   "days":         	JSON.stringify(_days)
                                    },  
                 function(str) {
                      alert(getLabel("lblAlertRegistered"));
