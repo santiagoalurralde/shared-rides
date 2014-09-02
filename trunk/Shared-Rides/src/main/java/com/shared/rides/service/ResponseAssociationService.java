@@ -7,10 +7,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.shared.rides.dao.interfaces.IAssociationDAO;
 import com.shared.rides.dao.interfaces.IScheduleDAO;
@@ -50,7 +48,7 @@ public class ResponseAssociationService {
 		offeredJson = new JsonArray();
 		List<Association> assocList = requestUser.getAssociations();
 		schIdList =  userDAO.getAllSchedule(requestUser);
-		
+				
 		Collections.sort(assocList, new Comparator() {
 			public int compare(Object a1, Object a2) {
 				Association assoc1 = (Association) a1;

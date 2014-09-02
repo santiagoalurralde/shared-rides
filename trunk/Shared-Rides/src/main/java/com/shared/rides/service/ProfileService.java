@@ -1,9 +1,6 @@
 package com.shared.rides.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.shared.rides.dao.interfaces.IAssociationDAO;
 import com.shared.rides.dao.interfaces.IPedestrianDAO;
 import com.shared.rides.dao.interfaces.IUserDAO;
@@ -151,12 +146,12 @@ public class ProfileService {
 		
 		int totalSeats = d.getVehicle().getSeats();
 		//Agrego el horario al objecto jsonDriver
-		ArrayList arraySch = new ArrayList();
+		List<Map<String, Object>> arraySch = new ArrayList<Map<String, Object>>();
 		for(int i = 0; i < d.getSchedule().size(); i++){	
 			int freeSeatsIn = calculateFreeSeats(u, d.getSchedule().get(i), totalSeats, 0);
 			int freeSeatsOut = calculateFreeSeats(u, d.getSchedule().get(i), totalSeats, 1);
 			Schedule sch = d.getSchedule().get(i);
-			Map<String, Object> day = new HashMap();
+			Map<String, Object> day = new HashMap<String, Object>();
 			//TRACK IN
 			day.put("dayDriver", sch.getDay());
 			day.put("hourInDriver", sch.getHourIn());
@@ -188,10 +183,10 @@ public class ProfileService {
 		model.addObject("idPedestrian", p.getPedestrianId());
 		model.addObject("ratingPedestrian", p.getRating());
 		
-		ArrayList arraySch = new ArrayList();
+		List<Map<String, Object>> arraySch = new ArrayList<Map<String, Object>>();
 		for(int i = 0; i < p.getSchedule().size(); i++){
 			Schedule sch = p.getSchedule().get(i);
-			Map<String, Object> day = new HashMap();
+			Map<String, Object> day = new HashMap<String,Object>();
 			
 			Stop stopInAux = getStopPed(p, sch, 0);
 			Stop stopOutAux = getStopPed(p, sch, 1);

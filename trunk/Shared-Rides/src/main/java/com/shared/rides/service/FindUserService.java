@@ -11,7 +11,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.shared.rides.dao.interfaces.IAssociationDAO;
 import com.shared.rides.dao.interfaces.IUserDAO;
-import com.shared.rides.domain.Address;
 import com.shared.rides.domain.Association;
 import com.shared.rides.domain.Shift;
 import com.shared.rides.domain.State;
