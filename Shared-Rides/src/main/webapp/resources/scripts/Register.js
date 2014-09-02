@@ -23,35 +23,21 @@ $(document).ready(function() {
     initMap();
    
     start();
-
-    //Pressing next or back
-    $(".btn-next, .btn-back").click(function(){
-        update(_step);
-    });
    
     $(".btn-map").click(function(){
         saveMap();              
+    });
+    
+    $(".btn-next, .btn-back").click(function(){
+        update(_step);
     });
    
     $(".btn-OK").click(function(){
         signUp();
     });
 
-    $(".btn-next").click(function() {
-        stepNext();
-    });
-
-    $(".btn-back").click(function() {
-        stepBack();
-    });
-
-    $(".sr-inputs").change(function(){
-        checkIt(this);
-    });
-
     $("#cellphone, #number").keyup(function(){
         checkNumeric(this);
-    });
     });
 });
 
@@ -142,6 +128,7 @@ function update(step) {
  * @param {Number} step - current step
  */
 function highlightStep(index) {
+    index = (index == -1) ? Math.abs(index) : index + 1;
     $(".step-signup"+ index).css("opacity", "1")
                             .siblings().css("opacity", ".2");
 }
@@ -280,9 +267,9 @@ function checkEmail(target) {
  * @param {Element} target - element we're gonna check.
  */
 function checkIt(target) {
-    if($(".alerts").hasClass("alert-inputs"))
-        toggleAlert(false, "", "alert-inputs");         
-   
+    if($(".alerts").hasClass("alert-inputs")) {
+        toggleAlert(false, "", "alert-inputs");
+    }
     checkLength($(target));   
 }
 
@@ -293,11 +280,13 @@ function checkIt(target) {
  */
 function checkLength($target) {
     if($target.val().length == 0) {
-        paint($target, true); 
+        paint($target, true);
+        toggleAlert(true, getLabel("lblAlertInputs"), "alert-inputs");
         return false;
     }
     else {
-        paint($(target), false)
+        paint($target, false);
+        toggleAlert(false, "", "alert-inputs");        
         return true;
     }
 }
@@ -309,10 +298,12 @@ function checkLength($target) {
  * @param {Bool} flag - TRUE for painting element.
  */
 function paint($target, flag) {
-    if(flag)
+    if(flag) {
         $target.addClass("painted");
-    else
+    }
+    else {
         $target.removeClass("painted");
+    }
 }
 
 /**
@@ -322,7 +313,7 @@ function paint($target, flag) {
  * @param {String} msg - Text that the alert is going to contain.
  * @param {String} flag - Additional class for the alert.
  */
-function toggleAlert(flag, msg, cls){
+function toggleAlert(flag, msg, cls) {
     var $alertPlusClass = $(".alerts."+cls);
 
     if(flag) {
@@ -347,8 +338,9 @@ function checkBounds(target, val) {
         alert("Este campo no admite valores mayores a "+ val);
         target.value = _previous2;
     }
-    else
+    else {
         _previous2 = target.value;
+    }
 }
 
 /**
@@ -406,7 +398,6 @@ function checkUserExists() {
 function checkHours($target){
     var d        = $target.parent().index() + 1,
         io       = $target.closest("tr").data("io"),
-        flag     = true,
         $hourOut = $("#hour-"+ d + "out");
         $hourIn  = $("#hour-"+ d + "in");
 
@@ -646,12 +637,12 @@ function fillRowsInOut($row) {
         var $select = $row.find("#hour-"+ d + io);
         $select.append("<option value='none'>Hora</option>");
        
-        for(var j=0; j<24; j++)
+        for(var j=0; j<24; j++) {
             /* Hours */
             $select.append("<option value='"+ j +":00'>"+ j +":00 hs</option>")
                    .append("<option value='"+ j +":30'>"+ j +":30 hs</option>")
                    .prop("disabled", true);
-
+        }
         /* Disable hour selects -> Enabled when defining map */
     }
 }
@@ -663,7 +654,7 @@ function fillRowType() {
     var content      = "";   
         $userTypeRow = $(".row-usertype");
     
-    $userTypeRow.html("<td>"+ getLabel("lblUserType") +"<td>");
+    $userTypeRow.html("<td>"+ getLabel("lblUserType") +"</td>");
 
     for(var d=1; d<6; d++) {
         if(_userType == "driver-pedestrian") {

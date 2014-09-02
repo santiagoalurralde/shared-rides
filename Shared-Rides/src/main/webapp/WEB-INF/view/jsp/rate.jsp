@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html>
 	<head>
@@ -46,7 +46,7 @@
 					$("#val-rate").val(this.value);				
 				});
 				
-				$(".btn-rate").click(function(){
+				$(".btn-rate").click(function() {
 					var stars = $("#val-rate").val(),
 						id = window.parent.document.getElementById("val-id").value,
 						userType;

@@ -1,3 +1,5 @@
+<%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <!-----------------------------------------
 [Menu]
 ------------------------------------------>
@@ -8,3 +10,7 @@
         <li><a class="highlight"	href="aboutNew.do">    	<spring:message code="lbl.about"	/>		</a></li>
     </ul>
 </div>
+
+
+<script id="temp-notifications" type="text/x-handlebars-template">
+</script>

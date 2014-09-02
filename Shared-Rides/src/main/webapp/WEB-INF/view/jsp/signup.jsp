@@ -1,4 +1,7 @@
-e<body onLoad="stepNext();">
+<%@	taglib uri="http://www.springframework.org/tags" 	prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" 		prefix="c" %>
+
+<body onload="stepNext();">
 	<div class="sr-content">	
 
 		<section title="Contact" class="sr-tupper">
@@ -27,7 +30,7 @@ e<body onLoad="stepNext();">
          			
          			<div class="split"></div>
          				
-         			<span>
+  					<span>
            				<span class="block-left">
 			               	<spring:message code="lbl.personalId"/>	          
 			            </span> 
@@ -241,6 +244,7 @@ e<body onLoad="stepNext();">
             			</span>  	
    					</div>
        		    </div>
+       		    
 				<!---------------------------------- END of SECOND STEP ---------------------------------->
 
        		    <div class="step step-third">
@@ -258,11 +262,12 @@ e<body onLoad="stepNext();">
 							<th> <spring:message code="lbl.thursday"/>	</th>
 							<th> <spring:message code="lbl.friday"/>	</th>				
 						</tr>
-						<tr class="usertype-row"></tr>
-						<tr id="in">
+						<tr class="row-usertype">
+						</tr>
+						<tr class="row-in">
 							<td> <spring:message code="lbl.arrival"/> </td>
 						</tr>
-						<tr id="out">
+						<tr class="row-out">
 							<td> <spring:message code="lbl.departure"/> </td>									
 						</tr>
 					</table>	
@@ -312,11 +317,11 @@ e<body onLoad="stepNext();">
         		<div class="buttons-steps">
         			<input 	type="button" class="btn btn-back"  
         					value='<spring:message code="lbl.button-previous"/>'	
-        					onClick="stepBack();"/>	
+        					onclick="stepBack();"/>	
 
            	   		<input 	type="button" class="btn btn-next"  	
 							value='<spring:message code="lbl.button-next"/>'		
-							onClick="stepNext();"/>	
+							onclick="stepNext();"/>	
 
         			<input 	type="button" class="btn btn-OK"
         					value='<spring:message code="lbl.button-confirm"/>'/>  
@@ -327,11 +332,6 @@ e<body onLoad="stepNext();">
 	
 	</div>
 
-	<!-----------------------------------------
-	[Labels]
-	------------------------------------------>	
-	<c:set var="lblUnsuscribe"><spring:message code="lbl.unsuscribe" /></c:set>	
-	<input type="hidden" id="lbl-unsuscribe" value="${lblUnsuscribe}" />
 </body>
 
 <!-----------------------------------------
@@ -345,7 +345,7 @@ e<body onLoad="stepNext();">
 <script src="resources/maps/track.js" 			type="text/javascript"></script>
 <script src="resources/maps/osmapSimple.js"		type="text/javascript"></script>
 
-<script>
+<script type="text/javascript">
 	initMapCoords(lonlat, zoom, map, null);
 
     var createLabels = (function (){
@@ -364,10 +364,12 @@ e<body onLoad="stepNext();">
             lblDriver           : '<spring:message code="lbl.driver"            />',
             lblButtonModify     : '<spring:message code="lbl.button-modify"     />',
             lblUnsubscribe      : '<spring:message code="lbl.unsubscribe"       />',
+            lblUserType      	: '<spring:message code="lbl.userType"       	/>',
             lblAlertEmptyDays   : '<spring:message code="lbl.alert-empty-days"  />'
-        }
-        return function () { return labels };
+        };
+        return function () { return labels; };
     })();
 </script>
 
-<script type="text/javascript" src="resources/scripts/Utils.js"></script>
+<script src="resources/scripts/Utils.js"		type="text/javascript"></script>
+

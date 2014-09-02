@@ -1,4 +1,6 @@
-<body onLoad="stepNext();">		
+<%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
+<body onload="stepNext();">		
     <div class="sr-content">	
         <section class="sr-tupper"> 
        		<h4> <spring:message code="lbl.messageFind"/> </h4>
