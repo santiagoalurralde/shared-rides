@@ -84,14 +84,16 @@
         		</div>
         		
         		<div class="buttons-steps">
-        			<input type="button" class="btn btn-back" 		
-        				value="<spring:message code="lbl.button-previous"	/>"/>
-        			<input type="button" class="btn btn-default"  	
-        				value="<spring:message code="lbl.button-search"		/>"/>         			
-           	   		<input type="button" class="btn btn-next" 		
-           	   			value="<spring:message code="lbl.button-next"		/>"/>
-        			<input type="button" class="btn btn-OK"	
-        				value="<spring:message code="lbl.button-confirm" 	/>"/>		
+        			<input 	type="button" class="btn btn-back"  
+        					value="<spring:message code="lbl.button-previous"/>"	
+        					onclick="stepBack();"/>	
+					<input 	type="button" class="btn btn-default"  	
+        					value="<spring:message code="lbl.button-search"/>"/>             					
+           	   		<input 	type="button" class="btn btn-next"  	
+							value="<spring:message code="lbl.button-next"/>"		
+							onclick="stepNext();"/>	
+        			<input 	type="button" class="btn btn-OK"	
+        					value="<spring:message code="lbl.button-confirm"/>"/>		
         		</div> 	 
        		</form>	        	
         </section>        
