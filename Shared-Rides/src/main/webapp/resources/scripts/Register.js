@@ -425,18 +425,18 @@ function checkHours($target){
  */
 function subscribes($target){
     var d          = $target.parent().index() + 1,
-        $btnIn     = $(".row-in td:nth-child("+ d +") .btn-define"),
-        $btnOut    = $(".row-out td:nth-child("+ d +") .btn-define");
+        $btnIn     = $(".row-in td:nth-child("+ d +") button"),
+        $btnOut    = $(".row-out td:nth-child("+ d +") button");
 
     // If checked, disable buttons.(UNCHECKED by default, see in definition)
     if($target.prop("checked")) {
-        $btnIn.add($btnOut).addClass(".btn-unsubscribed")
-		   .removeClass(".btn-define")
+        $btnIn.add($btnOut).addClass("btn-unsubscribed")
+		   .removeClass("btn-define")
 		   .prop("disabled", true);        
     }
     else {
-        $btnIn.add($btnOut).addClass(".btn-define")
-		   .removeClass(".btn-unsubscribed")
+        $btnIn.add($btnOut).addClass("btn-define")
+		   .removeClass("btn-unsubscribed")
 		   .prop("disabled", true);      	
     }
 }
