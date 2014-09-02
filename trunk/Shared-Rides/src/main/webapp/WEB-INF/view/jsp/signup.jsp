@@ -36,7 +36,7 @@
 			            </span> 
            				
            				<input 	type="text" id="personal-id" class="block-right sr-inputs" 
-           						onChange="checkIt(this);"/>
+           						onchange="checkIt(this);"/>
          			</span> 
          				
          			<div class="split"></div>
@@ -264,10 +264,10 @@
 						</tr>
 						<tr class="row-usertype">
 						</tr>
-						<tr class="row-in">
+						<tr class="row-in" data-io="in">
 							<td> <spring:message code="lbl.arrival"/> </td>
 						</tr>
-						<tr class="row-out">
+						<tr class="row-out" data-io="out">
 							<td> <spring:message code="lbl.departure"/> </td>									
 						</tr>
 					</table>	
