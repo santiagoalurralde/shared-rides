@@ -44,6 +44,16 @@ public class MainController {
 		return new ModelAndView("about");
 	}
 	
+	@RequestMapping(value="contactNew.do")
+	public ModelAndView showContactNew(HttpServletRequest request){
+		return new ModelAndView("contact");
+	}
+
+	@RequestMapping(value="aboutNew.do")
+	public ModelAndView showAboutNew(HttpServletRequest request){
+		return new ModelAndView("about");
+	}	
+	
 	@RequestMapping(value="mapdriver.do")
 	public ModelAndView showMapDriver(HttpServletRequest request){
 		return new ModelAndView("mapdriver");
