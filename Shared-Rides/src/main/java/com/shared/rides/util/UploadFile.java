@@ -18,7 +18,7 @@ public class UploadFile {
 				// Creando el directorio
 	        	//leandro: /home/leandrobagur/profilePic/
 	        	//santiago:/home/santiago/profilePic/ 
-				String rootPath = "/home/leandrobagur/profilePic";
+				String rootPath = "/home/santiago/profilePic";
 				File dir = new File(rootPath + File.separator);
         
 				// Creo el archivo en el server
