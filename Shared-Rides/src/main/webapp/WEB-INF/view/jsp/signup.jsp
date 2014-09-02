@@ -347,6 +347,27 @@ e<body onLoad="stepNext();">
 
 <script>
 	initMapCoords(lonlat, zoom, map, null);
+
+    var createLabels = (function (){
+        var labels = {
+            //Labels' name
+            lblAlertInputs      : '<spring:message code="lbl.alert-inputs"      />',
+            lblAlertPasswords   : '<spring:message code="lbl.alert-passwords"   />',
+            lblAlertIdExists    : '<spring:message code="lbl.alert-id-exists"   />',
+            lblAlertHours       : '<spring:message code="lbl.alert-hours"       />',
+            lblAlertRegistered  : '<spring:message code="lbl.alert-registered"  />',
+            lblAlertPickHour    : '<spring:message code="lbl.alert-pick-hour"   />',
+            lblAlertPickStop    : '<spring:message code="lbl.alert-pick-stop"   />',
+            lblAlertPickType    : '<spring:message code="lbl.alert-pick-type"   />',
+            lblSelectSelect     : '<spring:message code="lbl.select-select"     />',
+            lblPedestrian       : '<spring:message code="lbl.pedestrian"        />',
+            lblDriver           : '<spring:message code="lbl.driver"            />',
+            lblButtonModify     : '<spring:message code="lbl.button-modify"     />',
+            lblUnsubscribe      : '<spring:message code="lbl.unsubscribe"       />',
+            lblAlertEmptyDays   : '<spring:message code="lbl.alert-empty-days"  />'
+        }
+        return function () { return labels };
+    })();
 </script>
 
-
+<script type="text/javascript" src="resources/scripts/Utils.js"></script>

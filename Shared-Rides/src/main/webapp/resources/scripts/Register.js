@@ -2,16 +2,17 @@ var _step           = -1,   //Contador de Pasos
     _previous       = "",
     _previous2      = "",
     _previousTarget = "",
-    _userType,
     _days           = new Array(),
     _matrices       = new Array(),
-    _projections    = new Array();
+    _projections    = new Array(),
+    _userType;
 
 for (var l=0; l<5; l++) {
     _days[l]        = null;
     _matrices[l]    = null;
-    _projections[l] = null;    
+    _projections[l] = null;
 }
+
 
 /*******************************************************
  * STEPS
@@ -35,6 +36,23 @@ $(document).ready(function() {
     $(".btn-OK").click(function(){
         signUp();
     });
+
+    $(".btn-next").click(function() {
+        stepNext();
+    });
+
+    $(".btn-back").click(function() {
+        stepBack();
+    });
+
+    $(".sr-inputs").change(function(){
+        checkIt(this);
+    });
+
+    $("#cellphone, #number").keyup(function(){
+        checkNumeric(this);
+    });
+    });
 });
 
 /**
@@ -45,21 +63,26 @@ function start() {
    
     highlightStep(0);
    
-    fillRowsInOut("in");            
-    fillRowsInOut("out");
-   
+    fillRowsInOut($(".table-signup .row-in"));
+    fillRowsInOut($(".table-signup .row-out"));
+
     var l,
         neighborhoods   = ["Alta Córdoba","Alto Alberdi","Alto Verde","Argüello","Bella Vista","Centro","Cerro Chico","Cerro de las Rosas","Cerveceros","Chateau Carreras","Cofico","Colinas del Cerro","Country Jockey Club","Country Las Delicias","Country Lomas de la Carolina","Crisol","Dean Funes","Ejército Argentino","El Quebracho","Empalme","Ferreyra","General Bustos","General Paz","General Pueyrredon","Granja De Funes","Güemes","Ituzaingo","Jardín","Juniors","La France","Las Flores","Las Palmas","Las Violetas","Los Boulevares","Los Paraísos","Marques De Sobremonte","Nueva Córdoba","Observatorio","Palermo Bajo","Patricios","Poeta Lugones","San Martín","San Vicente","Urca","Villa Belgrano","Villa Cabrera","Villa Centenario","Villa Warcalde","Yapeyu","Yofre"],
         brands          = ["Alfa-Romeo", "Audi", "BMW", "Citroen", "Chery", "Chevrolet", "Chrysler", "Daihatsu", "Dodge", "Fiat", "Ford", "Honda", "Hyundai", "Jeep", "Kia", "Land Rover", "Mazda", "Mercedes Benz", "Mini", "Mitsubishi", "Nissan", "Peugeot", "Renault", "Seat",  "Subaru", "Suzuki", "Toyota", "Volkswagen", "Volvo"];
 
-    for(l=0; l<neighborhoods.length; l++)
-        $("#neighborhood").append(  "<option value='"+ neighborhoods[l] +"'>"
-                                        + neighborhoods[l] +
-                                    "</option>");         
-    for(l=0; l<brands.length; l++)
-        $("#brand").append( "<option value='"+ brands[l] +"'>"
-                                + brands[l] +
-                            "</option>");  
+    for(l=0; l<neighborhoods.length; l++) {
+        $("#neighborhood")
+            .append("<option value='" + neighborhoods[l] + "'>"
+                        + neighborhoods[l] +
+                    "</option>");
+    }
+
+    for(l=0; l<brands.length; l++) {
+        $("#brand")
+            .append("<option value='" + brands[l] + "'>"
+                        + brands[l] +
+                    "</option>");
+    }
 }
 
 /**
@@ -67,9 +90,9 @@ function start() {
  */
 function stepNext() {  
     if(_step == 0 && (!checkValues0() || $(".alerts.alert-pw-match").is(":visible") || checkUserExists()))
-        console.log("No es posible avanzar al segundo paso");
+        console.log("Can't proceed to second step");
     else if(_step == 1 && !checkValues1())
-        console.log("No es posible avanzar al terccer paso");
+        console.log("Can't proceed to third step");
     else
         _step++;
 }
@@ -96,14 +119,14 @@ function update(step) {
             $(".btn-back").hide("fast");
             break;
         case 1:
-            highlightStep(step);    
+            highlightStep(step);
             $(".map-driver, .map-pedestrian, .step-first, .step-third").hide();
             $(".step-second, .split-beginning").show();
-            $(".btn-back, .btn-next").show("fast");                
+            $(".btn-back, .btn-next").show("fast");
             $(".btn-OK").hide("fast");
             break;
         case 2:
-            highlightStep(step);    
+            highlightStep(step);
             fillRowType();
             $(".step-second, .split-beginning").hide();
             $(".step-third").show();
@@ -118,16 +141,9 @@ function update(step) {
  *
  * @param {Number} step - current step
  */
-
- /**
- * Highlights current step
- *
- * @param {Number} step - current step
- */
 function highlightStep(index) {
-    var $step = $(".step-signup"+index);
-    $step.css("opacity", "1");
-    $step.siblings().css("opacity", ".2");
+    $(".step-signup"+ index).css("opacity", "1")
+                            .siblings().css("opacity", ".2");
 }
 
 
@@ -142,20 +158,18 @@ function highlightStep(index) {
  */
 function checkValues0() {              
     var flag        = true,
-        ipts        = $(".step-first input"),
+        ipts        = $(".step-first input"),       // First step's inputs (array).
         lastElement = ipts.index($("#cellphone")),
         iptL;
    
     for(var l=0; l<lastElement+1; l++) {
-        iptL = $(ipts[l]);
+        iptL = $(ipts[l]);          //Jquery-cached input from the array of inputs.
         flag = checkLength(iptL);
     }
     
-    if(!flag) {
-        //TODO spring message INCOMPLETE INPUTS
-        var msg = "Los campos señalados están incompletos, debe llenarlos para proceder.";
-        toggleAlert(true, msg, "alert-inputs");
-    }
+    if(!flag)
+        toggleAlert(true, getLabel("lblAlertInputs"), "alert-inputs");
+
     return flag;
 }
 
@@ -172,11 +186,9 @@ function checkValues1() {
    
     if(_userType != "pedestrian") {
         /* Is not a pedestrian */
-        max = 4;     
-        flag = checkLength($("#plate-letters"));
-        flag = checkLength($("#plate-numbers"));
-        flag = checkLength($("#model"));
-        flag = checkLength($("#number-seats"));
+        max = 4;
+        flag = checkLength($("#plate-letters")) & checkLength($("#plate-numbers"))
+                & checkLength($("#model")) & checkLength($("#number-seats"));
     }
    
     for(var l=0; l<max; l++){
@@ -199,9 +211,7 @@ function checkValues1() {
     }
    
     if(!flag) {
-        //TODO spring message INCOMPLETE INPUTS
-        var msg = "Los campos señalados están incompletos, debe llenarlos para proceder.";
-        toggleAlert(true, msg, "alert-inputs");
+        toggleAlert(true, getLabel("lblAlertInputs"), "alert-inputs");
     }
     return flag;
 }
@@ -213,15 +223,16 @@ function checkValues1() {
  */
 function checkValues2() {      
     for (var d=0; d<5; d++) {
-        var aux = d+1;
-        if($(".chkActive"+aux).prop("checked"))
-            _days[d] = "Unsuscribed";
-        else    
-            if(_days[d] == null) {
-                var msg = "Quedan dias por completar";
-                toggleAlert(true, msg, "alert-schedules");
+        var aux = d + 1;
+        if($(".chk-active"+aux).prop("checked")) {
+            _days[d] = "Unsubscribed";
+        }
+        else {
+            if (_days[d] == null) {
+                toggleAlert(true, getLabel("lblAlertEmptyDays"), "alert-schedules");
                 return false;
             }
+        }
     }
     return true;
 }
@@ -241,9 +252,7 @@ function checkPassword() {
     if($passwordFirst.val() != $passwordCheck.val()) {
         paint($passwordFirst, true);    
         paint($passwordCheck, true);
-        //TODO MESSAGE
-        var msg = ("Las contraseñas deben coincidir");
-        toggleAlert(true, msg, "alert-pw-match");    
+        toggleAlert(true, getLabel("lblAlertPasswords"), "alert-pw-match");
         return false;
     }              
     else {
@@ -257,6 +266,7 @@ function checkPassword() {
 /**
  * Checks if email is cool. Returns TRUE if it is.
  *
+ * @param {Element} target - element we're gonna check.
  */
 function checkEmail(target) {
     var email   = $(target).val(),
@@ -330,7 +340,7 @@ function toggleAlert(flag, msg, cls){
  * Checks if value in element is smaller than limit
  *
  * @param {Element}
- * @param {val} Minimum limit
+ * @param {number} Minimum limit
  */
 function checkBounds(target, val) {
     if(target.value > val) {
@@ -344,8 +354,7 @@ function checkBounds(target, val) {
 /**
  * Checks if key pressed is in the alphabet
  *
- * @param {Element}
- * @param {val} Minimum limit
+ * @param {event}
  */
 function checkAlphabetic(event) {
     var inputValue = event.charCode;
@@ -357,7 +366,7 @@ function checkAlphabetic(event) {
 /**
  * Checks if value in element is numeric
  *
- * @param {Element}
+ * @param {Element} target - input that we're checking.
  */
 function checkNumeric(target) {
     if(target.value.length > 0 && isNaN(target.value)) {                                            
@@ -381,13 +390,11 @@ function checkUserExists() {
     $.ajax({
         url: "validateNewUser.do",              
         type: "GET",
-        data: { personalId: pId }
+        data: {personalId: pId}
         }).done(function(isValidate) {
             if(!isValidate) {
-                //TODO MESSAGE
-                var msg = "El usuario con el ID especificado ya existe";
-                flag = true;                
-                toggleAlert(flag, msg, "alert-inputs");
+                flag = true;
+                toggleAlert(flag, getLabel("lblAlertIdExists"), "alert-inputs");
             }
     });
     return flag;
@@ -396,24 +403,21 @@ function checkUserExists() {
 /**
  * Checks if hours are valid.
  */
-function checkHours(target){
-    var id      = $(target).attr("id"),
-        d       = id.slice(0,1),
-        io      = id.substring(1, id.length),
-        flag    = true,
-        hourOut = $("#"+ d +"out").find("option:selected").val(),
-        hourIn  = $("#"+ d +"in").find("option:selected").val();
-    
+function checkHours($target){
+    var d        = $target.parent().index() + 1,
+        io       = $target.closest("tr").data("io"),
+        flag     = true,
+        $hourOut = $("#hour-"+ d + "out");
+        $hourIn  = $("#hour-"+ d + "in");
+
     if(io == "out")
-        $("#"+ d +"in").on("change", function(event) {
-            checkHours();
+        $hourIn.on("change", function(event) {
+            checkHours(this);
         }); 
 
-    if(hourOut < hourIn){
-        //TODO MESSAGE
+    if($hourOut.val() < $hourIn.val()) {
         $(".map-definition").hide();
-        var msg = "La hora de salida debe ser después de la hora de entrada";
-        toggleAlert(true, msg, "alert-schedules");
+        toggleAlert(true, getLabel("lblAlertHours"), "alert-schedules");
         $(".btn-map").prop("disabled", true);
     }
     else {
@@ -424,23 +428,22 @@ function checkHours(target){
 }
 
 /**
- * Disables day if unsuscribed
+ * Disables day if unsubscribed
  *  
- * @param {jquery} $target - checkbox that indicates if suscribed and has changed.
+ * @param {jquery} $target - checkbox that indicates if subscribed and has changed.
  */
-function suscribes($target){
-    var d       = $target.parent().index()+1,
-        $btnIn  = $("#in td:nth-child("+ d +") #btnin"),
-        $btnOut = $("#out td:nth-child("+ d +") #btnout");
- 
-    if($target.prop("checked")) {
-        $btnIn.prop("disabled", true).removeClass("btnDefine").addClass("unsuscribed");
-        $btnOut.prop("disabled", true).removeClass("btnDefine").addClass("unsuscribed");
-    }
-    else {
-        $btnIn.prop("disabled", false).removeClass("unsuscribed").addClass("btnDefine");
-        $btnOut.prop("disabled", false).removeClass("unsuscribed").addClass("btnDefine");              
-    }
+function subscribes($target){
+    //TODO: Could be changed for indexes.
+    var d          = $target.parent().index() + 1,
+        $btnIn     = $(".row-in td:nth-child("+ d +") .btn-define"),
+        $btnOut    = $(".row-out td:nth-child("+ d +") .btn-define"),
+        isDisabled = false;
+
+    // If checked, disable buttons.(UNCHECKED by default, see in definition)
+    if($target.prop("checked"))
+        isDisabled  = true;
+
+    $btnIn.add($btnOut).prop("disabled", isDisabled);
 }
 
 /*******************************************************
@@ -490,8 +493,7 @@ function signUp() {
                                    "days":         JSON.stringify(_days)
                                    },  
                 function(str) {
-                     //TODO message
-                     alert("Alta de Usuario Completa");
+                     alert(getLabel("lblAlertRegistered"));
                 });
     }
 }
@@ -503,13 +505,11 @@ function saveMap() {
     var d           = $("#hdn-day").val(),
         io          = $("#hdn-inout").val(),
         userTypeDay = $("#hdn-usertype-day").val(),
-        h           = $("#"+ d + io ).find("option:selected").val(),
-        nthChild    = Number(d)+1,
+        h           = $("#hour-"+ d + io).val(),
         index       = Number(d)-1;
 
     if(h == "none") {
-        //TODO MESSAGE
-        alert("Selecciona la hora a definir");
+        alert(getLabel("lblAlertPickHour"));
         return false;
     }
    
@@ -535,8 +535,7 @@ function saveMap() {
         }
         gpxTrack.clear();
 
-        //TODO MESSAGE
-        $("#"+ io + " td:nth-child("+ nthChild +")").find("#btn"+ io).html("Modificar");
+        $("#btn-"+ d + io).html(getLabel("lblButtonModify"));
     }
     else {
         if(_lon != "" && _lat != "") {
@@ -557,39 +556,37 @@ function saveMap() {
                     _days[index].hourOut        = h;    
                     _projections[index].projOut = lonlatCurrent.transform(proj4326, map.getProjectionObject());
             }
-            $("#"+ io +" td:nth-child("+ nthChild +")").find("#btn"+ io).html("Modificar");
+            $("#btn-"+ d + io).html(getLabel("lblButtonModify"));
         }
         else {
-            alert("Selecciona un punto en el mapa");
+            alert(getLabel("lblAlertPickStop"));
             return false;
         }
     }
    
-    $("input[name='chkActive'], .btnDefine").prop("disabled", false);              
-    $("#"+ d + io ).prop("disabled", true);      
+    $("input[name='chk-active'], .btn-define").prop("disabled", false);
+    $("#hour-"+ d + io).prop("disabled", true);
     $(".map-driver, .map-pedestrian, .map-definition").hide();    
 }
 
 /**
  * Opens type of map according to user type in day; and shows previously saved maps.
  */
-function defineMap(target) {    
-    var d           = $(target).parent().index(),
-        io          = $(target).parent().parent().attr("id"),
-        userTypeDay = $("#userType"+ d).find("option:selected").val(),                         
+function defineMap($target) {
+    var d           = $target.parent().index(),
+        io          = $target.closest(tr).data("io"),
+        userTypeDay = $("usertype-day-"+ d).val(),
         index       = Number(d)-1;
 
     if(userTypeDay == "0") {  
         /* Hasn't selected any user type for this day. */
-        //TODO MESSAGE
-        var msg = "Seleccione el tipo de usuario de este día";
-        toggleAlert(true, msg, "alert-schedule");
+        toggleAlert(true, getLabel("lblAlertPickType"), "alert-schedule");
         return false;
     }
     toggleAlert(false, "", "alert-schedule");    
 
-    $("input[name='chkActive'], .btnDefine").prop("disabled", true);                    
-    $("#"+ d + io).prop("disabled", false);
+    $("input[name='chk-active'], .btn-define").prop("disabled", true);
+    $("#hour-"+ d + io).prop("disabled", false);
    
     if(_userType != "driver-pedestrian")    
         /* If it's not mixed, every day has the same user type */
@@ -632,29 +629,30 @@ function defineMap(target) {
 /**
  * Inserts available hours in selected row.
  *
- * @param {String} io - in/out
+ * @param {jquery} $row -
  */
-function fillRowsInOut(io) {
-    var button = "<button id='btn"+ io +"' class='btnDefine' " +
-                    "onClick='defineMap(this); return false;'>Definir</button>",
-        select = "";
-           
+function fillRowsInOut($row) {
+    var io = $row.data("io");
+
     for(var d=1; d<6; d++) {
         /* Days */
-        select = "<select id='"+ d + io +"' onchange='checkHours(this);'></select>";
-        var $currentCell = $("#"+ d + io);
+        var button = "<button id='btn-"+ d + io +"' class='btn-define'"+
+                "onclick='defineMap($(this)); return false;'>Definir</button>",
+            select = "<select id='hour-"+ d + io +"'"+
+                "onchange='checkHours($(this));'></select>";
 
-        $(".table-signup #"+ io).append("<td>"+ select + button +"</td>");
-        $currentCell.append("<option value='none'>Hora</option>");                                  
+        $row.append("<td>"+ select + button +"</td>");
+
+        var $select = $row.find("#hour-"+ d + io);
+        $select.append("<option value='none'>Hora</option>");
        
-        for(var j=0; j<24; j++) {
+        for(var j=0; j<24; j++)
             /* Hours */
-            $currentCell.append("<option value='"+ j +":00'>"+ j +":00 hs</option>");                      
-            $currentCell.append("<option value='"+ j +":30'>"+ j +":30 hs</option>");
-        }
-       
+            $select.append("<option value='"+ j +":00'>"+ j +":00 hs</option>")
+                   .append("<option value='"+ j +":30'>"+ j +":30 hs</option>")
+                   .prop("disabled", true);
+
         /* Disable hour selects -> Enabled when defining map */
-        $currentCell.prop("disabled", true);              
     }
 }
 
@@ -663,34 +661,33 @@ function fillRowsInOut(io) {
  */
 function fillRowType() {
     var content      = "";   
-        $userTypeRow = $(".usertype-row");
+        $userTypeRow = $(".row-usertype");
     
-    $userTypeRow.html("<td> Tipo de Usuario </td>");
+    $userTypeRow.html("<td>"+ getLabel("lblUserType") +"<td>");
 
     for(var d=1; d<6; d++) {
         if(_userType == "driver-pedestrian") {
             /* Select for user type each day */
-            //TODO SELECCIONAR MESSAGE
-            content =   "<select id='userType"+ d +"'>"+
-                            "<option value='0'>Seleccionar</option>"+
-                            "<option value='pedestrian'>Peaton</option>"+      
-                            "<option value='driver'>Conductor</option>"+
+            content =   "<select id='usertype-day-"+ d +"'>"+
+                            "<option value='0'>"+           getLabel("lblSelectSelect") +"</option>"+
+                            "<option value='pedestrian'>"+  getLabel("lblPedestrian")   +"</option>"+
+                            "<option value='driver'>"+      getLabel("lblDriver")       +"</option>"+
                         "</select>";
         }
         else if(_userType == "driver") {
             $("#hdn-usertype-day").val(_userType);
-            //TODO CONDUCTOR MESSAGE            
-            content = "Conductor";
+            content = getLabel("lblDriver");
         }
         else { /* _userType == "pedestrian" */
             $("#hdn-usertype-day").val(_userType); 
-            //TODO PEATON MESSAGE            
-            content = "Peaton";
+            content = getLabel("lblPedestrian");
         }
+
         content += "<br><br>";
-        content += "<input type='checkbox' name='chkActive' class='chkActive"+ d +"'"+
-                    "onclick='suscribes($(this));'>"+ $("#lbl-unsuscribe").val();
-        $userTypeRow.append("<td>"+ content +"</td>");                      
+        content += "<input type='checkbox' name='chk-active' class='chk-active"+ d +"'"+
+                        "onclick='subscribes($(this));'>"+ getLabel("lblUnsubscribe");
+
+        $userTypeRow.append("<td>"+ content +"</td>");
     }
 }
 
@@ -700,12 +697,9 @@ function fillRowType() {
  * @param {Element} target
  */
 function userTypeChanged(target) {
-    _userType = $(target).find("option:selected").val();
+    _userType = $(target).val();
            
-    if(_userType == "pedestrian" || _userType == "0")
-        $(".drives").hide("slow");
-    else
-        $(".drives").show("slow");
+    (_userType == "pedestrian" || _userType == "0") ? $(".drives").hide("slow") : $(".drives").show("slow");
 }
 
 
@@ -714,29 +708,35 @@ function userTypeChanged(target) {
  *******************************************************/
 
 /**
- * Constructor
+ * Track
+ *
+ * @constructor
  */
 function Track() {
-    this.isPedestrian   = false;
-    this.trackIn        = "";
-    this.hourIn         = "";  
-    this.trackOut       = "";  
-    this.hourOut        = "";          
+    this.isPedestrian = false;
+    this.trackIn      = "";
+    this.hourIn       = "";
+    this.trackOut     = "";
+    this.hourOut      = "";
 }
 
 /**
- * Constructor
+ * Stop
+ *
+ * @constructor
  */
 function Stop() {
-    this.isPedestrian   = true;
-    this.stopIn         = "";
-    this.hourIn         = "";  
-    this.stopOut        = "";
-    this.hourOut        = "";          
+    this.isPedestrian = true;
+    this.stopIn       = "";
+    this.hourIn       = "";
+    this.stopOut      = "";
+    this.hourOut      = "";
 }
 
 /**
- * Constructor
+ * Matrix
+ *
+ * @constructor
  */
 function Matrix() {
     this.matrixIn  = "";
@@ -744,7 +744,9 @@ function Matrix() {
 }
 
 /**
- * Constructor
+ * Projection
+ *
+ * @constructor
  */
 function Projection() {
     this.projIn  = "";
