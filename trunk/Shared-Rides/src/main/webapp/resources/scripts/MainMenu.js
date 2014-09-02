@@ -146,9 +146,11 @@ function update(step) {
             break;
         case 1:
             $.post("validateDefaultFind.do", {"user": _user},
-                    function(json) {
-            			var jsonNew = $.parseJSON(json);
-            			(jsonNew.validate == true) ? $(".btn-default").show() : $(".btn-default").hide();
+                    function(json) {     	
+		                var isValid = (function (){
+		                	var jsonNew = $.parseJSON(json);
+		                    return function () { return jsonNew.validate; };
+		                })();
             });
         	
             highlightStep(step);
@@ -162,6 +164,7 @@ function update(step) {
         case 2:
         	var $maps = $(".sr-maps");
             highlightStep(step);
+            (isValid() == true) ? $(".btn-default").show() : $(".btn-default").hide();
             $(".btn-OK").show();
             $maps.show();
             (_user == 2) ? $maps.load("mappedestrian.do") : $maps.load("mapdriver.do");
