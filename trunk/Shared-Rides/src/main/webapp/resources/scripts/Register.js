@@ -88,6 +88,7 @@ function stepNext() {
  */
 function stepBack() {
     toggleAlert(false, "", "alert-pw-match");
+    toggleAlert(false, "", "alert-schedules");
     _step--;
 }
 
@@ -404,16 +405,12 @@ function checkHours($target){
         $hourOut = $("#hour-"+ d + "out"),
         $hourIn  = $("#hour-"+ d + "in");
 
-    if($hourOut.val() < $hourIn.val() && $hourOut.val() != "none") {
-    	alert("true");
-        
+    if($hourOut.val() < $hourIn.val() && $hourOut.val() != "none") {       
     	toggleAlert(true, getLabel("lblAlertHours"), "alert-schedules");
         $(".map-definition").hide();
         $(".btn-map").prop("disabled", true);
     }
     else {
-    	alert("false");
-
         toggleAlert(false, "", "alert-schedules");      	
         $(".map-definition").show();        
         $(".btn-map").prop("disabled", false);
