@@ -126,7 +126,7 @@ public class FindUserService {
 
 	
 	public String defaultFindUser(long userId, int profile, int shift){
-		boolean needRemove;
+		boolean needRemove = true;
 		float minDistance = 1000;
 		distanceList = new ArrayList<Float>();
 		userList = userDAO.listAll();
@@ -151,14 +151,13 @@ public class FindUserService {
 				List<Stop> stopList = userList.get(i).getPedestrian().getStops();
 				//Aca obtengo toda la lista de tracks del usuario logueado
 				List<Track> trackList = u.getDriver().getTracks();
-				needRemove = true;
 				
 				for (Stop s : stopList){
+					needRemove = true;
 					for(Track t : trackList){
 						//Comparo solamente los stops con los tracks que corresponden al mismo dia e inout
 						if (s.getDay() == t.getDay() && s.getInout() == t.getInout()){
-							double [][] track = ReadGPXFile.readFile(t.getPathFile());
-							
+							double [][] track = ReadGPXFile.readFile(t.getPathFile());			
 							for(int j = 0; j < track.length; j++){
 								dist = DistanceHaversine.calculateDistance(track[j][1], track[j][0], s.getLat(), s.getLon());
 								if (dist < 1000){ 
@@ -167,6 +166,7 @@ public class FindUserService {
 								}	
 							}	
 						}
+						break;
 					}
 				}
 				if (needRemove){ 
@@ -201,6 +201,7 @@ public class FindUserService {
 								}	
 							}
 						}
+						break;
 					}
 					if (needRemove){
 						trackList.remove(j);
