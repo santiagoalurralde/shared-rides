@@ -434,8 +434,8 @@ function subscribes($target){
         isDisabled  = true;
     }
     
-    
-    $btnIn.add($btnOut).addClass("")
+    $btnIn.add($btnOut).addClass(".btn-unsubscribed")
+    				   .removeClass(".btn-define")
     				   .prop("disabled", isDisabled);
 }
 
@@ -483,7 +483,7 @@ function signUp() {
                                    "modelVehicle": 	modelVehicle,
                                    "plateLetters":  plNumb,
                                    "plateNumbers":  plLett,
-                                   "number-seats":  nSeats,
+                                   "numberSeats":   nSeats,
                                    "days":         	JSON.stringify(_days)
                                    },  
                 function(str) {
