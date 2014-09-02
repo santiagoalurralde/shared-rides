@@ -28,14 +28,6 @@ $(document).ready(function() {
     $(".btn-default").click(function() {
         defaultSearch();
     });
-
-    $(".btn-next").click(function() {
-        stepNext();
-    });
-
-    $(".btn-back").click(function() {
-        stepBack();
-    });
 });
 
 /**
