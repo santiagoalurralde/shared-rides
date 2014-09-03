@@ -199,8 +199,8 @@ public class FindUserService {
 									if (dist < minDistance) minDistance = dist;
 								}	
 							}
+							break;
 						}
-						break;
 					}
 					if (needRemove){
 						trackList.remove(j);

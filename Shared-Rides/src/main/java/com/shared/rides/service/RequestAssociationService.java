@@ -52,7 +52,7 @@ public class RequestAssociationService {
 				
 				try{
 					EmailSender emailSender = new EmailSender();
-					emailSender.sendEmail(supplierUser.getEmail(), applicantUser.getEmail(), applicantUser.getPw());					
+					emailSender.sendEmail(supplierUser, applicantUser, 0);					
 				}
 				catch(Exception e){
 					System.out.println(e);
