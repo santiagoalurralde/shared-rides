@@ -17,6 +17,7 @@ import com.shared.rides.domain.Association;
 import com.shared.rides.domain.Schedule;
 import com.shared.rides.domain.State;
 import com.shared.rides.domain.User;
+import com.shared.rides.util.EmailSender;
 
 @Service
 public class ResponseAssociationService {
@@ -133,22 +134,31 @@ public class ResponseAssociationService {
 	/*
 	 * Metodo que se encarga de cambiar el estado de la asociacion cuando un usuario responde a una solicitud
 	 */
-	public String sendResponseAssoc(long assocId, boolean response){
+	public String sendResponseAssoc(long assocId, boolean response, User u){
 		Association assoc = assocDAO.load(assocId);
 		Date date = new Date();
 		String msg = null;
 		
 		if (response == true){
 			assoc.setState(State.ACCEPTED);
-			assoc.setDate(date);
+			assoc.setDate(date);			
 			msg = "El usuario ha aceptado la solicitud";
 		}
 		else{
 			assoc.setState(State.CANCELLED);
+			assoc.setDate(date);
 			msg = "El usuario ha rechazado la solicitud";
 		}
 		assocDAO.update(assoc);
 			
+		try{
+			EmailSender emailSender = new EmailSender();
+			emailSender.sendEmail(assoc.getApplicantID(), u, 1);					
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		
 		return msg;
 	}
 }

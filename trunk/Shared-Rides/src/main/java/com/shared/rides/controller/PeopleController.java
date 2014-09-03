@@ -69,8 +69,9 @@ public class PeopleController {
 	@RequestMapping(value = "/responseAssoc.do", method = RequestMethod.POST)
 	public @ResponseBody String sendAssociationResponse(@RequestParam("assocId") long assocId,
 								@RequestParam("response") boolean resp,
-								HttpServletRequest request){	
-		return responseAssocService.sendResponseAssoc(assocId, resp);
+								HttpServletRequest request){
+		User u = (User) request.getSession().getAttribute("user");
+		return responseAssocService.sendResponseAssoc(assocId, resp, u);
 	}
 	
 
