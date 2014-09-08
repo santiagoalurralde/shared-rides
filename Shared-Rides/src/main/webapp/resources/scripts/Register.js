@@ -402,10 +402,10 @@ function checkUserExists() {
 function checkHours($target){
 	
     var d        = $target.parent().index(),
-        $hourOut = $("#hour-"+ d + "out"),
-        $hourIn  = $("#hour-"+ d + "in");
+        hourOut = $("#hour-"+ d + "out").val(),
+        hourIn  = $("#hour-"+ d + "in").val();
 
-    if($hourOut.val() < $hourIn.val() && ($hourOut.val() != "none" || $hourIn.val() != "none")) {       
+    if(parseInt(hourOut) < parseInt(hourIn) && (hourOut != "none" || hourIn != "none")) {       
     	toggleAlert(true, getLabel("lblAlertHours"), "alert-schedules");
         $(".map-definition").hide();
         $(".btn-map").prop("disabled", true);
@@ -570,7 +570,7 @@ function saveMap() {
 function defineMap($target) {
     var d           = $target.parent().index(),
         io          = $target.closest("tr").data("io"),
-        userTypeDay = $("usertype-day-"+ d).val(),
+        userTypeDay = $("#usertype-day-"+ d).val(),
         index       = Number(d)-1;
 
     if(userTypeDay == "0") {  
@@ -583,9 +583,10 @@ function defineMap($target) {
     $("input[name='chk-active'], .btn-define").prop("disabled", true);
     $("#hour-"+ d + io).prop("disabled", false);
    
-    if(_userType != "driver-pedestrian")    
+    if(_userType != "driver-pedestrian") {
         /* If it's not mixed, every day has the same user type */
         userTypeDay = _userType;
+    }
    
     /* Save in Hidden fields */
     $("#hdn-day").val(d);

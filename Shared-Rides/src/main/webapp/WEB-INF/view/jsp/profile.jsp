@@ -152,8 +152,12 @@
 
 <script type="text/javascript">
 			
-	if("${visible}" == "true")
+	if("${visible}" == "true") {
 		$(".private-data").show();
+	}
+	else {
+		$(".star").unwrap();
+	}
 	
 	initMapPedestrian();
 	initMapDriver(); 	

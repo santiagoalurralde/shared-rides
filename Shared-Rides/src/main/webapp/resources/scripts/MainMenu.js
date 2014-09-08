@@ -83,7 +83,7 @@ function defaultSearch() {
     });
    
     //Brings the list
-    $(".sr-maps, .btn-OK").hide();       
+    $(".sr-maps, .btn-OK, .btn-default").hide();       
     $(".search-results").show("fast");
 }
 
@@ -120,7 +120,7 @@ function customSearch() {
     });
    
     //Brings the list
-    $(".sr-maps, .btn-OK").hide();       
+    $(".sr-maps, .btn-OK, .btn-default").hide();       
     $(".search-results").show("fast");
 }
 

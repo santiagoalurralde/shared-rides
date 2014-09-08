@@ -101,8 +101,8 @@
 			               <spring:message code="lbl.telephone"/>
 						</span> 
            				
-           				<input 	type="text" id="cellphone" class="block-right sr-inputs" 
-           						onChange="checkIt(this);" onKeyUp="checkNumeric(this);"/>
+           				<input   type="text" id="cellphone" class="block-right sr-inputs" 
+           				         onChange="checkIt(this);" onKeyUp="checkNumeric(this);"/>
          			</span> 
        		    </div>
 				<!---------------------------------- END of FIRST STEP ---------------------------------->
@@ -119,7 +119,7 @@
 			        	</span>     
 						<input 	type="file" name="picture"  
 								class="block-right" accept="image/x-png, image/jpeg">
-	         			<input 	type="submit" class="btn" value='<spring:message code="lbl.send"/>'>
+	         			<input 	type="submit" class="btn" value="<spring:message code='lbl.send'/>">
          			</form>
           			
           			<div class="split"></div>         			
@@ -129,10 +129,10 @@
 				         	<spring:message code="lbl.address"/>          				              	 
 				        </span> 
 	           		
-	           			<input 	type="number" id="number" class="block-right sr-inputs" 
-	           				   	onChange="checkIt(this);" onKeyUp="checkNumeric(this);" min="0" max="99999"/>
+	           			<input 	type="text" id="number" class="block-right sr-inputs" 
+	           				   	  onChange="checkIt(this);" onKeyUp="checkNumeric(this);"/>
 	           			<input	type="text" id="street" class="block-right sr-inputs" 
-	           				   	onChange="checkIt(this);" />
+	           				   	  onChange="checkIt(this);" />
           			</span> 
           				
           			<div class="split"></div>
