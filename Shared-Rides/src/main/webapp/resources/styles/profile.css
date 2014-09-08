@@ -50,6 +50,11 @@ Assigned to:	Santiago Alurralde (sa)
 
 .pedestrian-data {
 	text-align: 		right;
+	margin-left:  		16px;
+}
+
+.pedestrian-data.block-half {
+	width:				47%;
 }
 
 .pedestrian-data, .driver-data, .private-data {
@@ -57,10 +62,19 @@ Assigned to:	Santiago Alurralde (sa)
 }
 
 .star {
-	float:				left;
-	margin-right:		2%;
     width:				50px;
 }
+
+.star-left {
+	float:				left;
+	margin-right:		2%;
+}
+
+.star-right {
+	float:				right;
+	margin-left:		2%;
+}
+
 
 .picture-profile {
     border:				solid 4px #FFF;
