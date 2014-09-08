@@ -51,7 +51,7 @@
 
 						<div class="rating"> 
 							<a class="ifancybox" href="rate.do">
-								<img class="star" src="resources/images/star.png" />
+								<img class="star star-left" src="resources/images/star.png" />
 							</a>
 							
 							<span class="rating-grade">
@@ -92,7 +92,7 @@
 								${ratingPedestrian}
 							</span>
 							<a class="ifancybox" href="rate.do">
-								<img class="star" src="resources/images/star.png"/>
+								<img class="star star-right" src="resources/images/star.png"/>
 							</a>
 						</div>	 	
 						 

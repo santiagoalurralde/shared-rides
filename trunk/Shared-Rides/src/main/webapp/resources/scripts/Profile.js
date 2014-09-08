@@ -113,6 +113,7 @@ function fixView($target) {
 	$(".star").css({"float":"left", "margin-right":"1%", "margin-left":"0"});
 	$(".rating").css("margin", "2% 0 0 0");
 	$(".profile-data").css({"padding-right":"70px", "padding-left":"70px"});
+	$(".pedestrian-data").css("margin-left", "0");
 	$(".map-static").css({"height":"400px", "width":"760px"});
 	$(".map-container").css("margin-left", "0");
 }
