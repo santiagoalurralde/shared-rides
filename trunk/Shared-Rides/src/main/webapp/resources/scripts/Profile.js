@@ -163,13 +163,13 @@ function fillTable(schedule, isDriver) {
 		if ($valMine == "false") {
 			// If it's my profile can't invite myself
 			$("<button></button>", {
-				class	: "btn-request-assoc btn-req-in",
-				html	: schedule[i].day + "<img src='resources/images/"+ image +"'/>"
+				class	: "btn-request-assoc btn-req-in"+ schedule[i].day,
+				html	: "<img src='resources/images/"+ image +"'/>"
 			}).appendTo($lastCellIn);
 			
 			$("<button></button>", {
-				class	: "btn-request-assoc btn-req-out",
-				html	: schedule[i].day + "<img src='resources/images/"+ image +"'/>"
+				class	: "btn-request-assoc btn-req-out"+ schedule[i].day,
+				html	: "<img src='resources/images/"+ image +"'/>"
 			}).appendTo($lastCellOut);
 		}
 
