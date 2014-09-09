@@ -26,7 +26,7 @@ public class HandlerFiles {
         String picName = request.getParameter("pic");
   
         try {
-            FileInputStream inputStream = new FileInputStream("/home/leandrobagur/profilePic/" + picName); 
+            FileInputStream inputStream = new FileInputStream("/home/leandrobagur/Shared Rides/profilePic/" + picName); 
             response.setContentType("image/png");
             OutputStream out = response.getOutputStream();
             byte[] bbuf = new byte[512];
@@ -48,7 +48,7 @@ public class HandlerFiles {
         String gpxName = request.getParameter("gpx");
   
         try {
-            FileInputStream inputStream = new FileInputStream("/home/leandrobagur/gpxFile/" + gpxName); 
+            FileInputStream inputStream = new FileInputStream("/home/leandrobagur/Shared Rides/gpxFile/" + gpxName); 
             response.setContentType("text/xml");
             OutputStream out = response.getOutputStream();
             byte[] bbuf = new byte[512];

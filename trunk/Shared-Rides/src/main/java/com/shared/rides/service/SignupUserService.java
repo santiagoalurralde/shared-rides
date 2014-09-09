@@ -255,7 +255,7 @@ public class SignupUserService {
 		
 		Track track = new Track();
 		//El nombre del archivo esta formado por el identificador personal del usuario, mas el dia de semana que es y si es in o out 
-		String fileName = personalId + "_" + day + "_" + inout + ".gpx";
+		String fileName = personalId + "_" + day + "_" + inout;
 		
 		CreateGPXFile.createGPX(fileName, markers);
 		track.setPathFile(fileName);
