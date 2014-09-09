@@ -75,6 +75,7 @@ $(document).ready(function() {
  */
 function disable($target, flag) {
 	var $img = $target.find("img");
+	// FLAG: 
 	// 0 Mine
 	// 1 Not allowed (X)
 	// 2 Allowed (Steering or Seat) 
