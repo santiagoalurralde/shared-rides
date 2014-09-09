@@ -4,7 +4,7 @@
 
 <body>
 	<div class="sr-content">	
-
+				
 		<!-----------------------------------------
 		[Data]
 		------------------------------------------>			
@@ -158,7 +158,7 @@
 	else {
 		$(".star").unwrap();
 	}
-	
+		
 	initMapPedestrian();
 	initMapDriver(); 	
 	
@@ -187,7 +187,7 @@
 		detSchDriver.hourOut      = "${day.hourOutDriver}";
 		detSchDriver.freeSeatsIn  = "${day.freeSeatsIn}";
 		detSchDriver.freeSeatsOut = "${day.freeSeatsOut}";
-		detSchDriver.pathIn       = "${day.trackIn}";
+		detSchDriver.pathIn       = "${day.trackIn}"; 
 		detSchDriver.pathOut      = "${day.trackOut}";
 		_schDriver.push(detSchDriver);
 	</c:forEach>
@@ -202,8 +202,8 @@
             lblWednesday    : '<spring:message code="lbl.wednesday"     />',
             lblThursday     : '<spring:message code="lbl.thursday"      />',
             lblFriday       : '<spring:message code="lbl.friday"        />'
-        }
-        return function () { return labels };
+        };
+        return function () { return labels; };
     })();
 </script>
 
