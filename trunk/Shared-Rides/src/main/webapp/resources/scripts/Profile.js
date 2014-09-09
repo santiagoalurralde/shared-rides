@@ -78,9 +78,9 @@ function disable($target, flag) {
 	var $img = $target.find("img");
 	// 0 Mine
 	// 1 Not allowed (X)
-	// 2 Allowed 
-	// 3 Sent and not responded
-	// 4 Sent and Accepted
+	// 2 Allowed (Steering or Seat) 
+	// 3 Sent and not responded (Clock)
+	// 4 Sent and Accepted (Tick)
 	
 	if (flag == 1) {
 		$target.prop("disabled", true);

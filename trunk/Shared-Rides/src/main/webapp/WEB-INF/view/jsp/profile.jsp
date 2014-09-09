@@ -182,9 +182,7 @@
 		var detSchDriver          = new DetailScheduleDriver();	
 		detSchDriver.day          = "${day.dayDriver}";
 		detSchDriver.allowIn      = "${day.allowIn}";
-		detSchDriver.allowOut     = "${day.allowOut}";	
-		detSchDriver.sentIn		  = "${day.sentIn}";	
-		detSchDriver.sentOut	  = "${day.sentOut}";			
+		detSchDriver.allowOut     = "${day.allowOut}";				
 		detSchDriver.hourIn       = "${day.hourInDriver}";
 		detSchDriver.hourOut      = "${day.hourOutDriver}";
 		detSchDriver.freeSeatsIn  = "${day.freeSeatsIn}";
