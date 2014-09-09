@@ -269,15 +269,22 @@ public class ProfileService {
 	}
 	
 	/*
-	 * Metodo que verifica si ya hay asociacion entre esas dos personas para ese dia y horario; para que no se pueda mandar
-	 * dos veces una misma asociacion
+	 * Metodo que verifica si existe ese dia para ambos usuario, si los usuarios no son del mismo tipo y si hay asociacion entre ellos
+	 * 0 -> Mi perfil
+	 * 1 -> No esta permitido enviar debido a que son el mismo tipo de usuario o no existe ese dia para ambos
+	 * 2 -> Que esta permitido pero tdv no envie nada
+	 * 3 -> Que ya se envio una peticion y aun no se respondio
+	 * 4 -> Que ya se envio una peticion y ya esta aceptada
 	 */
-	private boolean allowRequest(long userId, int day, int inout){
+	private int allowRequest(long userId, int day, int inout){
 		User user = userDAO.load(this.userLogInId);
 		User userAssoc = userDAO.load(userId);
+		boolean flagSent = false;
+		boolean isAllow = false;
+		boolean flagAccepted = false;
 		
 		if(userId == this.userLogInId){
-			return false;
+			return 0;
 		}
 		else{
 			for(Association a : user.getAssociations()){
@@ -285,7 +292,8 @@ public class ProfileService {
 					a.getInout() == inout && 
 					!(a.getState().equals(State.CANCELLED)) &&
 					a.getApplicantID().getUserId() == userId){
-						return false; 
+						flagSent = true;
+						if(a.getState().equals(State.ACCEPTED)) flagAccepted = true;
 				}
 			}
 			for(Association a : userAssoc.getAssociations()){
@@ -293,15 +301,27 @@ public class ProfileService {
 					a.getInout() == inout && 
 					!(a.getState().equals(State.CANCELLED)) &&
 					a.getApplicantID().getUserId() == this.userLogInId){
-						return false;			
+						flagSent = true;
+						if(a.getState().equals(State.ACCEPTED)) flagAccepted = true;
 				}
 			}	
 			
-			if (validateData(day, userLogInId, userId) == false){
-				return false; 
+			if (validateData(day, userLogInId, userId))	isAllow = true; 
+		}
+		if (isAllow != false){
+			if(flagSent == true){
+				if (flagAccepted == true){
+					return 4;
+				}
+				else{
+					return 3;
+				}
+			}
+			else{
+				return 2;
 			}
 		}
-		return true;
+		return 1;
 	}
 	
 	
