@@ -74,8 +74,8 @@ function start() {
 /**
  * Checks if we can add 1 step
  */
-function stepNext() {  
-    if(_step == 0 && (!checkValues0() || $(".alerts.alert-pw-match").is(":visible") || checkUserExists()))
+function stepNext() { 
+    if(_step == 0 && (!checkValues0() || $(".alerts.alert-pw-match").is(":visible")))
         console.log("Can't proceed to second step");
     else if(_step == 1 && !checkValues1())
         console.log("Can't proceed to third step");
@@ -380,20 +380,16 @@ function checkNumeric(target) {
  * Checks if user with a personal-id was already created. Returns true if exists.
  */
 function checkUserExists() {
-    var pId = $("#personal-id").val().toString(),
-        flag = false;
-   
-    $.ajax({
-        url: "validateNewUser.do",              
-        type: "GET",
-        data: {personalId: pId}
-        }).done(function(isValidate) {
-            if(!isValidate) {
-                flag = true;
-                toggleAlert(flag, getLabel("lblAlertIdExists"), "alert-inputs");
-            }
+    var pId 	= $("#personal-id").val().toString();
+    var exists = false;
+    $.get( "validateNewUser.do", {personalId: pId}, 
+		function(isValidate) {
+        	if(!isValidate) { 
+        		toggleAlert(true, getLabel("lblAlertIdExists"), "alert-inputs");
+        		exists = true;
+        	}
     });
-    return flag;
+    return exists;
 }
 
 /**
@@ -488,7 +484,8 @@ function signUp() {
                                    "days":         	JSON.stringify(_days)
                                    },  
                 function(str) {
-                     alert(getLabel("lblAlertRegistered"));
+                       window.location = "welcome.do";
+//                     alert(getLabel("lblAlertRegistered"));
                 });
     }
 }

@@ -44,7 +44,6 @@ public class SignupUserController {
 			org.put("orgName", o.getName());
 		
 			orgNameList.add(org);
-//			model.addObject("organizations", o);
 		}
 		model.addObject("organizations", orgNameList);
 		model.setViewName("signup");
@@ -81,7 +80,7 @@ public class SignupUserController {
 		String pic = r.getSession().getAttribute("picName").toString();
 		String licensePlate = plateLetters + " " + plateNumbers;
 		signupUserService.signupUser(organization, personalId, pw, name, surname, phoneNumber, email, street, numberStreet, neighborhood, shift, userType, brand, modelVehicle, licensePlate, numberSeats, days, pic);
-		return "msg";
+		return null;
 	}	
 	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)

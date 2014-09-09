@@ -54,11 +54,6 @@ public class MainController {
 		return new ModelAndView("aboutNew");
 	}	
 	
-	@RequestMapping(value="welcome.do")
-	public ModelAndView showWelcome(HttpServletRequest request){
-		return new ModelAndView("welcome");
-	}		
-	
 	@RequestMapping(value="mapdriver.do")
 	public ModelAndView showMapDriver(HttpServletRequest request){
 		return new ModelAndView("mapdriver");
@@ -67,6 +62,11 @@ public class MainController {
 	@RequestMapping(value="mappedestrian.do")
 	public ModelAndView showMapPedestrian(HttpServletRequest request){
 		return new ModelAndView("mappedestrian");
+	}
+	
+	@RequestMapping(value="welcome.do")
+	public ModelAndView showWelcomePage(HttpServletRequest request){
+		return new ModelAndView("welcome");
 	}
 	
 	@RequestMapping(value = "/getNotifications.do", method = RequestMethod.POST)
