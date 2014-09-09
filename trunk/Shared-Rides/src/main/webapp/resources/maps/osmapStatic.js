@@ -105,7 +105,7 @@ function setMapDriver(urlGpxDriver){
 	});
 	
 	_mapDriver.addLayer(_layerTrack);		
-}
+} 
 
 
 

@@ -54,7 +54,13 @@
     	<put-attribute name="style" value='about.css'/>	    	
     	<put-attribute name="body" 	value="/WEB-INF/view/jsp/about.jsp"/>
     </definition>
-
+    
+ 	<definition name="welcome" extends="newDefinition">
+    	<put-attribute name="title" value="About Us"/>
+    	<put-attribute name="style" value='welcome.css'/>	    	
+    	<put-attribute name="body" 	value="/WEB-INF/view/html/welcome.html"/>
+    </definition>
+    
 	<definition name="main" extends="baseDefinition">
     	<put-attribute name="title" value="Main"/>
     	<put-attribute name="style" value='mainMenu.css'/>	    	
