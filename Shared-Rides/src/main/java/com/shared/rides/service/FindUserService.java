@@ -142,8 +142,7 @@ public class FindUserService {
 		//Con la lista filtrada, vemos que usuarios tienen una distancia menor a 10 cuadras = 1000 mts.
 	
 		if (profile == 1){
-			//Si estoy buscando un peatón; quiere decir que soy un conductor y que en la vista marque un
-			//track; por ende tengo varios markers y los tengo que comparar con la direccion de cada peaton
+			//Si estoy buscando un peatón; quiere decir que soy un conductor
 			for(int i = 0; i < userList.size() ; i++){
 				minDistance = 1000;
 				
@@ -158,17 +157,20 @@ public class FindUserService {
 						if (s.getDay() == t.getDay() && s.getInout() == t.getInout()){
 							double [][] track = ReadGPXFile.readFile(t.getPathFile());			
 							for(int j = 0; j < track.length; j++){
-								dist = DistanceHaversine.calculateDistance(track[j][1], track[j][0], s.getLat(), s.getLon());
+								dist = DistanceHaversine.calculateDistance(track[j][0], track[j][1], s.getLat(), s.getLon());
 								if (dist < 1000){ 
 									needRemove = false;
 									if (dist < minDistance) minDistance = dist;
 								}	
-							}	
+							}
+							if (needRemove){ 
+								trackList.remove(t);
+							}
 						}
 						break;
 					}
 				}
-				if (needRemove){ 
+				if (trackList.isEmpty()){ 
 					userList.remove(i);
 					i--;
 				}
