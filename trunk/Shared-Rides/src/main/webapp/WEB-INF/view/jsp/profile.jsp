@@ -166,7 +166,7 @@
 		var	detSchPed			  = new DetailSchedulePedestrian();	
 		detSchPed.day             = "${day.dayPed}";
 		detSchPed.allowIn         = "${day.allowIn}";
-		detSchPed.allowOut        = "${day.allowOut}";
+		detSchPed.allowOut        = "${day.allowOut}";		
 		detSchPed.hourIn          = "${day.hourInPed}";
 		detSchPed.hourOut         = "${day.hourOutPed}";
 		detSchPed.hasDriverIn     = "${day.hasDriverIn}";
@@ -183,6 +183,8 @@
 		detSchDriver.day          = "${day.dayDriver}";
 		detSchDriver.allowIn      = "${day.allowIn}";
 		detSchDriver.allowOut     = "${day.allowOut}";	
+		detSchDriver.sentIn		  = "${day.sentIn}";	
+		detSchDriver.sentOut	  = "${day.sentOut}";			
 		detSchDriver.hourIn       = "${day.hourInDriver}";
 		detSchDriver.hourOut      = "${day.hourOutDriver}";
 		detSchDriver.freeSeatsIn  = "${day.freeSeatsIn}";
