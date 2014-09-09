@@ -20,13 +20,13 @@ public class DownloadImgController {
 	
 	@Autowired
 	private IUserDAO userDAO;
-
+/*
     @RequestMapping(value = "printImgFile.do")
     protected void downloadImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String picName = request.getParameter("pic");
   
         try {
-            FileInputStream inputStream = new FileInputStream("/home/santiago/profilePic/" + picName); 
+            FileInputStream inputStream = new FileInputStream("/home/leandrobagur/profilePic/" + picName); 
             response.setContentType("image/png");
             OutputStream out = response.getOutputStream();
             byte[] bbuf = new byte[512];
@@ -41,4 +41,5 @@ public class DownloadImgController {
             ex.printStackTrace();
         }        
     }
+    */
 }
