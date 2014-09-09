@@ -1,0 +1,35 @@
+/*------------------------------------------------------------------
+[Welcome Stylesheet]
+
+Project:		Shared Rides
+Last change:	25/08/2014
+Assigned to:	Santiago Alurralde (sa)
+-------------------------------------------------------------------*/
+
+
+/*-----------------------------------------------------------------*/
+
+body {
+	background:			url(../images/pic1.jpg); 
+	background-size:	cover
+}
+
+.block-left{
+	text-align:			right;
+	width:				40%
+}
+
+.block-left img{
+	width:				220px;
+}
+
+.block-left, .block-right{
+	margin-top:			10%;
+}
+
+.block-right{
+	background-color: 	rgba(0, 0, 0, 0.7);	
+	width: 				55%;
+	padding:			2% 2%;
+	color:				white;
+}
