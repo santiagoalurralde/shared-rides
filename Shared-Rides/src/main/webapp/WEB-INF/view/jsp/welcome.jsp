@@ -13,4 +13,11 @@
 	</div>
 	
 	<div class="clearer"></div>
+	
+	<script>
+		$(".btn").click(function(){
+			window.location = "login.do";
+		});	
+	
+	</script>
 </body>
