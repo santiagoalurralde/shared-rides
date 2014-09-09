@@ -45,10 +45,10 @@ function initMapDriver(){
   
 	/*  Layers		*/
 	var layerOSM    = new OpenLayers.Layer.OSM("Street Map");
-	_layerTrack 	= new OpenLayers.Layer.OSM.CycleMap("TrackLayer");
+//	_layerTrack 	= new OpenLayers.Layer.OSM.CycleMap("TrackLayer");
 
 	_mapDriver.addLayers([layerOSM]);
-	_mapDriver.addLayer(_layerTrack);
+//	_mapDriver.addLayer(_layerTrack);
 	
 	/*  Set Start Position  */
 	var zoomStart	= 16,
@@ -90,13 +90,16 @@ function setMapPedestrian(lonPed, latPed){
 /**
  * Sets Driver's Track
  */
-function setMapDriver(urlGpxDriver){
-	_mapDriver.removeLayer(_layerTrack);
+function setMapDriver(urlGpxDriver){	
+	if(typeof _layerTrack !== 'undefined') {
+		_mapDriver.removeLayer(_layerTrack);
+	}
 	
-    var _layerTrack = new OpenLayers.Layer.Vector("driver track", {
+    _layerTrack = new OpenLayers.Layer.Vector("driver track", {
         strategies: [new OpenLayers.Strategy.Fixed()],
         protocol: new OpenLayers.Protocol.HTTP({
-        	url: 'resources/gpxFiles/'+ urlGpxDriver,
+        	url: 'getGPXFile.do',
+        	params: {'gpx':urlGpxDriver},
         	format: new OpenLayers.Format.GPX()
         }),
         style: {strokeColor: "green", strokeWidth: 5, strokeOpacity: 0.5},
