@@ -58,7 +58,6 @@ $(document).ready(function() {
 		var $this = $(this);
 		if (confirm(getLabel("lblAlertConfirm"))) {
 			requestAssociation($this);
-			disable($this, true);
 		}
 	});
 
@@ -246,20 +245,20 @@ function disableRequests(schedule, isDriver) {
 
 		if (!isDriver) {
 			// If Pedestrian has driver, can't invite him.
-			if (schedule[i].hasDriverIn == "true" || schedule[i].allowIn == "false") {
-				disable($btnReqIn, true);
+			if (schedule[i].hasDriverIn == "true" || schedule[i].allowIn != 2) {
+				disable($btnReqIn, schedule[i].allowIn);
 			}
-			if (schedule[i].hasDriverOut == "true" || schedule[i].allowOut == "false") {
-				disable($btnReqOut, true);
+			if (schedule[i].hasDriverOut == "true" || schedule[i].allowOut != 2) {
+				disable($btnReqOut, schedule[i].allowIn);
 			}
 		} 
 		else {
 			// If Driver has no seats, can't invite him.
-			if (schedule[i].freeSeatsIn == 0 || schedule[i].allowIn == "false") {		
-				disable($btnReqIn, true);
+			if (schedule[i].freeSeatsIn == 0 || schedule[i].allowIn == 2) {		
+				disable($btnReqIn, schedule[i].allowIn);
 			}
-			if (schedule[i].freeSeatsOut == 0 || schedule[i].allowOut == "false") {				
-				disable($btnReqOut, true);
+			if (schedule[i].freeSeatsOut == 0 || schedule[i].allowOut == 2) {				
+				disable($btnReqOut, schedule[i].allowIn);
 			}
 		}
 	}
@@ -297,10 +296,10 @@ function requestAssociation($target) {
 		$btnReqOut	= $(".btn-req-out"+ day);
 
 	if (inOut == "0") {
-		disable($btnReqIn, true);
+		disable($btnReqIn, 3);
 	}
 	else {
-		disable($btnReqOut, true);
+		disable($btnReqOut, 3);
 	}
 
 	$.post("requestAssoc.do",
