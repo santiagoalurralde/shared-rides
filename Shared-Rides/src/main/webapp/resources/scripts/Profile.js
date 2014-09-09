@@ -76,19 +76,32 @@ $(document).ready(function() {
  */
 function disable($target, flag) {
 	var $img = $target.find("img");
-
-	if (flag){
+	// 0 Mine
+	// 1 Not allowed (X)
+	// 2 Allowed 
+	// 3 Sent and not responded
+	// 4 Sent and Accepted
+	
+	if (flag == 1) {
 		$target.prop("disabled", true);
-		$img.attr("src", "resources/images/disabled.png");
+		$img.attr("src", "resources/images/disabled.png");		
 	}
-	else {
+	else if (flag == 2) {
 		$target.prop("disabled", false);
-		if($target.closest("table").hasClass("table-ped")) {
+		if ($target.closest("table").hasClass("table-ped")) {
 			$img.attr("src", "resources/images/steering.png");
 		}
 		else {
 			$img.attr("src", "resources/images/seat.png");
 		}
+	}
+	else if (flag == 3){
+		$target.prop("disabled", true);
+		$img.attr("src", "resources/images/clock.png");				
+	}
+	else if (flag == 4){
+		$target.prop("disabled", true);
+		$img.attr("src", "resources/images/accepted.png");			
 	}
 }
 
