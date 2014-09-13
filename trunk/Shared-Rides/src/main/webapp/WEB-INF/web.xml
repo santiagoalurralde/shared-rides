@@ -24,4 +24,18 @@
     	<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
+<!--         	leandro: /home/leandrobagur/WORKSPACE/ -->
+<!--         	santiago:/home/santiago/workspace/ -->
+	<context-param> 
+    	<description>Directorio donde se almacenan las imagenes</description> 
+    	<param-name>img-upload</param-name> 
+    	<param-value>/home/leandrobagur/Shared Rides/profilePic/</param-value> 
+	</context-param>
+	
+		<context-param> 
+    	<description>Directorio donde se almacenan los gpx</description> 
+    	<param-name>gpx-upload</param-name> 
+    	<param-value>/home/leandrobagur/Shared Rides/gpxFile/</param-value> 
+	</context-param>
+
 </web-app>

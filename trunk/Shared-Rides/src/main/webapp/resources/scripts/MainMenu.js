@@ -74,7 +74,6 @@ function defaultSearch() {
             }
             else {
                 $.each(peopleFound, function(i, person) {
-                	person.distance = Math.ceil(person.distance);                    
                     var resultFound = templateFound(person);
                     $(".alerts").hide();  
                     $tableFound.append(resultFound).show();

@@ -150,7 +150,7 @@ public class ResponseAssociationService {
 			msg = "El usuario ha rechazado la solicitud";
 		}
 		assocDAO.update(assoc);
-			
+/*			
 		try{
 			EmailSender emailSender = new EmailSender();
 			emailSender.sendEmail(assoc.getApplicantID(), u, 1);					
@@ -158,7 +158,7 @@ public class ResponseAssociationService {
 		catch(Exception e){
 			System.out.println(e);
 		}
-		
+	*/	
 		return msg;
 	}
 }

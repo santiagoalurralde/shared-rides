@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -66,6 +67,9 @@ public class SignupUserService {
 	
 	@Autowired
 	private ITrackDAO trackDAO;
+	
+	@Autowired
+	private ServletContext context;
 	
 	public boolean validateNewUser(String personalId){
 		boolean isValidate = true;
@@ -257,7 +261,9 @@ public class SignupUserService {
 		//El nombre del archivo esta formado por el identificador personal del usuario, mas el dia de semana que es y si es in o out 
 		String fileName = personalId + "_" + day + "_" + inout;
 		
-		CreateGPXFile.createGPX(fileName, markers);
+		String pathFile = context.getInitParameter("gpx-upload");
+		
+		CreateGPXFile.createGPX(fileName, markers, pathFile);
 		track.setPathFile(fileName);
 		track.setDay(day + 1);
 		if(inout.equalsIgnoreCase("in")) track.setInout(0);
@@ -274,7 +280,10 @@ public class SignupUserService {
 		//Seteo el nuevo nombre de la imagen en la sesion para luego obtenerlo de nuevo a la hora de darle de alta al usuario
 		HttpSession s = request.getSession();
 		s.setAttribute("picName", fileName);	
-		return UploadFile.uploadFile(file, fileName);			
+		
+		String pathFile = context.getInitParameter("img-upload");
+		
+		return UploadFile.uploadFile(file, fileName, pathFile);			
 	}
 	
 }

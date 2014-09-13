@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,13 +21,17 @@ public class HandlerFiles {
 
 	@Autowired
 	private IUserDAO userDAO;
+	
+	@Autowired
+	private ServletContext context;
 
     @RequestMapping(value = "printImgFile.do")
     protected void downloadImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String picName = request.getParameter("pic");
-  
-        try {
-            FileInputStream inputStream = new FileInputStream("/home/leandrobagur/Shared Rides/profilePic/" + picName); 
+        
+        try {        	
+        	String filePath = context.getInitParameter("img-upload");
+            FileInputStream inputStream = new FileInputStream(filePath + picName); 
             response.setContentType("image/png");
             OutputStream out = response.getOutputStream();
             byte[] bbuf = new byte[512];
@@ -48,7 +53,8 @@ public class HandlerFiles {
         String gpxName = request.getParameter("gpx");
   
         try {
-            FileInputStream inputStream = new FileInputStream("/home/leandrobagur/Shared Rides/gpxFile/" + gpxName); 
+        	String filePath = context.getInitParameter("gpx-upload");
+            FileInputStream inputStream = new FileInputStream(filePath + gpxName); 
             response.setContentType("text/xml");
             OutputStream out = response.getOutputStream();
             byte[] bbuf = new byte[512];
