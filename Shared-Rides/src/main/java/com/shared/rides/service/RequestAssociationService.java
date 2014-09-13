@@ -49,15 +49,15 @@ public class RequestAssociationService {
 				assocDAO.save(assoc);
 				userDAO.newAssoc(supplierUser, assoc);
 				message = "Se ha enviado la solicitud correctamente.";
-				
+				/*
 				try{
 					EmailSender emailSender = new EmailSender();
 					emailSender.sendEmail(supplierUser, applicantUser, 0);					
 				}
 				catch(Exception e){
 					System.out.println(e);
-				}
-
+				}*/
+				
 				
 	//		}
 	//		else message = "Esta peticion ya se ha realizado anteriormente";

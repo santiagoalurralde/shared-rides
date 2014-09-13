@@ -82,11 +82,11 @@ function disable($target, flag) {
 	// 3 Sent and not responded (Clock)
 	// 4 Sent and Accepted (Tick)
 	
-	if (flag == 1) {
+	if (flag == "1") {
 		$target.prop("disabled", true);
 		$img.attr("src", "resources/images/disabled.png");		
 	}
-	else if (flag == 2) {
+	else if (flag == "2") {
 		$target.prop("disabled", false);
 		if ($target.closest("table").hasClass("table-ped")) {
 			$img.attr("src", "resources/images/steering.png");
@@ -95,11 +95,11 @@ function disable($target, flag) {
 			$img.attr("src", "resources/images/seat.png");
 		}
 	}
-	else if (flag == 3){
+	else if (flag == "3"){
 		$target.prop("disabled", true);
 		$img.attr("src", "resources/images/clock.png");				
 	}
-	else if (flag == 4){
+	else if (flag == "4"){
 		$target.prop("disabled", true);
 		$img.attr("src", "resources/images/accepted.png");			
 	}
@@ -176,15 +176,12 @@ function fillTable(schedule, isDriver) {
 		
 		if ($valMine == "false") {
 			// If it's my profile can't invite myself
-			$("<button></button>", {
-				class	: "btn-request-assoc btn-req-in"+ schedule[i].day,
-				html	: "<img src='resources/images/"+ image +"'/>"
-			}).appendTo($lastCellIn);
-			
-			$("<button></button>", {
-				class	: "btn-request-assoc btn-req-out"+ schedule[i].day,
-				html	: "<img src='resources/images/"+ image +"'/>"
-			}).appendTo($lastCellOut);
+			$lastCellIn.append("<button class='btn-request-assoc btn-req-in"+ schedule[i].day +"' data-day='"+ schedule[i].day +"'>"+
+					"<img src='resources/images/"+ image +"'/>"+
+					"</button>");
+			$lastCellOut.append("<button class='btn-request-assoc btn-req-out"+ schedule[i].day +"' data-day='"+ schedule[i].day +"'>"+
+					"<img src='resources/images/"+ image +"'/>"+
+					"</button>");
 		}
 
 		if (!isDriver) {
@@ -246,20 +243,20 @@ function disableRequests(schedule, isDriver) {
 
 		if (!isDriver) {
 			// If Pedestrian has driver, can't invite him.
-			if (schedule[i].hasDriverIn == "true" || schedule[i].allowIn != 2) {
+			if (schedule[i].hasDriverIn == "true" || schedule[i].allowIn != "2") {
 				disable($btnReqIn, schedule[i].allowIn);
 			}
-			if (schedule[i].hasDriverOut == "true" || schedule[i].allowOut != 2) {
-				disable($btnReqOut, schedule[i].allowIn);
+			if (schedule[i].hasDriverOut == "true" || schedule[i].allowOut != "2") {
+				disable($btnReqOut, schedule[i].allowOut);
 			}
 		} 
 		else {
 			// If Driver has no seats, can't invite him.
-			if (schedule[i].freeSeatsIn == 0 || schedule[i].allowIn == 2) {		
+			if (schedule[i].freeSeatsIn == 0 || schedule[i].allowIn == "2") {		
 				disable($btnReqIn, schedule[i].allowIn);
 			}
-			if (schedule[i].freeSeatsOut == 0 || schedule[i].allowOut == 2) {				
-				disable($btnReqOut, schedule[i].allowIn);
+			if (schedule[i].freeSeatsOut == 0 || schedule[i].allowOut == "2") {				
+				disable($btnReqOut, schedule[i].allowOut);
 			}
 		}
 	}
@@ -290,7 +287,7 @@ function showMap($target) {
  * @param {jquery} $target - clicked button.
  */
 function requestAssociation($target) {
-	var day    		= $target.closest("td").index(),
+	var day    		= $target.data("day"),
 		inOut  		= ($target.closest("tr").hasClass("row-in")) ? "0" : "1",
 		idUser 		= $("#val-id").val(),
 		$btnReqIn	= $(".btn-req-in"+ day),

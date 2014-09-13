@@ -3,15 +3,18 @@ package com.shared.rides.util;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
+
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CreateGPXFile {
 	
-	public static void createGPX(String name, Double[][] markers){
+	public static void createGPX(String name, Double[][] markers, String pathFile){
 		
 		Element gpx = new Element("gpx");
 		Document doc = new Document(gpx);
@@ -32,11 +35,9 @@ public class CreateGPXFile {
         
         XMLOutputter xmlOutput = new XMLOutputter();
         xmlOutput.setFormat(Format.getPrettyFormat());
-        
-        try {
-        	//leandro: /home/leandrobagur/WORKSPACE/
-        	//santiago:/home/santiago/workspace/ 
-			xmlOutput.output(doc, new FileWriter("/home/leandrobagur/Shared Rides/gpxFile/" + name));
+
+        try { 
+			xmlOutput.output(doc, new FileWriter(pathFile + name));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

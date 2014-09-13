@@ -15,11 +15,9 @@ public class ReadGPXFile {
 	
 	private static double [][] pointsList;
 	
-	public static double[][] readFile(String pathFile){
+	public static double[][] readFile(String fileName, String pathFile){
 		try {
-        	//leandro: /home/leandrobagur/WORKSPACE/
-        	//santiago:/home/santiago/workspace/
-			File fGPXFile = new File("/home/leandrobagur/Shared Rides/gpxFile/" + pathFile);
+			File fGPXFile = new File(pathFile + fileName);
 			if (fGPXFile.exists()){
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
