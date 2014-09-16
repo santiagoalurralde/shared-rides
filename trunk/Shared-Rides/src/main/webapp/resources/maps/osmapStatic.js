@@ -45,17 +45,15 @@ function initMapDriver(){
   
 	/*  Layers		*/
 	var layerOSM    = new OpenLayers.Layer.OSM("Street Map");
-//	_layerTrack 	= new OpenLayers.Layer.OSM.CycleMap("TrackLayer");
 
 	_mapDriver.addLayers([layerOSM]);
-//	_mapDriver.addLayer(_layerTrack);
 	
 	/*  Set Start Position  */
 	var zoomStart	= 16,
 		lonlatStart	= new OpenLayers.LonLat(-64.183, -31.416)
 						.transform(
-								_proj4326,
-								_mapDriver.getProjectionObject()
+							_proj4326,
+							_mapDriver.getProjectionObject()
 				    	);
 
 
@@ -106,7 +104,8 @@ function setMapDriver(urlGpxDriver){
 		projection: new OpenLayers.Projection("EPSG:4326")
 	});
 	
-	_mapDriver.addLayer(_layerTrack);		
+	_mapDriver.addLayer(_layerTrack);
+
 } 
 
 
