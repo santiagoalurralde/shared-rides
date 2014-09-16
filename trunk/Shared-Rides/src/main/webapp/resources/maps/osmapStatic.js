@@ -105,7 +105,7 @@ function setMapDriver(urlGpxDriver){
 	});
 	
 	_mapDriver.addLayer(_layerTrack);
-
+	_mapDriver.zoomToExtent(_layerTrack.getDataExtent()); //TODO try this
 } 
 
 
