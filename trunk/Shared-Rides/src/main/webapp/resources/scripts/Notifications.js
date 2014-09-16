@@ -13,14 +13,16 @@ $(document).ready(function() {
 	    function(json) {
 	        var notifArray = $.parseJSON(json);
 	        if(notifArray.notifications.length != 0) {
-	        	$(".notification-bubble").html(notifArray.length).show();
 		        $.each(notifArray.notifications, function(i, not) {
 	                var notifFinal = templateNotif(not);
 	                $(".notifications-list").append(notifFinal);
 		        });	            	
 	        }
-	        else{
-	        	$(".notification-bubble").hide();
+        	if(notifArray.newNotification == "true") {
+        		$(".notification-bubble").html(notifArray.length).show();
+        	} 
+        	else {
+	        	$(".notification-bubble").html(6).show();
 	        }
 	});	
 	

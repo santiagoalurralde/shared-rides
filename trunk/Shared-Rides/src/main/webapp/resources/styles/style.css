@@ -371,12 +371,12 @@ body {
 .notification-bubble {
     background-color:	red;
     border-radius:		30px;
-    box-shadow:			1px 1px 1px gray;    
+    box-shadow:			1px 1px 1px #555;    
     color:				white;
     display: 			none;
     font-weight:		bold;
-    font-size:			0.55em;
-	padding: 			1px 4px 3px 3px;    
+    font-size:			.6em;
+	padding: 			1px 4px 2px 3px;    
     position:			absolute;
 	top: 				3px;
 	right: 				44px;
