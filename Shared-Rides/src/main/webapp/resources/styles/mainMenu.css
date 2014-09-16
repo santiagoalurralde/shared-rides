@@ -138,9 +138,14 @@ Assigned to:	Santiago Alurralde (sa)
 	border-bottom:			1px solid #E0E0E0;
 }
 
-.sr-table-users img {					
+.sr-table-users .profile-picture {					
 	width: 					100px;
 	height:					110px;
+}
+
+.help-icon {
+	vertical-align: 		middle;
+	width:					40px;
 }
 
 /*------------------------------------------------------------------

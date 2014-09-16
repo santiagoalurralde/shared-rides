@@ -12,11 +12,15 @@ $(document).ready(function() {
 	$.post("getNotifications.do", 
 	    function(json) {
 	        var notifArray = $.parseJSON(json);
-	        if(notifArray != "") {
+	        if(notifArray.notifications.length != 0) {
+	        	$(".notification-bubble").html(notifArray.length).show();
 		        $.each(notifArray.notifications, function(i, not) {
 	                var notifFinal = templateNotif(not);
 	                $(".notifications-list").append(notifFinal);
 		        });	            	
+	        }
+	        else{
+	        	$(".notification-bubble").hide();
 	        }
 	});	
 	

@@ -58,7 +58,7 @@
 								${ratingDriver}
 							</span>	
 						</div>	 	
-												 							 
+													 							 
 						<div> 	
 							<table class="sr-schedule table-driver">
 								<tr class="row-day">
@@ -76,6 +76,21 @@
 						<div class="map-container">	
 							<p class="text-left text-bold"><spring:message code="lbl.track"/></p><br>
 							<div id="map-driver" class="map-static"></div>
+						</div>
+
+
+						<div class="vehicle">
+							<p class="text-left text-bold"><spring:message code="lbl.vehicleInfo"/></p><br>
+							<p>
+								<img class="help-icon" src="resources/images/car.png"/>
+								<spring:message code="lbl.brandModel"/> ${vehicleBrand} ${vehicleModel} 	
+							</p><br>
+							<p>
+							</p><br>
+							<p>
+								<img class="help-icon" src="resources/images/license.png"/>							
+								<spring:message code="lbl.plate"/> ${licensePlate} 	
+							</p>
 						</div>
 					</div>
 					
