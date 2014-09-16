@@ -19,10 +19,10 @@ $(document).ready(function() {
 		        });	            	
 	        }
         	if(notifArray.newNotification == "true") {
-        		$(".notification-bubble").html(notifArray.length).show();
+        		$(".notification-bubble").html(notifArray.notifications.length).show();
         	} 
         	else {
-	        	$(".notification-bubble").html(6).show();
+	        	$(".notification-bubble").hide();
 	        }
 	});	
 	
