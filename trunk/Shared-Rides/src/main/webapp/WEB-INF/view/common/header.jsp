@@ -28,6 +28,7 @@
 	</a>
 	
 	<img class="btn-alert" src="resources/images/bell.png"/>
+	<div class="notification-bubble"></div>
 	
 	<a href="logout.do">
 		<img class="btn-logout" src="resources/images/logout.png">

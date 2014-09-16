@@ -72,11 +72,15 @@
 								<td>{{name}} {{surname}}</td>
 								<td>
 							        <a href="/Shared-Rides/profile.do?user={{id}}">
-							            <img src="printImgFile.do?pic={{picture}}"/>
+							            <img class="profile-picture" src="printImgFile.do?pic={{picture}}"/>
 							        </a>
 								</td>
 								<td> 
 									<spring:message code="lbl.blocks1"/> {{distance}} <spring:message code="lbl.blocks2"/> 
+								</td>
+								<td> 
+									{{rating}}
+									<img class="help-icon" src="resources/images/star.png"/>
 								</td>
 							</tr>
 						</script>												
