@@ -240,7 +240,7 @@ function disableRequests(schedule, isDriver) {
 	for (var i=0; i<schedule.length; i++) {
 		var	$btnReqIn	= $(".btn-req-in"+ schedule[i].day),
 			$btnReqOut	= $(".btn-req-out"+ schedule[i].day);
-
+		
 		if (!isDriver) {
 			// If Pedestrian has driver, can't invite him.
 			if (schedule[i].hasDriverIn == "true" || schedule[i].allowIn != "2") {
@@ -256,12 +256,12 @@ function disableRequests(schedule, isDriver) {
 		} 
 		else {
 			// If Driver has no seats, can't invite him.
-			if (schedule[i].freeSeatsIn == 0 || schedule[i].allowIn == "2") {	
+			if (schedule[i].freeSeatsIn == 0 || schedule[i].allowIn != "2") {	
 				//TODO delete alerts				
 				alert(schedule[i].allowIn);
 				disable($btnReqIn, schedule[i].allowIn);
 			}
-			if (schedule[i].freeSeatsOut == 0 || schedule[i].allowOut == "2") {	
+			if (schedule[i].freeSeatsOut == 0 || schedule[i].allowOut != "2") {	
 				//TODO delete alerts				
 				alert(schedule[i].allowOut);				
 				disable($btnReqOut, schedule[i].allowOut);
