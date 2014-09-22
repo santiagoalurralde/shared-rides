@@ -46,9 +46,9 @@
 			<li class="notification-item">
 				<a href='people.do'>
 					{{#isRequest type}}
-						Has recibido una peticion de <b> {{name}} {{date}} </b>
+						<spring:message code="lbl.notif-request"/> <b> {{name}} - {{date}} </b>
 					{{else}}
-						<b>{{name}}</b> ha respondido a tu peticion {{date}}
+						<b>{{name}}</b> <spring:message code="lbl.notif-responded"/> - {{date}}
 					{{/isRequest}}
 				</a>
 			</li>
