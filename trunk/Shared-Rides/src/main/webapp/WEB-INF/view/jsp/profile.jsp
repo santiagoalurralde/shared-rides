@@ -168,7 +168,7 @@
 <script type="text/javascript">
 			
 	if("${visible}" == "true") {
-		$(".private-data").show();
+		$(".private-data, .vehicle").show();
 	}
 	else {
 		$(".star").unwrap();
