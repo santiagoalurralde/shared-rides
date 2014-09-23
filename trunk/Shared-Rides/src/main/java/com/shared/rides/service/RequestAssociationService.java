@@ -31,104 +31,28 @@ public class RequestAssociationService {
 	 */
 	public String sendAssocRequest(int day, int inout, long idUser, long idApplicant){
 		Date date = new Date();
-		message = "No se pudo enviar la solicitud correctamente.";
 		//Persona que hace la peticion
 		applicantUser = userDAO.load(idApplicant);
 		
 		//Persona que tiene que responder
 		supplierUser = userDAO.load(idUser);
 		
-//	if (validateData(day)){
-			if(validateAssoc(day, inout)){
-				Association assoc = new Association();
-				assoc.setDay(day);
-				assoc.setInout(inout);
-				assoc.setApplicantID(applicantUser);
-				assoc.setState(State.PENDING);
-				assoc.setDate(date);
-				assocDAO.save(assoc);
-				userDAO.newAssoc(supplierUser, assoc);
-				message = "Se ha enviado la solicitud correctamente.";
-				/*
-				try{
-					EmailSender emailSender = new EmailSender();
-					emailSender.sendEmail(supplierUser, applicantUser, 0);					
-				}
-				catch(Exception e){
-					System.out.println(e);
-				}*/
-				
-				
-	//		}
-	//		else message = "Esta peticion ya se ha realizado anteriormente";
+		Association assoc = new Association();
+		assoc.setDay(day);
+		assoc.setInout(inout);
+		assoc.setApplicantID(applicantUser);
+		assoc.setState(State.PENDING);
+		assoc.setDate(date);
+		assocDAO.save(assoc);
+		userDAO.newAssoc(supplierUser, assoc);
+		/*
+		try{
+			EmailSender emailSender = new EmailSender();
+			emailSender.sendEmail(supplierUser, applicantUser, 0);					
 		}
+		catch(Exception e){
+			System.out.println(e);
+		}*/	
 		return message;
-	}
-	
-//	private boolean validateData(int day){
-//		if (applicantUser.getPedestrian() != null){
-//			if (supplierUser.getDriver() != null){
-//				Pedestrian pedApplicant = applicantUser.getPedestrian();
-//				Driver driverSupplier = supplierUser.getDriver();
-//				/*
-//			 	* Si esto pasa, significa que para el dia en el que se solicito la invitacion, uno es un
-//			 	* pedestrian y otro es un driver, lo cual esta bien 
-//			 	*/
-//				if ( hasSchedule(pedApplicant, day, 0) && hasSchedule(driverSupplier, day, 1) ){
-//					return true;
-//				}
-//			}
-//		}
-//		if (applicantUser.getDriver() != null){
-//			if (supplierUser.getPedestrian() != null){
-//				Driver driverApplicant = applicantUser.getDriver();
-//				Pedestrian pedSupplier = supplierUser.getPedestrian();
-//				/*
-//			 	* Si esto pasa, significa que para el dia en el que se solicito la invitacion, uno es un
-//			 	* pedestrian y otro es un driver, lo cual esta bien 
-//			 	*/
-//				if ( hasSchedule(driverApplicant, day, 1) && hasSchedule(pedSupplier, day, 0) ){
-//					return true;
-//				}
-//			}
-//		}
-//		return false;
-//	}
-	
-	/*
-	 * Funcion que le paso un objecto (que puede ser un driver o un pedestrian), el dia por el cual quiero buscar
-	 * y el profile que me sirve para luego dentro de la funcion saber de que tipo es el parametro objeto
-	 * Si retorna -1 quiere decir que ese usuario no tiene un schedule para ese dia
-	 */
-//	private boolean hasSchedule(Object o, int day, int profile){
-//		List<Schedule> schList;
-//		if (profile == 0){
-//			Pedestrian p = (Pedestrian) o;
-//			schList = p.getSchedule();
-//		}
-//		else{
-//			Driver d = (Driver) o;
-//			schList = d.getSchedule();
-//		}
-//		
-//		for (int i = 0; i < schList.size(); i++){
-//			if (schList.get(i).getDay() == day){
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-	
-	private boolean validateAssoc(int day, int inout){
-		boolean isValidate = true;
-		
-		List<Association> myRequestList = userDAO.getMyRequests(applicantUser);
-		
-		for(Association assoc : myRequestList){
-			long supplierId = assocDAO.getSupplierId(assoc);
-			if((assoc.getDay() == day) && (assoc.getInout() == inout) && (supplierUser.getUserId() == supplierId)) isValidate = false;
-		}	
-		
-		return isValidate;
 	}
 }

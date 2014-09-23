@@ -63,4 +63,12 @@ public class LoginController {
 		request.getSession().invalidate();
 		return new ModelAndView("redirect:/");
 	}
+	
+	@RequestMapping(value="updateLoginDate.do")
+	public void updateLoginDate(HttpServletRequest request){
+		User u = (User) request.getSession().getAttribute("user");
+		//Actualizamos la ultima fecha de logueo cuando apreta la campana
+		loginService.saveLastLoginDate(u.getUserId());		
+	}
+	
 }

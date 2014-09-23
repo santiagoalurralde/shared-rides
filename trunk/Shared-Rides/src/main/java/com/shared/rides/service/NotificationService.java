@@ -58,6 +58,7 @@ public class NotificationService {
 					
 					uJson.addProperty("type", "response");
 					uJson.addProperty("name", fullName);
+					uJson.addProperty("answer", assoc.getState().toString());
 					uJson.addProperty("date", parseDate(assoc.getDate()));
 				
 					notifications.add(uJson);
