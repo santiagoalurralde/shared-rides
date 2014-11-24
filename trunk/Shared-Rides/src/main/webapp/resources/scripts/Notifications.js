@@ -19,6 +19,10 @@ $(document).ready(function() {
 	                $(".notifications-list").append(notifFinal);
 		        });	            	
 	        }
+	        else {
+                $(".notifications-list").append("<h5 style='font-weight:lighter; text-align:center'>No tienes notificaciones.</h5>");
+	        }
+	        
         	if(notifArray.newNotification) {
         		$(".notification-bubble").html(notifArray.notifications.length).show();
         	} 
@@ -33,3 +37,9 @@ $(document).ready(function() {
     	$notificationsBox.toggle();
     });
 });
+
+function updateLoginDate() {
+	$.post("updateLoginDate.do", function() {
+		console.log("success");
+	});
+};

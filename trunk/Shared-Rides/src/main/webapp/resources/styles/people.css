@@ -47,9 +47,14 @@ Assigned to:	Santiago Alurralde (sa)
 	width:			120px;
 }
 
-.btn-pending, .btn-associated{
+.btn-pending, .btn-associated {
 	float: 			right; 
 	vertical-align: top;
+}
+
+h1 {
+	text-align: 	center;
+	margin-bottom:	15px;
 }
 
 

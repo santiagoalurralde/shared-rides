@@ -32,9 +32,10 @@
 		[Schedule Data]
 		------------------------------------------>		
 		<section class="sr-tupper" style="margin-top: 20px">
-
+			
 			<div class="sr-board border-light schedule-data">
-
+				<h1> <spring:message code="lbl.schedule"/> </h1>
+				
 				<div class="requested block-half block-left">		
 					<h2> <spring:message code="lbl.requested"/> </h2>
 					<table class="table-requested sr-schedule"></table>					
