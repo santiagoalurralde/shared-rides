@@ -43,8 +43,8 @@
 
 	<ul class="notifications-list">
 		<script id="temp-notifications" type="text/x-handlebars-template">
-			<li class="notification-item">
-				<a href='people.do'>
+			<li class='notification-item'>
+				<a href='people.do' onclick='updateLoginDate();'>
 					{{#isRequest type}}
 						<spring:message code="lbl.notif-request"/> <b> {{name}} - {{date}} </b>
 					{{else}}

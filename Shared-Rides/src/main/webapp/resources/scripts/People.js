@@ -117,6 +117,9 @@ function viewSchedule(json, typeAssoc) {
 		$offered.hide()
 		        .siblings().css({"float":"none", "width":"100%"});
 	}
+	if(relations.requested == "" && relations.offered == "") {
+		$scheduleData.hide();
+	}
 }
 
 
@@ -166,8 +169,9 @@ function printSchedule(days, $table, typeAssoc) {
 		$rowDays		= 	$table.find("tr:first"),
 		$scheduleData 	= 	$(".schedule-data");
 
-	if(!$scheduleData.is(":visible"))			//Display schedules' section
+	if(!$scheduleData.is(":visible")) {			//Display schedules' section
 		$scheduleData.show("bounce", 400);
+	}
 		
 	for(var i=1; i<days.length; i++) {
 		if(days[i]!=null) {
@@ -229,18 +233,20 @@ function listenerSchedule(target) {
 	
 	$userId = $(target).siblings("input").attr("id");
 	
-	if($(target).hasClass("btn-pending"))
+	if($(target).hasClass("btn-pending")) {
 		$.post("viewSchedule.do", {"userId": $userId , "typeAssoc": 0}, 
 			function(json) {
 				viewSchedule(json, 0);
 			}
 		);
-	else
+	}
+	else {
 		$.post("viewSchedule.do", {"userId": $userId , "typeAssoc": 1}, 
 			function(json) {
 				viewSchedule(json, 1);
 			}
-		);	
+		);
+	}
 }
 
 /**
