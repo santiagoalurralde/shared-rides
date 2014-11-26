@@ -79,7 +79,8 @@ public class FindUserService {
 							needRemove = false;
 							if (dist < minDistance) minDistance = dist;
 						}
-					}	
+					}
+				}
 					if (needRemove){ 
 						userList.remove(i);
 						i--;
@@ -88,7 +89,7 @@ public class FindUserService {
 						int distance = Math.round(minDistance/100);
 						distanceList.add(distance);
 					}
-				}
+				
 			}
 		}
 		else{

@@ -39,7 +39,7 @@ $(document).ready(function() {
 });
 
 function updateLoginDate() {
-	$.post("updateLoginDate.do", function() {
-		console.log("success");
+	$.post("updateLoginDate.do", function(json) {
+		window.location = "people.do";
 	});
 };

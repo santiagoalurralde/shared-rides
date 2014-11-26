@@ -17,7 +17,6 @@ import com.shared.rides.domain.Association;
 import com.shared.rides.domain.Schedule;
 import com.shared.rides.domain.State;
 import com.shared.rides.domain.User;
-import com.shared.rides.util.EmailSender;
 
 @Service
 public class ResponseAssociationService {
@@ -146,7 +145,9 @@ public class ResponseAssociationService {
 		}
 		else{
 			assoc.setState(State.CANCELLED);
-			assoc.setDate(date);
+			if (!(assoc.getApplicantID().getUserId() == u.getUserId())){
+				assoc.setDate(date);
+			}
 			msg = "El usuario ha rechazado la solicitud";
 		}
 		assocDAO.update(assoc);

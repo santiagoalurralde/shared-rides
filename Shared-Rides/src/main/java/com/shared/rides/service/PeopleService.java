@@ -49,10 +49,10 @@ public class PeopleService {
 			Association assoc = applicantAssocList.get(i);
 			User applier = assoc.getApplicantID();
 			if (assoc.getState().equals(State.PENDING) && pendingIdList.contains(applier.getUserId())==false){
-				completeList(applier, pendingIdList, pendingList, true);
+				completeList(applier, pendingIdList, pendingList, true, isAssoc(u, applier.getUserId()));
 			}
 			if (assoc.getState().equals(State.ACCEPTED) && acceptedIdList.contains(applier.getUserId())==false){
-				completeList(applier, acceptedIdList, acceptedList, false);
+				completeList(applier, acceptedIdList, acceptedList, false, true);
 			}
 		}
 
@@ -64,7 +64,7 @@ public class PeopleService {
 			User supplier = userDAO.load(idSupplier);
 			
 			if (assoc.getState().equals(State.ACCEPTED) && acceptedIdList.contains(supplier.getUserId())==false){
-				completeList(supplier, acceptedIdList, acceptedList, false);
+				completeList(supplier, acceptedIdList, acceptedList, false, true);
 			}
 		}
 		jsonList.add(pendingList);
@@ -73,7 +73,7 @@ public class PeopleService {
 		
 	}
 	
-	private void completeList(User u, List<Long> idList, JsonArray list, boolean pending){
+	private void completeList(User u, List<Long> idList, JsonArray list, boolean pending, boolean isAssoc){
 		String fullNameSupplier = u.getName() + " " + u.getSurname();
 		String pictureSupplier = u.getPicture();
 		
@@ -81,12 +81,42 @@ public class PeopleService {
 		jsonUser.addProperty("userId", u.getUserId());
 		jsonUser.addProperty("name", fullNameSupplier);
 		
-		
-		if (pending) jsonUser.addProperty("pic", "user.png");
+		if (pending){
+			if(isAssoc){
+				jsonUser.addProperty("pic", pictureSupplier);				
+			}
+			else{
+				jsonUser.addProperty("pic", "user.png");	
+			}
+		}
 		else jsonUser.addProperty("pic", pictureSupplier);
 		
 		idList.add(u.getUserId());
 		list.add(jsonUser);
+	}
+	
+	private boolean isAssoc(User u, Long userId){
+		List <Association> applicantAssocList = u.getAssociations();
+		List <Association> supplierAssocList = userDAO.getMyRequests(u);
+		boolean isAssociation = false;
+		
+		for (Association assoc : applicantAssocList){
+			if (assoc.getApplicantID().getUserId() == userId && assoc.getState().equals(State.ACCEPTED)){
+				isAssociation = true;
+				break;
+			}
+		}
+		if (!isAssociation){
+			for (int j = 0; j < supplierAssocList.size(); j++){
+				//Obtengo el id del usuario al cual le envie la peticion
+				long supplierId = assocDAO.getSupplierId(supplierAssocList.get(j));
+				if (userId == supplierId && supplierAssocList.get(j).getState().equals(State.ACCEPTED)){
+					isAssociation = true;
+					break;
+				}
+			}
+		}		
+		return isAssociation;
 	}
 	
 }
