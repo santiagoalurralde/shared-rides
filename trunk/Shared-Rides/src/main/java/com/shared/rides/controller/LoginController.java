@@ -1,15 +1,9 @@
 package com.shared.rides.controller;
 
-import java.awt.List;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,11 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shared.rides.domain.User;
-import com.shared.rides.service.RequestAssociationService;
 import com.shared.rides.service.LoginService;
+import com.shared.rides.service.RequestAssociationService;
 
 
 @Controller
@@ -65,10 +60,11 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="updateLoginDate.do")
-	public void updateLoginDate(HttpServletRequest request){
+	public @ResponseBody String updateLoginDate(HttpServletRequest request){
 		User u = (User) request.getSession().getAttribute("user");
 		//Actualizamos la ultima fecha de logueo cuando apreta la campana
-		loginService.saveLastLoginDate(u.getUserId());		
+		loginService.saveLastLoginDate(u.getUserId());
+		return "Actualizado";
 	}
 	
 }

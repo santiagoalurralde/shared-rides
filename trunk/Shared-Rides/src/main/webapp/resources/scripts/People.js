@@ -89,10 +89,11 @@ function load() {
  * @param {number} typeAssoc - type of association
  */
 function viewSchedule(json, typeAssoc) {	
-	var relations   = $.parseJSON(json),
-		days		= new Array(),
-		$requested 	= $(".requested"),
-		$offered 	= $(".offered");
+	var relations   	= $.parseJSON(json),
+		days			= new Array(),
+		$requested 		= $(".requested"),
+		$offered 		= $(".offered");
+		$scheduleData   = $(".schedule-data");
 	
 	days[7] = null;	
 	
@@ -236,6 +237,7 @@ function listenerSchedule(target) {
 	if($(target).hasClass("btn-pending")) {
 		$.post("viewSchedule.do", {"userId": $userId , "typeAssoc": 0}, 
 			function(json) {
+				debugger;
 				viewSchedule(json, 0);
 			}
 		);
@@ -243,6 +245,7 @@ function listenerSchedule(target) {
 	else {
 		$.post("viewSchedule.do", {"userId": $userId , "typeAssoc": 1}, 
 			function(json) {
+			debugger;
 				viewSchedule(json, 1);
 			}
 		);
