@@ -93,13 +93,24 @@ function customSearch() {
     var coords,
         $tableFound     = $(".table-found"),
         templateFound   = Handlebars.compile($("#temp-table-found").html());
-
+    
     if(_user == 2) {
+    	if(typeof _lon === "undefined" || _lon === "") {
+    		alert("Determina la ubicación");
+    		return; 
+    	}
         coords = "[{lon=" + _lon.toString() + " , lat=" + _lat.toString() + "}]";
     }
     else {
         coords = gpxTrack.confirm();
+        if(typeof coords === "undefined") {
+        	return;
+        }
     }
+    
+	
+
+
                    
     $.post("find.do", {"user": _user , "shift": _shift, "mapData": coords},
         function(json) {
@@ -157,6 +168,8 @@ function update(step) {
             $(".step-shift").show("fast");               
             $(".btn-next").css("margin-left", "60px");
             $(".table-found td").remove();
+            _lon = "";
+            _lat = "";
             break;
         case 2:
         	var $maps = $(".sr-maps");
