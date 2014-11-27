@@ -74,7 +74,7 @@ public class ProfileController {
 												@RequestParam("rating") int rating,
 												HttpServletRequest request){
 			
-			User u = (User) request.getAttribute("user");
+			User u = (User) request.getSession().getAttribute("user");
 			if (showProfileService.calculateRating(u.getUserId(), userId, profile, rating))
 				return "Se hizo la puntuacion";
 			return "NO SE PUDO HACER LA PUNTUACION";

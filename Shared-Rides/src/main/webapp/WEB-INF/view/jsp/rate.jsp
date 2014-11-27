@@ -63,7 +63,9 @@
 							rating 	: stars 
 						}, 
 						function(msg) {
-							alert(msg);
+							console.log(msg);
+							parent.$.fancybox.close();
+							parent.location.reload();
 					});
 				});	
 			})();
