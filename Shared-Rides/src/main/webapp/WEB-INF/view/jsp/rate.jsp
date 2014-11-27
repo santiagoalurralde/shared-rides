@@ -41,7 +41,7 @@
 
 		<script src="resources/jquery/jquery-1.10.2.js"></script>
 		<script>
-			(function(){
+			(function() {
 				$("input[name='rating']").change(function() {
 					$(".choice").html(this.value);
 					$("#val-rate").val(this.value);				
