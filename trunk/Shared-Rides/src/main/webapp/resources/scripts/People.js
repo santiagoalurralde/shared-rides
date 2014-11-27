@@ -110,6 +110,8 @@ function viewSchedule(json, typeAssoc) {
 	});
 	printSchedule(days, $(".table-offered"), typeAssoc);
 	
+	$requested.show();
+	$offered.show();
 	if(relations.requested == "") {
 		$requested.hide()
 				  .siblings().css({"float":"none", "width":"100%"});
@@ -117,6 +119,10 @@ function viewSchedule(json, typeAssoc) {
 	if(relations.offered == "") {
 		$offered.hide()
 		        .siblings().css({"float":"none", "width":"100%"});
+	}
+	if(relations.offered != "" && relations.requested != "") {
+		$requested.css({"float":"left", "width":"50%"});
+		$offered.css({"float":"right", "width":"50%"});
 	}
 	if(relations.requested == "" && relations.offered == "") {
 		$scheduleData.hide();
@@ -216,7 +222,7 @@ function printSchedule(days, $table, typeAssoc) {
 				$rowOut.append("<td data-assoc='"+ days[i].assocIdOut +"'>"+ contentOut +"</td>");
 			}
 		}
-	}	
+	}
 }
 
 
