@@ -376,8 +376,8 @@ public class FindUserService {
 		JsonObject json = new JsonObject();
 		boolean validate = true;
 
-		if (typeUser == 1 && u.getPedestrian() != null) validate = false;
-		if (typeUser == 2 && u.getDriver() != null) validate = false;
+		if (typeUser == 1 && u.getDriver() == null) validate = false;
+		if (typeUser == 2 && u.getPedestrian() == null) validate = false;
 
 		json.addProperty("validate", validate);
 		

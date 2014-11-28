@@ -243,7 +243,6 @@ function listenerSchedule(target) {
 	if($(target).hasClass("btn-pending")) {
 		$.post("viewSchedule.do", {"userId": $userId , "typeAssoc": 0}, 
 			function(json) {
-				debugger;
 				viewSchedule(json, 0);
 			}
 		);
@@ -251,7 +250,6 @@ function listenerSchedule(target) {
 	else {
 		$.post("viewSchedule.do", {"userId": $userId , "typeAssoc": 1}, 
 			function(json) {
-			debugger;
 				viewSchedule(json, 1);
 			}
 		);

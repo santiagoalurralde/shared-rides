@@ -50,7 +50,7 @@ public class ProfileService {
 	@Autowired
 	private IAssociationDAO assocDAO;
 
-	private boolean isAssociation = false;
+	private boolean isAssociation;
 	private boolean myProfile;
 	private ModelAndView model;
 	private long userLogInId;
@@ -59,8 +59,10 @@ public class ProfileService {
 			boolean myProf) {
 		HttpSession s = req.getSession(false);
 		User u = (User) s.getAttribute("user");
+		u = userDAO.load(u.getUserId());
 		this.userLogInId = u.getUserId();
 		myProfile = myProf;
+		isAssociation = false;
 
 		// Si no es mi profile, entonces veo si tengo asociacion con esa persona
 		if (!myProfile) {

@@ -257,7 +257,6 @@ function disableRequests(schedule, isDriver) {
 			}
 		} 
 		else {
-			debugger;
 			// If Driver has no seats, can't invite him.
 			if (schedule[i].freeSeatsIn == "0"){
 				disable($btnReqIn, 1);
