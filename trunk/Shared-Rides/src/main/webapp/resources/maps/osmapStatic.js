@@ -49,7 +49,7 @@ function initMapDriver(){
 	_mapDriver.addLayers([layerOSM]);
 	
 	/*  Set Start Position  */
-	var zoomStart	= 16,
+	var zoomStart	= 13,
 		lonlatStart	= new OpenLayers.LonLat(-64.183, -31.416)
 						.transform(
 							_proj4326,
@@ -70,7 +70,7 @@ function setMapPedestrian(lonPed, latPed){
     var size 		= new OpenLayers.Size(35, 35),
     	offset 		= new OpenLayers.Pixel(-(size.w/2), -size.h),
     	icon 		= new OpenLayers.Icon('resources/images/markerred.png', size, offset),
-    	zoomStart	= 16,
+    	zoomStart	= 14,
 		lonlatStart	= new OpenLayers.LonLat(lonPed, latPed)
 			.transform(
 					_proj4326,
@@ -105,7 +105,6 @@ function setMapDriver(urlGpxDriver){
 	});
 	
 	_mapDriver.addLayer(_layerTrack);
-	_mapDriver.zoomToExtent(_layerTrack.getDataExtent()); //TODO try this
 } 
 
 

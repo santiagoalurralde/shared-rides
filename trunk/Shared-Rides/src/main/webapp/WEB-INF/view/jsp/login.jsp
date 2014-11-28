@@ -34,8 +34,8 @@
 		</h3>
 		
 		<form method="POST" action="validate.do">
-			<input 	class="sr-inputs" type="text"		name="email"	placeholder="mike@email.com">	<br>			
-			<input 	class="sr-inputs" type="password"	name="pwd"		placeholder="Password">			<br>
+			<input 	class="sr-inputs" type="text"		name="email"	placeholder="Usuario">	<br>			
+			<input 	class="sr-inputs" type="password"	name="pwd"		placeholder="Contraseña">			<br>
 			
 			<input 	class="btn btn-login" type="submit" value="<spring:message code="lbl.enter"/>">
 			<button class="btn btn-register" onclick="window.location.href='signup.do'; return false;">
